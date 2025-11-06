@@ -54,3 +54,7 @@ rsconnect/
 # dirs
 /data
 /out
+
+notes.txt
+scratch.R
+
