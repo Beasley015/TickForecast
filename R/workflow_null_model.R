@@ -1,11 +1,23 @@
+##################################################
+# Master script for tick forecasting null model  #
+# i.e. weekly density mean & sd                  #
+# Written by J.R. Foster                         #
+# Updated by E.M. Beasley                        #
+# Fall 2025                                      #
+##################################################
+
+# Setup ------------------------------
+# Load packages
 library(tidyverse)
 library(lubridate)
 library(mgcv)
 
-source("R/functions.R")
+# Function for processing and plotting NEON tick data
+source("./R/functions.R")
 
-dir.out <- "out"
+dir.out <- "./out"
 
+# Specifcy variables
 models <- "Null"
 species <- c("Ixodes scapularis", "Amblyomma americanum")
 neon.sites <- c(
@@ -21,12 +33,17 @@ neon.sites <- c(
 	"UKFS"
 )
 
+# Add Cary sites here at some point, when we are forecasting past
+# John's chapter 3
+
+# Create data frame of all combinations
 jobs <- expand_grid(
 	model = models,
 	species = species,
 	site = neon.sites
 )
 
+# Some sites don't have both species
 jobs <- jobs |>
 	filter(
 		!(site == "HARV" & species == "Amblyomma americanum"),

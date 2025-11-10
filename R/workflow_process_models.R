@@ -22,19 +22,16 @@ library(parallel)
 
 update <- TRUE
 
-dir.top <- "/projectnb/dietzelab/fosterj"
-dir.analysis <- file.path(
-	dir.top,
-	"FinalOut/A_Correct/Analysis/dormantStages/nimbleModels"
-)
-dir.out <- "out"
-# dir.out <- file.path(dir.top, "FinalOut/Chapter3/outConstraintForest")
+dir.top <- getwd()
+dir.analysis <- file.path(dir.top, "R")
+dir.out <- file.path(dir.top, "out")
 if (update) {
 	dir.out <- paste0(dir.out, "Update")
 }
 
-models <- c("Static", "WithMNAMice", "Weather", "WithWeatherAndMiceGlobal")
-species <- c("Ixodes scapularis", "Amblyomma americanum")
+# Define models to run
+models <- c("Weather", "WithWeatherAndMiceGlobal")
+species <- c("Ixodes scapularis", "Amblyomma americanum") 
 neon.sites <- c(
 	"BLAN",
 	"HARV",
@@ -46,14 +43,16 @@ neon.sites <- c(
 	"TALL",
 	"TREE",
 	"UKFS"
-)
+) # Eventually this will be modified when model is hierarchical
 
+# Create all possible combos
 jobs <- expand_grid(
 	model = models,
 	species = species,
 	site = neon.sites
 )
 
+# Not all sites have both tick species
 jobs <- jobs %>%
 	filter(
 		!(site == "HARV" & species == "Amblyomma americanum"),
@@ -62,13 +61,14 @@ jobs <- jobs %>%
 		!(site == "OSBS" & species == "Ixodes scapularis"),
 		!(site == "TALL" & species == "Ixodes scapularis"),
 		!(site == "UKFS" & species == "Ixodes scapularis")
-	)
+	) # Future edit: maybe change so impossible combos are auto-filtered
 
+# Run this line to only get models including weather
 # jobs <- jobs %>% filter(grepl("Weather", model))
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 47
+	job.num <- 1
 }
 
 site.job <- jobs$site[job.num]
@@ -79,7 +79,7 @@ message("====== Running simulation at ", site.job, " ======")
 message(species.job)
 message(model.job)
 
-
+# Assign variable that will later control whether mice submodel is run (?)
 ua.cal <-
 	if_else(
 		model.job == "WithWeatherAndMiceGlobal",
@@ -96,13 +96,15 @@ horizon <- 365
 # =========================================== #
 #       tick data intake
 # =========================================== #
-source("Functions/neon_tick_data.R")
+source("functions.R")
 neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 
+# Filter tick data based on job requirements
 neon.job <- neon.data %>%
 	filter(siteID == site.job, grepl("Forest", nlcd), time >= "2018-01-01") %>%
 	arrange(time)
 
+# Extract sampling dates and number of samples
 drag.dates <- neon.job$time %>% unique()
 start.date <- first(drag.dates)
 n.drags <- length(drag.dates)
@@ -146,8 +148,8 @@ IC <- tibble(
 #       mouse data intake
 # =========================================== #
 
-source("../neon-tick-smam/Functions/capture_matrix.R")
-neon.smam <- read_csv("../neon-tick-smam/Data/allSmallMammals.csv")
+source("./DataProcessing/capture_matrix.R")
+neon.smam <- read_csv("./Data/allSmallMammals.csv")
 ch.ls <- capture_matrix(site.job, neon.smam)
 ch <- ch.ls$ch
 alive <- ch %in% 1:3
@@ -155,7 +157,7 @@ ch[alive] <- 1
 ch[!alive] <- 0
 ncaps <- rowSums(ch)
 ch <- ch[ncaps > 0, ]
-source("Functions/known_states.R")
+source("./DataProcessing/known_states.R")
 ks <- known_states(ch)
 mna <- colSums(ks)
 mice.obs <- ymd(colnames(ch)) # unique sampling days: mice
@@ -187,7 +189,7 @@ mna.scaled <- tibble(
 # =========================================== #
 #       daymet intake and correction
 # =========================================== #
-source("Functions/daymet_downscale.R")
+source("./DataProcessing/daymet_downscale.R")
 cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
 maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
 	select(Date, maxTempCorrect) %>%
