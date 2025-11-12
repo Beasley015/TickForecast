@@ -13,7 +13,7 @@ library(lubridate)
 library(mgcv)
 
 # Function for processing and plotting NEON tick data
-source("./R/functions.R")
+source("./DataProcessing/functions.R")
 
 dir.out <- "./out"
 
@@ -53,7 +53,6 @@ jobs <- jobs |>
 		!(site == "TALL" & species == "Ixodes scapularis"),
 		!(site == "UKFS" & species == "Ixodes scapularis")
 	)
-
 
 # job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 # if(is.na(job.num)) job.num <- 6
@@ -164,4 +163,4 @@ if (!dir.exists(dir.base)) {
 
 write_csv(all.scores, file = file.path(dir.base, "forecastScores.csv"))
 write_csv(all.quants, file = file.path(dir.base, "forecastQuants.csv"))
-message("\n")
+

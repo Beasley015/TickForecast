@@ -39,7 +39,7 @@ neon_tick_data <- function(species) {
 	}
 
 	df <- read_csv(
-		"~/Data/tickTargets.csv"
+		"./Data/tickTargets.csv"
 	) |>
 		suppressMessages()
 	data <- df |>

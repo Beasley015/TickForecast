@@ -7,6 +7,7 @@ library(ggpubr)
 library(MetBrewer)
 library(NatParksPalettes)
 
+# Create function for saving plots
 save_gg <- function(dest, gg, path) {
 	if (!dir.exists(path)) {
 		dir.create(path, showWarnings = FALSE, recursive = TRUE)
@@ -25,21 +26,11 @@ save_gg <- function(dest, gg, path) {
 	# dev.off()
 }
 
-dir.top <- "/projectnb/dietzelab/fosterj"
-dir.analysis <- file.path(
-	dir.top,
-	"FinalOut/Chapter3/analysisConstraintForestUpdate"
-)
-dir.out <- file.path(dir.top, "FinalOut/Chapter3/outConstraintForestUpdate")
-dir.plot <- file.path(
-	dir.top,
-	"FinalOut/Figures/Chapter3/ConstraintForestUpdate"
-)
-dir.out.null <- file.path(dir.top, "FinalOut/Chapter3/outNull")
+# Retrieve null model outputs-----------------
+dir.out.null <- "./out/Null"
 out.files.null <- list.files(dir.out.null, recursive = TRUE)
-null.files <- grep("Null", out.files.null, value = TRUE)
-null.scores.files <- grep("Scores", null.files, value = TRUE)
-null.quants.files <- grep("Quants", null.files, value = TRUE)
+null.scores.files <- grep("Scores", out.files.null, value = TRUE)
+null.quants.files <- grep("Quants", out.files.null, value = TRUE)
 
 find_species <- function(x) {
 	species <- if_else(
@@ -70,10 +61,10 @@ df.null <- null.quants %>%
 	rename(lower95 = ymin, upper95 = ymax, variance = var, median = fx) %>%
 	select(-n.days, -n.drags, -count.flag, -site)
 
-dir.analysis <- "/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraintForestUpdate/"
-all.days <- list.files(dir.analysis, recursive = TRUE)
-all.days <- grep("allDaysQuants.csv", all.days, value = TRUE)
-all.days.proc <- read_csv(file.path(dir.analysis, all.days))
+# dir.analysis <- "/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraintForestUpdate/"
+# all.days <- list.files(dir.analysis, recursive = TRUE)
+# all.days <- grep("allDaysQuants.csv", all.days, value = TRUE)
+# all.days.proc <- read_csv(file.path(dir.analysis, all.days))
 
 # dir.analysis <- "/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraintControl"
 # all.days <- list.files(dir.analysis, recursive = TRUE)
@@ -246,8 +237,8 @@ ix.plots <- c("TREE", "HARV")
 aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
 
 null.crps <- null.scores %>%
-	mutate(crps = score, doy = yday(time)) %>%
-	select(-metric)
+	mutate(crps = score, doy = yday(time)) #%>%
+	# select(-metric)
 
 ls <- 2
 

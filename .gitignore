@@ -58,3 +58,5 @@ rsconnect/
 notes.txt
 scratch.R
 
+Data/dormantNymphParams.csv
+Data/dormantNymphTimeSeries.csv
