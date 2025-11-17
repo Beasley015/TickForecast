@@ -96,7 +96,7 @@ horizon <- 365
 # =========================================== #
 #       tick data intake
 # =========================================== #
-source("functions.R")
+source("./DataProcessing/functions.R")
 neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 
 # Filter tick data based on job requirements
@@ -201,7 +201,6 @@ precip <- daymet_precip(site.job) %>%
 	select(Date, precipitation) %>%
 	suppressMessages()
 
-source("Functions/scale_met_forecast.R")
 hist.means <- scale_met_forecast()
 
 join1 <- left_join(maxTemp, rh, by = "Date")
@@ -569,7 +568,7 @@ for (t in seq_len(n.drags)) {
 			}
 		}
 
-		source("Scripts/DA_neon.R")
+		source("Scripts/nimble_forecast.R")
 		source("Functions/run_transfer_nimble.R")
 		cl <- makeCluster(n.slots)
 		out.nchains <- run_transfer_nimble(
@@ -648,7 +647,6 @@ for (t in seq_len(n.drags)) {
 		dat.draws <- dat.hindcast[draws, ]
 
 		fileDest <- file.path(dir.save, fx.start.date)
-		source("Functions/transferAnalysis.R")
 		message("Running analysis...")
 		transfer_analysis(
 			fx.df = dat.draws,
