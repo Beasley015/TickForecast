@@ -22,10 +22,10 @@ tick.plots <- tick.data %>%
 
 plot.df <- bind_rows(mouse.plots, tick.plots)
 plot.df <- plot.df %>%
-  filter(grepl("HARV", site),
-         grepl("tick", site)) %>% 
+  filter(#grepl("HARV", plotID),
+         !grepl("tick", plotID)) %>%
   rename_with( ~ c("site", "latitude", "longitude"), everything())
-write_csv(plot.df, path = "./Data/plotLatLon.csv")
+write_csv(plot.df, file = "./Data/plotLatLon.csv")
 
 dm <- download_daymet_batch(
   file_location = './Data/plotLatLon.csv',
@@ -34,7 +34,21 @@ dm <- download_daymet_batch(
   internal = TRUE
 )
 
-write_csv(dm, path = "./Data/daymet.csv")
+dm_unlist <- function(x){
+  dat <- x$data
+  dat$site <- x$site
+  dat$lat <- x$latitude
+  dat$long <- x$longitude
+  dat$alt <- x$altitude
+
+  return(dat)
+}
+
+dm_tst <- lapply(dm, dm_unlist)
+
+dm_df <- do.call(rbind, dm_tst)
+
+write_csv(dm_df, path = "./Data/daymet.csv")
 
 variables <- c(
   "dayl..s.",      # day length
@@ -59,7 +73,7 @@ variable.name <- c(
 make_csvs <- function(org){
   
   if(org == "mice"){
-    data <- read_csv("./Data/daymetSite.csv")  
+    data <- read_csv("./Data/daymetSite.csv") # Where does this get made?
     size <- "Site"
   } else if (org == "tick"){
     data <- read_csv("./Data/daymet.csv")
@@ -75,16 +89,17 @@ make_csvs <- function(org){
   for(s in seq_along(variables)){
     message(paste("  ", variables[s]))
     
+    measurement <- variables[s]
+    
     df.save <- df %>% 
-      filter(measurement == variables[s]) %>% 
-      select(-measurement) 
+      select(-all_of(measurement)) 
     
     for(i in seq_along(unique(df.save$site))){
       # message(paste("     ", unique(df.save$site)[i]))
-      
+      # Resume here? ------------ 
       leap.df <- df.save %>% 
         filter(site == unique(df.save$site)[i], 
-               Date == "2016-12-30" | Date == "2017-01-01")
+               Date == "2016-12-30" | Date == "2017-01-01") # leap years?
       
       leap.value <- leap.df %>% 
         summarise(value = mean(value)) %>% 

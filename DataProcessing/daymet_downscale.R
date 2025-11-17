@@ -9,9 +9,8 @@ library(tidyverse)
 #' @param site the site being modeled
 #' @param org either "tick" or "smam"
 daymet_cumGDD <- function(site) {
-	df.all <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/daymetSite_maxTemperature.csv"
-	)
+	df.all <- read_csv("./Data/daymetSite_maxTemperature.csv")
+	
 	df <- df.all %>%
 		filter(siteID == site) %>%
 		group_by(year) %>%
@@ -27,15 +26,13 @@ daymet_cumGDD <- function(site) {
 ## max temperature ==================================================================
 daymet_temp <- function(site, minimum) {
 	if (minimum) {
-		df <- read_csv(
-			"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/daymetSite_minTemperature.csv"
-		)
+		df <- read_csv("./Data/daymetSite_minTemperature.csv")
+		
 		neon.col <- "tempTripleMinimum"
 		daymet.col <- "minTemperature"
 	} else {
-		df <- read_csv(
-			"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/daymetSite_maxTemperature.csv"
-		)
+		df <- read_csv("./Data/daymetSite_maxTemperature.csv")
+		
 		neon.col <- "tempTripleMaximum"
 		daymet.col <- "maxTemperature"
 	}
@@ -45,9 +42,8 @@ daymet_temp <- function(site, minimum) {
 		group_by(yday) %>%
 		select(-tile)
 
-	neon.temp <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/airTempDaily.csv"
-	)
+	neon.temp <- read_csv("./Data/airTempDaily.csv")
+	
 	neon.sub <- neon.temp %>%
 		filter(siteID == site) %>%
 		mutate(yday = yday(Date))
@@ -102,16 +98,14 @@ daymet_temp <- function(site, minimum) {
 ## relative humidity ==========================================================================
 
 daymet_rh <- function(site) {
-	df <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/daymetSite_vaporPressure.csv"
-	)
+	df <- read_csv("./Data/daymetSite_vaporPressure.csv")
+	
 	df.vpd <- df %>%
 		filter(siteID == site) %>%
 		select(-tile)
 
-	df <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/daymetSite_maxTemperature.csv"
-	)
+	df <- read_csv("./Data/daymetSite_maxTemperature.csv")
+	
 	df.temp <- df %>%
 		filter(siteID == site) %>%
 		select(-tile)
@@ -133,9 +127,8 @@ daymet_rh <- function(site) {
 		ungroup() %>%
 		mutate(rh = plantecophys::VPDtoRH(vaporPressure / 1000, maxTemperature))
 
-	neon.temp <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/RelativeHumidityDaily.csv"
-	)
+	neon.temp <- read_csv("./Data/RelativeHumidityDaily.csv")
+	
 	neon.sub <- neon.temp %>%
 		filter(siteID == site) %>%
 		mutate(yday = yday(Date)) %>%
@@ -204,9 +197,8 @@ daymet_rh <- function(site) {
 ## Precipitation ==========================================================================
 
 daymet_precip <- function(site) {
-	neon.precip <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/precipDaily.csv"
-	)
+	neon.precip <- read_csv("./Data/precipDaily.csv")
+	
 	neon.sub <- neon.precip %>%
 		filter(siteID == site) %>%
 		mutate(year = year(Date)) %>%
@@ -215,9 +207,7 @@ daymet_precip <- function(site) {
 		pull(sum.precip) %>%
 		mean()
 
-	df <- read_csv(
-		"/projectnb/dietzelab/fosterj/neon-tick-smam/Data/daymetSite_precipitation.csv"
-	)
+	df <- read_csv("./Data/daymetSite_precipitation.csv")
 
 	df.p <- df %>%
 		filter(siteID == site)

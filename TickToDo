@@ -1,0 +1,11 @@
+Immediate to do's:
+- Download cleaned daymet data from SCC
+- Test process model scripts with pre-prepared daymet data
+- Add Cary data to null model workflow
+- Add Cary data to process model workflow
+- Reproduce existing model
+
+In the distance:
+- Fix daymet intake script
+- Make submodel intercepts hierarchical
+- Make model fully hierarchical

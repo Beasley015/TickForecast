@@ -44,7 +44,7 @@ neon_tick_data <- function(species) {
 	}
 
 	df <- read_csv(
-		"data/tickTargets.csv"
+		"./Data/tickTargets.csv"
 	) |>
 		suppressMessages()
 	data <- df |>
@@ -353,7 +353,7 @@ mna_jags <- function(site.run, return.mean = FALSE) {
 	}
 
 	# tick data
-	dat <- read.csv("data/tick_cleaned") # tick data
+	dat <- read.csv("./Data/tick_cleaned") # tick data
 	tick <- dat[, c("Grid", "DATE", "n_larvae", "n_nymphs", "n_adults")]
 	tick <- subset(tick, Grid == site.run)
 	tick$DATE <- as.Date(tick$DATE)

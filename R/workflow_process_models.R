@@ -20,10 +20,9 @@ library(nimble)
 library(parallel)
 # nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
 
-update <- TRUE
+update <- FALSE
 
 dir.top <- getwd()
-dir.analysis <- file.path(dir.top, "R")
 dir.out <- file.path(dir.top, "out")
 if (update) {
 	dir.out <- paste0(dir.out, "Update")
@@ -45,6 +44,8 @@ neon.sites <- c(
 	"UKFS"
 ) # Eventually this will be modified when model is hierarchical
 
+cary.sites <- c() # Add these later
+
 # Create all possible combos
 jobs <- expand_grid(
 	model = models,
@@ -61,7 +62,8 @@ jobs <- jobs %>%
 		!(site == "OSBS" & species == "Ixodes scapularis"),
 		!(site == "TALL" & species == "Ixodes scapularis"),
 		!(site == "UKFS" & species == "Ixodes scapularis")
-	) # Future edit: maybe change so impossible combos are auto-filtered
+	) # Add Cary sites; they only have Iscap
+# Future edit: maybe change so impossible combos are auto-filtered
 
 # Run this line to only get models including weather
 # jobs <- jobs %>% filter(grepl("Weather", model))
@@ -75,9 +77,9 @@ site.job <- jobs$site[job.num]
 species.job <- jobs$species[job.num]
 model.job <- jobs$model[job.num]
 
-message("====== Running simulation at ", site.job, " ======")
-message(species.job)
-message(model.job)
+# message("====== Running simulation at ", site.job, " ======")
+# message(species.job)
+# message(model.job)
 
 # Assign variable that will later control whether mice submodel is run (?)
 ua.cal <-
@@ -113,7 +115,7 @@ n.drags <- length(drag.dates)
 #       get initial conditions
 # =========================================== #
 
-df.latent <- read_csv(file.path(dir.analysis, "dormantNymphTimeSeries.csv"))
+df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"))
 month.get <- if_else(month(start.date) < 5, 4, month(start.date))
 data.latent <- df.latent %>%
 	mutate(model = gsub("DormantNymph", "", model)) %>%
@@ -149,8 +151,8 @@ IC <- tibble(
 # =========================================== #
 
 source("./DataProcessing/capture_matrix.R")
-neon.smam <- read_csv("./Data/allSmallMammals.csv")
-ch.ls <- capture_matrix(site.job, neon.smam)
+smam <- read_csv("./Data/allSmallMammals.csv") # Change to ifelse for Cary
+ch.ls <- capture_matrix(site.job, smam)
 ch <- ch.ls$ch
 alive <- ch %in% 1:3
 ch[alive] <- 1
@@ -177,7 +179,6 @@ for (i in seq_along(mice.seq)) {
 }
 
 # historical mna
-source("Functions/mna_jags.R")
 mna.hist <- mna_jags("Green Control", return.mean = TRUE)
 
 # center and scale
