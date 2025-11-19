@@ -17,7 +17,7 @@ source("./DataProcessing/functions.R")
 
 dir.out <- "./out"
 
-# Specifcy variables
+# Specify variables
 models <- "Null"
 species <- c("Ixodes scapularis", "Amblyomma americanum")
 neon.sites <- c(
@@ -33,14 +33,17 @@ neon.sites <- c(
 	"UKFS"
 )
 
-# Add Cary sites here at some point, when we are forecasting past
-# John's chapter 3
+cary.sites <- c(
+  "GREN",
+  "HNRY",
+  "TEA"
+)
 
 # Create data frame of all combinations
 jobs <- expand_grid(
 	model = models,
 	species = species,
-	site = neon.sites
+	site = c(neon.sites, cary.sites)
 )
 
 # Some sites don't have both species
@@ -51,7 +54,10 @@ jobs <- jobs |>
 		!(site == "KONZ" & species == "Ixodes scapularis"),
 		!(site == "OSBS" & species == "Ixodes scapularis"),
 		!(site == "TALL" & species == "Ixodes scapularis"),
-		!(site == "UKFS" & species == "Ixodes scapularis")
+		!(site == "UKFS" & species == "Ixodes scapularis"),
+		!(site == "GREN" & species == "Amblyomma americanum"),
+		!(site == "HNRY" & species == "Amblyomma americanum"),
+		!(site == "TEA" & species == "Amblyomma americanum")
 	)
 
 # job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
@@ -111,7 +117,7 @@ for (job.num in 1:nrow(jobs)) {
 		)
 
 	drag.dates <- neon.job |>
-		filter(time >= "2018-01-01") |>
+		filter(time >= "2018-01-01" & time <= "2022-01-01") |> 
 		pull(time) |>
 		unique()
 

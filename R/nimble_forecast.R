@@ -1,5 +1,5 @@
 library(nimble)
-source("Functions/nimble_functions.R")
+source("./DataProcessing/functions.R")
 
 # registerDistributions(list(dwtmnorm = list(
 #   BUGSdist = "dwtmnorm(mean, prec, wt)",

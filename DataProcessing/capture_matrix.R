@@ -75,7 +75,7 @@ capture_matrix <- function(site, neon.smam){
            state = if_else(animalInTrap == 2 & tickOn == 2, dead.a, state),  # dead animal without tick attached
            state = if_else(animalInTrap == 2 & tickOn == 1, dead.p, state),  # dead animal with tick attached
            state = if_else(animalInTrap == 0, unobserved, state),            # unobserved
-           tagID = if_else(is.na(tagID) & animalInTrap == 0, 
+           tagID = if_else(is.na(tagID) & animalInTrap %in% c(0,1), 
                            "noCapture", tagID)) %>%     # placeholder for trap nights without any captures           
     select(tagID, collectDate, state) %>% 
     filter(!is.na(tagID)) 

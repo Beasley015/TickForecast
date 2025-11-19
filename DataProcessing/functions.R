@@ -3,6 +3,7 @@
 #' @param species the species to extract; "Ixodes scapularis" or "Amblyomma americanum"
 #' @export
 
+# Extract and process neon tick data
 neon_tick_data <- function(species) {
 	get_data <- function(i) {
 		sub.df <- data |>
@@ -16,7 +17,9 @@ neon_tick_data <- function(species) {
 
 		drags <- unique(sub.df$time) |> sort()
 		n.drags <- length(drags)
-		days.sequence <- seq.Date(drags[1], drags[n.drags], by = 1)
+		days.sequence <- seq.Date(from=as.Date(drags[1], format="%Y-%m-%d"), 
+		                          to=as.Date(drags[n.drags], format="%Y-%m-%d"),
+		                          by = 1)
 		n.days <- length(days.sequence)
 
 		df.l <- sub.df |>
@@ -43,7 +46,7 @@ neon_tick_data <- function(species) {
 			)
 	}
 
-	df <- read_csv(
+	df <- read.csv(
 		"./Data/tickTargets.csv"
 	) |>
 		suppressMessages()
@@ -383,7 +386,7 @@ mna_jags <- function(site.run, return.mean = FALSE) {
 
 
 scale_met_forecast <- function() {
-	met <- read.csv("data/Cary_Met_Data_Daily.csv")
+	met <- read.csv("./Data/Cary_Met_Data_Daily.csv")
 	met <- met %>%
 		filter(DATE >= "05-02-1995") %>%
 		filter(DATE <= "08-17-2005") %>%
@@ -694,3 +697,41 @@ transfer_analysis <- function(
 		write_csv(daymet.time, file.path(out.dir, "weatherSummary.csv"))
 	}
 }
+
+dZIP <- nimbleFunction(
+  run = function(x = integer(), lambda = double(), 
+                 zeroProb = double(), log = logical(0, default = 0)) {
+    returnType(double())
+    ## First handle non-zero data
+    if (x != 0) {
+      ## return the log probability if log = TRUE
+      if (log) return(dpois(x, lambda, log = TRUE) + log(1 - zeroProb))
+      ## or the probability if log = FALSE
+      else return((1 - zeroProb) * dpois(x, lambda, log = FALSE))
+    }
+    ## From here down we know x is 0
+    totalProbZero <- zeroProb + (1 - zeroProb) * dpois(0, lambda, log = FALSE)
+    if (log) return(log(totalProbZero))
+    return(totalProbZero)
+  })
+
+# zero-inflated poisson distribution random number generator 
+rZIP <- nimbleFunction(
+  run = function(n = integer(), lambda = double(), zeroProb = double()) {
+    returnType(integer())
+    isStructuralZero <- rbinom(1, prob = zeroProb, size = 1)
+    if (isStructuralZero) return(0)
+    return(rpois(1, lambda))
+  })
+
+
+if_else_nimble <- nimbleFunction(
+  run = function(condition = integer(0), valueIf=double(0), valueElse=double(0)) {
+    returnType(double(0))
+    if (condition==TRUE) {
+      return(valueIf)
+    } else {
+      return(valueElse)
+    }
+  }
+)

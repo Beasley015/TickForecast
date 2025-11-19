@@ -18,7 +18,7 @@ run_transfer_nimble <- function(
 	library(nimble)
 	library(coda)
 
-	source("Functions/nimble_functions.R")
+	source("./DataProcessing/functions.R")
 	# assign("dwtnorm", dwtnorm, envir = .GlobalEnv)
 	# assign("rwtnorm", rwtnorm, envir = .GlobalEnv)
 

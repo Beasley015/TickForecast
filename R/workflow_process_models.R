@@ -11,7 +11,7 @@
 ## 9 - save
 
 # =========================================== #
-#       1 - setup
+#       1 - setup ------------
 # =========================================== #
 
 library(tidyverse)
@@ -44,13 +44,17 @@ neon.sites <- c(
 	"UKFS"
 ) # Eventually this will be modified when model is hierarchical
 
-cary.sites <- c() # Add these later
+cary.sites <- c(
+  "GREN",
+  "HNRY",
+  "TEA"
+) 
 
 # Create all possible combos
 jobs <- expand_grid(
 	model = models,
 	species = species,
-	site = neon.sites
+	site = c(neon.sites, cary.sites)
 )
 
 # Not all sites have both tick species
@@ -61,8 +65,11 @@ jobs <- jobs %>%
 		!(site == "KONZ" & species == "Ixodes scapularis"),
 		!(site == "OSBS" & species == "Ixodes scapularis"),
 		!(site == "TALL" & species == "Ixodes scapularis"),
-		!(site == "UKFS" & species == "Ixodes scapularis")
-	) # Add Cary sites; they only have Iscap
+		!(site == "UKFS" & species == "Ixodes scapularis"),
+		!(site == "GREN" & species == "Amblyomma americanum"),,
+		!(site == "HNRY" & species == "Amblyomma americanum"),,
+		!(site == "TEA" & species == "Amblyomma americanum"),
+	)
 # Future edit: maybe change so impossible combos are auto-filtered
 
 # Run this line to only get models including weather
@@ -70,7 +77,7 @@ jobs <- jobs %>%
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 1
+	job.num <- 8
 }
 
 site.job <- jobs$site[job.num]
@@ -89,9 +96,10 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric()
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Some sort of cluster var
+n.slots <- 1
 production <- TRUE
-n.iter <- 50000
+n.iter <- 1000 #50000
 Nmc <- 2000
 horizon <- 365
 
@@ -99,11 +107,15 @@ horizon <- 365
 #       tick data intake
 # =========================================== #
 source("./DataProcessing/functions.R")
+
+# Get tick data based on site
 neon.data <- neon_tick_data(species.job) %>% suppressMessages()
+# function retrieves cary sites as well as NEON
 
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
-	filter(siteID == site.job, grepl("Forest", nlcd), time >= "2018-01-01") %>%
+	filter(siteID == site.job, grepl("Forest", nlcd), 
+	       time >= "2018-01-01" & time <= "2022-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -151,7 +163,13 @@ IC <- tibble(
 # =========================================== #
 
 source("./DataProcessing/capture_matrix.R")
-smam <- read_csv("./Data/allSmallMammals.csv") # Change to ifelse for Cary
+
+if(site.job %in% c("HNRY", "TEA", "GREN")){
+  smam <- read_csv("./Data/cary_mouse_formatted.csv")
+} else{
+  smam <- read_csv("./Data/allSmallMammals.csv")
+}
+               
 ch.ls <- capture_matrix(site.job, smam)
 ch <- ch.ls$ch
 alive <- ch %in% 1:3
@@ -178,53 +196,55 @@ for (i in seq_along(mice.seq)) {
 	}
 }
 
-# historical mna
-mna.hist <- mna_jags("Green Control", return.mean = TRUE)
-
-# center and scale
-mna.scaled <- tibble(
-	mna.scaled = (mna.all.days - mna.hist$mean) / mna.hist$sd,
-	Date = mice.seq
-)
+# Not sure if this is actually needed:
+# # historical mna
+# mna.hist <- mna_jags("Green Control", return.mean = TRUE)
+# 
+# # center and scale
+# mna.scaled <- tibble(
+# 	mna.scaled = (mna.all.days - mna.hist$mean) / mna.hist$sd,
+# 	Date = mice.seq
+# )
 
 # =========================================== #
 #       daymet intake and correction
 # =========================================== #
 source("./DataProcessing/daymet_downscale.R")
+
 cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
 maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
-	select(Date, maxTempCorrect) %>%
-	suppressMessages()
+    select(Date, maxTempCorrect) %>%
+    suppressMessages()
 rh <- daymet_rh(site.job) %>%
-	select(Date, maxRHCorrect, minRHCorrect) %>%
-	suppressMessages()
+    select(Date, maxRHCorrect, minRHCorrect) %>%
+    suppressMessages()
 precip <- daymet_precip(site.job) %>%
-	select(Date, precipitation) %>%
-	suppressMessages()
-
+    select(Date, precipitation) %>%
+    suppressMessages()
+  
 hist.means <- scale_met_forecast()
-
+  
 join1 <- left_join(maxTemp, rh, by = "Date")
 join2 <- left_join(join1, precip, by = "Date")
-
+  
 df.daymet <- join2 %>%
-	mutate(
-		maxTempScale = (maxTempCorrect - hist.means$means["MAX_TEMP"]) /
-			hist.means$sds["MAX_TEMP"],
-		maxRHScale = (maxRHCorrect - hist.means$means["MAX_RH"]) /
-			hist.means$sds["MAX_RH"],
-		minRHScale = (minRHCorrect - hist.means$means["MIN_RH"]) /
-			hist.means$sds["MIN_RH"],
-		precipScale = (precipitation - hist.means$means["TOT_PREC"]) /
-			hist.means$sds["TOT_PREC"]
-	) %>%
-	ungroup() %>%
-	select(Date, contains("Scale"))
+  mutate(
+    maxTempScale = (maxTempCorrect - hist.means$means["MAX_TEMP"]) /
+        hist.means$sds["MAX_TEMP"],
+    maxRHScale = (maxRHCorrect - hist.means$means["MAX_RH"]) /
+        hist.means$sds["MAX_RH"],
+    minRHScale = (minRHCorrect - hist.means$means["MIN_RH"]) /
+        hist.means$sds["MIN_RH"],
+    precipScale = (precipitation - hist.means$means["TOT_PREC"]) /
+        hist.means$sds["TOT_PREC"]
+  ) %>%
+  ungroup() %>%
+  select(Date, contains("Scale"))
 
 # =========================================== #
 #       get informative priors
 # =========================================== #
-df.params <- read_csv(file.path(dir.analysis, "dormantNymphParams.csv"))
+df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"))
 params.stats <- df.params %>%
 	filter(model == model.job) %>%
 	select(parameter, value) %>%
@@ -569,9 +589,10 @@ for (t in seq_len(n.drags)) {
 			}
 		}
 
-		source("Scripts/nimble_forecast.R")
-		source("Functions/run_transfer_nimble.R")
-		cl <- makeCluster(n.slots)
+		source("./R/nimble_forecast.R")
+		source("./R/run_transfer_nimble.R")
+		cl <- makeCluster(n.slots) 
+		
 		out.nchains <- run_transfer_nimble(
 			cl = cl,
 			model = model.code,
