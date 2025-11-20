@@ -577,7 +577,8 @@ transfer_analysis <- function(
 	plots <- data.site$plotID %>% unique()
 	for (p in seq_along(plots)) {
 		data.sub <- data.site %>%
-			filter(plotID == plots[p])
+			filter(plotID == plots[p]) %>%
+		  mutate(time=as.Date(time, format = "%Y-%m-%d"))
 		plot.time <- unique(data.sub$time)
 		fx.sub <- fx.samples %>%
 			filter(time %in% plot.time, lifeStage != "Dormant")

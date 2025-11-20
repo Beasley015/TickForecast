@@ -104,7 +104,7 @@ Nmc <- 2000
 horizon <- 365
 
 # =========================================== #
-#       tick data intake
+#       tick data intake ----------------
 # =========================================== #
 source("./DataProcessing/functions.R")
 
@@ -119,12 +119,12 @@ neon.job <- neon.data %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
-drag.dates <- neon.job$time %>% unique()
+drag.dates <- as.Date(neon.job$time, format="%Y-%m-%d") %>% unique()
 start.date <- first(drag.dates)
 n.drags <- length(drag.dates)
 
 # =========================================== #
-#       get initial conditions
+#       get initial conditions ----------
 # =========================================== #
 
 df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"))
@@ -159,7 +159,7 @@ IC <- tibble(
 	as.matrix()
 
 # =========================================== #
-#       mouse data intake
+#       mouse data intake ---------------
 # =========================================== #
 
 source("./DataProcessing/capture_matrix.R")
@@ -207,7 +207,7 @@ for (i in seq_along(mice.seq)) {
 # )
 
 # =========================================== #
-#       daymet intake and correction
+#       daymet intake and correction -------------
 # =========================================== #
 source("./DataProcessing/daymet_downscale.R")
 
@@ -242,7 +242,7 @@ df.daymet <- join2 %>%
   select(Date, contains("Scale"))
 
 # =========================================== #
-#       get informative priors
+#       get informative priors -------------------
 # =========================================== #
 df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"))
 params.stats <- df.params %>%
@@ -315,6 +315,7 @@ pr.sig <- df.params %>%
 
 # iterate ======================================================================================
 
+# Need to add total sampled area to Cary tick data for this to work -------------
 ua.type <- c(
 	"ic",
 	"ic_parameter",

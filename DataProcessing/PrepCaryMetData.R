@@ -39,3 +39,11 @@ rh <- raw.met %>%
 write.csv(rh, "./Data/Cary_vaporPressure.csv", row.names = F) 
 
 # Precipitation -----------------
+precip <- raw.met %>%
+  select(DATE, TOT_PREC) %>%
+  rename(precipitation=TOT_PREC, "Date" = "DATE") %>%
+  mutate(Date = as.Date(Date, format = "%m/%d/%Y")) %>%
+  mutate(year=year(Date)) %>%
+  mutate(yday=yday(Date))
+
+write.csv(precip, "./Data/Cary_precipitation.csv", row.names = F) 

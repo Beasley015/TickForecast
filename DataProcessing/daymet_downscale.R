@@ -233,21 +233,28 @@ daymet_rh <- function(site) {
 ## Precipitation ==========================================================================
 
 daymet_precip <- function(site) {
-	neon.precip <- read_csv("./Data/precipDaily.csv")
+  if(site %in% c("HNRY", "GREN", "TEA")){
+    cary.precip <- read_csv("./Data/Cary_precipitation.csv") %>%
+      mutate(siteID = site)
+    
+    return(cary.precip)
+  } else{
+	  neon.precip <- read_csv("./Data/precipDaily.csv")
 	
-	neon.sub <- neon.precip %>%
-		filter(siteID == site) %>%
-		mutate(year = year(Date)) %>%
-		group_by(year) %>%
-		summarise(sum.precip = sum(priPrecipTotal)) %>%
-		pull(sum.precip) %>%
-		mean()
+	  neon.sub <- neon.precip %>%
+		  filter(siteID == site) %>%
+		  mutate(year = year(Date)) %>%
+		  group_by(year) %>%
+		  summarise(sum.precip = sum(priPrecipTotal)) %>%
+		  pull(sum.precip) %>%
+		  mean()
 
-	df <- read_csv("./Data/daymetSite_precipitation.csv")
+	  df <- read_csv("./Data/daymetSite_precipitation.csv")
 
-	df.p <- df %>%
-		filter(siteID == site)
-	return(df.p)
+	  df.p <- df %>%
+		  filter(siteID == site)
+	  return(df.p)
+  }
 }
 
 # df %>%
