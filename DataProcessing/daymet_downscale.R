@@ -32,7 +32,7 @@ daymet_cumGDD <- function(site) {
 daymet_temp <- function(site, minimum) {
 	if (minimum) {
 	  if(site %in% c("TEA", "HNRY", "GREN")){
-	    df.all <- read_csv("./Data/Cary_minTemperature.csv") # Create this file!
+	    df.all <- read_csv("./Data/Cary_minTemperature.csv") 
 	    df.all$siteID <- site
 	  } else{
 	    df.all <- read.csv("./Data/daymetSite_minTemperature.csv") 
@@ -53,7 +53,7 @@ daymet_temp <- function(site, minimum) {
 	}
 
   if(!(site %in% c("TEA", "HNRY", "GREN"))){
-	  df.temp <- df %>%
+	  df.temp <- df.all %>%
 		  filter(siteID == site) %>%
 		  group_by(yday) %>%
 		  select(-tile)

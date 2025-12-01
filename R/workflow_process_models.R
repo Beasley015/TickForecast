@@ -77,7 +77,7 @@ jobs <- jobs %>%
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 8
+	job.num <- 1
 }
 
 site.job <- jobs$site[job.num]
@@ -96,8 +96,8 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Some sort of cluster var
-n.slots <- 1
+n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Some sort of cluster var
+# n.slots <- 1
 production <- TRUE
 n.iter <- 1000 #50000
 Nmc <- 2000
@@ -165,9 +165,11 @@ IC <- tibble(
 source("./DataProcessing/capture_matrix.R")
 
 if(site.job %in% c("HNRY", "TEA", "GREN")){
-  smam <- read_csv("./Data/cary_mouse_formatted.csv")
+  smam <- read_csv("./Data/cary_mouse_formatted.csv",
+                   show_col_types=F)
 } else{
-  smam <- read_csv("./Data/allSmallMammals.csv")
+  smam <- read_csv("./Data/allSmallMammals.csv",
+                   show_col_types=F)
 }
                
 ch.ls <- capture_matrix(site.job, smam)
@@ -315,7 +317,6 @@ pr.sig <- df.params %>%
 
 # iterate ======================================================================================
 
-# Need to add total sampled area to Cary tick data for this to work -------------
 ua.type <- c(
 	"ic",
 	"ic_parameter",

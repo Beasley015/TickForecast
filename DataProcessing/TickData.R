@@ -117,7 +117,9 @@ tick.out <- mutate(tick.out,
                                       pattern = "[\\d]+-[\\d]+-[\\d]+")) %>%
   mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
   mutate(nlcdClass = case_when(siteID %in% c("HNRY", "TEA", "GREN") ~ "Forest",
-                               TRUE ~ nlcdClass))
+                               TRUE ~ nlcdClass)) %>%
+  mutate(totalSampledArea = case_when(siteID %in% c("HNRY", "TEA", "GREN") ~ 450,
+                                      TRUE ~ totalSampledArea))
 
 larva <- tick.out %>% 
   filter(lifeStage == "Larva")
