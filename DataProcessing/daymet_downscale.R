@@ -55,8 +55,8 @@ daymet_temp <- function(site, minimum) {
   if(!(site %in% c("TEA", "HNRY", "GREN"))){
 	  df.temp <- df.all %>%
 		  filter(siteID == site) %>%
-		  group_by(yday) %>%
-		  select(-tile)
+		  group_by(yday) #%>%
+		  # select(-tile)
 
 	  neon.temp <- read_csv("./Data/airTempDaily.csv")
 	
@@ -125,14 +125,14 @@ daymet_rh <- function(site) {
       mutate(siteID = site)
   } else{
 	  df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv") %>%
-	    filter(siteID == site) %>%
-	    select(-tile)
+	    filter(siteID == site) #%>%
+	    # select(-tile)
   }
 	
   if(!(site %in% c("HNRY", "GREN", "TEA"))){
     df.temp <- read_csv("./Data/daymetSite_maxTemperature.csv") %>%
-      filter(siteID == site) %>%
-      select(-tile)
+      filter(siteID == site) #%>%
+      # select(-tile)
   }
   
   if(site %in% c("HNRY", "GREN", "TEA")){
@@ -147,9 +147,9 @@ daymet_rh <- function(site) {
 		  df.temp,
 		  by = c(
 			  "siteID",
-			  "latitude",
-			  "longitude",
-			  "altitude",
+			  # "latitude",
+			  # "longitude",
+			  # "altitude",
 			  "year",
 			  "yday",
 			  "Date"

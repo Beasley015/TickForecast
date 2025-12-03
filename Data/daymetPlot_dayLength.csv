@@ -1,4 +1,4 @@
-year,yday,dayl..s.,prcp..mm.day.,srad..W.m.2.,swe..kg.m.2.,maxTemperature,tmin..deg.c.,vp..Pa.,data,plotID,lat,long,alt,Date
+year,yday,dayLength,prcp..mm.day.,srad..W.m.2.,swe..kg.m.2.,tmax..deg.c.,tmin..deg.c.,vp..Pa.,data,plotID,lat,long,alt,Date
 2020,1,30795.14,12.79,98.29,0,9.64,4.42,837.35,ABBY,,45.75956,-122.33283,375,2020-01-01
 2020,1,31565.87,1.63,92.29,64.45,0.69,-3.7,464.62,BART,,44.04817,-71.29649,373,2020-01-01
 2020,1,33508.44,0,194.72,0,9.47,0.08,614.48,BLAN,,39.08551,-77.95953,142,2020-01-01

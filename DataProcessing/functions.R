@@ -512,7 +512,7 @@ transfer_analysis <- function(
 	observations,
 	fx.dates,
 	model,
-	ua,
+	# ua,
 	spp,
 	out.dir
 ) {
@@ -594,7 +594,7 @@ transfer_analysis <- function(
 		mutate(
 			forecast = value / 450 * totalSampledArea,
 			start.date = start.date,
-			ua = ua,
+			# ua = ua,
 			model = model
 		)
 
@@ -604,7 +604,7 @@ transfer_analysis <- function(
 			time,
 			siteID,
 			start.date,
-			ua,
+			# ua,
 			model,
 			species,
 			totalSampledArea,
@@ -624,18 +624,20 @@ transfer_analysis <- function(
 
 	# get scores
 	scores <- score(fx.data, nmcmc) %>%
-		mutate(siteID = site, ua = ua, species = spp, model = model)
+		mutate(siteID = site, #ua = ua, 
+		       species = spp, model = model)
 
 	fx.out <- left_join(
 		fx.quantiles,
 		scores,
-		by = c("lifeStage", "time", "species", "plotID", "model", "siteID", "ua")
+		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")#, "ua")
 	)
 
 	# parameters
 	param.samples <- fx.tb %>%
 		filter(!node %in% state.nodes, !node %in% weather.nodes) %>%
-		mutate(siteID = site, ua = ua, model = model)
+		mutate(siteID = site, #ua = ua, 
+		       model = model)
 
 	param.quants <- param.samples %>%
 		group_by(node) %>%
@@ -651,7 +653,7 @@ transfer_analysis <- function(
 		ungroup() %>%
 		mutate(
 			siteID = site,
-			ua = ua,
+			#ua = ua,
 			species = spp,
 			start.date == start.date,
 			model = model
@@ -689,7 +691,7 @@ transfer_analysis <- function(
 			select(-time.index) %>%
 			mutate(
 				siteID = site,
-				ua = ua,
+				#ua = ua,
 				species = spp,
 				start.date == start.date,
 				model = model

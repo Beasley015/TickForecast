@@ -13,7 +13,7 @@ source("./DataProcessing/functions.R")
 
 model.code <- nimbleCode({
 	### priors
-	if (parameter) {
+	# if (parameter) {
 		phi.l.mu ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
 		phi.n.mu ~ dnorm(pr.phi.n[1], tau = pr.phi.n[2])
 		phi.a.mu ~ dnorm(pr.phi.a[1], tau = pr.phi.a[2])
@@ -25,29 +25,29 @@ model.code <- nimbleCode({
 				beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
 			}
 		}
-	} else {
-		phi.l.mu <- pr.phi.l[1]
-		phi.n.mu <- pr.phi.n[1]
-		phi.a.mu <- pr.phi.a[1]
-		theta.ln <- pr.theta.l2n[1]
-		theta.na <- pr.theta.n2a[1]
+	# } else {
+	# 	phi.l.mu <- pr.phi.l[1]
+	# 	phi.n.mu <- pr.phi.n[1]
+	# 	phi.a.mu <- pr.phi.a[1]
+	# 	theta.ln <- pr.theta.l2n[1]
+	# 	theta.na <- pr.theta.n2a[1]
+	# 
+	# 	if (notStatic) {
+	# 		for (j in 1:n.beta) {
+	# 			beta[j] <- pr.beta[j, 1]
+	# 		}
+	# 	}
+	# }
 
-		if (notStatic) {
-			for (j in 1:n.beta) {
-				beta[j] <- pr.beta[j, 1]
-			}
-		}
-	}
-
-	if (driver) {
+	# if (driver) {
 		tau.temp ~ dexp(1)
 		tau.maxrh ~ dexp(1)
 		tau.minrh ~ dexp(1)
 		tau.precip ~ dexp(1)
 		tau.cgdd ~ dexp(1)
-	}
+	# }
 
-	if (process) {
+	# if (process) {
 		for (i in 1:ns) {
 			sig[i] ~ dinvgamma(pr.sig[i, 1], pr.sig[i, 2])
 		}
@@ -57,13 +57,13 @@ model.code <- nimbleCode({
 		OMEGA[2, 2] <- sig[2]
 		OMEGA[3, 3] <- sig[3]
 		OMEGA[4, 4] <- sig[4]
-	} else {
-		### precision priors without process error
-		OMEGA[1, 1] <- 1E-10
-		OMEGA[2, 2] <- 1E-10
-		OMEGA[3, 3] <- 1E-10
-		OMEGA[4, 4] <- 1E-10
-	}
+	# } else {
+	# 	### precision priors without process error
+	# 	OMEGA[1, 1] <- 1E-10
+	# 	OMEGA[2, 2] <- 1E-10
+	# 	OMEGA[3, 3] <- 1E-10
+	# 	OMEGA[4, 4] <- 1E-10
+	# }
 
 	OMEGA[1, 2] <- 0
 	OMEGA[1, 3] <- 0
@@ -82,15 +82,15 @@ model.code <- nimbleCode({
 	Ochol[1:ns, 1:ns] <- chol(OMEGA[1:ns, 1:ns])
 
 	### first latent process
-	if (ic) {
+	# if (ic) {
 		for (i in 1:4) {
 			x[i, 1] ~ T(dnorm(IC[i, 1], tau = IC[i, 2]), 0, Inf)
 		}
-	} else {
-		for (i in 1:4) {
-			x[i, 1] <- IC[i, 1]
-		}
-	}
+	# } else {
+		# for (i in 1:4) {
+		# 	x[i, 1] <- IC[i, 1]
+		# }
+	# }
 
 	### define parameters
 	for (t in 1:horizon) {
@@ -108,12 +108,12 @@ model.code <- nimbleCode({
 			logit(n2a[t]) <- theta.na
 		}
 
-		if (driver) {
-			cgdd[t] ~ dnorm(gdd[t], tau = tau.cgdd)
-			gdd[t] ~ dunif(0, max.cgdd)
-		} else {
+		# if (driver) {
+			# cgdd[t] ~ dnorm(gdd[t], tau = tau.cgdd)
+			# gdd[t] ~ dunif(0, max.cgdd)
+		# } else {
 			gdd[t] <- cgdd[t]
-		}
+		# }
 
 		theta.n2a[t] <- if_else_nimble(
 			(gdd[t] <= 1000) | (gdd[t] >= 2500),
@@ -128,7 +128,7 @@ model.code <- nimbleCode({
 		l2n.quest[t] <- if_else_nimble((gdd[t] >= 400) & (gdd[t] <= 2500), 1, 0)
 
 		if (use.daymet) {
-			if (driver) {
+			# if (driver) {
 				maxtemp[t] ~ dnorm(x1[t], tau = tau.temp)
 				maxrh[t] ~ dnorm(x2[t], tau = tau.maxrh)
 				minrh[t] ~ dnorm(x3[t], tau = tau.minrh)
@@ -138,12 +138,12 @@ model.code <- nimbleCode({
 				x2[t] ~ dnorm(0, 1)
 				x3[t] ~ dnorm(0, 1)
 				x4[t] ~ dnorm(0, 1)
-			} else {
-				x1[t] <- maxtemp[t]
-				x2[t] <- maxrh[t]
-				x3[t] <- minrh[t]
-				x4[t] <- precip[t]
-			}
+			# } else {
+			# 	x1[t] <- maxtemp[t]
+			# 	x2[t] <- maxrh[t]
+			# 	x3[t] <- minrh[t]
+			# 	x4[t] <- precip[t]
+			# }
 
 			logit(phi.l[t]) <- phi.l.mu +
 				beta[1] * x1[t] +

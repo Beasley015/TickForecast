@@ -96,7 +96,7 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Some sort of cluster var
+n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 1
 production <- TRUE
 n.iter <- 1000 #50000
@@ -110,12 +110,12 @@ source("./DataProcessing/functions.R")
 
 # Get tick data based on site
 neon.data <- neon_tick_data(species.job) %>% suppressMessages()
-# function retrieves cary sites as well as NEON
+# function now retrieves cary sites as well as NEON
 
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
 	filter(siteID == site.job, grepl("Forest", nlcd), 
-	       time >= "2018-01-01" & time <= "2022-01-01") %>%
+	       time >= "2016-01-01" & time < "2022-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -216,6 +216,7 @@ source("./DataProcessing/daymet_downscale.R")
 cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
 maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
     select(Date, maxTempCorrect) %>%
+    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
     suppressMessages()
 rh <- daymet_rh(site.job) %>%
     select(Date, maxRHCorrect, minRHCorrect) %>%
@@ -241,12 +242,15 @@ df.daymet <- join2 %>%
         hist.means$sds["TOT_PREC"]
   ) %>%
   ungroup() %>%
-  select(Date, contains("Scale"))
+  select(Date, contains("Scale")) %>%
+  filter(Date >= "2016-01-01" & Date < "2022-01-01")
 
 # =========================================== #
 #       get informative priors -------------------
 # =========================================== #
-df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"))
+df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
+                      show_col_types = F)
+
 params.stats <- df.params %>%
 	filter(model == model.job) %>%
 	select(parameter, value) %>%
@@ -317,15 +321,15 @@ pr.sig <- df.params %>%
 
 # iterate ======================================================================================
 
-ua.type <- c(
-	"ic",
-	"ic_parameter",
-	"ic_parameter_driver",
-	"ic_parameter_driver_process"
-)
+# ua.type <- c(
+# 	"ic",
+# 	"ic_parameter",
+# 	"ic_parameter_driver",
+# 	"ic_parameter_driver_process"
+# )
 
 t = 1
-k = 2
+# k = 2
 
 for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
@@ -333,19 +337,19 @@ for (t in seq_len(n.drags)) {
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
 	message(mm)
 
-	for (k in seq_along(ua.type)) {
-		ua.job <- ua.type[k]
-		message("Simulating ", ua.job)
+	#for (k in seq_along(ua.type)) {
+		#ua.job <- ua.type[k]
+		#message("Simulating ", ua.job)
 
 		# flags
 		miceAndWeather <- model.job == "WithWeatherAndMiceGlobal"
 		miceMNA <- model.job == "WithMNAMice"
 		notStatic <- model.job != "Static"
 		use.daymet <- grepl("Weather", model.job)
-		ic <- grepl("ic", ua.job)
-		parameter <- grepl("parameter", ua.job)
-		driver <- grepl("driver", ua.job)
-		process <- grepl("process", ua.job)
+		#ic <- grepl("ic", ua.job)
+		#parameter <- grepl("parameter", ua.job)
+		#driver <- grepl("driver", ua.job)
+		#process <- grepl("process", ua.job)
 
 		dir.base <- file.path(
 			dir.out,
@@ -353,7 +357,7 @@ for (t in seq_len(n.drags)) {
 			model.job,
 			gsub(" ", "", species.job)
 		)
-		dir.save <- file.path(dir.base, ua.job)
+		dir.save <- file.path(dir.base)#, ua.job)
 
 		# initialize nimble lists
 		constants <- data <- list()
@@ -366,7 +370,7 @@ for (t in seq_len(n.drags)) {
 			# read last forecast parameters and state
 			readDest <- file.path(
 				dir.base,
-				"ic_parameter_driver_process",
+				# "ic_parameter_driver_process",
 				drag.dates[t - 1]
 			)
 
@@ -511,7 +515,86 @@ for (t in seq_len(n.drags)) {
 		area.init[-nai] <- NA
 
 		# build inits
-		if (ua.job == "ic_parameter_driver_process") {
+		# if (ua.job == "ic_parameter_driver_process") {
+		# 	inits <- function() {
+		# 		list(
+		# 			area = area.init,
+		# 			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
+		# 			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
+		# 			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
+		# 			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
+		# 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+		# 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
+		# 			sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
+		# 			x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+		# 			Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y)),
+		# 			tau.temp = rexp(1),
+		# 			tau.maxrh = rexp(1),
+		# 			tau.minrh = rexp(1),
+		# 			tau.precip = rexp(1),
+		# 			tau.cgdd = rexp(1),
+		# 			x1 = jitter(data$maxtemp),
+		# 			x2 = jitter(data$maxrh),
+		# 			x3 = jitter(data$minrh),
+		# 			x4 = jitter(data$precip),
+		# 			gdd = jitter(data$cgdd)
+		# 		)
+		# 	}
+		# } else if (ua.job == "ic_parameter_driver") {
+		# 	inits <- function() {
+		# 		x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
+		# 		list(
+		# 			area = area.init,
+		# 			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
+		# 			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
+		# 			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
+		# 			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
+		# 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+		# 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
+		# 			x = x.init,
+		# 			Ex = x.init,
+		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y)),
+		# 			tau.temp = rexp(1),
+		# 			tau.maxrh = rexp(1),
+		# 			tau.minrh = rexp(1),
+		# 			tau.precip = rexp(1),
+		# 			tau.cgdd = rexp(1),
+		# 			x1 = jitter(data$maxtemp),
+		# 			x2 = jitter(data$maxrh),
+		# 			x3 = jitter(data$minrh),
+		# 			x4 = jitter(data$precip),
+		# 			gdd = jitter(data$cgdd)
+		# 		)
+		# 	}
+		# } else if (ua.job == "ic_parameter") {
+		# 	inits <- function() {
+		# 		x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
+		# 		list(
+		# 			area = area.init,
+		# 			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
+		# 			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
+		# 			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
+		# 			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
+		# 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+		# 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
+		# 			x = x.init,
+		# 			Ex = x.init,
+		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y))
+		# 		)
+		# 	}
+		# } else if (ua.job == "ic") {
+		# 	inits <- function() {
+		# 		x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
+		# 		list(
+		# 			area = area.init,
+		# 			x = x.init,
+		# 			Ex = x.init,
+		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y))
+		# 		)
+		# 	}
+		# }
+		
 			inits <- function() {
 				list(
 					area = area.init,
@@ -537,64 +620,13 @@ for (t in seq_len(n.drags)) {
 					gdd = jitter(data$cgdd)
 				)
 			}
-		} else if (ua.job == "ic_parameter_driver") {
-			inits <- function() {
-				x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
-				list(
-					area = area.init,
-					phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-					phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-					phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-					theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-					theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-					beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-					x = x.init,
-					Ex = x.init,
-					y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y)),
-					tau.temp = rexp(1),
-					tau.maxrh = rexp(1),
-					tau.minrh = rexp(1),
-					tau.precip = rexp(1),
-					tau.cgdd = rexp(1),
-					x1 = jitter(data$maxtemp),
-					x2 = jitter(data$maxrh),
-					x3 = jitter(data$minrh),
-					x4 = jitter(data$precip),
-					gdd = jitter(data$cgdd)
-				)
-			}
-		} else if (ua.job == "ic_parameter") {
-			inits <- function() {
-				x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
-				list(
-					area = area.init,
-					phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-					phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-					phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-					theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-					theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-					beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-					x = x.init,
-					Ex = x.init,
-					y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y))
-				)
-			}
-		} else if (ua.job == "ic") {
-			inits <- function() {
-				x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
-				list(
-					area = area.init,
-					x = x.init,
-					Ex = x.init,
-					y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y))
-				)
-			}
-		}
 
 		source("./R/nimble_forecast.R")
 		source("./R/run_transfer_nimble.R")
 		cl <- makeCluster(n.slots) 
 		
+		# Check this function- comment out if/else statements 
+		# related to uncertainty analysis
 		out.nchains <- run_transfer_nimble(
 			cl = cl,
 			model = model.code,
@@ -603,10 +635,10 @@ for (t in seq_len(n.drags)) {
 			inits = inits,
 			n.iter = n.iter,
 			notStatic = notStatic,
-			ic = ic,
-			parameter = parameter,
-			driver = driver,
-			process = process,
+			# ic = ic,
+			# parameter = parameter,
+			# driver = driver,
+			# process = process,
 			miceMNA = miceMNA,
 			miceAndWeather = miceAndWeather,
 			use.daymet = use.daymet
@@ -632,7 +664,7 @@ for (t in seq_len(n.drags)) {
 
 		dat.hindcast <- do.call(rbind, out.nchains)
 
-		if (ua.job == "ic_parameter_driver_process") {
+		# if (ua.job == "ic_parameter_driver_process") {
 			message("Checking convergence...")
 			nodes <- colnames(out.nchains[[1]])
 			gelman.keep <- numeric(length(nodes))
@@ -646,7 +678,7 @@ for (t in seq_len(n.drags)) {
 					mcmc.check,
 					transform = TRUE
 				)$psrf[1])
-			}
+			#}
 
 			if (any(gelman.keep > 1.2)) {
 				message("WARNING: Convergence not reached!")
@@ -656,7 +688,7 @@ for (t in seq_len(n.drags)) {
 					psrf = as.numeric(gelman.keep[bad.nodes])
 				) %>%
 					arrange(psrf)
-				print(tail(bad.params))
+				# print(tail(bad.params))
 			} else {
 				message("Convergence = TRUE")
 			}
@@ -677,10 +709,10 @@ for (t in seq_len(n.drags)) {
 			observations = neon.job,
 			fx.dates = fx.sequence,
 			model = model.job,
-			ua = ua.job,
+			# ua = ua.job,
 			spp = species.job,
 			out.dir = fileDest
 		)
-		message(ua.job, " complete")
-	}
+		# message(ua.job, " complete")
+	#}
 }
