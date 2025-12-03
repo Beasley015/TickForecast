@@ -15,15 +15,8 @@
 # Assign cores and cores per node
 #$ -pe omp 3 -l mem_per_core=16G # This assigns 3 cores per task; 1 core per markov chain
 
-# Send an email when the job finishes or if it is aborted (by default no email is sent).<- might not be right
+# Send an email when the job finishes or if it is aborted 
 #$ -m ea
-
-# Merge stderr into the stdout log file, to reduce clutter
-#$ -j y
-
-# Give the log file a name 
-#$ -o /projectnb/dietzelab/ebeasley/repro_john_models.log
-
 #
 #
 # Below is what would get passed to the command line - you can test just these lines to make sure they work

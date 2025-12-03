@@ -139,7 +139,7 @@ data.latent <- df.latent %>%
 		month(DATE) == month.get
 	) %>%
 	group_by(lifeStage) %>%
-	summarise(mu = mean(value), prec = 1 / var(value)) %>%
+	suppressMessages(summarise(mu = mean(value), prec = 1 / var(value))) %>%
 	pivot_wider(names_from = lifeStage, values_from = c(mu, prec))
 
 IC <- tibble(
@@ -255,7 +255,7 @@ params.stats <- df.params %>%
 	filter(model == model.job) %>%
 	select(parameter, value) %>%
 	group_by(parameter) %>%
-	summarise(mu = mean(value), tau = 1 / var(value))
+	suppressMessages(summarise(mu = mean(value), tau = 1 / var(value)))
 
 get_prior <- function(name) {
 	pr <- numeric(2)
@@ -681,7 +681,7 @@ for (t in seq_len(n.drags)) {
 			#}
 
 			if (any(gelman.keep > 1.2)) {
-				message("WARNING: Convergence not reached!")
+				# message("WARNING: Convergence not reached!")
 				bad.nodes <- which(gelman.keep > 1.2)
 				bad.params <- tibble(
 					node = nodes[bad.nodes],
@@ -690,7 +690,7 @@ for (t in seq_len(n.drags)) {
 					arrange(psrf)
 				# print(tail(bad.params))
 			} else {
-				message("Convergence = TRUE")
+				# message("Convergence = TRUE")
 			}
 		}
 
