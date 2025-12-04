@@ -612,7 +612,7 @@ transfer_analysis <- function(
 			nlcd,
 			observed
 		) %>%
-		summarise(
+		suppressMessages(summarise(
 			lower95 = quantile(forecast, 0.025),
 			lower75 = quantile(forecast, 0.125),
 			median = median(forecast),
@@ -620,7 +620,7 @@ transfer_analysis <- function(
 			upper75 = quantile(forecast, 0.875),
 			upper95 = quantile(forecast, 0.975),
 			variance = var(forecast)
-		)
+		))
 
 	# get scores
 	scores <- score(fx.data, nmcmc) %>%

@@ -20,6 +20,8 @@ library(nimble)
 library(parallel)
 # nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
 
+options(dplyr.summarise.inform = FALSE)
+
 update <- FALSE
 
 dir.top <- getwd()
@@ -139,7 +141,7 @@ data.latent <- df.latent %>%
 		month(DATE) == month.get
 	) %>%
 	group_by(lifeStage) %>%
-	suppressMessages(summarise(mu = mean(value), prec = 1 / var(value))) %>%
+	summarise(mu = mean(value), prec = 1 / var(value)) %>%
 	pivot_wider(names_from = lifeStage, values_from = c(mu, prec))
 
 IC <- tibble(
@@ -255,7 +257,7 @@ params.stats <- df.params %>%
 	filter(model == model.job) %>%
 	select(parameter, value) %>%
 	group_by(parameter) %>%
-	suppressMessages(summarise(mu = mean(value), tau = 1 / var(value)))
+	summarise(mu = mean(value), tau = 1 / var(value))
 
 get_prior <- function(name) {
 	pr <- numeric(2)
@@ -417,7 +419,7 @@ for (t in seq_len(n.drags)) {
 			tick.stats <- last.fx %>%
 				filter(time == fx.start.date) %>%
 				group_by(lifeStage, time) %>%
-				summarise(mu = mean(value), tau = 1 / var(value))
+			  summarise(mu = mean(value), tau = 1 / var(value))
 
 			IC <- matrix(NA, 4, 2)
 			IC[1, 1] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(mu)
@@ -493,14 +495,17 @@ for (t in seq_len(n.drags)) {
 			}
 		}
 
-		if (year(fx.start.date) == 2021) {
+		if (year(fx.start.date) == max(year(neon.job$time))) {
 			if (model.job == "Static" || model.job == "Weather") {
 				horizon <- length(data$cgdd)
-				data$y <- y[, 1:horizon, ]
-			} else {
+				data$y <- as.array(y[, 1:horizon, ])
+				if(is.na(dim(data$y)[3]==T)){
+				  dim(data$y)[3] <- 1
+				  }
+				} else {
 				horizon <- min(length(data$cgdd), length(data$mice))
 				data$y <- y[, 1:horizon, ]
-			}
+				}
 		}
 
 		# finalize constants
