@@ -7,7 +7,7 @@
 #$ -l buyin
 
 # Specify array job with tasks
-#$ -t 18-34
+#$ -t 19
 
 # Specify hard time limit of hours for the job (if you have a short runtime the SCC gives you priority)
 #$ -l h_rt=8:00:00
