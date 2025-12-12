@@ -356,7 +356,7 @@ mna_jags <- function(site.run, return.mean = FALSE) {
 	}
 
 	# tick data
-	dat <- read.csv("./Data/tick_cleaned") # tick data
+	dat <- read.csv(file=paste(getwd(), "/Data/tick_cleaned.csv", sep = "")) # tick data
 	tick <- dat[, c("Grid", "DATE", "n_larvae", "n_nymphs", "n_adults")]
 	tick <- subset(tick, Grid == site.run)
 	tick$DATE <- as.Date(tick$DATE)
@@ -613,13 +613,13 @@ transfer_analysis <- function(
 			observed
 		) %>%
 		suppressMessages(summarise(
-			lower95 = quantile(forecast, 0.025),
-			lower75 = quantile(forecast, 0.125),
-			median = median(forecast),
-			mean = mean(forecast),
-			upper75 = quantile(forecast, 0.875),
-			upper95 = quantile(forecast, 0.975),
-			variance = var(forecast)
+			lower95 = quantile(forecast, 0.025, na.rm=T),
+			lower75 = quantile(forecast, 0.125, na.rm=T),
+			median = median(forecast, na.rm=T),
+			mean = mean(forecast, na.rm=T),
+			upper75 = quantile(forecast, 0.875, na.rm=T),
+			upper95 = quantile(forecast, 0.975, na.rm=T),
+			variance = var(forecast, na.rm=T)
 		))
 
 	# get scores
@@ -642,13 +642,13 @@ transfer_analysis <- function(
 	param.quants <- param.samples %>%
 		group_by(node) %>%
 		summarise(
-			lower95 = quantile(value, 0.025),
-			lower75 = quantile(value, 0.125),
-			median = median(value),
-			mean = mean(value),
-			upper75 = quantile(value, 0.875),
-			upper95 = quantile(value, 0.975),
-			variance = var(value)
+			lower95 = quantile(value, 0.025, na.rm=T),
+			lower75 = quantile(value, 0.125, na.rm=T),
+			median = median(value, na.rm=T),
+			mean = mean(value, na.rm=T),
+			upper75 = quantile(value, 0.875, na.rm=T),
+			upper95 = quantile(value, 0.975, na.rm=T),
+			variance = var(value, na.rm=T)
 		) %>%
 		ungroup() %>%
 		mutate(
@@ -676,13 +676,13 @@ transfer_analysis <- function(
 			filter(node %in% weather.nodes) %>%
 			group_by(node) %>%
 			summarise(
-				lower95 = quantile(value, 0.025),
-				lower75 = quantile(value, 0.125),
-				median = median(value),
-				mean = mean(value),
-				upper75 = quantile(value, 0.875),
-				upper95 = quantile(value, 0.975),
-				variance = var(value)
+				lower95 = quantile(value, 0.025, na.rm=T),
+				lower75 = quantile(value, 0.125, na.rm=T),
+				median = median(value, na.rm=T),
+				mean = mean(value, na.rm=T),
+				upper75 = quantile(value, 0.875, na.rm=T),
+				upper95 = quantile(value, 0.975, na.rm=T),
+				variance = var(value, na.rm=T)
 			) %>%
 			ungroup() %>%
 			mutate(time.index = as.numeric(str_extract(node, "(?<=\\[)\\d*(?=\\])")))

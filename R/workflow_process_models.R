@@ -168,23 +168,29 @@ source("./DataProcessing/capture_matrix.R")
 
 if(site.job %in% c("HNRY", "TEA", "GREN")){
   smam <- read_csv("./Data/cary_mouse_formatted.csv",
-                   show_col_types=F)
+                   show_col_types=F) %>%
+    filter(siteID == site.job)
+  
+  mice.obs <- ymd(smam$collectDate)
+  mna <- smam$MNA
+  names(mna) <- smam$collectDate
+  
 } else{
   smam <- read_csv("./Data/allSmallMammals.csv",
                    show_col_types=F)
-}
                
-ch.ls <- capture_matrix(site.job, smam)
-ch <- ch.ls$ch
-alive <- ch %in% 1:3
-ch[alive] <- 1
-ch[!alive] <- 0
-ncaps <- rowSums(ch)
-ch <- ch[ncaps > 0, ]
-source("./DataProcessing/known_states.R")
-ks <- known_states(ch)
-mna <- colSums(ks)
-mice.obs <- ymd(colnames(ch)) # unique sampling days: mice
+  ch.ls <- capture_matrix(site.job, smam)
+  ch <- ch.ls$ch
+  alive <- ch %in% 1:3
+  ch[alive] <- 1
+  ch[!alive] <- 0
+  ncaps <- rowSums(ch)
+  ch <- ch[ncaps > 0, ]
+  source("./DataProcessing/known_states.R")
+  ks <- known_states(ch)
+  mna <- colSums(ks)
+  mice.obs <- ymd(colnames(ch)) # unique sampling days: mice
+}
 
 # every day in mouse sequence
 mice.seq <- seq.Date(mice.obs[1], mice.obs[length(mice.obs)], by = 1)
@@ -200,15 +206,14 @@ for (i in seq_along(mice.seq)) {
 	}
 }
 
-# Not sure if this is actually needed:
-# # historical mna
-# mna.hist <- mna_jags("Green Control", return.mean = TRUE)
-# 
-# # center and scale
-# mna.scaled <- tibble(
-# 	mna.scaled = (mna.all.days - mna.hist$mean) / mna.hist$sd,
-# 	Date = mice.seq
-# )
+# historical mna
+mna.hist <- mna_jags("Green Control", return.mean = TRUE)
+
+# center and scale
+mna.scaled <- tibble(
+	mna.scaled = (mna.all.days - mna.hist$mean) / mna.hist$sd,
+	Date = mice.seq
+)
 
 # =========================================== #
 #       daymet intake and correction -------------
@@ -422,14 +427,17 @@ for (t in seq_len(n.drags)) {
 			  summarise(mu = mean(value), tau = 1 / var(value))
 
 			IC <- matrix(NA, 4, 2)
-			IC[1, 1] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(mu)
-			IC[1, 2] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(tau)
-			IC[2, 1] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(mu)
-			IC[2, 2] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(tau)
-			IC[3, 1] <- tick.stats %>% filter(lifeStage == "Nymph") %>% pull(mu)
-			IC[3, 2] <- tick.stats %>% filter(lifeStage == "Nymph") %>% pull(tau)
-			IC[4, 1] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(mu)
-			IC[4, 2] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(tau)
+			
+			if(nrow(tick.stats)!=0){
+			  IC[1, 1] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(mu)
+			  IC[1, 2] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(tau)
+			  IC[2, 1] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(mu)
+			  IC[2, 2] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(tau)
+			  IC[3, 1] <- tick.stats %>% filter(lifeStage == "Nymph") %>% pull(mu)
+			  IC[3, 2] <- tick.stats %>% filter(lifeStage == "Nymph") %>% pull(tau)
+			  IC[4, 1] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(mu)
+			  IC[4, 2] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(tau)
+			}
 
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 			n.days <- length(fx.sequence)
@@ -492,6 +500,9 @@ for (t in seq_len(n.drags)) {
 			if (length(data$mice) < length(fx.sequence)) {
 				horizon <- min(length(data$cgdd), length(data$mice))
 				data$y <- y[, 1:horizon, ]
+				if(is.na(dim(data$y)[3]==T)){
+				  dim(data$y)[3] <- 1
+				}
 			}
 		}
 
@@ -505,7 +516,14 @@ for (t in seq_len(n.drags)) {
 				} else {
 				horizon <- min(length(data$cgdd), length(data$mice))
 				data$y <- y[, 1:horizon, ]
+				if(is.na(dim(data$y)[3]==T)){
+				  dim(data$y)[3] <- 1
 				}
+				}
+		}
+		
+		if(horizon == 0){
+		  break
 		}
 
 		# finalize constants

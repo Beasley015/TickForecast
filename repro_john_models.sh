@@ -6,11 +6,11 @@
 # Request buyin nodes so Mike doesn't kill you
 #$ -l buyin
 
-# Specify array job with 5 tasks numbered 1-5
-#$ -t 1-5
+# Specify array job with tasks
+#$ -t 18-34
 
 # Specify hard time limit of hours for the job (if you have a short runtime the SCC gives you priority)
-#$ -l h_rt=5:00:00
+#$ -l h_rt=8:00:00
 
 # Assign cores and cores per node
 #$ -pe omp 3 -l mem_per_core=16G # This assigns 3 cores per task; 1 core per markov chain

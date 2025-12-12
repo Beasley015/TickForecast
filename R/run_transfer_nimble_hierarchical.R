@@ -5,11 +5,7 @@ run_transfer_nimble <- function(
 	constants,
 	inits,
 	n.iter,
-	# ic,
-	# parameter,
-	# driver,
-	# process,
-	notStatic,
+	notStatic, # What is notStatic? -------------
 	miceMNA,
 	miceAndWeather,
 	use.daymet
@@ -19,8 +15,6 @@ run_transfer_nimble <- function(
 	library(coda)
 
 	source("./DataProcessing/functions.R")
-	# assign("dwtnorm", dwtnorm, envir = .GlobalEnv)
-	# assign("rwtnorm", rwtnorm, envir = .GlobalEnv)
 
 	n.cores <- length(cl) # number of cores used
 
@@ -30,11 +24,7 @@ run_transfer_nimble <- function(
 		"data",
 		"n.iter",
 		"if_else_nimble",
-		# "parameter",
-		"notStatic",
-		# "driver",
-		# "process",
-		# "ic",
+		"notStatic", # Might remove this depending on what it is
 		"miceAndWeather",
 		"miceMNA",
 		"use.daymet"
@@ -65,16 +55,7 @@ run_transfer_nimble <- function(
 		)
 		cModel <- compileNimble(model)
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
-		# if(process){
-		#   for(i in 1:nrow(data$y)){
-		#     for(j in 1:ncol(data$y)){
-		#       if(j > 1){
-		#         node <- paste0('x[', i, ', ', j, ']')
-		#         mcmcConf$addSampler(node, "RW")
-		#       }
-		#     }
-		#   }
-		# }
+
 		Rmcmc <- buildMCMC(mcmcConf)
 		Cmcmc <- compileNimble(Rmcmc)
 		Cmcmc$run(niter = n.iter, nburnin = n.iter / 2)

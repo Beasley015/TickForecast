@@ -3,8 +3,8 @@
 
 # Output .csv is an input for the script capture_matrix.R
 
-cary.raw <- read.csv("./Data/Cary_mouse.csv") %>%
-  select(Full.Date.2, Grid, Week, Fate, Tag.., day.of.year, Spp)
+cary.raw <- read.csv("./Data/cary_mna_1991-2022.csv") %>%
+  select(Grid, Year, Week, MNA, Date, spec)
 
 cary.save <- cary.raw %>%
   # Extract site and plot names
@@ -19,24 +19,14 @@ cary.save <- cary.raw %>%
   select(-c(Grid, plot)) %>%
   
   # Rename data column to match neon
-  rename("collectDate" = "Full.Date.2") %>%
+  rename("collectDate" = "Date") %>%
+  mutate(collectDate = as.Date(collectDate, format = "%m/%d/%y")) %>%
   
   # Rename species column to full name
-  mutate(genusName = case_when(Spp == "PL" ~ "Peromyscus",
-                         TRUE ~ NA)) %>%
-  select(-Spp) %>%
+  filter(spec == "PL") %>%
+  select(-spec) %>%
   
-  # Rename tag column
-  rename(tagID = "Tag..") %>%
-  
-  # Cary mice have unobserved tick status
-  mutate(adultTicksAttached = "U", nymphalTicksAttached = "U",
-         larvalTicksAttached = "U") %>%
-  
-  # Re-code mouse fates to match NEON codes
-  mutate(animalInTrap = case_when(Fate %in% c(1,2) ~ 1,
-                                  Fate %in% c(3,4) ~ 2,
-                                  TRUE ~ 0)) %>%
-  select(-Fate)
+  # Remove other columns
+  select(-c(Year, Week))
 
 write_csv(cary.save, "./Data/cary_mouse_formatted.csv")  
