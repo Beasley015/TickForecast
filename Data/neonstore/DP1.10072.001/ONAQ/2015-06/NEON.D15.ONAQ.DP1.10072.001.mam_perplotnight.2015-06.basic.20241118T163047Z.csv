@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d4739fdd-259e-4eb5-898e-6c81541b6bcf","94871547A88E4EE6B62C3141C60C95DE","ONAQ.2015.25","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2015-06-15","2015-06-15",,,,
+"b6d68777-1884-4897-8cb4-5e7c61efb9bd","898A53C577924130B05D15289EF2A1D3","ONAQ.2015.25","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2015-06-15","2015-06-15",,,,
+"ed24c473-4b09-4159-8852-309e9d7fef60","5FF60DAB98404FB9A02744762195FA9B","ONAQ.2015.25","ONAQ_014.mammalGrid.mam","D15","ONAQ","ONAQ_014","pathogen","2015-06-15","2015-06-15",,,,
+"9b94e2d5-4383-444d-b1d5-6c0072142353","88A72D7EEC32422399DBB3D228CF6A7A","ONAQ.2015.25","ONAQ_014.mammalGrid.mam","D15","ONAQ","ONAQ_014","pathogen","2015-06-16","2015-06-16",,,,
+"1ccf6306-5ea0-4376-a237-f0e3000786a2","BC864DADBFE54E53942D9FC80A7391ED","ONAQ.2015.25","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2015-06-16","2015-06-16",,,,
+"ef99a442-9e3a-4353-95e6-a3e0838c8153","12C1A71906404FA99AC1E00A6E410E57","ONAQ.2015.25","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2015-06-16","2015-06-16",,,,
+"0b29fa62-fd66-4954-99fe-d292c1f5d504","7FBE4DB17D734212801274582158E3EE","ONAQ.2015.25","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2015-06-17","2015-06-17",,,"Trap G1 had two entries in data sheet. Data for specimen in second instance of record was recorded under trap AX",
+"dc1b85df-a2f7-451f-8924-3b5ffabd263c","BEB815C56B5B412398641D14F906D39F","ONAQ.2015.25","ONAQ_014.mammalGrid.mam","D15","ONAQ","ONAQ_014","pathogen","2015-06-17","2015-06-17",,,,
+"89e3d572-ae8b-4cc0-917d-5542a5e0ee94","2B4EFB6D032F4B6CBC4A77DE08D2C949","ONAQ.2015.25","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2015-06-17","2015-06-17",,,,
+"8de1f178-2ad7-4bb4-9499-d41a752be450","A790AE4084BA47FA86184DB4C0725CCE","ONAQ.2015.25","ONAQ_004.mammalGrid.mam","D15","ONAQ","ONAQ_004","diversity","2015-06-18","2015-06-18",,,,
+"5dc1cbab-e8d0-4951-b5ce-5fcc1f151c1c","F8B37B8D7A344E66A0C461844E20CAA0","ONAQ.2015.25","ONAQ_015.mammalGrid.mam","D15","ONAQ","ONAQ_015","diversity","2015-06-18","2015-06-18",,,"15 traps not set because setting crew forgot to bring enough traps out the night before",

@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"b00d7e78-d582-482a-b69a-ee56f2f2b8d8","5305f68c-e6dd-4cf5-a637-7de426006530","STER.2024.18","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"e0d151c8-ce21-4865-a6c9-476ba121e00f","6eef2eb3-69a9-4d83-b863-e89f33919443","STER.2024.18","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"42d7d78d-3aa0-48ae-84a4-be31eea36fea","a91ee941-1eb0-4f20-8ef8-32acd94053e3","STER.2024.18","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"a0caf785-c73f-46ad-b23e-391548628a69","74b59d45-503d-42bc-b992-0f929d5ef247","STER.2024.18","STER_027.mammalGrid.mam","D10","STER","STER_027","diversity","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,

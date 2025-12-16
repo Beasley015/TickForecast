@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"88de3c31-f9a8-4196-89a9-081e58c285da","2f4ce12b-7dfa-4236-9445-3930bd3b9596","HARV.2017.33","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"affe30a9-5476-4e9c-b3d5-071ddfa039ae","60baa897-cd04-4893-a4cb-d653b8b2dba9","HARV.2017.33","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"91f84ba2-c5d3-470c-8333-99396330f1d6","850e3847-2100-48d5-92fc-50ca4d662fde","HARV.2017.33","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"4b490dc5-0d4a-41d8-8fc5-67b44e19d41d","2766618c-ef31-4f4d-8cf3-a69d315d887c","HARV.2017.33","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vG",,
+"0677884e-f1f5-45ac-94a0-bd6e7bc21da3","e39a9aae-7a85-4559-adf0-4901f33f6058","HARV.2017.33","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vG",,
+"54e4ded0-bb52-42a9-b5fe-8bd5d30e0647","2e622f13-992e-48e8-9a5a-43f6ee324156","HARV.2017.33","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vG",,
+"09e0e5f7-02f4-4006-99b6-9197fd71922d","b7b39fb8-c37c-44a8-8300-294c5d83929d","HARV.2017.33","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"253a9f08-851b-4f61-b143-38d619b22d2f","8c372fa4-7161-4d38-a0df-f45050c6daa5","HARV.2017.33","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"85862eaa-95e4-4981-bed7-2ac1b2af318a","d7d2ca29-d8c4-42ab-af18-0ce85f3ff029","HARV.2017.33","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"3a8d0e8a-9208-4031-bf93-5f3b9fe80b06","f9362d23-3c73-47e0-8e6f-1db13df1b916","HARV.2017.33","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","diversity","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,
+"a57bfe53-cdbc-4d3a-a5ff-b447458add00","5de27c56-5b98-4360-893c-332934f8f23d","HARV.2017.33","HARV_001.mammalGrid.mam","D01","HARV","HARV_001","diversity","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,
+"be38209f-b289-4f72-a7ed-50b77d01d50a","a7563e64-7c28-442e-a135-56d2299488ac","HARV.2017.33","HARV_010.mammalGrid.mam","D01","HARV","HARV_010","diversity","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,

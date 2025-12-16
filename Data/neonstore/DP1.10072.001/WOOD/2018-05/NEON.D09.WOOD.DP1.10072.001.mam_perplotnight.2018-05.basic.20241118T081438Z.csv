@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"98713915-adb9-44a4-ba39-66f08b7c77ac","351e0730-417d-4133-ab18-ad7bb7b586c1","WOOD.2018.20","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-05-15","2018-05-15",,"NEON.DOC.000481vK",,
+"3de4f9f5-8c09-4b5c-9270-438de42df3da","0b9ff24f-1945-475a-822a-97dac65d2428","WOOD.2018.20","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-05-15","2018-05-15",,"NEON.DOC.000481vK","A1 and B1 not set due to water",
+"db822c69-35e6-4307-8d55-783266e7f8ab","f90cf452-69e9-432c-91a5-14d7dbf88c75","WOOD.2018.20","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-05-15","2018-05-15",,"NEON.DOC.000481vK",,
+"4efb1c02-e9a6-4348-8233-656930a52d31","96cf6adf-27f7-434a-9d54-c582f5e42492","WOOD.2018.20","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-05-16","2018-05-16",,"NEON.DOC.000481vK",,
+"149ea514-7710-41f8-a98e-a840fe14d296","6d6e2dd3-8f42-489d-a2ea-83f97358b94e","WOOD.2018.20","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-05-16","2018-05-16",,"NEON.DOC.000481vK",,
+"c67691f6-1fee-4158-b3ea-4a1abc6992ef","a7ce2371-407c-4f81-a774-a1a03b221216","WOOD.2018.20","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-05-16","2018-05-16",,"NEON.DOC.000481vK",,
+"17d70589-a070-40b2-ae48-2badbbf4aed9","56c69acd-1720-4770-bd3e-765c5a78fe47","WOOD.2018.20","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2018-05-16","2018-05-16",,"NEON.DOC.000481vK",,
+"b6d5c2f5-0bff-45a8-823f-d9af1bb775ec","37de7e61-2a6f-4ef8-8ea0-b1806a802023","WOOD.2018.20","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2018-05-17","2018-05-17",,"NEON.DOC.000481vK",,
+"b14478ec-fd3e-4184-94a6-43f62413dec0","c12ef2d0-0d6c-4b2e-b5a1-cdae38ee3e7c","WOOD.2018.20","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-05-17","2018-05-17",,"NEON.DOC.000481vK",,
+"61a1626f-f8de-4365-b483-0cdeb9698ee5","5b70c42e-0280-49f0-90fe-a450e4a3c67a","WOOD.2018.20","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-05-17","2018-05-17",,"NEON.DOC.000481vK",,
+"12c55afe-026a-49bc-9683-840ddac2b045","80e1f9e0-fc9d-407a-a85f-5edaf5be48f2","WOOD.2018.20","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2018-05-17","2018-05-17",,"NEON.DOC.000481vK",,

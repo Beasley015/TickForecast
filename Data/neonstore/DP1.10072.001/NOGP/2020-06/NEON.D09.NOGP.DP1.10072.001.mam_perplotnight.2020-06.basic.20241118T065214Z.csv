@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f4bbc7a0-69cc-4d62-addf-24791cfe5a4f","84230aea-a2a2-4844-8588-fa61c410df93","NOGP.2020.27","NOGP_002.mammalGrid.mam","D09","NOGP","NOGP_002","pathogen","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,
+"b097d597-0d45-4590-b6cc-d6bfb3c72ddd","f2cde04d-750f-40ce-97b5-77256a2f8e8b","NOGP.2020.27","NOGP_005.mammalGrid.mam","D09","NOGP","NOGP_005","pathogen","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,
+"b48d32ef-8216-4028-a12e-a9a31f30c750","b48338e0-987c-4f5c-8dce-323be48aed45","NOGP.2020.27","NOGP_009.mammalGrid.mam","D09","NOGP","NOGP_009","diversity","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,
+"0a46317c-0e41-43f7-b595-fcd63c42c8e3","ecb30c8b-a984-4777-b74a-d07577a53bce","NOGP.2020.27","NOGP_017.mammalGrid.mam","D09","NOGP","NOGP_017","pathogen","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,

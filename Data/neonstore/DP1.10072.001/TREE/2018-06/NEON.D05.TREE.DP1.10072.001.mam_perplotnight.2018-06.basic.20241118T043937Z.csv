@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a75ba07a-2a2c-4321-8792-c054524688d5","09f2e857-675c-46a1-a75a-7e1f03fb6a50","TREE.2018.25","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2018-06-19","2018-06-19",,"NEON.DOC.000481vK",,
+"3bb1f874-4114-472c-a2ca-a1b21814217b","8892e748-5d5c-4033-a51a-d2855b212079","TREE.2018.25","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2018-06-19","2018-06-19",,"NEON.DOC.000481vK",,
+"8068cb2a-a4d4-4d66-a751-f6de4648ac21","0c70ee58-8c0b-4a9a-96a4-ccaa03932b74","TREE.2018.25","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2018-06-19","2018-06-19",,"NEON.DOC.000481vK",,
+"5153cc7c-dc4b-43e3-b1ff-53e8e022cdbb","5ceec9a0-e326-46f6-9898-d4f0e08b4fd2","TREE.2018.25","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"32138e63-ba29-4ebf-88c1-f1458ad4709d","69d345d5-30a4-4a9f-9799-14e38fe55817","TREE.2018.25","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"6f41d423-f90e-40eb-8ef2-f9b8bb18bd1e","bdf5f1e2-5abf-4d9e-aae5-35c866dd06c2","TREE.2018.25","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"d5c737b5-1279-4565-b87c-b8ef05c7f202","a272ba23-4fcb-4da4-99ac-68860fb61a87","TREE.2018.25","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,
+"45ef9af8-4792-41bd-9488-c5ef1ff6386b","d533f43a-c2a0-4c63-bba6-377b165659af","TREE.2018.25","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,
+"e566af8e-fc53-4b7b-b6fc-3c9258bae616","99c62903-4e15-460e-a8e8-77eb2bbad4ca","TREE.2018.25","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,
+"134f1cdc-5480-4afc-af74-76cb536b5343","c184898e-0b17-4863-9fe0-291e795e15c9","TREE.2018.25","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2018-06-22","2018-06-22",,"NEON.DOC.000481vK",,
+"17c0aa2f-dcf4-4d8d-a7d3-bbf5e8c1e100","c82eaf31-d629-4cfd-8816-a1699c188231","TREE.2018.25","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2018-06-22","2018-06-22",,"NEON.DOC.000481vK",,
+"eb36758e-b971-4582-9a63-07123484a241","8b370f17-83ad-4708-b2c7-320f5f88c207","TREE.2018.25","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2018-06-22","2018-06-22",,"NEON.DOC.000481vK","Bear damaged or disturbed 85 traps",

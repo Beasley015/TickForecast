@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5963339b-c974-40af-a6f0-e4198328550e","16a1e7af-08c0-49b0-8d3a-18af1a7721bf","GRSM.2019.19","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2019-05-07","2019-05-07",,"NEON.DOC.000481vL","cold chain broken on frozen samples",
+"6679e07d-13c3-45a2-866c-97863462f9a7","d635c408-d5cd-43cc-8b72-00a143862ae0","GRSM.2019.19","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2019-05-07","2019-05-07",,"NEON.DOC.000481vL",,
+"88f8934e-c5a6-495c-8585-9acf65e4692c","e17f7ef2-75b0-4cb0-ba3a-a149c1755401","GRSM.2019.19","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2019-05-07","2019-05-07",,"NEON.DOC.000481vL","cold chain broken on frozen samples",
+"b1c75597-8945-4bfa-bed1-69624398f9fe","083f9d19-228c-45c8-9a3e-5a02350232ab","GRSM.2019.19","GRSM_070.mammalGrid.mam","D07","GRSM","GRSM_070","diversity","2019-05-07","2019-05-07",,"NEON.DOC.000481vL",,
+"8e44609a-4f0c-4f59-a9ad-a50a336d46e3","7cd97184-71c9-4a6b-b063-f2aac2aefa23","GRSM.2019.19","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"c81a1944-3716-449a-a055-7d9648c422bc","0bc4c17d-ad42-4752-a5ee-1562fa9d5186","GRSM.2019.19","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","diversity","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"b3514463-4f05-4378-9533-c97311060af1","115456f0-92d8-4e63-98c1-0a890e42de61","GRSM.2019.19","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"0b655fc2-ddc7-4477-80ef-d650640ffc2a","0b1781fb-65d3-4cb4-93d1-3cd2ed52d202","GRSM.2019.19","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"01a13ac5-b417-47a0-b30a-03ce38f854ba","88dbd92e-2f0f-469f-b7b0-5ad1a0860334","GRSM.2019.19","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2019-05-09","2019-05-09",,"NEON.DOC.000481vL",,
+"ba9502ec-1c56-43a8-8b9e-da16ae7f5f74","789b8680-f57d-47be-9da3-659e68e36688","GRSM.2019.19","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","diversity","2019-05-09","2019-05-09",,"NEON.DOC.000481vL",,
+"808c2be0-6709-4f39-8768-0c4464677627","e3c34d95-9b8e-42b9-b1cb-294a618e427e","GRSM.2019.19","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2019-05-09","2019-05-09",,"NEON.DOC.000481vL",,
+"c42283a1-78b3-44ea-98be-8e624d0ce6db","8cfe7dd7-91c7-46c1-8fbe-9da73fc2aee9","GRSM.2019.19","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2019-05-09","2019-05-09",,"NEON.DOC.000481vL","Bear disturbance closed grid",

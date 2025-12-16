@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"38088a85-01af-46f7-a601-132b57d9e7d8","b216c283-7988-4760-b895-51cb1b636e43","SERC.2017.30","SERC_007.mammalGrid.mam","D02","SERC","SERC_007","diversity","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ",,
+"0a279105-3b3a-4340-89b0-01f6c635bc9c","63d81940-eda8-497d-a654-58338850c6d7","SERC.2017.30","SERC_014.mammalGrid.mam","D02","SERC","SERC_014","diversity","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ","Plot disturbed and not reset",
+"2fcb71e1-25aa-42a5-a478-02d64555acfa","0a3a5f9d-b527-4c72-90f8-05ff8a470177","SERC.2017.30","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ",,
+"764d4f1c-ce0c-4943-b977-e8ba96b28497","5a78d25f-45ca-4957-8f5e-d40d4ed91484","SERC.2017.30","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ",,
+"642e7046-2ed3-40dc-a01f-15572a466372","33d2e833-b293-40d7-8a66-c3c81893bc92","SERC.2017.30","SERC_016.mammalGrid.mam","D02","SERC","SERC_016","diversity","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ",,
+"b19ec590-2887-48ad-aedf-908929f225d1","8875c3e4-160d-4f30-aa8f-5251b0cedf19","SERC.2017.30","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ",,
+"cf150a37-b0be-4cb1-9fbd-bdb800400670","3c000ead-2c5d-4403-b128-bd0813f2a487","SERC.2017.30","SERC_008.mammalGrid.mam","D02","SERC","SERC_008","diversity","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ","Soybeans 1 to 2 ft tall; weather warm and dry",
+"55a93aa4-3308-4b4d-a98c-b2ae2cec8681","d0228abb-fc64-4736-902b-2a5fbd263e01","SERC.2017.30","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ",,
+"c481718b-71d1-4f95-b995-cef96b742745","e89c0b7e-052a-406a-8e4b-b323dcd3d6ca","SERC.2017.30","SERC_032.mammalGrid.mam","D02","SERC","SERC_032","diversity","2017-07-27","2017-07-27",,"NEON.DOC.000481vJ",,
+"83caa5a3-c935-4287-9702-8267daf058f3","c9ec1cb4-97d6-4370-85e6-81cbaf6db004","SERC.2017.30","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vJ",,
+"362243e5-0f33-4630-acf3-3f4387b52449","e7e49401-b0e8-4557-9555-142964ea9c7c","SERC.2017.30","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vJ",,
+"25b02a28-9527-43cf-87c8-d35d20fe0d60","60a5476c-cdb9-41d3-92a5-d9e9ec47ba89","SERC.2017.30","SERC_031.mammalGrid.mam","D02","SERC","SERC_031","diversity","2017-07-27","2017-07-27",,"NEON.DOC.000481vJ",,

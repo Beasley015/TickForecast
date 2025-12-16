@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"a8bdd6ee-16d6-4e78-9b31-23a7ac358584","8dc99aac-9218-4419-9693-e157645238dd","KONA.2024.18","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"047249da-3d33-4e1f-a0fd-05fe72fbc7d7","6617fd09-040f-4056-ae28-23c3e3b360b1","KONA.2024.18","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"4e55cddd-9f3e-4390-bd91-41983e5bb2d5","23b1563e-9989-4c51-a067-8174c5d36e73","KONA.2024.18","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,

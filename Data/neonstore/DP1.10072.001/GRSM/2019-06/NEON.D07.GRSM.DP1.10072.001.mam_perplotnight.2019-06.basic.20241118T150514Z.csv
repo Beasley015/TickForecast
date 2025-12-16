@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2243431d-b15c-4a7c-9477-67fbebc0f786","14891f36-58d6-4e90-bbeb-7b2543e79810","GRSM.2019.23","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"fad25530-1151-4550-9fd6-4c54da3ad0ff","63b4ce59-b0b7-4f8f-b913-684f78454c81","GRSM.2019.23","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"21b2895c-7218-4234-9328-475832e0d0a5","db3c8f23-2e99-43d6-a050-8308b6141cf7","GRSM.2019.23","GRSM_070.mammalGrid.mam","D07","GRSM","GRSM_070","diversity","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"0d326230-3741-4c90-a1d6-6ae98e1a5796","10857f3b-5bf0-4a57-9452-ffb28b4dd367","GRSM.2019.23","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"88ed4318-9431-456a-bf3d-9a6de0e9081f","1a9e6bad-9ffd-4f5f-ae65-46b9b04d6c5b","GRSM.2019.23","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"c7fe967b-347e-4aa8-bbc5-887afddfed46","6e8894e1-9105-484b-a713-fb2ce89e19a8","GRSM.2019.23","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"1ee8171c-90fe-438f-9f26-0f10430e8fb8","fad8cfb2-94f3-4944-aba7-fd37ba40a3cf","GRSM.2019.23","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL","Bear disturbance",
+"e228cab9-9730-4264-ae28-7427c57e2071","99f014a7-e65b-4381-996a-00c6537d4967","GRSM.2019.23","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","diversity","2019-06-05","2019-06-05",,"NEON.DOC.000481vL","Bear disturbance",
+"623233f3-6a87-4052-bb34-9ba28e72aad4","54d71ac0-6c8e-403c-8957-63f287f830b8","GRSM.2019.23","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"1ac73e0b-4282-4246-bd87-813d4c422885","5d994bb1-a1ab-48e1-b910-a2ecbe1640c1","GRSM.2019.23","GRSM_071.mammalGrid.mam","D07","GRSM","GRSM_071","diversity","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"aef8a3f2-093e-4b82-a002-913fad715f98","b6c5cdfa-44bc-4afa-9643-af1e5e4e1132","GRSM.2019.23","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL","Bear disturbance",
+"88d6ac9d-1065-416a-8eb7-e9f03a544510","d53822ca-bbf2-418b-b72b-678ddd928e6c","GRSM.2019.23","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","diversity","2019-06-06","2019-06-06",,"NEON.DOC.000481vL","Bear disturbance",

@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a777a78e-ccdd-46a0-9eab-a71b1f857a51","8e85686b-5387-400e-844a-b71432ed2526","KONZ.2021.39","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2021-10-01","2021-10-01","OK","NEON.DOC.000481vM",,
+"d748693e-1598-4112-9219-832a7d12e42c","6ba6081c-25d9-44d6-b7c9-9856c8ae4756","KONZ.2021.39","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2021-10-01","2021-10-01","OK","NEON.DOC.000481vM",,
+"c1a5458b-c078-408d-9b5c-475fe65e93dd","a38004af-2ee2-4a80-8a6d-373b7a34b4d5","KONZ.2021.39","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2021-10-01","2021-10-01","OK","NEON.DOC.000481vM",,

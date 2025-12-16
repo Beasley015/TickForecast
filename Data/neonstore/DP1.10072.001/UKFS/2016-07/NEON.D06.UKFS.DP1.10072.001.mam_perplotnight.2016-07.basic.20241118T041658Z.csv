@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"cc07cd39-a653-42da-8aa5-5893c8153f56","18116CEF93944EABBF9D546E4A7FE45D","UKFS.2016.26","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,
+"ff99b7d0-615d-4fce-a0db-a27432b9b174","973BE24B02BE465DAB68C05A3FD15B4B","UKFS.2016.26","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,
+"7c6ebb9d-f1c5-448e-8629-9c78426b51e0","8A577C18030543E59E37BDBE1F2F2FB6","UKFS.2016.26","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,

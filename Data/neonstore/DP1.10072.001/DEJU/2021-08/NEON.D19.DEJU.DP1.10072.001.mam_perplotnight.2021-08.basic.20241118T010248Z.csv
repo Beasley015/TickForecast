@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"39f2dfc8-a01c-4268-ac3f-8246e1d928cb","d39eced2-f0ee-4ecc-97cc-6b81929360f6","DEJU.2021.32","DEJU_005.mammalGrid.mam","D19","DEJU","DEJU_005","pathogen","2021-08-10","2021-08-10","OK","NEON.DOC.000481vM",,
+"63cea42f-9590-4ac7-809d-edeef39af53f","f003bfc5-de6a-4971-8703-5382c9f3eda4","DEJU.2021.32","DEJU_003.mammalGrid.mam","D19","DEJU","DEJU_003","pathogen","2021-08-10","2021-08-10","OK","NEON.DOC.000481vM",,
+"7bf1ded9-a63b-46fb-bb5c-959352a1c245","731a47c9-9853-4788-9792-13f02b7eb3b4","DEJU.2021.32","DEJU_017.mammalGrid.mam","D19","DEJU","DEJU_017","pathogen","2021-08-10","2021-08-10","OK","NEON.DOC.000481vM",,
+"74d2891e-ccbc-46dc-ba35-f01e5c1416b2","b3f68525-04f6-4d0c-b638-b6f5f9297c77","DEJU.2021.32","DEJU_003.mammalGrid.mam","D19","DEJU","DEJU_003","pathogen","2021-08-11","2021-08-11","OK","NEON.DOC.000481vM",,
+"380a7e26-8350-4bc3-9f72-183c8d9111dd","286ad5ed-08c4-4d8a-abe8-d84d263195dd","DEJU.2021.32","DEJU_017.mammalGrid.mam","D19","DEJU","DEJU_017","pathogen","2021-08-11","2021-08-11","OK","NEON.DOC.000481vM",,
+"1c04514d-11f3-45f7-827b-4a4eccca0110","73d4cd81-9901-4715-aaa5-3afa81671264","DEJU.2021.32","DEJU_005.mammalGrid.mam","D19","DEJU","DEJU_005","pathogen","2021-08-11","2021-08-11","OK","NEON.DOC.000481vM",,
+"a5efed76-81dc-40d7-a813-a48d898cb2ab","8b542e9a-592d-497e-88ea-7c052a00565f","DEJU.2021.32","DEJU_005.mammalGrid.mam","D19","DEJU","DEJU_005","pathogen","2021-08-12","2021-08-12","OK","NEON.DOC.000481vM",,
+"7b038ea4-79ce-4860-b3aa-867f8a625b07","3dc354f7-fa18-4843-90ed-8813cf8daaec","DEJU.2021.32","DEJU_003.mammalGrid.mam","D19","DEJU","DEJU_003","pathogen","2021-08-12","2021-08-12","OK","NEON.DOC.000481vM",,
+"cf9beee8-8680-439f-af76-04c044d0c26a","4d6a4351-aea2-4adf-bd79-29065b75c7ea","DEJU.2021.32","DEJU_017.mammalGrid.mam","D19","DEJU","DEJU_017","pathogen","2021-08-12","2021-08-12","OK","NEON.DOC.000481vM",,
+"d41a4120-c2fc-4bd8-aeac-47cc9d252363","226f70b6-4e39-4252-83b0-af1159b5d271","DEJU.2021.32","DEJU_001.mammalGrid.mam","D19","DEJU","DEJU_001","diversity","2021-08-13","2021-08-13","OK","NEON.DOC.000481vM",,
+"f6a50474-8352-4c73-aabd-96d0dab5381c","4b9b634b-5d89-4574-a266-90728faf7b13","DEJU.2021.32","DEJU_006.mammalGrid.mam","D19","DEJU","DEJU_006","diversity","2021-08-13","2021-08-13","OK","NEON.DOC.000481vM",,
+"652942cc-0aae-45b2-a73a-b11a5ae940e6","c1fe2f2f-c858-4ccd-b89d-4ca3da27e671","DEJU.2021.32","DEJU_014.mammalGrid.mam","D19","DEJU","DEJU_014","diversity","2021-08-13","2021-08-13","OK","NEON.DOC.000481vM",,

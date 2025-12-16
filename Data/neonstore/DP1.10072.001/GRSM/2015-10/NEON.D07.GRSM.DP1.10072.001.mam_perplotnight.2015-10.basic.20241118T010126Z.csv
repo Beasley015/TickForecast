@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"49a8a3aa-5d1e-4b09-affd-8966a510a74d","09026C14CCB741B28D7E79DD1B2474BD","GRSM.2015.43","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","diversity","2015-10-20","2015-10-20",,,"used NEON.DOC.000481vG; traps not set were not set because got too dark to finish setting traps",
+"fb3fd2ad-5688-45ae-82e2-5cb5c686b8d1","8EFFE93235C24681BA7CAF8152388EAA","GRSM.2015.43","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2015-10-20","2015-10-20",,,"used NEON.DOC.000481vG",
+"0d04b1d3-b168-44bc-a740-8e59d8a6e3e4","B01D1BEF18864E2B81580C3A8A53A9CD","GRSM.2015.43","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2015-10-20","2015-10-20",,,"used NEON.DOC.000481vG",
+"f0796460-6c7a-4d34-8a99-e5b9f72e3563","C8D3324CB5F34CA4BFA6F5C4C0E3663B","GRSM.2015.43","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2015-10-21","2015-10-21",,,"used NEON.DOC.000481vG",
+"234521f5-36fe-4248-b1fd-c6256a2f4d45","6EA0575099BF400981AC2CAF423A7E99","GRSM.2015.43","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2015-10-21","2015-10-21",,,"used NEON.DOC.000481vG",
+"d9570acf-3af2-4d20-ad2a-0e901bdce197","114BE3C6B44047C5992F5585190884DE","GRSM.2015.43","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2015-10-22","2015-10-22",,,"used NEON.DOC.000481vG",

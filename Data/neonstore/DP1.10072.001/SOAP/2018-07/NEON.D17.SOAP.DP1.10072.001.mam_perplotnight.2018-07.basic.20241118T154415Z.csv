@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"ddfc6105-80c7-49a8-bd40-eba651d1f4b4","81020cd1-2b03-4728-8434-821f94f9ae06","SOAP.2018.29","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2018-07-17","2018-07-17",,"NEON.DOC.000481vK",,
+"7dea7239-21e6-4fa2-ad81-9c0733f2e72b","329b4ae4-b31d-4091-b871-5fdfc98543e9","SOAP.2018.29","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2018-07-17","2018-07-17",,"NEON.DOC.000481vK",,
+"d75eb564-cac2-4cc4-a750-922464f2078e","b07586ac-464c-4e11-b268-924bcf28f74c","SOAP.2018.29","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2018-07-17","2018-07-17",,"NEON.DOC.000481vK",,
+"08fcd90d-202f-4ca0-8968-e8f503134051","102e13b1-cc55-4c39-afd7-c7e5211bc758","SOAP.2018.29","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2018-07-18","2018-07-18",,"NEON.DOC.000481vK",,
+"b84c0307-10b2-4698-a468-3ee67b48e328","17b42268-d3f5-4f6d-8bf1-45a327603e52","SOAP.2018.29","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2018-07-18","2018-07-18",,"NEON.DOC.000481vK",,
+"ceb870d8-2c9e-4b64-b18c-e06d2a2ef6e4","df80a4ac-01f8-4481-b8ca-afe8d14daf44","SOAP.2018.29","SOAP_012.mammalGrid.mam","D17","SOAP","SOAP_012","diversity","2018-07-18","2018-07-18",,"NEON.DOC.000481vK",,
+"000c42c5-6a04-48a9-968b-0aee1724f9cd","bc22994c-7299-4de5-b0ad-144e2997db6f","SOAP.2018.29","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2018-07-18","2018-07-18",,"NEON.DOC.000481vK",,
+"f8c4bb1b-1975-444b-b58b-eb90ac3c21dd","16ac985b-37d7-4889-97f4-3c8f114bc24e","SOAP.2018.29","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2018-07-19","2018-07-19",,"NEON.DOC.000481vK","additional data measured by Emily Artz recorded by Matt August",
+"6509fd15-157a-401e-85c0-3d92ab04f5e4","79277a0a-da60-4fed-b0e6-4e8026fb3f1f","SOAP.2018.29","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2018-07-19","2018-07-19",,"NEON.DOC.000481vK",,
+"54df4d97-28f7-4bd1-85cd-eaeb3e1385d0","8216ced4-e7c1-4cdb-bf85-ffefa9d6ad7c","SOAP.2018.29","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2018-07-19","2018-07-19",,"NEON.DOC.000481vK",,
+"4eb9d464-91b2-44c6-a06e-806363228a3e","b9ad59ec-3812-4306-8837-410e1c059811","SOAP.2018.29","SOAP_027.mammalGrid.mam","D17","SOAP","SOAP_027","diversity","2018-07-19","2018-07-19",,"NEON.DOC.000481vK","PLACEHOLDER for plot 027. No captures.",

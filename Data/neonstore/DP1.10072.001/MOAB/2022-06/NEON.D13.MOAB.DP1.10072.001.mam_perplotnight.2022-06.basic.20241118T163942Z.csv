@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c4538bb6-f36b-45e1-a5ee-72326816aec3","aeb67242-7319-4467-99f7-20429331705a","MOAB.2022.25","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"5d733b98-47df-4db1-ba72-4f72bd1c93c4","13360101-2f15-42c1-bcb0-eda9b679c7a3","MOAB.2022.25","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN","Animals released due to time constraint",
+"8bd5d542-d8b4-4be8-a382-2bc4cb47ba5c","bfb5de4f-15c3-429e-ab42-b6f5df336d02","MOAB.2022.25","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"6a03a0f2-d242-498f-9ec6-e9daf4dd0c1b","1a95148b-20af-47fd-b0fa-6cd2e19b7461","MOAB.2022.25","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"b446e6cd-c47d-4ec7-94bd-02734d5f8fb6","5836397f-6287-41f6-b5b9-c66894092e5c","MOAB.2022.25","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN","Animals released due to time constraint",
+"28d82def-9401-4d2e-94e4-fa6b753af81d","d30f387a-fd3f-4f00-9ac9-e5d4d7c8ff89","MOAB.2022.25","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"57e3ebe1-3ecc-4460-8e7f-331d84ffb11c","1e9eca95-90eb-4f9e-a623-1148d066db96","MOAB.2022.25","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2022-06-23","2022-06-23","OK","NEON.DOC.000481vN",,
+"7aab728c-aaa2-4ae3-ba7c-e011b0c4bbe9","f3a4563d-e4ff-40be-ac4e-bcf6f7d9439d","MOAB.2022.25","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2022-06-23","2022-06-23","OK","NEON.DOC.000481vN",,
+"ca700f06-46b1-4087-946b-4ba6039cca6e","9106836e-e93e-440b-883b-b56b8c7dcb09","MOAB.2022.25","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2022-06-23","2022-06-23","OK","NEON.DOC.000481vN",,
+"3f1c6f9a-8715-41e1-945a-3cb36a5a7813","2f75acd2-00ae-429b-b0f1-2e7b9930e325","MOAB.2022.25","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","diversity","2022-06-24","2022-06-24","OK","NEON.DOC.000481vN",,
+"d479c4dc-caa1-4d08-8d11-52618b6b131f","72a0a7ad-3e30-4a3a-9485-878111ec06f5","MOAB.2022.25","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2022-06-24","2022-06-24","OK","NEON.DOC.000481vN",,
+"49255ed1-3cee-45cf-ab45-ee35f9e86167","967fda8a-2d12-45c7-a3a5-84bdcbd1468c","MOAB.2022.25","MOAB_007.mammalGrid.mam","D13","MOAB","MOAB_007","diversity","2022-06-24","2022-06-24","OK","NEON.DOC.000481vN",,

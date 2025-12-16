@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2ef32686-6820-46f6-affb-71ac6b3f5ca5","31ddd95b-bfe2-45b9-ba1b-58dba53aadd1","BARR.2017.33","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","pathogen","2017-08-14","2017-08-14",,"NEON.DOC.000481vJ",,
+"03d2396d-578e-4585-bfa1-7724343234cf","7f0f3bae-e24b-4d9f-8630-78d49a135cdd","BARR.2017.33","BARR_037.mammalGrid.mam","D18","BARR","BARR_037","diversity","2017-08-14","2017-08-14",,"NEON.DOC.000481vJ",,
+"4c5037fd-d8b1-42d9-ba0b-7e2078227459","5581e439-e618-452b-8837-e3c624917927","BARR.2017.33","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2017-08-14","2017-08-14",,"NEON.DOC.000481vJ",,
+"9940409d-7467-42c1-9f00-8cf8dde4a7bb","800274dd-c691-43de-8eb7-ad9fa772603f","BARR.2017.33","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2017-08-14","2017-08-14",,"NEON.DOC.000481vJ",,
+"82224733-1133-4d6f-ad03-903c6ef622e9","f314c613-09cc-49ce-84d2-636ed5b5b61e","BARR.2017.33","BARR_044.mammalGrid.mam","D18","BARR","BARR_044","diversity","2017-08-14","2017-08-14",,"NEON.DOC.000481vJ",,
+"162b6bac-b414-4686-afe0-663c9d86609c","b1020385-aa95-4c01-afce-c2176b2549c4","BARR.2017.33","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"9cdcf950-01a5-4e9b-87e4-aed337de45e9","d04f7b75-3abc-4c09-9c92-a28795ff0f04","BARR.2017.33","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"ce1ef926-83d6-4098-81fb-315a294a4640","f456a056-4bd5-4ebe-9ef2-2707cfe76fb5","BARR.2017.33","BARR_084.mammalGrid.mam","D18","BARR","BARR_084","diversity","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"8a2c463b-80da-4883-ac19-4cc83f0dc063","c30b3b1d-380d-4cfe-a7eb-7c742038e13c","BARR.2017.33","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"0dce5de3-2cf4-45ae-969b-de8d8277737f","e52e6b36-ca74-4a4b-8b0e-95d2362fc0b1","BARR.2017.33","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,
+"7060586f-694c-4569-a97c-c5f80406ca7f","d64e0d4e-8461-4278-b3c9-fc41c33009ea","BARR.2017.33","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,
+"9d7f668c-2608-4353-a024-975e78a932ef","33fd74e5-c472-4fe2-8644-99d718f89571","BARR.2017.33","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,

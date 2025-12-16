@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"9856a9d6-acad-4d2c-a720-bc27c5cc1630","114187e5-096a-4901-89e3-63e7a01de333","TEAK.2023.37","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"eb7af8df-1570-4bf6-b236-069bd2125f8d","33d94a38-9448-44ae-8654-483e406bf6bc","TEAK.2023.37","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"520e96dd-f217-4c81-8c5b-1e1ef646b42c","80335301-5e8a-4870-8aa2-faaef30a90c0","TEAK.2023.37","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"1c3fde7e-bbbc-4c29-a51f-7d29325cb54e","a3063813-ad83-44a7-8c78-0a3ad6fbfae4","TEAK.2023.37","TEAK_025.mammalGrid.mam","D17","TEAK","TEAK_025","diversity","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"da7a09f4-7056-48af-8917-e94f20e3ed67","3d5af689-05d7-4153-acc4-9d96c1f7dfaa","TEAK.2023.37","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"32b17ee6-f49b-43d8-8c77-5e0de6145701","5ec350a2-120a-4741-aeb6-018fe90e80c6","TEAK.2023.37","TEAK_004.mammalGrid.mam","D17","TEAK","TEAK_004","diversity","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"313fcd0c-f3d8-4405-88c7-36f177e36248","79bc538c-d47f-415a-8185-d27412c75280","TEAK.2023.37","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"47a5be4a-0461-47dd-b509-6bd94e6d321a","94b84883-2cbd-4313-b17d-7fc98d66e533","TEAK.2023.37","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"89221ab2-eddd-4067-96bd-0e8d581029af","4991e366-6b2d-4d2c-b422-8135d746f749","TEAK.2023.37","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP",,
+"f4a26f3e-1300-421c-ad5a-b8ca36697f71","98c7fa5f-48c5-4def-9d81-c1009e6ed3df","TEAK.2023.37","TEAK_007.mammalGrid.mam","D17","TEAK","TEAK_007","diversity","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP","Animal disturbance",
+"57192f3a-b671-4c0e-926f-b965300f55c8","4405a60a-117f-412b-b51c-4040724d13e4","TEAK.2023.37","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP",,
+"f1dba18b-f8e0-4744-97ee-fcf1ce9dc884","7ae0d932-c5bf-4d08-89b9-5156174b2299","TEAK.2023.37","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP",,

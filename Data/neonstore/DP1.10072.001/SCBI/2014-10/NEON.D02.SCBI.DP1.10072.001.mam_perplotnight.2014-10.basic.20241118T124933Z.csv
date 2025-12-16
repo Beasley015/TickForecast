@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"95c4e1ba-cb7c-4e41-bc5f-bf8edd13c4dd","664B9451C05643D4B49657C76827B099","SCBI.2014.42","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2014-10-14","2014-10-14",,,,
+"fe8e8c13-7139-4ab5-bf38-83eba4aad756","922B53518679442285B420999FD8AF6D","SCBI.2014.42","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2014-10-14","2014-10-14",,,,
+"4901fe7a-8829-4f5b-ab41-fd86e7f1e7fd","FAD88C3011D54FC48A062DF7B9130C0A","SCBI.2014.42","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2014-10-14","2014-10-14",,,,
+"2ac97043-5122-4c28-a8e7-174edc6e17d1","B441332892F544FEBF0AE758628C5F89","SCBI.2014.42","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2014-10-15","2014-10-15",,,"No trapping/processing occurred on this morning as traps were not set the preceding night due to prolonged severe thunderstorms",
+"c5126671-959f-4930-bdf2-349dab226075","9EDA667E47A341408D4B4B052078A885","SCBI.2014.42","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2014-10-15","2014-10-15",,,"No trapping/processing occurred on this morning as traps were not set the preceding night due to prolonged severe thunderstorms",
+"73683b61-c3af-4fc4-9044-692dbaeb23e3","77679DCC6CF5479587DABD297774BF3F","SCBI.2014.42","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2014-10-15","2014-10-15",,,"No trapping/processing occurred on this morning as traps were not set the preceding night due to prolonged severe thunderstorms",
+"0cc489c8-69ec-42e3-9a35-d07946fb0cb0","B54E1D60C63A4D11A0B5B53DCB561DCA","SCBI.2014.42","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2014-10-16","2014-10-16",,,,
+"09827ae1-1ac9-4ef7-8647-98e30be2b8d9","AD9787279CBB45C68759C23F103902CE","SCBI.2014.42","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2014-10-16","2014-10-16",,,,
+"74972ca4-81b1-43cb-b671-dcdfdecc0e73","8A9D9A52E74E4D90BFAC271991F69384","SCBI.2014.42","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2014-10-16","2014-10-16",,,,

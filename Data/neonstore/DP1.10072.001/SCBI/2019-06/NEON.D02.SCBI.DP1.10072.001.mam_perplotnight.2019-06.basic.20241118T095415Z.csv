@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b86e1a88-e548-4855-a03c-0fccd105bf33","c368f227-5a62-41c6-b92a-db2910ef142b","SCBI.2019.22","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2019-06-01","2019-06-01",,"NEON.DOC.000481vL",,
+"3000b89c-6ee2-4716-be20-54a71a9ff654","05c75445-96ef-46b0-9b03-a6bc27234bf4","SCBI.2019.22","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2019-06-01","2019-06-01",,"NEON.DOC.000481vL",,
+"0b0bcfd7-c9fc-4c8f-89b5-b1c1da4b02c7","c7d83984-e89d-46ea-8730-7b758cbced50","SCBI.2019.26","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL",,
+"b42e105a-6117-499f-b608-a9ce249eabad","458d6106-458a-4b8b-813b-a317051463ff","SCBI.2019.26","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL","All Disturbed",
+"3825ea96-7b55-4700-9dd6-ac6f9b6cae3b","a50c08b7-99c4-4e4e-a2e0-690c42e91614","SCBI.2019.26","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL","Entered data; a few questions remain",
+"2e6f0994-4a10-464c-9005-2d696226b022","f7c7d49a-cf07-46b1-82a3-e5f709450063","SCBI.2019.26","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL","Many traps were knocked over or tossed away from the flags.",
+"843d20bf-73a5-4883-8d95-c9b4e193bc51","ce3e1b3e-55be-42c6-ba96-39b921e7e7f9","SCBI.2019.26","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"c6f54819-298c-48c5-ba27-b4d3dd84c292","cb43a862-fbe6-436d-8395-ecfc3140f654","SCBI.2019.26","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2019-06-27","2019-06-27",,"NEON.DOC.000481vL",,
+"d1d2c3d3-f383-4bcd-9cd2-a3b147606063","630a49ba-44d6-4e8d-9988-2e9efe54705d","SCBI.2019.26","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-06-27","2019-06-27",,"NEON.DOC.000481vL",,
+"6e1c8449-57f1-41ab-a04f-862945d61287","bf84f632-b8b8-4f2e-8808-bdef7fd449fe","SCBI.2019.26","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2019-06-28","2019-06-28",,"NEON.DOC.000481vL",,
+"cd917019-1319-4a4c-9171-53dc9b8db0e2","bfa989f8-8364-410d-b035-7b22b7c41b36","SCBI.2019.26","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2019-06-28","2019-06-28",,"NEON.DOC.000481vL",,

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c0cf0f8d-28c5-4b1f-b593-dcca1b993f15","62139931-6ea7-44d4-a400-037c6d3d6610","BLAN.2017.29","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ","some traps not set as impending storm during setting time",
+"9391e808-91ba-4d6a-b81a-27cfbed4f933","eaa2faf1-aca6-44dd-b4e4-74cab308c4a9","BLAN.2017.29","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ",,
+"7c39062d-3f49-42b4-9296-17d92988adba","27333216-3c83-42a9-958a-046252674a1f","BLAN.2017.29","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ",,
+"f1e468fa-fc3c-4431-98dd-e15a97510509","63ccac37-99b1-4f2c-aed3-a2e94c7e6013","BLAN.2017.29","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","diversity","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"45dcdb75-e0ec-4a1e-ac42-bd28e6e56967","fbefcaac-0237-4d87-a263-c1d8eec9d001","BLAN.2017.29","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"ccad79a7-d777-48e8-a130-2725b844d2d9","6f9f0cfb-f670-4b69-bdcd-c88d65b833c1","BLAN.2017.29","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"e2be766d-d1de-4b78-9a9f-40cb6ec0c30a","3a3653f5-b84e-4955-8ff0-d0880295d495","BLAN.2017.29","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"aa8fefcd-965f-4508-b6e1-c03059d76ac6","e88aa17d-54ac-4f48-97d7-7edc93480474","BLAN.2017.29","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2017-07-21","2017-07-21",,"NEON.DOC.000481vJ",,
+"76e57316-759a-4820-ad13-fc9078731cf4","c07d84c1-c081-4c13-a69f-61d7390a3f7e","BLAN.2017.29","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2017-07-21","2017-07-21",,"NEON.DOC.000481vJ",,
+"f43bea3a-b6ed-4319-873a-b99333816500","b7d2669c-31de-4cef-98b7-e20e0de707a1","BLAN.2017.29","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2017-07-21","2017-07-21",,"NEON.DOC.000481vJ",,

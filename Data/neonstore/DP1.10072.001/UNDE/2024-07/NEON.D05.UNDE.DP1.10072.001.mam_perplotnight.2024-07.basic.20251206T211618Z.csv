@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"46dc6b57-a6f3-453f-91ec-206039fba47c","79029f78-6929-4c82-9f59-d650a4e3a0c3","UNDE.2024.31","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2024-07-31","2024-07-31","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"fe07977c-8000-459d-acc8-1cdf3e7f2a5a","9cb04b2f-d122-4d85-9882-b4674249a3e5","UNDE.2024.31","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2024-07-31","2024-07-31","OK","setting complete, processing complete","NEON.DOC.000481vP",,

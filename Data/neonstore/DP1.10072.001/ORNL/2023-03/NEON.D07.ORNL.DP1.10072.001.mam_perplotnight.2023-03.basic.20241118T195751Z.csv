@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b3ee0783-92f9-4c6a-ae2e-cf9f5669b868","3fa96628-e4e3-4ace-80c5-1bb205b5f820","ORNL.2023.11","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2023-03-14","2023-03-14","OK","NEON.DOC.000481vN",,
+"1194ef0b-e45c-4788-8f75-83cbee5718da","d9c86a74-cd64-4e5c-88c5-832d4c93fbdf","ORNL.2023.11","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2023-03-14","2023-03-14","OK","NEON.DOC.000481vN",,
+"c444641c-baa4-4adc-9e8e-674a36f71143","4e06d1c7-ad3e-43c4-acb4-98c0fc7f30db","ORNL.2023.11","ORNL_039.mammalGrid.mam","D07","ORNL","ORNL_039","diversity","2023-03-14","2023-03-14","OK","NEON.DOC.000481vN",,
+"ab5456b3-cdf0-4be7-8e07-26c4b5801840","24c93d01-08c1-4436-839d-081834e02a59","ORNL.2023.11","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2023-03-14","2023-03-14","OK","NEON.DOC.000481vN",,
+"8f5d2f83-d392-4ff2-aa45-db7312de80f2","addd90f7-d91c-4db3-a4b8-53865805f588","ORNL.2023.11","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2023-03-15","2023-03-15","OK","NEON.DOC.000481vN",,
+"039e908a-9915-4976-a1c0-e5e63e5c2ed9","4dbff5ba-c605-4baa-90d0-8d1beaf4a304","ORNL.2023.11","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2023-03-15","2023-03-15","OK","NEON.DOC.000481vN",,
+"8fa36a4a-efc8-435f-a253-106204425531","c765a854-d516-4663-9496-b6887173ed66","ORNL.2023.11","ORNL_007.mammalGrid.mam","D07","ORNL","ORNL_007","diversity","2023-03-15","2023-03-15","OK","NEON.DOC.000481vN",,
+"996f5cc2-681b-44bd-b002-4e6caebb5057","d5418f8b-074b-4748-a731-9e3d5e4cf7f7","ORNL.2023.11","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2023-03-15","2023-03-15","OK","NEON.DOC.000481vN",,
+"b425cb91-c5ae-4d76-abf7-2be5b7637a18","2bbe7705-8d06-4dd8-93fd-53a8a65c7641","ORNL.2023.11","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2023-03-16","2023-03-16","OK","NEON.DOC.000481vN",,
+"7f04fe5a-fff6-487f-b7b1-a0636cbad45d","5b5c6fcc-bc84-4f8a-9ad6-5436b1372278","ORNL.2023.11","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2023-03-16","2023-03-16","OK","NEON.DOC.000481vN",,
+"94f31a38-7126-4413-8162-85b3dbdb4ece","46897a1b-4b4b-468d-9497-c03477b8957c","ORNL.2023.11","ORNL_027.mammalGrid.mam","D07","ORNL","ORNL_027","diversity","2023-03-16","2023-03-16","logistical","NEON.DOC.000481vN","Cannot access plot trees blocking road.",
+"9957249a-b711-491d-abf2-f1563a5535ab","2e28ec11-ea82-4398-b2c8-5518a8a8a98b","ORNL.2023.11","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2023-03-16","2023-03-16","OK","NEON.DOC.000481vN",,

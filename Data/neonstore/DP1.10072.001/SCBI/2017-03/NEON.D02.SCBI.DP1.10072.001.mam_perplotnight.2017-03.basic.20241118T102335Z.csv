@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c3f46383-6825-4d86-85c6-804ec0ec288e","396a8104-089f-45c3-9e19-67fe19b4da86","SCBI.2017.12","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-03-21","2017-03-21",,"NEON.DOC.000481vG",,
+"ba35480c-5325-4aa1-b966-fbdb821803dd","ea295db0-0923-4c08-9246-4e3147824e85","SCBI.2017.12","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-03-21","2017-03-21",,"NEON.DOC.000481vG",,
+"b93cb34d-7ec0-45c4-a823-a97cdf854011","51b2d23f-ef3e-41f0-9d36-b1b46b92966c","SCBI.2017.12","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-03-21","2017-03-21",,"NEON.DOC.000481vJ","Lows in the 40s; high humidity in the morning",
+"43167a6e-6fb3-48aa-8e05-77d82a2dcfbb","080df4ac-f91b-4cbb-9e00-2413287bfb22","SCBI.2017.12","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-03-22","2017-03-22",,"NEON.DOC.000481vG",,
+"c47f001b-aeb0-4c68-bb9e-5658330ecf64","bdf4794a-c71e-471a-945e-0f4b606a2114","SCBI.2017.12","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-03-22","2017-03-22",,"NEON.DOC.000481vJ",,
+"93ee1906-ded2-4164-96ec-332c9b7641e7","636cac02-6a40-4308-99e3-fd1a154e8c47","SCBI.2017.12","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-03-22","2017-03-22",,"NEON.DOC.000481vJ",,
+"735af01c-8921-40e9-9a74-df5934bbeecf","c32c51c4-8e39-4744-bb14-8c2cabad8270","SCBI.2017.12","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-03-23","2017-03-23",,"NEON.DOC.000481vJ",,
+"0e3bc04d-b865-4829-9334-a14891c6e1ec","c38d559f-34f2-4801-af5a-4f1bdb2a08ff","SCBI.2017.12","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-03-23","2017-03-23",,"NEON.DOC.000481vJ",,
+"22bc00e5-55fb-4259-a5c3-e324869d11e9","0516e679-947d-4bd8-9057-440f26115ec1","SCBI.2017.12","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-03-23","2017-03-23",,"NEON.DOC.000481vJ","Lows in 20sF; ice frozen onto nearly all traps",
+"8eacc1cd-ceef-426a-b369-0e1935224332","815bcafa-3491-4c3b-80d6-bd331b92f75f","SCBI.2017.12","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2017-03-24","2017-03-24",,"NEON.DOC.000481vJ",,
+"53926323-d920-4200-9b08-5b91a0e89f29","3b8c8dab-ae9d-4cfd-a53c-4ee4f802d17f","SCBI.2017.12","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2017-03-24","2017-03-24",,"NEON.DOC.000481vJ",,
+"f6fb60e6-5a15-470c-aa13-69d9140a5d96","bbde8940-e349-44f5-b278-2a3bf9e1c93d","SCBI.2017.12","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2017-03-24","2017-03-24",,"NEON.DOC.000481vJ",,

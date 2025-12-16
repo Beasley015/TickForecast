@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1ae604de-c5fc-457a-b0b2-837f9092307c","c1f89783-97bc-485b-813c-d99bf97613e6","ABBY.2019.30","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-07-23","2019-07-23",,"NEON.DOC.000481vL",,
+"7b27cae0-4e73-4daf-91af-764a42923432","731423e0-47f7-42b8-9103-8684f8786143","ABBY.2019.30","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-07-23","2019-07-23",,"NEON.DOC.000481vL","99 traps set",
+"314e5401-b1a0-4ed5-8575-b8ca26ed9077","1370ee82-68bb-42e9-9283-afc10a2b113e","ABBY.2019.30","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-07-24","2019-07-24",,"NEON.DOC.000481vL",,
+"2fe02a21-674b-4a14-b23d-affbf6ad8a33","a4d14161-8c89-470d-8a02-d895d287b487","ABBY.2019.30","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-07-24","2019-07-24",,"NEON.DOC.000481vL","Grid closed early due to high mortality rates",
+"1a79e625-7742-49da-836d-a6067674bb21","58ab38a4-e8fa-4e14-b6d9-82922727b207","ABBY.2019.30","ABBY_014.mammalGrid.mam","D16","ABBY","ABBY_014","diversity","2019-07-24","2019-07-24",,"NEON.DOC.000481vL",,
+"c367dd1a-6f98-489b-b847-da478366cfb0","6161adfb-3a2b-46ca-af1e-2d9a49746406","ABBY.2019.30","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-07-24","2019-07-24",,"NEON.DOC.000481vL",,
+"a6763c18-d8c7-4d9b-a793-4a0ea0c80338","0d84a74d-cf0d-4980-8e2a-a780943a3bfa","ABBY.2019.30","ABBY_007.mammalGrid.mam","D16","ABBY","ABBY_007","diversity","2019-07-25","2019-07-25",,"NEON.DOC.000481vL",,
+"bd8d456b-b9b4-43dd-94d9-9b9bc8610d85","65c66666-220a-46e0-99d6-c48179bc8746","ABBY.2019.30","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-07-25","2019-07-25",,"NEON.DOC.000481vL",,
+"38a20269-e156-4e64-8945-b79529f954fa","4bd34404-c93c-49b4-bb42-2246f5bc8e12","ABBY.2019.30","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-07-25","2019-07-25",,"NEON.DOC.000481vL","Grid closed early due to high mortality rates",
+"b6a98d75-e32d-46a9-a9a9-25c37c1fcaa9","ef38e316-f26b-4ac3-9d4a-57618c8c068d","ABBY.2019.30","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-07-25","2019-07-25",,"NEON.DOC.000481vL",,
+"eb855f1c-1d54-4663-a2f1-c17029c2bbc6","310174d0-b2fb-4b4f-8009-853b159aae73","ABBY.2019.30","ABBY_023.mammalGrid.mam","D16","ABBY","ABBY_023","diversity","2019-07-26","2019-07-26",,"NEON.DOC.000481vL",,
+"6d80bc5e-3cfd-4127-9112-b6a622db7ab3","145879fa-625d-43a1-8599-05c1f2a308cf","ABBY.2019.30","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-07-26","2019-07-26",,"NEON.DOC.000481vL",,

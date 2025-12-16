@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2a907903-a805-4b56-9157-0bc7d8de23fd","5A1ADCDC5157420C957B60B91D1E0D87","STER.2015.25","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2015-06-17","2015-06-17",,,"Used version 'vG",
+"74a89ec6-c3ff-46ef-849e-c90bd1312b6c","FBA1F07928714940ABD514117BD9F445","STER.2015.25","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2015-06-17","2015-06-17",,,"used version 'vG",
+"3f65dc40-a667-4c5a-88b6-017701423595","47D101468D954B9A812B682846D3661A","STER.2015.25","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2015-06-17","2015-06-17",,,"Used version 'vG",
+"047310bb-836e-4830-841c-56d561a4714f","3DCD52E3E56141C0ADBE5990D4D746E5","STER.2015.25","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2015-06-18","2015-06-18",,,"Using protocol vg",
+"230e51b3-d059-45a2-9230-2253f24b261a","F5AE3EE3D2024D1BABC3F7026DC97674","STER.2015.25","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2015-06-18","2015-06-18",,,"Used version 'vG",
+"4f4175db-f03a-4940-8b3e-a6bdb1a2340b","FFE955667BCD494FA168CA7EBCBA9A9B","STER.2015.25","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2015-06-18","2015-06-18",,,"used version 'vG",
+"59cc5e1d-3aa5-482d-9492-fe779ec34627","EF6DC335326D4BCBB5E5A108790C266F","STER.2015.25","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2015-06-19","2015-06-19",,,"Using protocol vG",
+"63baac21-4411-4186-a448-c78874c7476f","2D641DDAE8FB4F76867067EE9B702274","STER.2015.25","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2015-06-19","2015-06-19",,,"used version 'vG",
+"95232655-a36b-46a7-b20b-9ca0dd473a8e","E485F63FCC66429884791C02EDCC7847","STER.2015.25","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2015-06-19","2015-06-19",,,,
+"e56f2b44-522b-498c-bdcb-0ef1fab07d16","0DDF148EC60B44C8A7FC1A41E1A3A26F","STER.2015.25","STER_028.mammalGrid.mam","D10","STER","STER_028","diversity","2015-06-20","2015-06-20",,,"used version 'vG",
+"b3b4dec5-2562-478d-9da9-c645542a20a6","4579EB50E2AA4B8AA5F7017E3A35624F","STER.2015.25","STER_027.mammalGrid.mam","D10","STER","STER_027","diversity","2015-06-20","2015-06-20",,,"Using protocol vg",
+"011ad94c-fe0d-4eb0-9448-dc7037ece38e","3B6CB4CA8A824F0E8A9C63D0E32A90F2","STER.2015.25","STER_026.mammalGrid.mam","D10","STER","STER_026","diversity","2015-06-20","2015-06-20",,,"Using protocol vg",

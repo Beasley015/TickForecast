@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"ce3000d7-a827-4ab0-b432-bbb6ab4e785b","a27294ca-997a-473a-a6fc-057a26f01d4e","UNDE.2019.19","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2019-05-06","2019-05-06",,"NEON.DOC.000481vL",,
+"d553f05c-3ecf-4dbe-8de5-78988a1905fe","eae9b0f0-fc37-47b1-b73a-7f4e107b2979","UNDE.2019.19","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2019-05-06","2019-05-06",,"NEON.DOC.000481vL",,
+"a99c7e95-bad2-44fd-82b4-80cb59e244ef","74765367-1430-4d8c-9d6a-1e6b3c2e39bc","UNDE.2019.19","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2019-05-07","2019-05-07",,"NEON.DOC.000481vL",,
+"11347526-0862-446b-853a-913a8a06ae1a","85c43c5c-691c-4be0-82e8-cfd7170989c6","UNDE.2019.19","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"2f546370-9347-49fd-84c2-c736e0b73257","786c936c-31d8-4fee-85c2-e7675fae4119","UNDE.2019.19","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"57b18601-ff4d-4e4e-8bd1-754b35531db4","89f9398f-c3ef-4ca2-a2f7-18d847df02e3","UNDE.2019.19","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2019-05-08","2019-05-08",,"NEON.DOC.000481vL",,
+"a45ca518-c72a-42c2-bc08-463950932985","018e7ce1-6795-4a43-b67b-5e37d46fab81","UNDE.2019.19","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2019-05-10","2019-05-10",,"NEON.DOC.000481vL",,
+"5d912899-d7d7-496f-833a-23d6d56a7f5f","372ac552-85da-4820-bfb7-8261035f1f3b","UNDE.2019.19","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2019-05-10","2019-05-10",,"NEON.DOC.000481vL",,
+"de5f0b0c-438e-4ae0-897c-e45f9bce1f0f","e72f37f1-34b5-4e69-8e51-2732d48e9180","UNDE.2019.19","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2019-05-10","2019-05-10",,"NEON.DOC.000481vL",,
+"233a3abe-bfe0-4ccd-a9a1-80bac86547f4","7f05928e-c58f-41c5-aa19-3452cce6f8ef","UNDE.2019.19","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2019-05-10","2019-05-10",,"NEON.DOC.000481vL",,

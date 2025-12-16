@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"cbf0a4e2-453f-4e8a-a3c9-928c066aaa54","22E9B2D3B3AD461880CDABC06B3001E1","MOAB.2015.41","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2015-10-07","2015-10-07",,,,
+"95487655-d0b2-4be6-9a30-b9e7b4800dfd","7DF5DE57E9294D748F0EB36512D05D0B","MOAB.2015.41","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2015-10-07","2015-10-07",,,,
+"d18dea3c-6cc4-452c-8d20-f66e3dbb792b","F6D3DB15A3FE44B0826C0154DB70D184","MOAB.2015.41","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2015-10-07","2015-10-07",,,,
+"98dcc199-1247-4c94-aaf0-0a9ef746aaf8","5D64A9DBB97347D99C20FB4C279CB45A","MOAB.2015.41","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2015-10-08","2015-10-08",,,,
+"71edfee2-8bdc-46ca-ac8a-421f3151ca8c","20F87E6CB0864357A0A211D9CEF34CD9","MOAB.2015.41","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","diversity","2015-10-08","2015-10-08",,,,
+"20b5dcbf-9c49-4f9b-91f8-6dc5d14aa115","F21E103814AE4BB8B25341B4E2773BA7","MOAB.2015.41","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2015-10-08","2015-10-08",,,,
+"dc2fa512-4f88-476b-ac37-f08d2e4fef34","71F4B005FB0E46C0B287408517116E8E","MOAB.2015.41","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2015-10-09","2015-10-09",,,,
+"1f7a9c26-d9fc-4da2-be6e-3329f687b7da","0A1EAC477DAF4DCD8C2F13A4597FC5EE","MOAB.2015.41","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2015-10-09","2015-10-09",,,,

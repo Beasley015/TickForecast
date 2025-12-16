@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5a51568e-378c-46de-8d3b-acd9c1ee68ea","ffc8200d-9efe-4a99-ae5e-ef32fdc9ba31","BONA.2019.35","BONA_020.mammalGrid.mam","D19","BONA","BONA_020","diversity","2019-09-04","2019-09-04",,"NEON.DOC.000481vL",,
+"b65d6814-175a-4892-bf43-ae88352eb7de","1e268e9c-93fe-4eae-a4d4-b13668821a99","BONA.2019.35","BONA_004.mammalGrid.mam","D19","BONA","BONA_004","diversity","2019-09-04","2019-09-04",,"NEON.DOC.000481vL",,

@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"d0714603-029f-4eab-bbc0-3153406bf935","93f10fd2-ca7c-41b0-9b38-bad058e3e89a","SRER.2025.18","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2025-04-29","2025-04-29","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"fd0f2c8c-821f-46a8-8c0a-b2456401564f","d94f3c3b-e459-4fb7-9ca9-598fc849b81e","SRER.2025.18","SRER_012.mammalGrid.mam","D14","SRER","SRER_012","pathogen","2025-04-29","2025-04-29","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"395436e0-325a-4419-a2b3-f36beea94d6f","5e72f371-e561-4947-896f-caed7f9795f9","SRER.2025.18","SRER_012.mammalGrid.mam","D14","SRER","SRER_012","pathogen","2025-04-30","2025-04-30","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"808f44e8-f73b-4143-bdeb-46f60cfb878f","3cd34b3c-6cbb-4693-a141-5c66f316cd5e","SRER.2025.18","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2025-04-30","2025-04-30","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

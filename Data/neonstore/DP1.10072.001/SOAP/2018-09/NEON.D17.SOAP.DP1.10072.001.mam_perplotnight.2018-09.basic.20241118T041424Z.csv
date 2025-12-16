@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b5d6be7d-3a1e-41ed-9972-4837e9964274","811d4ab6-072d-4c8b-b3a4-e00cd4af1e39","SOAP.2018.37","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"bce3c52c-f00f-4115-b1fa-909dd2f68bd1","957cd9f3-d3af-49ab-b464-7c05260f96b5","SOAP.2018.37","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"89fcb37c-9182-44bc-9ebd-c1818bd4036d","4d71f2d4-7f11-45d4-9182-6528dff4c147","SOAP.2018.37","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"dbbedcd0-d97c-446c-9a49-e38c5b32937d","56376175-20bd-4487-9c92-a026240348e2","SOAP.2018.37","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"842e53ad-127d-47b3-af6f-52556a87921c","e2793c8d-12c1-4d2e-bd86-273856dbeea1","SOAP.2018.37","SOAP_012.mammalGrid.mam","D17","SOAP","SOAP_012","diversity","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"c1d75c17-dcfd-47cf-b854-5ffa3995d9cf","52bb8f9a-0195-43df-9833-4e0835247392","SOAP.2018.37","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"10d0e839-ecf2-47df-aed4-4df6e0d66a4c","ab41f5a9-2df5-4164-9d88-a4c2323d4338","SOAP.2018.37","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"efcb059d-b960-4f37-829a-6d7a8d36e18a","440a95f0-c05b-4b2d-ba1a-e066062e022d","SOAP.2018.37","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"9b0c01b3-bef1-4a29-b25a-fb15481963a7","e6120dbb-36e4-4248-8d7b-de7b8c436132","SOAP.2018.37","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"a5481f84-1d6d-4824-a31d-f23cc50344e3","876e13ec-2486-46d1-b5d3-0083108d3773","SOAP.2018.37","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,

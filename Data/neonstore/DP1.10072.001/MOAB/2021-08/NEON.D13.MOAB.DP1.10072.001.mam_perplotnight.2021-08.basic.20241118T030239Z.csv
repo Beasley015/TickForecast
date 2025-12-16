@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"55d2f87c-23f1-41c8-a0a2-0a09c6a5f769","c5efd22c-dfcb-4c70-a48a-20664534018f","MOAB.2021.35","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"73a23fde-9709-4ff2-95de-829d957065d5","b5aacda5-b453-48fa-9ee8-2093bb521324","MOAB.2021.35","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"9401059b-df1b-4a01-8a87-96d35022e712","070370d3-47e5-4dc8-8a9b-bd9574adf0eb","MOAB.2021.35","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","diversity","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"f47516dc-98f2-46e6-bc56-2ba53a113954","8eb7e1f2-edfe-44c7-bb57-e7e6ea2089cf","MOAB.2021.35","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,

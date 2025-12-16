@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1219153e-d4d2-411c-831e-bb0d3ec4324e","457c50a2-f8c8-4c89-b540-92ecaa70f3af","JERC.2018.37","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"9811b0cd-6f10-4bb0-9d55-247838244452","26081d4b-3583-44be-8319-a1d9bea1ed8f","JERC.2018.37","JERC_002.mammalGrid.mam","D03","JERC","JERC_002","diversity","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"2f9779a9-045a-416a-99cd-4aedbd7b21b0","7b21f8d1-40bd-4289-b943-11fcebd6831a","JERC.2018.37","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"d4e582e5-8bc4-4108-8024-da9400b5a6e3","f40d5608-58ac-40f0-8c6c-6ec5de026298","JERC.2018.37","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"535ddaf5-0991-4ede-be6c-81c62ea78abe","ab1f2ff7-94bd-4116-b03e-48926d4a1053","JERC.2018.37","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"41cca3fa-cff8-4e85-894c-602ade712f86","04933d29-e7b4-44d5-b1a6-3fc7cabce2b6","JERC.2018.37","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"c0c985ca-8567-4257-97ce-c0d2bf8dcf02","fceff5f5-7cf6-4238-b77b-a58ada6092c3","JERC.2018.37","JERC_006.mammalGrid.mam","D03","JERC","JERC_006","diversity","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"ebbecb00-bfc6-4337-abd9-c058a9cbc378","a51bae16-e194-42e3-a093-f929cac665d3","JERC.2018.37","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"30c6b7ce-9adc-4baa-980a-a821efd4a0e2","19704153-5670-4311-b09b-c52f46ef1501","JERC.2018.37","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"0ce62a05-64ac-4968-8746-e6515e2adbf9","00672f93-42cf-43dd-b04b-759fb02f3e8f","JERC.2018.37","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"b1dcc42c-d207-4d7b-bd57-74a5129aef2b","d6b5fd63-db5f-4049-aad5-d8d4634d66d9","JERC.2018.37","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"1840916f-4065-47ed-9493-81440a0e6671","94a62c0d-1646-4ca2-9efe-652480494c9c","JERC.2018.37","JERC_019.mammalGrid.mam","D03","JERC","JERC_019","diversity","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,

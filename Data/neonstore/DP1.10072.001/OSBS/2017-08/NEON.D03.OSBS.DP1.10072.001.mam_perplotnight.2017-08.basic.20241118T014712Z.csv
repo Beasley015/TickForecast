@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"0d35a6e9-c418-49dd-a41b-727548540835","f1084d31-c17f-4084-8a76-135f007dd357","OSBS.2017.33","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-08-15","2017-08-15",,,,
+"f15135d4-1b39-4a77-a939-f3308c954e4d","6fbe4537-8ce9-42f7-80c8-d5fadb7bf505","OSBS.2017.33","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","diversity","2017-08-15","2017-08-15",,,,
+"db6b6402-38b7-4a9d-a70e-ab9e5512b81f","bd14359e-89b3-464d-8ef5-738ea0ba5a92","OSBS.2017.33","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vH",,
+"e24504b6-4867-4f50-9dd6-7cf5a4fe29e2","185ac885-6120-4856-aba5-d9b0d8e05b42","OSBS.2017.33","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-08-15","2017-08-15",,,,
+"3242547e-0cda-4321-89f6-ddd014cf558f","a1b72b3e-2324-44c1-a038-1c3bbd372324","OSBS.2017.33","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"fadfd425-5e3e-4799-a70d-28ed219d768b","430f2b67-4e27-4a1e-a38b-63d147148450","OSBS.2017.33","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"75acb617-66df-4bbc-8d84-6817c3b5335c","a91867ef-aafb-484b-80b6-42a402196aca","OSBS.2017.33","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"7b39e71a-4d92-426e-b115-1dea36bc7cac","84b35620-fe4b-4a17-9663-041bf20c386e","OSBS.2017.33","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"48eb3bba-7440-4ee1-ba7d-701da72b9542","189ad201-de0f-452f-9aa0-edcac8bde35b","OSBS.2017.33","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ","Hog damage to plot",
+"252bb44a-005f-472c-971b-beb22016b67a","d82bdd48-81a0-4d9b-a7f5-605ea9e5c1eb","OSBS.2017.33","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"78b7d2d6-1833-4d77-8376-8bdc134b7e90","45f3f6b8-9903-4b14-95db-5692b1c1dafb","OSBS.2017.33","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"0e55c277-560d-4788-8950-943471c710fd","8bd8b1af-e282-4492-9776-302dad8c9a1b","OSBS.2017.33","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-08-17","2017-08-17",,,,

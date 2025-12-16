@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8483a32e-39e5-4b9e-b5d4-69e4caa9dbf4","f9ec3216-8b28-4f52-bce3-1a2064e89f11","OSBS.2017.29","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-07-18","2017-07-18",,"NEON.DOC.000481vG","Plot flooded",
+"1b36dc8d-9d07-421f-9f39-e9acffa8fe6e","d96c5e03-0108-413e-8a8a-ea2539467411","OSBS.2017.29","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-07-18","2017-07-18",,"NEON.DOC.000481vJ",,
+"da33e673-9d88-4cb8-a299-797e7f2da3e5","cfca705f-caec-4998-8c3a-7456f3887933","OSBS.2017.29","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-07-18","2017-07-18",,,,
+"e945c5b3-a9db-4b08-b6d7-a4bdca4f577a","8549f8f8-1f22-42af-9879-c5ca8a1dac83","OSBS.2017.29","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","diversity","2017-07-18","2017-07-18",,"NEON.DOC.000481vG",,
+"b7eca713-a9a4-47ee-9c36-436c21d3c20a","9c602092-312e-42fa-949c-af4555aae395","OSBS.2017.29","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vG","Flooding in Plot",
+"6ad61d45-011d-496a-8e03-a6ffbb7f70fe","e8b48a4d-f737-45a0-b163-034aa82f0296","OSBS.2017.29","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vG",,
+"75a2b988-2c43-4960-a3dd-77c2e30a0f6f","af8af4f3-85c9-41ab-bd9c-6cc96c523bc4","OSBS.2017.29","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vG","Multiple traps disturbed. Possibly by raccoons.",
+"d1223bc7-6b6c-4b32-8911-cabd06e9ed2f","f934f2e4-51c1-4e63-8a97-2560791ef997","OSBS.2017.29","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2017-07-19","2017-07-19",,"NEON.DOC.000481vG",,
+"ebc60fac-ca04-4e52-9153-d03349df621e","8788e7e1-0689-413f-93dd-82c8337f7aec","OSBS.2017.29","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"0770bffb-1c91-4768-a926-52bd3e154df8","7ef7cd6b-1b20-4da9-bffd-37f014b7695e","OSBS.2017.29","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-07-21","2017-07-21",,"NEON.DOC.000481vG",,
+"76b87698-b96b-447d-9071-280848409fd3","a36f8489-93ac-4431-9f4e-0cd11340819b","OSBS.2017.29","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2017-07-21","2017-07-21",,"NEON.DOC.000481vG",,
+"8ad27543-174a-43ec-8c3e-ef7afe432460","7a7ebcd4-feeb-4917-b49e-f71d342896f1","OSBS.2017.29","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-07-21","2017-07-21",,"NEON.DOC.000481vG","Flooded",

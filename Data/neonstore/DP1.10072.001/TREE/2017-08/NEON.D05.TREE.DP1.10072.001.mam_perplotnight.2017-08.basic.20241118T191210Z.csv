@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"59caebec-c397-4c5b-8299-0b1f1ed66d9c","d0389dbf-ca27-4f90-b0ff-d098e0dfd5de","TREE.2017.35","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2017-08-28","2017-08-28",,"NEON.DOC.000481vJ",,
+"0051c95b-9e47-4b8e-95ba-e53b5f15a64b","0a0ed137-6115-42bd-ac1b-3294e94f7daf","TREE.2017.35","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2017-08-28","2017-08-28",,"NEON.DOC.000481vJ",,
+"f1025fe7-c740-45df-8b9b-185e4d7baa7b","b8324a16-d245-427c-90dc-9bffcee315b6","TREE.2017.35","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2017-08-28","2017-08-28",,"NEON.DOC.000481vJ",,
+"c101f359-b017-4c4d-90c4-26841ecff107","f7c0ec0e-1e76-4469-b31f-c192731eb23d","TREE.2017.35","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-08-29","2017-08-29",,"NEON.DOC.000481vJ",,
+"bf1f35b6-ac0a-4dc7-b298-320c9b5d90d1","708bfbea-a388-4121-b219-9814f3968dd7","TREE.2017.35","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-08-29","2017-08-29",,"NEON.DOC.000481vJ",,
+"fa8b6f04-f708-4d30-8079-2f6e20e3f1fe","d2efebb5-58ae-4b6b-a48b-71853b4472d4","TREE.2017.35","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-08-29","2017-08-29",,"NEON.DOC.000481vJ",,
+"86e172ce-f2d2-4aa6-b9ab-f6a780149a50","0df20747-9703-4627-9581-3b6f29e0f4fa","TREE.2017.35","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-08-30","2017-08-30",,"NEON.DOC.000481vJ",,
+"518f8b2e-4353-494d-8753-00254c8ec756","34e3e1d2-5f55-4c00-90f6-ccc1228ef21b","TREE.2017.35","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-08-30","2017-08-30",,"NEON.DOC.000481vJ",,
+"c5e034c4-0139-47f5-bb90-cfc1bfa69ebb","bc890a4e-5ddc-491c-968f-092b65224c5c","TREE.2017.35","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-08-30","2017-08-30",,"NEON.DOC.000481vJ",,
+"bccd3d34-92bb-46fb-9007-eccfee78ae23","7b39dc83-1960-4ae6-a443-4e011a2d6377","TREE.2017.35","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-08-31","2017-08-31",,"NEON.DOC.000481vJ","Most traps in grid disturbed possibly by bear",
+"0b526b0d-1b6e-4f8c-bba5-6f252f5dca25","d6e4fb97-d918-4d99-8508-d24ca71b1c50","TREE.2017.35","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-08-31","2017-08-31",,"NEON.DOC.000481vJ",,
+"3d9d768d-b94d-4175-854f-c43a576e1adc","18c60550-909a-4d29-aa0b-2c0dc78d7a28","TREE.2017.35","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-08-31","2017-08-31",,"NEON.DOC.000481vJ",,

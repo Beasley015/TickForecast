@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"928b9d20-71c3-4460-aa23-0b931671a120","8def2b68-c82e-4525-920e-bfe8582ec5be","ABBY.2019.34","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-08-20","2019-08-20",,"NEON.DOC.000481vL",,
+"5ceb9c16-a2a8-4e06-a16b-14b740afbb4b","a7fbbe10-c167-4f3c-8330-ceee8bd76aec","ABBY.2019.34","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-08-20","2019-08-20",,"NEON.DOC.000481vL",,
+"b4377533-2c04-4c57-a223-82acf71a1c08","de641224-d067-4bcb-9e65-1eb5dcb6f03a","ABBY.2019.34","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-08-21","2019-08-21",,"NEON.DOC.000481vL",,
+"c1af0e54-9709-4f89-91dc-9216abce862e","8d0b08eb-d929-4d38-8e6f-9bb6c8e1c463","ABBY.2019.34","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-08-21","2019-08-21",,"NEON.DOC.000481vL",,
+"f7c3f706-cc9a-439b-8817-365ee1c505df","7ba7f933-6a8d-4f45-976c-9880dc62c936","ABBY.2019.34","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-08-21","2019-08-21",,"NEON.DOC.000481vL",,
+"56078753-a005-4a35-8eda-b313535a0ea1","4a537a02-14a2-4975-887b-b76571be9cc2","ABBY.2019.34","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-08-22","2019-08-22",,"NEON.DOC.000481vL","Rained",
+"3cccf946-8d93-4fcd-9f3c-7b3a5aa74d90","b6f2a80d-036f-4e9a-9df2-808958e2ed37","ABBY.2019.34","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-08-22","2019-08-22",,"NEON.DOC.000481vL",,
+"67d32879-1e89-4759-9bd9-b93aab2a13c5","2de1af1f-741c-45ef-aabf-333f4bd2b360","ABBY.2019.34","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-08-22","2019-08-22",,"NEON.DOC.000481vL","Reset 37",
+"090bfc84-30c9-4f02-88dd-62e62bdcb431","8e9a8444-8bd2-4a7b-b327-fe017b2e91f2","ABBY.2019.34","ABBY_014.mammalGrid.mam","D16","ABBY","ABBY_014","diversity","2019-08-23","2019-08-23",,"NEON.DOC.000481vL",,
+"2ef77110-9ec2-4428-a468-3a2cf9320c55","907cce80-19a9-4e33-8f8d-f8760970b7c6","ABBY.2019.34","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-08-23","2019-08-23",,"NEON.DOC.000481vL",,
+"d96f58e7-b6cb-47e3-9a4f-7204e254dcc4","99d5b729-8419-42cb-9ea5-c5348146fb7a","ABBY.2019.34","ABBY_023.mammalGrid.mam","D16","ABBY","ABBY_023","diversity","2019-08-24","2019-08-24",,"NEON.DOC.000481vL",,
+"1008bad1-0c89-4151-82cc-981d072adf43","80a55442-6906-4bf7-a08a-fc7e21edfb0c","ABBY.2019.34","ABBY_007.mammalGrid.mam","D16","ABBY","ABBY_007","diversity","2019-08-24","2019-08-24",,"NEON.DOC.000481vL","100 set. 101 on grid",

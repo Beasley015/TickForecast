@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"fd0bc3b6-5c5a-4333-b588-e403c9469709","c45b9b7e-82d7-4306-ade2-9f7b924f363f","GRSM.2023.21","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","diversity","2023-05-23","2023-05-23","OK","NEON.DOC.000481vP",,
+"d65b3589-3933-4215-8153-6e68ebed0951","8cf615ff-a00f-4605-a598-3dcf95491073","GRSM.2023.21","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2023-05-23","2023-05-23","OK","NEON.DOC.000481vP",,
+"09ef2745-c339-4e76-84a2-f0bb6143dfb9","4aec5183-3a50-416c-9e68-be546c5d1bca","GRSM.2023.21","GRSM_071.mammalGrid.mam","D07","GRSM","GRSM_071","diversity","2023-05-23","2023-05-23","OK","NEON.DOC.000481vP",,
+"dfb7fb8c-9854-40ba-b4f8-7b03d1c1157b","410092e5-4ae9-44e5-9e93-84eed522420f","GRSM.2023.21","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","pathogen","2023-05-23","2023-05-23","OK","NEON.DOC.000481vP",,
+"735e6545-dbc3-456b-b63f-2557ea9dda4b","f487445e-b5fb-433c-8e70-b0ac54a2f894","GRSM.2023.21","GRSM_013.mammalGrid.mam","D07","GRSM","GRSM_013","diversity","2023-05-24","2023-05-24","OK","NEON.DOC.000481vP",,
+"9ddbf16e-ad2c-4197-974b-be1469d4cb12","617ddadc-32ba-4ba5-bf96-8c9528f8b15c","GRSM.2023.21","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2023-05-24","2023-05-24","OK","NEON.DOC.000481vP",,
+"8994f1ad-fd6f-4db2-9c11-9837760cc85d","2dfaed88-21b2-4846-acf0-d49acb3eb681","GRSM.2023.21","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","pathogen","2023-05-24","2023-05-24","disturbance","NEON.DOC.000481vP",,
+"bddfc940-949c-4c5a-a189-01824f7ac5a8","81c85d67-e9ef-44ab-8d5b-fc98128954f9","GRSM.2023.21","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2023-05-25","2023-05-25","OK","NEON.DOC.000481vP",,
+"291cb3e8-cd6a-4a68-a5a4-6f8471a36c07","b5ef7b5c-4178-473e-a132-7d9af1183db0","GRSM.2023.21","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","pathogen","2023-05-25","2023-05-25","disturbance","NEON.DOC.000481vP",,

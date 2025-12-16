@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5658f772-141c-44db-8fa0-96475095ac8e","a423f0d4-e72e-47e8-bd93-e5866dd7bb4b","BLAN.2023.30","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-07-25","2023-07-25","OK","NEON.DOC.000481vP",,
+"cdeeb060-6935-4f8d-ae98-7333861ab4ec","cff1b50a-14ee-40c0-8208-dbaa3d247bf4","BLAN.2023.30","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-07-25","2023-07-25","OK","NEON.DOC.000481vP",,
+"10d3c0ce-83af-4270-bf20-6e9fe3af8d2d","02cff714-8fed-4a18-9d6f-69abf4aad2f5","BLAN.2023.30","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-07-26","2023-07-26","OK","NEON.DOC.000481vP",,
+"5c41d216-43a6-45e4-bbde-4456d2f8f307","561ca2aa-c786-49a2-bb5e-8ad4934fff2c","BLAN.2023.30","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-07-26","2023-07-26","disturbance","NEON.DOC.000481vP",,
+"47b582ce-8d67-425d-8051-9c6a8cec2341","e7a7e280-3b97-44e2-96de-4da9ff591916","BLAN.2023.30","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-07-26","2023-07-26","disturbance","NEON.DOC.000481vP",,
+"57678204-bf9d-49bc-9aab-d4a6e629fb6c","808d4f0f-9915-4228-abca-c919379abe4e","BLAN.2023.30","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-07-27","2023-07-27","disturbance","NEON.DOC.000481vP",,
+"ce2a6a4e-b3ef-4094-922b-a1339cccb3e6","b8de5cc4-d496-427e-a95e-4d4c8bd28eec","BLAN.2023.30","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-07-27","2023-07-27","OK","NEON.DOC.000481vP",,
+"6d60f4ce-1fda-4571-bfb2-928e4570a618","eb19199a-2378-4f58-979b-6c6ec1f47359","BLAN.2023.30","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-07-27","2023-07-27","disturbance","NEON.DOC.000481vP",,
+"7e228dc5-ad1f-4d32-8a5c-8488ad8937c4","f0976145-627f-4e2c-8959-31c8327d14bd","BLAN.2023.30","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2023-07-27","2023-07-27","OK","NEON.DOC.000481vP",,
+"64b8e39b-4281-4c2a-bee2-8a80efc03666","6b61ffae-018d-4c25-94a5-f2313a90d858","BLAN.2023.30","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-07-28","2023-07-28","extreme weather","NEON.DOC.000481vP",,

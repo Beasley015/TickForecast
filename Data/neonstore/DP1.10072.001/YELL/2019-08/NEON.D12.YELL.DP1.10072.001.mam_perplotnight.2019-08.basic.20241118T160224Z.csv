@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"309e8330-7e72-48fe-838d-f6b88233affb","9ed1bf7e-e646-412e-aa34-466787b3046e","YELL.2019.32","YELL_011.mammalGrid.mam","D12","YELL","YELL_011","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"19d8de9f-1af8-40c2-bc0e-558bb85236a8","612594f8-f407-452a-bd47-8683cab90534","YELL.2019.32","YELL_032.mammalGrid.mam","D12","YELL","YELL_032","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"b136a993-4f82-4b6e-8aa4-85c262805a8d","6afb73f9-b919-4c9c-898a-3543088c42e9","YELL.2019.32","YELL_020.mammalGrid.mam","D12","YELL","YELL_020","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"83e15d9b-edd8-4cb9-a5c3-2882a3755e45","f84a1559-2b5b-4686-b48d-b10195b9649a","YELL.2019.32","YELL_023.mammalGrid.mam","D12","YELL","YELL_023","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"58fe8d62-22b5-4040-9be3-c5e2e4776676","6ab006e3-8f4d-47a5-9873-225bdcf42b40","YELL.2019.32","YELL_001.mammalGrid.mam","D12","YELL","YELL_001","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"c2613b88-b878-4784-a76c-6ff0724a4fec","e2f1ee0b-e4be-4422-aa1d-14fb1b959196","YELL.2019.32","YELL_031.mammalGrid.mam","D12","YELL","YELL_031","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"0fdc1774-e147-47cc-ab51-1a2eee4b63b7","f7450435-4616-4280-8c36-095aaeb0b333","YELL.2019.32","YELL_023.mammalGrid.mam","D12","YELL","YELL_023","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"371a3bb4-7043-413f-88fe-d7ed332d951e","07b64ca7-caf3-46d5-9473-474d7385935b","YELL.2019.32","YELL_031.mammalGrid.mam","D12","YELL","YELL_031","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"ec106657-a973-4821-b39b-60d00a4b9770","84a6d0cd-04aa-490e-a14e-ba25ac8a2dbe","YELL.2019.32","YELL_001.mammalGrid.mam","D12","YELL","YELL_001","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"f4adede4-72c4-46a8-a4d9-8b52eb4abebf","6fed5e94-7425-423d-8b35-ecf345df64a2","YELL.2019.32","YELL_001.mammalGrid.mam","D12","YELL","YELL_001","pathogen","2019-08-09","2019-08-09",,"NEON.DOC.000481vL",,
+"702e7eb8-55cf-4eca-8beb-0e75967e5784","3f7cc3e0-01ca-41aa-8d75-ec46617e8b8a","YELL.2019.32","YELL_031.mammalGrid.mam","D12","YELL","YELL_031","pathogen","2019-08-09","2019-08-09",,"NEON.DOC.000481vL",,
+"4f5989bf-2875-45b4-a3c8-f26c71fcb851","5900643a-1c2b-481a-a9fc-1cdb7b08886a","YELL.2019.32","YELL_023.mammalGrid.mam","D12","YELL","YELL_023","pathogen","2019-08-09","2019-08-09",,"NEON.DOC.000481vL",,

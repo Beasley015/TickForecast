@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"3ad848fa-0646-49c1-8891-c36e27d3b660","d594219b-ff14-4a02-901c-9c0a08293f87","STEI.2024.26","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2024-06-25","2024-06-25","other",,"NEON.DOC.000481vP","sampling at this grid has been discontinued",
+"4c57e837-2032-41a2-981e-b51a4b3723d5","9f90e42f-524e-4d3e-9079-f731fdbfd348","STEI.2024.26","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2024-06-27","2024-06-27","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"1919519a-6833-4c57-a252-a27de97d9792","74ded9fb-9344-4206-a099-cff147be4137","STEI.2024.26","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2024-06-27","2024-06-27","OK","setting complete, processing complete","NEON.DOC.000481vP",,

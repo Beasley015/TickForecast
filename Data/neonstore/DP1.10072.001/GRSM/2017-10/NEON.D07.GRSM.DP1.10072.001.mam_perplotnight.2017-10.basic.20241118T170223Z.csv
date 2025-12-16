@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"42726a36-8826-4301-a634-c4072891157f","03122e18-906e-415d-9ebc-ee0d7c325604","GRSM.2017.43","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","diversity","2017-10-24","2017-10-24",,"NEON.DOC.000481vJ",,
+"6742098c-a2a7-4bff-ab1f-54458d6e8daf","e48564f2-e135-4610-baae-b6d91a69a180","GRSM.2017.43","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","diversity","2017-10-24","2017-10-24",,"NEON.DOC.000481vJ",,
+"d8bc87b0-d8d0-43af-b9a9-def1de939db3","29dd0de6-4f23-427d-be35-1ac9f95fa01e","GRSM.2017.43","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","diversity","2017-10-24","2017-10-24",,"NEON.DOC.000481vJ",,
+"b37232d2-be88-45df-8589-ffc178f67dd0","32de4b7f-56f7-4b97-9fe1-be691f51444e","GRSM.2017.43","GRSM_013.mammalGrid.mam","D07","GRSM","GRSM_013","diversity","2017-10-24","2017-10-24",,"NEON.DOC.000481vJ",,

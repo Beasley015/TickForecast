@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f1b771fb-be48-42e5-8655-1ea9fc194465","225ee673-fd3e-41a9-9836-5f49fef3b791","BONA.2020.27","BONA_002.mammalGrid.mam","D19","BONA","BONA_002","pathogen","2020-06-29","2020-06-29","OK","NEON.DOC.000481vM",,
+"47c7609d-936f-4fb3-a7ff-9f51d655a690","ec7c4724-02c2-400b-a6cf-0972d1fe8ca2","BONA.2020.27","BONA_033.mammalGrid.mam","D19","BONA","BONA_033","pathogen","2020-06-29","2020-06-29","OK","NEON.DOC.000481vM",,
+"08d1852c-243f-46c0-819c-72dc5973aaa5","6dfe6355-b327-4963-aed1-e83fe7c2e144","BONA.2020.27","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2020-06-29","2020-06-29","OK","NEON.DOC.000481vM",,
+"59b374a5-3d14-48b1-bb5f-cc13e9da020b","93e07b81-1326-46ed-866a-eec4a6c55a95","BONA.2020.27","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM","Many disturbed traps had fluff removed from trap",
+"e8d83da5-8136-4deb-932a-a564a604a3fe","286b7cca-45a1-4089-9810-1117d68026c0","BONA.2020.27","BONA_023.mammalGrid.mam","D19","BONA","BONA_023","diversity","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,
+"e1e9afe0-76f1-4f6c-9f58-c66133985153","697dc986-b7fe-4062-aac5-7ce9e4588e1e","BONA.2020.27","BONA_002.mammalGrid.mam","D19","BONA","BONA_002","pathogen","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,
+"a3b12ab4-a37c-41f2-baf4-ac986e611129","037d1e2c-5bfd-4065-9e4b-59e40f491086","BONA.2020.27","BONA_033.mammalGrid.mam","D19","BONA","BONA_033","pathogen","2020-06-30","2020-06-30","OK","NEON.DOC.000481vM",,

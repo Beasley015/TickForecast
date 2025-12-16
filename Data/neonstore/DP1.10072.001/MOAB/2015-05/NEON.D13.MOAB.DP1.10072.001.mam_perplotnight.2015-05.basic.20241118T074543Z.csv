@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"274e31ba-4a60-4831-9abe-ea42e1d1b55a","B081C9ECA66C4EF29772CF5615B255D8","MOAB.2015.20","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2015-05-12","2015-05-12",,,"NONE",
+"978dd6c3-502d-42da-84fd-15447ed13e48","56FA50B149234C23BC5851C761E66069","MOAB.2015.20","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2015-05-12","2015-05-12",,,,
+"883fd813-98a9-4e97-bebc-23877ddbd171","D829364534D24E129510D5344C9A2D3C","MOAB.2015.20","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","pathogen","2015-05-12","2015-05-12",,,"NONE",
+"61e04237-4292-4f63-a015-bfcc21d9d7b9","98131F6CF3C54238BA41D94C3B150806","MOAB.2015.20","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2015-05-13","2015-05-13",,,,
+"3a1bfec3-53b4-4780-b73d-13e8abe04f37","D5FB079BF1F843EB9D782CBFDA74BF0C","MOAB.2015.20","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2015-05-13","2015-05-13",,,,
+"2c6da77c-5210-43d7-8205-60643db0179f","0E68BD9382364729B22D7C7C0FEBA529","MOAB.2015.20","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","pathogen","2015-05-13","2015-05-13",,,,
+"649fe6b4-6882-4339-9c04-01499e3f0ff3","E369928A4D5A46348C003E2C8D8EC7E2","MOAB.2015.20","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","pathogen","2015-05-14","2015-05-14",,,"Unsure about sex ID for all DIOR for this plot based on further experience looking at sex in other individuals in successive bouts.",
+"14bd9815-36cd-477e-9f70-f1e9489b4358","7C6BB9C471594538860DAB3A4F57B4BD","MOAB.2015.20","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2015-05-14","2015-05-14",,,,
+"f5892d37-e2ce-4109-887f-922f9fc633ad","AADC687839834E1C855253B27F6F26C9","MOAB.2015.20","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2015-05-14","2015-05-14",,,,

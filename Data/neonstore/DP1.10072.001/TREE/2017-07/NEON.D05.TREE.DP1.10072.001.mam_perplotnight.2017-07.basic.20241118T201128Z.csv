@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"fed66201-61af-4958-90ed-66febd092d9d","66dd8544-de35-4d75-81af-9dc71d1334f5","TREE.2017.30","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2017-07-28","2017-07-28",,"NEON.DOC.000481vG",,
+"efcc48c7-1942-4ab9-a8b0-8728639a34f3","38bd651a-c627-441c-b06b-a337f9a46487","TREE.2017.30","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2017-07-28","2017-07-28",,"NEON.DOC.000481vG",,
+"2be58f9c-211b-47ef-b116-3273c383c1e7","486461ca-0524-4711-97a7-8b9e9e3216b8","TREE.2017.30","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2017-07-28","2017-07-28",,"NEON.DOC.000481vG","animal disturbance. some traps thrown or taken apart. A lot were disturbed.",
+"9783fa06-79a8-4231-9305-cb166028606c","1345f864-940a-4627-b037-662b46516038","TREE.2017.30","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-07-29","2017-07-29",,"NEON.DOC.000481vG",,
+"ca180af2-8578-4601-bbbc-17e4f0fb9c58","b2010fc9-1b8b-4f53-9493-59e68e2bd5ed","TREE.2017.30","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-07-29","2017-07-29",,"NEON.DOC.000481vG",,
+"75fb1e2c-79e6-4b03-a10c-2ffda74bc45b","9ba0eb7f-8cdc-423e-9c69-06821c7f486b","TREE.2017.30","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-07-29","2017-07-29",,"NEON.DOC.000481vG",,
+"4bd856de-4253-46e2-9186-3c7c05ed4d35","9f91860b-0855-423f-87a0-9e04ad2623bc","TREE.2017.30","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-07-30","2017-07-30",,"NEON.DOC.000481vG",,
+"1e5d30f6-bb8b-4b9f-adee-486be1c3f09a","07761b16-6e4f-4b38-9ad3-1b1d9e3c5985","TREE.2017.30","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-07-30","2017-07-30",,"NEON.DOC.000481vG",,
+"124d4bd6-ab42-486f-9c52-51d7c1c0b58d","50dc2251-a501-46fd-93af-4319fde833f5","TREE.2017.30","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-07-30","2017-07-30",,"NEON.DOC.000481vG",,
+"4f7a98d4-b88d-45e6-a0c4-f84f4bcc372c","af6c05ce-8cd3-4410-99cb-9dff7029d3e5","TREE.2017.30","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vG",,
+"326b6980-d287-44c1-a192-de6221595f56","578c9b46-2fc3-46fa-9460-96c3a1b8d841","TREE.2017.30","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vG",,
+"0a3f8242-895a-4d4a-af1e-74c63969f102","f329378b-59b8-429b-be55-da7bd883a4b7","TREE.2017.30","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vG","Animal disturbance many traps were smashed tossed flipped taken apart etc.",

@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"7ef8c887-278b-435f-b88f-90bb2a9420c6","ef5e19ff-e25e-4760-a8b5-f2fef74f0df8","GRSM.2024.31","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","diversity","2024-07-30","2024-07-30","disturbance",,"NEON.DOC.000481vP",,
+"eb60da79-818d-4c64-9b7b-037a09d08c17","9f672b6e-8df6-4ca5-817e-b946924d659b","GRSM.2024.31","GRSM_071.mammalGrid.mam","D07","GRSM","GRSM_071","pathogen","2024-07-30","2024-07-30","disturbance",,"NEON.DOC.000481vP",,
+"b5f63e54-7adc-4cdb-b169-71d3ba83ff16","44ac8a37-da85-4b95-97f1-259a2f999bfd","GRSM.2024.31","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2024-07-30","2024-07-30","disturbance",,"NEON.DOC.000481vP",,
+"05800cd3-5a63-4e54-89ee-3d097c449d34","b2ffb119-6843-46cb-8929-513f9c3e80f6","GRSM.2024.31","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2024-07-30","2024-07-30","disturbance",,"NEON.DOC.000481vP",,
+"5a1e81ea-75d6-459e-bbe6-adb732aabb8b","66807257-4452-4d2e-a549-624997cc6f58","GRSM.2024.31","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2024-07-31","2024-07-31","disturbance",,"NEON.DOC.000481vP",,
+"7dc22c0a-ba6a-4dba-8ad4-1d4873399dea","166578a5-2b7b-42f8-9ec9-1dddfbf4329e","GRSM.2024.31","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2024-07-31","2024-07-31","disturbance",,"NEON.DOC.000481vP",,
+"24fff2e4-dfe0-4af7-8cfa-0536c3772b70","8fdc6b0b-a048-46b4-b5fb-ec2e796a0ef5","GRSM.2024.31","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2024-07-31","2024-07-31","disturbance",,"NEON.DOC.000481vP",,
+"9c45b829-f35a-4609-b41d-748c14c36a2e","3b3ded4d-3c77-4786-88f7-49703acde757","GRSM.2024.31","GRSM_071.mammalGrid.mam","D07","GRSM","GRSM_071","pathogen","2024-07-31","2024-07-31","disturbance",,"NEON.DOC.000481vP",,

@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e735c685-2b92-4bef-af1b-effe2139c6f7","7c83b9bd-4713-45d7-a5ff-ced9d941536f","BONA.2021.26","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2021-06-29","2021-06-29","OK","NEON.DOC.000481vM",,
+"506c1d5a-fd2c-481d-bb0a-c2a7f941d29b","2967d5f6-3fb3-4c1e-9afc-57d84c5b50c7","BONA.2021.26","BONA_002.mammalGrid.mam","D19","BONA","BONA_002","pathogen","2021-06-29","2021-06-29","OK","NEON.DOC.000481vM",,
+"a2d38b6b-2502-49cc-a4d6-380d7bcbc281","b46723d2-ce6c-46ba-9155-bbfcdfa0eb9f","BONA.2021.26","BONA_033.mammalGrid.mam","D19","BONA","BONA_033","pathogen","2021-06-29","2021-06-29","OK","NEON.DOC.000481vM",,
+"1b4d81fc-4a14-403e-a7c5-fc14872e4fde","d48b9af2-883b-4cf9-ad8f-b23b015b904c","BONA.2021.26","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2021-06-30","2021-06-30","OK","NEON.DOC.000481vM",,
+"f7f25aeb-9ddd-4e56-a540-73d2d3d1fca5","2fd93df1-3cc5-46da-b56a-46cbf0069df6","BONA.2021.26","BONA_033.mammalGrid.mam","D19","BONA","BONA_033","pathogen","2021-06-30","2021-06-30","OK","NEON.DOC.000481vM",,
+"ed6059b1-6d3d-4546-bd34-034c5e9a5bf7","ee727fd3-2585-4e8a-a9de-2bfbe65ee56f","BONA.2021.26","BONA_002.mammalGrid.mam","D19","BONA","BONA_002","pathogen","2021-06-30","2021-06-30","OK","NEON.DOC.000481vM",,

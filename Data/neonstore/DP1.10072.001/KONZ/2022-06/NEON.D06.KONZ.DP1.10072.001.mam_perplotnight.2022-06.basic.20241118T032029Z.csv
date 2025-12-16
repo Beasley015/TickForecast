@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"66a1d79e-ec4d-4b1a-b51d-b74e1c44d09e","de55cad6-cc94-42c4-9fdc-356f5037f5f8","KONZ.2022.25","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"4d9db28e-772b-4409-a922-666d98d8eade","df661766-b8cc-483b-abcd-b6cfa7878372","KONZ.2022.25","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"c63bb652-f161-4d9e-a7cb-cef8b0a1b431","8e0d260f-988b-40ed-8119-3ecdb24afc39","KONZ.2022.25","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"c81e6ad2-a0e6-4a9b-94fd-1a96954868e5","f87e9305-192f-4381-a73b-c0a8fe7dc834","KONZ.2022.25","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"50e08b4e-7cd0-4812-ae80-05f42fc4331a","5b1c0fef-2d98-4e93-b93e-43f4ff33e017","KONZ.2022.25","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"aee76ac3-96fb-472c-a0db-6e76edb7f5ab","8459beb1-3166-4951-b353-79a8e97a2da1","KONZ.2022.25","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"8bde1fd4-ff13-49ef-866e-edd5573f3bf1","d990c264-0a9d-44c5-bd87-05d87b8a00db","KONZ.2022.25","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2022-06-23","2022-06-23","extreme weather","NEON.DOC.000481vN",,
+"69500d6d-5980-4100-93fe-5dc3b0bbc3ea","4d0b63b2-2eff-4ab3-a58c-744486f7d7d2","KONZ.2022.25","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2022-06-23","2022-06-23","extreme weather","NEON.DOC.000481vN",,
+"0db95626-b8c1-4fd1-903c-dffb53832f76","95234b29-15b4-4b09-824f-52565aba7a51","KONZ.2022.25","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2022-06-23","2022-06-23","extreme weather","NEON.DOC.000481vN",,
+"da94ce8c-77b7-4b71-a135-5ef5e7649df6","9717ac83-abec-4f26-8450-eacfded4eba9","KONZ.2022.25","KONZ_002.mammalGrid.mam","D06","KONZ","KONZ_002","diversity","2022-06-24","2022-06-24","extreme weather","NEON.DOC.000481vN",,
+"a3375a42-0f3c-42ac-9110-a145de6662f4","f8b610c0-399f-458f-9cc0-dc8fe281a060","KONZ.2022.25","KONZ_005.mammalGrid.mam","D06","KONZ","KONZ_005","diversity","2022-06-24","2022-06-24","extreme weather","NEON.DOC.000481vN",,
+"53e9ed48-7310-45ba-bb10-16d6c3084160","f050e6fe-d041-4096-a9cd-34f68490eb48","KONZ.2022.25","KONZ_003.mammalGrid.mam","D06","KONZ","KONZ_003","diversity","2022-06-24","2022-06-24","extreme weather","NEON.DOC.000481vN",,

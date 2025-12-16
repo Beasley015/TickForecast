@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"85b446cd-8671-4c74-b835-c04715fdcf49","c22947b0-6121-407a-a291-e32db8a3494b","ABBY.2021.23","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2021-06-07","2021-06-07","OK","NEON.DOC.000481vM",,
+"81cf7c45-c13e-4a7d-87d1-71ad81d2a917","3f356c93-dcd0-40d1-9896-98ed84eb7d7e","ABBY.2021.23","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2021-06-07","2021-06-07","OK","NEON.DOC.000481vM",,
+"af6505f8-e112-4648-9e7d-517ee5eb6137","902efb53-0db7-4b1d-b836-36a68f0fedca","ABBY.2021.23","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2021-06-07","2021-06-07","OK","NEON.DOC.000481vM",,
+"9b61b736-b870-4f10-bc13-ca0cc2680afa","511b8a03-0b1a-4015-9f28-a3cfc5b49d10","ABBY.2021.23","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2021-06-08","2021-06-08","OK","NEON.DOC.000481vM",,
+"8d003ba3-b836-4f9e-b271-a8d0baf1c7f7","ea953ce1-ca89-45a0-8e70-e62353e1fa52","ABBY.2021.23","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2021-06-08","2021-06-08","OK","NEON.DOC.000481vM",,
+"4a486cd2-d1f4-4d4b-9978-ede50c727928","6d742a7f-1d72-4477-af85-4d47014fc332","ABBY.2021.23","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2021-06-09","2021-06-09","OK","NEON.DOC.000481vM",,
+"cce57e6f-7eb5-49b7-821e-c37bca8155d4","d5881e95-dfe9-4d9d-aa9f-4a80509fa442","ABBY.2021.23","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2021-06-09","2021-06-09","OK","NEON.DOC.000481vM",,
+"f44bcd72-ceac-421e-8ef7-419999a4f35f","104e4802-4f51-4a2c-adf8-a10608d899de","ABBY.2021.23","ABBY_014.mammalGrid.mam","D16","ABBY","ABBY_014","diversity","2021-06-09","2021-06-09","OK","NEON.DOC.000481vM",,
+"ffd49963-253b-4d12-99d2-174dc9be92a7","edd929ce-a5b0-4d2e-89f4-33617f1d4381","ABBY.2021.23","ABBY_023.mammalGrid.mam","D16","ABBY","ABBY_023","diversity","2021-06-10","2021-06-10","OK","NEON.DOC.000481vM",,
+"5cb64469-e761-4d95-8e05-c545ff70b10b","ce849d01-91e8-41ad-8ba8-00cbde783cb2","ABBY.2021.23","ABBY_007.mammalGrid.mam","D16","ABBY","ABBY_007","diversity","2021-06-10","2021-06-10","OK","NEON.DOC.000481vM",,

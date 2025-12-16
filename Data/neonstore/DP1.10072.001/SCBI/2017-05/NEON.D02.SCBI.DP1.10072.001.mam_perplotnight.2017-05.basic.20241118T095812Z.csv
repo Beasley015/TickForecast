@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"23010c9d-fe17-4174-9dbc-9578f5e38ec0","4d75b5f6-1928-407e-9747-3d51414c8241","SCBI.2017.20","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-05-16","2017-05-16",,"NEON.DOC.000481vJ","Low in the high 40s",
+"75ad1c37-cc66-408c-a8ad-ef375599e0a5","e555475d-c323-45ef-8153-0c597a437658","SCBI.2017.20","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-05-16","2017-05-16",,"NEON.DOC.000481vJ","Closed grid after this night due to disturbance",
+"a096cb04-af64-43c5-84af-6afd14b2f351","a501877f-2cba-4f94-95bc-b2e498d01f3a","SCBI.2017.20","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-05-16","2017-05-16",,"NEON.DOC.000481vJ",,
+"afd4ee3d-2f28-47ed-a841-044541045c05","6d55efe6-4668-45d0-8e6a-ab14cde0344f","SCBI.2017.20","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-05-17","2017-05-17",,"NEON.DOC.000481vJ",,
+"b2d77ee4-a590-4a27-b2b5-070322ff9fee","d7e19106-53b1-49f8-a53a-2db01395717c","SCBI.2017.20","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-05-17","2017-05-17",,"NEON.DOC.000481vJ",,
+"7aef8a73-ec54-4b9b-8b07-d99c33f07f46","dc68adab-7107-4eda-b42c-d674267e44ad","SCBI.2017.20","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2017-05-17","2017-05-17",,"NEON.DOC.000481vJ","Low in the low 60s",
+"45bb7c80-c4ea-41c8-8198-75b70301b754","373406f7-19c4-4f79-b2f3-5dae3aa6357c","SCBI.2017.20","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-05-18","2017-05-18",,"NEON.DOC.000481vJ",,
+"1308ef9a-72c0-4087-bf39-5188e9ca6f9f","ccfa95a5-fd54-4d32-840b-39d86a463c45","SCBI.2017.20","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-05-18","2017-05-18",,"NEON.DOC.000481vJ","Low in the high 60s",
+"c3a97579-71e2-464b-aabb-65027ef86bce","9fe8e54f-f797-4331-9bb7-5fc692d5967a","SCBI.2017.20","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2017-05-18","2017-05-18",,"NEON.DOC.000481vJ",,
+"bc37fbd0-fed7-4e01-b912-34717cb0b0f6","d5811262-bbb0-47dd-ba94-b0a6810896f6","SCBI.2017.20","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2017-05-19","2017-05-19",,"NEON.DOC.000481vJ","Low in upper 60s",

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"743d9521-02c6-4995-a5a6-7ebd06ffc910","2bde7182-5ae7-4a6a-b1e8-065b136c7f2e","MLBS.2019.32","MLBS_004.mammalGrid.mam","D07","MLBS","MLBS_004","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"07d2527c-5969-45f7-a867-acc5dc175a66","d5dbb6c8-40f8-4c1a-a074-5e2cb16c757d","MLBS.2019.32","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"61e4c076-27a9-4081-b6d4-55edcdd076a6","d90f82e7-bc13-4e81-a11f-53dd060cb5c8","MLBS.2019.32","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"469cf096-f1fd-49dc-82b6-2dfe52767ec1","62581cd0-897a-4080-aa9d-2a0c7379487c","MLBS.2019.32","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"fb15de61-1fea-4094-bc65-0ae5eb7398f5","53d489ad-dfa0-4f20-9032-dd6e5c080bce","MLBS.2019.32","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"603243a8-42db-4d13-8ca4-eff8a1c91c39","f599aa2d-0b0f-42b1-ba20-32546408e798","MLBS.2019.32","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"868e1be4-600b-4c32-87bf-996947b7f35a","1fad8a46-eaf2-40a2-81ca-d349156f5462","MLBS.2019.32","MLBS_002.mammalGrid.mam","D07","MLBS","MLBS_002","diversity","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"a4f57a11-637f-4096-92b4-22d653cad3c9","f0d691fe-4580-4153-973c-bb92456a15e8","MLBS.2019.32","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"fc46361d-862d-46be-8d57-798eaeaba0a3","7188342b-a651-49bf-9a56-025269c9676a","MLBS.2019.32","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"cd3b63da-2e88-4237-a5e6-1f6789116428","4cab7d68-238d-4421-9763-dc7aa45f5c31","MLBS.2019.32","MLBS_009.mammalGrid.mam","D07","MLBS","MLBS_009","diversity","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,

@@ -1,4 +1,6 @@
-## main transferability workflow script
+## Hierarchical workflow script
+## Based on previous work by Foster et al.
+## Updated by E.M. Beasley, fall 2025
 ## 1 - setup
 ## 3 - state data intake
 ## 4 - weather data intake
@@ -18,7 +20,6 @@ library(tidyverse)
 library(lubridate)
 library(nimble)
 library(parallel)
-# nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
 
 options(dplyr.summarise.inform = FALSE)
 
@@ -98,8 +99,8 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-# n.slots <- 1
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+n.slots <- 2
 production <- TRUE
 n.iter <- 1000 #50000
 Nmc <- 2000

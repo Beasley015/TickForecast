@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7e0243f2-2dab-4a67-a231-f6069c0eaadd","6f38fe9a-5a95-4ddc-8821-ee99d8a9d59b","GUAN.2017.12","GUAN_007.mammalGrid.mam","D04","GUAN","GUAN_007","pathogen","2017-03-21","2017-03-21",,"NEON.DOC.000481vJ",,
+"ea470026-15ec-49fa-9936-d75b4715a9f0","77cc273a-1b71-4c2a-b963-6546e84fa344","GUAN.2017.12","GUAN_003.mammalGrid.mam","D04","GUAN","GUAN_003","pathogen","2017-03-21","2017-03-21",,"NEON.DOC.000481vH",,
+"b0bb3510-e924-424a-b2f9-f13ee2397f99","44d74246-54c8-47e6-8564-c3d6093d7882","GUAN.2017.12","GUAN_025.mammalGrid.mam","D04","GUAN","GUAN_025","pathogen","2017-03-21","2017-03-21",,"NEON.DOC.000481vJ",,
+"f8dbb783-fb35-414f-9bc4-7714e1d389c9","f973cabf-2c4c-4544-abd1-905c557a51f8","GUAN.2017.12","GUAN_025.mammalGrid.mam","D04","GUAN","GUAN_025","pathogen","2017-03-22","2017-03-22",,,,
+"474111d3-d909-4d36-8a9f-726d99cce821","b3db7eb3-825e-4191-a7b1-740787fa721e","GUAN.2017.12","GUAN_003.mammalGrid.mam","D04","GUAN","GUAN_003","pathogen","2017-03-22","2017-03-22",,"NEON.DOC.000481vG",,
+"305ea72f-aa18-4551-b407-a3e3cc64c75c","06f024c6-b2b0-432a-8a7a-f2750896778e","GUAN.2017.12","GUAN_007.mammalGrid.mam","D04","GUAN","GUAN_007","pathogen","2017-03-22","2017-03-22",,"NEON.DOC.000481vG",,
+"92fa7b35-ffa1-45f1-a1ae-24d80eafc4eb","77ee9af0-f79d-46c2-a3bf-7a24356a9a7d","GUAN.2017.12","GUAN_025.mammalGrid.mam","D04","GUAN","GUAN_025","pathogen","2017-03-23","2017-03-23",,"NEON.DOC.000481vG",,
+"8c8c3043-af92-447d-94bc-23c4f3004b1a","a9a50082-5289-46a9-b33e-a975198eee71","GUAN.2017.12","GUAN_003.mammalGrid.mam","D04","GUAN","GUAN_003","pathogen","2017-03-23","2017-03-23",,"NEON.DOC.000481vG",,
+"8a65b3af-12c2-4023-9745-0926725876b8","08b020a3-a0f1-4e0e-bfdd-9fc167ed9f22","GUAN.2017.12","GUAN_007.mammalGrid.mam","D04","GUAN","GUAN_007","pathogen","2017-03-23","2017-03-23",,"NEON.DOC.000481vG",,
+"b2b0c521-0706-49b1-a257-b510335ad1bf","4046cf25-1828-4747-b634-f4a78b54fb23","GUAN.2017.12","GUAN_004.mammalGrid.mam","D04","GUAN","GUAN_004","diversity","2017-03-24","2017-03-24",,"NEON.DOC.000481vH",,
+"2f0fe4c5-454e-48e4-a9ba-02b821176314","a9f472a2-dab4-45a0-bd7f-03e92c5f8b69","GUAN.2017.12","GUAN_005.mammalGrid.mam","D04","GUAN","GUAN_005","diversity","2017-03-24","2017-03-24",,"NEON.DOC.000481vH",,
+"43a1c69d-4604-4d1a-90f9-23d47a5146cf","11eb026f-c63d-4794-b0ef-65e1ab8b633e","GUAN.2017.12","GUAN_002.mammalGrid.mam","D04","GUAN","GUAN_002","diversity","2017-03-24","2017-03-24",,"NEON.DOC.000481vH",,

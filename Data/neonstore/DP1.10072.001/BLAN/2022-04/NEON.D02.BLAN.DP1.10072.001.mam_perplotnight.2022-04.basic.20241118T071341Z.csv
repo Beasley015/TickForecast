@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"0ef4a74e-8f74-4e74-84b0-56652325a189","09be8435-1357-406b-84ef-dfb5e1d52078","BLAN.2022.14","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2022-04-06","2022-04-06","OK","NEON.DOC.000481vN",,
+"4fb5240a-66a0-4fab-ac18-564725e12f24","68653594-75ca-4dc6-83c5-cbe7258a3ae3","BLAN.2022.14","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2022-04-06","2022-04-06","OK","NEON.DOC.000481vN",,
+"d58dcc91-2bf2-4731-a7a0-5f300f9d3de4","993e2678-db66-4523-91ce-83c4688a54af","BLAN.2022.14","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2022-04-07","2022-04-07","disturbance","NEON.DOC.000481vN",,
+"17d66e71-1930-4bb6-bae2-6d0d46f6a771","9c46fa87-ea0d-4fba-96cc-130a50b78b16","BLAN.2022.14","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2022-04-07","2022-04-07","OK","NEON.DOC.000481vN",,
+"76838b29-d717-4d5c-87c0-1341df3eafbb","7d536d36-02ac-4bf2-92ce-47bc880cfc4a","BLAN.2022.14","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2022-04-07","2022-04-07","OK","NEON.DOC.000481vN",,
+"72e5c48c-83cd-48df-ac1c-1f03593b35bb","9d0a04f0-116d-43c6-b841-45d03ade1d84","BLAN.2022.14","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2022-04-08","2022-04-08","OK","NEON.DOC.000481vN",,
+"4f5df9fa-00c3-40c3-abc1-8f4478a243f0","ea55bfbf-0efd-4da3-b9c4-7b6e05427aca","BLAN.2022.14","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2022-04-08","2022-04-08","disturbance","NEON.DOC.000481vN",,
+"f9652390-7731-4b3c-8617-f5ca7c29b54d","75c539e0-1031-48e2-963d-8e057d4fc5f9","BLAN.2022.14","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2022-04-08","2022-04-08","OK","NEON.DOC.000481vN",,
+"507c3dc7-49f5-431f-a5b8-16f803210eda","426fe2d6-ec6d-45f1-8752-a15a21186364","BLAN.2022.14","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2022-04-08","2022-04-08","disturbance","NEON.DOC.000481vN",,
+"3dddb66c-7f1b-4c26-ba21-e36236a1a1bc","e4d72c3e-1c3b-4391-8e61-0da22c72824b","BLAN.2022.14","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2022-04-09","2022-04-09","disturbance","NEON.DOC.000481vN",,

@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"27c4bcc8-e44b-411d-8196-e27afe969f7a","cafee8a4-026b-4906-a686-6dbd8a152255","UNDE.2017.21","UNDE_002.mammalGrid.mam","D05","UNDE","UNDE_002","diversity","2017-05-23","2017-05-23",,,,
+"2038ee5c-a2ba-44d1-af4d-91bdc3fc4df9","a092c971-093d-4ba7-8b6f-a3a393403548","UNDE.2017.21","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2017-05-23","2017-05-23",,"NEON.DOC.000481vG",,
+"25f4cdc9-7488-4ad7-8464-fc6f7b988238","7563b17d-3793-481a-a316-ea95907eb593","UNDE.2017.21","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-05-24","2017-05-24",,"NEON.DOC.000481vJ",,
+"2338216a-b628-43d6-b3af-3b9309f56a41","ab2c1ca9-cea2-4327-bf97-3599ea7de2d3","UNDE.2017.21","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-05-24","2017-05-24",,"NEON.DOC.000481vJ",,
+"17f5ef2c-20ca-44fd-897b-f26046f6e11a","9c76f697-0292-4702-9789-bd93886b3399","UNDE.2017.21","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-05-24","2017-05-24",,"NEON.DOC.000481vJ",,
+"23126f65-452d-4ecc-babb-c8452d1ac369","77b7fabc-ff79-4272-a661-83a460781b8a","UNDE.2017.21","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-05-25","2017-05-25",,"NEON.DOC.000481vJ",,
+"1db3aa15-1570-4fd2-92e9-37ed74399bae","8cb3c210-b3b3-4913-8be1-792955f53fa5","UNDE.2017.21","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-05-25","2017-05-25",,"NEON.DOC.000481vJ",,
+"e5b34b4d-044f-489a-9ddc-2879015de77e","0222e140-858d-4502-84fc-99d270cff2b1","UNDE.2017.21","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-05-25","2017-05-25",,"NEON.DOC.000481vJ",,
+"e22b5d7b-9a4e-4a45-9c5d-4a8174b95129","18951fcd-222e-4296-b0c3-7eab170c8cfd","UNDE.2017.21","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-05-26","2017-05-26",,"NEON.DOC.000481vJ",,
+"6457cec8-2b24-4d40-9712-b2a1700d610d","cb890e57-55b1-4ddb-8758-91d75a647208","UNDE.2017.21","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-05-26","2017-05-26",,"NEON.DOC.000481vJ",,
+"3f1fdacf-316a-4a06-af84-63fde86715dc","5cbe779f-076d-417c-8644-edc2d7da35f6","UNDE.2017.21","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-05-26","2017-05-26",,"NEON.DOC.000481vJ",,

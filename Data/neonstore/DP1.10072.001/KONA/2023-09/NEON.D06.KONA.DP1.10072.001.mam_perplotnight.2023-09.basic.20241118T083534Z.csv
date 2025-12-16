@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"10b055e7-29c2-4fa2-aa37-0e508b092349","76dab898-8d9a-43ed-8a79-64a01676a54f","KONA.2023.37","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"bf9da691-b681-4c58-b966-732e6a6eb5d0","478b0690-69a7-4d95-8277-054cc60539a6","KONA.2023.37","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"a08358e3-1d5c-43e6-b240-60b24d261664","61e65e9b-9006-4c9b-be4a-36f67325daa8","KONA.2023.37","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2023-09-12","2023-09-12","OK","NEON.DOC.000481vP",,
+"4a488e49-05c1-41ea-8910-8ba31a5f7800","a776d4a1-5da4-45e9-86fe-49b32e8f40df","KONA.2023.37","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"ca2a496f-050a-4ac7-9daf-db6bbf14c5d7","7629769c-6624-46f1-a376-4b4c465f6413","KONA.2023.37","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"aefa273e-94fc-4f59-8366-83acffc7d1a8","565e8e2e-1aed-47fe-9dfe-6ea8ce9b2083","KONA.2023.37","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2023-09-13","2023-09-13","OK","NEON.DOC.000481vP",,
+"ef4be3b2-1e35-40c9-aed5-a5ec6856819b","c5b2fe76-9cd4-424d-8296-527f4249f0a4","KONA.2023.37","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP",,
+"48c25fb0-f071-4e1a-8452-198b705bfc81","dd8ad3e0-0471-43fe-a59c-c740bb48e850","KONA.2023.37","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP",,
+"8813f9c3-3d23-42bc-8534-3d0141d5b5af","b0cebad9-6390-4a4b-80e0-d48240ae313e","KONA.2023.37","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2023-09-14","2023-09-14","OK","NEON.DOC.000481vP",,
+"a98852c5-44c7-4a57-9de5-b4da822eaa10","854c4330-c044-49bf-a55a-4f3a8c5512c4","KONA.2023.37","KONA_003.mammalGrid.mam","D06","KONA","KONA_003","diversity","2023-09-15","2023-09-15","OK","NEON.DOC.000481vP",,
+"1bc5c260-079a-49e2-9084-b7bc2c1c5efa","aee320f9-4a8d-4d9c-b563-c6e0a193e0a9","KONA.2023.37","KONA_004.mammalGrid.mam","D06","KONA","KONA_004","diversity","2023-09-15","2023-09-15","OK","NEON.DOC.000481vP",,
+"ed5cf234-28b2-4ac0-9ce5-9c9a0bb9f9e3","5594e289-320d-471c-8101-dec164dd3178","KONA.2023.37","KONA_006.mammalGrid.mam","D06","KONA","KONA_006","diversity","2023-09-15","2023-09-15","OK","NEON.DOC.000481vP",,

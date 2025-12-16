@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1ca1e823-c935-40ec-91d6-897282a4a808","ac3902fd-e325-4b05-8941-9a200d238cb7","BLAN.2019.23","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"1b14b8cb-7f5a-4a53-aa5d-ce42f1b136f6","d250a4be-f214-4431-9b4c-01e2f6909637","BLAN.2019.23","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"934fc5cc-2f47-4874-8634-5aa54513dd80","f50e47c2-7bac-4a93-8459-d8c8e89bc1c6","BLAN.2019.23","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"85fa9cc6-7660-4a95-a05d-6345cf0bce64","5d66ae57-1597-46af-90c2-74ae39fb1a6c","BLAN.2019.23","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"a5638baa-0214-431b-bb63-903ec92e6d8c","fbb7584b-f0b3-46ac-b645-cb60645202ed","BLAN.2019.23","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL","Late morning; some prioritizing resulted.",
+"ce3f736c-9b2e-48be-a2a7-ca07c251d9b5","16287a4e-a25d-42fa-ae23-22fe6cef4a4a","BLAN.2019.23","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL","Late morning; prioritized id and tag",
+"9669ca34-1dc1-4f3b-8a72-f91055d50007","243e1d5e-ff66-4d0f-99cb-742ec9154a40","BLAN.2019.23","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"801a541a-f9bf-4e6f-8131-5c37bd2f7b47","2ebb7b4b-113e-49c2-9920-5119dacc7945","BLAN.2019.23","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"dcf9aeaa-3ff5-4e77-8c5b-6e7900b6ad11","8b82c814-738f-4a94-84b0-14fc4f4e5f86","BLAN.2019.23","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL","Began prioritizing due to the time.",
+"a2ad5e72-98fa-446e-8a95-917c0c2300f8","dbfa0564-fc9a-46ae-a21e-4fe4540c02e3","BLAN.2019.23","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,

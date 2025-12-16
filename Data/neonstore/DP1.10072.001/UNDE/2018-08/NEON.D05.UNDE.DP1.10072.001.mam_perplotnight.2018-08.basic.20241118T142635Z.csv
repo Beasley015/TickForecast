@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"63dbe196-8eb1-4314-a79b-3495d303f99c","81056462-8424-4cd3-a2df-2a9ec5d18838","UNDE.2018.32","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"f5428c1d-f721-41eb-baba-efb64dea0e08","5b310710-78e2-44ef-9425-0de105f2afc2","UNDE.2018.32","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"9f402a00-c8b0-4abd-9876-78e738191f95","bb030b55-808c-4b21-8d63-ec09ba8a88fd","UNDE.2018.32","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK","Suspected bear activity disturbed 87 traps on grid. Sampling was discontinued for the remainder of the bout",
+"cbc2ebe6-0a8c-45c7-8bdc-bb96dd104587","984fd740-33f4-44d7-9198-514d8d33b8e2","UNDE.2018.32","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK",,
+"c3420e4a-a3a4-4437-93c2-f12f76f85c43","e8126ae3-7b3b-46c0-945e-f142e9848635","UNDE.2018.32","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK",,
+"6ade1126-ae02-463a-bb26-57b95408a87d","1383b11b-64bc-4103-bb40-919aaa46822f","UNDE.2018.32","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2018-08-10","2018-08-10",,"NEON.DOC.000481vK",,
+"109e7168-73fb-4850-9edd-1d6ef77e89fd","d3c507fe-ee95-4acd-b85a-802c030f8864","UNDE.2018.32","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2018-08-10","2018-08-10",,"NEON.DOC.000481vK",,
+"7c642a30-21ff-4c6d-8421-204252a6aa08","fcc2805c-20b6-47a8-87bf-10596fa8b034","UNDE.2018.32","UNDE_002.mammalGrid.mam","D05","UNDE","UNDE_002","diversity","2018-08-11","2018-08-11",,"NEON.DOC.000481vK",,
+"da9ba49c-1310-4697-92e6-b2b7c86ade1f","08d9e920-a5cd-4cd4-842a-772c09a41d7d","UNDE.2018.32","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2018-08-11","2018-08-11",,"NEON.DOC.000481vK",,
+"f9a29500-7b59-475b-9d17-a2deac0d882a","82c4ba99-3914-49fc-843f-49dd793a4448","UNDE.2018.32","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2018-08-11","2018-08-11",,"NEON.DOC.000481vK",,
+"6df2003b-1607-470d-a12d-b326e9d9c094","0288762d-3e27-4fad-8f7f-491730f916bd","UNDE.2018.32","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2018-08-11","2018-08-11",,"NEON.DOC.000481vK",,

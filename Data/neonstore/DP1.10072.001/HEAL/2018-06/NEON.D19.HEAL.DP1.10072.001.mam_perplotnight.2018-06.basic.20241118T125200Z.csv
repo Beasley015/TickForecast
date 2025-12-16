@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1222fc90-36c8-4e50-a359-dfa17cd3f0bb","f81ffc93-d083-4822-be5e-18b93378ec35","HEAL.2018.25","HEAL_010.mammalGrid.mam","D19","HEAL","HEAL_010","diversity","2018-06-19","2018-06-19",,"NEON.DOC.000481vK",,
+"e1e483ef-6862-4793-ae25-7a45a5e85ca2","a372233d-02cf-4f7e-a871-f393eac56056","HEAL.2018.25","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2018-06-19","2018-06-19",,"NEON.DOC.000481vK","Windy night",
+"c34b7c66-5b19-4d53-a8f2-a99296a040dd","e4d1f790-4047-483c-9051-899fffcd6275","HEAL.2018.25","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2018-06-19","2018-06-19",,"NEON.DOC.000481vK",,
+"ccc77e02-62cb-4d9c-853c-8f4a2fdab1c0","6b808107-702b-41fc-8c18-0fe81d42661b","HEAL.2018.25","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","pathogen","2018-06-19","2018-06-19",,"NEON.DOC.000481vK","Very windy when traps were set",
+"bf49f0ca-6dfe-404e-8f66-dc43c0b17fce","d8bf2918-93ad-4c83-b873-9d8a441a2aa0","HEAL.2018.25","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","pathogen","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"95308779-f812-4f1e-bc74-db35f0034e34","ed45bb0b-465c-4af8-bd76-fc7e9d1daf1f","HEAL.2018.25","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"d9694f31-a352-485c-8a05-3c75cb28bce5","064e5c4a-c6e5-4641-be6a-ea1d890cc33e","HEAL.2018.25","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"627c5784-c011-4c2a-b456-a2294c33bd5d","1d2543ce-a397-4795-b9a3-398d7a41aea1","HEAL.2018.25","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","diversity","2018-06-20","2018-06-20",,"NEON.DOC.000481vK",,
+"ea21b65c-667d-4181-8153-e960abf9271e","0a8c3b96-5768-44f1-b023-be9d31a1be27","HEAL.2018.25","HEAL_014.mammalGrid.mam","D19","HEAL","HEAL_014","diversity","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,
+"3e5d6ba3-75cb-4909-b173-b6b55ffbf0b5","a91d63ee-9fd0-475b-b5ca-df4b26fdfaea","HEAL.2018.25","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","pathogen","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,
+"8cd9855b-0082-4b4b-8e24-6dc1bedfecba","1bf32e5c-984c-4159-8ee6-6171627098ed","HEAL.2018.25","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,
+"d628632d-8e2e-4202-9924-3f6228cbcefd","895a4410-43ef-4aaf-b421-0f67e601cf59","HEAL.2018.25","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2018-06-21","2018-06-21",,"NEON.DOC.000481vK",,

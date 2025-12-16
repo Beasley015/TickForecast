@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8c37246b-5aa6-408c-9ad0-bab347e82442","b26137d6-62fb-4ece-8062-5b5008cb8f40","DSNY.2021.41","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2021-10-13","2021-10-13","OK","NEON.DOC.000481vM",,
+"acf0e002-139e-49c6-9eb2-8eb993d7d6b9","856b30dc-0cdb-4a8e-8d2e-5321802db467","DSNY.2021.41","DSNY_006.mammalGrid.mam","D03","DSNY","DSNY_006","diversity","2021-10-13","2021-10-13","OK","NEON.DOC.000481vM",,
+"d02f220b-ab93-41d8-9c60-e622d850bf24","1ca34a3c-4d6d-4830-9dc9-3cd2a66268cd","DSNY.2021.41","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2021-10-13","2021-10-13","OK","NEON.DOC.000481vM",,
+"b07abeef-2dd9-447d-a667-a9e2c28ef862","6596895d-322f-4572-951b-ad4b1e993535","DSNY.2021.41","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2021-10-13","2021-10-13","OK","NEON.DOC.000481vM",,
+"6a29cf06-a3f1-4df1-ba24-cec188ac603a","fa4a7f1d-3d3d-4e44-8840-ca3e95965620","DSNY.2021.41","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,
+"76697cbf-b4d2-427f-a3fb-28cb717961b4","67f97d20-e83e-47ed-bee5-b9f1dbb1e070","DSNY.2021.41","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,
+"71c84038-bdf6-4da9-ada9-24fc05c47301","8fc13d75-d7a9-4f55-ae15-34955ea0bc60","DSNY.2021.41","DSNY_010.mammalGrid.mam","D03","DSNY","DSNY_010","diversity","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,
+"93effcc3-d4aa-496c-80db-b5476a00469c","cac0c059-f9de-4c35-9ad5-c3ba531eebea","DSNY.2021.41","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,
+"812f601d-8b85-45c1-b744-5d699d38ac04","c6b31c34-87f5-44d4-a66a-25cfa1622ccb","DSNY.2021.41","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2021-10-15","2021-10-15","OK","NEON.DOC.000481vM",,
+"59cdc7b5-474b-471b-a164-78382513c6f6","54ada6ea-08cd-4eb0-bd0f-0621bada377c","DSNY.2021.41","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2021-10-15","2021-10-15","OK","NEON.DOC.000481vM",,
+"c3c7507b-55ce-4abe-b8b3-54f3bc55a4e4","71eda52b-fb9a-454e-8ac1-961f7ea6bce5","DSNY.2021.41","DSNY_016.mammalGrid.mam","D03","DSNY","DSNY_016","diversity","2021-10-15","2021-10-15","OK","NEON.DOC.000481vM",,
+"42d48634-f31a-452d-b528-e4c7c01cb789","f3c9029b-50c5-4f76-b188-e2b559a5d879","DSNY.2021.41","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2021-10-15","2021-10-15","OK","NEON.DOC.000481vM",,

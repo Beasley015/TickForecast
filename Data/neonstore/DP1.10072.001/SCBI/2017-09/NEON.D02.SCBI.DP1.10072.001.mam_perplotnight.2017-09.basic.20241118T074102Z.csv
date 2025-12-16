@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"ec8a1423-6723-457e-b32a-01b3e0bb3a9d","04a4c02a-c313-46c2-b8ab-308ecf2d14a6","SCBI.2017.37","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-09-12","2017-09-12",,"NEON.DOC.000481vJ",,
+"340c744d-d18e-40ae-97b1-ec5f1215ce0e","0dd47db9-4a1b-4b00-83f9-089087abb717","SCBI.2017.37","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-09-12","2017-09-12",,"NEON.DOC.000481vJ",,
+"9745f6f1-50e0-4e73-bc4a-523332dc8254","d620f708-9c65-4a62-88a8-f8bf562639fd","SCBI.2017.37","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-09-12","2017-09-12",,"NEON.DOC.000481vJ",,
+"acb51c74-af19-4f9e-ad24-2553287098ae","b198b939-7100-41a1-9add-59654ce51410","SCBI.2017.37","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-09-13","2017-09-13",,"NEON.DOC.000481vJ",,
+"798ec45e-005b-4419-aae3-bf6d400cb5c5","953a52da-bebe-4e62-9c12-c0ebbfe20821","SCBI.2017.37","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-09-13","2017-09-13",,"NEON.DOC.000481vJ",,
+"7f9cdf18-58d2-4758-888d-c6956ac559d8","5ca9ad96-ce87-422f-8e2c-4eeb012f3e38","SCBI.2017.37","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-09-13","2017-09-13",,"NEON.DOC.000481vJ",,
+"d245c1ee-a9e9-415b-9d7a-6a57afcbe0c1","a567c92e-08bf-4320-9890-3da3ae2ed44b","SCBI.2017.37","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-09-14","2017-09-14",,"NEON.DOC.000481vJ",,
+"a7b0857d-6cec-4507-96d3-86b6bd85d729","85b8c5d9-a7e3-4ec1-9a2e-6baa84dcb78d","SCBI.2017.37","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-09-14","2017-09-14",,"NEON.DOC.000481vJ",,
+"8922f474-7295-4ed7-bb98-1a467c0e4b02","21a69ed0-d06f-43c5-90b5-f4354f46a7c2","SCBI.2017.37","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-09-14","2017-09-14",,"NEON.DOC.000481vJ",,
+"131b56fe-b126-4fa6-b3e2-e385d4230af4","fca155c7-17ab-4c5b-b619-6fd04682fb32","SCBI.2017.37","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2017-09-15","2017-09-15",,"NEON.DOC.000481vJ",,
+"e1b8d259-bbae-465d-90f1-fe394560d99c","7f5b6756-1ee9-46b5-970a-eea1358995aa","SCBI.2017.37","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2017-09-15","2017-09-15",,"NEON.DOC.000481vJ",,
+"65ee45d5-26cc-40bb-ae9f-1e44dcd1dfbc","70ef179a-6af0-4f86-9a44-2983ee1afb9f","SCBI.2017.37","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2017-09-15","2017-09-15",,"NEON.DOC.000481vJ",,

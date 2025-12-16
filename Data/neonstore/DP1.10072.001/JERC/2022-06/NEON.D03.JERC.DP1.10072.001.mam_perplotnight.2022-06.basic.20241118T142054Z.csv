@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"cb133add-9b56-4aed-b70d-61ccb379a064","eef51f6d-c243-46d5-b6b3-a1376cd7ca04","JERC.2022.23","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2022-06-07","2022-06-07","OK","NEON.DOC.000481vN",,
+"117e6787-18f3-4b9d-b0db-8a3632a7ad1d","854ec70d-e5a7-47c4-8067-8ca8d8a26581","JERC.2022.23","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2022-06-07","2022-06-07","OK","NEON.DOC.000481vN",,
+"59d50a0b-e958-472b-8c30-807c07771e3a","62526008-659e-472e-ae73-25ceed4b7869","JERC.2022.23","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2022-06-07","2022-06-07","OK","NEON.DOC.000481vN",,
+"f5b800a2-f8dc-43db-94da-a9715ea576a0","8805f280-9659-4c2e-97a5-739ec42ed641","JERC.2022.23","JERC_002.mammalGrid.mam","D03","JERC","JERC_002","diversity","2022-06-07","2022-06-07","logistical","NEON.DOC.000481vN","Reduced staff",
+"cd7508e5-aec4-4688-85ed-caf3b81b21f6","3435e540-8640-442d-a2c2-bd7492bb29c0","JERC.2022.23","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"45b89cfc-b59c-454f-92f5-889505cf1d5e","accf23eb-6450-4813-890d-a6a9ffd5a871","JERC.2022.23","JERC_006.mammalGrid.mam","D03","JERC","JERC_006","diversity","2022-06-08","2022-06-08","logistical","NEON.DOC.000481vN","Reduced staff",
+"1971fcb2-bea9-463d-93ba-2877718eb58a","f185e4b4-6d8c-4ac7-b9f3-d390b8ac4693","JERC.2022.23","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"451c262c-4b9d-43e4-b112-f8d166a38d2c","4581e8cd-dccf-45b3-bf6e-f2924e6081c0","JERC.2022.23","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"b05289c7-ec6b-4791-80df-13d8500a8b3d","b040734d-344a-4163-a5df-a18910a77ed6","JERC.2022.23","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,
+"f1863f57-0005-47b4-b3a7-3bf12fd3105f","98c9de79-dde6-4e0a-ad71-53caa1420b2f","JERC.2022.23","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,
+"918a137d-7c4d-457f-b9ce-f6aa5b3708f4","9538306f-29b5-4a04-8be2-2a2e3a99ef86","JERC.2022.23","JERC_008.mammalGrid.mam","D03","JERC","JERC_008","diversity","2022-06-09","2022-06-09","logistical","NEON.DOC.000481vN","Reduced staff",
+"1c728084-bf9c-426f-b4e5-4c5d1e3943b5","9878c009-7157-41b0-b997-a0ce0bcb8f48","JERC.2022.23","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,

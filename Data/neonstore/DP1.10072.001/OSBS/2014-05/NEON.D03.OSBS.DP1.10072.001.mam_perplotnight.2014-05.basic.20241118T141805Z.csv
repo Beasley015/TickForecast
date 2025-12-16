@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"90293887-6d80-4f2d-95d3-26fe8078fa25","D4464A20678D4E389630577C85AF5832","OSBS.2014.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-05-20","2014-05-20",,,,
+"fdae2839-7ac2-4bc2-9a4a-312282822a20","5E45FE80C22F428489D01CB60B62B000","OSBS.2014.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-05-21","2014-05-21",,,,
+"d79c7287-a1bf-4d44-92d3-e67b3c20f365","EB1BA7F98B5543F78F9D0228BA086ACD","OSBS.2014.21","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-05-21","2014-05-21",,,,
+"7296e200-aa81-4dab-9831-2e258e18d606","4A858F16E3CB4B999FE8D40E116BCFB4","OSBS.2014.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-05-22","2014-05-22",,,"No samples, both caught yesterday",
+"2922e7b9-7166-4755-917b-c3961d0a9095","B4E3A06FCC9A49EDA69ACFA68C51C7EC","OSBS.2014.21","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-05-22","2014-05-22",,,,
+"4b6af111-ebdb-49b8-9aa8-0650b0ee6273","53F4246E0B2546749E1DC9EB6F6C9092","OSBS.2014.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-05-23","2014-05-23",,,,

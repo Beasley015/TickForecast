@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f30b93cf-1312-411e-ac74-8c2b1e3d0514","09855299-9b0e-43fa-b400-7291ee9ffc36","YELL.2023.28","YELL_023.mammalGrid.mam","D12","YELL","YELL_023","pathogen","2023-07-11","2023-07-11","OK","NEON.DOC.000481vN",,
+"bec3b41e-8735-42e0-a0b8-748189c22d48","184f600d-f0fa-41da-b1ab-12b5503a1140","YELL.2023.28","YELL_031.mammalGrid.mam","D12","YELL","YELL_031","pathogen","2023-07-11","2023-07-11","OK","NEON.DOC.000481vN",,
+"c90e6a14-d021-4ebe-8ca2-290bc2986bad","b24d585d-0cb2-465f-b180-984db03b2840","YELL.2023.28","YELL_032.mammalGrid.mam","D12","YELL","YELL_032","pathogen","2023-07-11","2023-07-11","OK","NEON.DOC.000481vN",,
+"595813b3-8e8a-4447-ac08-a15cf1df7071","f809689d-3a22-4f61-bc98-37a55b38b27a","YELL.2023.28","YELL_023.mammalGrid.mam","D12","YELL","YELL_023","pathogen","2023-07-12","2023-07-12","OK","NEON.DOC.000481vN",,
+"087ef2f6-9572-4654-b9f4-ab39e066d3df","3a44f754-889a-4cec-b25f-a42fbc8d190e","YELL.2023.28","YELL_031.mammalGrid.mam","D12","YELL","YELL_031","pathogen","2023-07-12","2023-07-12","OK","NEON.DOC.000481vN",,
+"d97dc015-f465-4a0a-93e1-d51464d4b479","f4fd15b6-e8f1-4a75-93d1-f0004b93306d","YELL.2023.28","YELL_032.mammalGrid.mam","D12","YELL","YELL_032","pathogen","2023-07-12","2023-07-12","OK","NEON.DOC.000481vN",,
+"6e7149ad-3e56-41a8-a1ff-64cf2a6d43af","3b22c556-dde3-4326-bb95-84e1033a8599","YELL.2023.28","YELL_031.mammalGrid.mam","D12","YELL","YELL_031","pathogen","2023-07-13","2023-07-13","OK","NEON.DOC.000481vN",,
+"571152c5-176f-4030-ba93-6ceff0d917ff","0f10f235-046e-44d4-b281-e6a14c345e18","YELL.2023.28","YELL_023.mammalGrid.mam","D12","YELL","YELL_023","pathogen","2023-07-13","2023-07-13","OK","NEON.DOC.000481vN",,
+"a0513662-fff1-4166-9f91-f5cbd1dc0e4c","7e06f4e1-d435-4bb5-8cbd-2a6bb253cd37","YELL.2023.28","YELL_032.mammalGrid.mam","D12","YELL","YELL_032","pathogen","2023-07-13","2023-07-13","OK","NEON.DOC.000481vN",,
+"24d07fec-2478-4398-97a3-c20707e35f64","a1fc7f3f-1ba6-4ae2-b17a-bd1676b35002","YELL.2023.28","YELL_011.mammalGrid.mam","D12","YELL","YELL_011","diversity","2023-07-14","2023-07-14","OK","NEON.DOC.000481vP",,
+"207caa90-b432-4ed3-b9a9-6a64a86561d0","67da2649-1553-4139-86fd-51621996922f","YELL.2023.28","YELL_020.mammalGrid.mam","D12","YELL","YELL_020","diversity","2023-07-14","2023-07-14","OK","NEON.DOC.000481vP",,
+"dafcf555-2cee-462f-8cfd-e701f326a3c5","ef015f35-879a-4f3e-90d7-f31a2c3f6dce","YELL.2023.28","YELL_072.mammalGrid.mam","D12","YELL","YELL_072","diversity","2023-07-14","2023-07-14","OK","NEON.DOC.000481vP",,

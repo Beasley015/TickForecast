@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5e45908a-312d-43e2-8198-72307d5cfde5","dcd51d33-308f-4e0c-b7be-09547337c2fa","STEI.2021.35","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2021-09-01","2021-09-01","OK","NEON.DOC.000481vM",,
+"0869a210-8a19-4a31-8f8b-b9b151537c77","d1e069f5-4ffe-46ea-9f7c-614f49f4df36","STEI.2021.35","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2021-09-01","2021-09-01","OK","NEON.DOC.000481vM",,
+"79d8b23c-a273-4460-9a1c-f565515e3e9c","523a9401-c968-4c17-9762-5d6edca1291f","STEI.2021.35","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2021-09-01","2021-09-01","other","NEON.DOC.000481vM","sampling at this grid has been discontinued",
+"36c068d8-47b2-4417-8841-88c336808549","62384651-967b-48ca-b9f7-c1ff346f362f","STEI.2021.35","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2021-09-01","2021-09-01","OK","NEON.DOC.000481vM",,
+"99104e2f-5756-4cb4-b378-02376b05042d","6ab49276-09bc-4e70-83a8-8e48ce8fba9a","STEI.2021.35","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"45f8e0de-6704-4884-b432-7ede123e4056","65e9c463-013f-4403-a68f-1add16c89333","STEI.2021.35","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"ef75fd86-2e53-46fd-afb0-7cc9372ee16a","7dc146fc-5e44-4b88-832a-be3f3f0a2c19","STEI.2021.35","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,

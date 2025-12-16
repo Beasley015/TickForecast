@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2ce0dcec-13bc-470a-a6d0-1cb9f25ee94b","f75ecd42-93ab-4886-aa41-d842e73bc496","TEAK.2022.30","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2022-07-26","2022-07-26","OK","NEON.DOC.000481vN",,
+"f7a08ea5-fc69-483b-b466-277fe07a9441","493e011b-803f-496d-869a-6ce3161782ed","TEAK.2022.30","TEAK_004.mammalGrid.mam","D17","TEAK","TEAK_004","diversity","2022-07-26","2022-07-26","OK","NEON.DOC.000481vN",,
+"712663f4-1579-47dc-b092-5d7e21d353be","c0bb95f1-9268-402b-8824-8acf236b68b6","TEAK.2022.30","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2022-07-26","2022-07-26","OK","NEON.DOC.000481vN",,
+"63471ee8-c475-4887-aa82-d8ac7e61e2b1","0ea6cb29-1fc7-4507-a509-8a80e71cc8f2","TEAK.2022.30","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2022-07-26","2022-07-26","OK","NEON.DOC.000481vN",,
+"f65fc86c-e9c8-4c58-8231-e48ddfa7c813","8a9071a1-6a12-4070-84e0-943c13b5b9db","TEAK.2022.30","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2022-07-27","2022-07-27","OK","NEON.DOC.000481vN",,
+"1f005bc5-f645-4643-9b04-668620f6e4f2","7a0d8139-e488-4522-adb6-f3c931e53959","TEAK.2022.30","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2022-07-27","2022-07-27","OK","NEON.DOC.000481vN",,
+"a11baa73-ec5b-41a6-87d0-5d9aa6feb952","346644a3-b463-4c4c-93e0-755b24ae9eee","TEAK.2022.30","TEAK_007.mammalGrid.mam","D17","TEAK","TEAK_007","diversity","2022-07-27","2022-07-27","OK","NEON.DOC.000481vN",,
+"c860f3a1-749a-4453-9eee-0c2f1618edcd","d6b515de-4828-494e-b085-05952ba8933c","TEAK.2022.30","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2022-07-27","2022-07-27","OK","NEON.DOC.000481vN",,
+"f1a4a3ea-859b-44e0-b5dc-df248f26746c","f28360b7-645f-4eb7-8c23-57c97650de21","TEAK.2022.30","TEAK_025.mammalGrid.mam","D17","TEAK","TEAK_025","diversity","2022-07-28","2022-07-28","other","NEON.DOC.000481vN","not set due to poor air quality",
+"d2d968d1-e433-4e1b-ac71-26a4a43e20bb","63dbf715-5b37-4fd2-bf49-05c10c2768e4","TEAK.2022.30","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2022-07-28","2022-07-28","OK","NEON.DOC.000481vN",,
+"14d59755-d667-4e92-b81a-4e24341b8bc6","240465e5-64b6-4fb1-8ea5-9cd511b499c3","TEAK.2022.30","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2022-07-28","2022-07-28","OK","NEON.DOC.000481vN",,
+"65a8eaea-cf45-459c-b880-7d6853455459","e1ee5d5b-4d8b-4467-91bc-e20acbdd4bab","TEAK.2022.30","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2022-07-28","2022-07-28","OK","NEON.DOC.000481vN",,

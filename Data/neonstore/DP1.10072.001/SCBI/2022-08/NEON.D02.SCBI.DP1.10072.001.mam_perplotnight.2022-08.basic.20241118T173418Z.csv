@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"fe8099c2-ea34-48fb-948c-20dce91f3846","fc49a735-ca7e-4831-b8a4-853506b16e92","SCBI.2022.34","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2022-08-23","2022-08-23","OK","NEON.DOC.000481vN",,
+"c027332d-a8c0-4e9b-94b3-30add171d9a5","f79e5b35-5fe5-49aa-8fff-03d5f7765186","SCBI.2022.34","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2022-08-23","2022-08-23","OK","NEON.DOC.000481vN",,
+"62d039e8-a3cd-4351-ba35-fe6f0b9fbb83","b17e9253-c1b4-4cfe-a471-c993fd4b12f9","SCBI.2022.34","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2022-08-23","2022-08-23","OK","NEON.DOC.000481vN",,
+"84ef2837-da67-4c0c-8fd8-d6dee8e91a6e","40d72e02-1e55-4ed0-8c90-7621aa86b735","SCBI.2022.34","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2022-08-24","2022-08-24","OK","NEON.DOC.000481vN",,
+"e1ce1214-88f7-4756-87d2-0f67abd91c94","61e4cec2-de12-4ef4-b72e-a0e36bd0d963","SCBI.2022.34","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2022-08-24","2022-08-24","OK","NEON.DOC.000481vN",,
+"f0cdef73-20c8-4fdf-9b93-0d922a6e29cd","a389b74b-9101-4b2d-a394-a03a8daf4434","SCBI.2022.34","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2022-08-24","2022-08-24","OK","NEON.DOC.000481vN",,
+"0e7d1ee1-2833-44f1-a5ee-1411d4d4e048","74b5e396-2d07-4577-bc75-7b6cc83a0001","SCBI.2022.34","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2022-08-25","2022-08-25","OK","NEON.DOC.000481vN",,
+"6864807d-58fd-40bf-ad53-50d1a57e11ee","6608cabb-9baf-48c1-a62b-3d69bfb384fb","SCBI.2022.34","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2022-08-25","2022-08-25","OK","NEON.DOC.000481vN",,
+"95275a93-505e-4e16-a08e-63a90785cb13","7fd5d2de-7e23-4d94-a6c3-0d1e2efbbdbf","SCBI.2022.34","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2022-08-25","2022-08-25","disturbance","NEON.DOC.000481vN","Plot closed due to disturbance (INC0058145)",
+"95f74d98-64ce-4d59-a935-d2aaa4285bb0","640bcd33-8b23-460a-a8bc-183e3f362d8f","SCBI.2022.34","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2022-08-26","2022-08-26","logistical","NEON.DOC.000481vN",,
+"253849ca-e1cb-4349-8898-60f0946edeb1","e74ccbdd-20da-4132-8a65-faee2f9f82a7","SCBI.2022.34","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2022-08-26","2022-08-26","logistical","NEON.DOC.000481vN",,
+"bcf4b20d-dd45-46f4-8b2b-b5bb19dfdeaf","cd378ffa-c807-4d03-a170-4035cb594e79","SCBI.2022.34","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2022-08-26","2022-08-26","logistical","NEON.DOC.000481vN",,

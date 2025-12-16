@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"0686a737-1171-4dde-82c4-046b4d8ab869","3d2c6fc9-09dc-451c-b0a1-5f23a2e179e3","STEI.2018.31","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2018-08-01","2018-08-01",,"NEON.DOC.000481vK",,
+"5757b007-3007-4fb8-9fa9-7dd4aa8492e0","64e715b4-6ea2-4593-85cb-c2d45c810cd8","STEI.2018.31","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2018-08-01","2018-08-01",,"NEON.DOC.000481vK",,
+"a87548bf-284f-45bb-94a3-9fac9544f0c4","94465f01-20c7-4ca5-8b18-fe9471ce7610","STEI.2018.31","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2018-08-01","2018-08-01",,"NEON.DOC.000481vK",,
+"c1dae1a3-84a0-486e-80d2-5efa967915ab","79fe7c0d-cdf7-48e7-a1e1-483bb2cb6a72","STEI.2018.31","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2018-08-02","2018-08-02",,"NEON.DOC.000481vK",,
+"dfdf2d40-1e1c-4a5c-bdb6-22af7a23f6a6","d377a413-aff9-439c-a656-b35a8d545e5e","STEI.2018.31","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2018-08-02","2018-08-02",,"NEON.DOC.000481vK",,
+"f6e3b1a5-3d4c-4e59-8924-34e8386994d5","d6ec674f-8d96-4796-bd46-abeb9376b629","STEI.2018.31","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2018-08-02","2018-08-02",,"NEON.DOC.000481vK",,
+"4a0dad51-9cad-436c-a36b-071247a056a7","ad01de15-b793-444c-9a0b-23b4b183e8ef","STEI.2018.31","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2018-08-03","2018-08-03",,"NEON.DOC.000481vK",,
+"1878bc33-9e4e-4a06-860d-010fa9dfa357","a54f26fe-10df-428b-b949-b379948652f3","STEI.2018.31","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2018-08-04","2018-08-04",,"NEON.DOC.000481vK",,
+"c587600a-24aa-42b9-9764-6e93b5e5f49a","c0f9fe69-2849-4e7a-8a1c-f6c7cc5bba64","STEI.2018.31","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2018-08-04","2018-08-04",,"NEON.DOC.000481vK",,
+"47229808-eaad-4495-a8b5-53ff3d88f58a","2fe16847-6c53-42d0-b960-07caef8c0318","STEI.2018.31","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2018-08-04","2018-08-04",,"NEON.DOC.000481vK","Arrived at plot late due to unexpected thunderstorms so data collection was reduced to just tagID-species-sex and reproductive condition. No samples were collected.",
+"266c6093-7fc7-43bc-9496-75688d25cabe","dbfe98f8-f3a2-408c-baf8-163ec6567aaf","STEI.2018.31","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK",,

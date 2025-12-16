@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7def95fa-e580-4ad0-8380-350584707f66","275ea8fc-a601-4f66-bcc8-77f32af0b0bc","SCBI.2019.34","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-08-21","2019-08-21",,"NEON.DOC.000481vL",,
+"07221131-ab71-49cc-b26e-386a452d815e","1efd524e-c751-418c-8931-60438ccc5d47","SCBI.2019.34","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-08-21","2019-08-21",,"NEON.DOC.000481vL",,
+"2ae1744a-18fc-4db0-85bf-615e51348b24","aef62bb7-39a4-48be-b970-d4f8e423c47c","SCBI.2019.34","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-08-21","2019-08-21",,"NEON.DOC.000481vL","This plot not set due to thunderstorms",
+"fcedb711-f0ec-4acd-beff-20f8e0a35ff2","d0368d04-37bf-4445-ba35-55a1599564c6","SCBI.2019.34","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-08-22","2019-08-22",,"NEON.DOC.000481vL",,
+"11b37a41-5e11-4ca1-a316-3f94326fee95","801d1597-ae6c-4cda-ae06-25ccf91be369","SCBI.2019.34","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-08-22","2019-08-22",,"NEON.DOC.000481vL",,
+"2c434cff-6b83-4bdd-a052-91071a8714cb","a7b7d690-1781-4152-b675-d63ed4ac32c3","SCBI.2019.34","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-08-22","2019-08-22",,"NEON.DOC.000481vL","reentered as data lost",
+"cacd321c-0710-4da3-871a-c88902a0159b","c2108139-fb2b-4d6f-8b95-36a660fd353d","SCBI.2019.34","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-08-23","2019-08-23",,"NEON.DOC.000481vL",,
+"812fb14b-0613-4148-83ad-45e2a312adf3","bd2465db-3eef-4069-9efc-cacb9d671b8a","SCBI.2019.34","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-08-23","2019-08-23",,"NEON.DOC.000481vL",,
+"830abb8d-bbbb-4033-9a12-9a2aae5817fd","18470107-15ff-4f12-95cb-db3d08bb2a9b","SCBI.2019.34","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-08-23","2019-08-23",,"NEON.DOC.000481vL",,
+"98c248c4-3829-4bec-9bc1-2fc6b50c6f36","2ad219ab-464e-4921-8a99-2b28d588eeff","SCBI.2019.34","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2019-08-24","2019-08-24",,"NEON.DOC.000481vL",,
+"81ad322f-f280-413a-ac2b-9abbd8d4c2ef","b1693536-fdc8-427b-8b18-eb7716406d81","SCBI.2019.34","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2019-08-24","2019-08-24",,"NEON.DOC.000481vL",,
+"f2a4f328-1c00-43ed-a8e5-c520ba85e4d8","43de6f42-9561-4f30-891f-294a7b0dca4e","SCBI.2019.34","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2019-08-24","2019-08-24",,"NEON.DOC.000481vL",,

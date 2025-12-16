@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c4b63b15-b3db-4805-8242-1186fef640c4","262fe0dd-49e2-4b32-8bb8-9b57382c7e8f","HARV.2020.37","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2020-09-13","2020-09-13","OK","NEON.DOC.000481vM",,
+"b61aba49-0c4b-4400-bfe2-470a87a977f9","3a67af6b-eacb-4701-a0cf-b014c9bb656a","HARV.2020.37","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2020-09-13","2020-09-13","OK","NEON.DOC.000481vM",,
+"811b5f76-b1b3-4585-8f02-1e8679b357a4","bc06ef1b-5a78-467e-bce8-a2cbe55bf82c","HARV.2020.37","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2020-09-14","2020-09-14","OK","NEON.DOC.000481vM",,
+"484000b4-e549-4278-aafe-87c68b67f0c3","ced342a1-4d47-4b14-9d1d-fab7afebe624","HARV.2020.37","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","diversity","2020-09-14","2020-09-14","OK","NEON.DOC.000481vM",,
+"c7e66ade-d016-44d6-98a0-aba1cb3f4412","f7d6016e-e68e-4f55-b0c2-04eec97fecff","HARV.2020.37","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2020-09-14","2020-09-14","OK","NEON.DOC.000481vM",,
+"5cc2a678-8c56-4319-b4d3-25e19467b83b","e44ca982-2c96-49d0-a536-eabcb78db117","HARV.2020.37","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2020-09-15","2020-09-15","OK","NEON.DOC.000481vM",,
+"2393e3c9-91c5-4272-9d53-6bfcaef40b02","53eb80e1-431a-4088-961f-411df4d129cb","HARV.2020.37","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2020-09-15","2020-09-15","OK","NEON.DOC.000481vM",,
+"c4877134-ee3f-4e68-8ad2-77f5fc026bea","5c05f865-9ceb-446e-bb8c-0e410e85b744","HARV.2020.37","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2020-09-15","2020-09-15","OK","NEON.DOC.000481vM","Grid disturbed by bear.",
+"8ae4019f-7946-4adc-9624-3ebd756758a6","a036cbab-9240-4b5c-81f6-a19d0bfe0f08","HARV.2020.37","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2020-09-16","2020-09-16","OK","NEON.DOC.000481vM",,
+"daf94c6e-29ed-4401-9e6f-1582eefbfdfd","c7f01be8-4bb4-4007-b7fd-6567c529444a","HARV.2020.37","HARV_010.mammalGrid.mam","D01","HARV","HARV_010","diversity","2020-09-16","2020-09-16","OK","NEON.DOC.000481vM",,
+"a693ff48-c29e-4672-a598-a54f11aa144c","3df72af8-face-4d68-ad6d-097ca8b22f81","HARV.2020.37","HARV_001.mammalGrid.mam","D01","HARV","HARV_001","diversity","2020-09-16","2020-09-16","OK","NEON.DOC.000481vM",,
+"473986d4-40f0-4865-8d2b-1d7e1060e5ed","0ac1c809-3b1c-489b-9dab-ac60c56c14c9","HARV.2020.37","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2020-09-17","2020-09-17","OK","NEON.DOC.000481vM",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7f898bdc-8b02-4d36-ab80-8acf21e6d0a5","6b0f0c21-7ffd-48de-9b3d-a36366d9dcf5","TREE.2022.23","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2022-06-07","2022-06-07","OK","NEON.DOC.000481vN",,
+"7455566c-20ae-4c83-972c-3843c44fbe44","871714da-dfb8-4033-a3d1-bb6f75fbee3e","TREE.2022.23","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2022-06-07","2022-06-07","logistical","NEON.DOC.000481vN","Access road to the grid is closed for construction",
+"7712ab37-dd87-45aa-9b83-e52c72eee0e7","44077fa5-3154-49f5-a2dd-6fabfaf6aca5","TREE.2022.23","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2022-06-07","2022-06-07","OK","NEON.DOC.000481vN",,
+"5739f600-26c3-4f92-927f-dfadf66c990d","04f0be50-f016-4037-a702-5549511717be","TREE.2022.23","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2022-06-07","2022-06-07","OK","NEON.DOC.000481vN",,
+"5b0c18f0-78c6-4561-b94c-68fd40a99b92","307e5248-c13a-4072-9f33-07dcc55ebca3","TREE.2022.23","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"901da96b-c2e2-460d-a115-8a9f541ea4d0","41399d94-c283-43ff-b8b8-7d159f4096a0","TREE.2022.23","TREE_062.mammalGrid.mam","D05","TREE","TREE_062","diversity","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"3c4d0aec-3bce-4755-b370-fddbffe15757","4f3d182d-67a5-48d2-bc81-d1c4ba07d86a","TREE.2022.23","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"915431c9-70b4-4a98-8f64-d0d1b62692d3","143c473a-da51-47bb-a625-15e2736055bd","TREE.2022.23","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2022-06-08","2022-06-08","OK","NEON.DOC.000481vN",,
+"51b2b97a-d9ff-4430-b48a-7a609bff048e","bc1cadee-634c-4799-8c17-3651fe44176a","TREE.2022.23","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,
+"d9b1a390-3016-475f-b25e-59cebfe0b764","b7c9c51d-485f-4944-a040-ba2d71b2c002","TREE.2022.23","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,
+"697dfacc-968b-47b1-9bd2-a1140bf05633","97c25d9b-bd7e-424a-9613-2677993de7e3","TREE.2022.23","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,
+"772bfce9-22b9-40d0-a3df-025d37d813b5","d3d5d1bd-49b3-4259-be0f-7f900e791e51","TREE.2022.23","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2022-06-09","2022-06-09","OK","NEON.DOC.000481vN",,

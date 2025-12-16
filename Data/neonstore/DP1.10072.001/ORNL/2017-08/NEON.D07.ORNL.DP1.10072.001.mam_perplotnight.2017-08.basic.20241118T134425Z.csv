@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3d1f66b2-aa32-4aa0-a676-475b0aace011","8db7863c-a36d-4eec-b1ee-63c8681d7c5d","ORNL.2017.33","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"5f3e4a51-f7fb-4d0b-b754-edc865934ee8","87e17c44-baf6-4c7e-9b2a-01251c31672c","ORNL.2017.33","ORNL_039.mammalGrid.mam","D07","ORNL","ORNL_039","diversity","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"27b75b71-99ea-4b75-b5ca-a50a3fe7d52a","b80c4fec-ac8c-49ba-95dd-da8f5b3fe528","ORNL.2017.33","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"f12d1562-3748-4aba-8ba3-0eacf1d280fe","89868af4-a1d7-4671-85e3-e9680c33e2f1","ORNL.2017.33","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"3ba4395c-daf7-4da4-9f25-c6e7031d15e9","111f44f8-4d6e-4fa5-bfc4-2d4e7bbaa912","ORNL.2017.33","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"834f8de6-c23b-4757-bcfc-5927e100ad6c","16e51ff0-5936-416e-868e-f68eca7c2f49","ORNL.2017.33","ORNL_007.mammalGrid.mam","D07","ORNL","ORNL_007","diversity","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"aad40c3d-2450-45e0-a03c-b8caf4a9ff8f","fd71d806-b656-499f-92ee-07209797aed8","ORNL.2017.33","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"d590c973-7720-4042-988c-755a259f4b66","2575f7fe-c24f-4428-9562-f047fde5c5b9","ORNL.2017.33","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"a6fc5708-589e-46c1-824b-9c8f27a6a973","78dc3ad4-6d6a-4988-aac8-dee6a290929d","ORNL.2017.33","ORNL_027.mammalGrid.mam","D07","ORNL","ORNL_027","diversity","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"a55ced56-4c78-4aa0-861c-f93174084aeb","8aa8307a-e5d7-416e-b2fa-6840155299df","ORNL.2017.33","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"7856e8e3-7e8d-48c6-aa2d-44af332ac553","f7810ab5-0ff5-4000-91fe-5bb20679115c","ORNL.2017.33","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"9bc5c8d7-d834-4339-81ab-b703bbd4cd1a","1de22d74-571b-4712-8303-732c6e74d157","ORNL.2017.33","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,

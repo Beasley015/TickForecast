@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8c59bde3-8a93-4e27-b715-9fc70c0fe9a1","F4771E1A2A9F44FC970BB9F847792B73","BLAN.2015.29","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2015-07-15","2015-07-15",,,"Rained heavy after setting.",
+"55a18400-2dc5-443c-9f59-2fe3e5222058","454257A706354D81A0B1F8C04DDBFD85","BLAN.2015.29","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2015-07-15","2015-07-15",,,"Heavy rain after setting.",
+"ac75846e-415c-4a24-8399-8c0314c1558a","F4E8C5EAEF1C44A2A42149831A35395B","BLAN.2015.29","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","diversity","2015-07-16","2015-07-16",,,,
+"46ff4c7b-cf11-4843-9523-b16f8188e56f","8432F6C37A4B4C149367558F5FE143A5","BLAN.2015.29","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2015-07-16","2015-07-16",,,,
+"a3a69ddf-0e4a-4505-bf2b-85c97466c388","20FFF986C9FF4164B76D611C24808E6D","BLAN.2015.29","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2015-07-16","2015-07-16",,,"Weather: low temp in upper 50's, clear skies.",
+"67747cfa-505a-4c4b-ba2d-ca55860f98e2","FA772C8752BA4CF7B6418A1B6F0D0106","BLAN.2015.29","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2015-07-16","2015-07-16",,,,
+"9f806bdd-ddd1-4fba-ac7c-4a63d091e0d8","CA4143013FF945ADADF44941D9F14848","BLAN.2015.29","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2015-07-17","2015-07-17",,,,
+"217ece20-3cf9-4050-a89b-200b02ed327f","FB5AA54F826D4EC19889A7C23DA7D46D","BLAN.2015.29","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2015-07-17","2015-07-17",,,,
+"67eedbb3-5bc1-4154-8cc1-b6dd88a8c2d8","17D7193105BA47038DDB118F0228B326","BLAN.2015.29","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2015-07-17","2015-07-17",,,,

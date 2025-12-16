@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b80db2d1-cd70-4164-ae56-8225d47be2e2","a236235c-79e1-4eac-8d39-216d6e26beff","UNDE.2017.29","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-07-20","2017-07-20",,,,
+"9da1206a-bdb9-48d2-894b-23d13d76fa47","a66d6f58-2ada-4702-922a-6db1a570009b","UNDE.2017.29","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-07-20","2017-07-20",,,"Potential animal disturbance.",
+"be45028d-dd77-4bbd-a6e4-93c2d86cc1cf","c130e657-310d-4656-9b84-15c455fa7948","UNDE.2017.29","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-07-20","2017-07-20",,,,
+"c2f1bd7e-7442-4e4f-ae4a-935d9eca9085","56ce6a03-f808-4e31-a0af-e370d0abeb3b","UNDE.2017.29","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-07-21","2017-07-21",,,"Animal disturbance of 31 traps.",
+"bd79d7a3-c870-4cf0-919d-ecbe9f2ccb24","efb2814a-27ff-4b4e-8905-a0caccc499b1","UNDE.2017.29","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-07-21","2017-07-21",,,,
+"4e61a68c-f1df-41b2-ae70-ed13a6cb2133","aaa5810e-e3b0-4122-aef5-f8960644028a","UNDE.2017.29","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-07-21","2017-07-21",,,,
+"36998d44-88d0-4e73-b554-a66c16e61fe5","63eddc3b-dc3a-4e89-97a0-aebe1970ff55","UNDE.2017.29","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-07-22","2017-07-22",,,,
+"36961d8c-6d41-4b5c-8daf-a6ede12849ed","e509933a-52cd-4628-bdc5-8d7a68de9e4a","UNDE.2017.29","UNDE_002.mammalGrid.mam","D05","UNDE","UNDE_002","diversity","2017-07-22","2017-07-22",,,,
+"6d17b67a-af81-4d33-ae6e-35bd2d4d3d08","de6efea7-e7ce-465d-996e-d0cf9364cffb","UNDE.2017.29","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-07-22","2017-07-22",,,,
+"02000557-f202-498f-ae78-72c1f27eb65f","dbf527e2-5709-463f-a168-dcc34205168c","UNDE.2017.29","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2017-07-24","2017-07-24",,,,
+"75f77a6c-5c96-4e98-82c6-8de8cc1f5dbb","f6508336-a3be-467f-b2ba-3aa1f9c7eebd","UNDE.2017.29","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2017-07-24","2017-07-24",,,,
+"26064d69-8562-4980-81cc-e9b1cc262172","35c775e3-5580-4d43-8519-e42109bd6051","UNDE.2017.29","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2017-07-24","2017-07-24",,,,

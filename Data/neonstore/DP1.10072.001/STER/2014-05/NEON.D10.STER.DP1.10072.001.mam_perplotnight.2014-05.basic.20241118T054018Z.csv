@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"85ffa5a8-b2dc-4a99-8b41-27cf6b2f52e2","DD19AEC092904E55940634057FC6705A","STER.2014.21","STER_026.mammalGrid.mam","D10","STER","STER_026","recapture","2014-05-21","2014-05-21",,,"most current data set 20141022",
+"1b43c118-dab0-4ded-ae1f-063757354f42","0794CBFE146D42958B561775516383A0","STER.2014.21","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2014-05-22","2014-05-22",,,"Bout not completed due to lightening",
+"eee62e39-136c-4b0e-86a0-5841b67376c6","BB656D865AEB4386A80965399829133B","STER.2014.21","STER_026.mammalGrid.mam","D10","STER","STER_026","recapture","2014-05-22","2014-05-22",,,"Bout not completed due to lightening",
+"3a9d2f88-32a5-4da9-8b55-1682dec4981a","79A6AF5FB21645CC8874016246164781","STER.2014.21","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2014-05-22","2014-05-22",,,,

@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b1bdbc19-420a-458f-a580-4fb74833678d","bee8166f-6090-4517-8c3a-be42cc24d2f3","SCBI.2018.32","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK","plot closed due to high disturbance; many traps knocked over",
+"2c2bebbe-2b26-4cff-8eec-2debcc05a27f","7875b96f-243c-4bf3-be3e-7034b713b820","SCBI.2018.32","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK",,
+"56009555-a588-479c-9f22-e427bebc44b8","78c1448b-3a68-49ae-8d73-e94203bd337f","SCBI.2018.32","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK","grass 7ft tall",
+"38423621-89ff-444d-8df4-bab9540e42c7","f38bc946-5427-4afd-b613-9a30b2972f15","SCBI.2018.32","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK","Tall grass 7ft wet",
+"aa9c81f5-90b9-4125-891c-8df469cf26c6","baf3928f-0102-4fbd-ad72-faecdc26a03b","SCBI.2018.32","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"86510923-7158-4bc0-861d-f8285eaa18cc","364bec51-a9ea-439a-8fce-80dd7b9dde84","SCBI.2018.32","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"1069402a-7087-4810-ac96-c7afb840fe82","6a7b30f2-c591-4510-94d1-df25e4932cbc","SCBI.2018.32","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK",,
+"5da83f8e-efc7-4635-a748-777f085921a8","ea44295f-82bc-4623-b2e9-655f7e01bb5b","SCBI.2018.32","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK","Grass 7ft tall",
+"015a6c5b-51c6-4025-a35f-b18daff5d67a","c20710d1-c706-4ba6-a290-69f8c3fefe70","SCBI.2018.32","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2018-08-10","2018-08-10",,"NEON.DOC.000481vK",,

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a37b89b7-abd2-48bf-9990-d5549545a886","525ee338-5614-49cc-8cab-826f931f0058","CPER.2019.22","CPER_011.mammalGrid.mam","D10","CPER","CPER_011","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL","A5 not set due to ants",
+"a1b4cfd7-9cce-4d05-b2bb-b16106894823","e54a8691-6d80-469a-adaa-6f22c35fe7e9","CPER.2019.22","CPER_004.mammalGrid.mam","D10","CPER","CPER_004","diversity","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"ffd9f7b1-c9a5-454e-9a4a-5adfee2b1cdc","f73d7208-4955-496d-8ae7-0bf2e6eecd69","CPER.2019.22","CPER_015.mammalGrid.mam","D10","CPER","CPER_015","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"cf8671c9-8188-430c-bc54-b79f92de598b","2ce9040c-1f54-4bd9-92fc-33be6d01c699","CPER.2019.22","CPER_002.mammalGrid.mam","D10","CPER","CPER_002","diversity","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"0e7ba243-6b64-4750-b494-19ef5db82077","a2a49ac5-2004-41c2-ac91-ce75ab47e53a","CPER.2019.22","CPER_005.mammalGrid.mam","D10","CPER","CPER_005","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"ccd14cde-8687-40a5-9ef5-1ac3dab6640e","3f735bc8-3f36-425b-bf71-99e8cc14b9b0","CPER.2019.22","CPER_006.mammalGrid.mam","D10","CPER","CPER_006","diversity","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"399d8d81-31b1-4ce4-97a2-07c9a80a9b8f","3e4b2c22-b707-4afe-818f-552e930b2d17","CPER.2019.22","CPER_009.mammalGrid.mam","D10","CPER","CPER_009","diversity","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"0a27c196-c442-4c8a-8da9-1c29a95e5a8b","2d0dfb91-2f63-4254-90d0-491f4ed1489e","CPER.2019.22","CPER_015.mammalGrid.mam","D10","CPER","CPER_015","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"fe1c40b6-f674-4324-8b0b-7a56e79d7210","bc9dd3a5-bf17-4586-82b0-bfb2f33c3aea","CPER.2019.22","CPER_005.mammalGrid.mam","D10","CPER","CPER_005","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"ebfbfa23-a4eb-4e85-9458-6aca9c58d9e8","7eec934c-8747-4994-9821-8b0ed3488bfb","CPER.2019.22","CPER_011.mammalGrid.mam","D10","CPER","CPER_011","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,

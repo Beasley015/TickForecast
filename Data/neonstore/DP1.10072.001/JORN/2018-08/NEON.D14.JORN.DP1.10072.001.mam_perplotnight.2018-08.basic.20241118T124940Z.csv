@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e6e28274-8705-45b7-8d2a-b8fe0ef15232","9cd54951-aa7f-4b26-a12b-0b75c6b92d2c","JORN.2018.33","JORN_031.mammalGrid.mam","D14","JORN","JORN_031","diversity","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,
+"88c4b8bf-4e8c-4c18-8acf-cffd5e7a9aa1","3ede8571-9fc7-40c7-a8f9-def14dbf1ca1","JORN.2018.33","JORN_011.mammalGrid.mam","D14","JORN","JORN_011","diversity","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,

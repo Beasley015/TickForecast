@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"351116fd-e3e8-42c2-a959-e5976f9febc0","1ca4e23a-f917-4482-8ceb-f4607670bbf4","SOAP.2022.31","SOAP_012.mammalGrid.mam","D17","SOAP","SOAP_012","diversity","2022-08-02","2022-08-02","OK","NEON.DOC.000481vN","0 captures",
+"4792a6e2-93b1-440f-8d73-b6e1f51e76fa","aa708898-eefd-46dd-b029-f56242a7fbfd","SOAP.2022.31","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2022-08-02","2022-08-02","OK","NEON.DOC.000481vN",,
+"6f8b3389-1f6d-402b-90f2-0c49d2d3d3f2","94f27bf9-63ff-4e5e-becf-c6ad502fd719","SOAP.2022.31","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2022-08-02","2022-08-02","OK","NEON.DOC.000481vN",,
+"2b7ca343-8b7e-46fe-a081-21342ec29cf1","f0995516-070e-43cd-b0a1-9462f6794bac","SOAP.2022.31","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2022-08-03","2022-08-03","OK","NEON.DOC.000481vN",,
+"bc1c5dbd-342d-4609-9767-ec2033632fab","096f0f5c-903e-4b69-8571-dc2d4fcce73b","SOAP.2022.31","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2022-08-03","2022-08-03","too windy","NEON.DOC.000481vN",,
+"5c6ac413-a288-4d76-b1ce-56f88dbd6ac9","6aa6f999-246a-4782-8ace-c3bd293f324d","SOAP.2022.31","SOAP_027.mammalGrid.mam","D17","SOAP","SOAP_027","diversity","2022-08-03","2022-08-03","OK","NEON.DOC.000481vN",,
+"f9876d38-18ce-467a-87d1-79b8c0ebabaa","68820e37-b584-42ca-b88d-c3e2e43e24e5","SOAP.2022.31","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2022-08-03","2022-08-03","OK","NEON.DOC.000481vN",,
+"87aaa4dc-385c-4821-984e-38f5f14ebbc7","697687a0-fcc7-4725-8c0b-1502a6964cc3","SOAP.2022.31","SOAP_006.mammalGrid.mam","D17","SOAP","SOAP_006","pathogen","2022-08-04","2022-08-04","OK","NEON.DOC.000481vN",,
+"231797c4-c55b-4c62-845c-8b95f7af5427","364b457d-1785-4ba9-be39-8e6badebf5fd","SOAP.2022.31","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2022-08-04","2022-08-04","OK","NEON.DOC.000481vN",,
+"38bb163d-a13e-4c62-9ba6-502c9f1b9783","7c2e4277-ef78-475e-bac1-c34084f34fd7","SOAP.2022.31","SOAP_002.mammalGrid.mam","D17","SOAP","SOAP_002","pathogen","2022-08-04","2022-08-04","OK","NEON.DOC.000481vN",,
+"33541736-7f47-40b6-9086-a2b63e8bf5ba","b338c978-6506-441f-8a09-0a712f319b89","SOAP.2022.31","SOAP_003.mammalGrid.mam","D17","SOAP","SOAP_003","pathogen","2022-08-05","2022-08-05","extreme weather","NEON.DOC.000481vN","Thunder storm prevented trap setting",

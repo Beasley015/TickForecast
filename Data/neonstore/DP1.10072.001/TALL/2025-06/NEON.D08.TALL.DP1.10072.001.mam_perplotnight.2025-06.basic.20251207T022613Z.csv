@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"6be631a7-0a6a-45ee-b380-e36e8dc2262d","065c536a-3a10-422f-9ed5-24d82d2e3c83","TALL.2025.26","TALL_012.mammalGrid.mam","D08","TALL","TALL_012","pathogen","2025-06-27","2025-06-27","OK","setting complete, no small mammals captured","NEON.DOC.000481vQ",,
+"fbc09682-1200-4262-9cd2-127dd2446b2f","273cacc5-67a5-447e-9941-ed0a37771263","TALL.2025.26","TALL_006.mammalGrid.mam","D08","TALL","TALL_006","diversity","2025-06-27","2025-06-27","OK","setting complete, no small mammals captured","NEON.DOC.000481vQ",,
+"3e0b3019-9de2-41a5-977a-0a2b9f933713","e6c36aff-7ae5-45e6-8c43-59007abc4142","TALL.2025.26","TALL_013.mammalGrid.mam","D08","TALL","TALL_013","diversity","2025-06-27","2025-06-27","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"cd4294db-446a-41fe-96be-597c7b71bd71","e65e7cf2-5757-43e0-8184-de5f920982cf","TALL.2025.26","TALL_010.mammalGrid.mam","D08","TALL","TALL_010","pathogen","2025-06-27","2025-06-27","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

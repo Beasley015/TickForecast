@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"9b2a95d0-1dcd-41a4-adf5-9810f4805367","a5634eb2-ede4-41c5-9af5-3a847580d198","JORN.2018.39","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2018-09-29","2018-09-29",,"NEON.DOC.000481vK",,
+"9a1efad9-d49a-45e7-a250-3f7e287e4439","6bbf1f94-e1de-4fe0-bc61-fb5be4e078a3","JORN.2018.39","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2018-09-29","2018-09-29",,"NEON.DOC.000481vK",,
+"61c1de93-22b5-4b9a-8d6b-98f9290a76a7","32633d14-6e9c-43e7-b06c-fb8b84038879","JORN.2018.39","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2018-09-29","2018-09-29",,"NEON.DOC.000481vK",,
+"685c0798-4bbe-4106-afa5-0e0130b9451c","407cee25-1ec1-45b3-8136-ac45b51eae29","JORN.2018.39","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2018-09-30","2018-09-30",,"NEON.DOC.000481vK",,
+"b27af113-a0e8-4896-bf85-4a981f89489c","a914fede-4f82-49fe-93e5-63adf490ec97","JORN.2018.39","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2018-09-30","2018-09-30",,"NEON.DOC.000481vK",,
+"720b8c70-1488-4166-ba0e-23e175fbd4f2","5ddf946b-fe83-4c7c-968f-a6e0878e50e6","JORN.2018.39","JORN_007.mammalGrid.mam","D14","JORN","JORN_007","diversity","2018-09-30","2018-09-30",,"NEON.DOC.000481vK","Record mistakenly created. Was supposed to be for JORN_018",
+"bbd9be16-7b54-4be7-aca6-98a72ca56c17","79bac498-bf17-4470-9f22-1ced40731349","JORN.2018.39","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2018-09-30","2018-09-30",,"NEON.DOC.000481vK",,

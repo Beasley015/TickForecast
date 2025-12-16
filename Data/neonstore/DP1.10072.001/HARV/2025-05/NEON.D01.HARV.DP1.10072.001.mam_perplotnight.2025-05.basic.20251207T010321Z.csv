@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"5b06aa63-da9f-47ae-bb89-18fcd6e0c0dc","12b90d0a-91fa-45f8-a9fd-7e38b5cab8d6","HARV.2025.17","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2025-05-01","2025-05-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"d8ecae5e-fcfc-462d-b577-f850f0a6cd52","157cdf60-73c1-45e8-a3a8-953e7b1bdd4a","HARV.2025.17","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2025-05-01","2025-05-01","disturbance",,"NEON.DOC.000481vQ","Bear Disturbance",
+"d0032d54-73fd-4882-810b-b0d83fd9394a","e9239ed8-246d-447b-a54b-48b1e525d4bf","HARV.2025.17","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2025-05-01","2025-05-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d51e4f09-23d5-4acb-8b03-6251903e92be","9D95C76425174D37A6EC77F62597EB07","OSBS.2015.16","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-04-14","2015-04-14",,,,
+"b62282d7-6126-4f2e-a21c-364c634a450d","254C0A6F9A5E4CF9A251EED6F6CAD87B","OSBS.2015.16","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-04-14","2015-04-14",,,,

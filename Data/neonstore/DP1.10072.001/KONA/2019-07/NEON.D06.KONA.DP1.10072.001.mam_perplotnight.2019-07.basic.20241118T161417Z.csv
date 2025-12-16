@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"879ea6a5-7eda-4aae-83f8-ebeae0cb2d8a","f806d56e-5297-4d6a-a74d-cf25befe053e","KONA.2019.31","KONA_003.mammalGrid.mam","D06","KONA","KONA_003","diversity","2019-07-30","2019-07-30",,"NEON.DOC.000481vL",,
+"cf331fa4-b5b7-4a3d-aefd-f1bdede7666f","272edfe9-1fcc-4548-ae4b-1b5da1a8e286","KONA.2019.31","KONA_004.mammalGrid.mam","D06","KONA","KONA_004","diversity","2019-07-30","2019-07-30",,"NEON.DOC.000481vL",,
+"9273587e-303a-4247-9375-c6ac35e3d596","72f8a35a-ed21-4041-b5b7-34c2a8dccd74","KONA.2019.31","KONA_006.mammalGrid.mam","D06","KONA","KONA_006","diversity","2019-07-30","2019-07-30",,"NEON.DOC.000481vL",,
+"987b1fd4-f87a-4c43-a87b-a4a41ddc63e8","3712b736-6cc6-4493-a15b-7676dcffbf1c","KONA.2019.31","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2019-07-31","2019-07-31",,"NEON.DOC.000481vL",,
+"cca78e12-f9f5-4f60-b79d-dadbc925b964","5044d862-a744-4d48-a1ee-52f852c3a435","KONA.2019.31","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2019-07-31","2019-07-31",,"NEON.DOC.000481vL",,
+"34b56438-73bd-46c5-9c3d-cfcaaefc5b04","20a7ead5-a100-4532-ab96-374eae809cce","KONA.2019.31","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2019-07-31","2019-07-31",,"NEON.DOC.000481vL",,

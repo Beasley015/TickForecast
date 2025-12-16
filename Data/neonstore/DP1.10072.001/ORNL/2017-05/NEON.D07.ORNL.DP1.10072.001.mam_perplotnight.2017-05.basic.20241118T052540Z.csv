@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"0e273f03-1c3f-4a9c-95bb-eb75758e3c60","e09d5279-6bda-41bc-a046-32cd037f9a91","ORNL.2017.21","ORNL_007.mammalGrid.mam","D07","ORNL","ORNL_007","diversity","2017-05-23","2017-05-23",,,,
+"8b616be4-b2e6-4b44-a466-6f8fa9541d04","f58eb290-3de2-4ce6-8a30-5eab5844f441","ORNL.2017.21","ORNL_039.mammalGrid.mam","D07","ORNL","ORNL_039","diversity","2017-05-23","2017-05-23",,,,
+"0f1d678d-8f74-4263-901b-34e5985e4079","3a3ab6e5-18d3-4586-b362-246d3c2f4b15","ORNL.2017.21","ORNL_027.mammalGrid.mam","D07","ORNL","ORNL_027","diversity","2017-05-23","2017-05-23",,,,
+"71bf9a58-6a8e-4436-b7e9-090485a3965c","a76f4584-5e22-4a43-9443-c8dc0e366c40","ORNL.2017.21","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2017-05-24","2017-05-24",,,,
+"3f14338f-48a1-4927-baa3-cd5f49625fad","20bf5a40-caf1-4def-84fb-96bc238e1ad9","ORNL.2017.21","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2017-05-24","2017-05-24",,,,
+"4ef25fa4-6bc6-4589-8f64-77e0633a8066","213eee52-afa3-4e7e-9d27-693f3dfc292d","ORNL.2017.21","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2017-05-24","2017-05-24",,,"Animals not fully processed due to time constraints",
+"8cc5150b-63be-48f7-a461-a62cd3c62673","318f3121-715f-46f7-818a-02b669b7d51e","ORNL.2017.21","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2017-05-25","2017-05-25",,,,
+"6f9b817d-7c9b-4620-83a5-ff68a81f3007","d46d9dc5-82b7-4798-8479-807095f6fb22","ORNL.2017.21","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2017-05-25","2017-05-25",,,,
+"3dabb9f7-0d60-4846-848d-153776b9b816","347424b1-defd-49a8-ba46-b31f0c2405a0","ORNL.2017.21","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2017-05-25","2017-05-25",,,,
+"69880d33-638e-4e72-802d-3a16157aed76","3867b8ef-8a45-48ed-b9c1-c45557e81536","ORNL.2017.21","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2017-05-26","2017-05-26",,,,
+"bdef089b-54b7-4d9f-a042-f3081119acb0","4e7e3c28-9cd1-4f74-837c-93c450cbd0f6","ORNL.2017.21","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2017-05-26","2017-05-26",,,,
+"c6bf1be2-fa99-4966-8c60-b9362e1a3356","c22de20d-113a-4a62-ba57-5d8da6440967","ORNL.2017.21","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2017-05-26","2017-05-26",,,,

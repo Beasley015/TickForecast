@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d33e7ede-343b-4afe-83c4-d5d7228f87c8","6450cfd3-53e4-4923-a671-0c41c2cc21da","SCBI.2021.39","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2021-10-01","2021-10-01","OK","NEON.DOC.000481vM",,
+"f1282a80-1fe9-46c5-9c44-9cc002fea4e2","e23840ad-7435-4b85-b547-0d1b1fae0c57","SCBI.2021.39","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2021-10-01","2021-10-01","OK","NEON.DOC.000481vM",,
+"370982b4-2b06-4346-a12e-c3b220d7709a","2030e68e-8ec3-416f-a627-bdcccb7eaa2b","SCBI.2021.39","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2021-10-01","2021-10-01","OK","NEON.DOC.000481vM",,

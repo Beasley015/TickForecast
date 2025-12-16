@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"551d936d-cce6-48d1-ba5f-98dcc7d4091f","7781c174-fb43-4d79-8df5-fbc9c92a2b90","WOOD.2022.35","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2022-08-30","2022-08-30","logistical","NEON.DOC.000481vN",,
+"85833393-01ce-4704-97ef-78a8d14dddd5","53c667a9-8ef2-4894-87b0-7258f36e0512","WOOD.2022.35","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"2b89c4c9-acd1-48ee-b06a-5e6c800c78cb","ed0f82ea-f838-464a-a8d9-a82492befd40","WOOD.2022.35","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"28ad9176-17b0-4f4f-ac67-26194cbf437f","d173f376-4e6c-48b4-8b01-dc81a862d304","WOOD.2022.35","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2022-08-30","2022-08-30","logistical","NEON.DOC.000481vN",,
+"0cb835ff-3604-4865-a19b-d6568318c5f3","ec53207f-3fcc-4d3f-9ccc-777b238d91f3","WOOD.2022.35","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2022-08-31","2022-08-31","logistical","NEON.DOC.000481vN",,
+"212944a9-4710-445b-9951-f6803b00826b","c88ef3ee-0945-43ac-b57b-cc2064d42f95","WOOD.2022.35","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"a343508d-32ef-4098-b58c-e2125260bc4f","595b5640-8f65-40b3-a759-ef7fa8f6946b","WOOD.2022.35","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"54632d87-0d09-4cc1-9e30-3f00590ef33c","93a7776f-4a2c-443a-80df-ac0d9edb81ef","WOOD.2022.35","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2022-08-31","2022-08-31","logistical","NEON.DOC.000481vN",,

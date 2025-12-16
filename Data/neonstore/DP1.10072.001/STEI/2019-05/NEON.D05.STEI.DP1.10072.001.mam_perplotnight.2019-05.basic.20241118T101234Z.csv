@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a8f10346-6909-4bbd-bc70-136d9d65761c","f2795332-2496-4166-9446-2aaa1e860236","STEI.2019.22","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"15bc05a6-e1f2-4ce9-92b7-662d12f96fa9","1ee655fe-89c1-4185-8727-cafe1528aa56","STEI.2019.22","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"7952a78a-3587-4b50-aabb-9f85546ba674","e455c9dd-0172-49e4-9305-0592ba10ee5e","STEI.2019.22","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"436cb874-ed98-43a4-a11c-e9afbc11558f","a98a9f0c-cae9-4cc6-b52c-c5534fbc17f1","STEI.2019.22","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"2af7023b-c867-4b19-afc0-be6e45246f80","6566fb6e-fc3e-4f15-a490-a6bcda9381f7","STEI.2019.22","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"5b8e4abc-ae11-4fda-9b0e-754b65b255a2","de73417e-bc4f-45b4-96c3-cdf47ff89686","STEI.2019.22","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"d34f70fe-be59-4438-b6b1-f732b0bb980f","5f7d917c-84f3-4070-8708-671f4aa05e43","STEI.2019.22","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"f0cb4611-3cd3-4e9e-b54d-c802ad280596","a4cfbc92-02bb-4843-bc1f-d61e96dcfd69","STEI.2019.22","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"b17e4db1-cd59-40b2-91d8-6a33e32c64f0","a8d0d55f-7e21-4cf4-8858-4361e3b8faad","STEI.2019.22","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"e980f183-ac2f-4b6c-b5c3-5e4e713f5782","048872e9-2eb6-4313-8f65-35e0dd2f782c","STEI.2019.22","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"64085a2b-a3a9-4dc9-870f-299c2272fea2","58bc9488-2efe-4233-8132-995cad588273","STEI.2019.22","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"beaaebf8-f106-4dc6-9950-05e7b8c91627","1c4e60c4-5a6d-4e5b-aabb-1007b5ab0e26","STEI.2019.22","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL","Discovered >30 traps disturbed by predators on 5/30 so grid was not reopened for collection on 5/31",

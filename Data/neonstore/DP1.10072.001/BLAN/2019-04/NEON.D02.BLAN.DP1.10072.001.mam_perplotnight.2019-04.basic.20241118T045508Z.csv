@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7cadb79c-77f8-4ee4-90eb-bd1373b87355","83992c82-99cd-49af-b62e-89e792bce4a2","BLAN.2019.14","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-04-03","2019-04-03",,"NEON.DOC.000481vK",,
+"dd5a045d-7dfd-4391-9181-d25fbd62a3ec","89fff77e-85a5-4393-9446-fd6fc7fc3807","BLAN.2019.14","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-04-03","2019-04-03",,"NEON.DOC.000481vK",,
+"a99c2d81-1442-4aab-9bef-6b23c0b3c482","0cec2869-320d-413e-a195-65a3056ce1eb","BLAN.2019.14","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-04-03","2019-04-03",,"NEON.DOC.000481vK",,
+"4ef460fa-4843-44ee-bb0b-21ba87c13025","b31cabd5-e475-4414-b50f-d92744759cd9","BLAN.2019.14","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-04-04","2019-04-04",,"NEON.DOC.000481vL",,
+"30a716da-680c-4879-9a68-63a145f61927","c39ea855-0653-44d8-bc5a-52481bce7a06","BLAN.2019.14","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-04-04","2019-04-04",,"NEON.DOC.000481vL",,
+"c5842e78-3b9b-4077-8f95-4dc63f817751","871b924a-1add-41d3-bb65-bab0f5a46af2","BLAN.2019.14","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-04-04","2019-04-04",,"NEON.DOC.000481vL",,
+"ad6ff86b-fa04-4959-8a99-ccff256ed5d9","f92cf40b-1b25-4867-a423-5722ffce2af7","BLAN.2019.14","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2019-04-04","2019-04-04",,"NEON.DOC.000481vL",,
+"c5624f88-869e-4370-aef3-b1b20585abe5","59971e70-43ae-4220-9129-3a6b13e66168","BLAN.2019.14","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-04-05","2019-04-05",,"NEON.DOC.000481vL",,
+"bde21ef8-9561-494c-8719-aa54bfa730ec","e1341781-ba2f-4e01-ad7e-1aae7afca4e4","BLAN.2019.14","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-04-05","2019-04-05",,"NEON.DOC.000481vL",,
+"c7393136-0b70-4a7b-b14d-02ac99f0001c","266ce67c-80e5-42ec-90c3-fa98760dc2a1","BLAN.2019.14","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-04-05","2019-04-05",,"NEON.DOC.000481vL",,

@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"04bb21b5-f281-4461-b413-92c18077faea","b4c79cbb-b94c-4a95-a7a3-ebf4329c9a08","UKFS.2022.26","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2022-07-01","2022-07-01","OK","NEON.DOC.000481vN",,
+"b56a80b0-4b59-4696-95d7-0ee5646f50bd","e5f94517-eb3f-4893-bb52-7cc6acf7683f","UKFS.2022.26","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2022-07-01","2022-07-01","OK","NEON.DOC.000481vN",,
+"2c0644cc-18a6-402a-be7d-99e7eda53f9c","5e35dabb-1a22-4928-95d6-a34e2cb58e47","UKFS.2022.26","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2022-07-01","2022-07-01","OK","NEON.DOC.000481vN",,

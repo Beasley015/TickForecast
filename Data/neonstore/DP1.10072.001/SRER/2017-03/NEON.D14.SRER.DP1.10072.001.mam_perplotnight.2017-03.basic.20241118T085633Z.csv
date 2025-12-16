@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"63b35f5e-e2a3-4ad8-a6f2-004f023bc7f0","97311e17-d929-4fb2-8ead-5378d3b792df","SRER.2017.12","SRER_014.mammalGrid.mam","D14","SRER","SRER_014","diversity","2017-03-22","2017-03-22",,"NEON.DOC.000481vJ",,
+"8f92338c-dd78-4ec0-922a-511b9dcd0d29","b9c781f5-2c8d-45cb-b343-704138a588b5","SRER.2017.12","SRER_007.mammalGrid.mam","D14","SRER","SRER_007","pathogen","2017-03-22","2017-03-22",,"NEON.DOC.000481vJ",,
+"625862da-fac5-45df-9b88-62077957ae50","aed1bca7-6ced-4e08-8d95-6d6b3f411ba4","SRER.2017.12","SRER_007.mammalGrid.mam","D14","SRER","SRER_007","pathogen","2017-03-23","2017-03-23",,,,
+"829afed4-2240-451e-ab8d-a467d12b3812","50992142-7ed8-49a6-b749-0400878995da","SRER.2017.12","SRER_008.mammalGrid.mam","D14","SRER","SRER_008","diversity","2017-03-23","2017-03-23",,,,
+"8524f624-a1bd-437b-a5bd-41e8148d0f4f","a473a100-3f32-4768-ac40-efcc89ddf550","SRER.2017.12","SRER_009.mammalGrid.mam","D14","SRER","SRER_009","diversity","2017-03-24","2017-03-24",,,,
+"23f6c0f6-a88f-471d-830a-251e83b40bac","e8f0dda1-cd73-4f79-aa55-fe5f5d6b7f60","SRER.2017.12","SRER_007.mammalGrid.mam","D14","SRER","SRER_007","pathogen","2017-03-24","2017-03-24",,,,
+"a244a42e-ff46-483f-832c-ea18c7ab8f1b","ee4f289d-b039-4ed2-880b-9467f62f90fc","SRER.2017.12","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2017-03-25","2017-03-25",,,,
+"6605bf46-72c6-4c17-b978-d7ec6302f12b","8e63a6f4-a664-4dbb-9f0b-ab41ed7cfd18","SRER.2017.12","SRER_012.mammalGrid.mam","D14","SRER","SRER_012","pathogen","2017-03-25","2017-03-25",,"NEON.DOC.000481vJ",,
+"bd830fe2-318c-4474-805b-c8742e67659e","c1b00651-a3dd-45c5-856c-5d4e4c8ce435","SRER.2017.12","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2017-03-26","2017-03-26",,"NEON.DOC.000481vJ",,
+"8b87b574-d55c-4741-af2d-855562d3db9d","09722a2e-5019-44f3-ae3f-8628115cd511","SRER.2017.12","SRER_012.mammalGrid.mam","D14","SRER","SRER_012","pathogen","2017-03-26","2017-03-26",,,,
+"edc69997-b838-469a-886a-bee717539462","e0f98202-583b-4ba3-89c8-477aa27c879f","SRER.2017.12","SRER_012.mammalGrid.mam","D14","SRER","SRER_012","pathogen","2017-03-27","2017-03-27",,"NEON.DOC.000481vJ","Due to high capture rates we only took taxon ID ear and PIT tag sex repro and HW",
+"6f088876-4ee2-4681-864d-f681c2886a9e","ac381ac6-6495-46d8-8b0a-163163a8cec5","SRER.2017.12","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2017-03-27","2017-03-27",,"NEON.DOC.000481vJ",,

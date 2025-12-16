@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f2153e4c-f066-45f0-adc2-d6320b6d05ac","DE18305D226140D6B20D8F7879A63D11","SCBI.2016.13","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2016-03-29","2016-03-29",,"NEON.DOC.000481vG","Low 43 F",
+"a81f4448-c1c1-49bf-ba65-e1854ba9fc60","52398D58CE64419E9F0693FB9E2FFEEA","SCBI.2016.13","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2016-03-29","2016-03-29",,"NEON.DOC.000481vG","Plot vegetation is 1.5m high thorns, sassafras, and other brush, with 15% of plot in forest. Not yet brushhogged",
+"60a253a4-d9df-4abe-a281-57e244c80e39","D0DA717F401A40AB88E39E381C69F0F8","SCBI.2016.13","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2016-03-30","2016-03-30",,"NEON.DOC.000481vG","Low 34 F; windy",
+"763d0d56-e655-4b3f-b0a2-df5c2396472a","071D2894386D4693866C381C383E285B","SCBI.2016.13","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2016-03-30","2016-03-30",,"NEON.DOC.000481vG",,
+"5727ac3b-db86-4298-b373-8ef4382c0b70","BE80052D26B74E71B60FAC7A21973652","SCBI.2016.13","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2016-03-31","2016-03-31",,"NEON.DOC.000481vG","Overnight Low in the 50's, clear",
+"6e11b9a2-b2b9-450d-a1b4-9b7441b33dd2","23749B7F76FA4A32A81D0D3C65CE0DA4","SCBI.2016.13","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2016-03-31","2016-03-31",,"NEON.DOC.000481vG","Overnight low in 50s; clear",

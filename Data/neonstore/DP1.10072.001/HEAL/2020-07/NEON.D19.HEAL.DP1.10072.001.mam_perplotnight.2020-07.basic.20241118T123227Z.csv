@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3cda643e-9bbf-4a8a-bdf8-733913149368","5869f93c-ec68-476d-adce-3a1a68f65043","HEAL.2020.30","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","pathogen","2020-07-21","2020-07-21","OK","NEON.DOC.000481vM",,
+"db3b08bf-ed50-4a59-b12b-dbe6dcab578e","e45a7a37-de0a-4702-b65e-5a66770abde0","HEAL.2020.30","HEAL_014.mammalGrid.mam","D19","HEAL","HEAL_014","pathogen","2020-07-21","2020-07-21","OK","NEON.DOC.000481vM",,
+"58c76a64-77b6-4206-bf34-bad15d385cca","3f4f619b-c736-4362-977a-062a436d4f8d","HEAL.2020.30","HEAL_010.mammalGrid.mam","D19","HEAL","HEAL_010","pathogen","2020-07-21","2020-07-21","OK","NEON.DOC.000481vM",,
+"995346a5-d1cf-4427-880b-24b25c700c89","3e7840cf-e5ac-4fd1-ba91-da0d553e687a","HEAL.2020.30","HEAL_010.mammalGrid.mam","D19","HEAL","HEAL_010","pathogen","2020-07-22","2020-07-22","OK","NEON.DOC.000481vM",,
+"a4a1275c-b94a-44c6-88f2-66b55c06b056","0f738a5d-97bb-4d2e-8b1b-f712ec2e3bde","HEAL.2020.30","HEAL_014.mammalGrid.mam","D19","HEAL","HEAL_014","pathogen","2020-07-22","2020-07-22","OK","NEON.DOC.000481vM",,
+"af523253-e239-4093-953d-411b803dac2d","bc05bcb8-3d27-456f-b961-7970f3fd8d94","HEAL.2020.30","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","pathogen","2020-07-22","2020-07-22","OK","NEON.DOC.000481vM",,
+"a73af0c5-5a38-4faf-ba9e-4092c57e5233","107154f3-88d8-4471-a449-4e81b8da4ab5","HEAL.2020.30","HEAL_010.mammalGrid.mam","D19","HEAL","HEAL_010","pathogen","2020-07-23","2020-07-23","OK","NEON.DOC.000481vM",,
+"20ab5db8-377b-49db-becb-1980abdf6aaf","ac566b82-b9f9-43a4-b059-92665bc45bc1","HEAL.2020.30","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","pathogen","2020-07-23","2020-07-23","OK","NEON.DOC.000481vM",,
+"e5305f35-f8f2-4185-a505-233bf35cf84c","98496397-8293-408c-adb3-e659aef42cb2","HEAL.2020.30","HEAL_014.mammalGrid.mam","D19","HEAL","HEAL_014","pathogen","2020-07-23","2020-07-23","OK","NEON.DOC.000481vM",,
+"1c7e55c2-92c8-450d-a5e1-955ecd7f4609","cd88a195-3cb7-4ea8-8b81-a6cb9fc29881","HEAL.2020.30","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","diversity","2020-07-24","2020-07-24","OK","NEON.DOC.000481vM",,
+"882e0843-d3f7-454d-9b38-93bddf4914b7","d17eb3a1-0757-43b1-96ba-248d52a0828c","HEAL.2020.30","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","diversity","2020-07-24","2020-07-24","OK","NEON.DOC.000481vM",,
+"1dab7295-e52e-4630-896a-68e1979a06ee","0cc5813a-6da1-47b2-964d-53a8f8c72e51","HEAL.2020.30","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","diversity","2020-07-24","2020-07-24","OK","NEON.DOC.000481vM",,

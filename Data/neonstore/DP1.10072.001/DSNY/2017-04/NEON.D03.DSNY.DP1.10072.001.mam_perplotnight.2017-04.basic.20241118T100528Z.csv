@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8d5e2acb-c117-4c5e-a421-2fe3e1efb0fb","d1b64521-c450-4d05-bfc4-906099036e74","DSNY.2017.14","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2017-04-04","2017-04-04",,,,
+"6c79f55b-2c60-4ecc-9f3c-686ff720b2aa","5a7cf4de-8ccc-48b6-881e-89a3241cf066","DSNY.2017.14","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2017-04-04","2017-04-04",,,,
+"bfe8ae5e-d04e-41dc-ad3d-2df2f9e047ff","793cb905-e9bd-45dd-be5d-7b562105b5c1","DSNY.2017.14","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2017-04-04","2017-04-04",,,,
+"775102dc-087a-47ec-887f-6bb138a02f3f","c4206bd0-2a9e-4eb4-997f-639a85576556","DSNY.2017.14","DSNY_016.mammalGrid.mam","D03","DSNY","DSNY_016","diversity","2017-04-04","2017-04-04",,,,
+"499857ad-3cbe-4640-a773-47259faad9ca","a0ac4fba-9e53-41e1-ac42-fab598ab63a6","DSNY.2017.14","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2017-04-05","2017-04-05",,,,
+"c73e6fc5-3005-480e-a66a-2a0d22ff6621","42439a93-4840-47be-8611-9d5488e3cb11","DSNY.2017.14","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2017-04-05","2017-04-05",,,,
+"cc620d68-acb9-418d-bd82-e9d17ae9de5c","3850aa44-6f39-43f4-bc14-8f37e031c454","DSNY.2017.14","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2017-04-05","2017-04-05",,,,
+"9b01faa0-de59-4371-9621-6cc8f0ee8cbe","497948ce-b6cf-42b7-bf3a-fdeb9869b4f6","DSNY.2017.14","DSNY_006.mammalGrid.mam","D03","DSNY","DSNY_006","diversity","2017-04-05","2017-04-05",,"NEON.DOC.000481vG",,
+"d16df77c-6858-4012-8f75-f42814734e12","e6cc493b-3eee-4dfb-8173-eb99630d51d3","DSNY.2017.14","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2017-04-06","2017-04-06",,,,
+"5399616e-da6f-4e19-bd9d-6f1eac2acc1e","28d0581c-7a9d-4a46-b85b-7879bac91a90","DSNY.2017.14","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2017-04-06","2017-04-06",,,,
+"45456779-4c05-415b-aca4-0e975ad515dd","aab01892-a5b6-47d0-b134-d0faa1545a06","DSNY.2017.14","DSNY_085.mammalGrid.mam","D03","DSNY","DSNY_085","diversity","2017-04-06","2017-04-06",,,,
+"a21bbbad-2f9e-4fa1-b981-fdde311e58cf","20e96871-e0cf-4484-9a8b-0fbdab276cfe","DSNY.2017.14","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2017-04-06","2017-04-06",,,,

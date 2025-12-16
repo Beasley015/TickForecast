@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3bc715a6-3d4c-4e40-901a-9ed3a55faaca","976f531d-9616-40b0-9377-61af7b56a773","WOOD.2017.34","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ",,
+"2b1f8914-bb8c-43df-b84d-1ef0d58247cd","194152db-db05-433c-b3fa-0f3a982d38b4","WOOD.2017.34","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ",,
+"d9cfa104-f183-462a-af57-ee84b4d11d50","8c30abea-2439-45a2-a959-cd7699019e4a","WOOD.2017.34","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ",,
+"17509442-2216-462b-9038-6cdf87c28a70","0eae9931-da5c-44e0-b256-77cd70f7a548","WOOD.2017.34","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-08-23","2017-08-23",,,,
+"05e0513c-a45c-4b48-9b4a-8d28ee886ad7","6d7d4f5e-68cb-4c6c-bac3-bcc068ed4590","WOOD.2017.34","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-08-23","2017-08-23",,,,
+"bc0aa1fb-11c5-420b-8bf1-6b34d789b790","35887b59-bd4c-46bb-92d5-f56c8d97d989","WOOD.2017.34","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-08-24","2017-08-24",,,,
+"1343d572-a2d4-4990-9a26-bdc75963aa93","dfa30590-98a2-40a0-b244-4f3c4fd83d6f","WOOD.2017.34","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-08-24","2017-08-24",,,,
+"d8699385-a1ce-41a8-9c61-9c76ee81e951","9c82c12d-e1ad-4a9b-89ec-e218bad362a5","WOOD.2017.34","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-08-25","2017-08-25",,,,
+"97d9ebab-abaf-4f5b-aaf4-7ee3e8b7877e","5adac53c-feca-49e4-9c0e-8e5e7c070a2a","WOOD.2017.34","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2017-08-25","2017-08-25",,,,

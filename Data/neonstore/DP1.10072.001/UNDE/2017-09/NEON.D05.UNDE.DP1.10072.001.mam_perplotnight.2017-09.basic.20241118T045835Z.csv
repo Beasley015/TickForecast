@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"cc78f067-5ba1-4a7d-bde1-e606196aa4eb","c1f1a604-b9c5-4fe1-b0ad-51a1dc506f4e","UNDE.2017.38","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2017-09-19","2017-09-19",,"NEON.DOC.000481vJ",,
+"ba70082d-b463-487e-9b78-14b5dcb09119","e89aceae-9710-493d-89f6-57d07f0e6c28","UNDE.2017.38","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-09-19","2017-09-19",,"NEON.DOC.000481vJ",,
+"1736f6b6-454f-409e-b6e9-ed99a0402555","1a854bcd-6304-42ed-a9f9-edb12a3aaef0","UNDE.2017.38","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-09-19","2017-09-19",,"NEON.DOC.000481vJ",,
+"5557c6b7-fc8e-4b52-b23b-5b43cf218c57","a6290cf4-d43a-4441-a3a6-35677fac3e3c","UNDE.2017.38","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-09-20","2017-09-20",,"NEON.DOC.000481vJ",,
+"24d83d53-8333-4216-810d-6de3573eb303","130a9aea-c898-4532-a77a-0fe49ea0b445","UNDE.2017.38","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-09-20","2017-09-20",,"NEON.DOC.000481vJ",,
+"45ab9712-cfb2-4e4d-8028-3e583fdee64b","51d959fd-7e46-4212-b3cd-67a40842d26c","UNDE.2017.38","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"9f08710a-b780-4bae-97d3-1271122efca7","9847cbe2-941f-4e0b-a949-e0e86febae3d","UNDE.2017.38","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"e677118f-566b-4ac3-b963-6372b26e2098","dbebb3e9-2ea5-4aaa-9577-dea479de5bab","UNDE.2017.38","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2017-09-22","2017-09-22",,"NEON.DOC.000481vJ",,
+"2619714d-a7d9-49ef-b4d9-defbd987ecb0","4e8ef7f2-fa29-4222-9ab6-baff88e6c250","UNDE.2017.38","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2017-09-22","2017-09-22",,"NEON.DOC.000481vJ","Thunderstorm rolled in while checking lines released mammals without processing",
+"4145eebb-27f7-41d6-a1e4-8d5bd1f63448","60818a9b-d9a4-41e0-97c2-b4e0123dc70d","UNDE.2017.38","UNDE_002.mammalGrid.mam","D05","UNDE","UNDE_002","diversity","2017-09-22","2017-09-22",,"NEON.DOC.000481vJ",,
+"ec5a0937-f37b-4da1-8451-303a6a70ba15","d9a35fe8-94a9-487f-a4a5-6590993c0424","UNDE.2017.38","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2017-09-22","2017-09-22",,"NEON.DOC.000481vJ",,

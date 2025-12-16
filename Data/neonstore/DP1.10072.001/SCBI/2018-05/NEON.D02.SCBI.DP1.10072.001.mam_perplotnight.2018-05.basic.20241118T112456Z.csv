@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3f9fcc85-f71d-4b64-ab3f-00ae6bb17476","ab9939b9-9bbc-45cc-806e-2e8fa16081c3","SCBI.2018.19","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-05-08","2018-05-08",,"NEON.DOC.000481vK",,
+"00b9d81c-329d-41ee-a6a3-117f9a19a264","76fac893-5b06-45e1-9a3c-206558425ae5","SCBI.2018.19","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-05-08","2018-05-08",,"NEON.DOC.000481vK","Many were knocked over with batting out",
+"49c73cfb-0dde-4900-8c94-4163a9bde95c","e68fb2b8-7258-4a18-9a96-9dfcd8b85c0a","SCBI.2018.19","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-05-08","2018-05-08",,"NEON.DOC.000481vK",,
+"a03d608a-0588-448c-b448-c9ecdca98c98","7ca4dd9b-3cda-4733-a63e-edc11d671a4c","SCBI.2018.19","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-05-09","2018-05-09",,"NEON.DOC.000481vK",,
+"0a154170-3e0e-41a3-a491-dee50a1b1d8d","6b020bbf-6260-4c33-ba62-c0dd3c189433","SCBI.2018.19","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-05-09","2018-05-09",,"NEON.DOC.000481vK",,
+"a1ff36ee-ff5a-4e5b-be92-152a2a00107c","f4eb8c73-1082-432f-be27-e6c6ac93e069","SCBI.2018.19","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2018-05-09","2018-05-09",,"NEON.DOC.000481vK",,
+"4df10d3e-5999-44f5-b774-e954b5b23661","d1a5162c-f62c-4e2a-8d05-1eb39c9681e9","SCBI.2018.19","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-05-10","2018-05-10",,"NEON.DOC.000481vK",,
+"9b872161-1dbc-4916-9e5d-59382dbc8ff1","4cc1ce41-ec92-463e-a955-9bc707a91dee","SCBI.2018.19","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2018-05-10","2018-05-10",,"NEON.DOC.000481vK","Some traps destroyed by bears",
+"3f2884f1-dd68-459b-bdd5-91a6907b3cee","fc95a9cc-b1ae-4fe8-80a1-83cde6ed436c","SCBI.2018.19","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-05-10","2018-05-10",,"NEON.DOC.000481vK",,

@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"18259e69-b731-4406-b495-a375a522f533","20445e07-6b42-4c2f-80d7-b491c578e706","BLAN.2022.35","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2022-09-01","2022-09-01","disturbance","NEON.DOC.000481vN","Plot closed due to disturbance (INC0058351)",
+"564fb505-bbd5-4aa5-8304-77ca2fdec105","fbb1beb8-be00-433a-8411-9f26f4d5f417","BLAN.2022.35","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2022-09-01","2022-09-01","OK","NEON.DOC.000481vN",,
+"ffa92912-db2c-4c22-92b2-5cb44d9b8b29","5bb89693-a8fc-4b45-aa74-6ce66aad8113","BLAN.2022.35","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2022-09-01","2022-09-01","OK","NEON.DOC.000481vN",,
+"e02c1ca2-7638-4381-82c7-dbe800aa1666","b3b6c7cd-da42-41ff-8701-060a0c2ff676","BLAN.2022.35","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2022-09-01","2022-09-01","OK","NEON.DOC.000481vN",,

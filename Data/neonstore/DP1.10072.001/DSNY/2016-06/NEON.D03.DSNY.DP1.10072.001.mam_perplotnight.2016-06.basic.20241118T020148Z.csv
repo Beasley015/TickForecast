@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"54750284-3c89-46d2-9506-46913359a530","5E0595FF24FA44E69CDCD4991DCD0D25","DSNY.2016.26","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2016-06-28","2016-06-28",,"NEON.DOC.000481vH",,
+"8d9ee365-b0ce-4bc1-aa76-ec2e4e000f96","E4041C26C4384E0FBF3A977F71F96655","DSNY.2016.26","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2016-06-28","2016-06-28",,"NEON.DOC.000481vH",,
+"46c2a074-ecd2-4bb2-b997-4901e6dd0dcf","E491B864472C4EE58AED9B417A6B6DE7","DSNY.2016.26","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2016-06-28","2016-06-28",,"NEON.DOC.000481vH",,
+"4e65619b-bb04-4e6b-a546-85098d281870","831FD91889F4420BADD71743F74FC415","DSNY.2016.26","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2016-06-29","2016-06-29",,"NEON.DOC.000481vH",,
+"d857f73b-db58-4222-b77e-5a6177a748a4","15AB0CDF5E374234B24A2674E789F71E","DSNY.2016.26","DSNY_085.mammalGrid.mam","D03","DSNY","DSNY_085","diversity","2016-06-29","2016-06-29",,"NEON.DOC.000481vH",,
+"aeefa2ad-59e5-46b6-9744-c1c3348bbd50","F5A83FFA3012409CAE7C7FFA95D1A28A","DSNY.2016.26","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2016-06-29","2016-06-29",,"NEON.DOC.000481vH","Roads closed due to weather, vehicle stuck, animals released and grid 004 pulled for remainder of bout",
+"b6d8ce7a-ee5b-49ba-bf4f-e22939e414c4","4A956236D5F94B09886567CB6E1BAA11","DSNY.2016.26","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2016-06-29","2016-06-29",,"NEON.DOC.000481vH","Traps closed, animals released due to road closures and weather",

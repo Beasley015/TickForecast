@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"48736f60-907a-45e6-9c4a-d8d160adfd47","a9dff1f6-4824-4964-b828-275a688016f3","DCFS.2021.23","DCFS_020.mammalGrid.mam","D09","DCFS","DCFS_020","diversity","2021-06-09","2021-06-09","logistical","NEON.DOC.000481vM","COVID19",
+"96c4248e-f717-4beb-9d29-40f45e554687","233bf3ee-f2f3-4661-a7b3-2fa45d77b58d","DCFS.2021.23","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2021-06-09","2021-06-09","logistical","NEON.DOC.000481vM","COVID19",
+"ca3be303-ecfb-4ad9-8034-c3843cbf4e6b","d702a443-b5a0-4b35-8006-284efc8a79a5","DCFS.2021.23","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2021-06-09","2021-06-09","logistical","NEON.DOC.000481vM","COVID19",
+"f3730481-65bb-4d8d-baab-4b13c90bb8f2","9e1b87cc-3665-411b-96f2-d5773db32cb7","DCFS.2021.23","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2021-06-09","2021-06-09","logistical","NEON.DOC.000481vM","COVID19",
+"843cab06-b843-413b-a5d4-7d9a2db023c1","d482bc32-30df-4ded-8ec9-857e67565e79","DCFS.2021.23","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2021-06-10","2021-06-10","OK","NEON.DOC.000481vM",,
+"45374ff3-c81d-4279-a8de-687a5958ff21","de8c952b-884d-4600-8235-f39f14c361d4","DCFS.2021.23","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2021-06-10","2021-06-10","OK","NEON.DOC.000481vM",,
+"191dee20-c682-47db-9841-d6ed55e5653a","38da5222-6c21-4faa-853c-1a49106b7ef4","DCFS.2021.23","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2021-06-10","2021-06-10","OK","NEON.DOC.000481vM",,
+"e7a8ec7a-1d75-43b8-9f5c-8132ad0a5026","8efca483-7ebd-484b-864e-d18911e0b361","DCFS.2021.23","DCFS_004.mammalGrid.mam","D09","DCFS","DCFS_004","diversity","2021-06-10","2021-06-10","OK","NEON.DOC.000481vM",,
+"a2d0d9f5-0572-4fc9-ab9e-a5bfab72f2db","73eafc60-9ed3-4631-aa08-61ede2d1cfdb","DCFS.2021.23","DCFS_009.mammalGrid.mam","D09","DCFS","DCFS_009","diversity","2021-06-11","2021-06-11","extreme weather","NEON.DOC.000481vM",,
+"a2b76a71-60aa-476f-8264-63cda30706a9","0d6daf3d-583d-423e-8146-885f5dba7f9e","DCFS.2021.23","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2021-06-11","2021-06-11","extreme weather","NEON.DOC.000481vM",,
+"6082d892-c51b-46c6-805f-cd7cbd0258e5","c92333bc-44e9-4e42-8b9a-342f87ad9f6b","DCFS.2021.23","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2021-06-11","2021-06-11","extreme weather","NEON.DOC.000481vM",,
+"bd70998a-67c3-4f8e-a7ac-273d6468a998","d7fbf35f-fbdd-4993-a8a8-a0d66aebeea3","DCFS.2021.23","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2021-06-11","2021-06-11","extreme weather","NEON.DOC.000481vM",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d7955cd3-449b-4aa9-ac25-3ff1996814b4","f6473081-9eaf-4ff2-8df3-b351701fd2dd","KONZ.2018.23","KONZ_005.mammalGrid.mam","D06","KONZ","KONZ_005","diversity","2018-06-04","2018-06-04",,"NEON.DOC.000481vK",,
+"6aaa4027-2b79-4fac-91b6-96bea9f4fc05","d72c54b2-8664-4461-be67-33f78a196484","KONZ.2018.23","KONZ_002.mammalGrid.mam","D06","KONZ","KONZ_002","diversity","2018-06-04","2018-06-04",,"NEON.DOC.000481vK",,
+"f2825cc9-4583-4e63-86de-c42a03737a5b","d8446847-7757-45a0-9a6b-11810724907b","KONZ.2018.23","KONZ_003.mammalGrid.mam","D06","KONZ","KONZ_003","diversity","2018-06-04","2018-06-04",,"NEON.DOC.000481vK",,
+"fa1eab12-6029-4b41-873f-c27c5c49b3c4","d673465c-78f4-48d9-a2ec-840f685bb6df","KONZ.2018.23","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2018-06-06","2018-06-06",,"NEON.DOC.000481vK",,
+"2d75a631-44ce-4b93-a727-6eba21c729b5","50a0ffe3-d08a-4882-b97c-bbc61b047852","KONZ.2018.23","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2018-06-06","2018-06-06",,"NEON.DOC.000481vK",,
+"1b55f2e5-3e6d-44c5-a37b-2a16cc7e5c4f","8738c20f-b671-4406-8ee8-309c71366a80","KONZ.2018.23","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2018-06-06","2018-06-06",,"NEON.DOC.000481vK",,
+"0aed9ee5-ac51-4fd6-aede-3ea001548ac4","d087f6fe-bfb9-410a-ab8a-426eaf74893d","KONZ.2018.23","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2018-06-07","2018-06-07",,"NEON.DOC.000481vK",,
+"2e37eea8-74ad-4a98-bf0f-da5a1623f049","8fb3289a-f5ce-4fdc-b0ea-0d7d06b16c59","KONZ.2018.23","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2018-06-07","2018-06-07",,"NEON.DOC.000481vK",,
+"6b072cca-9ab7-4606-96d9-19c460395b43","5aec394b-3fc5-4f9e-8876-4a4c3edc0f4d","KONZ.2018.23","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2018-06-07","2018-06-07",,"NEON.DOC.000481vK",,
+"20a2f8fa-ada3-41c4-9954-74e58028fe6d","6b40f64a-1cc7-4500-a778-733fd96480f8","KONZ.2018.23","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2018-06-08","2018-06-08",,"NEON.DOC.000481vK",,
+"b1bb5983-47a8-4332-91fb-0f37c15fa2d8","13607c86-b3bb-4e8c-a3bc-949438230ff9","KONZ.2018.23","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2018-06-08","2018-06-08",,"NEON.DOC.000481vK",,
+"fd727fee-abcc-474e-b408-52759499c4fb","d6f010a9-a058-45ac-8fc2-510a0aabeb56","KONZ.2018.23","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2018-06-08","2018-06-08",,"NEON.DOC.000481vK",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"82be0fc9-0517-48ae-9bc4-1d5acdb938e0","24326bf6-e737-457e-b9f7-1d20645c4c66","RMNP.2018.32","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK",,
+"9e4aabdc-f58d-445f-9b48-5dc92bc3709b","5a4257cb-a6e8-4523-be1e-e5467d4b8f4e","RMNP.2018.32","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK",,
+"a215ba3c-a4a1-4cbf-acee-549913bd1cc7","80a10916-2553-4998-bbad-049c3d40fb83","RMNP.2018.32","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2018-08-07","2018-08-07",,"NEON.DOC.000481vK",,
+"8a5bd1ae-5fe4-4720-96b5-05be651e2447","e2c279cb-1951-4f9d-a845-d4cafdc57b52","RMNP.2018.32","RMNP_005.mammalGrid.mam","D10","RMNP","RMNP_005","diversity","2018-08-07","2018-08-07",,"NEON.DOC.000481vK",,
+"d1e98a9c-be65-4452-957e-28f35989ddc2","aa338bc7-84dc-4364-ac8f-97720b553068","RMNP.2018.32","RMNP_013.mammalGrid.mam","D10","RMNP","RMNP_013","diversity","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"8dc9b3bf-c384-41ce-b30a-9f415b28d7ac","ae195eb3-e409-4eb1-9084-ff53581f78fa","RMNP.2018.32","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"fccdc78f-9cae-4d33-a346-8a55ca635791","c03b1ed4-695e-486d-9bfb-794210f775dd","RMNP.2018.32","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"d5483dbc-4277-4044-b74f-80a46efde79e","397e3408-be31-49e2-b060-20af2643d1f3","RMNP.2018.32","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2018-08-08","2018-08-08",,"NEON.DOC.000481vK",,
+"9c06edf8-1f51-4c63-ab56-59ede4a59b8f","6381341d-6e7b-43f2-8304-3316ae726beb","RMNP.2018.32","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK",,
+"58d63a25-af8b-449d-8278-674df1835995","73ccadaf-9876-4b07-bbdd-77d523bf8acc","RMNP.2018.32","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK",,
+"d9f1b73f-fff4-4618-bbda-b09ba6cfe0e2","03f848bd-9666-49af-ab5e-d76c2752016c","RMNP.2018.32","RMNP_009.mammalGrid.mam","D10","RMNP","RMNP_009","diversity","2018-08-09","2018-08-09",,"NEON.DOC.000481vK",,
+"003f3753-5ff8-48a2-8a9e-97289846913e","0b213466-442e-4c74-98e8-5487e09af2d0","RMNP.2018.32","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2018-08-09","2018-08-09",,"NEON.DOC.000481vK","Likely bear disturbance for the 9 traps with status of 2",

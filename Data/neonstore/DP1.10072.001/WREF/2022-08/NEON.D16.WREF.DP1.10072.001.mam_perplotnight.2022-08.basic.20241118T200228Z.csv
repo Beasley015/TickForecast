@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3e80c3c1-e976-48e1-9100-099b0954c20e","a73a3afb-2298-4830-9819-b52ef2c2629a","WREF.2022.35","WREF_005.mammalGrid.mam","D16","WREF","WREF_005","diversity","2022-08-30","2022-08-30","logistical","NEON.DOC.000481vN",,
+"8bae33b7-7162-4a72-9bf9-fd1b8d272bae","3bc5d49f-80a2-4c11-bcf2-d11a6b16709e","WREF.2022.35","WREF_003.mammalGrid.mam","D16","WREF","WREF_003","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"b9574ee5-d6d2-4b6c-9f3b-a23ea56c4c8c","2a5778ca-6c81-4e29-bdbd-bb0dcf8eaa1a","WREF.2022.35","WREF_012.mammalGrid.mam","D16","WREF","WREF_012","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"cd6784b9-8b4c-49da-87a8-9ba16158c823","cf030665-ceeb-439a-89df-49835724a6e3","WREF.2022.35","WREF_007.mammalGrid.mam","D16","WREF","WREF_007","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"9200d658-05ae-4d85-9fc9-a20c874f9e93","8611f950-9239-46f3-bd23-fadbde211c9d","WREF.2022.35","WREF_007.mammalGrid.mam","D16","WREF","WREF_007","pathogen","2022-08-31","2022-08-31","other","NEON.DOC.000481vN","5 mammal deaths",
+"02107b35-bd2a-4973-b467-30b0bcec8236","d299ca5c-fdd7-40e4-a2b8-49b7c65b168b","WREF.2022.35","WREF_004.mammalGrid.mam","D16","WREF","WREF_004","diversity","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"3da8890b-57a6-4a69-96d0-923420f0f2f4","99bbc40b-cedf-4ccd-8654-a07924aa5ca8","WREF.2022.35","WREF_012.mammalGrid.mam","D16","WREF","WREF_012","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"4babffc0-f6a1-48aa-8479-06883650c68f","284c0861-283c-4308-ac4d-3e59fb0b7e59","WREF.2022.35","WREF_003.mammalGrid.mam","D16","WREF","WREF_003","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,

@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e585c9b5-2b1f-4b9b-8c64-ec9cb784de75","45F6E529A58441B59F8DA4FD612A2F22","DELA.2016.35","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,
+"46de88f4-52e6-4ad4-b485-a61bee702760","513ADC86EDBF45C3870B9C0ABC30D9B6","DELA.2016.35","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,
+"cb967e8e-ac67-47e1-8308-f08e5f5fdf32","CBB56F83AD444A4E8439F707202A5082","DELA.2016.35","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,

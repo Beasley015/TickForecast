@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d4763254-bac3-4300-8a8b-c048faaddeee","d7513247-b770-4403-b9c0-e4adbc2432d3","WOOD.2020.26","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2020-06-23","2020-06-23","OK","NEON.DOC.000481vM","J3 J4 not set due to wetland",
+"34eac12d-4844-4da5-be37-16d56fab2e13","87162c0e-6da5-4668-affb-3992645080a8","WOOD.2020.26","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2020-06-23","2020-06-23","OK","NEON.DOC.000481vM",,
+"70f24ecd-59e9-4a7c-9824-0e09d7fc5424","122f113c-0ef5-4dd4-b391-64b0b82d4ecd","WOOD.2020.26","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2020-06-23","2020-06-23","OK","NEON.DOC.000481vM",,
+"b37a9d40-3f4f-445f-b488-638b02e798e5","8cf61cfa-c8c8-4803-bc1d-1104acf0dfb3","WOOD.2020.26","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2020-06-23","2020-06-23","OK","NEON.DOC.000481vM",,
+"891ecf16-f696-41ff-8ee0-60ca8393ec39","7835e12c-b0e1-4e16-8b8d-74f71dc472b7","WOOD.2020.26","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM",,
+"547c8510-24c8-4aff-93de-accecf14f651","099fb517-13b2-4e43-8418-b88c5a433fd4","WOOD.2020.26","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM","A1 B1 C1 not set due to flooding",
+"56306b8a-e135-41b0-9447-33ae8d9a1998","394123dd-8172-417c-ac8b-b38fbd03d20b","WOOD.2020.26","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM",,
+"939db131-2988-436e-8dbe-99cb5307bd31","4303eadc-a97a-4817-94e8-a3612423911b","WOOD.2020.26","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM",,
+"1658369d-f88a-4017-b0cd-44aaafa3a83d","962538d5-365a-4d85-9ec3-880f80830143","WOOD.2020.26","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2020-06-25","2020-06-25","OK","NEON.DOC.000481vM",,
+"102b2aba-c972-4ed4-9959-900dd7bc5a6d","87d604bb-d22f-43e6-a8a0-19dbcce2745b","WOOD.2020.26","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2020-06-25","2020-06-25","OK","NEON.DOC.000481vM","A1 B1 C1 not set due to wetland",
+"c23cabb2-483d-4562-8d5a-a97433913454","64ace232-92fa-46ab-a6a9-cde6ddeacbda","WOOD.2020.26","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2020-06-25","2020-06-25","OK","NEON.DOC.000481vM",,
+"65a711b2-236c-4573-91ad-90c1d3fcb30f","c0e7fab5-5b14-4921-bd56-285ad19ae7ea","WOOD.2020.26","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2020-06-25","2020-06-25","OK","NEON.DOC.000481vM",,

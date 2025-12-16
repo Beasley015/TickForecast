@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2855a464-0ae3-4fc3-ba46-270754c778d1","44091aae-e82f-4a78-aacc-d13dedc06bd6","BLAN.2022.35","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"bbf8a3bd-fd68-4202-9aa7-cadc53a70ae9","41330ced-d931-4616-b8e1-fd98d9492b52","BLAN.2022.35","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"4af45bc3-5352-43cc-81d8-f8faa7c4189d","687db9ed-263f-47f7-8728-11b06c03e9ea","BLAN.2022.35","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"3b0ecb17-b08c-4e31-903d-6a440c8d9015","e59bb535-ea43-4c69-be51-6b1c9b078c77","BLAN.2022.35","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"9c6b0694-0a90-481f-9bf2-f85ada082257","4e4fe6f1-eb42-48c3-8be7-57bb7e811942","BLAN.2022.35","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"fdf0931d-2d2b-464e-aebf-da37a12ea3d2","ae8dc211-cd29-47ab-b7fb-03a336cf87bd","BLAN.2022.35","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
