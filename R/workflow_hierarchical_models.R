@@ -194,23 +194,30 @@ for (i in seq_along(mice.seq)) {
 mna.hist <- mna_jags("Green Control", return.mean = TRUE)
 
 # center and scale
-mna.scaled <- tibble(
-	mna.scaled = (mna.all.days - mna.hist$mean) / mna.hist$sd,
-	Date = mice.seq
-)
+mna.scaled <- as.data.frame(mna.all.days-mna.hist$mean/mna.hist$sd)
+colnames(mna.scaled) <- mice.seq
+
+mna.scaled <- mna.scaled %>%
+  mutate(siteID = mna.full$siteID) %>%
+  pivot_longer(cols=-siteID, names_to="Date", values_to = "mna_scaled")
 
 # =========================================== #
 #       daymet intake and correction -------------
 # =========================================== #
+source("./DataProcessing/daymet_downscale_hierarchical.R")
 
-# RESUME HERE ------------------
-source("./DataProcessing/daymet_downscale.R")
+cgdd <- daymet_cumGDD(sites=sites) %>%
+  ungroup() %>%
+  select(-year) %>%
+  suppressMessages()
 
-cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
-maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
-    select(Date, maxTempCorrect) %>%
-    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
-    suppressMessages()
+maxTemp <- daymet_temp(sites, minimum = FALSE) %>%
+  ungroup() %>%
+  select(Date, siteID, maxTempCorrect) %>%
+  mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
+  suppressMessages()
+
+# RESUME HERE: ------------------
 rh <- daymet_rh(site.job) %>%
     select(Date, maxRHCorrect, minRHCorrect) %>%
     suppressMessages()
