@@ -101,7 +101,7 @@ ua.cal <-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 1
 production <- TRUE
-n.iter <- 1000 #50000
+n.iter <- 50000
 Nmc <- 2000
 horizon <- 365
 
@@ -507,7 +507,7 @@ for (t in seq_len(n.drags)) {
 			}
 		}
 
-		if (year(fx.start.date) == (max(year(neon.job$time))+1)) {
+		if (year(fx.start.date) == max(year(neon.job$time))) {
 			if (model.job == "Static" || model.job == "Weather") {
 				horizon <- length(data$cgdd)
 				data$y <- as.array(y[, 1:horizon, ])
