@@ -217,10 +217,11 @@ maxTemp <- daymet_temp(sites, minimum = FALSE) %>%
   mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
   suppressMessages()
 
-# RESUME HERE: ------------------
-rh <- daymet_rh(site.job) %>%
-    select(Date, maxRHCorrect, minRHCorrect) %>%
+rh <- daymet_rh(sites) %>%
+    select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
     suppressMessages()
+
+# RESUME HERE -------------
 precip <- daymet_precip(site.job) %>%
     select(Date, precipitation) %>%
     suppressMessages()

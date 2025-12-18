@@ -2,9 +2,10 @@ Immediate to do's:
 X Add Cary data to null model workflow
 X Add Cary data to process model workflow
 X Fix daymet intake script
-- Reproduce existing model
+X Reproduce existing model
 - Make submodel intercepts hierarchical
 
 In the distance:
 - Make model fully hierarchical
+- Compare hierarchical vs. OG vs. null models
 

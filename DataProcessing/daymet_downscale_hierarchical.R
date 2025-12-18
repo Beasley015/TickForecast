@@ -121,138 +121,68 @@ daymet_temp <- function(sites, minimum) {
 	return(daymet.temp.bias)
 }
 
-# ndf <- neon.sub %>%
-#   filter(Date >= "2018-01-01",
-#          Date < "2021-01-01") %>%
-#   select(Date, siteID, tempTripleMaximum)
-# ddf <- daymet.temp.bias %>%
-#   ungroup() %>%
-#   filter(Date >= "2018-01-01",
-#          Date < "2021-01-01") %>%
-#   select(Date, siteID, maxTempCorrect)
-#
-# gg.max.temp <- left_join(ndf, ddf, by = c("siteID", "Date")) %>%
-#   ggplot()+
-#   aes(x = tempTripleMaximum, y = maxTempCorrect) +
-#   geom_point() +
-#   geom_abline() +
-#   labs(title = "Daily Minimum Temperature (Deg. C)",
-#        x = "NEON",
-#        y = "Daymet Corrected") +
-#   theme_pubr()
-
 ## relative humidity ==========================================================================
 
-daymet_rh <- function(site) {
-  if(site %in% c("HNRY", "GREN", "TEA")){
-    df.rh <- read_csv("./Data/Cary_vaporPressure.csv") %>%
-      mutate(siteID = site)
-  } else{
-	  df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv") %>%
-	    filter(siteID == site) #%>%
-	    # select(-tile)
-  }
-	
-  if(!(site %in% c("HNRY", "GREN", "TEA"))){
-    df.temp <- read_csv("./Data/daymetSite_maxTemperature.csv") %>%
-      filter(siteID == site) #%>%
-      # select(-tile)
+daymet_rh <- function(sites) {
+  if(all(c("HNRY", "GREN", "TEA") %in% sites)){
+    rh.cary <- read_csv("./Data/Cary_vaporPressure.csv",
+                        show_col_types = F) 
+    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(rh.cary))
+    
+    rh.cary <- bind_rows(rh.cary, rh.cary, rh.cary) %>%
+      mutate(siteID = cary.sites) %>%
+      rename(maxRHCorrect=maxRH, minRHCorrect=minRH) %>%
+      select(-c(year, yday))
   }
   
-  if(site %in% c("HNRY", "GREN", "TEA")){
-    df.rh <- df.rh %>%
-      rename(maxRHCorrect=maxRH, minRHCorrect=minRH)
-    
-    return(df.rh)
-    
-  } else{
-    df.join <- left_join(
-		  df.vpd,
-		  df.temp,
-		  by = c(
-			  "siteID",
-			  # "latitude",
-			  # "longitude",
-			  # "altitude",
-			  "year",
-			  "yday",
-			  "Date"
-		  )
-	  )
+  # Calculate rh from existing daymet vars
+  df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv",
+                     show_col_types = F) %>%
+    filter(siteID %in% sites)
 	
-    df.dew <- df.join %>%
+  df.temp <- read_csv("./Data/daymetSite_maxTemperature.csv",
+                      show_col_types = F) %>%
+      filter(siteID %in% sites) 
+  
+  df.join <- left_join(df.vpd, df.temp, by = c("siteID","year",
+                                               "yday","Date"))
+	
+  df.dew <- df.join %>%
 		  ungroup() %>%
 		  mutate(rh = plantecophys::VPDtoRH(vaporPressure / 1000, maxTemperature))
 
-	  neon.temp <- read_csv("./Data/RelativeHumidityDaily.csv")
+  # Bias correction
+  neon.temp <- read_csv("./Data/RelativeHumidityDaily.csv",
+                        show_col_types = F)
 	
-	  neon.sub <- neon.temp %>%
-		  filter(siteID == site) %>%
-		  mutate(yday = yday(Date)) %>%
-		  select(Date, yday, RHMaximum, RHMinimum)
+  neon.sub <- neon.temp %>%
+    filter(siteID %in% sites) %>%
+    mutate(yday = yday(Date)) %>%
+    select(siteID, Date, yday, RHMaximum, RHMinimum)
 
-	  neon.doy <- neon.sub %>%
-		  group_by(yday) %>%
-		  summarise(muRHmax = mean(RHMaximum), muRHmin = mean(RHMinimum))
+  neon.doy <- neon.sub %>%
+    group_by(yday, siteID) %>%
+    summarise(muRHmax = mean(RHMaximum), muRHmin = mean(RHMinimum))
 	  
-	  daymet.doy <- df.dew %>%
-		  group_by(yday) %>%
-		  summarise(muDaymet = mean(rh))
+  daymet.doy <- df.dew %>%
+    group_by(yday, siteID) %>%
+    summarise(muDaymet = mean(rh))
 
-	  df.join <- left_join(neon.doy, daymet.doy, by = "yday") %>%
+  df.join <- left_join(neon.doy, daymet.doy, by = c("yday", "siteID")) %>%
 		  mutate(biasMax = muRHmax - muDaymet, biasMin = muRHmin - muDaymet)
 
-	  daymet.temp.bias <- left_join(df.dew, df.join, by = "yday") %>%
-		  mutate(
+  daymet.temp.bias <- left_join(df.dew, df.join, by = c("yday", "siteID")) %>%
+    mutate(
 			  maxRHCorrect = pmin(rh + biasMax, 100),
 			  minRHCorrect = pmin(rh + biasMin, 100)
 		  ) %>%
-		  select(-maxTemperature, -vaporPressure)
+    select(Date, maxRHCorrect, minRHCorrect, siteID)
+  
+  # Add Cary sites
+  daymet.temp.bias <- bind_rows(daymet.temp.bias, rh.cary)
 	  
-	  return(daymet.temp.bias)
-  }
+  return(daymet.temp.bias)
 }
-
-# ndf <- neon.sub %>%
-#   filter(Date >= "2018-01-01",
-#          Date < "2021-01-01") %>%
-#   select(-yday)
-# ddf <- daymet.temp.bias %>%
-#   ungroup() %>%
-#   filter(Date >= "2018-01-01",
-#          Date < "2021-01-01") %>%
-#   select(Date, maxRHCorrect, minRHCorrect)
-#
-# rh.df <- left_join(ndf, ddf, by = c("Date"))
-#
-# rh.df %>%
-#   ggplot() +
-#   aes(x = `Date`) +
-#   geom_line(aes(y = RHMaximum, linetype = "NEON")) +
-#   geom_line(aes(y = maxRHCorrect, linetype = "Downscale")) +
-#   theme_pubr()
-#
-# gg.max.rh <- rh.df %>%
-#   ggplot() +
-#   # aes(x = Date) +
-#   aes(x = RHMaximum, y = maxRHCorrect) +
-#   geom_point() +
-#   # geom_abline() +
-#   labs(title = "Daily Maximim RH (%)",
-#        x = "NEON",
-#        y = "Daymet Corrected") +
-#   theme_pubr()
-# gg.max.rh
-# gg.min.rh <- rh.df %>%
-#   ggplot()+
-#   aes(x = RHMinimum, y = minRHCorrect) +
-#   geom_point() +
-#   geom_abline() +
-#   labs(title = "Daily Maximim RH (%)",
-#        x = "NEON",
-#        y = "Daymet Corrected") +
-#   theme_pubr()
-# gg.min.rh
 
 ## Precipitation ==========================================================================
 
