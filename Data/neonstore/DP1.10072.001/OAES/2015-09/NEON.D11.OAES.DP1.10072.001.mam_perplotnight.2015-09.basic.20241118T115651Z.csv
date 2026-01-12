@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c748724a-4dbb-4591-b4c7-03ba4e1376ca","2FC0630767964471B67BC93EFBCB48D1","OAES.2015.38","OAES_003.mammalGrid.mam","D11","OAES","OAES_003","diversity","2015-09-15","2015-09-15",,,,
+"fc0af141-a08c-49a6-85be-11ffd2fcb606","66CE0DEDC23D48CF99169A25B84D121A","OAES.2015.38","OAES_029.mammalGrid.mam","D11","OAES","OAES_029","diversity","2015-09-15","2015-09-15",,,,
+"6fa9f662-f9c2-44b7-af27-df8d12439b7e","941B539A5FC04C258D6C4B3D1D477961","OAES.2015.38","OAES_004.mammalGrid.mam","D11","OAES","OAES_004","diversity","2015-09-15","2015-09-15",,,,
+"abaa5b9b-b0ff-42be-beeb-247b3663b868","A9786116F41B4F579C27AB17AE79F9F7","OAES.2015.38","OAES_010.mammalGrid.mam","D11","OAES","OAES_010","pathogen","2015-09-16","2015-09-16",,,,
+"913570d9-b1b8-4dc4-afec-a8af5c78105b","22E8054D72A84422A075EE327346BE69","OAES.2015.38","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2015-09-16","2015-09-16",,,,
+"f12072fd-c3a5-4242-9afd-2dd16ebd3712","82E737BBF0F2409189A262F998014974","OAES.2015.38","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2015-09-16","2015-09-16",,,,
+"2de94cf7-dd94-462c-b2f3-005badcdb711","E300C113485544E58CA81063549EB47C","OAES.2015.38","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2015-09-17","2015-09-17",,,,
+"fe77d261-d711-4f4e-8b0f-e63e4b2654be","6DDD8E271C9C4F96A94855A911E9A60E","OAES.2015.38","OAES_010.mammalGrid.mam","D11","OAES","OAES_010","pathogen","2015-09-17","2015-09-17",,,,
+"3ecd67a3-6949-4fff-af96-2d83e1c5edcb","F8904B0A1B3F413991860B907B6CBBDC","OAES.2015.38","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2015-09-17","2015-09-17",,,,

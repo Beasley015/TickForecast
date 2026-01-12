@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c5e05303-3f5b-482e-ba77-4831a5ce98e0","c1ce07f0-807d-48e5-beec-21c36d9c20ff","SCBI.2019.18","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-04-30","2019-04-30",,"NEON.DOC.000481vL",,
+"876eda4e-554e-4f44-bbc3-334a31b2c519","48aa56ba-cc6d-4401-8b26-6eb1f6a7f043","SCBI.2019.18","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-04-30","2019-04-30",,"NEON.DOC.000481vL","A lot of ants in traps.",
+"cbfe25db-5bb9-4c25-a478-8139cb89df32","f0963a69-9756-4c45-8858-68bfb9f89e62","SCBI.2019.18","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-04-30","2019-04-30",,"NEON.DOC.000481vL",,

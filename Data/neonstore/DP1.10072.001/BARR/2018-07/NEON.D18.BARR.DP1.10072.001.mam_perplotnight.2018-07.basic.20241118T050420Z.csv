@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"6d286b8f-91e0-4ad3-b0bb-e3f76b74baa7","ead05e0e-b5a2-459a-bbc0-386481b04c06","BARR.2018.30","BARR_044.mammalGrid.mam","D18","BARR","BARR_044","pathogen","2018-07-23","2018-07-23",,"NEON.DOC.000481vK",,
+"f3bba036-83b3-40c9-96eb-39cc7bbbd072","dd598152-6605-417f-a162-e2a3dd49d303","BARR.2018.30","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2018-07-23","2018-07-23",,"NEON.DOC.000481vK",,
+"d7f8ac8c-a1c3-4cde-a7ce-3b31efc0f47a","27ae0807-bb62-42a3-bf0c-55ce6154e4d4","BARR.2018.30","BARR_037.mammalGrid.mam","D18","BARR","BARR_037","diversity","2018-07-23","2018-07-23",,"NEON.DOC.000481vK","Plot very flooded",
+"98cf599a-77f7-4847-8c05-a9685929fc80","4d66dcbe-5f77-423f-8a18-85a49ef6459c","BARR.2018.30","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2018-07-23","2018-07-23",,"NEON.DOC.000481vK","Plot very flooded",
+"3870fd21-635d-4559-ba8f-060d2c1f940b","0edd4cff-813b-45de-9392-7a250d8e0fba","BARR.2018.30","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2018-07-24","2018-07-24",,"NEON.DOC.000481vK",,
+"c4248071-27b7-40eb-871b-0eb175df7ac2","b2fef09c-bec4-4376-8221-4c38af5c8449","BARR.2018.30","BARR_044.mammalGrid.mam","D18","BARR","BARR_044","pathogen","2018-07-24","2018-07-24",,"NEON.DOC.000481vK",,
+"a3325ce2-592e-4aa9-9641-c95ee5bcf6a8","e293e173-c15d-4073-b08c-6d5fd31e7789","BARR.2018.30","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2018-07-24","2018-07-24",,"NEON.DOC.000481vK",,
+"1ad3124a-53c3-49b5-9cf9-b3c57961c5d7","c0f8d120-b295-497a-be7c-e80a4b87fd84","BARR.2018.30","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","diversity","2018-07-24","2018-07-24",,"NEON.DOC.000481vK",,
+"0c72c646-4899-411a-8874-b8be51330731","72816a40-a7cf-4141-a1b5-7a93ef6b8d28","BARR.2018.30","BARR_084.mammalGrid.mam","D18","BARR","BARR_084","diversity","2018-07-24","2018-07-24",,"NEON.DOC.000481vK",,

@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"99a99034-0828-4be1-9a1d-2b649c57606d","E476542A4B6047F6ABF89769867D9585","HARV.2014.18","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","recapture","2014-04-28","2014-04-28",,,"No captures",
+"d514f84f-7f79-49ff-83bb-f6c6f55abe68","7976001D196C48C082AE59F96C6FAB52","HARV.2014.18","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2014-04-28","2014-04-28",,,"No captures",
+"efe076ec-7349-4960-a912-13ffb9d43041","8CBCC836964345C986373E0C1040DCE2","HARV.2014.18","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2014-04-29","2014-04-29",,,,
+"a938a4ba-ff12-44c6-818b-ca77c597a63c","312F7F9F09944071A4D0E6BDC7F919EA","HARV.2014.18","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","recapture","2014-04-29","2014-04-29",,,"No captures",
+"9cee8f39-e790-4606-aebe-0fd212cfb87b","BFB1B949EFC7436988A4E03E7086D47D","HARV.2014.18","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","recapture","2014-04-30","2014-04-30",,,,
+"c32f7993-eaf8-46f1-837c-94f29976d186","78D7CCA8F98D4A298A15FC9140F6713A","HARV.2014.18","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2014-04-30","2014-04-30",,,,

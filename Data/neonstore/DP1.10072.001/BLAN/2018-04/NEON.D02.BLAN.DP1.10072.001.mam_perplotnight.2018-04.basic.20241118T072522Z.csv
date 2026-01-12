@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c2c5b018-c5b0-4634-bcbb-577e318c3d95","d9e8842b-a5dc-45a6-a35a-1cc5b0faa115","BLAN.2018.16","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2018-04-17","2018-04-17",,"NEON.DOC.000481vK",,
+"02498e35-f852-492a-8e53-2b973abae938","b6a3ec50-4735-4d64-b71e-f4b35f0d7699","BLAN.2018.16","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2018-04-17","2018-04-17",,"NEON.DOC.000481vK",,
+"f126ba38-9286-46aa-8846-5c450c5fd49d","e309314b-09e0-4851-8abd-a5a61a06a5c6","BLAN.2018.16","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2018-04-17","2018-04-17",,"NEON.DOC.000481vK","Grass short",
+"4bc7bb1d-551b-4ec6-869d-71ba03ad9edd","4785cf40-c35d-4280-9652-2c645a08378f","BLAN.2018.16","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2018-04-18","2018-04-18",,"NEON.DOC.000481vK",,
+"7780c6da-0727-48bc-a111-b74f67f75f5c","4a1686aa-b202-4e12-bb49-0110ed68ba76","BLAN.2018.16","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2018-04-18","2018-04-18",,"NEON.DOC.000481vK",,
+"0c3d788b-3df1-4d68-b051-b6cffed0cf15","a46cc98a-5cac-4a12-b603-e94c1c1e675f","BLAN.2018.16","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2018-04-18","2018-04-18",,"NEON.DOC.000481vK","grass in plot <1ft tall",
+"131c4513-ba3e-40ca-b728-9d3859bfed37","5e588a71-1115-49b7-8c92-fb4e68e7480f","BLAN.2018.16","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,
+"112c9c77-598f-4cf0-b6d4-25b9dee7d783","e5118bbc-9053-43a4-928e-89d24b6c3399","BLAN.2018.16","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","diversity","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,
+"dba95a59-e390-4bae-82f1-261825ef50fd","cc33f65d-8042-4239-94df-a52642cafef4","BLAN.2018.16","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,
+"fc4cfe6f-f8d8-4aa8-b9af-c27608aa0960","c142dfd3-c9d8-47f0-a952-82d92f8bf7aa","BLAN.2018.16","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2018-04-19","2018-04-19",,"NEON.DOC.000481vK","Grass very short",

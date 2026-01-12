@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8b0bd7ae-8f98-4f4e-b529-e6a15a3a407f","14ad746a-d1fb-42fe-babd-32da9749ff10","SERC.2020.18","SERC_016.mammalGrid.mam","D02","SERC","SERC_016","diversity","2020-05-01","2020-05-01","logistical","NEON.DOC.000481vM","COVID19",
+"2ccde0cd-9aa0-40fc-ae7e-dc4e6d1f8715","b0ede75f-12c3-4179-8f50-dec336b03999","SERC.2020.18","SERC_032.mammalGrid.mam","D02","SERC","SERC_032","diversity","2020-05-01","2020-05-01","logistical","NEON.DOC.000481vM","COVID19",

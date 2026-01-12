@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"40d08126-3ddf-4812-bee7-37abbbaa3559","92968e66-0095-40d2-8c63-e90cd97495ab","NIWO.2025.40","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2025-10-01","2025-10-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"ef7c8f8d-96b5-4cde-a9e2-b06ccb966d17","ad8ac2e4-391e-45e1-a812-c4dc03652473","NIWO.2025.40","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2025-10-01","2025-10-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"17caa4c8-9ecd-4abc-be3d-37fc01967755","835b74c7-0ec3-455a-a13e-6e62cdda78ac","NIWO.2025.40","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2025-10-01","2025-10-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"c6cd1d27-8dd2-4182-9d88-63152ba70259","1784be8e-c6a3-4a7a-b6b3-c164b1dfa8b1","NIWO.2025.40","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2025-10-01","2025-10-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

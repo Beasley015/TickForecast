@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"11d446f4-c892-4da7-88b2-87d9a69ad1a6","3529B643891D494A9E7AEC3C46D5F421","SCBI.2015.20","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2015-05-12","2015-05-12",,,,
+"0acdae20-3378-479f-b838-55611b528c85","2D9545D29D984FA4B6B603DA0B3E2007","SCBI.2015.20","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2015-05-12","2015-05-12",,,,
+"e4287e06-0f6d-4754-bd9f-434d0fc03890","C7F09A5295F943B1B3F073A486F009DD","SCBI.2015.20","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2015-05-12","2015-05-12",,,,
+"f7817e15-9b94-4509-a0f4-a9d8c90cbcdc","FB5B0935B8A24EA681B31C047ACBB3DE","SCBI.2015.20","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2015-05-13","2015-05-13",,,,
+"9822faff-0f31-428d-a5b3-4bf1f1618498","49843B34F35A46E1B938BC1D1D66627C","SCBI.2015.20","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2015-05-13","2015-05-13",,,"High capture rates this morning, used priority processing (ID, bleeding, tagging, weight)",
+"707146bc-2642-4d70-aef1-1d09db41b2c5","673EDC79A69A409BAE0C0E2563947FE7","SCBI.2015.20","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2015-05-13","2015-05-13",,,"High capture rates led to priority processing",
+"84dcffcb-1f54-4627-b9ce-ae2c8e30208a","249751A516BE4A0ABE0478C1CBE73485","SCBI.2015.20","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2015-05-14","2015-05-14",,,"High capture rate; started priority processing",
+"cfee4e8a-3af3-46ef-83cf-f6f3b5a9450f","3DD9AB4F2B5542C89EF7DA18FE976E88","SCBI.2015.20","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2015-05-14","2015-05-14",,,"High capture rates; priority processing",
+"c257803c-7301-4612-8d84-8254ff1f57d8","DA784D1D29BF4B7695BF83C82D11B0A6","SCBI.2015.20","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2015-05-14","2015-05-14",,,,
+"d08e89de-fa3a-4e26-b052-9076ddb4ebc5","E63DC431123C4F96A98B6A0169532B13","SCBI.2015.20","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2015-05-15","2015-05-15",,,,
+"c948afad-6457-45d6-98f5-3295f2dab5e1","10F1C6F1B47045B086947A066D033DF9","SCBI.2015.20","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2015-05-15","2015-05-15",,,,
+"8f564146-a987-44da-b951-8bd8de05846b","3E3B79BF37884E0DA889A3652DADF10F","SCBI.2015.20","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2015-05-15","2015-05-15",,,,

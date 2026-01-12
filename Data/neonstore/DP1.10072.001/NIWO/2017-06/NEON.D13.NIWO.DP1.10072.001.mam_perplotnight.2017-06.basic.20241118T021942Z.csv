@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"35b9f4c0-9136-4977-8e6b-e15cdddc7e30","2af3e9e3-8e02-4025-b997-52d8d9e357d1","NIWO.2017.26","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2017-06-27","2017-06-27",,,,
+"694dad67-594b-49f8-9010-cf5ad57c1511","d927dfd5-efe6-4b9a-b03a-14abafbe563c","NIWO.2017.26","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2017-06-27","2017-06-27",,,,
+"30bfeaa7-3099-470c-8222-4f79f42f22d6","69899348-6a97-492e-8012-457231c9e000","NIWO.2017.26","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2017-06-27","2017-06-27",,,,
+"c21465c7-6e7b-4c69-950c-cf97e8131040","0c3b9aaf-c8b5-441d-84a4-9304c12913ed","NIWO.2017.26","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2017-06-27","2017-06-27",,,,
+"a17da007-81ed-4780-8335-c24dd5283937","2cf1dda3-c69b-499c-9133-81b369fca730","NIWO.2017.26","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2017-06-28","2017-06-28",,,,
+"3dcd51e1-49ef-4f31-aa30-00ee62c6bd3a","42824d27-1ad3-4026-9a4a-9d7290beb37c","NIWO.2017.26","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2017-06-28","2017-06-28",,,,
+"f46fe8b7-968c-4389-91e7-25dd1187d508","a7f114ee-e173-426e-803e-70717f7d5be4","NIWO.2017.26","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2017-06-28","2017-06-28",,,,
+"b2a05f27-f073-4254-b33c-c4b9b8558783","37df2237-5dc7-493c-8f0e-81e5c8a4f40d","NIWO.2017.26","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2017-06-28","2017-06-28",,,,
+"d858b2d2-ad1c-4fcb-9c49-dc0eae58e763","386f0a9c-4d81-49e7-86c6-dd171891a761","NIWO.2017.26","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2017-06-28","2017-06-28",,,,
+"c4d14b65-443d-492b-a595-365dfb03d8ad","4cdd0907-091a-406b-a9f3-823eaf2015e1","NIWO.2017.26","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2017-06-29","2017-06-29",,,,
+"4e2150f8-d475-4642-bff9-4755ec846593","aafe5a02-e879-413a-93fb-bc5c4cc41ddb","NIWO.2017.26","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2017-06-29","2017-06-29",,,,
+"288f8b82-4e95-44ac-912b-f415829a72f9","c4b792f5-0c4c-49a5-bae3-e40847204ff7","NIWO.2017.26","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2017-06-29","2017-06-29",,,,

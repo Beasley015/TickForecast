@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"020950c6-0997-4b3a-89bb-dddc96a6729a","CFC77324D03F4E5690910BBC757BA03F","STER.2015.13","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2015-03-24","2015-03-24",,,"Used sampling protocol vF",
+"742fc97e-7229-418f-9506-fc024a1baacf","FB4097F8A8774F6B9DCE23C8DF9AEBC3","STER.2015.13","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2015-03-24","2015-03-24",,,"used protocol vF",
+"c8fd72cc-7962-4fc1-af66-6e379b02293e","3B2775636C8449769DF03C7451520928","STER.2015.13","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2015-03-24","2015-03-24",,,,
+"a2a0d1ec-6856-4ded-95f0-3115f1e37cdf","9A1EC14B15804DAA822613253BD6562A","STER.2015.13","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2015-03-25","2015-03-25",,,"Used sampling protocol vF Remaining captures ( 16) were released due to logistics. 2 animals died and several were suffering cold stress and the weather was a wintery mix of precipation.",
+"25760523-c882-458a-8898-7e2e7f1d8d6c","508DF22E4D994C1DAD68DC591B94A9B3","STER.2015.13","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2015-03-26","2015-03-26",,,"used protocol vF",
+"c52b9930-767d-486d-ad4f-c227a7c57bdb","104096BBCBE04E57B523CFB8F8F96BF2","STER.2015.13","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2015-03-26","2015-03-26",,,,
+"b63d5560-546a-443d-86b8-463f8ee32c68","B45B2D59FE3E4E588AA24A6580AD5A3F","STER.2015.13","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2015-03-26","2015-03-26",,,"used protocol vF",

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d1d08534-b90f-4391-af99-8140c7c70de2","e4abccad-e1ce-466b-af64-c7dbe1ea98be","HEAL.2021.33","HEAL_010.mammalGrid.mam","D19","HEAL","HEAL_010","diversity","2021-08-17","2021-08-17","temperature low","NEON.DOC.000481vM",,
+"515365e5-13af-4e08-b6dc-07c7ee86fd51","11c6c34d-22ba-4a5b-94dc-35b22cda850f","HEAL.2021.33","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2021-08-17","2021-08-17","temperature low","NEON.DOC.000481vM",,
+"2f24e510-fea4-4ec3-a99f-85b43e431875","9af4fec5-e393-4dd3-a939-1d5b9739c317","HEAL.2021.33","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2021-08-17","2021-08-17","temperature low","NEON.DOC.000481vM",,
+"9feab245-a10e-4826-a029-270cacbcb108","5448446c-915a-40b4-950f-28e328294aa3","HEAL.2021.33","HEAL_014.mammalGrid.mam","D19","HEAL","HEAL_014","diversity","2021-08-18","2021-08-18","temperature low","NEON.DOC.000481vM",,
+"893263b3-b68a-478f-bb06-cc12a3d624b3","57930b91-2cea-4f19-b7c5-0e5321c5d169","HEAL.2021.33","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2021-08-18","2021-08-18","temperature low","NEON.DOC.000481vM",,
+"17fb1a7d-9d87-4eff-ac45-823f22bd1afa","f2881283-f740-431f-bb55-0740bdf5a134","HEAL.2021.33","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2021-08-18","2021-08-18","temperature low","NEON.DOC.000481vM",,
+"c3c3e64a-c53e-408d-b1f8-cdec4a460785","ecd5238b-17d6-4688-b5f1-7a42b284d012","HEAL.2021.33","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2021-08-19","2021-08-19","temperature low","NEON.DOC.000481vM",,
+"6620bea5-2d52-45c5-8696-5dade3ab7db5","2b72ea9c-93ba-489e-bf0a-7c19db937c06","HEAL.2021.33","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","diversity","2021-08-19","2021-08-19","temperature low","NEON.DOC.000481vM",,
+"ee28f6ef-9eaa-4220-9b00-c72e321820b3","d4d7a3a3-c499-4ffe-a34d-aa69a28b844d","HEAL.2021.33","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2021-08-19","2021-08-19","temperature low","NEON.DOC.000481vM",,
+"d0e0673b-ab7f-4052-addb-b5344b915fc9","6f113291-ca02-47c0-96fa-57c193c960da","HEAL.2021.33","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","diversity","2021-08-20","2021-08-20","temperature low","NEON.DOC.000481vM",,

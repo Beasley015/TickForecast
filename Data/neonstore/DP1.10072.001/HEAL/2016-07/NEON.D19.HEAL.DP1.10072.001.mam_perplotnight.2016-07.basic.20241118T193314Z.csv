@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f6ad3ca3-ba64-4bfe-90ea-3b2842790316","31155F9E10D6457D91B05938AD652691","HEAL.2016.26","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vG",,
+"8f76f7fc-6eb6-4096-b15d-5a7d4645e57e","C6524D209479456D8963E70FA3693981","HEAL.2016.26","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","diversity","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,
+"2f9b9383-cc11-40f8-8466-d52934d9037c","0FFD9C9C78DA49699832896EBC4C1DFC","HEAL.2016.26","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,
+"32031b0b-7f1e-4702-9222-aebcb7a49a96","43F1347AC091461182DA5DB082A45D96","HEAL.2016.26","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,

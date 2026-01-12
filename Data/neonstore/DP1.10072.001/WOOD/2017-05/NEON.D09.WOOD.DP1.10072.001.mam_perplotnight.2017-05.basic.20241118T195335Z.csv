@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"4f6b7ca9-cee2-4aed-afe9-26b246d1b974","6f367f74-7fc8-482a-bb07-41663ff2ec58","WOOD.2017.21","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-05-23","2017-05-23",,,,
+"0bf031f0-9ae2-43d2-b10a-05af6d77ba8f","8af98511-7a36-4c8b-a390-ebc1da4a6930","WOOD.2017.21","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2017-05-23","2017-05-23",,,,
+"b9ed25eb-283b-493f-8e92-f2c2be392354","02b7d434-089a-4562-ba9e-c2843a5adb77","WOOD.2017.21","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2017-05-23","2017-05-23",,,,
+"913c2202-7c31-4744-afe4-62ded4a49fff","bf1acde1-561b-4515-bae0-189eb2c27c4b","WOOD.2017.21","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-05-24","2017-05-24",,,"Recorded by mgentzkow",
+"dc936368-f69b-4490-852c-85474a052fb8","a7db55cd-1429-4ee9-b156-db5ce7185e04","WOOD.2017.21","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-05-24","2017-05-24",,,,
+"add792d9-fec5-440f-8979-ef2698bf2d3e","61651bb0-d087-418e-b847-c9047580100d","WOOD.2017.21","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-05-24","2017-05-24",,,,
+"29cb37fd-ca10-474d-87d6-4069fe095c6a","b6049edf-1d05-457c-adc0-5e816122a564","WOOD.2017.21","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-05-25","2017-05-25",,,,
+"6eb0ad28-5f63-41c0-957e-d447fa261915","96091fa1-cc93-4b09-bbcf-0105e3449676","WOOD.2017.21","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-05-25","2017-05-25",,,,
+"e001ed5b-7c6a-479c-8144-31dc47dc9d8d","2c23d6b9-4a18-46cb-93d5-9441f0981d48","WOOD.2017.21","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-05-25","2017-05-25",,,,
+"289a5e4f-cc8a-4e38-b73d-934babee8839","e78909ee-efff-4cbf-b2a2-b2f3f163951b","WOOD.2017.21","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2017-05-25","2017-05-25",,,,
+"578b141b-7c51-4198-b8da-2f90a3be8583","543046cb-6385-4163-8aa7-a06094d7c475","WOOD.2017.21","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-05-26","2017-05-26",,,,
+"807d31c9-8c4a-4b4c-a981-a42be5c11d16","da90b0ea-e57c-430e-9f61-185860968d87","WOOD.2017.21","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-05-26","2017-05-26",,,,

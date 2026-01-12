@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"139acd51-9c2b-45b6-b785-c5e217791ef0","BC666638776D4FF5BEDA8D6EB9C53A81","UNDE.2015.25","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2015-06-21","2015-06-21",,,,
+"765dc4f5-484a-4eac-89dc-d96b2352be5e","0A22C4EF8F4446DE8E6E4C8C5171A82B","UNDE.2015.25","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2015-06-21","2015-06-21",,,,
+"77ac5ddb-5dd7-49a7-906b-c4f6dae3859e","77920913FD71410A93594278CCA4188C","UNDE.2015.25","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2015-06-21","2015-06-21",,,,
+"6179d438-3f93-4abd-a2d8-d34656803fb2","53B077B45DAC41AB8CA060AC6D99D9FE","UNDE.2015.25","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2015-06-22","2015-06-22",,,"Grid closed due to extensive bear damage on the previous night of trapping",
+"30b70c4b-6f06-4fe9-b6e5-2d48b75f2947","D4D798BC23904C5F84D1C2E46C8459CB","UNDE.2015.25","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2015-06-22","2015-06-22",,,,
+"78e21fbd-9d69-4245-a1fa-daabcb8abdb1","8742D7C3DD404D818037A13330EE1F78","UNDE.2015.25","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2015-06-22","2015-06-22",,,,
+"8f02e691-5347-4317-b03f-d401a5c5167d","2BF4CDF3147A4A08B798F4B8B3D9497F","UNDE.2015.25","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2015-06-23","2015-06-23",,,"Grid closed due to extensive bear damage on the previous night of trapping",
+"be525c40-ea5e-4819-9dac-1927a0f096fd","AF3BDA2ACE2941AAB154EDF4921513F7","UNDE.2015.25","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2015-06-23","2015-06-23",,,"This grid was visited by a bear overnight. Seventy-one traps were destroyed.",
+"b64a71b4-9599-43a3-8926-45ae60313393","4E9509CB73294172B9D8B39A38078918","UNDE.2015.25","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2015-06-23","2015-06-23",,,,
+"7f3af042-e37f-4073-9cbf-e45d4bcf5d75","0622B27D16384DC882FEB1875B978D09","UNDE.2015.25","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2015-06-24","2015-06-24",,,,
+"7240fae5-dde3-42f2-b697-74dede56215d","23088671E378408DA608A3156D90B653","UNDE.2015.25","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2015-06-24","2015-06-24",,,,
+"378e9f0e-4528-4b42-8b0c-b5e530f31b7c","99606DF0B43A4BA2AB694D280A7AE6EC","UNDE.2015.25","UNDE_002.mammalGrid.mam","D05","UNDE","UNDE_002","diversity","2015-06-24","2015-06-24",,,,

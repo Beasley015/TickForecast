@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1b89d20a-0aef-44f7-8820-fcf0d4dd37f0","3758febb-f4b1-4014-af25-57e733e16442","KONA.2017.41","KONA_003.mammalGrid.mam","D06","KONA","KONA_003","diversity","2017-10-09","2017-10-09",,"NEON.DOC.000481vJ",,
+"71589c4f-7d29-4184-a525-14be1fd0c91e","10eae2f7-865c-4189-a297-7929d9519b79","KONA.2017.41","KONA_004.mammalGrid.mam","D06","KONA","KONA_004","diversity","2017-10-09","2017-10-09",,"NEON.DOC.000481vJ",,
+"0d1f5d0f-9bde-4dca-864f-1f82800fe869","6b060576-937f-4244-926b-24fb50e7b5ad","KONA.2017.41","KONA_006.mammalGrid.mam","D06","KONA","KONA_006","diversity","2017-10-09","2017-10-09",,"NEON.DOC.000481vJ",,
+"8a676c80-27de-4bd0-95a2-6c6eb81fe63b","7bfd397f-d355-4409-bc5e-2cd738322415","KONA.2017.41","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2017-10-12","2017-10-12",,"NEON.DOC.000481vJ",,
+"b47982ea-8f9a-4d85-a4e2-ff06c8cd6b65","589cf522-5489-4019-8309-39f0d13aadcc","KONA.2017.41","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2017-10-12","2017-10-12",,"NEON.DOC.000481vJ","Soybean field is now harvested",
+"d2fb9ca7-7875-4b74-9aef-ec208998d5d3","94eb9f19-166c-4a03-b978-b7b4af48168b","KONA.2017.41","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2017-10-12","2017-10-12",,"NEON.DOC.000481vJ",,
+"eccf4188-7576-4de2-acc0-cd95481eac03","76789bb9-9a4f-41f4-ac44-a0b7bc9af18a","KONA.2017.41","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2017-10-13","2017-10-13",,"NEON.DOC.000481vJ",,
+"f12a7b60-7446-4794-abb7-f14e8488c0e8","3dcc946d-d409-48ca-b253-e9dca463bab9","KONA.2017.41","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2017-10-13","2017-10-13",,"NEON.DOC.000481vJ",,
+"488ee4a6-dd74-4c43-90e8-67bd31877338","625c235a-0fa2-4047-afca-9849378f80e5","KONA.2017.41","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2017-10-13","2017-10-13",,"NEON.DOC.000481vJ",,

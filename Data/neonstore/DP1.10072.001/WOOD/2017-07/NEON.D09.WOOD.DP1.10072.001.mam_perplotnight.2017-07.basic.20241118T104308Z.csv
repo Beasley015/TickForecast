@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"fd06acc4-4503-4695-9e0c-bb0d69aac1bd","061432dc-df93-42fd-8060-c73cf4ce0cbf","WOOD.2017.29","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2017-07-18","2017-07-18",,"NEON.DOC.000481vJ",,
+"f468d048-5b79-427e-acda-68b0ae0d96c5","93a9640c-3bd4-4b6a-b6f0-2358d8df42c8","WOOD.2017.29","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-07-18","2017-07-18",,"NEON.DOC.000481vJ",,
+"d8749adf-ebf9-47b4-a701-7af7da5b4280","497674e4-0ea1-4fcf-b14a-3acf922fd7a6","WOOD.2017.29","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2017-07-18","2017-07-18",,,,
+"26b783fc-d465-4b4a-b8fc-40a6c6957483","b0ffd67a-d88f-4022-bcf3-a3951a883448","WOOD.2017.29","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ",,
+"ec44b41c-0000-441d-aa3e-56d10e7d7dec","f85bc4cd-b05e-434a-b641-d5b1f68080e5","WOOD.2017.29","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-07-19","2017-07-19",,,,
+"48380100-7f98-4e52-86c6-aba310fbaa55","3bc1cdf4-333c-472a-8588-f053f9be36c7","WOOD.2017.29","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ",,
+"aea3190a-fbcd-46ba-96a4-c677bf0f460d","b367fef6-8fdd-4143-adad-3d2732ba2367","WOOD.2017.29","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"4f558948-71d3-4cde-ac14-479c2033cb70","524f0d9b-f0e1-4474-9165-3813cdce5baf","WOOD.2017.29","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2017-07-20","2017-07-20",,,,
+"a24985a4-dfe3-4289-b4f1-71207cbde059","1cb502e2-a778-4768-a296-362f6c87e455","WOOD.2017.29","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-07-20","2017-07-20",,,"Recorded by swenner",
+"7fde4408-d39a-476e-8e43-4a143cfef351","2a3c2fdb-01c2-4dd9-9294-c6939d23e80b","WOOD.2017.29","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-07-20","2017-07-20",,"NEON.DOC.000481vJ",,
+"c8e19cb2-2dbb-4250-97bf-68661b8e3c8a","66291769-fe29-4584-8ae6-734d31ba03c0","WOOD.2017.29","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-07-21","2017-07-21",,"NEON.DOC.000481vJ",,
+"5a6b3249-9bca-4e35-b2d9-7f4a7fb82b86","4149b814-327e-4b82-aff6-d3ae90c34462","WOOD.2017.29","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-07-21","2017-07-21",,,"Recorder: Kjohnson",

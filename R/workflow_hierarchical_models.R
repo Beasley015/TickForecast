@@ -1,4 +1,6 @@
-## main transferability workflow script
+## Hierarchical workflow script
+## Based on previous work by Foster et al.
+## Updated by E.M. Beasley, fall 2025
 ## 1 - setup
 ## 3 - state data intake
 ## 4 - weather data intake
@@ -16,9 +18,9 @@
 
 library(tidyverse)
 library(lubridate)
+library(zoo)
 library(nimble)
 library(parallel)
-# nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
 
 options(dplyr.summarise.inform = FALSE)
 
@@ -31,75 +33,44 @@ if (update) {
 }
 
 # Define models to run
-models <- c("Weather", "WithWeatherAndMiceGlobal")
+models <- c("Weather_hierarchical", "WeatherMice_hierarchical")
 species <- c("Ixodes scapularis", "Amblyomma americanum") 
-neon.sites <- c(
-	"BLAN",
-	"HARV",
-	"KONZ",
-	"LENO",
-	"OSBS",
-	"SCBI",
-	"SERC",
-	"TALL",
-	"TREE",
-	"UKFS"
-) # Eventually this will be modified when model is hierarchical
-
-cary.sites <- c(
-  "GREN",
-  "HNRY",
-  "TEA"
-) 
 
 # Create all possible combos
 jobs <- expand_grid(
 	model = models,
-	species = species,
-	site = c(neon.sites, cary.sites)
-)
+	species = species)
 
-# Not all sites have both tick species
-jobs <- jobs %>%
-	filter(
-		!(site == "HARV" & species == "Amblyomma americanum"),
-		!(site == "TREE" & species == "Amblyomma americanum"),
-		!(site == "KONZ" & species == "Ixodes scapularis"),
-		!(site == "OSBS" & species == "Ixodes scapularis"),
-		!(site == "TALL" & species == "Ixodes scapularis"),
-		!(site == "UKFS" & species == "Ixodes scapularis"),
-		!(site == "GREN" & species == "Amblyomma americanum"),,
-		!(site == "HNRY" & species == "Amblyomma americanum"),,
-		!(site == "TEA" & species == "Amblyomma americanum"),
-	)
-# Future edit: maybe change so impossible combos are auto-filtered
-
-# Run this line to only get models including weather
-# jobs <- jobs %>% filter(grepl("Weather", model))
+# Vectors of site names
+iscap.sites <- c("BLAN","GREN","HARV","HNRY","LENO","SCBI",
+                  "SERC","TEA","TREE")
+ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
+                 "SERC","TALL","UKFS")
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
 	job.num <- 1
 }
 
-site.job <- jobs$site[job.num]
 species.job <- jobs$species[job.num]
 model.job <- jobs$model[job.num]
 
-# message("====== Running simulation at ", site.job, " ======")
-# message(species.job)
-# message(model.job)
+if(species.job=="Ixodes scapularis"){
+  sites <- iscap.sites
+  } else{
+    sites <- ambly.sites
+}
 
 # Assign variable that will later control whether mice submodel is run (?)
 ua.cal <-
 	if_else(
-		model.job == "WithWeatherAndMiceGlobal",
+		model.job == "WeatherMice_hierarchical",
 		"mice_ic_parameter_process",
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-# n.slots <- 1
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+n.slots <- 2
 production <- TRUE
 n.iter <- 1000 #50000
 Nmc <- 2000
@@ -108,7 +79,7 @@ horizon <- 365
 # =========================================== #
 #       tick data intake ----------------
 # =========================================== #
-source("./DataProcessing/functions.R")
+source("./DataProcessing/functions_hierarchical.R")
 
 # Get tick data based on site
 neon.data <- neon_tick_data(species.job) %>% suppressMessages()
@@ -116,8 +87,7 @@ neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
-	filter(siteID == site.job, grepl("Forest", nlcd), 
-	       time >= "2016-01-01" & time < "2022-01-01") %>%
+	filter(time >= "2016-01-01" & time < "2022-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -129,10 +99,15 @@ n.drags <- length(drag.dates)
 #       get initial conditions ----------
 # =========================================== #
 
-df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"))
+df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"),
+                      show_col_types = F)
 month.get <- if_else(month(start.date) < 5, 4, month(start.date))
 data.latent <- df.latent %>%
 	mutate(model = gsub("DormantNymph", "", model)) %>%
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchical",
+                           model == "WeatherAndMiceGlobal" ~ 
+                             "WeatherMice_hierarchical",
+                           TRUE ~ model)) %>%
 	filter(
 		model == model.job,
 		type == "latent",
@@ -164,65 +139,89 @@ IC <- tibble(
 #       mouse data intake ---------------
 # =========================================== #
 
-source("./DataProcessing/capture_matrix.R")
+source("./DataProcessing/capture_matrix_hierarchical.R")
 
-if(site.job %in% c("HNRY", "TEA", "GREN")){
-  smam <- read_csv("./Data/cary_mouse_formatted.csv",
+smam_cary <- read_csv("./Data/cary_mouse_formatted.csv",
                    show_col_types=F)
-} else{
-  smam <- read_csv("./Data/allSmallMammals.csv",
+smam_neon <- read_csv("./Data/allSmallMammals.csv",
                    show_col_types=F)
-}
                
-ch.ls <- capture_matrix(site.job, smam)
-ch <- ch.ls$ch
-alive <- ch %in% 1:3
-ch[alive] <- 1
-ch[!alive] <- 0
-ncaps <- rowSums(ch)
-ch <- ch[ncaps > 0, ]
-source("./DataProcessing/known_states.R")
+ch.ls <- capture_matrix(smam_neon, sites=sites)
+
+ch <- ch.ls$ch %>%
+  mutate_at(.vars = vars(-siteID), ~case_when(. %in% 1:3 ~ 1,
+                                              TRUE ~ 0)) %>%
+  mutate(ncaps = rowSums(.[2:156])) %>%
+  filter(ncaps > 0) %>%
+  select(-ncaps)
+
+# mna: NEON
 ks <- known_states(ch)
-mna <- colSums(ks)
-mice.obs <- ymd(colnames(ch)) # unique sampling days: mice
+mna <- ks %>%
+  group_by(siteID) %>%
+  summarise(across(.cols = everything(), sum)) %>%
+  pivot_longer(cols = -siteID, names_to = "collectDate", values_to = "MNA") %>%
+  mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d"))
+
+# Add Cary mna
+mna.full <- smam_cary %>%
+  select(-plotID) %>%
+  filter(collectDate >= ymd("2013-01-01")) %>%
+  full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
+  pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
+              values_fn = sum) %>%
+  mutate(pmap_df(., ~ na.locf(c(...)[-1]))) %>%
+  mutate(across(-siteID, .fns = as.numeric))
+
+mice.obs <- ymd(colnames(mna.full)[-1]) # unique sampling days: mice
 
 # every day in mouse sequence
 mice.seq <- seq.Date(mice.obs[1], mice.obs[length(mice.obs)], by = 1)
 
-mna.all.days <- rep(NA, length(mice.seq))
+mna.all.days <- matrix(NA, ncol = length(mice.seq), nrow = nrow(mna.full))
 mna.count <- 1
 for (i in seq_along(mice.seq)) {
 	if (mice.seq[i] %in% mice.obs) {
-		mna.all.days[i] <- mna[mna.count]
+		mna.all.days[,i] <- pull(mna.full, colnames(mna.full)[mna.count+1])
 		mna.count <- mna.count + 1
 	} else {
-		mna.all.days[i] <- mna[mna.count]
+		mna.all.days[,i] <- pull(mna.full, colnames(mna.full)[mna.count+1])
 	}
 }
 
-# Not sure if this is actually needed:
-# # historical mna
-# mna.hist <- mna_jags("Green Control", return.mean = TRUE)
-# 
-# # center and scale
-# mna.scaled <- tibble(
-# 	mna.scaled = (mna.all.days - mna.hist$mean) / mna.hist$sd,
-# 	Date = mice.seq
-# )
+# Shouldn't need historical but will keep for now:
+# historical mna
+mna.hist <- mna_jags("Green Control", return.mean = TRUE)
+
+# center and scale
+mna.scaled <- as.data.frame(mna.all.days-mna.hist$mean/mna.hist$sd)
+colnames(mna.scaled) <- mice.seq
+
+mna.scaled <- mna.scaled %>%
+  mutate(siteID = mna.full$siteID) %>%
+  pivot_longer(cols=-siteID, names_to="Date", values_to = "mna_scaled")
 
 # =========================================== #
 #       daymet intake and correction -------------
 # =========================================== #
-source("./DataProcessing/daymet_downscale.R")
+source("./DataProcessing/daymet_downscale_hierarchical.R")
 
-cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
-maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
-    select(Date, maxTempCorrect) %>%
-    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
+cgdd <- daymet_cumGDD(sites=sites) %>%
+  ungroup() %>%
+  select(-year) %>%
+  suppressMessages()
+
+maxTemp <- daymet_temp(sites, minimum = FALSE) %>%
+  ungroup() %>%
+  select(Date, siteID, maxTempCorrect) %>%
+  mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
+  suppressMessages()
+
+rh <- daymet_rh(sites) %>%
+    select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
     suppressMessages()
-rh <- daymet_rh(site.job) %>%
-    select(Date, maxRHCorrect, minRHCorrect) %>%
-    suppressMessages()
+
+# RESUME HERE -------------
 precip <- daymet_precip(site.job) %>%
     select(Date, precipitation) %>%
     suppressMessages()

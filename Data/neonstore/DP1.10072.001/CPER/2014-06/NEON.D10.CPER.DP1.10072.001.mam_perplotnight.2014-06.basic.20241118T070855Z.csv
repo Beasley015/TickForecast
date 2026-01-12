@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"36ad5a8e-ed07-457f-a452-f727711aa4fd","75B3A409FEB344D9933C8D3A9B84B85E","CPER.2014.26","CPER_002.mammalGrid.mam","D10","CPER","CPER_002","recapture","2014-06-29","2014-06-29",,,"No captures or disturbed traps.",
+"bf04f053-2636-4805-aba1-c18f16a633a8","991A31AFE8A94B24A2C4054E14249923","CPER.2014.26","CPER_006.mammalGrid.mam","D10","CPER","CPER_006","recapture","2014-06-29","2014-06-29",,,,
+"273b0745-4b81-4108-a70f-4a14dc1551dc","4D9C1B72AC384134AE8FE3C1E314A616","CPER.2014.26","CPER_009.mammalGrid.mam","D10","CPER","CPER_009","recapture","2014-06-29","2014-06-29",,,,
+"3077745d-93a2-4451-9b35-ce03972bdb18","0774A07919034D6BA2A5ABE58C958FDC","CPER.2014.26","CPER_008.mammalGrid.mam","D10","CPER","CPER_008","recapture","2014-06-29","2014-06-29",,,"No captures or disturbed traps.",
+"35794ebd-008e-47fb-88f7-81cf64b02374","8E859862A0284DAB9C6B3387D269FB07","CPER.2014.26","CPER_009.mammalGrid.mam","D10","CPER","CPER_009","recapture","2014-06-30","2014-06-30",,,,
+"fbbbfd7b-c583-4083-983e-9dacb15c5b29","A152F714877148CB830294181BD6A9CF","CPER.2014.26","CPER_002.mammalGrid.mam","D10","CPER","CPER_002","recapture","2014-06-30","2014-06-30",,,"No captures or disturbed traps.",
+"8aef931b-b157-468f-bfc3-468a811cb3c1","35C284C17B934991B98780AF6B8E7BA7","CPER.2014.26","CPER_008.mammalGrid.mam","D10","CPER","CPER_008","recapture","2014-06-30","2014-06-30",,,"No captures or disturbed traps.",
+"6c6059fe-a4ce-4f9b-8f03-d8bb75dcc0cc","9069EC65DD294F46851D8998B6E213D4","CPER.2014.26","CPER_006.mammalGrid.mam","D10","CPER","CPER_006","recapture","2014-06-30","2014-06-30",,,"No captures or disturbed traps.",

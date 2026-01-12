@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1745ccd2-5627-4cc1-bfaa-b391414c33ad","a26e4525-814f-4ec8-b638-4d734de199f5","KONZ.2019.18","KONZ_002.mammalGrid.mam","D06","KONZ","KONZ_002","diversity","2019-04-30","2019-04-30",,"NEON.DOC.000481vL",,
+"5fd2d5e7-c2ac-4948-9cec-fcf34f2f70f0","20daeb3d-42b3-4b72-bf62-b3559c8160fc","KONZ.2019.18","KONZ_003.mammalGrid.mam","D06","KONZ","KONZ_003","diversity","2019-04-30","2019-04-30",,"NEON.DOC.000481vL",,
+"377832ad-1e03-408f-875d-c822e3cf6424","7d478e6f-3556-4203-8b2c-30fbea4552a5","KONZ.2019.18","KONZ_005.mammalGrid.mam","D06","KONZ","KONZ_005","diversity","2019-04-30","2019-04-30",,"NEON.DOC.000481vL",,

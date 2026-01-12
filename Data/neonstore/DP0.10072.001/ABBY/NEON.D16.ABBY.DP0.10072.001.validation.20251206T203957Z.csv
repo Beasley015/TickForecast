@@ -1,0 +1,159 @@
+table,fieldName,description,dataType,units,parserToCreate,entryValidationRulesParser,entryValidationRulesForm
+mam_perplotnight,uid,"Unique ID within NEON database; an identifier for the record",string,NA,"[CREATE_UID]",,
+mam_perplotnight,nightuid,"Unique ID of associated record in perplotnight table",string,NA,,"[ASCII]","[HIDDEN][REQUIRE]"
+mam_perplotnight,plotID,"Plot identifier (NEON site code_XXX)",string,NA,,"[NAMED_LOCATION_TYPE('OS Plot - mam')]","[FROM_TABLE(TOS_SPATIAL)][REQUIRE]"
+mam_perplotnight,eventID,"An identifier for the set of information associated with the event, which includes information about the place and time of the event",string,NA,,"[ASCII][REQUIRE]","REQUIRE"
+mam_perplotnight,startDate,"The start date-time or interval during which an event occurred",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[DATE_FORMAT('YYYY-MM-DD')][REQUIRE]"
+mam_perplotnight,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[DEFAULT_TO(mam_perplotnight_in.startDate)][REQUIRE]"
+mam_perplotnight,mammalGridSamplingMethod,"Type of sampling method at a mammal grid",string,NA,"[LOV]","[REQUIRE]","[LOV]"
+mam_perplotnight,samplingImpractical,"Samples and/or measurements were not collected due to the indicated circumstance",string,NA,"[LOV]",,"[LOV]"
+mam_perplotnight,gridCompletion,"Grid setting and processing completion status",string,NA,"[LOV]","[IF (samplingImpractical= 'OK'), REQUIRE]","[LOV]"
+mam_perplotnight,samplingProtocolVersion,"The NEON document number and version where detailed information regarding the sampling method used is available; format NEON.DOC.######vX",string,NA,"[LOV]",,"[WARN][LOV]"
+mam_perplotnight,fulcrumVersion,"Version of the Fulcrum application used during data entry",string,NA,,"[ASCII]",
+mam_perplotnight,platformInfo,"Operating System and browser information (where applicable) of computer used during data entry",string,NA,,"[ASCII]",
+mam_perplotnight,remarks,"Technician notes; free text comments accompanying the record",string,NA,,"[ASCII]","[ASCII]"
+mam_perplotnight,dataQF,"Data quality flag",string,NA,,"[ASCII]",
+mam_pertrapnight,uid,"Unique ID within NEON database; an identifier for the record",string,NA,"[CREATE_UID]",,
+mam_pertrapnight,nightuid,"Unique ID of associated record in perplotnight table",string,NA,,"[ASCII]","[DEFAULT_TO(nightuid)][HIDDEN][REQUIRE]"
+mam_pertrapnight,plotID,"Plot identifier (NEON site code_XXX)",string,NA,,"[NAMED_LOCATION_TYPE('OS Plot - mam')]","[FROM_TABLE(TOS_SPATIAL)][REQUIRE]"
+mam_pertrapnight,startDate,"The start date-time or interval during which an event occurred",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[SUGGESTED_ENTRY(mam.perplotnight_in.startDate)][DATE_FORMAT('YYYY-MM-DD')][REQUIRE]"
+mam_pertrapnight,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[DEFAULT_TO(mam_pertrapnight_in.startDate)][REQUIRE][HIDDEN]"
+mam_pertrapnight,trapCoordinate,"Relative coordinate of the trap within the given plotID (A1 - J10). If row or column coordinate is unknown, X is used",string,NA,"[LOV]","[REQUIRE]","[REQUIRE][LOV]"
+mam_pertrapnight,trapType,"Type of trap from which a sample was collected",string,NA,"[LOV]","[REQUIRE]","[REQUIRE][LOV]"
+mam_pertrapnight,trapStatus,"Categorical descriptor of trap status; 0 - no data; 1 - trap not set; 2 - trap disturbed/door closed but empty; 3 - trap door open or closed w/ spoor left; 4 - >1 capture in one trap; 5 - capture; 6 - trap set and empty",string,NA,"[LOV]","[REQUIRE]","[REQUIRE][GREATER_THAN_OR_EQUAL_TO(0)][LESS_THAN_OR_EQUAL_TO(6)]"
+mam_pertrapnight,taxonID,"Species code, based on one or more sources",string,NA,,"[ELEMENT_OF('SMALL_MAMMAL', 'taxonID', 'T')][IF(trapStatus='4 - more than 1 capture in one trap'), REQUIRE][IF(trapStatus='5 - capture'), REQUIRE]","[ELEMENT_OF('SMALL_MAMMAL', 'taxonID', 'T')][IF(trapStatus='4 - more than 1 capture in one trap'), REQUIRE][IF(trapStatus='5 - capture'), REQUIRE]"
+mam_pertrapnight,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,identificationHistoryID,"Identifier for linking records related to this identification history",string,NA,,"[ASCII]",
+mam_pertrapnight,voucherUpdate,"Name of any data fields updated after review of voucher specimen",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,sex,"M for male, F for female, U for unknown",string,NA,"[LOV]","[IF IS_NOT_BLANK(taxonID), REQUIRE]","IF IS_NOT_BLANK(taxonID), REQUIRE][LOV]"
+mam_pertrapnight,lifeStage,"The age class of the individual at the time the Occurrence was recorded. juvenile = obvious signs of a very young individual, small size, distinctive pelage coloration; subabult; adult",string,NA,"[LOV]","[IF IS_NOT_BLANK(taxonID), REQUIRE]","[IF IS_NOT_BLANK(taxonID), REQUIRE][LOV]"
+mam_pertrapnight,testes,"Condition of the testes at time of capture; if mature: scrotal = testes descended, nonscrotal = testes abdominal",string,NA,"[LOV]",,"[IF(sex=M), WARN][LOV]"
+mam_pertrapnight,nipples,"Condition of the nipples at time of capture; if mature: enlarged = nipples enlarged, nonenlarged = nipples not enlarged",string,NA,"[LOV]",,"[IF(sex=F), WARN][LOV]"
+mam_pertrapnight,pregnancyStatus,"Condition at time of capture; if mature: 'pregnant' | 'not'",string,NA,"[LOV]",,"[IF(sex=F), WARN][LOV]"
+mam_pertrapnight,vagina,"Condition of the vagina at time of capture; if mature: swollen, plugged, neither",string,NA,"[LOV]",,"[IF(sex=F), WARN][LOV]"
+mam_pertrapnight,hindfootLength,"length of left hindfoot; including claws; in millimeters",unsigned integer,millimeter,,"[GREATER_THAN_OR_EQUAL_TO(5)][LESS_THAN_OR_EQUAL_TO(101)]","[GREATER_THAN_OR_EQUAL_TO(5)][LESS_THAN_OR_EQUAL_TO(101)]"
+mam_pertrapnight,earLength,"length of left ear; in millimeters",unsigned integer,millimeter,,"[GREATER_THAN(0)][LESS_THAN_OR_EQUAL_TO(51)]","[GREATER_THAN(0)][LESS_THAN_OR_EQUAL_TO(51)]"
+mam_pertrapnight,tailLength,"length of tail; in millimeters",unsigned integer,millimeter,,"[GREATER_THAN_OR_EQUAL_TO(5)][LESS_THAN_OR_EQUAL_TO(251)]","[GREATER_THAN_OR_EQUAL_TO(5)][LESS_THAN_OR_EQUAL_TO(251)]"
+mam_pertrapnight,totalLength,"total length (head + body); in millimeters",unsigned integer,millimeter,,"[GREATER_THAN_OR_EQUAL_TO(25)][LESS_THAN_OR_EQUAL_TO(501)]","[GREATER_THAN_OR_EQUAL_TO(25)][LESS_THAN_OR_EQUAL_TO(501)]"
+mam_pertrapnight,weight,"Live weight as measured with a spring scale; in grams",unsigned integer,gram,,"[GREATER_THAN(0)][LESS_THAN_OR_EQUAL_TO(601)]","[GREATER_THAN(0)][LESS_THAN_OR_EQUAL_TO(601)]"
+mam_pertrapnight,tagID,"Domain-level unique identifier of tag used to mark the individual",string,NA,,"[MIGHT_EXIST][ASCII][IF IS_NOT_BLANK, NOT_MATCH_REGULAR_EXPRESSION('\\?|\\/|\\-|\\+|\\=|\'|(?i)UNDEFINED|(?i)NONE|(?i)NULL|(?i)UNABLE|(?i)NONTARGET|\\.$')][MATCH_REGULAR_EXPRESSION('NEON.MAM.D[0-2][0-9].[A-Z0-9]{4}')]",
+mam_pertrapnight,individualFate,"Fate of a tagged individual",string,NA,"[LOV]","[IF IS_NOT_BLANK(tagID) AND IS_NOT_BLANK(fate), REQUIRE][IF IS_BLANK(tagID), REQUIRE_NULL]","[HIDDEN][IF(mam_pertrapnight_in.fate!='dead'), 'released'][IF(mam_pertrapnight_in.fate='dead'), 'active'][REQUIRE]"
+mam_pertrapnight,mortalityCause,"Suspected cause of mortality",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,individualCode,"Barcode of an individual",string,NA,,"[ASCII]",
+mam_pertrapnight,replacedTag,"Indicates which ear tag was replaced (L#### | R####) or which ear appears to have lost a tag ('left' = left ear tag replaced; 'right' = right ear tag replaced)",string,NA,,"[ASCII]",
+mam_pertrapnight,recapture,"Indicates whether or not the captured individual is a recapture; 'Y' for yes, 'N' for no",string,NA,"[LOV]",,"[IF IS_NOT_BLANK(tagID) OR IS_NOT_BLANK(individualCode), REQUIRE][LOV]"
+mam_pertrapnight,fate,"The fate of the individual",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,larvalTicksAttached,"Indicates whether larval ticks are observed on the captured individual",string,NA,"[LOV]",,"[IF IS_NOT_BLANK(tagID) OR IS_NOT_BLANK(individualCode), REQUIRE][LOV]"
+mam_pertrapnight,nymphalTicksAttached,"Indicates whether nymphal ticks are observed on the captured individual",string,NA,"[LOV]",,"[IF IS_NOT_BLANK(tagID) OR IS_NOT_BLANK(individualCode), REQUIRE][LOV]"
+mam_pertrapnight,adultTicksAttached,"Indicates whether adult ticks are observed on the captured individual",string,NA,"[LOV]",,"[IF IS_NOT_BLANK(tagID) OR IS_NOT_BLANK(individualCode), REQUIRE][LOV]"
+mam_pertrapnight,tickNumber,"Binned range of values representing total number of ticks of any life stage or species present on the head and neck of the individual",string,NA,"[LOV]",,"[IF(larvalTicksAttached=N AND nymphalTicksAttached=N AND adutTicksAttached=N), IS_BLANK][LOV]"
+mam_pertrapnight,additionalParasites,"Indicator of whether additional parasites were observed",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,frozenSamplePrepMethod,"Preparation or preservation method for a frozen sample",string,NA,"[LOV]",,"[LOV]"
+mam_pertrapnight,bloodSampleID,"Unique identifier for the blood sample",string,NA,,"[DOES_NOT_EXIST][ASCII]",
+mam_pertrapnight,bloodSampleMethod,"Method used to collect the blood sample",string,NA,"[LOV]",,"[LOV][IF IS_NOT_BLANK(bloodSampleID) OR IS_NOT_BLANK(bloodSampleBarcode), REQUIRE]"
+mam_pertrapnight,bloodSampleVolume,"Blood sample volume",string,microliter,"[LOV]","[IF(endDate>2025-03-01T00:00 AND bloodSampleMethod='mandibular - QNS'), REQUIRE]",
+mam_pertrapnight,bloodSampleFate,"Fate of the blood sample",string,NA,"[LOV]","[IF IS_NOT_BLANK(bloodSampleID), REQUIRE][IF IS_BLANK(bloodSampleID), REQUIRE_NULL]","[DEFAULT_TO('active')][HIDDEN]"
+mam_pertrapnight,bloodSampleBarcode,"Barcode of the blood sample",string,NA,,"[ASCII]",
+mam_pertrapnight,fecalSampleID,"Unique identifier for the fecal sample",string,NA,,"[DOES_NOT_EXIST][ASCII]",
+mam_pertrapnight,fecalSampleCondition,"Condition of the fecal sample",string,NA,"[LOV]",,"[LOV] [IF IS_NOT_BLANK(fecalSampleID) OR IS_NOT_BLANK(fecalSampleBarcode), REQUIRE]"
+mam_pertrapnight,fecalSampleFate,"Fate of the fecal sample",string,NA,"[LOV]","[IF IS_NOT_BLANK(fecalSampleID), REQUIRE][IF IS_BLANK(fecalSampleID), REQUIRE_NULL]","[DEFAULT_TO('active')][HIDDEN]"
+mam_pertrapnight,fecalSampleBarcode,"Barcode of the fecal sample",string,NA,,"[ASCII]",
+mam_pertrapnight,earSampleID,"Unique identifier for the ear sample",string,NA,,"[DOES_NOT_EXIST][ASCII]",
+mam_pertrapnight,earSampleFate,"Fate of the ear sample",string,NA,"[LOV]","[IF IS_NOT_BLANK(earSampleID), REQUIRE][IF IS_BLANK(earSampleID), REQUIRE_NULL]","[DEFAULT_TO('active')][HIDDEN]"
+mam_pertrapnight,earSampleBarcode,"Barcode of the ear sample",string,NA,,"[ASCII]",
+mam_pertrapnight,hairSampleID,"Unique identifier for the hair sample",string,NA,,"[DOES_NOT_EXIST][ASCII]",
+mam_pertrapnight,hairSampleContents,"The type(s) of hair collected",string,NA,"[LOV]",,"[LOV] [IF IS_NOT_BLANK(hairSampleID) OR IS_NOT_BLANK(hairSampleBarcode), REQUIRE]"
+mam_pertrapnight,hairSampleFate,"Fate of the hair sample",string,NA,"[LOV]","[IF IS_NOT_BLANK(hairSampleID), REQUIRE][IF IS_BLANK(hairSampleID), REQUIRE_NULL]","[DEFAULT_TO('active')][HIDDEN]"
+mam_pertrapnight,hairSampleBarcode,"Barcode of the hair sample",string,NA,,"[ASCII]",
+mam_pertrapnight,voucherSampleID,"Unique identifier for the voucher sample",string,NA,,"[DOES_NOT_EXIST][ASCII]",
+mam_pertrapnight,voucherSampleFate,"Fate of a voucher sample",string,NA,"[LOV]","[IF IS_NOT_BLANK(voucherSampleID), REQUIRE][IF IS_BLANK(voucherSampleID), REQUIRE_NULL]","[DEFAULT_TO('active')][HIDDEN]"
+mam_pertrapnight,voucherSampleBarcode,"Barcode of the voucher sample",string,NA,,"[ASCII]",
+mam_pertrapnight,iButtonNumber,"ibutton number used for assignable asset project",unsigned integer,NA,,"[GREATER_THAN_OR_EQUAL_TO(0)][LESS_THAN_OR_EQUAL_TO(801)]","[GREATER_THAN_OR_EQUAL_TO(0)][LESS_THAN_OR_EQUAL_TO(801)]"
+mam_pertrapnight,iButtonLabel,"ibutton label used for assignable asset project",string,NA,,"[MATCH_REGULAR_EXPRESSION('^[N][0-9]{1,3}$|^[0-9]{1,3}$')]","[MATCH_REGULAR_EXPRESSION('^[N][0-9]{1,3}$|^[0-9]{1,3}$')]"
+mam_pertrapnight,extraEarID,"Extra earSampleID for assignable asset project",string,NA,,"[ASCII]","[ASCII]"
+mam_pertrapnight,dnaBarcoded,"An indicator of whether the sample was selected as a candidate for genetic barcoding",string,NA,,,
+mam_pertrapnight,identifierEmail,"E-mail address of the primary identifier",string,NA,,,
+mam_pertrapnight,identifierInstitution,"The full name of the institutional or organizational affiliation of the identifier",string,NA,,,
+mam_pertrapnight,method,"Published method used for analysis",string,NA,,,
+mam_pertrapnight,reproduction,"The presumed method of reproduction",string,NA,,,
+mam_pertrapnight,sampleStatus,"Status of sample for downstream processing and/or analysis",string,NA,,,
+mam_pertrapnight,specimenSource,"Physical source from which individual was obtained",string,NA,,,
+mam_pertrapnight,externalURLs,"Pipe-delimited list of web accessible links that provide additional information about the specimen",string,NA,,,
+mam_pertrapnight,daysOfTrapping,"number of days between trap setting and collecting events",unsigned integer,nominalDay,,,
+mam_pertrapnight,measuredBy,"An identifier for the technician who measured or collected the data",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)]"
+mam_pertrapnight,recordedBy,"An identifier for the technician who recorded the data",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)]"
+mam_pertrapnight,identifiedBy,"An identifier for the technician who identified the specimen",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)]"
+mam_pertrapnight,identifiedDate,"Date on which the sample, individual, or specimen was identified",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[DEFAULT_TO(mam_pertrapnight_in.startDate)][REQUIRE][HIDDEN]"
+mam_pertrapnight,enteredBy,"An identifier for the technician who entered the data",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)][HIDDEN]"
+mam_pertrapnight,fulcrumVersion,"Version of the Fulcrum application used during data entry",string,NA,,"[ASCII]",
+mam_pertrapnight,platformInfo,"Operating System and browser information (where applicable) of computer used during data entry",string,NA,,"[ASCII]",
+mam_pertrapnight,remarks,"Technician notes; free text comments accompanying the record",string,NA,,"[ASCII]","[ASCII]"
+mam_pertrapnight,fieldRemarks,"Field technician notes; free text accompanying the record",string,NA,,"[ASCII]","[ASCII]"
+mam_pertrapnight,dataQF,"Data quality flag",string,NA,,"[ASCII]",
+mam_pertrapnight,fulcrumPrimaryKey,"Primary identifier for the record in Fulcrum at the same granularity for which the record occurs in the NEON database (i.e., one fulcrumPrimaryKey should map to a single record in the NEON database)",string,NA,,"[ASCII]",
+mam_voucher,uid,"Unique ID within NEON database; an identifier for the record",string,NA,"[CREATE_UID]",,"[HIDDEN]"
+mam_voucher,locationID,"Identifier for location where sample was collected",string,NA,,"[REQUIRE][NAMED_LOCATION_TYPE('SITE')]","[REQUIRE][NAMED_LOCATION_TYPE('SITE')]"
+mam_voucher,altLatitude,"Alternate Sampling Location coordinate - latitude",real,decimalDegree,,,"[IF (IS_BLANK(plotID)), REQUIRE]"
+mam_voucher,altLongitude,"Alternate Sampling Location coordinate - longitude",real,decimalDegree,,,"[IF (IS_BLANK(plotID)), REQUIRE]"
+mam_voucher,altCoordinateUncertainty,"The horizontal distance (in meters) from the given altLatitude and altLongitude describing the smallest circle containing the whole of the Location. Zero is not a valid value for this term",real,meter,,,
+mam_voucher,altGeodeticDatum,"Model used to measure horizontal position on the earth for alternate location coordinate",string,NA,,"[ASCII]","[IF (IS_BLANK(plotID)), REQUIRE]"
+mam_voucher,altElevation,"Alternate elevation (in meters) above sea level",real,meter,,,"[IF (IS_BLANK(plotID)), REQUIRE]"
+mam_voucher,altElevationUncertainty,"Alternate uncertainty in elevation values (in meters)",real,meter,,,
+mam_voucher,altCoordinateSource,"Alternate method used to collect or create spatial information",string,NA,,"[ASCII]","[IF (IS_BLANK(plotID)), REQUIRE]"
+mam_voucher,startDate,"The start date-time or interval during which an event occurred",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[DATE_FORMAT('YYYY-MM-DD')]"
+mam_voucher,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,"[DEFAULT_TO(startDate)][CONVERT_TO_UTC(namedLocation)]",,"[DATE_FORMAT('YYYY-MM-DD')][DEFAULT_TO(startDate)][HIDDEN]"
+mam_voucher,taxonID,"Species code, based on one or more sources",string,NA,,"[REQUIRE][IF sampleClass = 'mam_voucher_in.voucherSampleID.mam', ELEMENT_OF('SMALL_MAMMAL','taxonID','T')]  [IF sampleClass = 'mam_voucher_in.voucherSampleID.herp', ELEMENT_OF('HERPETOLOGY','taxonID','T')] [ASCII]","[REQUIRE] [ELEMENT_OF('SMALL_MAMMAL','taxonID','T')]"
+mam_voucher,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,"[LOV]",,"[LOV]"
+mam_voucher,taxonIDRemarks,"Technician notes about the specific taxon; free text comments accompanying the record",string,NA,,"[ASCII]",
+mam_voucher,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,"[LOV]",,"[FROM_TABLE(TOS_IDENTIFICATIONREFERENCES)]"
+mam_voucher,identificationHistoryID,"Identifier for linking records related to this identification history",string,NA,,"[ASCII]",
+mam_voucher,sampleType,"Type of sample",string,NA,,"[MATCH_REGULAR_EXPRESSION('small mammal voucher|herptile voucher')]","[MATCH_REGULAR_EXPRESSION('small mammal voucher|herptile voucher')]"
+mam_voucher,sampleClass,"Class of a sample",string,NA,,"[REQUIRE][IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), MATCH_REGULAR_EXPRESSION('mam_voucher_in.voucherSampleID.mam')] [IF MATCH_REGULAR_EXPRESSION(sampleType, 'herptile voucher'), MATCH_REGULAR_EXPRESSION('mam_voucher_in.voucherSampleID.herp')]","[REQUIRE][IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), 'mam_voucher_in.voucherSampleID.mam'][IF MATCH_REGULAR_EXPRESSION(sampleType, 'herptile voucher'), 'mam_voucher_in.voucherSampleID.herp']"
+mam_voucher,voucherSampleID,"Unique identifier for the voucher sample",string,NA,,"[DOES_NOT_EXIST][IF sampleClass='mam_voucher_in.voucherSampleID.mam', MATCH_REGULAR_EXPRESSION('(?i)([A-Z]{4}).(20|21)[0-9][0-9](0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]).([A-Z]|[0-9]).')][IF sampleClass='mam_voucher_in.voucherSampleID.herp', MATCH_REGULAR_EXPRESSION('(?i)([A-Z]{4}).(20|21)[0-9][0-9](0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]).([0-1][0-9]|2[0-3]):[0-5][0-9].V')]","[IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), siteID + '.' + startDate + '.' + tagID + '.V'][IF MATCH_REGULAR_EXPRESSION(sampleType, 'herptile voucher'), siteID + '.' + startDate + '.' + collectTime + '.V']"
+mam_voucher,voucherSampleFate,"Fate of a voucher sample",string,NA,,"[ASCII]","[HIDDEN][DEFAULT_TO('active')]"
+mam_voucher,voucherSampleCode,"Barcode of a voucher sample",string,NA,,"[ASCII]","[HIDDEN]"
+mam_voucher,fulcrumVersion,"Version of the Fulcrum application used during data entry",string,NA,,"[ASCII]",
+mam_voucher,platformInfo,"Operating System and browser information (where applicable) of computer used during data entry",string,NA,,"[ASCII]",
+mam_voucher,tagID,"Domain-level unique identifier of tag used to mark the individual",string,NA,,"[EXISTS]",
+mam_voucher,tagFate,"Fate of domain-level unique identifier used to mark the individual",string,NA,,"[IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), 'processed']","[HIDDEN][IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), 'processed']"
+mam_voucher,tagCode,"Code of domain-level unique identifier used to mark the individual",string,NA,,"[ASCII]","[HIDDEN]"
+mam_voucher,remarks,"Technician notes; free text comments accompanying the record",string,NA,,"[ASCII]","[ASCII]"
+mam_voucher,collectedBy,"An identifier for the technician who collected the sample or specimen",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)]"
+mam_voucher,identifiedBy,"An identifier for the technician who identified the specimen",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)]"
+mam_voucher,identifiedDate,"Date on which the sample, individual, or specimen was identified",dateTime,NA,"[CONVERT_TO_UTC(namedLocation)]",,"[DATE_FORMAT('YYYY-MM-DD')][DEFAULT_TO(startDate)][HIDDEN]"
+mam_voucher,recordedBy,"An identifier for the technician who recorded the data",string,NA,,"[ASCII]","[FROM_TABLE(PERSONNEL)]"
+mam_voucher,dataQF,"Data quality flag",string,NA,,"[ASCII]",
+mam_voucher,fulcrumPrimaryKey,"Primary identifier for the record in Fulcrum at the same granularity for which the record occurs in the NEON database (i.e., one fulcrumPrimaryKey should map to a single record in the NEON database)",string,NA,,"[ASCII]",
+mam_identificationHistory,uid,"Unique ID within NEON database; an identifier for the record",string,NA,"[CREATE_UID]",,
+mam_identificationHistory,identificationTable,"The table(s) containing the record to which this identification history applies",string,NA,,"[REQUIRE][ASCII][REQUIRE_COLUMN]",
+mam_identificationHistory,sampleID,"Identifier for sample",string,NA,,"[ASCII][EXISTS][REQUIRE]",
+mam_identificationHistory,sampleCode,"Barcode of a sample",string,NA,,"[ASCII]",
+mam_identificationHistory,namedLocation,"Name of the measurement location in the NEON database",string,NA,,"[NAMED_LOCATION_TYPE('SITE' OR 'OS Plot - mam')]",
+mam_identificationHistory,identificationHistoryID,"Identifier for linking records related to this identification history",string,NA,,"[ASCII][REQUIRE][REQUIRE_COLUMN]",
+mam_identificationHistory,identifiedDate,"Date on which the sample, individual, or specimen was identified",dateTime,NA,,"[REQUIRE][REQUIRE_COLUMN]",
+mam_identificationHistory,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,,"[GREATER_THAN(identifiedDate)][REQUIRE][REQUIRE_COLUMN]",
+mam_identificationHistory,scientificName,"Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined",string,NA,,"[ELEMENT_OF('SMALL_MAMMAL', 'scientificName', 'T')][REQUIRE][REQUIRE_COLUMN]",
+mam_identificationHistory,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,"[LOV]","[REQUIRE_COLUMN]",
+mam_identificationHistory,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,"[LOV]","[REQUIRE_COLUMN]",
+mam_identificationHistory,identificationRemarks,"Comments or notes about the identification",string,NA,"[LOV]","[REQUIRE_COLUMN]",
+mam_identificationHistory,remarks,"Technician notes; free text comments accompanying the record",string,NA,,"[ASCII][REQUIRE_COLUMN]",
+mam_identificationHistory,identifiedBy,"An identifier for the technician who identified the specimen",string,NA,,"[REQUIRE][ASCII][REQUIRE_COLUMN]",
+mam_identificationHistory,dataQF,"Data quality flag",string,NA,,"[ASCII]",
+mam_voucherIdentificationHistory,uid,"Unique ID within NEON database; an identifier for the record",string,NA,"[CREATE_UID]",,
+mam_voucherIdentificationHistory,identificationTable,"The table(s) containing the record to which this identification history applies",string,NA,,"[REQUIRE][ASCII][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,sampleType,"Type of sample",string,NA,,"[MATCH_REGULAR_EXPRESSION('small mammal voucher|herptile voucher')]","[MATCH_REGULAR_EXPRESSION('small mammal voucher|herptile voucher')]"
+mam_voucherIdentificationHistory,sampleClass,"Class of a sample",string,NA,,"[REQUIRE][IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), MATCH_REGULAR_EXPRESSION('mam_voucher_in.voucherSampleID.mam')] [IF MATCH_REGULAR_EXPRESSION(sampleType, 'herptile voucher'), MATCH_REGULAR_EXPRESSION('mam_voucher_in.voucherSampleID.herp')]","[REQUIRE][IF MATCH_REGULAR_EXPRESSION(sampleType, 'small mammal voucher'), 'mam_voucher_in.voucherSampleID.mam'][IF MATCH_REGULAR_EXPRESSION(sampleType, 'herptile voucher'), 'mam_voucher_in.voucherSampleID.herp']"
+mam_voucherIdentificationHistory,sampleID,"Identifier for sample",string,NA,,"[ASCII][EXISTS][REQUIRE]",
+mam_voucherIdentificationHistory,sampleCode,"Barcode of a sample",string,NA,,"[ASCII]",
+mam_voucherIdentificationHistory,namedLocation,"Name of the measurement location in the NEON database",string,NA,,"[NAMED_LOCATION_TYPE('SITE' OR 'OS Plot - mam')]",
+mam_voucherIdentificationHistory,identificationHistoryID,"Identifier for linking records related to this identification history",string,NA,,"[ASCII][REQUIRE][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,identifiedDate,"Date on which the sample, individual, or specimen was identified",dateTime,NA,,"[REQUIRE][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,,"[GREATER_THAN(identifiedDate)][REQUIRE][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,scientificName,"Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined",string,NA,,"[ELEMENT_OF('SMALL_MAMMAL', 'scientificName', 'T')][REQUIRE][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,"[LOV]","[REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,"[LOV]","[REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,identificationRemarks,"Comments or notes about the identification",string,NA,"[LOV]","[REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,remarks,"Technician notes; free text comments accompanying the record",string,NA,,"[ASCII][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,identifiedBy,"An identifier for the technician who identified the specimen",string,NA,,"[REQUIRE][ASCII][REQUIRE_COLUMN]",
+mam_voucherIdentificationHistory,dataQF,"Data quality flag",string,NA,,"[ASCII]",

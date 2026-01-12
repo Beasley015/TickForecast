@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"22e33ec3-5a72-4b53-9f31-24f6ce631b81","521692079D0C4823B30BE70D1FC49A5B","OAES.2016.26","OAES_010.mammalGrid.mam","D11","OAES","OAES_010","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,
+"258c3e86-1667-4e72-8fc8-d606c946fa40","1AFF34C4CC5F4DBBAEEE67407942D38D","OAES.2016.26","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2016-07-01","2016-07-01",,"NEON.DOC.000481vH",,

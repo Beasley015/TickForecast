@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8eb7f77e-551a-44b3-9682-5d8ae50ef0b8","cdeea78f-e7b8-4b93-86f6-4241eb631f8f","SJER.2019.6","SJER_006.mammalGrid.mam","D17","SJER","SJER_006","pathogen","2019-02-04","2019-02-04",,"NEON.DOC.000481vK","Cow disturbance",
+"df99dbad-b2e6-408d-9d41-b7aa32a68488","67046b76-315f-4eae-9956-e869153abaae","SJER.2019.6","SJER_033.mammalGrid.mam","D17","SJER","SJER_033","pathogen","2019-02-04","2019-02-04",,"NEON.DOC.000481vK","Cow disturbance",
+"437ff7c6-11a3-4256-abce-7fc8c078547b","a95d198d-400b-4d38-b1fe-30c8b52f37dd","SJER.2019.6","SJER_032.mammalGrid.mam","D17","SJER","SJER_032","pathogen","2019-02-04","2019-02-04",,"NEON.DOC.000481vK",,
+"716f3244-5cde-490a-be7a-aa904a958e8a","bc76e55f-f24a-4768-b4a2-4bcafa163e9d","SJER.2019.6","SJER_010.mammalGrid.mam","D17","SJER","SJER_010","diversity","2019-02-04","2019-02-04",,"NEON.DOC.000481vK",,
+"d924f8df-13f1-43ed-81b8-24074269d4a9","0c7b2d02-d1f8-4ca6-a6ba-b53da0f78047","SJER.2019.6","SJER_009.mammalGrid.mam","D17","SJER","SJER_009","diversity","2019-02-06","2019-02-06",,"NEON.DOC.000481vK",,
+"a152e13b-ad3e-407e-a986-031b046f0484","13cf8de1-c028-412b-9186-bb47ea9fc972","SJER.2019.6","SJER_006.mammalGrid.mam","D17","SJER","SJER_006","pathogen","2019-02-06","2019-02-06",,"NEON.DOC.000481vK",,
+"29726dfb-95c8-4c38-b1fc-3c266b5a8b9a","6ce8a55e-025e-4fcd-a6c2-b63f04d79284","SJER.2019.6","SJER_033.mammalGrid.mam","D17","SJER","SJER_033","pathogen","2019-02-06","2019-02-06",,"NEON.DOC.000481vK",,
+"0ec3f249-845b-4aa6-8f48-6881bbc6478b","44499fd0-5de1-4425-b3fe-2f1b966a46a6","SJER.2019.6","SJER_032.mammalGrid.mam","D17","SJER","SJER_032","pathogen","2019-02-06","2019-02-06",,"NEON.DOC.000481vK",,
+"2aec6573-0c44-466e-8666-d664b48a0163","6e76a195-7f18-4655-8545-1ec7452f6ee0","SJER.2019.6","SJER_012.mammalGrid.mam","D17","SJER","SJER_012","diversity","2019-02-07","2019-02-07",,"NEON.DOC.000481vK",,
+"a0d47fef-f09a-4a0c-a501-50c022d8df71","317c5580-a6d1-4fd9-991d-0fdde0b915cb","SJER.2019.6","SJER_002.mammalGrid.mam","D17","SJER","SJER_002","diversity","2019-02-07","2019-02-07",,"NEON.DOC.000481vK","Cow disturbance",
+"77b378fc-8a6f-4f77-a4e4-44fa712a74ae","d9f3f676-a23a-4a62-8f38-6c8b4b268e2d","SJER.2019.6","SJER_032.mammalGrid.mam","D17","SJER","SJER_032","pathogen","2019-02-07","2019-02-07",,"NEON.DOC.000481vK",,
+"63de8b66-1097-4e06-b395-c397cde57bee","31eb3021-66e9-4bf9-b09c-2bbfec7e4960","SJER.2019.6","SJER_007.mammalGrid.mam","D17","SJER","SJER_007","diversity","2019-02-07","2019-02-07",,"NEON.DOC.000481vK",,

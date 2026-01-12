@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8c5c6411-02bc-481c-9bd6-5376db130346","AC568D4F27F24A5A8998163AA18DF834","CPER.2015.16","CPER_011.mammalGrid.mam","D10","CPER","CPER_011","pathogen","2015-04-14","2015-04-14",,,"Using protocol vf",
+"148e4ea1-5566-420a-8df3-3a0be80d5360","7EC79CE3302243A0B801DB74900CD64A","CPER.2015.16","CPER_015.mammalGrid.mam","D10","CPER","CPER_015","pathogen","2015-04-14","2015-04-14",,,"Using protocol vf",
+"558c6b35-5925-4811-941b-883468981778","7A891A357BE84C83BC440235AB5401C8","CPER.2015.16","CPER_005.mammalGrid.mam","D10","CPER","CPER_005","pathogen","2015-04-14","2015-04-14",,,"Using protocol vf",
+"ce12ded2-a343-412a-bc01-6d982cf74059","83886A5A267345C88F2A7E306C4DB39E","CPER.2015.16","CPER_011.mammalGrid.mam","D10","CPER","CPER_011","pathogen","2015-04-15","2015-04-15",,,"Using protocol vf",
+"eb7443fe-56b4-42d1-a53c-e9c4f79611f4","FFDC1790EE074FB0925B5605F87FA252","CPER.2015.16","CPER_015.mammalGrid.mam","D10","CPER","CPER_015","pathogen","2015-04-15","2015-04-15",,,"Using protocol vf",
+"799220a7-cd0b-4f62-a0bb-f5a3c9b14c0e","3953D8B44F044B6C92033C72973346B8","CPER.2015.16","CPER_005.mammalGrid.mam","D10","CPER","CPER_005","pathogen","2015-04-15","2015-04-15",,,"Using protocol vf",
+"e54b4422-2ffb-4163-9c7e-9fd5446ae7d9","D8DD689F48D6413D95FCDCCA43767C5F","CPER.2015.16","CPER_002.mammalGrid.mam","D10","CPER","CPER_002","diversity","2015-04-21","2015-04-21",,,"Using protocol vf",
+"b59d9a7d-f485-48ea-956c-1e13d5cc4780","4E87C687EFD14C24BCA3FABB47A8D4A0","CPER.2015.16","CPER_004.mammalGrid.mam","D10","CPER","CPER_004","diversity","2015-04-21","2015-04-21",,,"Using protocol vf",
+"332f2e09-b7f5-4573-bdfc-be28f7f54a45","953467C74759423A9DEFB6C8D2DBCB78","CPER.2015.16","CPER_008.mammalGrid.mam","D10","CPER","CPER_008","diversity","2015-04-21","2015-04-21",,,"Using protocol vf",
+"261bbab3-8427-4dfe-9797-d9250c7839f1","8C91989B6E9B4887A7C847A73D492B6E","CPER.2015.16","CPER_009.mammalGrid.mam","D10","CPER","CPER_009","diversity","2015-04-21","2015-04-21",,,"Using protocol vf",
+"aacdad86-a48b-4051-ad91-99bf9c725553","0B33DB6918694269902B7E53211C6608","CPER.2015.16","CPER_006.mammalGrid.mam","D10","CPER","CPER_006","diversity","2015-04-21","2015-04-21",,,"Using protocol vf",

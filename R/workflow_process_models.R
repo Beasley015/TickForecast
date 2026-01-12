@@ -101,7 +101,7 @@ ua.cal <-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 1
 production <- TRUE
-n.iter <- 1000 #50000
+n.iter <- 50000
 Nmc <- 2000
 horizon <- 365
 
@@ -335,9 +335,6 @@ pr.sig <- df.params %>%
 # 	"ic_parameter_driver_process"
 # )
 
-t = 1
-# k = 2
-
 for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
@@ -441,6 +438,10 @@ for (t in seq_len(n.drags)) {
 
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 			n.days <- length(fx.sequence)
+		}
+		
+		if(horizon == 0){
+		  break
 		}
 
 		if (use.daymet) {

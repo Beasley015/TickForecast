@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"ca7b99cd-b465-44fc-a7a4-b1b765954ccd","04c34444-f569-4e49-a308-d3aea754af97","JORN.2021.41","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2021-10-11","2021-10-11","OK","NEON.DOC.000481vM",,
+"c6dae07a-e72f-42d5-a4b2-db945fcf652a","1e9c3c73-2b76-4ef0-9448-745a4090aefe","JORN.2021.41","JORN_031.mammalGrid.mam","D14","JORN","JORN_031","diversity","2021-10-11","2021-10-11","OK","NEON.DOC.000481vM",,
+"66329389-f7cb-498a-be36-77c8e7ff81ae","24086998-6ef8-43e8-ac14-49e71ba9bc7b","JORN.2021.41","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2021-10-11","2021-10-11","OK","NEON.DOC.000481vM",,
+"6b68dc8d-5aae-4279-89b4-10768129c7ee","272103a9-bed7-4ea8-abbe-a3ce4d3d3df8","JORN.2021.41","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2021-10-12","2021-10-12","OK","NEON.DOC.000481vM",,
+"6a69e884-557c-4600-af48-6eed1c777412","5ba1e5bc-72a7-439b-accf-44aadb51cdb6","JORN.2021.41","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2021-10-12","2021-10-12","OK","NEON.DOC.000481vM",,
+"931af71f-f895-4914-8aba-881f49fa9af0","affff0e7-0719-4574-b45c-63a82bd68488","JORN.2021.41","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2021-10-12","2021-10-12","OK","NEON.DOC.000481vM",,
+"9215ae63-1e1e-4537-a8d8-67b3dd8fb3e4","dc5800d9-f183-401c-94d8-33f5b286a96d","JORN.2021.41","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2021-10-13","2021-10-13","too windy","NEON.DOC.000481vM","wind gusts in excess of 35 mph",
+"c6e999d9-d7d9-40d3-b19b-f6b207dd18ad","67fcc261-7397-4bde-88d0-bdb59c70863f","JORN.2021.41","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2021-10-13","2021-10-13","too windy","NEON.DOC.000481vM","wind gusts in excess of 35 mph",
+"0ac61a9c-50ad-4e37-9002-c80433198649","c090dc1a-211f-42bf-99d6-bc14bf74d89b","JORN.2021.41","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2021-10-13","2021-10-13","too windy","NEON.DOC.000481vM","wind gusts in excess of 35 mph",
+"21655a17-802c-4b8b-a931-4f6ec3693803","ebc8c744-e750-42dd-9b83-bbd568ae134d","JORN.2021.41","JORN_011.mammalGrid.mam","D14","JORN","JORN_011","diversity","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,
+"a95e38f2-675f-44e5-a7c9-0f2c67ecb2d6","c9e3ffd0-0257-4559-85f8-351dfff84e53","JORN.2021.41","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,
+"3297eb44-748c-4ffc-abd5-13f4331d02c7","53a00ca2-71cd-48a0-b09f-4bbedb088b00","JORN.2021.41","JORN_007.mammalGrid.mam","D14","JORN","JORN_007","diversity","2021-10-14","2021-10-14","OK","NEON.DOC.000481vM",,

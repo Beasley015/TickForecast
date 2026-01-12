@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"ebb50f18-f1d8-43da-b8ff-85e59d622a66","B1D30A80D05C4BEF99CA8836B3B0D633","MOAB.2015.24","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2015-06-08","2015-06-08",,,"Unsure about sex ID for all DIOR based on further experience determining sex for this species in successive bouts. 201506022 AWalker",
+"b11c5c83-4108-4e38-9969-3b7b26f93733","3AE1DEF85B834A15BB3FB29482CB678D","MOAB.2015.24","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","diversity","2015-06-08","2015-06-08",,,"Unsure about sex ID for all DIOR for this plot based on further experience determining sex for this species in successive bouts.",
+"db7f59f1-501b-4193-bdd0-90ec90b8c2d9","8C7AB3394F6B492DB76F31CA0EFAA344","MOAB.2015.24","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","pathogen","2015-06-08","2015-06-08",,,,
+"65f730ea-52ce-483d-9065-984d0b71c91e","B192EF8899DC47E1B5EBE99C1C69F54C","MOAB.2015.24","MOAB_008.mammalGrid.mam","D13","MOAB","MOAB_008","recapture","2015-06-08","2015-06-08",,,,
+"206f21cd-0b4b-4968-a9b7-d31c5f77314e","644BAD698339423E96A0F85449122D80","MOAB.2015.24","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","pathogen","2015-06-09","2015-06-09",,,,
+"279a14a1-83db-48b0-893e-34bae4bc3123","F7D3E012F7CC492BAC5ED3A5C0B39043","MOAB.2015.24","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","diversity","2015-06-09","2015-06-09",,,,
+"8bc0b261-5e95-4499-9f67-a8cf1d083504","F99D23BC7FC54F7495339C626A26C246","MOAB.2015.24","MOAB_008.mammalGrid.mam","D13","MOAB","MOAB_008","recapture","2015-06-10","2015-06-10",,,,

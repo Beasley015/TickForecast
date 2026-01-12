@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d62a02f8-c36a-4ace-8809-0853abf4b6e2","08fed5ea-1d7d-4f55-abd0-ce67f836db99","RMNP.2017.42","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2017-10-17","2017-10-17",,"NEON.DOC.000481vJ","Record lost but recreated",
+"6df965bb-02b6-45be-818f-20db6cae5d44","25fd7452-1e09-48e0-954a-f4655d9da6c9","RMNP.2017.42","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2017-10-17","2017-10-17",,"NEON.DOC.000481vJ",,
+"5003600f-deeb-4975-b5d6-c99bdff294d3","9448f48b-92de-421f-a100-af2cc7674a95","RMNP.2017.42","RMNP_005.mammalGrid.mam","D10","RMNP","RMNP_005","diversity","2017-10-17","2017-10-17",,"NEON.DOC.000481vJ",,
+"f409084f-0777-46f3-b915-fff0e91b2160","75730635-9554-4e45-8932-296c5d6714b0","RMNP.2017.42","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2017-10-17","2017-10-17",,"NEON.DOC.000481vJ",,
+"99e02328-de5c-40b8-b327-fd85a0193177","cadc94ce-ad5c-4f05-b681-d56e839e80da","RMNP.2017.42","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2017-10-18","2017-10-18",,"NEON.DOC.000481vJ",,
+"b172cc56-27d3-434a-8ec3-c132ace7fbc4","dc99a600-13a9-4629-b45e-870933d96730","RMNP.2017.42","RMNP_009.mammalGrid.mam","D10","RMNP","RMNP_009","diversity","2017-10-18","2017-10-18",,"NEON.DOC.000481vJ",,
+"28d06131-2115-4ba8-9d55-7497bb83e1da","1e26d285-ff11-4790-ae4a-69eafccdaf92","RMNP.2017.42","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2017-10-18","2017-10-18",,"NEON.DOC.000481vJ",,
+"ff0dc993-89b4-4988-9f9c-b5f360f0108f","61f63918-ec26-4621-b7e3-d62ea50a0f55","RMNP.2017.42","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2017-10-19","2017-10-19",,"NEON.DOC.000481vJ",,
+"c8efe5d2-f300-4b7b-9e9d-c04241d8fd2d","de22effb-6665-4054-945e-d6c548b0c1d6","RMNP.2017.42","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2017-10-19","2017-10-19",,"NEON.DOC.000481vJ",,
+"6743ab76-6a90-44fc-b84a-0f9e6c6b2326","b3794b55-991a-4bc4-8c1f-b2007082c8b0","RMNP.2017.42","RMNP_013.mammalGrid.mam","D10","RMNP","RMNP_013","diversity","2017-10-19","2017-10-19",,"NEON.DOC.000481vJ",,

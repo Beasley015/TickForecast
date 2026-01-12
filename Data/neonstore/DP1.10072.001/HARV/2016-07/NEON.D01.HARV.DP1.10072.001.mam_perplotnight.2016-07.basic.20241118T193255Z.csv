@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"935c55de-9c29-44de-ab8c-a8c3502c4844","F0DC3EBA21774A65B89CFA6A62E37C3B","HARV.2016.26","HARV_001.mammalGrid.mam","D01","HARV","HARV_001","diversity","2016-07-01","2016-07-01",,"NEON.DOC.000481vD",,
+"ee639de9-603f-46ca-95a4-f136bc0ba5f4","A97D53B209B646E29DC48BE8B54265A4","HARV.2016.26","HARV_010.mammalGrid.mam","D01","HARV","HARV_010","diversity","2016-07-01","2016-07-01",,"NEON.DOC.000481vD",,

@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"41abf20c-ea7d-4cb0-be19-be4a8b48e4cb","4ef79cdd-db49-4b14-88c7-b87d4095caef","DELA.2021.31","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2021-08-04","2021-08-04","location flooded","NEON.DOC.000481vM",,
+"7f53094a-588f-4ad6-b986-50974e883a99","eb638bcc-a2f8-46ef-814d-b24fa51a7f6c","DELA.2021.31","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2021-08-04","2021-08-04","OK","NEON.DOC.000481vM",,
+"c891dfad-ea8b-4957-aa9a-cf58cafa40f6","f815487c-d480-4060-ad6c-4e778cc299b0","DELA.2021.31","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2021-08-04","2021-08-04","OK","NEON.DOC.000481vM",,
+"430c17b7-be50-4e89-99a3-edb3e2ec4b03","b0b2ae2b-9f8c-410c-aa99-579edf60f310","DELA.2021.31","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2021-08-05","2021-08-05","location flooded","NEON.DOC.000481vM",,
+"ef85c71c-2ab7-4ab3-a2b7-a028da02822b","c0a760eb-5d52-4188-8849-2f5d033960cf","DELA.2021.31","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2021-08-05","2021-08-05","logistical","NEON.DOC.000481vM",,
+"b7ffc23f-21f9-4c66-a46e-31107917f4d2","b31736c9-7928-4dcb-884d-0752043bdf8e","DELA.2021.31","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2021-08-05","2021-08-05","location flooded","NEON.DOC.000481vM",,
+"529333ed-dfcb-4763-b50c-44af69f9df50","ee206a6e-7cc1-40af-90c8-bc7c2f3c2a80","DELA.2021.31","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2021-08-06","2021-08-06","location flooded","NEON.DOC.000481vM",,
+"cea4e7b4-0cf5-4a1b-8464-a2e3a0d77749","576a2c54-4cdb-4e99-a841-2b7a8424e65e","DELA.2021.31","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2021-08-06","2021-08-06","logistical","NEON.DOC.000481vM",,
+"1a863ae0-5b6f-4ae3-91a2-7994fcfa4737","9d1152e7-0561-46df-8db3-8c477bcea46a","DELA.2021.31","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2021-08-06","2021-08-06","location flooded","NEON.DOC.000481vM",,

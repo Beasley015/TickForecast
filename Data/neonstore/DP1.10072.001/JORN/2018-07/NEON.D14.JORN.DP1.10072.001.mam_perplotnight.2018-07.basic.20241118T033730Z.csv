@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a0cd46fb-25b6-4c45-a6c1-b477c349d5d2","e035f21b-3b13-4c9e-80dd-b71f681ecdf9","JORN.2018.27","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2018-07-03","2018-07-03",,"NEON.DOC.000481vK",,
+"2960f340-7f1d-497f-b8a1-fbc01d2d587f","eabd1ebc-a956-4bb8-906b-5d3cae13826a","JORN.2018.27","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2018-07-03","2018-07-03",,"NEON.DOC.000481vK","Excessive ants on plot",
+"6dec6039-76ca-4d0a-859a-903cfe05e36c","6f7cf641-bbd8-4b5d-b9de-e0b316f1473a","JORN.2018.27","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2018-07-03","2018-07-03",,"NEON.DOC.000481vK","Lots of disturbed traps and ants",
+"1dbc031f-1890-42ea-a469-dbbc139428bd","68a369d7-6e6e-4ed2-92c3-69e860119997","JORN.2018.27","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2018-07-04","2018-07-04",,"NEON.DOC.000481vK",,
+"def1725c-23b6-439c-86be-3ae3b01d7f41","615078bc-b81f-4fc8-ac7d-7504a117edd2","JORN.2018.27","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2018-07-04","2018-07-04",,"NEON.DOC.000481vK","Many ants",
+"c7f34e4d-c692-4345-b651-ac417689ab0f","b5780fca-cea7-4aa3-9e0f-a87d86415142","JORN.2018.27","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2018-07-04","2018-07-04",,"NEON.DOC.000481vK",,
+"1217a35c-1fa3-48bc-8db5-8a1b2c0004f1","fc820ad1-6f86-46d9-8797-a3a344315312","JORN.2018.27","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2018-07-05","2018-07-05",,"NEON.DOC.000481vK",,
+"fbd671b7-1d4e-4e8b-94a8-5b34c82bc6eb","510fe0bd-d7a0-4b83-b649-5ad201f53d87","JORN.2018.27","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2018-07-05","2018-07-05",,"NEON.DOC.000481vK",,
+"a416449c-0c23-497f-bef8-f6c6d7923ae9","ffdb677d-d7a3-407a-9c48-bfd0bc699613","JORN.2018.27","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2018-07-05","2018-07-05",,"NEON.DOC.000481vK",,
+"1368f7c2-8d64-4d24-8248-30a45a48a300","f382d2a5-12fc-424e-aaef-d5900f3af0a5","JORN.2018.27","JORN_007.mammalGrid.mam","D14","JORN","JORN_007","diversity","2018-07-06","2018-07-06",,"NEON.DOC.000481vK",,

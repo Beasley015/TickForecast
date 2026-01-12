@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"29529d19-236c-47cc-9f56-9167dce33945","833fb9d9-a42c-4f86-93c0-dbb87abb360a","HEAL.2021.29","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2021-07-20","2021-07-20","OK","NEON.DOC.000481vM",,
+"c811e5af-ea7f-4794-a506-e6696cc7464c","25fd7561-e486-4a90-93ff-196b01cfdb0a","HEAL.2021.29","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2021-07-20","2021-07-20","OK","NEON.DOC.000481vM",,
+"bed72fd2-6b91-40cf-ad53-153438f7ac9e","2f454590-1315-4b45-9cdd-54d80f49d8c5","HEAL.2021.29","HEAL_010.mammalGrid.mam","D19","HEAL","HEAL_010","diversity","2021-07-20","2021-07-20","OK","NEON.DOC.000481vM",,
+"45e69ad9-be27-45af-baf6-83eb18756f54","b53e8f4e-0b0f-46e6-a76d-151867ca008f","HEAL.2021.29","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2021-07-21","2021-07-21","OK","NEON.DOC.000481vM",,
+"7adda313-9eea-444a-bcc3-7c644a3cd456","84ffe15d-0657-4007-bb30-cbdf564df32d","HEAL.2021.29","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2021-07-21","2021-07-21","OK","NEON.DOC.000481vM",,
+"0e4892f1-6d45-40d2-bc33-9c195ce88b80","91504c75-f787-4e60-aace-546fa1cfe4aa","HEAL.2021.29","HEAL_014.mammalGrid.mam","D19","HEAL","HEAL_014","diversity","2021-07-21","2021-07-21","OK","NEON.DOC.000481vM",,
+"7b76ae66-5445-46ca-84c1-96deb5213040","4468bb4b-d557-47a6-981c-580a388c1f7e","HEAL.2021.29","HEAL_033.mammalGrid.mam","D19","HEAL","HEAL_033","pathogen","2021-07-22","2021-07-22","OK","NEON.DOC.000481vM",,
+"efe5f3ab-ddf7-44f7-a283-9101cb5d035c","6360fb31-9f9b-49ba-8fe0-27340d3198b7","HEAL.2021.29","HEAL_032.mammalGrid.mam","D19","HEAL","HEAL_032","pathogen","2021-07-22","2021-07-22","OK","NEON.DOC.000481vM",,
+"dd112733-2b53-42aa-b785-41d2bdfd0faf","2bd43f11-560f-4fec-b999-c3c20c56a82a","HEAL.2021.29","HEAL_031.mammalGrid.mam","D19","HEAL","HEAL_031","diversity","2021-07-23","2021-07-23","OK","NEON.DOC.000481vM",,
+"2923f84b-0e04-4449-95af-4b6ed4395b4d","be0d09d9-8d27-4623-9e30-a01b3847853f","HEAL.2021.29","HEAL_034.mammalGrid.mam","D19","HEAL","HEAL_034","diversity","2021-07-23","2021-07-23",,"NEON.DOC.000481vM",,

@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"563efa59-0227-4a3d-bf33-8ce202589d0c","78894257-da9e-47d4-b0c0-0420b2f4270b","ONAQ.2017.30","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vJ",,
+"350e6a20-65f0-4fa2-b5b7-d55295996306","9c60c89a-66bc-4d13-9836-9ab162ea5625","ONAQ.2017.30","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vJ","Thunderstorm and wind night before trap collection",
+"aac584e5-209f-4972-9426-a4ee42c11df7","46e44e1f-9b29-441f-b83d-8c616561f95e","ONAQ.2017.30","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2017-07-28","2017-07-28",,"NEON.DOC.000481vJ",,
+"db81edc6-0319-4514-8911-cd4b5da6a505","723dc6e4-b74e-436a-8876-49770fb4a1a5","ONAQ.2017.30","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2017-07-28","2017-07-28",,"NEON.DOC.000481vJ",,
+"ef14ac3c-7ede-4448-90b7-4e941a3dd8a4","db1c2237-f0ee-4fa7-8c35-e39da0007840","ONAQ.2017.30","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2017-07-28","2017-07-28",,"NEON.DOC.000481vJ",,
+"be03a00d-99ac-4a7d-8ff6-1fdd4531aa31","91b68443-a49d-44ad-b9c2-68a6619917d1","ONAQ.2017.30","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2017-07-29","2017-07-29",,"NEON.DOC.000481vJ",,
+"c8c86a55-b636-421b-be4c-2e15b78934ac","92c4a07d-5f71-450b-a39c-617bbb3c1f42","ONAQ.2017.30","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2017-07-29","2017-07-29",,,,
+"13389c3a-1eba-4116-8a4b-ee28b88c6c55","9d3b0aac-5f24-41dc-a909-067c234ba92e","ONAQ.2017.30","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2017-07-29","2017-07-29",,,,
+"913e39c4-b2db-43c6-9602-629e7341be7c","a03e480b-7719-4a29-afb9-bc62e539b251","ONAQ.2017.30","ONAQ_023.mammalGrid.mam","D15","ONAQ","ONAQ_023","diversity","2017-07-30","2017-07-30",,,"Caught 3 PETR for the first time at this plot. Took full samples (except blood)",
+"7898709f-10e4-4654-b872-3f4a4071c750","a9afc475-67ce-47ed-9f29-4fe0d0450610","ONAQ.2017.30","ONAQ_019.mammalGrid.mam","D15","ONAQ","ONAQ_019","diversity","2017-07-30","2017-07-30",,"NEON.DOC.000481vJ",,
+"a1bedb2e-2a0d-48e6-acd8-7854ac63d1c7","e7bfb48e-f0fe-4be5-bc25-9a6be5fc89ed","ONAQ.2017.30","ONAQ_004.mammalGrid.mam","D15","ONAQ","ONAQ_004","diversity","2017-07-30","2017-07-30",,,"Pit tag reader battery died part way through processing.",

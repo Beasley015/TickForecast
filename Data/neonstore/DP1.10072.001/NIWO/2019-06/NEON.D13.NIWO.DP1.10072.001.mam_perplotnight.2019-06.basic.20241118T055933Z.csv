@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"6c5c0769-89b0-4a94-bfb0-6926fb1504e9","021ea4fb-a536-4aa6-a6e5-b27e365b0b28","NIWO.2019.23","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2019-06-08","2019-06-08",,"NEON.DOC.000481vL",,
+"1ecca6dc-43c6-4c18-a486-c2489388d4af","5017e96d-f0ce-4289-9c03-95384247b7d1","NIWO.2019.23","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2019-06-08","2019-06-08",,"NEON.DOC.000481vL",,
+"98508e1f-3b76-4a57-83fc-4d3dc30b090c","1310f003-12df-4ccf-9096-f54c61cb1e1a","NIWO.2019.23","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2019-06-08","2019-06-08",,"NEON.DOC.000481vL",,
+"a835a011-0202-4fe9-a3e8-5dc85f1c8e6f","1ad1d9c4-a382-4b4d-8a37-a07cf0d67172","NIWO.2019.23","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2019-06-08","2019-06-08",,"NEON.DOC.000481vL",,
+"e56e131d-e983-4f6d-906d-c91080d410cc","1502d4be-b94b-49e1-bc1f-7844f9714408","NIWO.2019.23","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2019-06-09","2019-06-09",,"NEON.DOC.000481vL",,
+"777fe275-1b7b-450b-a6db-f9eb5ed82f7a","f1a959c2-077d-4a2e-8cb3-6ade12d2a26c","NIWO.2019.23","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2019-06-09","2019-06-09",,"NEON.DOC.000481vL",,
+"fb462268-83a0-4353-93a9-096e072706b8","5493348c-8cbb-46c0-9ee8-4cc22a73d3bb","NIWO.2019.23","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2019-06-09","2019-06-09",,"NEON.DOC.000481vL",,
+"f2612195-cba4-4f5c-95da-d09c462b05b8","d4f6a68e-448e-4e4d-a694-2b48fcdd52fa","NIWO.2019.23","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2019-06-09","2019-06-09",,"NEON.DOC.000481vL",,
+"52751ba2-4831-4231-a46c-49b900062536","c2072ce6-a47e-40de-bdb1-3ac6ed21f98a","NIWO.2019.23","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2019-06-10","2019-06-10",,"NEON.DOC.000481vL",,
+"da18c133-955d-4fcc-94f8-f169e5de8d4c","720e106e-90ea-4842-ac16-5d0245df3526","NIWO.2019.23","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2019-06-10","2019-06-10",,"NEON.DOC.000481vL",,
+"201c4bb1-dbbd-485f-aa42-884c0a1b97b6","c59a3c99-3265-4791-8a56-1dce524471d2","NIWO.2019.23","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2019-06-10","2019-06-10",,"NEON.DOC.000481vL",,

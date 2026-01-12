@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7d0bbd16-f2c4-4298-aba7-14134adb7707","10D6FD0CA7F240638142F46BDBCA29BA","OSBS.2014.30","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-07-22","2014-07-22",,,,
+"da7a3f34-a2f6-4a89-88f2-8f129cddea37","560CEAE30F404A2CB6B4507813130B7F","OSBS.2014.30","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-07-22","2014-07-22",,,,
+"ebfcf46c-7fcd-4899-9095-ba75f71763b4","273016B7723546F78C4D746477ECFACD","OSBS.2014.30","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2014-07-22","2014-07-22",,,,
+"9f95fd4b-0025-4a58-a507-7ba25c197851","9CC4A4DF6CA040E78CFD7502DC700D5F","OSBS.2014.30","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2014-07-23","2014-07-23",,,,
+"aadd0e7e-c30e-4e2c-9a78-91c13466e1cb","ABB6E1C50AB34003AC77AEE99FF4A679","OSBS.2014.30","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-07-23","2014-07-23",,,,
+"1a2ec9ab-b9ef-464a-98f9-731dedbd09f5","AA44AF3536D84706B0A3228E0FAB1FCD","OSBS.2014.30","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-07-23","2014-07-23",,,,
+"263327ca-28fa-4336-b945-e5c084d96204","C21B3BB1586B445F8693346F5FE565E3","OSBS.2014.30","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2014-07-24","2014-07-24",,,,
+"50e6ef80-f3d4-416d-b2dd-5f386013416a","6D64147F858A4BB8AFB167D50E1B93EC","OSBS.2014.30","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-07-24","2014-07-24",,,"Data entered by employee from different domain with errors (plots 3 and 4 were combined. This is re-entered data solely for plot 3.",
+"4ddd83e6-fa49-408e-ba95-60f6e57bb87e","6530CABBE639486595B9D1B906E7EFEB","OSBS.2014.30","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-07-24","2014-07-24",,,,

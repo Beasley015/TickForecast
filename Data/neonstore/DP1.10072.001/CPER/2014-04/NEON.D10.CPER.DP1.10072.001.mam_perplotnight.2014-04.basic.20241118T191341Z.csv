@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f93073f7-8cd1-441b-9193-e3132a33f272","3FFF5A6061C440159C8E84B52EA1278C","CPER.2014.18","CPER_002.mammalGrid.mam","D10","CPER","CPER_002","recapture","2014-04-28","2014-04-28",,,,
+"6b3b486e-f68e-4a65-a833-a60e824ce2e8","3EB9FFF81A2E4C728E23C45A1EABB920","CPER.2014.18","CPER_006.mammalGrid.mam","D10","CPER","CPER_006","recapture","2014-04-28","2014-04-28",,,"High trap disturbance due to wind",
+"cf546a09-693e-49a6-a2f8-9d099e0bacd9","CA3E0AE6B4624E3B8CC7D0195AB4C7CE","CPER.2014.18","CPER_009.mammalGrid.mam","D10","CPER","CPER_009","recapture","2014-04-28","2014-04-28",,,,
+"84d455e7-438a-4d0c-9439-81f28d2aa003","515FD8B9E9664412BE106CF60BE622FA","CPER.2014.18","CPER_008.mammalGrid.mam","D10","CPER","CPER_008","recapture","2014-04-28","2014-04-28",,,,

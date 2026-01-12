@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3da0d8f2-ebe6-45c1-b524-cac937efebe8","CBE0C149DD654DF39E2573079458F3D7","SCBI.2014.22","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2014-05-30","2014-05-30",,,"Light precipitation, heavy fog during processing. Rain overnight",
+"0f21137c-522d-41f4-9f4d-eb1281cc167f","1F4FAD7BA4BE417687D495B1B05908B3","SCBI.2014.22","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2014-05-30","2014-05-30",,,"Rain overnight, many ants near/in traps",
+"0a8d741e-9501-404a-906c-ae622b1dc37e","D54EA877F02D47F2A28C613B519B76E4","SCBI.2014.22","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","pathogen","2014-05-30","2014-05-30",,,"Light precipitation, heavy fog during processing. Rain overnight",
+"afdaa4f6-f1f0-457d-9e2d-85215aecf620","855A099CAA124157AF1311A48F96A7F5","SCBI.2014.22","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","pathogen","2014-05-31","2014-05-31",,,,
+"8f56477c-0120-4286-91a9-c86707653596","9B5D4689E2464926AA514B4EFA9B3F20","SCBI.2014.22","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2014-05-31","2014-05-31",,,,
+"3b5c6119-0f68-409b-894f-ee2a363ab59b","9CD9F054B59B4DA49EAC40CA673F3F67","SCBI.2014.22","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2014-05-31","2014-05-31",,,,

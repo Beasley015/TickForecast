@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a76980b2-ccd2-4f79-bdcd-2a067ad4b83c","9cad95a8-3e31-4bc6-a4e5-ada3d74428dc","SCBI.2020.29","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2020-07-14","2020-07-14","OK","NEON.DOC.000481vM","waiting on lynsey am card",
+"c9ba8e6f-1382-4ca3-b007-66277c3d67ca","049d7cab-6c3d-4cbd-aeb7-28d0485dc6bf","SCBI.2020.29","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2020-07-14","2020-07-14","OK","NEON.DOC.000481vM",,
+"fd10bdee-8f01-4857-a5f3-7b314ac9d876","15f31114-0eb1-4549-9952-daf39e569bf0","SCBI.2020.29","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2020-07-14","2020-07-14","OK","NEON.DOC.000481vM",,
+"b2dd83ba-84ec-4b8d-8ab5-b034fcaf0db6","4f4775bb-a4fc-4c2a-b18d-6c02089c45f6","SCBI.2020.29","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2020-07-15","2020-07-15","OK","NEON.DOC.000481vM",,
+"bfcbd122-119c-4753-a220-c5a37582c694","1ce871ca-0298-45eb-bbeb-498f8ce41cb1","SCBI.2020.29","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2020-07-15","2020-07-15","OK","NEON.DOC.000481vM",,
+"605d53e4-5e50-477d-8687-282d58e979e3","32bea268-3fbf-4286-ba7b-bc92370be87f","SCBI.2020.29","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2020-07-15","2020-07-15","OK","NEON.DOC.000481vM",,
+"c72e4d79-cdda-40ea-a71d-d2da2661ff38","028deea7-7e1f-4b02-9332-cb83f495e606","SCBI.2020.29","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2020-07-16","2020-07-16","OK","NEON.DOC.000481vM",,
+"cfb90a7e-087b-4f3f-95fd-c31deae4e463","605c1e8d-fe73-4dbb-9ee4-d09d92bff4e2","SCBI.2020.29","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2020-07-16","2020-07-16","OK","NEON.DOC.000481vM",,
+"41f3bc1c-46b7-4a9b-9fe0-06174ebc7a16","c5e5affe-a13e-4250-9a62-61137990e081","SCBI.2020.29","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2020-07-16","2020-07-16","OK","NEON.DOC.000481vM","waiting on check of am cards",
+"3590b79d-b4c8-44f3-a85f-94f99a01d0a6","0eae10ee-dedd-4dc3-891c-73043e33d482","SCBI.2020.29","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2020-07-17","2020-07-17","OK","NEON.DOC.000481vM",,
+"7ff1147f-05c3-418b-a25f-1723ad661bc0","a3c94964-3565-4925-8e89-6b74a1d4012b","SCBI.2020.29","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2020-07-17","2020-07-17","OK","NEON.DOC.000481vM",,
+"d9b95fb3-7a26-4fd8-a895-eca2d4bd0090","acc0905a-7ea9-4584-9a21-9037ba117409","SCBI.2020.29","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2020-07-17","2020-07-17","OK","NEON.DOC.000481vM",,

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"70236c3e-3737-4d34-9edd-a9920f4d26cd","5cad8ace-1672-4c69-8d21-14ff9d854eba","ABBY.2017.16","ABBY_011.mammalGrid.mam","D16","ABBY","ABBY_011","diversity","2017-04-18","2017-04-18",,"NEON.DOC.000481vG","E8 not set due to slash pile",
+"15f9a2bb-f33f-4871-bf47-6b31db6fc2ef","efc0009d-bd7b-4878-a09c-fc420fa4e86c","ABBY.2017.16","ABBY_023.mammalGrid.mam","D16","ABBY","ABBY_023","diversity","2017-04-18","2017-04-18",,,"98 traps set. E10 not set plus one other missed.",
+"516aefb7-8918-49d5-8c0e-4c0f4a245950","28b43369-3455-4025-b80d-571e0d6cdaf0","ABBY.2017.16","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2017-04-20","2017-04-20",,"NEON.DOC.000481vG","All set",
+"e7f27726-2fda-4114-aed6-96020d6c3d94","83c8731d-207a-4f9f-9551-f8ad90a064e8","ABBY.2017.16","ABBY_007.mammalGrid.mam","D16","ABBY","ABBY_007","diversity","2017-04-21","2017-04-21",,"NEON.DOC.000481vG",,
+"c52546ef-fe65-42a2-875e-9e93aa631737","835e6a73-185b-43b9-b412-8124ea785efa","ABBY.2017.16","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2017-04-21","2017-04-21",,"NEON.DOC.000481vG","All set",
+"e6c5f309-fb24-40a7-9e7c-d7ebf94fd18e","48a6509b-96aa-42b2-b326-245f01c3f5d0","ABBY.2017.16","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2017-04-22","2017-04-22",,"NEON.DOC.000481vJ","Set on 20170421; collected on 20170422",
+"d74988be-3262-48ce-84d0-267f07a3ae8e","dea1cc79-172e-4673-bea7-b1a0095ef2b0","ABBY.2017.16","ABBY_003.mammalGrid.mam","D16","ABBY","ABBY_003","diversity","2017-04-22","2017-04-22",,"NEON.DOC.000481vJ","set on 20170421; collected on 20170422",
+"7533dc31-a033-4c75-8c78-26a930b54853","aa35f1c7-24ab-4fa5-b132-5b3c5fe79942","ABBY.2017.16","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2017-04-23","2017-04-23",,,,
+"091c8f4c-27b8-49b2-9424-6fe8b79c3949","949c1908-806b-41a2-a36a-c7adbba7dc0f","ABBY.2017.16","ABBY_014.mammalGrid.mam","D16","ABBY","ABBY_014","diversity","2017-04-24","2017-04-24",,,"99 traps set",
+"cf014bbd-f4e4-446d-8a26-1d2d9cec0dfa","12fe6c32-1649-4f66-9540-ee7dd3089352","ABBY.2017.16","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2017-04-24","2017-04-24",,,"5 Traps reset",

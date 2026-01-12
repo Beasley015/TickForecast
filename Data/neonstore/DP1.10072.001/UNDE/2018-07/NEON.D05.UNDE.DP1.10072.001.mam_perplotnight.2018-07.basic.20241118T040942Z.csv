@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"4dcbe2c4-6e10-4363-a365-bc2f9b3ec3de","84a4860b-acd0-4446-be13-635640d0c128","UNDE.2018.28","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"a33355f7-b699-44df-8d31-094f1006f437","ef4968fd-517c-4bc0-9725-039c82a072cf","UNDE.2018.28","UNDE_002.mammalGrid.mam","D05","UNDE","UNDE_002","diversity","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"485e52bf-70b7-4e28-aa34-8194a1e50c2e","9e591396-96b8-4dc1-8011-d0d46e1ed5dd","UNDE.2018.28","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"2925d9a8-d717-41c9-9f23-f0d10b02dc8c","106fc5d5-7251-40cb-89ef-fa773d252561","UNDE.2018.28","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"9f830e25-28a9-484a-bb87-35535cc6faec","c506c3dd-6776-469c-8406-7959bef8910c","UNDE.2018.28","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"d1c8a1a4-328e-4d49-b27c-e8678709f5a9","3967bcd0-c792-4937-9a38-bb95b43c2e1a","UNDE.2018.28","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"8c2594f4-e54e-4d22-afd6-f47a258f1584","106bce82-e71e-4b52-aef6-bdd88299869f","UNDE.2018.28","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"29dba9b0-4483-435d-975b-16712a95c7f9","b1020374-1599-4409-9d15-941cbe81fa36","UNDE.2018.28","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2018-07-13","2018-07-13",,"NEON.DOC.000481vK",,
+"4c9b30b0-802e-46d3-8d68-2f3d8da0ec61","47dfbc94-422d-49f5-a0d9-075bba6bd01d","UNDE.2018.28","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2018-07-13","2018-07-13",,"NEON.DOC.000481vK",,
+"8b44495f-f243-48df-8c35-2ad6b6f9626a","36dc4622-fbe2-419c-bb76-a2cbdc112ebd","UNDE.2018.28","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2018-07-17","2018-07-17",,"NEON.DOC.000481vK",,
+"d58f633b-f2b0-42a1-9d77-6f18686478cc","8fc0d14b-5415-41cd-98c6-fcf33dd23685","UNDE.2018.28","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2018-07-17","2018-07-17",,"NEON.DOC.000481vK",,
+"fc6597b5-a4cb-4eab-bd77-be214f466261","f52cf9ba-5d1e-4662-8b99-ff4c840e50a5","UNDE.2018.28","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2018-07-17","2018-07-17",,"NEON.DOC.000481vK",,

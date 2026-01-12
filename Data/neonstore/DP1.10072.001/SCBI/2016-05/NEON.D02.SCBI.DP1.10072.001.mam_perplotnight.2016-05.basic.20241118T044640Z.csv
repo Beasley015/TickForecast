@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d402d01d-b1e2-452c-81cd-b529004185dd","595F832B4A06470883BA03A5F0242F4E","SCBI.2016.22","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2016-05-31","2016-05-31",,"NEON.DOC.000481vG","low 63 F; high in 80s F; clear and humid; all traps covered with leaves and other plant debris",
+"bcc69d22-bddb-4ad0-a469-b2bc266e3173","A008C4178FEA481B9363660D53ACE86F","SCBI.2016.22","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2016-05-31","2016-05-31",,"NEON.DOC.000481vG",,
+"cd01dc93-e116-49c9-9fe0-208a72804f5d","DA06BF85C16F47FF9BB258362FA296D3","SCBI.2016.22","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2016-05-31","2016-05-31",,"NEON.DOC.000481vG",,

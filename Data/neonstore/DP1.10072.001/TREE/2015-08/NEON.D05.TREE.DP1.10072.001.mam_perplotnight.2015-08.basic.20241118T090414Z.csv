@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d9d809fb-f176-417a-aa63-c851fc3cac0b","B0C2EB67D4414A5E8D3C779F5F45A8A5","TREE.2015.32","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2015-08-05","2015-08-05",,,,
+"16f387bf-a72e-4c6c-a180-a6a310678cfe","B239062304594F2D9FAFCCDF3D0D9D25","TREE.2015.32","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2015-08-05","2015-08-05",,,,
+"27c3d5b5-1dc0-4675-a55a-6bc4515da890","6353855D7A1643B5A9B95F598152F845","TREE.2015.32","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","pathogen","2015-08-05","2015-08-05",,,,
+"c287efe0-fde9-4854-abc7-087b0a93b91f","AB39ED960B2849A0B2291AD07FD078F1","TREE.2015.32","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2015-08-06","2015-08-06",,,"Found dead SOCI in a bag of batting. Not sure of trap ID",
+"de930bef-2fe4-4968-bb7d-ed17d67308f2","DD46CCF4A79E4F47A5FEC80717FB9CB8","TREE.2015.32","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2015-08-06","2015-08-06",,,,
+"46b3bbb6-7e15-4ccc-9e71-a4af23a8cc4b","53A4115D32D34EFEB6ACDCF93D62ACC4","TREE.2015.32","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","pathogen","2015-08-06","2015-08-06",,,"Grid looked like it had been disturbed by a raccoon. Out of all the traps disturbed, 21 had batting pulled out",
+"093ab0f5-b651-4cf2-a938-a858c91c1da8","44551EA91EC1478B903E626C0359A11F","TREE.2015.32","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2015-08-07","2015-08-07",,,"Grid appeared to be visited by raccoons. Many disturbed traps had batting pulled out and seeds removed.",
+"81902acf-08e0-40be-9e67-bf1645b31459","F44D7F76F924495E96D3B3D0026998A1","TREE.2015.32","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","pathogen","2015-08-07","2015-08-07",,,"No traps were set on this grid on the night of August 7 due to extensive disturbance by predators the night before.",
+"13281ab2-4aa1-4a82-97d2-13181fba9920","73385C002E8548D28C59020940E59799","TREE.2015.32","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2015-08-07","2015-08-07",,,,
+"1f769b19-74dc-47cc-a3c9-c6539ec15436","62F3EBD2CC1041B2AAA6AF0A1F68E73A","TREE.2015.32","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","diversity","2015-08-08","2015-08-08",,,,
+"a5f96af5-4ece-4bd8-a2a1-d5fe758f1be5","E631E780FEA5437A8290E1E59FECE62E","TREE.2015.32","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2015-08-08","2015-08-08",,,,
+"35f0efb8-8d0c-4be1-a67a-022386e2d5a0","325CFDF38E6F4D3F91AA627514D1EB25","TREE.2015.32","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2015-08-08","2015-08-08",,,,

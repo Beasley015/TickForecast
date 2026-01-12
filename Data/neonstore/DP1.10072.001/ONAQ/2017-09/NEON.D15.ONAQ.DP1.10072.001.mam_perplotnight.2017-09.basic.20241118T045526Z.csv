@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8267bfcc-ef4e-4614-893c-c319a026d4c7","c6e7eb6e-d761-44c4-89c7-6ba8016bcfd6","ONAQ.2017.38","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"3c5a173d-2c97-41b7-be7c-8bc5960f8f08","48b22dd5-7f73-46b8-a319-454d670073a4","ONAQ.2017.38","ONAQ_023.mammalGrid.mam","D15","ONAQ","ONAQ_023","diversity","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"262f0bfd-66e4-4177-b377-29a7dcfa0b75","80c9158e-2f68-45b1-9879-2fd87b25f898","ONAQ.2017.38","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"07f6909d-530c-43c6-aeee-7cca9546818a","e79f81f0-da98-4df3-8b8e-de264ecc2006","ONAQ.2017.38","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"9e94fe4c-9d6f-4d22-a84f-3eaed0037769","4423aec5-4d1c-4436-8bcd-a07686c1f149","ONAQ.2017.38","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2017-09-26","2017-09-26",,"NEON.DOC.000481vJ",,
+"7d49761b-9e43-401c-917c-8e5ac7fe6a61","62a84ee0-aab6-4fda-89d7-2c7e8b982f0d","ONAQ.2017.38","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2017-09-26","2017-09-26",,"NEON.DOC.000481vJ",,
+"22f30b85-ec20-4f30-89d9-de42ea86774d","43f2a45a-78a0-470b-9f29-f93d352f44e2","ONAQ.2017.38","ONAQ_019.mammalGrid.mam","D15","ONAQ","ONAQ_019","diversity","2017-09-26","2017-09-26",,"NEON.DOC.000481vJ",,
+"1c069d30-9cbe-4d0f-be2f-70f08d18368c","7a0c9706-7916-4a3c-b444-a41f2e9ee1f4","ONAQ.2017.38","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2017-09-26","2017-09-26",,"NEON.DOC.000481vJ",,
+"5988ce28-c5b9-4966-9d3b-baf4e49d089a","904defff-bb21-4eeb-81b0-1b2948f32ec3","ONAQ.2017.38","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2017-09-27","2017-09-27",,"NEON.DOC.000481vJ",,
+"450a75b7-dfbd-452f-8f15-8d28cff91696","d8b0c37f-a24c-425f-9751-9968fcdd6a9f","ONAQ.2017.38","ONAQ_004.mammalGrid.mam","D15","ONAQ","ONAQ_004","diversity","2017-09-27","2017-09-27",,"NEON.DOC.000481vJ",,
+"b81b29ba-83e3-436f-af2b-2a6cd307cfe7","5f14321e-ca40-4749-9069-bdc5691eee6f","ONAQ.2017.38","ONAQ_003.mammalGrid.mam","D15","ONAQ","ONAQ_003","pathogen","2017-09-27","2017-09-27",,"NEON.DOC.000481vJ","Reduced processing due to high capture rate no measurements taken for recaptures",
+"ecb7cb82-344d-4a52-94d0-faa52e990aa8","3fd1ea47-e115-487c-9b00-8a27405c37f0","ONAQ.2017.38","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2017-09-27","2017-09-27",,"NEON.DOC.000481vJ",,

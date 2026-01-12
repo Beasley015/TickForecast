@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"57f7e422-a27c-4f37-8a5f-c078bc255d64","82946ecc-4dc9-4993-b80e-05b5b24b6ad1","STER.2022.36","STER_026.mammalGrid.mam","D10","STER","STER_026","diversity","2022-09-04","2022-09-04","OK","NEON.DOC.000481vN",,
+"78681ef8-b3c8-4e1e-ba23-3f889bc2410d","5883466b-6360-4cf7-a3a1-5cc937548be3","STER.2022.36","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-09-04","2022-09-04","logistical","NEON.DOC.000481vN","Insufficient resources",
+"89b264a4-4fa4-40e8-873f-76526f96a030","56df3ff2-5b9c-4096-aa10-ce50bcb544c2","STER.2022.36","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-09-04","2022-09-04","OK","NEON.DOC.000481vN",,
+"fba6cc03-8afb-44b0-ba35-321620df8db8","a77d592a-770d-426d-9b0e-1956d8d4126f","STER.2022.36","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-09-04","2022-09-04","OK","NEON.DOC.000481vN",,
+"0d84cd3d-9027-46aa-bdba-c72be579649a","99cc2edf-2cb7-430a-bf99-f6527d22cc8f","STER.2022.36","STER_028.mammalGrid.mam","D10","STER","STER_028","diversity","2022-09-05","2022-09-05","OK","NEON.DOC.000481vN",,
+"8e87a373-448c-4368-baf8-0f5cf348a6b3","b4fad86a-d807-40d6-89fd-42557129cca6","STER.2022.36","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-09-05","2022-09-05","OK","NEON.DOC.000481vN",,
+"219cd62d-cd20-40a7-8af7-a7927cc01ebb","954ccdb7-3794-44cd-8daf-ed3cff9bbd60","STER.2022.36","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-09-05","2022-09-05","management","NEON.DOC.000481vN","Harvesting at plot",
+"db48fda9-8448-4b20-a8c3-2145f82ac6af","46bdd067-da79-432e-806b-4ea55ee1e98c","STER.2022.36","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-09-05","2022-09-05","OK","NEON.DOC.000481vN",,
+"c8c0fecf-ee51-4f78-b535-438ecb43b9b5","0831675e-f743-4785-aebd-95092cbfa9fe","STER.2022.36","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-09-06","2022-09-06","management","NEON.DOC.000481vN","Harvesting at plot",
+"4433b62a-ca67-4718-9bda-47e2dc2517f9","f4bb513d-c365-4b09-815e-7e5751c358a8","STER.2022.36","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-09-06","2022-09-06","OK","NEON.DOC.000481vN",,
+"9473b1fb-27a2-487e-9687-0d47b9a6a6a7","8d0f96b7-b736-4e39-aceb-65810b41d250","STER.2022.36","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-09-06","2022-09-06","OK","NEON.DOC.000481vN",,
+"8c2cdd0a-00ed-447c-bf07-0dfde031ea21","171e56f0-b496-4337-80cc-39702c42ac94","STER.2022.36","STER_027.mammalGrid.mam","D10","STER","STER_027","diversity","2022-09-06","2022-09-06","logistical","NEON.DOC.000481vN","Insufficient resources",

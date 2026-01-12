@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"aa4f4d0c-bcde-4328-94f1-469e980b9967","2c55e590-022b-4b6b-a0cb-027ac9fe6c74","OSBS.2018.15","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2018-04-10","2018-04-10",,"NEON.DOC.000481vK","Raining",
+"531debdc-b595-41c8-8db4-098b59b34c05","b2f15ba9-e3d6-4949-90bf-b03f9460b859","OSBS.2018.15","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2018-04-10","2018-04-10",,"NEON.DOC.000481vK",,
+"b2a1786c-a9de-4a7c-abbc-88aaf3893a92","f267e42e-0f2c-46e2-bbbc-5f00954484b5","OSBS.2018.15","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2018-04-11","2018-04-11",,"NEON.DOC.000481vK",,
+"28b167c5-28ab-4229-ba98-52c263c8a407","16ae53e4-a768-4be9-820e-138c77c9758c","OSBS.2018.15","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2018-04-11","2018-04-11",,"NEON.DOC.000481vK",,
+"8526fb0a-9fb1-4e67-bb02-33b9c1f90cfe","40f6d043-bd7c-44a7-91c1-3691936a786e","OSBS.2018.15","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2018-04-11","2018-04-11",,"NEON.DOC.000481vK",,
+"3f7f502d-d897-4fb8-bfad-29ecc84de7d1","8ca06155-3f1c-4b80-948f-54f811551ae9","OSBS.2018.15","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2018-04-12","2018-04-12",,"NEON.DOC.000481vK",,
+"5c1b2c17-8d8f-44db-a2c2-ff1a19b3ec69","47180a31-c7bc-49c7-83f6-cb008093e807","OSBS.2018.15","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2018-04-12","2018-04-12",,"NEON.DOC.000481vK",,
+"9c05361a-74bc-4ac6-b2ee-83b3b22fb5d0","dc22b666-9dd5-4a2b-ad25-6e8121d003af","OSBS.2018.15","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2018-04-13","2018-04-13",,"NEON.DOC.000481vK",,

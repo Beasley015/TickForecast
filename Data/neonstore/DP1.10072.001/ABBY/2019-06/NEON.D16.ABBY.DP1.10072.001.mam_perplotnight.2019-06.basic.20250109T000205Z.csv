@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e33aa1ef-fb6c-41a1-a9a6-1d265f9be3a9","0d90115c-f27e-4d6d-8817-9498243a29f7","ABBY.2019.26","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL","100 traps set",
+"62000310-c1d7-4689-ad6d-05124ac85463","8eb17242-b085-4fcf-b359-d596db0d7540","ABBY.2019.26","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL",,
+"756fab08-03b9-4626-afbb-8ad4bf13a320","498d1ff3-0f8e-4209-a5cf-7c6b8c1bf12b","ABBY.2019.26","ABBY_007.mammalGrid.mam","D16","ABBY","ABBY_007","diversity","2019-06-25","2019-06-25",,"NEON.DOC.000481vL","100 traps set",
+"e2964639-3b20-4414-861f-f1766233de6b","2a11eea8-fdd9-43da-9823-4017c08f6a2f","ABBY.2019.26","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"9fa44edc-e7bf-4cf3-b256-3ccb87859da7","f8fed20a-ae0a-4764-a773-5e63f7326ed9","ABBY.2019.26","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"8b29ed4c-1d18-42ce-bcfa-bc0785ad8d06","64065170-3623-4d39-91fa-247f36e188aa","ABBY.2019.26","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL","100 traps set",
+"21d1aec7-1dc8-4744-a4f8-321c52223736","eb5a9a7d-0e7d-41d2-825e-5e2d9010ae69","ABBY.2019.26","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2019-06-27","2019-06-27",,"NEON.DOC.000481vL",,
+"287d2d64-940a-423b-9bb3-68bf34bab4e2","aadc4201-9cc6-4dd3-ab88-8667dc83502b","ABBY.2019.26","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-06-28","2019-06-28",,"NEON.DOC.000481vL",,
+"43662a6f-0de9-4d2f-a5fc-6bba6b9aa420","045144cd-d5c5-4e5e-ad99-5133de75e1b8","ABBY.2019.26","ABBY_014.mammalGrid.mam","D16","ABBY","ABBY_014","diversity","2019-06-28","2019-06-28",,"NEON.DOC.000481vL","99 traps set",
+"cb9da777-022e-47b8-95af-9eda47f4a3e9","163a14ff-0799-4514-980f-086d8d052b66","ABBY.2019.26","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2019-06-28","2019-06-28",,"NEON.DOC.000481vL","99 traps set",
+"a0cae53b-e3fe-464a-9e86-af86d9b77a1c","270cfd08-f2af-4254-bd9b-d4653fd45afc","ABBY.2019.26","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2019-06-29","2019-06-29",,"NEON.DOC.000481vL",,
+"c189a3d3-c910-4224-b9d1-40005279f6dc","ae668a24-8d45-4a75-a890-3463e030a3de","ABBY.2019.26","ABBY_023.mammalGrid.mam","D16","ABBY","ABBY_023","diversity","2019-06-29","2019-06-29",,"NEON.DOC.000481vL","99 traps set",

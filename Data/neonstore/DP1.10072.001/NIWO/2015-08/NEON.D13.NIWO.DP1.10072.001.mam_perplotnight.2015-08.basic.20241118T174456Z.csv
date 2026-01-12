@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a6cdf01f-25af-4e41-bbae-952b7091c639","BD4F8529837843BF9A2CA5538D9A0B29","NIWO.2015.34","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-08-18","2015-08-18",,,"used version 'vG",
+"1acd6db6-68b5-4339-81cf-1940854a099f","A6F1E73FD1824BC680E05CB7DB38F850","NIWO.2015.34","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-08-18","2015-08-18",,,,
+"4e07e0d2-35d7-4d5f-b53e-6f678a614799","D0AA2CE11B9A49F09F863D7E422DEC8B","NIWO.2015.34","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-08-18","2015-08-18",,,"used version 'vG",
+"69682c44-1c27-40a9-8bf8-13b02e4713dd","EF93CCA715334F5FB0B7B17C90E68993","NIWO.2015.34","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-08-19","2015-08-19",,,"used version 'vG",
+"c2763406-8490-442e-9dd0-9fff159c3c79","890C2F5D42FC40C08CC57A0FFA01A32B","NIWO.2015.34","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2015-08-19","2015-08-19",,,"used version 'vG",
+"e654deb5-a892-4c61-b071-f959ed0318a1","32D9FC6CBE62412BAC5E7B5A431555A8","NIWO.2015.34","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-08-19","2015-08-19",,,"used version 'vG",
+"c6c3265c-3de5-4153-abaa-7e88a7719c3f","5674DFC21C284FD18D0A6E996C7313AF","NIWO.2015.34","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-08-20","2015-08-20",,,"Using protocol vg",
+"c5c1ba1c-9944-4bde-8cd3-00327a59e277","BC1002C1683643FD9DA4D1EFED1072CD","NIWO.2015.34","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-08-20","2015-08-20",,,"used version 'vG",
+"8dc8b3b7-35c9-4b9f-8030-561a5a80beda","E86B69C1C5674D7BA9860617CCC7833E","NIWO.2015.34","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-08-20","2015-08-20",,,,
+"5ffee121-e105-46c4-a2e8-39b739c99d87","CD7D04ABF06C49ABB892781B10EFDF01","NIWO.2015.34","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2015-08-21","2015-08-21",,,"Using protocol vg",
+"1ca8bef5-5deb-492c-8470-b3f4ca669111","C8B5EC02CBF74AA9AEDD80B4FE5B4177","NIWO.2015.34","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2015-08-21","2015-08-21",,,"Using protocol vg",

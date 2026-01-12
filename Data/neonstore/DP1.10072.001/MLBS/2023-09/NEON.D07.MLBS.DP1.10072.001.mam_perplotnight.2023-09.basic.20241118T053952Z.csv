@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"806956c0-ed3a-43ca-9ed6-b54d7c9a0555","1d7f63a4-4ef0-4c2f-8979-02228f4e1014","MLBS.2023.38","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2023-09-19","2023-09-19","OK","NEON.DOC.000481vP",,
+"45c14bbb-3ed8-4c70-b53f-c3ed2cca2035","df9f53ab-dd39-491d-bbba-5458c60175f7","MLBS.2023.38","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2023-09-19","2023-09-19","OK","NEON.DOC.000481vP",,
+"2fa2499d-1f98-4989-a9f0-cb6a0ac23e17","9a124b0b-a103-40e8-9e39-50172d01a64a","MLBS.2023.38","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2023-09-19","2023-09-19","OK","NEON.DOC.000481vP",,
+"069e6737-6380-49de-9f9c-cde4471a64f9","f1d103d4-f06b-43ab-98e7-7eedf8a8099a","MLBS.2023.38","MLBS_002.mammalGrid.mam","D07","MLBS","MLBS_002","diversity","2023-09-19","2023-09-19","OK","NEON.DOC.000481vP",,
+"691ae7dd-aa47-42bb-b1da-bcd44e3955d3","7c969468-f067-4b46-8f20-a1d5abf067a8","MLBS.2023.38","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2023-09-20","2023-09-20","OK","NEON.DOC.000481vP",,
+"658bfbae-c11b-4f4e-bacb-d6f9baf2d571","60681b17-b15d-45fe-af3b-f3dc84e11d2f","MLBS.2023.38","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2023-09-20","2023-09-20","other","NEON.DOC.000481vP","Grid closed early due to protocol guidance.",
+"1b1f9b82-2f72-4332-a546-c07aca8048e3","839df7b9-f936-4cfe-9d2a-12fa34966cbf","MLBS.2023.38","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2023-09-20","2023-09-20","OK","NEON.DOC.000481vP",,
+"9a8d97d4-4673-4256-989e-49239d3a88d0","4fdfa8db-4509-4db6-80e6-bd54b00d4faa","MLBS.2023.38","MLBS_009.mammalGrid.mam","D07","MLBS","MLBS_009","diversity","2023-09-20","2023-09-20","OK","NEON.DOC.000481vP",,
+"995e2547-cb7b-465d-8271-fcd8469e385f","3684f8a5-a56b-4694-92f3-710394bde251","MLBS.2023.38","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2023-09-21","2023-09-21","OK","NEON.DOC.000481vP",,
+"1e6233cb-86b9-47a3-81a5-82b37cea3ab0","0e03f977-20dd-46ae-aa3b-d7d37aaf7b14","MLBS.2023.38","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2023-09-21","2023-09-21","OK","NEON.DOC.000481vP",,
+"36b1c296-64b3-46b4-bdeb-a1596135fb23","a62e789e-b660-4f6b-9681-b75fb568a0cd","MLBS.2023.38","MLBS_004.mammalGrid.mam","D07","MLBS","MLBS_004","diversity","2023-09-21","2023-09-21","OK","NEON.DOC.000481vP",,
+"bcc11d66-9324-4429-82d2-364a8f35f124","613f323a-5c03-456a-8425-fde6d0481503","MLBS.2023.38","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2023-09-21","2023-09-21","other","NEON.DOC.000481vP","Grid closed early due to protocol guidance.",

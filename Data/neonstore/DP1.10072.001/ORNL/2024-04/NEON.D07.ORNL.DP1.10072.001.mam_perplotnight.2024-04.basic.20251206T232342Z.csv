@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"99706881-2bda-4d7a-8932-78ad2378b5cb","05f9e45a-fee3-4656-b212-6ebe051b1371","ORNL.2024.18","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"3451a031-83b0-4ae7-8c7f-615feaaa2fd8","01562908-a118-4187-9745-d9154d749acd","ORNL.2024.18","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"90e44a60-8529-4067-8a96-b0e519abd476","02810272-6816-4617-9f53-fd53eaf77310","ORNL.2024.18","ORNL_039.mammalGrid.mam","D07","ORNL","ORNL_039","diversity","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"21f7800c-3826-4f58-a11b-52df25eafb71","6aa716d6-906f-4d4c-940d-8571b3a67195","ORNL.2024.18","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,

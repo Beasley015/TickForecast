@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2ee325ab-3925-4ca9-a5d9-5dde6a56e460","0578DB55CA0F48D89A684A41E11128E2","ONAQ.2014.34","ONAQ_021.mammalGrid.mam","D15","ONAQ","ONAQ_021","pathogen","2014-08-24","2014-08-24",,,,
+"a34a5f12-aa63-4ff7-97f2-2a85b77493d1","D742305991724A169CCD785230064773","ONAQ.2014.34","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2014-08-24","2014-08-24",,,,
+"b94ef845-14af-4374-8235-d61c9f946a0f","1669B7AF020C46F692F9A47FA14C653A","ONAQ.2014.34","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2014-08-25","2014-08-25",,,"Several animals were released w/o processing due to logistical time constraints/high capture rates (after noon cut-off).",
+"46280658-1f5a-4fa8-9136-43c8e31d2a0e","9BC64ED67C9B44C49FF7DE44A6C3386C","ONAQ.2014.34","ONAQ_021.mammalGrid.mam","D15","ONAQ","ONAQ_021","pathogen","2014-08-25","2014-08-25",,,,
+"3b8f0ac0-f057-42c9-b52a-d493f6689340","67BCE22656434FB3B4C35480E0FBE756","ONAQ.2014.34","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","pathogen","2014-08-26","2014-08-26",,,"Several animals were released w/o processing due to logistical time constraints/high capture rates.",
+"c907d4f8-b119-4571-9e17-f7cad45f0149","2D15C20E0DDC497FB351325262955F72","ONAQ.2014.34","ONAQ_021.mammalGrid.mam","D15","ONAQ","ONAQ_021","pathogen","2014-08-26","2014-08-26",,,,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d5563401-ca4d-4534-9a5c-671da0e231d3","d14b7141-c3c4-44c4-a415-d362933c7def","WOOD.2017.26","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"9bdb82ae-ee38-4f90-a853-b4a72161dba7","0d936bd3-647e-4590-b0e0-6f2bff6a9256","WOOD.2017.26","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"99f40428-297a-4f7c-b0c6-c4a02d3736c3","b108e4d2-4690-46f9-a7b9-9f787aebe8a1","WOOD.2017.26","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2017-06-27","2017-06-27",,,"Recorded by mgentzkow",
+"dd0c4a60-a30a-4add-8a36-f22d06e96bbe","cc14fa42-ac74-488f-80c6-4f6ac4e9cb0b","WOOD.2017.26","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-06-28","2017-06-28",,,,
+"72b06640-6e09-42d9-bd70-cccd883caf98","6a5623e3-27cb-44d3-8186-0aad6f0847b4","WOOD.2017.26","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-06-28","2017-06-28",,,,
+"4b9c604e-7125-4b47-92e4-9d53b42c21a4","769f5b1d-7ee0-4b88-a013-5272925424c9","WOOD.2017.26","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-06-28","2017-06-28",,,,
+"4ce5dd7e-817a-4643-9b3f-d684a927995b","440c8681-93bb-4669-9d53-6fd7cc6154e7","WOOD.2017.26","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,
+"161750a5-5ccb-4f77-97bd-d7dab9d06727","89ff8829-79c7-4198-8d54-1ec6a8f731b2","WOOD.2017.26","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-06-29","2017-06-29",,,,
+"3ae263ed-151f-43eb-b007-25b83c63cefa","0302329b-aaf4-458b-b1cd-ee9506d64794","WOOD.2017.26","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2017-06-29","2017-06-29",,,"Measured by swenner",
+"0bab8b40-b51f-4522-b30a-fadbe88872b9","367281e0-2253-4e42-b461-9148282ff1e2","WOOD.2017.26","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-06-29","2017-06-29",,,"Swenner",
+"a908a9b2-2a0d-49c2-8a7a-119eacd6c57d","ddc1d9b2-a5ab-45a6-a342-3e5896d939d4","WOOD.2017.26","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2017-06-30","2017-06-30",,,,
+"1a63499c-20f5-4760-832e-ce12df85059f","73332504-4e55-4116-af27-51541527db8f","WOOD.2017.26","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2017-06-30","2017-06-30",,"NEON.DOC.000481vJ",,

@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"be8b5fbb-82af-4206-8d3f-1fa2236d88db","72488dd7-7216-473c-8b52-1db76cabd11d","BART.2019.27","BART_062.mammalGrid.mam","D01","BART","BART_062","pathogen","2019-07-07","2019-07-07",,"NEON.DOC.000481vL",,
+"9aefabf5-ac02-4cd3-aa19-547036b6e99a","0b7b4c99-44a5-4b19-bf15-232bf58344ac","BART.2019.27","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2019-07-07","2019-07-07",,"NEON.DOC.000481vL",,
+"51ba259f-0096-4c24-bbde-864707b2cb89","3d3effd8-ff1e-497f-8363-657650b18626","BART.2019.27","BART_012.mammalGrid.mam","D01","BART","BART_012","pathogen","2019-07-07","2019-07-07",,"NEON.DOC.000481vL",,
+"20947b78-cbe7-400d-a1f8-d79d4a825114","ea455a13-8e8a-48e0-a9c3-3c984a2d62d7","BART.2019.27","BART_012.mammalGrid.mam","D01","BART","BART_012","pathogen","2019-07-08","2019-07-08",,"NEON.DOC.000481vL","bear disturbed plot (more than 30 traps)",
+"1cba88b4-dfba-4441-9f5f-feda23d8f944","ee686d79-db50-4bd2-ae98-b59722757693","BART.2019.27","BART_062.mammalGrid.mam","D01","BART","BART_062","pathogen","2019-07-08","2019-07-08",,"NEON.DOC.000481vL",,
+"ddc11e5a-527b-496a-9f9d-08476144990b","1211607d-04ed-4d83-be5c-b6f12a35e499","BART.2019.27","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2019-07-08","2019-07-08",,"NEON.DOC.000481vL",,
+"45fed385-11a1-43a4-adfd-98150a89955a","b59d84c0-d67f-4fef-bf38-465eb72ccfef","BART.2019.27","BART_062.mammalGrid.mam","D01","BART","BART_062","pathogen","2019-07-09","2019-07-09",,"NEON.DOC.000481vL",,
+"fbbe4712-e54f-46b5-8da5-e669da92bc0e","79ab5bc4-fe23-464c-b310-fd021ea2b732","BART.2019.27","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2019-07-09","2019-07-09",,"NEON.DOC.000481vL",,
+"30fd4dfb-3ab1-40c8-9179-cc903a406970","cc6ed9ab-db4c-4429-8a18-9bd34db93e1a","BART.2019.27","BART_012.mammalGrid.mam","D01","BART","BART_012","pathogen","2019-07-09","2019-07-09",,"NEON.DOC.000481vL",,

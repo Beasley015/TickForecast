@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3dc597f6-eed1-4b2d-af9f-38cbae2a4142","2373f4b9-5d87-439a-b624-7cef5b92c52f","STEI.2017.24","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2017-06-15","2017-06-15",,,,
+"020b7299-3f58-4787-96c6-cc79d62b0381","d4ff23a8-6321-4079-a3af-e2d01ce7977e","STEI.2017.24","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2017-06-15","2017-06-15",,,,
+"318d1df2-6c14-4236-8c91-877ccf5b034d","7ff2aa5f-a23e-48bf-b44f-8fe9ccb53032","STEI.2017.24","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2017-06-15","2017-06-15",,,,
+"d643cccc-a76c-4ed6-8678-82efe3a4cc74","c88e2e14-fc10-48f7-9c50-231d468c4e69","STEI.2017.24","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2017-06-16","2017-06-16",,,,
+"ca74267e-f855-4700-a586-e617c97f848d","b6f37a7c-8cd3-4429-b843-8822d635c86d","STEI.2017.24","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2017-06-16","2017-06-16",,,,
+"22f0b9b1-ba65-4917-bbf1-a575a8474485","3d1ced2a-dca2-4d2e-8560-3bdec5277e02","STEI.2017.24","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2017-06-16","2017-06-16",,,,
+"27636bcc-bf28-479f-a09b-d12b0cc8f5b1","2e179f1c-935b-4fe2-bb23-fca9a5effe41","STEI.2017.24","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2017-06-17","2017-06-17",,,,
+"75a11be1-8526-4a55-89cb-82c8a1b47a34","2cdfd57c-cfab-40c8-999f-cdb69f0f667f","STEI.2017.24","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2017-06-17","2017-06-17",,,,
+"a41a1e2e-62d6-44da-842c-b0fcecd1abb3","ac503cd4-2408-40d9-bf80-db644953fcb4","STEI.2017.24","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2017-06-17","2017-06-17",,,,

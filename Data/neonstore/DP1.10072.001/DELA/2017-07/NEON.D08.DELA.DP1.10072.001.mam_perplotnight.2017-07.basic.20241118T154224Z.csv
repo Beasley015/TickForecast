@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2c2e8424-b5af-40e7-b5b6-e3fb1f636f0d","c15f57e6-fc76-4745-b454-28665d984ff2","DELA.2017.30","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ",,
+"28d2cca4-52b4-4f5b-be44-08a720880276","9bbccb38-c317-4ea7-ab99-9a9f3ed4b2ff","DELA.2017.30","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ",,
+"72d48a21-bff8-49a3-9619-8e50159980f6","0ef7c19c-a78c-429e-a052-82d6a9f3ed17","DELA.2017.30","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2017-07-25","2017-07-25",,"NEON.DOC.000481vJ",,
+"d9113e9f-6fd8-4d7b-a683-5aff5f53edc3","82464020-8b73-44e8-97b0-db6f7236dc7e","DELA.2017.30","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ",,
+"2cbb0175-4e78-4b39-8fc6-0f85be9b18e1","dbfdb7cb-9501-4885-9887-e819f9e3fd89","DELA.2017.30","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ",,
+"a305adbf-77da-4435-abe9-574f6890cf57","63c9ca9d-0334-406d-bb35-c649c218920d","DELA.2017.30","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2017-07-26","2017-07-26",,"NEON.DOC.000481vJ",,
+"1e9efc17-f17a-48ed-ae70-e8bac7d7bf72","49c8e169-640f-4e77-9367-dac43c025152","DELA.2017.30","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vH",,
+"ceeda3fa-401b-4726-9773-894abd27132e","7199ff16-ced3-491f-b3e4-92ccb51a10df","DELA.2017.30","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vH",,
+"00153252-7d0f-4ed9-b6d5-24aa9cd8398a","e9c025b8-2d96-4708-8710-d4c2c8d93523","DELA.2017.30","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2017-07-27","2017-07-27",,"NEON.DOC.000481vH",,

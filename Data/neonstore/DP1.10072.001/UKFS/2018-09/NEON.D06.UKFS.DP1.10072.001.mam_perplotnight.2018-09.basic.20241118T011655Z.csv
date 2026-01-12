@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"79837b5a-22ed-4de0-8579-2358c21d7f03","0ec8aa15-8529-4a03-8d43-ebb543a99838","UKFS.2018.37","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"c55d970c-6f90-4de5-b2b0-76e0154c20be","21ceca6f-491f-4789-a99e-cbedd014207c","UKFS.2018.37","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"07dd5c32-1c5f-4dd9-b5d6-ce1d26f76aeb","5e130ee0-f863-492d-bb26-95e428043e1a","UKFS.2018.37","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2018-09-11","2018-09-11",,"NEON.DOC.000481vK",,
+"d6659204-a3a5-4728-ab85-5f3e4daa0c05","2f07fbc3-3154-4dd9-882f-8ff302de2060","UKFS.2018.37","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"252b8f15-22aa-493d-93f8-89f70942e860","18f58808-4713-4b14-9e1d-87348a42316c","UKFS.2018.37","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"dfc7db50-d29f-4fd9-87e5-abf4fe2c6147","0bef059b-b559-45b0-a3d4-bc5271cc05fc","UKFS.2018.37","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2018-09-12","2018-09-12",,"NEON.DOC.000481vK",,
+"06dd629b-6a8b-4c92-9dc2-cf88537c7b2e","05fad025-7887-4f5a-b8bb-9b9681168e67","UKFS.2018.37","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"a922681b-536f-436d-9033-9db64fb089c5","dc721d4e-c91a-4620-8450-8f7d820e6379","UKFS.2018.37","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"34f69bbc-4e84-460d-b999-927e6f900b2d","8bcd4109-82c8-4d42-83d7-691b76b288f8","UKFS.2018.37","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2018-09-13","2018-09-13",,"NEON.DOC.000481vK",,
+"39ea111e-15cd-4600-a0ea-4ce3dcc9a0be","aec2a022-b05c-4b7c-a2ce-371efa642826","UKFS.2018.37","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2018-09-14","2018-09-14",,"NEON.DOC.000481vK",,
+"ff9f7726-48d0-44bd-9e51-426e0491ead3","88d39dbd-3b02-46a1-bbd4-1e9d0e9ef91a","UKFS.2018.37","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2018-09-14","2018-09-14",,"NEON.DOC.000481vK",,
+"97b1e47b-d109-403d-bad9-1a4b03c5c574","5a6169ee-08d2-457e-95ce-f1ef202ff2c0","UKFS.2018.37","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2018-09-14","2018-09-14",,"NEON.DOC.000481vK",,

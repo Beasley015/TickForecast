@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7189d5c8-abe7-4eb4-ac7f-ed0c8409818f","d1744aa4-eb1f-4a28-bb3c-59f4996f39cd","UKFS.2023.40","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2023-10-03","2023-10-03","OK","NEON.DOC.000481vP",,
+"94f78b5b-16de-46c4-aefa-3207f3ac78da","f6767c0a-e7a5-4232-8ef6-60446cd16427","UKFS.2023.40","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2023-10-03","2023-10-03","OK","NEON.DOC.000481vP",,
+"6ab8aaa8-faee-4721-8915-3c1b9bfe551c","0ecb30f9-765d-4ef1-b2db-0c08007615a4","UKFS.2023.40","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2023-10-03","2023-10-03","OK","NEON.DOC.000481vP",,
+"2140f0d4-36ce-4c13-b3e6-bb7a7e48cb4d","65a69c4d-25a4-4cd8-b762-e600cf9a5847","UKFS.2023.40","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2023-10-04","2023-10-04","OK","NEON.DOC.000481vP",,
+"37724042-8dbb-46de-8b8f-420399c811ec","7e132ce0-9e2e-4779-ac15-22e2b70e5e6b","UKFS.2023.40","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2023-10-04","2023-10-04","OK","NEON.DOC.000481vP",,
+"e75c12a0-6a19-4c1b-8865-7937e222afd7","55009f11-cb5f-4e0e-a3b3-f3b40a81a5b5","UKFS.2023.40","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2023-10-04","2023-10-04","OK","NEON.DOC.000481vP",,
+"2163c5d0-ac00-40ce-a80b-1904f23afe74","97b1342b-ba76-4f96-b5c5-440f425f04b8","UKFS.2023.40","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2023-10-05","2023-10-05","OK","NEON.DOC.000481vP",,
+"ef0a48a7-d743-403c-ac8f-dc89b1513a16","86a3327c-d4ce-40aa-9e10-b56ab6436e21","UKFS.2023.40","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2023-10-05","2023-10-05","OK","NEON.DOC.000481vP",,
+"3748f1c1-77ae-4b49-88b5-682102b706cd","4bea99de-99ee-46d8-9421-b0d0531fc8a9","UKFS.2023.40","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2023-10-05","2023-10-05","OK","NEON.DOC.000481vP",,
+"7311502b-faaf-411d-81aa-acbcef0e9ff9","2ae5ccd4-b774-4a88-8812-e6dc6979009a","UKFS.2023.40","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2023-10-06","2023-10-06","logistical","NEON.DOC.000481vP",,
+"1d5d926a-f02d-417a-9636-c7dcda39517b","db30aa4a-3d57-410b-9567-f1086d05ec17","UKFS.2023.40","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2023-10-06","2023-10-06","logistical","NEON.DOC.000481vP",,
+"874a8247-1304-4a60-924c-8be8f61ac4b6","66256a9d-2b44-4a8a-b0d8-30278fca78e6","UKFS.2023.40","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2023-10-06","2023-10-06","logistical","NEON.DOC.000481vP",,

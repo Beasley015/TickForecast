@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2e7bf154-b182-4642-b75d-5165afdc5daa","ce8b312b-b452-436c-bb10-c2af1d9cbacf","GRSM.2017.18","GRSM_013.mammalGrid.mam","D07","GRSM","GRSM_013","diversity","2017-05-02","2017-05-02",,"NEON.DOC.000481vG",,
+"5bf3e9db-c03a-44e9-a68c-5114e8b25d86","e47916c5-dda6-4b2f-8ed4-0f103117ecaf","GRSM.2017.18","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","diversity","2017-05-02","2017-05-02",,"NEON.DOC.000481vG",,
+"360d368d-94b7-48bc-a4c2-56bd8464ad01","09ddafbe-9ede-4019-91e2-053971d4d5de","GRSM.2017.18","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","diversity","2017-05-02","2017-05-02",,"NEON.DOC.000481vG",,
+"96d73115-826f-48f8-91e5-a58deff8d618","3a8601b5-7774-49be-96d6-d74e4d6eb8d2","GRSM.2017.18","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2017-05-03","2017-05-03",,"NEON.DOC.000481vJ","Plot burned in earlier wildfire",
+"30bd6610-baa6-42be-87bb-7b616f5646e6","26b78cd3-c27f-43d2-b0d9-7740dc0bb328","GRSM.2017.18","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2017-05-03","2017-05-03",,"NEON.DOC.000481vG",,
+"e62f0359-a77c-40b3-9bad-487a0f7e7437","19284b22-258f-4c88-bdee-1c4cfdb79dd7","GRSM.2017.18","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2017-05-03","2017-05-03",,"NEON.DOC.000481vG",,
+"63777c2b-04c0-40b3-8d21-c22efe5c664e","22932bb4-2cf3-49f9-b532-e47899ab1b87","GRSM.2017.18","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2017-05-04","2017-05-04",,"NEON.DOC.000481vJ","Plot in post wilfire",
+"f76caa50-c6b0-4855-83bc-e75634bf4575","3865369a-cecc-46e8-9ce3-2d717f3fe2f8","GRSM.2017.18","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2017-05-04","2017-05-04",,"NEON.DOC.000481vJ",,
+"fb8753a0-88d4-431f-a57d-3c9e5f7e6a70","3eabd658-5608-462d-b282-a2ad77fbfa9c","GRSM.2017.18","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2017-05-04","2017-05-04",,"NEON.DOC.000481vJ",,

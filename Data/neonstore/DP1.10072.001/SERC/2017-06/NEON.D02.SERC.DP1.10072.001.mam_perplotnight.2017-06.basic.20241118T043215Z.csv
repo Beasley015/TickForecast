@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"306a875f-fabd-4731-b16f-24b47320fe3f","9ae63a04-d480-40b6-8658-354f0e9ad682","SERC.2017.26","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"2c70645b-4066-4b93-a6d8-f5aadc1f73b0","7eb18d08-4cec-45b8-9681-bf066fd7e70f","SERC.2017.26","SERC_007.mammalGrid.mam","D02","SERC","SERC_007","diversity","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"d327a88e-24d5-4bcc-9a32-ae50de9dce25","8c975463-bfa0-4f5d-ba3e-ea9329c84bcf","SERC.2017.26","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"a3745676-a149-4800-83a0-3c210d5421f2","59724f94-4a3a-4032-919b-1d4f10dbc5d2","SERC.2017.26","SERC_014.mammalGrid.mam","D02","SERC","SERC_014","diversity","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"2bc9c726-788e-4bd1-b787-45edfddc5c74","64b4ba99-2c55-4307-b3fb-6f3cd4270dee","SERC.2017.26","SERC_032.mammalGrid.mam","D02","SERC","SERC_032","diversity","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"48d557a0-05c6-467f-90bf-1e8a742e81bc","da7c2dc9-7a9d-4e45-affd-50d61ac89d3f","SERC.2017.26","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"5917d16d-64b8-4f71-91b9-001c0337fd24","d7e1c258-e4f5-435d-8e27-7c4f6af5bfe3","SERC.2017.26","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"8962a9f8-a1bd-4d28-919f-4da2a96d27ec","d6d631c8-6e08-4943-abf0-141da51b5bc8","SERC.2017.26","SERC_016.mammalGrid.mam","D02","SERC","SERC_016","diversity","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"62b3c7b4-37b3-4d93-a0e8-609ebb2e2475","3f3dc4b7-696d-4fca-880c-65872e719268","SERC.2017.26","SERC_008.mammalGrid.mam","D02","SERC","SERC_008","diversity","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,
+"27550fb8-019b-443c-b226-0766e81f9d8c","3cb17804-7286-4ecc-a48f-db8e330b3dff","SERC.2017.26","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ","Feces not collected from individuals that we already collected species from earlier in the week",
+"832ffcbb-8256-4425-bd21-f1a69cce45fd","b19b0216-864c-4d83-87fb-42127ada34d0","SERC.2017.26","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,
+"6eb61b6f-8a36-47d1-b2f6-975e1d6d6d5f","cf5eb00b-3627-4e45-8581-d42573e0b242","SERC.2017.26","SERC_031.mammalGrid.mam","D02","SERC","SERC_031","diversity","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,

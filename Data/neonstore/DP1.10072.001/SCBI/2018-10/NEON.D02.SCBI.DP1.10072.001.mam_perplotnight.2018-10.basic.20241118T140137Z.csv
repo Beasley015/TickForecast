@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"6b6051d0-279f-47d5-917a-6960aa5aff38","216d6ab8-dd1e-4284-a59b-611a614177d5","SCBI.2018.40","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-10-02","2018-10-02",,"NEON.DOC.000481vK",,
+"6615331b-919e-4491-959b-4a0daaeaf1a8","56364e08-6054-410d-9095-f3630930a1b8","SCBI.2018.40","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-10-02","2018-10-02",,"NEON.DOC.000481vK",,
+"cf908f94-8fa2-413e-a7e6-4b634cbcb9f0","75a96b7a-cd92-458d-b400-98e18714be13","SCBI.2018.40","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-10-02","2018-10-02",,"NEON.DOC.000481vK",,
+"19184c79-782d-4931-b898-2e7489a51860","bcfe43ca-5224-43ce-8e30-3b5131849236","SCBI.2018.40","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-10-03","2018-10-03",,"NEON.DOC.000481vK",,
+"9b4da32b-1e77-42ff-b253-3dcacf2d2198","6e537f08-8237-43a6-9b99-76d21574114b","SCBI.2018.40","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-10-03","2018-10-03",,"NEON.DOC.000481vK",,
+"aa9ed8f7-e77c-4a5d-b2f6-b7c593ab5221","c5bd62c5-4f43-47c8-8997-dc3ac18f6695","SCBI.2018.40","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-10-04","2018-10-04",,"NEON.DOC.000481vK",,
+"99de9837-4d05-43d0-a9db-48983d1b966a","35eda564-79c3-42cc-82ff-6aa66b619259","SCBI.2018.40","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2018-10-04","2018-10-04",,"NEON.DOC.000481vK","Many disturbed traps with batting out or knocked over",
+"dd3dd451-c67f-4fc7-944d-8bcc017ab16e","f575028c-f1d1-43c9-a09c-c2db898d767d","SCBI.2018.40","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-10-04","2018-10-04",,"NEON.DOC.000481vK",,
+"9b5a21a9-2825-4ca0-8181-86543cbc064b","494b12c9-b855-47c4-a90d-3cd87cc6ac68","SCBI.2018.40","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2018-10-05","2018-10-05",,"NEON.DOC.000481vK",,

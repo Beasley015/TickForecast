@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d4df8eab-fd21-4aa0-aacd-5b104b988af9","95bf84bb-eded-46a2-bdde-eea092068bf7","BLAN.2023.21","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-05-23","2023-05-23","OK","NEON.DOC.000481vP",,
+"e568087a-217a-4df9-b50c-e36d1338015a","e02d320c-680a-4510-8dfb-1bdde48e26a4","BLAN.2023.21","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-05-23","2023-05-23","OK","NEON.DOC.000481vP",,
+"51cf29d6-19a9-4e0b-97e1-e74b223c0142","f821e146-4b80-47ef-881f-585209552a5a","BLAN.2023.21","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-05-24","2023-05-24","OK","NEON.DOC.000481vP",,
+"c1b0065e-d18d-4e14-bacb-036cfcd18f19","0ac38095-b31c-4fe9-aefd-e2cca1311287","BLAN.2023.21","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-05-24","2023-05-24","disturbance","NEON.DOC.000481vP",,
+"c6dab622-5f12-49cf-af90-dd36c1ae4f16","f20b58da-52cb-4d41-a35f-1f5ab6692c62","BLAN.2023.21","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-05-25","2023-05-25","OK","NEON.DOC.000481vP",,
+"f9bc00c0-56a5-4497-9281-490afe5b3fc2","f69fdd22-837e-4037-9b7a-8d13e71f43a3","BLAN.2023.21","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-05-25","2023-05-25","disturbance","NEON.DOC.000481vP",,
+"5b6beb22-ff4f-46ce-811d-5813a0d47dcc","c6dc4ca8-2a27-476d-8c26-b42cb7d6e46c","BLAN.2023.21","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-05-30","2023-05-30","OK","NEON.DOC.000481vP","sampling outside new moon window",
+"3c0d324d-b79a-4c22-b995-faf7f40cda29","a55d670a-0092-4ec2-a0b3-e88993d4d74a","BLAN.2023.21","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-05-31","2023-05-31","OK","NEON.DOC.000481vP","sampling outside new moon window",
+"02d109b2-79eb-426e-9862-ae00d5e4745f","ebb50c57-e786-419d-86d2-7587a3c1ce2f","BLAN.2023.21","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2023-05-31","2023-05-31","OK","NEON.DOC.000481vP","sampling outside new moon window",

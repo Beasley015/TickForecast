@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2789f721-1dc9-4dc6-8fd8-efa9aefafa6a","d0180a0c-dfc5-405e-8d37-e00e0773f99d","SCBI.2022.30","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2022-07-25","2022-07-25","logistical","NEON.DOC.000481vN",,
+"0788c825-47b1-4021-b2cc-6d67f9c37ea7","600382a0-fd8d-413c-b545-eadda827f764","SCBI.2022.30","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2022-07-25","2022-07-25","logistical","NEON.DOC.000481vN",,
+"2a2c5334-9181-40f6-a5ef-c9347ca5d386","653c6a1c-100e-4f4b-9b3d-154f39cc2507","SCBI.2022.30","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2022-07-26","2022-07-26","OK","NEON.DOC.000481vN",,
+"78556187-776c-4e35-aac1-c4844a462860","7ad6474a-c6c6-49fa-9270-55705ba7fd24","SCBI.2022.30","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2022-07-26","2022-07-26","OK","NEON.DOC.000481vN",,
+"2ad88e2b-b62f-4fa9-9e70-18c72b7a2d4a","1bf5058c-b8da-47d1-bb96-19962d43b025","SCBI.2022.30","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2022-07-26","2022-07-26","logistical","NEON.DOC.000481vN",,
+"4adc0811-91b3-41a1-a8ac-115051835811","a42efce5-3f9b-48bd-9469-89d985008cdd","SCBI.2022.30","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2022-07-27","2022-07-27","OK","NEON.DOC.000481vN",,
+"13c29fdc-11a3-4cf1-ac8b-fbca09d5326b","c9508fdb-4c07-4ca9-8ae3-0851f1fcebd6","SCBI.2022.30","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2022-07-27","2022-07-27","logistical","NEON.DOC.000481vN",,
+"05612579-5dad-4114-a1b1-966253ccc9c5","f3e37995-84f1-4023-b5bc-1936a62998f3","SCBI.2022.30","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2022-07-27","2022-07-27","OK","NEON.DOC.000481vN",,
+"377d9148-7e0b-4659-a7b7-2e9cc36ec93a","436fa427-f90a-4813-ab2f-d033f8d8e3d6","SCBI.2022.30","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2022-07-28","2022-07-28","OK","NEON.DOC.000481vN",,
+"168c4a4a-d240-4b86-92df-f2dd137b2e50","0235112c-2697-42c1-9618-190431dcec18","SCBI.2022.30","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2022-07-28","2022-07-28","OK","NEON.DOC.000481vN",,
+"ea7e59b2-770b-456f-984a-5067fea41320","236ef6e6-4d79-4210-b613-78e489556854","SCBI.2022.30","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2022-07-29","2022-07-29","OK","NEON.DOC.000481vN",,
+"b96a18ed-df70-49d9-930e-6842ec75873d","086a3cf7-f4a5-4153-bbdb-b321bce56ef4","SCBI.2022.30","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2022-07-29","2022-07-29","OK","NEON.DOC.000481vN","Sampling outside 21 day new moon sampling window",

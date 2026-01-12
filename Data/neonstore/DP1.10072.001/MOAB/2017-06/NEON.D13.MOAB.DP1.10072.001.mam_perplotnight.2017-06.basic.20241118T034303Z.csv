@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"bd867649-bcce-42f6-a7c5-62f8033d00ca","79d43c3d-7b48-4cd2-a7b3-df2560523c01","MOAB.2017.24","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2017-06-17","2017-06-17",,"NEON.DOC.000481vJ",,
+"d019a41f-2388-466f-978d-6a70175bbdf2","98c4f9fb-cc20-46c0-a332-83d5c336ede9","MOAB.2017.24","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2017-06-18","2017-06-18",,"NEON.DOC.000481vJ",,
+"713101f9-9fd8-4f92-a8a3-f99590583901","8ebcbd53-41e7-4269-b161-db9299fc69d2","MOAB.2017.24","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2017-06-19","2017-06-19",,"NEON.DOC.000481vJ",,
+"698b0e1d-194c-4dfb-be69-de705d9669dd","fe1828ea-9284-48f9-913f-5375f128a24e","MOAB.2017.24","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","diversity","2017-06-20","2017-06-20",,"NEON.DOC.000481vJ",,
+"406d9412-36dd-412f-9438-4a006cf48614","78a95b6a-0716-457e-b095-f095887a4c1a","MOAB.2017.24","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2017-06-20","2017-06-20",,"NEON.DOC.000481vJ",,
+"ff067c2e-7f90-4599-8894-2fdf6a075b64","7a76baae-734d-4138-a795-42585965b4ca","MOAB.2017.24","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","pathogen","2017-06-20","2017-06-20",,"NEON.DOC.000481vJ",,
+"72c405d0-500b-4a2d-a53a-42e31917f63b","4f734fa2-9f95-41d9-b143-ac2cdb11b5c4","MOAB.2017.24","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2017-06-21","2017-06-21",,"NEON.DOC.000481vJ",,
+"f906a9ae-a7e9-41c4-9025-13e102058137","a10d9b52-be30-4a8b-803f-df5a36364392","MOAB.2017.24","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","pathogen","2017-06-21","2017-06-21",,"NEON.DOC.000481vJ",,
+"9b9cd78b-4722-4906-849f-d5b931e8f5fd","e868ceea-920d-4d71-b0a0-627f15a77344","MOAB.2017.24","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","diversity","2017-06-21","2017-06-21",,"NEON.DOC.000481vJ",,
+"5843ebb2-056f-4258-8906-0eddf6753b78","13a7d660-5ce3-4c40-87b8-cf503c0cab69","MOAB.2017.24","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2017-06-22","2017-06-22",,"NEON.DOC.000481vJ",,
+"66aa947b-c4ee-4aec-85d6-ada7449b3273","7ad2ed63-7f1c-481d-b7b2-3ee0f5a43b16","MOAB.2017.24","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","pathogen","2017-06-22","2017-06-22",,"NEON.DOC.000481vJ","Many traps closed but empty- there was a lot of wind and a little bit of rain last night",
+"c2928e2b-5395-44a4-b7ad-a9e6f28328e9","bad912af-1aed-4f5e-a5b4-4b453fc65ea0","MOAB.2017.24","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2017-06-22","2017-06-22",,"NEON.DOC.000481vJ",,

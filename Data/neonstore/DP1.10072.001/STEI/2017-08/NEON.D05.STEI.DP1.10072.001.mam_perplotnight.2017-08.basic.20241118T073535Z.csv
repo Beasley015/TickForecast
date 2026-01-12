@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"1e4234b8-50b2-4a06-a034-a15f9b658078","d71c735b-6aa6-49a1-bd40-b91284cefa86","STEI.2017.33","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2017-08-15","2017-08-15",,"NEON.DOC.000481vG",,
+"c9b525ab-472e-4481-850e-ec2f4dace447","acc7d589-b360-459b-8687-1b779fdbefa2","STEI.2017.33","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2017-08-15","2017-08-15",,"NEON.DOC.000481vG",,
+"7c1b651d-99f1-46f0-bb92-634f1da6cbc2","bc51b800-eb53-4019-b51f-c2ce4e3c7377","STEI.2017.33","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2017-08-15","2017-08-15",,"NEON.DOC.000481vG",,
+"7ed83a3a-d6db-42e5-b609-89b2b11e98e0","b9c5212e-e559-4254-a677-85dc0aa566f5","STEI.2017.33","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vG",,
+"9df53d91-6716-4793-b7f8-a0842b326c23","070a26ef-4ac9-4d3d-9ec3-c09847647195","STEI.2017.33","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vG",,
+"b876a59e-0b6f-49dc-abe8-7bdcc9483aec","dad186b1-2ed1-4296-bfff-23981f573294","STEI.2017.33","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vG","Limited processing because captures exceeded 30",
+"2179ebd3-6055-4fb2-a227-9c5ca036af2a","d680cd45-0a3d-42f3-b07f-29a2d32be06c","STEI.2017.33","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vG",,
+"60e484f4-570a-4188-996e-a16c5efe82f0","9a1dc485-0954-48b0-aa26-c0bba1853c94","STEI.2017.33","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vG",,
+"f3d72e02-a8e1-4034-80fa-bf6f56d57b76","5d56416c-bdce-4fd1-aecc-04d3d8bb0c60","STEI.2017.33","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vG",,

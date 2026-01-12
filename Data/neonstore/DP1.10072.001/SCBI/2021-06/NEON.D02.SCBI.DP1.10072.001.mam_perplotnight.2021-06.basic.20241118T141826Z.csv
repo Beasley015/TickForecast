@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"908e73b4-157e-4bdf-ac53-462a03b79611","f1049f07-fa32-4360-87af-8e4660231b25","SCBI.2021.22","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2021-06-02","2021-06-02","OK","NEON.DOC.000481vM",,
+"0835e8bf-5f48-4b42-b229-8ce8433a010d","9470a332-9e34-427d-b066-1600841fd64a","SCBI.2021.22","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2021-06-02","2021-06-02","OK","NEON.DOC.000481vM",,
+"84258d8b-d0c3-47de-82a1-bd2a1d9acf7a","4468d9f2-3705-4984-9438-2959d80e6984","SCBI.2021.22","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2021-06-03","2021-06-03","OK","NEON.DOC.000481vM",,
+"a76417cb-6544-4490-b6c4-6d03dddc7822","d5560b3d-01c0-485d-9050-187869f65713","SCBI.2021.22","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2021-06-03","2021-06-03","OK","NEON.DOC.000481vM",,
+"2f490581-f5f0-4b48-a393-5ba25137cfc4","a625986b-09aa-4661-b4ad-3be2a9356b88","SCBI.2021.22","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2021-06-04","2021-06-04","logistical","NEON.DOC.000481vM",,
+"4d27d5bc-4bc8-4ffc-9346-fdf9a087be7b","fe83d475-2b02-40d2-89ac-dd4082f7aefe","SCBI.2021.22","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2021-06-04","2021-06-04","logistical","NEON.DOC.000481vM",,
+"d2edc223-7dbe-4fb9-8a63-07073a152291","1f9590a5-7aeb-451c-ab82-8a79687979ac","SCBI.2021.22","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2021-06-04","2021-06-04","logistical","NEON.DOC.000481vM","too few staff",
+"cd424e3e-a47d-48ed-9d07-f9aef76cf7da","96cbc9f7-11d9-483e-8c93-6f04639f9576","SCBI.2021.22","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2021-06-04","2021-06-04","OK","NEON.DOC.000481vM",,
+"e3eeca36-7411-4e7d-af14-b139a3caa23a","b8d7064d-f80b-473a-9f76-404e3399f82e","SCBI.2021.22","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2021-06-04","2021-06-04","logistical","NEON.DOC.000481vM",,
+"1c136993-0e38-4af0-8d38-89a7d6377be1","08684185-91fc-4985-8e9f-28a2e29a4469","SCBI.2021.22","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2021-06-04","2021-06-04","OK","NEON.DOC.000481vM",,
+"e7aeb924-16bb-4a5b-9df7-d5f1f363af2e","fa60046a-fd53-4178-8b9b-15d5be9d52c2","SCBI.2021.22","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2021-06-05","2021-06-05","logistical","NEON.DOC.000481vM","too few staff",
+"85c11e5c-e2c6-45cc-93a2-ad05fb7dfb3a","78db5f05-4922-4688-8688-422cfde56226","SCBI.2021.22","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2021-06-05","2021-06-05","disturbance","NEON.DOC.000481vM",,

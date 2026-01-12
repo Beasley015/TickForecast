@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"eaf42112-9f39-4ade-b21c-1550653296a4","2dd89573-56a7-4743-af78-6842895b81ac","RMNP.2019.23","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"2382f126-b657-4461-9505-12ae62671af6","a8bdc3e0-6c04-4d8c-986b-242130ce717f","RMNP.2019.23","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"b4aa09c2-364b-4970-ad3b-ea2fc15a11ae","a23d4bc7-16b3-4735-a834-573368d01889","RMNP.2019.23","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"48e5892c-745a-44d1-b5b8-9e921dcc23a9","4b5c8f30-9623-49bc-82bf-80b57c5d95ef","RMNP.2019.23","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"9a46746c-e8fb-43dc-b5d4-22ffdf1449a7","749c3369-f276-46f2-9edf-8728f5dff652","RMNP.2019.23","RMNP_005.mammalGrid.mam","D10","RMNP","RMNP_005","diversity","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"a4e9a478-d14e-425d-aa62-0c6d35ab29ac","550fd226-e8f8-4957-8b2d-477e3f97b6ee","RMNP.2019.23","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"58fc8432-fd08-402d-9ca2-eb7a0b12e704","b6553469-5956-4d82-ab5b-0a8e8f44e5f6","RMNP.2019.23","RMNP_009.mammalGrid.mam","D10","RMNP","RMNP_009","diversity","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"907e1822-678c-4f78-a250-f7d144cb0521","dec9fc56-ccfe-42a1-b467-d604b4e29bd0","RMNP.2019.23","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"352241a5-1055-4da0-80d4-2e46885e87ca","771d3ec3-4dd4-458c-8f2e-d7729dd02429","RMNP.2019.23","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"b8674b4b-3bb5-4ca0-8844-51ca6c6aec7b","08360d22-bb4a-4c5e-be95-1adc4a095c61","RMNP.2019.23","RMNP_013.mammalGrid.mam","D10","RMNP","RMNP_013","diversity","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"71c13d0b-192c-4c0f-a002-4c7713b99a96","5fd5723f-cb38-4173-8af6-b70429ed9a25","RMNP.2019.23","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"e9eb36fe-5173-4f08-bea5-52ff9aa906b0","bdca5c01-6a12-45e0-ac45-6cf5d22b35e7","RMNP.2019.23","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,

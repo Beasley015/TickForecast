@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"32c0b9b7-dbbf-4ba7-aa74-7c76d0fac08a","4c2b61ce-c9da-4f98-80f2-b2b9e6458cbc","SCBI.2020.12","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2020-03-17","2020-03-17","OK","NEON.DOC.000481vM",,
+"28822919-2c0d-4fb4-a980-72e57e62ad7b","aea39294-3d8e-4054-84d2-efe868fdee58","SCBI.2020.12","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2020-03-17","2020-03-17","OK","NEON.DOC.000481vM",,
+"85385e81-fecf-4877-afa2-e2b123626e2f","24125869-bb43-4896-978c-0f7159826325","SCBI.2020.12","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2020-03-17","2020-03-17","OK","NEON.DOC.000481vM",,
+"db721a8a-e3b3-4e56-babb-fb901cae49c4","6357eb87-ef89-4189-929e-7a67b13b971d","SCBI.2020.12","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2020-03-18","2020-03-18","OK","NEON.DOC.000481vM",,
+"74c801ae-b5a9-42e2-8bb6-f682fc54b385","af6bf0e7-f5c4-4c49-8cf9-969e8bb9a0df","SCBI.2020.12","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2020-03-18","2020-03-18","OK","NEON.DOC.000481vM",,
+"5dc6ce40-1d30-463d-a75f-07ec9e2fa31f","925a4978-c834-402a-b408-bcca35f287f5","SCBI.2020.12","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2020-03-18","2020-03-18","OK","NEON.DOC.000481vM",,
+"db34a7e5-f66e-46e5-9659-2f2260fdc706","d2659a6c-1993-494c-b378-9bc78fdcafac","SCBI.2020.12","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2020-03-19","2020-03-19","OK","NEON.DOC.000481vM","high priority mode",
+"8dd87e72-6139-41ca-9361-3eab7d853476","0520106a-9eff-4792-86e9-d865338d006d","SCBI.2020.12","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2020-03-19","2020-03-19","OK","NEON.DOC.000481vM",,
+"b3ef6a21-9167-4eea-8a8f-4e57bb25a6cd","1d0b3c80-b6ad-4f97-a7dd-21f357938d68","SCBI.2020.12","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2020-03-19","2020-03-19","OK","NEON.DOC.000481vM",,
+"68af6825-8cf9-41ef-86c7-820db8e91b29","2f947c95-4d15-4ba2-aa20-27fcc7b62951","SCBI.2020.12","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2020-03-20","2020-03-20","OK","NEON.DOC.000481vM",,
+"19783e76-081d-435c-9254-27c772d1aa93","7c26d3b3-bde6-4064-8013-6ea3fded6dbc","SCBI.2020.12","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2020-03-20","2020-03-20","OK","NEON.DOC.000481vM",,
+"5976989f-ad04-4cfe-947d-726cc2f0cebf","94ca26a2-ee1f-4603-bf07-8c70bd5e55af","SCBI.2020.12","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2020-03-20","2020-03-20","OK","NEON.DOC.000481vM",,

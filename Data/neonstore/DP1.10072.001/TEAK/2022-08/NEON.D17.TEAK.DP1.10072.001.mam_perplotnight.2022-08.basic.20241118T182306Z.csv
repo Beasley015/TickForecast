@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"33798190-42e5-4829-ba4b-e210d45fa755","77f64293-6950-43c2-87a8-0f38f3fb1290","TEAK.2022.34","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2022-08-23","2022-08-23","OK","NEON.DOC.000481vN",,
+"49624490-66ae-4b0e-a694-2fa91c5dbd3c","2014c914-34f6-4004-b79b-8ff121e39a95","TEAK.2022.34","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2022-08-23","2022-08-23","OK","NEON.DOC.000481vN",,
+"712e9075-b98f-4ab1-b719-998048abafc9","53229b54-241d-4798-9ff1-e24fcc87f567","TEAK.2022.34","TEAK_004.mammalGrid.mam","D17","TEAK","TEAK_004","diversity","2022-08-23","2022-08-23","logistical","NEON.DOC.000481vN","not set due to lack of staff",
+"b826912c-1453-4a75-a8ee-4a16b3e8ee2b","f1614c42-ded8-4461-b130-4973da851d48","TEAK.2022.34","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2022-08-23","2022-08-23","OK","NEON.DOC.000481vN",,
+"dd8a7314-383e-46da-b063-f0c03bb92282","dc881cbb-d9b8-4307-8294-d47a976b2f9c","TEAK.2022.34","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2022-08-24","2022-08-24","OK","NEON.DOC.000481vN",,
+"561bdabb-6c72-47f1-ae6e-c12f9f0f561f","989a81e1-d359-461d-b7ee-25d5584ed170","TEAK.2022.34","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2022-08-24","2022-08-24","OK","NEON.DOC.000481vN",,
+"19728a65-18ae-4478-8cb5-e9b16b6ea609","9f61ff72-5cef-4399-821b-06293caf7b00","TEAK.2022.34","TEAK_007.mammalGrid.mam","D17","TEAK","TEAK_007","diversity","2022-08-24","2022-08-24","logistical","NEON.DOC.000481vN","traps not set due to lack of staff",
+"cb98a928-1297-4b9d-ab77-03b5dfe490cf","ae0180c3-95d2-490a-8963-dd7c2f051995","TEAK.2022.34","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2022-08-24","2022-08-24","OK","NEON.DOC.000481vN",,
+"80933e91-908a-4c29-9b27-c29b770adc9e","7f69ce8f-be8d-4b53-84be-9b3b351608c6","TEAK.2022.34","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2022-08-25","2022-08-25","OK","NEON.DOC.000481vN",,
+"6224562f-893c-486b-8a77-166d38b4a3d2","a9bbe434-d066-410c-a747-e0e8616dcb50","TEAK.2022.34","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2022-08-25","2022-08-25","OK","NEON.DOC.000481vN",,
+"f4006c08-49d5-48bd-be28-153e8c8cd0d0","a77873bb-04ab-4581-b4de-cbc325dd5213","TEAK.2022.34","TEAK_025.mammalGrid.mam","D17","TEAK","TEAK_025","diversity","2022-08-25","2022-08-25","logistical","NEON.DOC.000481vN","lack of resources",
+"2551dbe0-ca4a-4270-98e4-b79ea8f098e9","4b17c1cd-9adf-493b-97ef-5cbc151e85d4","TEAK.2022.34","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2022-08-25","2022-08-25","OK","NEON.DOC.000481vN",,

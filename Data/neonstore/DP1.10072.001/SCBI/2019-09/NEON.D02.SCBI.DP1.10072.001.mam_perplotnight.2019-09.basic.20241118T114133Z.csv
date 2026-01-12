@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"62e66952-52bd-42be-a9b9-ebb9d8881831","c95e15b1-dcd4-435b-b851-957e4aa7b512","SCBI.2019.39","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-09-24","2019-09-24",,"NEON.DOC.000481vL",,
+"f0365993-14aa-4166-82ea-e9abfd89713c","7c00fbe2-def4-41ce-8844-6513ec41d810","SCBI.2019.39","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-09-24","2019-09-24",,"NEON.DOC.000481vL",,
+"3b76c7d3-d986-4e00-8f5c-b968fb2e523f","e0eae289-6139-4dc7-ae53-d456e5afac90","SCBI.2019.39","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-09-24","2019-09-24",,"NEON.DOC.000481vL",,
+"ad04f2ce-43b5-4c98-a8e6-725aa93409d9","7b90b3ed-8b9c-4a7e-8568-7f768872fd9a","SCBI.2019.39","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-09-25","2019-09-25",,"NEON.DOC.000481vL",,
+"1a673aa7-b65b-4784-867a-0e2fe2a11872","2a5f4d7b-189d-4cfc-9d3c-ffa29fbca1a3","SCBI.2019.39","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-09-25","2019-09-25",,"NEON.DOC.000481vL",,
+"9b376d5d-2469-4d10-9f64-f7fe624c3887","9dbba602-681e-4202-9924-9b8d2c8f782d","SCBI.2019.39","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-09-25","2019-09-25",,"NEON.DOC.000481vL","Disturbed traps located on the A-E portion of the grid had batting pulled out.",
+"7bac046f-b7bc-4a1a-b170-69d99ed294dd","ea508c32-c164-4bd8-ae0e-0ca17892ecda","SCBI.2019.39","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2019-09-26","2019-09-26",,"NEON.DOC.000481vL",,
+"4c3145ba-4d53-484d-aa63-32b7e6c35fcf","177e79d8-3c3b-414b-933a-7f4cbfbbd151","SCBI.2019.39","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2019-09-26","2019-09-26",,"NEON.DOC.000481vL",,
+"e1b5f8aa-b52d-4ee0-9672-da5ebd1dbd53","284e6b98-de82-4538-89ff-3ec03fb80742","SCBI.2019.39","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2019-09-26","2019-09-26",,"NEON.DOC.000481vL",,
+"e28b4826-4b37-4174-9e20-70764f19ac10","0920103d-bb29-4232-923c-82ab0e0e117b","SCBI.2019.39","SCBI_016.mammalGrid.mam","D02","SCBI","SCBI_016","diversity","2019-09-27","2019-09-27",,"NEON.DOC.000481vL","ask emily about J6",
+"9f29fc38-f411-4fbc-a284-1604db1bd2d4","969b8289-5364-40ea-ba0a-89ab5c88cdb4","SCBI.2019.39","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2019-09-27","2019-09-27",,"NEON.DOC.000481vL",,
+"26c08250-6302-4200-819f-a8d65678cbca","5e8b47a9-61b9-4804-8e03-3c1f8ad22c1a","SCBI.2019.39","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2019-09-27","2019-09-27",,"NEON.DOC.000481vL",,

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"85a189d8-da67-477d-8f69-b94dbe0bb0d6","faeb1fba-7b9b-4a94-be86-d5341ea3e805","BONA.2017.26","BONA_004.mammalGrid.mam","D19","BONA","BONA_004","pathogen","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"6351fe5e-1826-4817-8426-c9d27c14cf83","8eada471-4519-441a-8eab-955dddb171c0","BONA.2017.26","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"4bd8bbe6-4eed-42f9-b686-483a344dd970","b68ac8b8-3c33-4799-9df2-b6722f2ace1b","BONA.2017.26","BONA_094.mammalGrid.mam","D19","BONA","BONA_094","pathogen","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"e6103334-19f8-4c58-9440-3cbb8e2c2199","d38b30de-72f9-42af-a093-8638fd166055","BONA.2017.26","BONA_020.mammalGrid.mam","D19","BONA","BONA_020","diversity","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"f3eee0e5-e68d-44bc-9600-44bae6afee54","bff34313-924e-4504-a5f6-6c342457533e","BONA.2017.26","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"31d10c5c-221c-4b6f-a683-cfc7293683d6","533510af-911a-4b16-94f0-2d0ce3e59ab6","BONA.2017.26","BONA_094.mammalGrid.mam","D19","BONA","BONA_094","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ","Rain",
+"adc91199-b7c1-4f0a-95f4-23f1cc99f0b8","44191d40-6ef8-47fa-b35b-72be5ceb42cb","BONA.2017.26","BONA_004.mammalGrid.mam","D19","BONA","BONA_004","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"bf171489-9ed0-4fb1-b79e-b3688f5fe257","65060090-3c02-4920-bee2-3891168a8078","BONA.2017.26","BONA_094.mammalGrid.mam","D19","BONA","BONA_094","pathogen","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,
+"6909c24a-4b68-4372-b144-4120a7a6813f","90f785dc-d355-4afe-8b03-78c931c0f1a9","BONA.2017.26","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,
+"5c27c67e-2eb1-44d6-b72b-54bf41843a72","236133c0-7e7d-491c-bcdd-ddea343876c3","BONA.2017.26","BONA_004.mammalGrid.mam","D19","BONA","BONA_004","pathogen","2017-06-29","2017-06-29",,"NEON.DOC.000481vJ",,

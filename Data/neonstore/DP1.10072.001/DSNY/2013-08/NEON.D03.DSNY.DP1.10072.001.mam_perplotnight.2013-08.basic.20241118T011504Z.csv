@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"bed7d724-d37d-43ee-b32a-c1ce5f628e86","37000870C8074B9D9A59351B6C023EB9","DSNY.2013.31","DSNY_016.mammalGrid.mam","D03","DSNY","DSNY_016","pathogen","2013-08-01","2013-08-01",,,,
+"43a861f8-3112-4e84-9bdb-f1d06bf5823a","357A064E5F294F9C92EB57569CBE16A9","DSNY.2013.31","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2013-08-01","2013-08-01",,,,

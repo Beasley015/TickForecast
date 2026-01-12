@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"638df765-0ef7-4520-9338-269036f86f48","5ab28c2c-f372-4f9a-a67a-5cc81ac88833","STER.2022.19","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-05-10","2022-05-10","OK","NEON.DOC.000481vN",,
+"006dc3a5-f92f-4fe9-a47d-6195b5d85268","2df57af8-f3fc-4d21-9f92-5d13768c0dec","STER.2022.19","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-05-10","2022-05-10","OK","NEON.DOC.000481vN",,
+"25b4ead6-d18c-4a63-bacb-3018079114cd","b5c00e1b-9269-4472-8888-63d28a89560e","STER.2022.19","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-05-10","2022-05-10","OK","NEON.DOC.000481vN",,
+"ed222fb3-8709-4686-9356-810eb8e5aef0","22aae766-7821-45cc-8337-64f564c9859b","STER.2022.19","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-05-11","2022-05-11","management","NEON.DOC.000481vN","Fertilizer application at plot",
+"d9724d99-732c-496f-b203-c421693f53cf","5a27db3f-3fe0-4af5-8711-b45dbaa9c6e2","STER.2022.19","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-05-11","2022-05-11","OK","NEON.DOC.000481vN",,
+"027d3451-9168-415f-9303-98a549bf7c4a","34c227c3-7ff3-4837-a697-00087c38ab16","STER.2022.19","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-05-11","2022-05-11","OK","NEON.DOC.000481vN",,
+"24f6a2b0-835d-4804-82d1-a091474f112f","25389a52-676d-44ac-9822-bbb915213655","STER.2022.19","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-05-12","2022-05-12","management","NEON.DOC.000481vN","Fertilizer application at plot",
+"b0456ec2-33ec-4161-8038-471dab6fbd51","cc29e984-b231-4afd-89a1-d30aa7932e43","STER.2022.19","STER_026.mammalGrid.mam","D10","STER","STER_026","diversity","2022-05-12","2022-05-12","OK","NEON.DOC.000481vN",,
+"00ce1910-04cf-4c29-85b3-0420c6877551","24abb8b0-d8a2-487d-941b-c6734bba51c8","STER.2022.19","STER_028.mammalGrid.mam","D10","STER","STER_028","diversity","2022-05-12","2022-05-12","OK","NEON.DOC.000481vN",,
+"b47d164b-55a3-46f4-82e0-a2f6edcfca02","fe5f760d-a9d4-40f3-a097-1915ab960495","STER.2022.19","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-05-12","2022-05-12","OK","NEON.DOC.000481vN",,
+"b87a6596-545a-49dd-9240-a44b4f57c20b","f7ceb7e6-9545-424f-9f45-f8927adbab8a","STER.2022.19","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-05-12","2022-05-12","OK","NEON.DOC.000481vN",,
+"801e14ce-0948-4b56-b75e-32bb1f8a0eb6","1f258094-82b0-4632-8bfe-cb305ccfbb46","STER.2022.19","STER_027.mammalGrid.mam","D10","STER","STER_027","diversity","2022-05-12","2022-05-12","management","NEON.DOC.000481vN","Herbicide application at plot",

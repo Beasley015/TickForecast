@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"89cee997-b88e-4ccf-857c-5a86acff2dfb","17741ac7-fe09-4f05-9ba7-5be71cf032de","JORN.2021.26","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2021-07-01","2021-07-01","extreme weather","NEON.DOC.000481vM","Monsoon",
+"db5869ed-dfbf-42b6-876b-48e5393eef09","2f5587ab-ea37-4aaa-b648-c9ffd84aa4a7","JORN.2021.26","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2021-07-01","2021-07-01","extreme weather","NEON.DOC.000481vM","Monsoon",
+"d44bc858-7b09-4e9f-ae39-b10b776194c9","8e857173-2ced-437d-ab91-c508f68e8007","JORN.2021.26","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2021-07-01","2021-07-01","extreme weather","NEON.DOC.000481vM","Monsoon",
+"4da2e135-9abd-4d66-a5cf-27909460a59c","4ac06fc5-f19e-44a0-b9ac-ca24bdd4afa5","JORN.2021.26","JORN_031.mammalGrid.mam","D14","JORN","JORN_031","diversity","2021-07-28","2021-07-28","extreme weather","NEON.DOC.000481vM","Monsoon",

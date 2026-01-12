@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8b6854f5-4f20-48c0-b618-6fae9c5a11e1","1acf6403-6192-4e70-a8c1-0a6ec2e5429d","DCFS.2019.26","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL",,
+"8bc61047-1917-44df-b8b6-d8ec7914608e","aca243e4-3954-4c5d-8191-378d35b074d9","DCFS.2019.26","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL","I-J not set due to weather",
+"829208cf-05d9-4156-803c-fc3138e8e32e","7247e28a-3714-4b2d-a6ae-a69cf94e677f","DCFS.2019.26","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2019-06-25","2019-06-25",,"NEON.DOC.000481vL",,
+"885691bf-d597-4c5e-b315-db3eba09c322","3476d8f8-ecaa-4935-b5d0-3e01deabdc8c","DCFS.2019.26","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"61285b2d-1937-4db3-9832-b684930ac9d0","298b6cd9-2f0e-4a7e-8f21-04ba069fb79d","DCFS.2019.26","DCFS_004.mammalGrid.mam","D09","DCFS","DCFS_004","diversity","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"0b5bb95b-04bb-49b9-a95d-21aca955a2a9","531b769d-61b2-43b1-9c09-2551e34a3725","DCFS.2019.26","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"310456fc-f45c-4a5f-bce5-d3fab23d3195","1c3f98e7-3f33-44bc-96b7-69d629f599c4","DCFS.2019.26","DCFS_020.mammalGrid.mam","D09","DCFS","DCFS_020","diversity","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"abdf4f73-54b8-4658-a8bb-d87c7383361f","f15534e1-1709-4280-ba39-8f900e8d0a48","DCFS.2019.26","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2019-06-26","2019-06-26",,"NEON.DOC.000481vL",,
+"4a602226-1469-45be-a009-6f088f24e80e","42c748c1-3438-440a-8bcd-9492c9159063","DCFS.2019.26","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2019-06-27","2019-06-27",,"NEON.DOC.000481vL","G 1-8 and B2 not set due to set team unable to locate and/or replace",
+"81395a86-4414-4654-b285-dee42f434fcc","5f105ddb-cf7d-4b1a-9758-111de780c22c","DCFS.2019.26","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2019-06-27","2019-06-27",,"NEON.DOC.000481vL","Grid not set last night due to high predator disturbance (raccoon)",
+"ba1f3d90-fb23-4954-9f39-78893b7f25e4","bed896ed-4638-4e06-b149-fcdadff5f8b3","DCFS.2019.26","DCFS_009.mammalGrid.mam","D09","DCFS","DCFS_009","diversity","2019-06-27","2019-06-27",,"NEON.DOC.000481vL",,
+"db80d1b0-e073-48b9-89ee-9b0c2868a974","0e7737f6-9854-48cb-8d4f-915baf127652","DCFS.2019.26","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2019-06-27","2019-06-27",,"NEON.DOC.000481vL",,

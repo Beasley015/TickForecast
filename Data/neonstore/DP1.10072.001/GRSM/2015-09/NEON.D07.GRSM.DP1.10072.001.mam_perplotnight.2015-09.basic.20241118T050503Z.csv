@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"475747ad-addd-4dc8-8bf9-a1c7a1c0b110","296724DC4AA443DF8DC4BB2DE91840AE","GRSM.2015.38","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2015-09-15","2015-09-15",,,"used NEON.DOC.000481vG",
+"4739af63-d681-4dea-8030-7e274128fd76","602CE4516900439881ECCF6FF8C3955A","GRSM.2015.38","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2015-09-15","2015-09-15",,,"used NEON.DOC.000481vG",
+"ca694d3a-7b20-4152-b6c1-d637309fd7bc","61EF8E0161274B77A30DB49C6CBC4330","GRSM.2015.38","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2015-09-15","2015-09-15",,,"used NEON.DOC.000481vG; 2 lines not set. Bears removed 95-98% of the flags causing us to remark the plot, and we ran out of sunlight.",
+"f27cf5c7-2f35-4295-9109-226f2920c4c1","3539AFF130F1491D93DF0C10EE1350C5","GRSM.2015.38","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2015-09-16","2015-09-16",,,"used NEON.DOC.000481vG",
+"094b7de8-3fee-4e0d-80bf-8854037e8ecd","58285D91B1CA423081A9D6496F10D535","GRSM.2015.38","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2015-09-16","2015-09-16",,,"used NEON.DOC.000481vG",
+"ea68d0de-df3f-4d33-a877-be70c990dd3b","9BCF0C60CA6046D69FAAE2E5A14CB744","GRSM.2015.38","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2015-09-16","2015-09-16",,,"used NEON.DOC.000481vG",
+"3ce1c526-6d88-4353-b2f4-62d215f2c282","4D7D2B16D4BF48F99AD6EF4267A9349F","GRSM.2015.38","GRSM_003.mammalGrid.mam","D07","GRSM","GRSM_003","pathogen","2015-09-17","2015-09-17",,,"used NEON.DOC.000481vG",
+"e7cb95ff-d746-41bf-86a0-39ed7dbc348b","18AECC48A5904E7AB907EF1FCC78BE00","GRSM.2015.38","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2015-09-17","2015-09-17",,,"used NEON.DOC.000481vG",
+"0f34991f-a638-4885-976a-2fa1b0b1a481","396C77BA880D49418DCAC0650E1C885A","GRSM.2015.38","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2015-09-17","2015-09-17",,,"used NEON.DOC.000481vG",

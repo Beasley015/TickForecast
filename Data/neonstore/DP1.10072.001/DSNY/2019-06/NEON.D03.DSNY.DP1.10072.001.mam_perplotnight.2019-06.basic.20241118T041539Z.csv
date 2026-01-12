@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d19daf69-70b7-4243-8427-948576ae3695","65940a65-94c5-4074-815d-4082bebaefa1","DSNY.2019.23","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"7378bb14-aa72-4a03-a95d-a0abd263cf87","7d0edfc0-cbab-4a41-9499-3ce32939590b","DSNY.2019.23","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"1e650c3f-2b25-474f-8b43-4140bf3927ce","743d696b-47f4-441c-aeec-151f7ed1dcd2","DSNY.2019.23","DSNY_010.mammalGrid.mam","D03","DSNY","DSNY_010","diversity","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"22697bda-9216-4eb7-8592-4b71cd378f6d","e5343b26-d060-4718-9884-de3173cb9831","DSNY.2019.23","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2019-06-04","2019-06-04",,"NEON.DOC.000481vL",,
+"6e33dd4e-b0d6-46fc-b131-9a22f9697f59","fbb4a359-7f91-4cf6-a6c5-6125144c4bea","DSNY.2019.23","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"03332c41-d89d-4498-b50b-a5d42dd6be7a","2fcd25f1-4910-401f-a0a4-116bc40241e1","DSNY.2019.23","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"8c5ebaa9-62db-4e7e-9f4f-1d807526680c","f35665f3-3a10-4981-9744-e29c6a41a2dd","DSNY.2019.23","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"f02fa485-8dde-4e94-b9f6-1b924c753b1f","d995b2c3-0845-45a4-bae8-8ff8a7f9db88","DSNY.2019.23","DSNY_006.mammalGrid.mam","D03","DSNY","DSNY_006","diversity","2019-06-05","2019-06-05",,"NEON.DOC.000481vL",,
+"854c56fb-d9dc-472b-99ee-7130ad3fd207","5576672b-f08e-4943-a97f-ff3b141eb025","DSNY.2019.23","DSNY_016.mammalGrid.mam","D03","DSNY","DSNY_016","diversity","2019-06-06","2019-06-06",,"NEON.DOC.000481vL","Cows seen in plot",
+"59f65bc8-76f0-4203-966e-74255c5a320b","91231530-de6d-4973-b857-41f63939471e","DSNY.2019.23","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"183c9d74-5b2a-4162-b67e-32328eacf806","173ce82f-042e-4ccc-b49d-6291e6aa3438","DSNY.2019.23","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,
+"8450f580-d678-41ba-9fed-3fc2792ccd1f","9dabb086-da0d-44a7-9f0c-34d7804ef4a1","DSNY.2019.23","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2019-06-06","2019-06-06",,"NEON.DOC.000481vL",,

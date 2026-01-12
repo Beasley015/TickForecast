@@ -1,0 +1,242 @@
+This data package was produced by and downloaded from the National Ecological Observatory Network (NEON). NEON is
+funded by the National Science Foundation (Awards 0653461, 0752017, 1029808, 1138160, 1246537, 1638695, 1638696,
+1724433) and managed cooperatively by Battelle. These data are provided under the terms of the NEON data policy at
+https://www.neonscience.org/data-policy.
+
+DATA PRODUCT INFORMATION
+------------------------
+
+ID: NEON.DOM.SITE.DP1.10072.001
+
+Name: Small mammal box trapping
+
+Description: Individual- and trap-level data collected using box traps designed to capture small mammals
+
+NEON Science Team Supplier: Terrestrial Observation System
+
+Abstract: This data product contains the quality-controlled, native sampling resolution data from NEON's small mammal sampling protocol. Small mammal abundance and diversity are sampled at regular intervals by NEON field technicians at core and gradient sites. Here small mammals are defined based on a combination of behavioral, dietary, and size constraints, as the NEON design is limited to species sampled by box traps. This definition includes any mammal that is (1) nonvolant; (2) nocturnally active; (3) forages predominantly aboveground; and (4) is greater than 5 grams but less than approximately 500-600 g. In North America, this includes cricetids, heteromyids, small sciurids, and introduced murids. It does not include shrews, large squirrels, rabbits, or weasels, despite the fact that individuals of these species may be incidentally captured. Products resulting from this sampling include the species identification and unique identifier for each individual captured, as well as a suite of standard size measurements and reproductive condition data. Sample identifiers for any blood, ear, hair, whisker, fecal, and/or voucher samples collected are also provided. For additional details, see the user guide, protocols, and science design listed in the Documentation section in this data product's details webpage.
+
+Latency:
+The expected time from data and/or sample collection in the field to data publication is as follows, for each of the data tables (in days) in the downloaded data package. See the Data Product User Guide for more information.
+
+mam_perplotnight:  45
+
+mam_pertrapnight:  45
+
+mam_voucher:  45
+
+mam_identificationHistory: 7
+
+mam_voucherIdentificationHistory: 7
+
+Brief Design Description: Small mammal sampling is based on the lunar calendar, with timing of sampling constrained to occur within 10 days before or after the new moon. Sites are typically, sampled 4 times per year, when season-length allows. Small mammals are sampled using box traps (models LFA, XLK, H.B. Sherman Traps, Inc., Tallahassee, FL, USA). Box traps are arrayed in four to six (depending on the size of the site) 10 x 10 grids with 10m spacing between traps at all sites. Small mammal trapping bouts are comprised of one or three nights of trapping, depending on whether a grid is designated for pathogen sample collection (3 nights) or not (1 night).
+
+Brief Study Area Description: These data are collected at all NEON terrestrial sites, except the sites in Hawaii and Puerto Rico.
+
+
+Keywords: Animalia, Chordata, Cricetidae, DNA barcoding, DNA sequences, Dipodidae, Mammalia, Muridae, Rodentia, animals, archive, archived samples, biodiversity, community composition, cricetids, demography, density, diversity, heteromyids, introduced species, invasive species, mam, mammals, mark-recapture, material samples, mice, mouse, murids, native species, pathogens, population, rats, rodents, sciurids, small mammals, species abundance, species composition, species diversity, specimens, taxonomy, traps, vector-borne, vectors, vertebrates, voles, vouchers
+
+
+QUERY INFORMATION
+-----------------
+
+Date-Time for Data Publication: 2025-12-07 03:02 (UTC)
+Start Date-Time for Queried Data: 2025-06-03 17:00 (UTC)
+End Date-Time for Queried Data: 2025-06-05 17:00 (UTC)
+
+Site: WOOD
+Geographic coordinates (lat/long datum): 
+Domain: D09
+
+
+DATA PACKAGE CONTENTS
+---------------------
+
+This folder contains the following documentation files:
+- This readme file: NEON.D09.WOOD.DP1.10072.001.readme.20251207T030219Z.txt
+- Term descriptions, data types, and units: NEON.D09.WOOD.DP1.10072.001.variables.20251207T030219Z.csv
+- Data entry validation and parsing rules: NEON.D09.WOOD.DP1.10072.001.validation.20251207T030219Z.csv
+- Machine-readable metadata file describing the data package: NEON.D09.WOOD.DP1.10072.001.EML.20250603-20250605.20251207T030219Z.xml.
+This file uses the Ecological Metadata Language (EML) schema. Learn more about this specification and tools to parse
+it at https://www.neonscience.org/about/faq.
+- Other related documents are available such as engineering specifications, field protocols, and data processing 
+documentation. Please visit https://data.neonscience.org/data-products/DP1.10072.001 for more information.
+
+
+This folder also contains 2 data files:
+NEON.D09.WOOD.DP1.10072.001.mam_perplotnight.2025-06.basic.20251207T030219Z.csv - Small mammal trapping summary data per plot per night
+NEON.D09.WOOD.DP1.10072.001.mam_pertrapnight.2025-06.basic.20251207T030219Z.csv - Small mammal trapping data per trap per night
+
+Basic download package definition: The basic data package includes all measurements, except for voucher specimens collected off of the long-term trapping grids.
+
+Expanded download package definition: The expanded package includes an additional table listing any voucher specimens collected off of the long-term trapping grids.
+
+
+FILE NAMING CONVENTIONS
+-----------------------
+
+NEON data files are named using a series of component abbreviations separated by periods. File naming conventions
+for NEON data files differ between NEON science teams. A file will have the same name whether it is accessed via
+NEON's data portal or API. Please visit https://www.neonscience.org/data-formats-conventions for a full description
+of the naming conventions.
+
+ISSUE LOG
+----------
+
+This log provides a list of issues identified during data collection or processing, prior to publication
+of this data package. For a more recent log, please visit this data product's detail page at
+https://data.neonscience.org/data-products/DP1.10072.001.
+
+Issue Date: 2025-04-30
+Issue: Sampling suspended: In the last few years black bear populations at GRSM have steadily increased along with the disturbance of NEON small mammal sampling plots. Bear incidents have increased from about three per year to closer to three per week in the last three years.  This generates a number of staff and animal safety concerns that has made sampling small mammals at GRSM impractical under current conditions.
+    Date Range: 2024-09-01 to 2025-12-31
+    Location(s) Affected: GRSM
+Resolution Date: 
+Resolution: Small mammal sampling has been suspended for at least 3 years at the GRSM site. Two camera traps have been deployed at four small mammal plots along game trails. Images will be collected from these plots over the next 3 years. After 3 years, we will examine the data to determine if bear activity has decreased. If the cameras suggest that trapping can safely begin, we will run test bouts of sampling at GRSM.  The end date of this issue will be updated yearly until it is determined that regular protocol-frequency sampling at GRSM can be resumed.  Sampling impractical records will be created to document this suspension in the data.
+
+Issue Date: 2023-12-22
+Issue: Identification history: updates to taxonomic determinations were not previously tracked.
+    Date Range: 2012-01-01 to 2025-11-25
+    Location(s) Affected: All
+Resolution Date: 2025-12-31
+Resolution: In provisional data, RELEASE-2023, and all subsequent releases, if taxonomic determinations are updated for any records, past determinations are archived in the `mam_identificationHistory` table, where the archived determinations are linked to current records using identificationHistoryID. A separate `mam_voucherIdentificationHistory` was added prior to RELEASE-2026 to track past determinations for the `mam_voucher` table.
+
+Issue Date: 2025-11-20
+Issue: gridCompletion field added: Prior to November 2025, there was not a straightforward or reliable method for evaluating mammal survey completeness, either in terms of the percentage of traps set or the proportion of captures successfully processed.
+    Date Range: 2013-01-01 to 2025-11-13
+    Location(s) Affected: All
+Resolution Date: 2025-12-31
+Resolution: To enhance usability, the "gridCompletion" field was added to the per_plotnightnight table to describe the grid setting and processing completion status for each unique nightuid. Grid setting is considered complete if 75% or more traps are deployed.  Processing completion is considered complete if 75% or more captured target or opportunistic small mammals have been assigned a tagID and identified to the species or genus rank.  This field has been retrospectively calculated and backfilled for all existing records in the mam_perplotnight table when Sampling Impractical is "OK" or blank. Additionally, the fate field in the mam_pertrapnight table was updated to align with the revised list of fate categories for records from 2017 onward. These updates are now available in all provisional datasets and will be formally included in the 2026 data release.
+
+Issue Date: 2024-08-19
+Issue: mammalGridSamplingType field added: Prior to August 2024, there was not a straightforward or reliable method for filtering mammal plots by their status as either pathogen (sampled 3 nights per bout) or diversity (sampled 1 night per bout) grids.
+    Date Range: 2012-01-01 to 2024-08-01
+    Location(s) Affected: All
+Resolution Date: 2024-08-19
+Resolution: To enhance usability the ‘mammalGridSampleType’ field was added to the per_plotnight_in table to describe if the grid followed the diversity, pathogen, or recapture (early 2014 &2015 data only, 2-3 nights per bout and few blood samples collected) protocol for that sampling bout. Grid sampling type is typically stable from year to year but sometimes switches depending on sampling logistics and capture rates. Three sites in Alaska, TOOL, BARR, and HEAL, switch grid sampling types yearly to decrease sampling impacts on permafrost. This field is currently available in all provisional data and will be present in the 2025 data release.
+
+Issue Date: 2024-01-11
+Issue: Reduced sampling: In the 2013-2023 field season most core sites where conditions allow sampled 6 bouts per year.  All gradient sites sampled 4 bouts per year. Additionally, several sites sampled more than 6 total grids per bout.
+    Date Range: 2013-01-01 to 2023-08-31
+    Location(s) Affected: Core sites with > 4 bouts HARV, SCBI, OSBS, UNDE, KONZ, ORNL, TALL, WOOD, CPER, CLBJ, NIWO, SRER, ONAQ, WREF, SJER. Gradient sites with very low captures: DSNY, LENO, BARR. Sites sampling > 6 plots: CLBJ, CPER, ORNL, SERC, SJER, TALL, TOOL, BONA and UNDE.
+Resolution Date: 2024-01-01
+Resolution: Data analyses indicated that 4 bouts of sampling per year is sufficient to characterize the community at most sites, and a low intensity sampling of just 1 bout per year at low-yield sites (e.g., those with low captures, diversity and pathogen infection) is the most effective use of resources.  Similarly, a maximum of 6 plots of sampling per site is sufficient to characterize the community. The Small Mammal Technical Working Group concurred with all sample reductions.
+
+Issue Date: 2023-05-09
+Issue: D01 state-level taxa obfuscation: Prior to the 2024 data release, publication of species identifications were obfuscated to a higher taxonomic rank when the taxon was found to be listed as threatened, endangered, or sensitive by any state within the domain. Obfuscating state-listed taxa across an entire domain has created challenges for data users studying biodiversity.
+    Date Range: 2012-01-01 to 2023-04-25
+    Location(s) Affected: D01
+Resolution Date: 2023-12-31
+Resolution: To reduce the number of records in which taxonomic identifications are obfuscated in D01, the state-level obfuscation routine has been applied to data using site-level granularity as of 25 April 2023. Previously published data have been reprocessed using the more precise obfuscation routine for the 2024 data release and onward. Federally listed threatened and endangered or sensitive species remain obfuscated at all sites.
+
+Issue Date: 2022-09-15
+Issue: Toolik Field Station required a quarantine period prior to starting work in the 2020, 2021, and 2022 field seasons to protect all personnel during the COVID-19 pandemic. This complicated NEON field scheduling logistics, which typically involves repeated travel across the state on short time frames. Consequently, NEON reduced staff traveling to Toolik and was thus unable to complete all planned sampling efforts. Missed data collection events are indicated in data records via the samplingImpractical field.
+    Date Range: 2020-03-23 to 2022-12-31
+    Location(s) Affected: TOOL
+Resolution Date: 2022-10-31
+Resolution: The quarantine policy at Toolik Field Station ended after the 2022 field season.
+
+Issue Date: 2022-09-15
+Issue: Severe flooding destroyed several roads into Yellowstone National Park in June 2022, making the YELL and BLDE sites inaccessible to NEON staff. Observational data collection was halted during this time. Canceled data collection events are indicated in data records via the samplingImpractical field.
+    Date Range: 2022-06-12 to 2022-10-31
+    Location(s) Affected: YELL
+Resolution Date: 2022-10-31
+Resolution: Normal operations resumed on October 31, 2022, when the National Park Service opened a newly constructed road from Gardiner, MT to Mammoth, WY with minimal restrictions. For more details about data impacts, see Data Notification https://www.neonscience.org/impact/observatory-blog/data-impacts-neons-yellowstone-sites-yell-blde-due-catastrophic-flooding-0
+
+Issue Date: 2021-01-06
+Issue: Safety measures to protect personnel during the COVID-19 pandemic resulted in reduced or canceled sampling activities for extended periods at NEON sites. Data availability may be reduced during this time.
+    Date Range: 2020-03-23 to 2021-12-31
+    Location(s) Affected: All
+Resolution Date: 2021-12-31
+Resolution: The primary impact of the pandemic on observational data was reduced data collection. Training procedures and data quality reviews were maintained throughout the pandemic, although some previously in-person training was conducted virtually.  Scheduled measurements and sampling that were not carried out due to COVID-19 or any other causes are indicated in data records via the samplingImpractical data field.
+
+Issue Date: 2021-12-09
+Issue: State-level taxa obfuscation: Prior to the 2022 data release, publication of species identifications were obfuscated to a higher taxonomic rank when the taxon was found to be listed as threatened, endangered, or sensitive at the state level where the observation was recorded. Obfuscating state-listed taxa has created challenges for data users studying biodiversity.
+    Date Range: 2012-01-01 to 2021-12-31
+    Location(s) Affected: All
+Resolution Date: 2021-12-31
+Resolution: The state-level obfuscation routine was removed from the data publication process at all locations excluding sites located in D01 and D20. Data have been reprocessed to remove the obfuscation of state-listed taxa. Federally listed threatened and endangered or sensitive species remain obfuscated at all sites and sensitive species remain redacted at National Park sites.
+
+Issue Date: 2020-11-01
+Issue: Sampling halted in Puerto Rico: Small mammal communities in Puerto Rico are exclusively invasive species of Rattus and Mus. The larger Tomahawk traps required to capture the Rattus spp. risk capturing invasive mongoose (Herpestes auropunctatus). The site host would not permit release of this invasive species once captured, and the IACUC would not permit euthanasia by NEON staff due to risks to staff safety.
+    Date Range: 2016-03-01 to 2017-05-01
+    Location(s) Affected: GUAN, LAJA
+Resolution Date: 2020-10-14
+Resolution: Small mammal trapping activities in Puerto Rico have been suspended to prevent unintended capture of invasive mongoose (Herpestes auropunctatus).
+
+Issue Date: 2020-11-01
+Issue: No sampling impractical: Bouts of missed sampling are not being recorded in the data.
+    Date Range: 2013-01-01 to 2020-02-11
+    Location(s) Affected: All
+Resolution Date: 2020-02-11
+Resolution: In 2020, NEON added the quality flag "samplingImpractical" to the small mammal `per_plotnight` table to assist users in determining the cause of missing samples.
+
+Issue Date: 2021-11-08
+Issue: Alaska sampling change: In D18 and D19, the small mammal grids used for 'pathogen' sampling are sampled for 3 nights each bout, and the permafrost is beginning to show very early signs of damage due to the high sampling frequency.
+    Date Range: 2020-02-01 to 2020-02-01
+    Location(s) Affected: HEAL, TOOL, BARR
+Resolution Date: 2020-02-01
+Resolution: To prevent degradation of the permafrost at small mammal grids in D18 and D19 sites, the field teams will rotate which grids serve as the 'pathogen' grids that are sampled for 3 nights each bout with those serving as diversity grids, which are sampled only 1 night per bout.  This leads to higher frequency pathogen grid sampling every other year at a grid allowing for recovery time between bouts of higher intensity sampling.
+
+Issue Date: 2020-11-01
+Issue: Hair sample update: Small mammal hair sample weight is below the 5 mg minimum required for stable isotope analyses.
+    Date Range: 2013-01-01 to 2019-03-18
+    Location(s) Affected: All
+Resolution Date: 2019-03-18
+Resolution: The protocol was updated to require collection of hair samples weighing 5-8 mg instead of < 1 mg.
+
+Issue Date: 2020-11-01
+Issue: Ticks are not being recorded on small mammals.
+    Date Range: 2013-01-01 to 2016-01-29
+    Location(s) Affected: All
+Resolution Date: 2019-01-29
+Resolution: Tick monitoring (presence/absence by lifestage) was added to the data product for the 2016 field season.  Beginning in the 2020 field season, the binned number of total ticks attached to a small mammal was also added to the data product with groupings that include: 1-5, 6-20, >20.
+
+Issue Date: 2017-08-08
+Issue: Different data fields: As part of NEON's ongoing construction tasks, the processing pipeline for most data products for NEON's observational systems (terrestrial [TOS] and aquatic [AOS]) has been simplified to use a generic codebase.
+    Date Range: 2017-08-08 to 2017-08-08
+    Location(s) Affected: All
+Resolution Date: 2017-08-08
+Resolution: Data that were published previously have been reprocessed and republished using the generic code -- replacing data that had been processed using the original algorithms described in Algorithm Theoretical Basis Documents (ATBDs). Consequently, data are in a new format including, in many cases, different data fields. Details of the new processing pipeline can be found in http://data.neonscience.org/api/v0/documents/OS_generic_transitions_vA  and http://data.neonscience.org/api/v0/documents/Nicl_Language_DRAFT.
+
+Issue Date: 2020-11-01
+Issue: Samples collected reduced: On days when large numbers of small mammals are captured, collecting and processing samples from all captures requires too much time.
+    Date Range: 2013-01-01 to 2015-03-23
+    Location(s) Affected: All
+Resolution Date: 2015-03-23
+Resolution: Only ten samples of a given type (e.g., hair, fecal, ear) are collected from priority species when capture rates are high.
+
+Issue Date: 2020-11-01
+Issue: Sampling nights reduced: Trapping small mammals for three nights on every grid is highly resource-intensive.
+    Date Range: 2013-01-01 to 2015-03-23
+    Location(s) Affected: All
+Resolution Date: 2015-03-23
+Resolution: In consultation with the Technical Working Group, sample bout duration was decreased from three nights to one at diversity grids. By maintaining three sampling nights on the remaining three pathogen grids at each site, this design change balanced the sampling of a diversity of land cover classes with the recapture data required for density estimation.
+
+
+ADDITIONAL INFORMATION
+----------------------
+
+Protection of species of concern: At most sites, taxonomic IDs of species of concern have been 'fuzzed',
+i.e., reported at a higher taxonomic rank than the raw data, to avoid publishing locations of sensitive species. For
+a few sites with stricter regulations (e.g., Great Smoky Mountains National Park (GRSM)), records for species of
+concern are not published.
+
+Queries for this data product will return data collected during the date range specified. Per trapping grid data are provided in the table, `mam_perplotnight`, with associated per trap per night data provided in the `mam_pertrapnight` table. The tables can be joined by the nightuid field. Duplicates may exist where protocol and/or data entry aberrations have occurred; users should check data carefully for anomalies before joining tables. Taxonomic IDs of species of concern have been 'fuzzed'; see data package readme files for more information. If taxonomic determinations have been updated for any records in the tables `mam_pertrapnight` or `mam_voucher`, past determinations are archived in the `mam_identificationHistory` or `mam_voucherIdentificationHistory` tables, where the archived determinations are linked to current records using identificationHistoryID.
+
+NEON DATA POLICY AND CITATION GUIDELINES
+----------------------------------------
+
+A citation statement is available in this data product's detail page at
+https://data.neonscience.org/data-products/DP1.10072.001. Please visit https://www.neonscience.org/data-policy for
+more information about NEON's data policy and citation guidelines.
+
+DATA QUALITY AND VERSIONING
+---------------------------
+
+NEON data are initially published with a status of Provisional, in which updates to data and/or processing
+algorithms will occur on an as-needed basis, and query reproducibility cannot be guaranteed. Once data are published
+as part of a Data Release, they are no longer provisional, and are associated with a stable DOI.
+
+To learn more about provisional versus released data, please visit
+https://www.neonscience.org/data-revisions-releases.

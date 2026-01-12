@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"4b50973e-20c8-4066-8607-0dddf71d6c5e","fdf42001-f0c3-45b6-9df8-19639c44e7e8","MLBS.2025.18","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2025-05-01","2025-05-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"d0be414e-5463-4edb-b002-e35347eaefb2","52a32a1d-d96e-4029-98c5-44cbecf6b979","MLBS.2025.18","MLBS_004.mammalGrid.mam","D07","MLBS","MLBS_004","diversity","2025-05-01","2025-05-01","logistical",,"NEON.DOC.000481vQ","Access limited road damage",
+"5206a49b-eb5b-4256-9c34-d9036a75bf54","064a1fb9-e383-4b72-aa60-5085a7a08fb8","MLBS.2025.18","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2025-05-01","2025-05-01","OK","setting complete, no small mammals captured","NEON.DOC.000481vQ",,
+"d0c9a04f-c20a-43d3-bb82-e4d2498c0c25","c4cfba3d-23ae-425b-bce1-10365e5d134e","MLBS.2025.18","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2025-05-01","2025-05-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

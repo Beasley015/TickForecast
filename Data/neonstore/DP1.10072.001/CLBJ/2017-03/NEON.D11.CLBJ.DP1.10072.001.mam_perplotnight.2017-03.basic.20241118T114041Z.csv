@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c42e9f81-4157-4332-af13-4f07ce645c04","29c4a852-6fb7-45cd-a597-d56285183527","CLBJ.2017.13","CLBJ_057.mammalGrid.mam","D11","CLBJ","CLBJ_057","diversity","2017-03-28","2017-03-28",,,,
+"4633e7cf-cbbe-4550-b3a7-cd9b0641f5ce","323ade2f-8f98-4285-ac41-a86a7a26196a","CLBJ.2017.13","CLBJ_040.mammalGrid.mam","D11","CLBJ","CLBJ_040","diversity","2017-03-28","2017-03-28",,,,
+"1eb65a01-7871-4d9c-8e4a-f710f2d7cfc9","08ad28f8-78b8-44d1-80b1-4af03491764d","CLBJ.2017.13","CLBJ_033.mammalGrid.mam","D11","CLBJ","CLBJ_033","pathogen","2017-03-28","2017-03-28",,,,
+"46b90249-5f5e-4051-a257-af2de52eb083","f6bfd933-d429-41a4-a1ef-054ceee51501","CLBJ.2017.13","CLBJ_041.mammalGrid.mam","D11","CLBJ","CLBJ_041","pathogen","2017-03-28","2017-03-28",,,,
+"5be3fbae-2349-469b-bf31-ece0ece84c4b","58945a42-18cb-4900-a2de-f6ee1b9892cd","CLBJ.2017.13","CLBJ_033.mammalGrid.mam","D11","CLBJ","CLBJ_033","pathogen","2017-03-30","2017-03-30",,,,
+"233d47c0-5baf-406f-978c-616af5accc6c","ff1aa58b-1fb7-4c2c-bede-9f672c54ab1a","CLBJ.2017.13","CLBJ_042.mammalGrid.mam","D11","CLBJ","CLBJ_042","pathogen","2017-03-30","2017-03-30",,"NEON.DOC.000481vJ",,
+"609ac0d0-b566-48da-ae3b-e37892f942fe","f3104dce-c249-4113-a72a-747292d059f2","CLBJ.2017.13","CLBJ_041.mammalGrid.mam","D11","CLBJ","CLBJ_041","pathogen","2017-03-30","2017-03-30",,,,
+"0522edef-de1e-43e6-ae84-b0dfd7b3ba77","ce994741-7cfb-4a64-8eb0-3e65dbbfd5b4","CLBJ.2017.13","CLBJ_037.mammalGrid.mam","D11","CLBJ","CLBJ_037","diversity","2017-03-31","2017-03-31",,,,
+"6cbde47f-4971-4581-8c90-9fdde520d672","c07a0eae-0d72-4737-9224-52e97e109eae","CLBJ.2017.13","CLBJ_039.mammalGrid.mam","D11","CLBJ","CLBJ_039","diversity","2017-03-31","2017-03-31",,,,
+"e1625077-f8d9-4228-b699-f412c5c33c24","caa37e69-1788-4be0-bc86-36a2fa56aad8","CLBJ.2017.13","CLBJ_034.mammalGrid.mam","D11","CLBJ","CLBJ_034","diversity","2017-03-31","2017-03-31",,"NEON.DOC.000481vJ",,
+"b520a3e5-2938-4b10-9471-381acec5a84e","77370ea3-527a-4f92-b4c2-2e60dd51b266","CLBJ.2017.13","CLBJ_042.mammalGrid.mam","D11","CLBJ","CLBJ_042","pathogen","2017-03-31","2017-03-31",,,,

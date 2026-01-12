@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5198f824-f85b-40bb-9805-8567efe78574","48b46a31-a7ee-489c-a443-e702f8b15503","TALL.2022.22","TALL_010.mammalGrid.mam","D08","TALL","TALL_010","pathogen","2022-05-31","2022-05-31","logistical","NEON.DOC.000481vN",,
+"c69ccbeb-bf01-4406-a8eb-6e626bc43ad7","a352a2a6-b3d4-45c2-8e0d-acfa948ff79a","TALL.2022.22","TALL_024.mammalGrid.mam","D08","TALL","TALL_024","pathogen","2022-05-31","2022-05-31","logistical","NEON.DOC.000481vN",,
+"5a886b5c-23a8-4159-9701-f318b1656882","5c9bcfe5-16c2-424b-b872-e6584ba8a5fa","TALL.2022.22","TALL_015.mammalGrid.mam","D08","TALL","TALL_015","pathogen","2022-05-31","2022-05-31","logistical","NEON.DOC.000481vN",,
+"6183e2af-9149-47d8-a1db-1c5548dbc2d4","2124a6c6-8cb3-488e-9c8b-a0eeff1e3990","TALL.2022.22","TALL_012.mammalGrid.mam","D08","TALL","TALL_012","pathogen","2022-05-31","2022-05-31","logistical","NEON.DOC.000481vN",,

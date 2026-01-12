@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b7c60eb9-4ef0-4d11-a6e2-84a9c10f1442","82e651b0-c3a9-4a7c-b0d9-9320c9f0ddb9","KONA.2019.31","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2019-08-01","2019-08-01",,"NEON.DOC.000481vL",,
+"2a1530c8-4a7e-4a6c-af4b-725bbbcd4862","6c423a32-d301-45dd-8d01-82864a56ec78","KONA.2019.31","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2019-08-01","2019-08-01",,"NEON.DOC.000481vL",,
+"aa1f00e0-401d-4ef4-b46a-3a07bd979524","22f9c07e-5a71-427b-89c8-e3173018fabf","KONA.2019.31","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2019-08-01","2019-08-01",,"NEON.DOC.000481vL",,
+"e47c864a-167d-4be1-b9ec-7197899b8d1d","a193969d-7cc4-4617-b1e1-e1c39ef42496","KONA.2019.31","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2019-08-02","2019-08-02",,"NEON.DOC.000481vL","Grid not set due to thunderstorms",
+"021c1ca9-7d40-4f9c-861f-f60a20d44091","3c4f0982-3e1d-4acf-84b1-4dec6d502d4d","KONA.2019.31","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2019-08-02","2019-08-02",,"NEON.DOC.000481vL","Grid not set due to thunderstorms",
+"17130af4-ba0c-4455-837e-495944ab348b","b92b6556-263f-4d34-ac2a-c33b78f8bac8","KONA.2019.31","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2019-08-02","2019-08-02",,"NEON.DOC.000481vL","Grid not set due to thunderstorms",

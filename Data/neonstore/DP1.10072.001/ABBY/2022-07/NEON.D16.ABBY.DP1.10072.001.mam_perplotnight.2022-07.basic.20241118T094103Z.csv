@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b8b67c16-5b6c-41c8-9ee4-157329376007","7c15968f-347d-462a-a71b-831da1b56cee","ABBY.2022.29","ABBY_014.mammalGrid.mam","D16","ABBY","ABBY_014","diversity","2022-07-18","2022-07-18","logistical","NEON.DOC.000481vN",,
+"b60b779a-431d-4034-9f51-d6db8713dc4e","b8dc7bd5-0fa9-4769-b637-cd9ae67b7d7b","ABBY.2022.29","ABBY_007.mammalGrid.mam","D16","ABBY","ABBY_007","diversity","2022-07-18","2022-07-18","logistical","NEON.DOC.000481vN",,
+"9ae2a5d2-e9a3-40e1-8910-f54fa2d7aaa4","4f7cf4d5-2ab4-4c17-9cd6-2eb7049a2834","ABBY.2022.29","ABBY_010.mammalGrid.mam","D16","ABBY","ABBY_010","pathogen","2022-07-18","2022-07-18","logistical","NEON.DOC.000481vN",,
+"21e49ba2-6489-443e-aa92-e6ab13ac37d0","b5ec0ca2-f732-4e9f-a4e7-2458dc37e03c","ABBY.2022.29","ABBY_023.mammalGrid.mam","D16","ABBY","ABBY_023","diversity","2022-07-18","2022-07-18","logistical","NEON.DOC.000481vN",,
+"57a15384-5ab5-478b-bd2c-5dbcfd301e21","d4106eaf-c043-4a84-a901-80187e8bc874","ABBY.2022.29","ABBY_002.mammalGrid.mam","D16","ABBY","ABBY_002","pathogen","2022-07-18","2022-07-18","logistical","NEON.DOC.000481vN",,
+"aa2a4fab-d1d5-4690-af96-0c27664ec552","07cacd2b-e233-46ea-a332-79d4a8e4b7f6","ABBY.2022.29","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2022-07-18","2022-07-18","logistical","NEON.DOC.000481vN",,

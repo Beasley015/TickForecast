@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"46b0876c-c8dd-4f3f-9120-2487c4a2ecb1","a2f0a922-967a-4c19-804d-573c3be9e3b4","DCFS.2023.36","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2023-09-05","2023-09-05","logistical","NEON.DOC.000481vP",,
+"1747c712-2d1a-4018-9c47-ae4fb41ffae4","5d67926f-92a0-4168-b535-2292266ac1d5","DCFS.2023.36","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2023-09-05","2023-09-05","logistical","NEON.DOC.000481vP",,
+"6fa76a57-ed23-4ada-b7b9-b05440182d07","f1819266-3830-44ab-83c1-92c727d02f0a","DCFS.2023.36","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2023-09-05","2023-09-05","OK","NEON.DOC.000481vP",,
+"31967122-d77f-40fe-b9bf-0faf548ffe4a","54754a18-e171-4c9d-870d-6a191138c812","DCFS.2023.36","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2023-09-06","2023-09-06","logistical","NEON.DOC.000481vP",,
+"71dfc813-ea1f-4d8e-a502-da20106ba591","96244216-db2e-4102-be3f-28f9199c430d","DCFS.2023.36","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2023-09-06","2023-09-06","logistical","NEON.DOC.000481vP",,
+"d054b6bd-dd5b-46c3-b59b-3015e0d4b49c","0ac85d3a-9781-4ad0-b66a-e3b5710e8756","DCFS.2023.36","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2023-09-06","2023-09-06","OK","NEON.DOC.000481vP",,
+"f340baa0-9a57-4b71-9e4e-b8f9386517d7","699d4942-59ee-40bb-aed5-a05b437f141b","DCFS.2023.36","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2023-09-07","2023-09-07","OK","NEON.DOC.000481vP",,
+"7352d131-bf7e-4354-9732-f8819c53d848","1348896f-450e-4b4f-a4a1-d2eb2e0b1221","DCFS.2023.36","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2023-09-07","2023-09-07","logistical","NEON.DOC.000481vP",,
+"0bc4da16-f976-4fd6-bea1-76bbb9ce0260","0f220645-b7fd-4a72-bc93-d6cf1463ac4a","DCFS.2023.36","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2023-09-07","2023-09-07","logistical","NEON.DOC.000481vP",,
+"a20756bd-32af-4739-b8e3-f6c0e6e0cb03","6c6b4971-01f0-4a72-a0c3-519d13d1e4d1","DCFS.2023.36","DCFS_020.mammalGrid.mam","D09","DCFS","DCFS_020","diversity","2023-09-08","2023-09-08","logistical","NEON.DOC.000481vP",,
+"699a0158-e974-470f-b73e-5ad9af8bd556","19d56f19-6d25-4283-9fc2-0233ee1e343a","DCFS.2023.36","DCFS_009.mammalGrid.mam","D09","DCFS","DCFS_009","diversity","2023-09-08","2023-09-08","logistical","NEON.DOC.000481vP",,
+"f4bc725c-9beb-4b2e-abb8-0b1ae5cb969b","96f50703-3777-4106-a10b-409a2233f163","DCFS.2023.36","DCFS_004.mammalGrid.mam","D09","DCFS","DCFS_004","diversity","2023-09-08","2023-09-08","OK","NEON.DOC.000481vP",,

@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"9b5beaed-304b-4f7e-9f08-33b1d4eecaca","6e828721-c731-425a-81ff-41ca3c8b18a3","SCBI.2018.23","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-06-05","2018-06-05",,"NEON.DOC.000481vK",,
+"b981b4a0-a7a3-4aeb-adfd-3d3591459195","6508d1ab-770b-46f4-ba53-d14cc1342feb","SCBI.2018.23","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-06-05","2018-06-05",,"NEON.DOC.000481vK",,
+"91d9fa22-d4d2-49f0-b6b3-132cdd7aae02","9454871f-094c-4902-af48-07bbfa26bdf6","SCBI.2018.23","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-06-05","2018-06-05",,"NEON.DOC.000481vK","Lots of Disturbed and damaged traps- bear; plot closed",
+"a5e76382-396e-4953-a436-a9209921fbd2","e06d5b6a-5f58-46ce-a17f-69f98e77690d","SCBI.2018.23","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-06-06","2018-06-06",,"NEON.DOC.000481vK","Plot closed due to high disturbance",
+"c06aeb13-8709-4cc2-a7ba-504c9c1d8af5","cc788356-ae97-4e2f-8a16-93a4ee93aacc","SCBI.2018.23","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-06-06","2018-06-06",,"NEON.DOC.000481vK",,
+"41c63c95-5c81-4c46-8abf-1ee4827b3d67","4a0bc913-cc43-4daa-a05b-c9a467bc4d61","SCBI.2018.23","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2018-06-07","2018-06-07",,"NEON.DOC.000481vK",,
+"486eb9b1-f05a-40c6-a22f-da1bf55094bc","e3f3b018-9276-47c8-b3ea-8e39f78c64a9","SCBI.2018.23","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-06-07","2018-06-07",,"NEON.DOC.000481vK","Grass 1 to 1.5m high",
+"63589427-8279-47cc-ab19-8be96089ba9a","4f729a85-9d9a-4b94-9aa8-606cf6ceb719","SCBI.2018.23","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2018-06-08","2018-06-08",,"NEON.DOC.000481vK",,

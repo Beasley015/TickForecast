@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"07a9fc23-cc48-45fa-a94c-656bab9285d6","170220ce-9383-4975-9845-4c0d321389a7","ABBY.2017.21","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2017-05-22","2017-05-22",,,"All Traps Set. Some markers were missing- found ones placed at A10",
+"e294db05-ea5c-4362-af56-71aaf9cbccaa","e54eed31-5c7c-48a7-be70-557daee0c743","ABBY.2017.21","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2017-05-23","2017-05-23",,,,
+"02890e37-e58a-445e-bb80-7760d02ca667","c3647405-1033-4e71-8a67-8211e21bc781","ABBY.2017.21","ABBY_004.mammalGrid.mam","D16","ABBY","ABBY_004","pathogen","2017-05-24","2017-05-24",,,"All traps set.",

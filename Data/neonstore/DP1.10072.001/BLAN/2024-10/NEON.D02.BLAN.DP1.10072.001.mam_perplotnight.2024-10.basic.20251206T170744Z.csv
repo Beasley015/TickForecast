@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"766ab6d2-de48-4af8-bdae-ade5715bfe35","d7437e54-1815-4cbc-bb43-55c9013c3d1b","BLAN.2024.39","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2024-10-01","2024-10-01","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"aa3bf983-96a1-4726-990d-0cb29299444c","45edb1d2-d34a-4e67-a76a-b32ac137c4ad","BLAN.2024.39","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2024-10-01","2024-10-01","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"a6f87aa4-0cc8-45a4-920a-1ca5e66169d4","beb2c24d-4d2f-4bd3-bff9-b928a1244d59","BLAN.2024.39","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2024-10-02","2024-10-02","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"1c5c6b5d-ec0c-4183-9291-365435ef6f4e","8c2279b0-67a1-440f-926a-3b343379e55d","BLAN.2024.39","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2024-10-03","2024-10-03","OK","setting complete, processing complete","NEON.DOC.000481vP",,

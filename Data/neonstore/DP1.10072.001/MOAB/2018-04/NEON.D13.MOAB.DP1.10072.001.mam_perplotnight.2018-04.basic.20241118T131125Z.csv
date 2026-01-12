@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"16e9db94-75f3-4aea-afc1-8dc0fad2e589","d81266ac-f77f-4574-84f2-105b8cf6244e","MOAB.2018.15","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2018-04-11","2018-04-11",,"NEON.DOC.000481vK",,
+"93454d8c-ca8d-4487-a756-3fe8864f6960","ef5f03e1-0545-4ef1-8f2c-59867438212b","MOAB.2018.15","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2018-04-11","2018-04-11",,"NEON.DOC.000481vK",,
+"7363e29b-f048-4b07-8234-990b2564c82d","9e974a4d-58aa-4030-aec0-b25cbaa647f4","MOAB.2018.15","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2018-04-11","2018-04-11",,"NEON.DOC.000481vK",,
+"0557f39f-6604-4722-a6fd-63bf606ab2ea","a5ebdaca-64de-46b1-9699-e391911a0e12","MOAB.2018.15","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2018-04-12","2018-04-12",,"NEON.DOC.000481vK",,
+"da0dbbed-be8e-45ba-b780-1aa9837db8ab","e85e7520-3c64-4c49-ac19-f46c68e04c04","MOAB.2018.15","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2018-04-12","2018-04-12",,"NEON.DOC.000481vK",,
+"1b83229b-025f-48e8-aad1-d0609a3d0ef4","f6c6f36c-1a00-4241-abb0-1e51a7e69b9a","MOAB.2018.15","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2018-04-12","2018-04-12",,"NEON.DOC.000481vK",,
+"dd2b5589-8410-4e12-9dca-a4f43fb3eff3","f88c64d1-a708-4b0a-956b-4a7b51652d39","MOAB.2018.15","MOAB_007.mammalGrid.mam","D13","MOAB","MOAB_007","diversity","2018-04-16","2018-04-16",,"NEON.DOC.000481vK","New grid. Record created on 20180430 because MOAB 007 was not yet available on Fulcrum at the time of trap setting and collecting.",
+"a7bd434f-13c5-4738-96a5-61d481e11ee7","56b03370-254c-4ff7-948c-8d9ef11bf8a5","MOAB.2018.15","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","diversity","2018-04-16","2018-04-16",,"NEON.DOC.000481vK",,
+"8757cc78-1a02-4159-a363-c8feb9254bd2","6f1d9fa6-7fcc-4d9d-8ef0-0053c9ab4e7d","MOAB.2018.15","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2018-04-16","2018-04-16",,"NEON.DOC.000481vK",,

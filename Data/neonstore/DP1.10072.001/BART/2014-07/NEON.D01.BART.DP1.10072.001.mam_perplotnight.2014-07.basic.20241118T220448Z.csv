@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e99fafb3-de9a-4e61-bea6-a0ac164d750f","C298E46344344B3F93F5DEC4FBAC59FA","BART.2014.26","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2014-07-01","2014-07-01",,,,
+"d0d7fa4b-6ca8-4d64-bf14-01e33cf552e2","41CD1AAE5D45436997F6CB720B9CF1B1","BART.2014.26","BART_007.mammalGrid.mam","D01","BART","BART_007","pathogen","2014-07-01","2014-07-01",,,,
+"7912583e-1da4-4b7e-8d37-444becbf6c9f","B91E9ABD60234CFD88D219341250F6E9","BART.2014.26","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2014-07-02","2014-07-02",,,,
+"1dbf1d38-c8e8-47cd-9faf-0c577c5b089f","F0FC72EA8E3A4AA1876E37BECF608D70","BART.2014.26","BART_007.mammalGrid.mam","D01","BART","BART_007","pathogen","2014-07-02","2014-07-02",,,,
+"8c5b6b5d-d3a3-4e5a-b5a6-5c35c8ae2859","D02B22D166FD4E3A9AF8B8A0BFF5842F","BART.2014.26","BART_007.mammalGrid.mam","D01","BART","BART_007","pathogen","2014-07-03","2014-07-03",,,,
+"8801658e-d191-4a47-a1ab-5bf8358d40d2","F1468003E4594CC7924C65727F70FB13","BART.2014.26","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2014-07-03","2014-07-03",,,,

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"66f5fd5e-d096-4115-8ec8-fb2bdccf68d0","7A10C76B3C724D3597168ECC257CAE9A","OSBS.2014.17","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-04-22","2014-04-22",,,,
+"43fc9c26-7dc1-4a87-8479-d003b4d7102f","D6482B6F692E4A5E830B41B3F9365289","OSBS.2014.17","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","recapture","2014-04-22","2014-04-22",,,,
+"eafd5958-ee9a-4ee3-957e-ba8eee4d245e","2DFB2F87E16747518CBFD5DF693B6FC1","OSBS.2014.17","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2014-04-22","2014-04-22",,,,
+"79ca018f-9588-41df-9a1c-5ffc8ba95835","79105D3E7DB1428BB5617C7000F5235E","OSBS.2014.17","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-04-22","2014-04-22",,,"first bout for the year",
+"483f8a5c-568c-4cb4-888b-1ebfd079f2d5","C877C32A2C70424AB8451DD24FAFC210","OSBS.2014.17","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2014-04-23","2014-04-23",,,,
+"81ee34ab-c9dd-4c51-9cba-76522be8d1f4","0CD63A2A958948A39B6CABF3364636FB","OSBS.2014.17","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-04-23","2014-04-23",,,"raccoons disturbed plot",
+"2937adb2-08d6-4747-b0e4-eb942dcbadee","26F2F40B7E7E4F95A886A02EEA821C40","OSBS.2014.17","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","recapture","2014-04-23","2014-04-23",,,,
+"0c392a2a-b013-4497-b3a7-20ad6223da89","AE0A405148C44C3CB17CA3631EF7EB21","OSBS.2014.17","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-04-24","2014-04-24",,,"34 traps were disturbed and two went missing",
+"b9b88130-2e72-4d0b-846b-434d86390668","DCC1262BEFEB4DD4ACB8DF46C02E9EB1","OSBS.2014.17","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","recapture","2014-04-24","2014-04-24",,,,
+"1639235f-e56f-4dcb-b9bd-3195aeaa240e","AA4F53B27875416292F57A400EE2FB8D","OSBS.2014.17","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2014-04-24","2014-04-24",,,,

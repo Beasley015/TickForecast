@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"bd8d2868-424c-4300-859a-4c987f9e79b1","f8ed1ad2-6e22-4a41-a32a-7cec234b8da4","JORN.2018.39","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2018-10-01","2018-10-01",,"NEON.DOC.000481vK",,
+"0a28213b-feff-4260-8de5-e6a9e0ce316b","0b6fc26f-9ea6-4630-bab4-5b108f4a06c4","JORN.2018.39","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2018-10-01","2018-10-01",,"NEON.DOC.000481vK","Traps not set because of ants",
+"230d708c-29ce-4767-9a85-7a5a0fdc0dea","3f2f7e83-4081-4478-9115-7255ff25a8bb","JORN.2018.39","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2018-10-01","2018-10-01",,"NEON.DOC.000481vK",,
+"ec773be2-0565-46a8-b48a-d5b0a92cfb49","713e2a70-fe72-4f68-a129-bd1fa37174f8","JORN.2018.39","JORN_031.mammalGrid.mam","D14","JORN","JORN_031","diversity","2018-10-02","2018-10-02",,"NEON.DOC.000481vK",,
+"c77f9a66-7ab3-4152-8314-45f915582789","c8f3d180-0b68-467e-abd1-cdbe6b11d2eb","JORN.2018.39","JORN_011.mammalGrid.mam","D14","JORN","JORN_011","diversity","2018-10-02","2018-10-02",,"NEON.DOC.000481vK","Rained over night",
+"3d5a8a68-5a2d-48f5-b570-db7064718a73","6877266b-e0a9-4749-81a2-734824d19aaa","JORN.2018.39","JORN_007.mammalGrid.mam","D14","JORN","JORN_007","diversity","2018-10-02","2018-10-02",,"NEON.DOC.000481vK",,

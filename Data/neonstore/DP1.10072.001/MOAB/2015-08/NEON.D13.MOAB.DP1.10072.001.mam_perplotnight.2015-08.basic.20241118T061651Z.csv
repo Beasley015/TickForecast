@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5eee17cb-4600-4e55-bb64-2f7985bcee93","548260B4EA51419687ADC6BECA2B4824","MOAB.2015.32","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2015-08-07","2015-08-07",,,,
+"888ed826-a88a-4d61-93cd-19441e02721f","8E0C871AC1F4401682B13058E6C5FF13","MOAB.2015.32","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","pathogen","2015-08-07","2015-08-07",,,,
+"1e5c271f-2c8a-4ee2-b7d9-a0dd2ba5a433","9D776267BEE74148A776989444333262","MOAB.2015.32","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","pathogen","2015-08-07","2015-08-07",,,,
+"4b79c063-5d3a-45ef-b034-d83bdcab5ccb","A9FED8502D3B4F41BEBB96B30BCA5DEB","MOAB.2015.32","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2015-08-08","2015-08-08",,,,
+"d5358bec-fcd2-49b7-bcc2-fb2761581c9b","5BD0767A8E7445D8B5532246752A8191","MOAB.2015.32","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","pathogen","2015-08-08","2015-08-08",,,,
+"cceaf4a8-4c44-4237-b894-628fda01a662","930341097CEE4B9785A666DB54D4AA6F","MOAB.2015.32","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2015-08-09","2015-08-09",,,"Most animals at this plot were returned without processing due to 5 mortalities. For details, see detailed description of incident on data sheet.",
+"39b89d35-9a5f-4744-a002-c54382047ff4","DA672CEDFDCE44E79A7E763F6205076F","MOAB.2015.32","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","pathogen","2015-08-09","2015-08-09",,,,
+"e9e39bff-2439-4442-81f4-016443e872b8","A205199A3CF14AF2B5CD555140EC3933","MOAB.2015.32","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","pathogen","2015-08-09","2015-08-09",,,,
+"e7283b48-7b02-444a-ab51-e34ac1250b4b","91217A2BA4604CC3A2C3994585C62CB9","MOAB.2015.32","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2015-08-10","2015-08-10",,,,
+"1498a8fd-60b0-4d33-abae-defc3a72e5b4","3A5A7AE3F6C94B64867572B1DAC9FA2B","MOAB.2015.32","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","diversity","2015-08-10","2015-08-10",,,,
+"6ff10962-e3fc-425c-a913-d1639bb4b462","4D56A71D32834174B900C4D588ABC6A9","MOAB.2015.32","MOAB_025.mammalGrid.mam","D13","MOAB","MOAB_025","pathogen","2015-08-10","2015-08-10",,,,

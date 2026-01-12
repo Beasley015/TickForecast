@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"13233d1e-88bb-47f1-9d46-55f19a349fde","4B76F75ED6134BCB93BED59D73C5162A","NIWO.2015.42","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-10-13","2015-10-13",,,"Used version 'vG",
+"2b197805-f309-4047-9296-9c0999b1ed72","499D014ECC1E4605AFC3C60B7DA303D3","NIWO.2015.42","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-10-13","2015-10-13",,,"Using protocol vg.",
+"020d832e-00df-4859-9cbc-6a228c533f68","6B7068AFE1374DD48ED24596A0603258","NIWO.2015.42","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-10-13","2015-10-13",,,"Used version 'vG",
+"c59780b9-def3-4799-896e-7cb861b647a3","81DC051B96EC458E88BE9CB473EBBF5E","NIWO.2015.42","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2015-10-14","2015-10-14",,,"Using protocol vg.",
+"84e0d218-2edd-4c9c-9224-edc10745c673","75E34B7075634C19851D01A4EB9E309A","NIWO.2015.42","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2015-10-14","2015-10-14",,,"Using protocol vg.",
+"dc02ed9c-c79c-4de8-b91a-2e5ebeb41b17","909A675B5A174755872802087E9F94FB","NIWO.2015.42","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-10-14","2015-10-14",,,"Using protocol vg.",
+"19985a90-6d25-433c-8856-e2ed08680346","4BD5ECDF95F24046B7E465D8EFFF7E9D","NIWO.2015.42","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-10-14","2015-10-14",,,"Using protocol vg.",
+"e2a9afb9-cd84-4e4d-be73-0d493ead8445","ACC310E697AE4ED4969595E0AEA1CD4A","NIWO.2015.42","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-10-14","2015-10-14",,,"Using protocol vg.",
+"1bbe097c-04e2-4a67-8836-c100e2c1c35c","081946BAE22B42F8A0D8F4B4A7A20594","NIWO.2015.42","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-10-15","2015-10-15",,,"Using protocol vg.",
+"752f9714-e8b7-44f7-a4db-7f6d919b4885","E450A161F2824A76BD74D04F3002D403","NIWO.2015.42","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-10-15","2015-10-15",,,"Using protocol vg.",
+"eb9f9a7a-6fb3-451a-b776-6f12a75ff9d7","4640EEE1B673423EB3AC673A42F2845E","NIWO.2015.42","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-10-15","2015-10-15",,,"Using protocol vg.",
+"7f31c23d-c4b1-4a8a-a9f5-e6490407c990","79D2E5F214FF481EBF32351AEF59E228","NIWO.2015.42","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2015-10-15","2015-10-15",,,"Using protocol vg.",

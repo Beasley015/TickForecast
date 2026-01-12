@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"ad33067e-2087-42df-89c7-afb79278ed26","de8251a6-6f31-4c21-90f0-919eb2ae4357","STER.2022.14","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-04-05","2022-04-05","OK","NEON.DOC.000481vN",,
+"a97283ae-1179-4d4d-a4bb-eb1020596e04","ac60643e-af9d-4e90-993c-f9b3253ed6c6","STER.2022.14","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-04-05","2022-04-05","OK","NEON.DOC.000481vN",,
+"23bc5485-305e-499b-8a81-931a482a24a8","30fc4193-4256-444a-9294-865ee64549d5","STER.2022.14","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-04-05","2022-04-05","OK","NEON.DOC.000481vN",,
+"a77e0e78-5765-4eee-ba02-a873acca659a","a8de3b71-8477-4a50-b956-6423d9ab956e","STER.2022.14","STER_026.mammalGrid.mam","D10","STER","STER_026","diversity","2022-04-05","2022-04-05","logistical","NEON.DOC.000481vN","Insufficient Resources",
+"08dbcdab-b6ee-4185-81dc-9c9ae2da34df","c0cdbca9-0942-41c7-a87b-e52a281fd430","STER.2022.14","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-04-06","2022-04-06","too windy","NEON.DOC.000481vN",,
+"c4ed584a-04a6-428a-bfee-48b3235fbde7","cf484dc6-2cb0-4c4e-a503-18c66b50fe2f","STER.2022.14","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-04-06","2022-04-06","too windy","NEON.DOC.000481vN",,
+"60416780-262f-4cef-8c56-8502c1b2b807","75b57f1a-57bd-4483-83a5-90ee59641802","STER.2022.14","STER_027.mammalGrid.mam","D10","STER","STER_027","diversity","2022-04-06","2022-04-06","too windy","NEON.DOC.000481vN",,
+"ef913a95-9d85-4bf3-9247-924bddb9ae60","99f58e82-9614-4cdf-b269-53d50d288a37","STER.2022.14","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-04-06","2022-04-06","too windy","NEON.DOC.000481vN",,
+"3cd389db-06be-4ae8-853a-73c4014b157b","c2242528-90c7-4619-bfae-ca49f1cff5dd","STER.2022.14","STER_028.mammalGrid.mam","D10","STER","STER_028","diversity","2022-04-07","2022-04-07","too windy","NEON.DOC.000481vN",,
+"a081991f-6d7b-44f0-9bd1-08ec2c3098ac","af055ddc-c1d1-49cd-9925-af58afb444d3","STER.2022.14","STER_031.mammalGrid.mam","D10","STER","STER_031","pathogen","2022-04-07","2022-04-07","too windy","NEON.DOC.000481vN",,
+"44f68bb9-4b06-49eb-88e0-1d75e2067eb8","44f05d4e-bfd3-40cd-b6f6-daaf3447bf16","STER.2022.14","STER_029.mammalGrid.mam","D10","STER","STER_029","pathogen","2022-04-07","2022-04-07","too windy","NEON.DOC.000481vN",,
+"952afe61-9b28-4068-95a8-1c28392a20ee","628e6683-9387-4d8a-8bba-2625c1ae2c20","STER.2022.14","STER_006.mammalGrid.mam","D10","STER","STER_006","pathogen","2022-04-07","2022-04-07","too windy","NEON.DOC.000481vN",,

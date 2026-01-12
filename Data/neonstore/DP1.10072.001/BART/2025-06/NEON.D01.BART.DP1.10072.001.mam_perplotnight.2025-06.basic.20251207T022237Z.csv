@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"51ade31f-fca3-49c4-91b0-56599dae82d1","ef799a66-352b-4698-a497-c37c80c5a60e","BART.2025.27","BART_012.mammalGrid.mam","D01","BART","BART_012","pathogen","2025-06-30","2025-06-30","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"03b9dc8f-1112-42b7-aa20-93863ab85990","ca7658f9-64b1-419d-b89d-0ed80cc545c3","BART.2025.27","BART_062.mammalGrid.mam","D01","BART","BART_062","pathogen","2025-06-30","2025-06-30","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"b2d99787-3060-4c9f-8e61-f6d13f00da37","abbad558-7c3f-445f-a7a7-309b1fb3ed53","BART.2025.27","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2025-06-30","2025-06-30","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

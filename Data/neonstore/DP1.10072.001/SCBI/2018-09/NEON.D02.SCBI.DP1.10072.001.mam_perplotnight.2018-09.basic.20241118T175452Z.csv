@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"49d7680c-9735-40b5-83bd-d0072ae2190b","4170b915-27d1-4991-a9eb-a8dc76536cd6","SCBI.2018.36","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-09-05","2018-09-05",,"NEON.DOC.000481vK",,
+"65fc7904-b660-4af8-8e45-c574b0893709","0c8ea7ae-b9b3-4f97-9513-f0b623c07fda","SCBI.2018.36","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-09-05","2018-09-05",,"NEON.DOC.000481vK",,
+"c9d1699f-2485-4e6e-a8bb-d082eee8ea97","f5667cc4-625e-400e-bbf2-902931715184","SCBI.2018.36","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-09-05","2018-09-05",,"NEON.DOC.000481vK",,
+"888c415d-3e70-4d31-a374-b4ec800f2ee4","e91c9b47-8d1d-4a13-8532-edcbe5bab399","SCBI.2018.36","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-09-06","2018-09-06",,"NEON.DOC.000481vK",,
+"3da63f8e-a905-4720-a685-c4a7b7d1526e","123dec75-a62c-48e3-bf2f-04ddc14e652c","SCBI.2018.36","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-09-06","2018-09-06",,"NEON.DOC.000481vK",,
+"15fa9186-fc76-4c61-b7b0-4153797be873","3d660181-c324-41bf-abf2-e1c7ab00dd73","SCBI.2018.36","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-09-06","2018-09-06",,"NEON.DOC.000481vK",,
+"5dde36bb-2a29-4006-9f33-d31fa2b20945","fdcb9d5e-4156-4fee-8c6a-2172d4c18f74","SCBI.2018.36","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2018-09-07","2018-09-07",,"NEON.DOC.000481vK","Bear in plot yesterday evening and thunderstorms over night",
+"1e7b4032-9eec-492d-98c2-5c6fb85b0af5","d4c6393b-2c48-42d5-baf3-3cb49e3a9ec6","SCBI.2018.36","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2018-09-07","2018-09-07",,"NEON.DOC.000481vK",,
+"75ffabaf-37ba-4504-ae83-993a446d9213","4ecc7b1c-5cbd-4c2e-b99f-299e5a7ec3f4","SCBI.2018.36","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2018-09-07","2018-09-07",,"NEON.DOC.000481vK",,
+"3d1a390e-35c6-49c2-8bca-862c5851a2c4","8d76cfa5-d431-48c0-a902-70c79a0bc559","SCBI.2018.36","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2018-09-08","2018-09-08",,"NEON.DOC.000481vK","Plot not fully set due to thunderstorms",

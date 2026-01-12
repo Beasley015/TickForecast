@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c25dfc70-105d-44a4-9800-c4d93e73798d","3dd9b066-b2e6-4b05-a51d-7999f4090308","BLAN.2023.13","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-03-28","2023-03-28","OK","NEON.DOC.000481vN",,
+"66cae9b5-935d-4c51-9804-2589d2875ba3","d8ec2710-f694-4595-b5e6-bbb16e038c3d","BLAN.2023.13","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-03-28","2023-03-28","logistical","NEON.DOC.000481vO",,
+"0cac711d-7ffb-41c7-8281-e5cea3a002fb","af771817-bd60-4924-8fbe-54b6cee117e9","BLAN.2023.13","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2023-03-28","2023-03-28","logistical","NEON.DOC.000481vO",,
+"0d5d12f1-bac2-4c6a-bb81-c350320d8dd5","68d6f698-2f0f-4eb7-8bb9-922560643f9e","BLAN.2023.13","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-03-28","2023-03-28","logistical","NEON.DOC.000481vO",,
+"b232eb78-6bb5-46a5-b941-b1c96d65d29c","16b9ca84-6995-4553-833c-76d8f518c377","BLAN.2023.13","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-03-29","2023-03-29","logistical","NEON.DOC.000481vO",,
+"94932582-27bb-452e-a22a-74207f16e2c5","0383331d-c542-475c-b688-65912c9ba070","BLAN.2023.13","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-03-29","2023-03-29","logistical","NEON.DOC.000481vO",,
+"2e706a10-0d6d-408f-8f50-333f5da5eb6e","64730ca2-7b0e-48e8-8717-0e4f414b89b2","BLAN.2023.13","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2023-03-30","2023-03-30","logistical","NEON.DOC.000481vO",,
+"afd42627-a22c-443d-8803-ac3c47310134","6e78d8cc-ee66-4e4b-8458-9a9809c52262","BLAN.2023.13","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2023-03-30","2023-03-30","logistical","NEON.DOC.000481vO",,
+"3f559fd6-1af4-4350-a86e-81bee4ea0fcc","2966b052-b642-42b8-a8f1-d431133cb003","BLAN.2023.13","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-03-30","2023-03-30","OK","NEON.DOC.000481vN",,
+"ff66ee92-8cf1-4539-bb40-ade1dfea4e69","1c46d762-e4ed-4287-bdae-5e257d377a19","BLAN.2023.13","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2023-03-31","2023-03-31","logistical","NEON.DOC.000481vO",,

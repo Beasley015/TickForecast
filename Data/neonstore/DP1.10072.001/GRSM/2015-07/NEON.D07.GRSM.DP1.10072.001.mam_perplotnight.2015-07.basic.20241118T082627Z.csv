@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b2ef5cf1-62ec-4d91-8041-7c2bebe2ea2c","D3D29224029F424091576C66DC5F64F3","GRSM.2015.29","GRSM_013.mammalGrid.mam","D07","GRSM","GRSM_013","diversity","2015-07-14","2015-07-14",,,"used NEON.DOC.000481vG",
+"a6682b3d-4bcf-458a-8376-6e11f033b3ec","703FAD8F62D749FE99E34AEF0E9EFEE1","GRSM.2015.29","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","diversity","2015-07-14","2015-07-14",,,"used NEON.DOC.000481vG; due to dangerous weather, all captured individuals were released on site",
+"bb1b551e-fe8b-496e-bf62-a41d06494b03","C58A544ACFC54E50B2921664B5C3585D","GRSM.2015.29","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","diversity","2015-07-15","2015-07-15",,,"used NEON.DOC.000481vG",
+"0d12a28c-9ee4-4e23-8f30-a8fcf180f0e3","6E67DEA23B0D47F090197B4A1AB68DB7","GRSM.2015.29","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2015-07-15","2015-07-15",,,"used NEON.DOC.000481vG",
+"babe070d-a12f-4139-8c84-5d298c69f332","6A0C9364CD6C402A9C70EAA76E8E55A3","GRSM.2015.29","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","pathogen","2015-07-15","2015-07-15",,,"used NEON.DOC.000481vG",
+"6ac77675-bed7-43e2-a137-8acf4b648086","C38A3C0AF2F14E34B4F3DED10F4756A2","GRSM.2015.29","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2015-07-16","2015-07-16",,,"used NEON.DOC.000481vG",
+"feb2c4e7-47e3-4ce7-9e5f-d0c3097a9f96","B89CA38D0A3049BD97BFCA497EC9A135","GRSM.2015.29","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","pathogen","2015-07-16","2015-07-16",,,"used NEON.DOC.000481vG",
+"45ec70a0-4cf8-4022-b13b-81b0c65b33c9","E3D94DEB610547CEA93A0FCCB154BFFD","GRSM.2015.29","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2015-07-17","2015-07-17",,,"used NEON.DOC.000481vG",

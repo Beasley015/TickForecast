@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"87bbd884-7f85-4cfd-998a-4abb8b5bfdb2","e6641053-ddaf-464e-be53-e5ea9b709788","DCFS.2019.22","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"261bdd8b-19e6-440a-ba85-d7541d67a9bf","70537123-1f5d-4e48-a3ea-8b5da67ba851","DCFS.2019.22","DCFS_004.mammalGrid.mam","D09","DCFS","DCFS_004","diversity","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"450f0625-aa93-46f1-a489-0900984319ee","1000b86a-4060-4247-9e46-4910898e7bb6","DCFS.2019.22","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"6154b35d-5eb1-4e30-a363-93c5819793d7","ecab8874-a1f9-493c-989a-a0de4cfd10f2","DCFS.2019.22","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"00d14d6b-bb64-4bfd-8683-4c00cab748ab","ce9a9070-51ec-43cc-9ede-11a412e772ed","DCFS.2019.22","DCFS_020.mammalGrid.mam","D09","DCFS","DCFS_020","diversity","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"e3dd7061-f2ff-4f7f-9254-2b2bd687ecc0","f6b89454-6cea-46c9-9bb9-01d262149d0b","DCFS.2019.22","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"a87889e0-25d0-45c0-937f-64b0ffc377f1","82ce816f-a53c-4640-b5bd-494f4b54e6e2","DCFS.2019.22","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"834fe2ca-c35a-4401-a128-6b3ff93a0975","dde11cd7-b7a6-4061-9695-2c5889397fcd","DCFS.2019.22","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"609f5a02-792f-4f7e-8049-2fa994de92ac","dd284363-58f4-4b2b-b1e2-51b382a8c666","DCFS.2019.22","DCFS_003.mammalGrid.mam","D09","DCFS","DCFS_003","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL","G10 H10 I5 I6 I10 J05 J06 J07 J10 not set due to flooding",
+"aacdf769-d62a-4659-8bfa-346ea823745d","7bc2bdcb-d65a-42b0-975f-ecc0fd49271a","DCFS.2019.22","DCFS_014.mammalGrid.mam","D09","DCFS","DCFS_014","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"44fb6826-cb00-45ad-abbf-d83a00cd7935","33fb3a13-24fe-404f-968b-ffbeacf1a3d6","DCFS.2019.22","DCFS_009.mammalGrid.mam","D09","DCFS","DCFS_009","diversity","2019-05-31","2019-05-31",,"NEON.DOC.000481vL","A10 B09 B10 C10 not set due to flooding",
+"ffd6d549-cf77-4130-842b-e16fdc49b8e9","bc46e903-3d44-4c2c-af6d-ec0e81786886","DCFS.2019.22","DCFS_006.mammalGrid.mam","D09","DCFS","DCFS_006","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,

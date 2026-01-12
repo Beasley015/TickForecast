@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"6ebc6f89-2e84-4912-a9f1-a42041e34b37","E2968411570E4346B2B07501875FA94D","DELA.2015.28","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2015-07-07","2015-07-07",,,,
+"627a4c03-2391-4c3b-859f-311f9529c766","52647D45A50F4C88A121A96252B39C96","DELA.2015.28","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2015-07-07","2015-07-07",,,,
+"23185b5c-757f-4cba-8a44-632bcf9a5999","6E04B7CBE81B48F5AA16F397CFE07440","DELA.2015.28","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2015-07-07","2015-07-07",,,"No traps were set. Could not meet the minimum trap requirement due to flooding.",
+"f73170a2-68d0-4e29-8025-fedd1b42da92","7B1BA02ED87F4A9F9F248E31933E693B","DELA.2015.28","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2015-07-08","2015-07-08",,,"No traps were set. Minimum trap requirement could not be met due to flooding.",
+"279b3b8a-5f47-413d-bb88-8eaac2dde326","53E9AD7D09F54BBEAB2551D71319940C","DELA.2015.28","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2015-07-08","2015-07-08",,,,
+"5b55f366-6ae7-49cf-93a8-5aa1fcebe28e","074C9C4238B740F3BB9DD5DB96A08CE3","DELA.2015.28","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2015-07-08","2015-07-08",,,,
+"3420ba55-46ae-4d76-8cba-f5868db711fe","F72E72BB667848F8975F2522D3218D2B","DELA.2015.28","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2015-07-09","2015-07-09",,,"No traps were set. Could not meet the minimum trap requirement due to flooding.",
+"73c70fbb-beaa-4f95-a493-f449ae6ade7d","23C5FB55D7874704911C2AF03D77DDA5","DELA.2015.28","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2015-07-09","2015-07-09",,,,
+"1256c443-3843-4631-9c5e-837db0254f1d","4A229E0BD3884146ACB405195C026089","DELA.2015.28","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2015-07-09","2015-07-09",,,,

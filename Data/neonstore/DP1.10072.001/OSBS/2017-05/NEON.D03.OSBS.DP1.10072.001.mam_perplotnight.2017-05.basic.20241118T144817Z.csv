@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f2aef31e-fa1e-417d-8e1f-5be6fd14dcb1","d22eed25-124e-4789-b3aa-99f735c6e73f","OSBS.2017.21","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-05-23","2017-05-23",,,,
+"46a87d78-51d5-405a-a06c-d2e6313185f3","fbd1e921-cb23-40eb-a2e7-19582760f40b","OSBS.2017.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-05-23","2017-05-23",,,,
+"c66d8854-0f49-406a-88b4-1916ac6a7cb5","dbcc9a30-1842-44fd-9fb2-08858c9b11bf","OSBS.2017.21","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","diversity","2017-05-23","2017-05-23",,,,
+"c22c385a-15c5-443c-b809-54689eb152c3","095e15b1-f8a0-4b78-8303-ef1ed16e4bb8","OSBS.2017.21","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-05-23","2017-05-23",,,,
+"7742ba98-3a19-4b50-97a7-ee9037814fd1","3ebee56b-3a13-427a-945c-d0d2e06db6df","OSBS.2017.21","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-05-24","2017-05-24",,,"Did not take samples due to storm",
+"e774c40f-885a-4e21-b2b3-485296624218","77567cd0-3d35-4a48-a919-7c3881326189","OSBS.2017.21","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-05-24","2017-05-24",,,,
+"7f934e0f-933a-417e-b927-c46c26f3423b","2d5faf1c-5f02-41b5-9b86-00a2590a2d4b","OSBS.2017.21","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2017-05-24","2017-05-24",,"NEON.DOC.000481vG","Traps closed quickly due to lightening atom",
+"08be535b-30f8-401d-bc66-77a61d4ef338","4f96c5fa-cb72-44e4-a535-3c74070157ff","OSBS.2017.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-05-24","2017-05-24",,,"Lots of traps filled with dirt from heavy rain",
+"9831750d-a77b-4302-828c-801f756f9722","cb5de495-f41c-4bcf-a01b-8fe6a3cd17cf","OSBS.2017.21","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2017-05-26","2017-05-26",,,,
+"f2c8312f-3feb-4475-a72e-b32ad8f510ac","eeb5940f-f394-4b12-a070-a6e9d5d66618","OSBS.2017.21","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-05-26","2017-05-26",,,,
+"5651ebb2-9b7a-494b-a4bb-f38dda48815c","5e65abd9-48d5-4925-90f3-558a02a3c2fb","OSBS.2017.21","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-05-26","2017-05-26",,,,
+"5e4520ae-a867-45f5-a042-e99a17096f50","a5bcf558-8c44-4bbc-aaf2-eb8e67a6c707","OSBS.2017.21","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-05-26","2017-05-26",,,,

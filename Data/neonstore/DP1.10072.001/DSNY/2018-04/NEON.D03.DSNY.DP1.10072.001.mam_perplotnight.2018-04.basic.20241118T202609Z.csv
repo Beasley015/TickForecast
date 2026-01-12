@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e691f842-0b98-44b1-9897-3e6eebffb796","1d0ae5bb-7005-4628-8264-08b9a165e734","DSNY.2018.16","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2018-04-17","2018-04-17",,"NEON.DOC.000481vK",,
+"65143e13-182d-4ece-812c-41816fb3e039","a46c16e3-cb91-49a4-ab76-5359392d728f","DSNY.2018.16","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2018-04-17","2018-04-17",,"NEON.DOC.000481vK",,
+"e2c0b599-19aa-4d6a-85cf-9408cff3b5a9","69d3beb5-f429-4928-b349-9cfa8ba81942","DSNY.2018.16","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2018-04-17","2018-04-17",,"NEON.DOC.000481vK",,
+"cdda82a1-6a94-4a6a-9905-cc7e2ec51c5e","13d8e974-7444-4628-ac53-aaa9cc16dc94","DSNY.2018.16","DSNY_016.mammalGrid.mam","D03","DSNY","DSNY_016","diversity","2018-04-17","2018-04-17",,"NEON.DOC.000481vK",,
+"9787b511-b9f6-4eec-abc9-847578220220","e23773d3-1f26-4eb1-a36b-76a180c078af","DSNY.2018.16","DSNY_010.mammalGrid.mam","D03","DSNY","DSNY_010","diversity","2018-04-18","2018-04-18",,"NEON.DOC.000481vK",,
+"eed61928-ba3f-4f57-8c14-e21a08f9a7cd","6b00c28e-ad92-4b96-80e5-3e968d2d3759","DSNY.2018.16","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2018-04-18","2018-04-18",,"NEON.DOC.000481vK",,
+"c9177e88-ad47-4300-98a4-a87aee0c1c9a","117f3f36-8fe5-4ef4-bb8f-4ece67107987","DSNY.2018.16","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2018-04-18","2018-04-18",,"NEON.DOC.000481vK",,
+"b8ba4471-87b3-4517-aa15-96db1121d15d","90b7d131-ddea-42ef-9c61-a27dfe262b3e","DSNY.2018.16","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2018-04-18","2018-04-18",,"NEON.DOC.000481vK",,
+"adab395d-000e-420b-ac63-4db4b007f27d","18323b23-1ff6-4fa4-8e8a-c350472479b8","DSNY.2018.16","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,
+"e39c4925-0ce9-4b1d-93f5-27aca6342f10","daec8237-dd4f-47d8-9002-a2db358f647f","DSNY.2018.16","DSNY_006.mammalGrid.mam","D03","DSNY","DSNY_006","diversity","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,
+"717d95c5-8f88-4f80-be57-2fb13936e7e9","d41b01ca-4176-4fe1-b3c0-06e1e4d25d85","DSNY.2018.16","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,
+"25c44ad2-8dd7-4999-9bf8-03e8ef98521f","526f7475-784f-41ec-80b1-510d5bad66f8","DSNY.2018.16","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2018-04-19","2018-04-19",,"NEON.DOC.000481vK",,

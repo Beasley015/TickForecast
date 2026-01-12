@@ -1,0 +1,8 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"146055a6-922a-44a4-8c0b-214cae04c31d","bb455615-5a62-4542-9cb7-f801c2186b3b","BLAN.2018.24","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2018-06-12","2018-06-12",,"NEON.DOC.000481vK",,
+"7a7fbf90-fba7-4221-a672-e7c58ea12d04","e138bb61-2803-408e-bcfd-41cd476b02ba","BLAN.2018.24","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2018-06-12","2018-06-12",,"NEON.DOC.000481vK","Plot flooded 2 weeks prior",
+"d529dbd5-611f-4a98-ab43-3fff5bd9ee22","247dd38e-8490-4aed-86d7-cd44851bd8b2","BLAN.2018.24","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK",,
+"a0c56c27-73ae-463c-a953-8d707633f57e","31aaa84c-26c1-4361-8714-8c9b29059bb4","BLAN.2018.24","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK",,
+"016a1e68-971c-41ec-8154-a767100d3153","ffbdb622-98e6-4a6a-8bf6-a093c1cfc463","BLAN.2018.24","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","diversity","2018-06-13","2018-06-13",,"NEON.DOC.000481vK","Cows haven't been in plot in months; grass 2 to 3ft tall",
+"ee966710-d44f-4e92-b551-651f2b37f6b9","ea5a2d00-0adb-4ce1-bc7c-34346027e356","BLAN.2018.24","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,
+"fd69cfcd-31ad-47c8-a2c6-e9f812013e28","92293121-8a49-4425-812b-94477cb73db6","BLAN.2018.24","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,

@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"135cef22-352f-41d6-8722-5b89795787aa","c4a721bb-4f80-4779-b483-cc55f8867321","ORNL.2020.25","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2020-06-16","2020-06-16","OK","NEON.DOC.000481vM",,
+"23c1ffe7-db8b-4dc0-ab35-b4825ab1c224","4831ce35-69aa-486c-90d7-b65c0698cad8","ORNL.2020.25","ORNL_002.mammalGrid.mam","D07","ORNL","ORNL_002","pathogen","2020-06-16","2020-06-16","OK","NEON.DOC.000481vM",,
+"63d4c2da-3cae-4a5a-8865-063fc0f4e575","60b71631-a920-4094-acfa-1c7ef59054fa","ORNL.2020.25","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2020-06-16","2020-06-16","OK","NEON.DOC.000481vM",,
+"68ef3bf9-939b-41d5-8907-a06a0de067bf","7e1d08b3-792e-4683-b379-1b3a75384758","ORNL.2020.25","ORNL_039.mammalGrid.mam","D07","ORNL","ORNL_039","diversity","2020-06-16","2020-06-16","OK","NEON.DOC.000481vM",,
+"4c599f7c-d211-472c-864e-eea1cae1b9bc","6226dcce-09ab-4ac7-bcba-733a0e6445da","ORNL.2020.25","ORNL_001.mammalGrid.mam","D07","ORNL","ORNL_001","pathogen","2020-06-17","2020-06-17","disturbance","NEON.DOC.000481vM",,
+"6a8a9776-bf9c-4a56-9f94-0b7c47244b28","7c99e79d-bb64-426d-a39f-31cb9fa2ed7a","ORNL.2020.25","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2020-06-17","2020-06-17","OK","NEON.DOC.000481vM",,
+"61caf689-3ab6-40d8-b8dd-d24018a24fb6","22090c80-4a87-428c-b7ee-15fba7716a2d","ORNL.2020.25","ORNL_027.mammalGrid.mam","D07","ORNL","ORNL_027","diversity","2020-06-17","2020-06-17","OK","NEON.DOC.000481vM",,
+"0c96a80c-29ad-440e-8be1-54e2253943c6","e4d9010d-9666-4958-b2e1-645c6c4c929a","ORNL.2020.25","ORNL_007.mammalGrid.mam","D07","ORNL","ORNL_007","diversity","2020-06-17","2020-06-17","OK","NEON.DOC.000481vM",,
+"02a4b072-4c84-4293-8af2-60e862a5a24d","1259d2ba-51fa-42fc-af67-c1d8d9a22885","ORNL.2020.25","ORNL_003.mammalGrid.mam","D07","ORNL","ORNL_003","pathogen","2020-06-18","2020-06-18","OK","NEON.DOC.000481vM",,

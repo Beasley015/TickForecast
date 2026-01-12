@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"481bfc2c-f39d-4c83-bfce-9c0d55d713df","7cf04835-07f9-44c9-931a-d5bf5e483b4c","STEI.2021.30","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2021-08-01","2021-08-01","OK","NEON.DOC.000481vM",,
+"2b4807de-0963-4cf5-bffe-7e7e7ed58e9b","27dc8374-ec8a-4ec3-be76-a12f4bee5d6d","STEI.2021.30","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2021-08-01","2021-08-01","OK","NEON.DOC.000481vM",,
+"ba0f70a5-d081-4fff-a48d-397c730e4b71","91bb0117-36a1-4b25-85c9-766d2b6a26b8","STEI.2021.30","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2021-08-01","2021-08-01","OK","NEON.DOC.000481vM",,
+"511a5bdd-34cc-4b18-998c-c1edd876b3e8","c05f0597-96a9-4738-9e3c-082e83ff3491","STEI.2021.30","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2021-08-02","2021-08-02","OK","NEON.DOC.000481vM",,
+"a84a78f6-4758-4271-bd70-4c96b4615093","a659ef64-a783-4128-9b98-5e095779986f","STEI.2021.30","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2021-08-02","2021-08-02","OK","NEON.DOC.000481vM",,
+"f668f061-b541-4887-8dba-3df8205b8bd9","1037e7e5-9786-463e-82ab-bc4d208347be","STEI.2021.35","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2021-08-30","2021-08-30","OK","NEON.DOC.000481vM",,
+"df69b472-17cb-4cb7-b0e7-b41a09b693db","66aadbb0-92c4-4087-ba36-e5dfaa5eb2f3","STEI.2021.35","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2021-08-30","2021-08-30","OK","NEON.DOC.000481vM",,
+"52f79278-b14a-48bf-977c-192c0dcf8f9c","f61b4d28-0bf1-401f-bdc4-cd5188081148","STEI.2021.35","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"d85f80c1-c739-4efd-9f67-545b572ede7b","ec6a8d32-ca74-40a0-9c30-2ff2e27724b5","STEI.2021.35","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"08cefffc-91bd-41d5-8f24-ca1c0dbe0632","26e6d9ec-4897-4bda-b320-2ee94185097c","STEI.2021.35","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,

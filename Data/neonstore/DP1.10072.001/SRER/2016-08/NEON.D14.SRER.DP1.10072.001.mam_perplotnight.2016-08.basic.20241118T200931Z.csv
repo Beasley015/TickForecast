@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"113af5e5-5198-4f8c-9883-345db4dba5e9","972615BB9C9D42EFB8C92A4B6BCDD6F0","SRER.2016.30","SRER_023.mammalGrid.mam","D14","SRER","SRER_023","diversity","2016-08-01","2016-08-01",,"NEON.DOC.000481vH",,
+"e4f5dc5c-8bd2-4472-95f4-05e37af44951","7FD524BB41C1460394C3B58F53CF90F3","SRER.2016.30","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2016-08-01","2016-08-01",,"NEON.DOC.000481vH",,
+"b00aed1f-09b5-45d3-b23f-5bdb02453f30","BE190458362E444CA8F32C05B5096513","SRER.2016.30","SRER_009.mammalGrid.mam","D14","SRER","SRER_009","diversity","2016-08-01","2016-08-01",,"NEON.DOC.000481vH",,
+"d16418e2-97fc-47bf-924d-547245d841c1","B81A68C6BE5941CE84E0D50FFFBB6D54","SRER.2016.30","SRER_005.mammalGrid.mam","D14","SRER","SRER_005","pathogen","2016-08-02","2016-08-02",,"NEON.DOC.000481vH","Many traps not set due to ants",

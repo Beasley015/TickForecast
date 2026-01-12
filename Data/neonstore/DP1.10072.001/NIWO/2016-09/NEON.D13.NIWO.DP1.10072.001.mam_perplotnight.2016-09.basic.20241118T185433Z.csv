@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"57d961d9-9013-4aba-8291-3c61146406ff","C1C9E946A4944ADC9DAC95EF071416EE","NIWO.2016.35","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,
+"6727003d-e7e3-494c-a6ee-b890c46a6dc4","94CF1485F469440692E267BA284765E2","NIWO.2016.35","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,
+"dbf81d0e-a1ed-4fb9-9808-805622f6b830","C0ABB6726FAA4D2DBC3F9B75FE739FF8","NIWO.2016.35","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,
+"a38f0540-ab27-44e1-a982-6a159a01d6d4","5C13B7D75DF3450DBE1848EE22325EAE","NIWO.2016.35","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2016-09-07","2016-09-07",,"NEON.DOC.000481vH",,
