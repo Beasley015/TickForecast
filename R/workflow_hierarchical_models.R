@@ -189,7 +189,6 @@ for (i in seq_along(mice.seq)) {
 	}
 }
 
-# Shouldn't need historical but will keep for now:
 # historical mna
 mna.hist <- mna_jags("Green Control", return.mean = TRUE)
 
