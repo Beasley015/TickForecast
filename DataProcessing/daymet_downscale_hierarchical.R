@@ -187,34 +187,36 @@ daymet_rh <- function(sites) {
 ## Precipitation ==========================================================================
 
 daymet_precip <- function(site) {
-  if(site %in% c("HNRY", "GREN", "TEA")){
-    cary.precip <- read_csv("./Data/Cary_precipitation.csv") %>%
-      mutate(siteID = site)
+  # Read in Cary sites, if present
+  if(all(c("HNRY", "GREN", "TEA") %in% sites)){
+    precip.cary <- read_csv("./Data/Cary_precipitation.csv",
+                        show_col_types = F) 
+    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(precip.cary))
     
-    return(cary.precip)
-  } else{
-	  neon.precip <- read_csv("./Data/precipDaily.csv")
-	
-	  neon.sub <- neon.precip %>%
-		  filter(siteID == site) %>%
-		  mutate(year = year(Date)) %>%
-		  group_by(year) %>%
-		  summarise(sum.precip = sum(priPrecipTotal)) %>%
-		  pull(sum.precip) %>%
-		  mean()
-
-	  df <- read_csv("./Data/daymetSite_precipitation.csv")
-
-	  df.p <- df %>%
-		  filter(siteID == site)
-	  return(df.p)
+    precip.cary <- bind_rows(precip.cary, precip.cary, precip.cary) %>%
+      mutate(siteID = cary.sites) %>%
+      select(-c(year, yday))
   }
-}
+  
+  # Read in NEON data for some reason?
+	# neon.precip <- read_csv("./Data/precipDaily.csv")
+	# 
+	# neon.sub <- neon.precip %>%
+	#   filter(siteID %in% sites) %>%
+	#   mutate(year = year(Date)) %>%
+	#   group_by(year) %>%
+	#   summarise(sum.precip = sum(priPrecipTotal)) %>%
+	#   pull(sum.precip) %>%
+	#   mean()
 
-# df %>%
-#   filter(siteID == site) %>%
-#   mutate(year = year(Date)) %>%
-#   group_by(year) %>%
-#   summarise(sum.precip = sum(precipitation)) %>%
-#   pull(sum.precip) %>%
-#   mean()
+	# Daymet data
+	df <- read_csv("./Data/daymetSite_precipitation.csv")
+
+	df.p <- df %>%
+	  filter(siteID %in% sites)
+	
+	# Add Cary data
+	df.p <- bind_rows(df.p, precip.cary)
+	  
+	return(df.p)
+}

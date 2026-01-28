@@ -52,7 +52,8 @@ if (is.na(job.num)) {
 	job.num <- 1
 }
 
-species.job <- jobs$species[job.num]
+species.job <- jobs$species[job.num] %>%
+  str_replace(., " ", "_")
 model.job <- jobs$model[job.num]
 
 if(species.job=="Ixodes scapularis"){
@@ -220,15 +221,16 @@ rh <- daymet_rh(sites) %>%
     select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
     suppressMessages()
 
-# RESUME HERE -------------
-precip <- daymet_precip(site.job) %>%
-    select(Date, precipitation) %>%
+precip <- daymet_precip(sites) %>%
+    select(Date, precipitation, siteID) %>%
     suppressMessages()
-  
+ 
+# Combine all met variables
+join1 <- left_join(maxTemp, rh, by = c("Date", "siteID"))
+join2 <- left_join(join1, precip, by = c("Date", "siteID"))
+ 
+# Scale met data based on historical means
 hist.means <- scale_met_forecast()
-  
-join1 <- left_join(maxTemp, rh, by = "Date")
-join2 <- left_join(join1, precip, by = "Date")
   
 df.daymet <- join2 %>%
   mutate(
@@ -242,7 +244,7 @@ df.daymet <- join2 %>%
         hist.means$sds["TOT_PREC"]
   ) %>%
   ungroup() %>%
-  select(Date, contains("Scale")) %>%
+  select(Date, siteID, contains("Scale")) %>%
   filter(Date >= "2016-01-01" & Date < "2022-01-01")
 
 # =========================================== #
@@ -252,6 +254,10 @@ df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
                       show_col_types = F)
 
 params.stats <- df.params %>%
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchical",
+                           model == "WithWeatherAndMiceGlobal" ~
+                             "WeatherMice_hierarchical",
+                           TRUE ~ model)) %>%
 	filter(model == model.job) %>%
 	select(parameter, value) %>%
 	group_by(parameter) %>%
@@ -266,14 +272,18 @@ get_prior <- function(name) {
 	pr
 }
 
+# Get informative priors for model parameters
+# All site priors drawn from dist with the below parameters
 phi.l <- get_prior("phi.l.mu")
 phi.n <- get_prior("phi.n.mu")
 phi.a <- get_prior("phi.a.mu")
 theta.l2n <- get_prior("theta.ln")
 theta.n2a <- get_prior("theta.na")
 repro <- get_prior("repro.mu")
-repro.mu <- repro[1]
+repro.mu <- repro[1] # goes to reproduction portion of transition matrix
 
+# I don't like how covariates are annotated: all are just "beta"
+# Will fix once model comparisons are complete
 n.beta <- params.stats %>%
 	filter(grepl("beta", parameter)) %>%
 	nrow()
@@ -321,15 +331,8 @@ pr.sig <- df.params %>%
 
 # iterate ======================================================================================
 
-# ua.type <- c(
-# 	"ic",
-# 	"ic_parameter",
-# 	"ic_parameter_driver",
-# 	"ic_parameter_driver_process"
-# )
-
+# Make sure start is on the first time step
 t = 1
-# k = 2
 
 for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
@@ -337,40 +340,28 @@ for (t in seq_len(n.drags)) {
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
 	message(mm)
 
-	#for (k in seq_along(ua.type)) {
-		#ua.job <- ua.type[k]
-		#message("Simulating ", ua.job)
+  # flags for if statements
+	miceAndWeather <- model.job == "WeatherMice_hierarchical"
+	use.daymet <- grepl("Weather", model.job)
 
-		# flags
-		miceAndWeather <- model.job == "WithWeatherAndMiceGlobal"
-		miceMNA <- model.job == "WithMNAMice"
-		notStatic <- model.job != "Static"
-		use.daymet <- grepl("Weather", model.job)
-		#ic <- grepl("ic", ua.job)
-		#parameter <- grepl("parameter", ua.job)
-		#driver <- grepl("driver", ua.job)
-		#process <- grepl("process", ua.job)
+	dir.base <- file.path(
+		dir.out,
+		species.job,
+		model.job
+	)
+	
+	dir.save <- file.path(dir.base)
 
-		dir.base <- file.path(
-			dir.out,
-			site.job,
-			model.job,
-			gsub(" ", "", species.job)
-		)
-		dir.save <- file.path(dir.base)#, ua.job)
+	# initialize nimble lists
+	constants <- data <- list()
 
-		# initialize nimble lists
-		constants <- data <- list()
-
-		if (t == 1) {
-			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
-			# n.days <- horizon
-			y <- matrix(NA, 4, horizon)
-		} else {
+	if (t == 1) {
+		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
+		y <- array(NA, dim=c(4, horizon, length(sites)))
+		} else { # EDIT AFTER 1 SUCCESSFUL TIME STEP ---------------------------
 			# read last forecast parameters and state
 			readDest <- file.path(
 				dir.base,
-				# "ic_parameter_driver_process",
 				drag.dates[t - 1]
 			)
 
@@ -432,6 +423,8 @@ for (t in seq_len(n.drags)) {
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 			n.days <- length(fx.sequence)
 		}
+	
+	# RESUME HERE -----------------------
 
 		if (use.daymet) {
 			daymet.sub <- df.daymet %>%
