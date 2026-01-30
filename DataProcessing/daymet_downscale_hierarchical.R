@@ -55,8 +55,11 @@ daymet_temp <- function(sites, minimum) {
 	  df.all <- read.csv("./Data/daymetSite_minTemperature.csv") %>%
 	    select(year, yday, Date, minTemperature, siteID) %>%
 	    filter(siteID %in% sites) %>%
-	    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
-	    bind_rows(df.cary)
+	    mutate(Date = as.Date(Date, format = "%Y-%m-%d"))
+	  
+	  if(exists('df.cary')==T){
+	    df.all <- bind_rows(df.all, df.cary)
+	  }
 		
 		neon.col <- "tempTripleMinimum"
 		daymet.col <- "minTemperature"
@@ -74,8 +77,11 @@ daymet_temp <- function(sites, minimum) {
 	  df.all <- read.csv("./Data/daymetSite_maxTemperature.csv") %>%
 	    select(year, yday, Date, maxTemperature, siteID) %>%
 	    filter(siteID %in% sites) %>%
-	    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
-	    bind_rows(df.cary)
+	    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) 
+	  
+	  if(exists('df.cary')==T){
+	    df.all <- bind_rows(df.all, df.cary)
+	  }
 		
 		neon.col <- "tempTripleMaximum"
 		daymet.col <- "maxTemperature"
@@ -179,7 +185,10 @@ daymet_rh <- function(sites) {
     select(Date, maxRHCorrect, minRHCorrect, siteID)
   
   # Add Cary sites
-  daymet.temp.bias <- bind_rows(daymet.temp.bias, rh.cary)
+  if(exists('rh.cary')==T){
+    daymet.temp.bias <- bind_rows(daymet.temp.bias, rh.cary)
+  }
+  
 	  
   return(daymet.temp.bias)
 }
@@ -216,7 +225,9 @@ daymet_precip <- function(site) {
 	  filter(siteID %in% sites)
 	
 	# Add Cary data
-	df.p <- bind_rows(df.p, precip.cary)
+	if(exists('precip.cary')==T){
+	  df.p <- bind_rows(df.p, precip.cary)
+	}
 	  
 	return(df.p)
 }

@@ -88,6 +88,7 @@ neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
+  filter(siteID %in% sites) %>%
 	filter(time >= "2016-01-01" & time < "2022-01-01") %>%
 	arrange(time)
 
@@ -211,7 +212,7 @@ cgdd <- daymet_cumGDD(sites=sites) %>%
   select(-year) %>%
   suppressMessages()
 
-maxTemp <- daymet_temp(sites, minimum = FALSE) %>%
+maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
   ungroup() %>%
   select(Date, siteID, maxTempCorrect) %>%
   mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
@@ -357,7 +358,6 @@ for (t in seq_len(n.drags)) {
 
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
-		y <- array(NA, dim=c(4, horizon, length(sites)))
 		} else { # EDIT AFTER 1 SUCCESSFUL TIME STEP ---------------------------
 			# read last forecast parameters and state
 			readDest <- file.path(
@@ -423,34 +423,81 @@ for (t in seq_len(n.drags)) {
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 			n.days <- length(fx.sequence)
 		}
+
+	if (use.daymet) {
+		# Filter dates that don't have corresponding drags
+		daymet.sub <- df.daymet %>%
+			filter(Date %in% fx.sequence)
+			
+		# Create day x site matrices for each variable
+		data$maxtemp <- daymet.sub %>% 
+			select(Date, siteID, maxTempScale) %>%
+			pivot_wider(names_from= siteID, values_from = maxTempScale,
+		              values_fill=NA) %>%
+			select(-Date) %>%
+			as.matrix()
+			
+		data$maxrh <- daymet.sub %>%
+		  select(Date, siteID, maxRHScale) %>%
+			pivot_wider(names_from=siteID, values_from=maxRHScale,
+			           values_fill=NA) %>%
+			select(-Date) %>%
+			as.matrix()
+			
+		data$minrh <- daymet.sub %>% 
+      select(Date, siteID, minRHScale) %>%
+	    pivot_wider(names_from=siteID, values_from=minRHScale,
+	                values_fill=NA) %>%
+		  select(-Date) %>%
+		  as.matrix()
+			
+		data$precip <- daymet.sub %>% 
+		  select(Date, siteID, precipScale) %>%
+			pivot_wider(names_from=siteID, values_from=precipScale,
+			            values_fill=NA) %>%
+			select(-Date) %>%
+			as.matrix()
+	}
+    
+	# Get observational data
+	obs <- neon.job %>%
+	  filter(time == fx.start.date)
 	
-	# RESUME HERE -----------------------
+	# Get number of plots per site
+	plots <- neon.data %>%
+	  select(siteID, plotID) %>%
+	  filter(siteID %in% sites) %>%
+	  distinct() 
+	
+	# ID and number of plots
+	plot.names <- unique(plots$plotID)
+	n.plots <- plots %>%
+	  group_by(siteID) %>%
+	  summarise(nplot=n()) %>%
+	  pull(nplot)
 
-		if (use.daymet) {
-			daymet.sub <- df.daymet %>%
-				filter(Date %in% fx.sequence)
-			data$maxtemp <- daymet.sub %>% pull(maxTempScale) %>% as.vector()
-			data$maxrh <- daymet.sub %>% pull(maxRHScale) %>% as.vector()
-			data$minrh <- daymet.sub %>% pull(minRHScale) %>% as.vector()
-			data$precip <- daymet.sub %>% pull(precipScale) %>% as.vector()
-		}
+	# Set up observation matrices
+	y <- array(NA, dim = c(4, horizon, max(n.plots), length(sites)))
+	area <- array(NA, dim = c(horizon, max(n.plots), length(sites)))
+	
+	for(site in 1:length(sites)){
+	  obs.site <- obs %>%
+	    filter(siteID == sites[site])
+	  print(site)
+	  if(nrow(obs.site) != 0){  
+		  for (p in 1:n.plots[site]) {
+			  obs.plot <- obs.site %>% 
+			    filter(plotID == obs.site$plotID[p])
+			
+			  y[1, 1, p, site] <- obs.plot %>% pull(Larva)
+			  y[3, 1, p, site] <- obs.plot %>% pull(Nymph)
+			  y[4, 1, p, site] <- obs.plot %>% pull(Adult)
+			  area[1, p, site] <- obs.plot %>% pull(totalSampledArea)
+		  }
+	  }
+	}
 
-		obs <- neon.job %>%
-			filter(time == fx.start.date)
-
-		plots <- unique(obs$plotID)
-		n.plots <- length(plots)
-
-		y <- array(NA, dim = c(4, horizon, n.plots))
-		area <- matrix(NA, horizon, n.plots)
-		for (p in 1:n.plots) {
-			obs.plot <- obs %>% filter(plotID == plots[p])
-			y[1, 1, p] <- obs.plot %>% pull(Larva)
-			y[3, 1, p] <- obs.plot %>% pull(Nymph)
-			y[4, 1, p] <- obs.plot %>% pull(Adult)
-			area[1, p] <- obs.plot %>% pull(totalSampledArea)
-		}
-
+	# RESUME HERE ---------------------
 		if (model.job == "Static") {
 			n.beta <- 2
 			pr.beta <- matrix(1, n.beta, 2)

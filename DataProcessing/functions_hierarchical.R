@@ -29,7 +29,7 @@ neon_tick_data <- function(species) {
 			mutate(lifeStage = "Larva")
 
 		df.na <- sub.df |>
-			filter(lifeStage != "Larva") |>
+			filter(lifeStage %in% c("Nymph", "Adult")) |>
 			select(time, processedCount, totalSampledArea, lifeStage) |>
 			distinct()
 
@@ -45,6 +45,7 @@ neon_tick_data <- function(species) {
 				count.flag = nrow(df.l) * 2 == nrow(df.na)
 			)
 	}
+	species <- str_replace(species, "_", " ")
 
 	df <- read.csv(
 		"./Data/tickTargets.csv"
