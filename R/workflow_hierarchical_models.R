@@ -464,15 +464,17 @@ for (t in seq_len(n.drags)) {
 	  filter(time == fx.start.date)
 	
 	# Get number of plots per site
-	plots <- neon.data %>%
+	plots <- neon.job %>%
 	  select(siteID, plotID) %>%
 	  filter(siteID %in% sites) %>%
 	  distinct() 
 	
 	# ID and number of plots
 	plot.names <- unique(plots$plotID)
-	n.plots <- plots %>%
+	
+  n.plots <- plots %>%
 	  group_by(siteID) %>%
+	  distinct() %>%
 	  summarise(nplot=n()) %>%
 	  pull(nplot)
 
@@ -481,210 +483,139 @@ for (t in seq_len(n.drags)) {
 	area <- array(NA, dim = c(horizon, max(n.plots), length(sites)))
 	
 	for(site in 1:length(sites)){
+	  # Filter observations from site
 	  obs.site <- obs %>%
 	    filter(siteID == sites[site])
-	  print(site)
+
 	  if(nrow(obs.site) != 0){  
-		  for (p in 1:n.plots[site]) {
+	    # Get all possible plots
+	    plt.t <- plots %>%
+	      filter(siteID == sites[site])
+	    
+		  for (p in 1:length(plt.t$plotID)) {
 			  obs.plot <- obs.site %>% 
-			    filter(plotID == obs.site$plotID[p])
+			    filter(plotID == plt.t$plotID[p])
 			
-			  y[1, 1, p, site] <- obs.plot %>% pull(Larva)
-			  y[3, 1, p, site] <- obs.plot %>% pull(Nymph)
-			  y[4, 1, p, site] <- obs.plot %>% pull(Adult)
-			  area[1, p, site] <- obs.plot %>% pull(totalSampledArea)
+			  if(nrow(obs.plot != 0)){
+			    y[1, 1, p, site] <- obs.plot %>% pull(Larva)
+			    y[3, 1, p, site] <- obs.plot %>% pull(Nymph)
+			    y[4, 1, p, site] <- obs.plot %>% pull(Adult)
+			    area[1, p, site] <- obs.plot %>% pull(totalSampledArea)
+			  }
 		  }
 	  }
 	}
 
-	# RESUME HERE ---------------------
-		if (model.job == "Static") {
-			n.beta <- 2
-			pr.beta <- matrix(1, n.beta, 2)
-		}
+	# finalize data
+	data$y <- y
+	data$area <- area
+	data$IC <- IC
+	data$pr.phi.l <- phi.l
+	data$pr.phi.n <- phi.n
+	data$pr.phi.a <- phi.a
+	data$pr.theta.l2n <- theta.l2n
+	data$pr.theta.n2a <- theta.n2a
+	data$repro.mu <- repro.mu
+	data$pr.beta <- pr.beta
+	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
+	
+	# Cumulative degree days
+	data$cgdd <- cgdd %>%
+	  filter(Date %in% ymd(fx.sequence)) %>%
+	  pivot_wider(names_from=siteID, values_from=cumGDD) %>%
+	  select(-Date)
+	
+	data$max.cgdd <- cgdd %>%
+	  filter(Date %in% ymd(fx.sequence)) %>%
+	  group_by(siteID) %>%
+	  summarise(max.cgdd = max(cumGDD)*1.2) %>%
+	  pull(max.cgdd)
+	
+	data$xind <- matrix(1, 4, horizon)
 
-		# finalize data
-		data$y <- y
-		data$area <- area
-		data$IC <- IC
-		data$pr.phi.l <- phi.l
-		data$pr.phi.n <- phi.n
-		data$pr.phi.a <- phi.a
-		data$pr.theta.l2n <- theta.l2n
-		data$pr.theta.n2a <- theta.n2a
-		# data$pr.repro <- repro
-		data$repro.mu <- repro.mu
-		data$pr.beta <- pr.beta
-		data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
-		data$cgdd <- cgdd %>%
-			filter(Date %in% ymd(fx.sequence)) %>%
-			pull(cumGDD)
-		data$max.cgdd <- max(data$cgdd) * 1.2
-		data$xind <- matrix(1, 4, horizon)
+	if (miceAndWeather){
+	  data$mice <- mna.scaled %>%
+	    filter(Date %in% fx.sequence) %>%
+	    pivot_wider(names_from=siteID, values_from=mna_scaled)
 
-		if (miceAndWeather || miceMNA) {
-			data$mice <- mna.scaled %>%
-				filter(Date %in% fx.sequence) %>%
-				pull(mna.scaled)
+	  if (nrow(data$mice) < length(fx.sequence)) {
+	    horizon <- min(length(data$cgdd), hrow(data$mice))
+	    data$y <- y[, 1:horizon, ,]
+	  }
+	}
 
-			if (length(data$mice) < length(fx.sequence)) {
-				horizon <- min(length(data$cgdd), length(data$mice))
-				data$y <- y[, 1:horizon, ]
-			}
-		}
+	if (year(fx.start.date) == max(year(neon.job$time))) {
+	  if (model.job == "Weather_hierarchical") {
+	    # Make sure horizon does not go past empirical data
+	    horizon <- nrow(data$cgdd)
+	    data$y <- as.array(y[, 1:horizon, ,])
+	    
+	    # Fix error arising from single-site models, may remove
+	    # if(is.na(dim(data$y)[3]==T)){
+	    #   dim(data$y)[3] <- 1
+	    # }
+	    
+	    } else {
+	      horizon <- min(nrow(data$cgdd), nrow(data$mice))
+				data$y <- y[, 1:horizon, ,]
+	    }
+	}
 
-		if (year(fx.start.date) == max(year(neon.job$time))) {
-			if (model.job == "Static" || model.job == "Weather") {
-				horizon <- length(data$cgdd)
-				data$y <- as.array(y[, 1:horizon, ])
-				if(is.na(dim(data$y)[3]==T)){
-				  dim(data$y)[3] <- 1
-				  }
-				} else {
-				horizon <- min(length(data$cgdd), length(data$mice))
-				data$y <- y[, 1:horizon, ]
-				}
-		}
+	# finalize constants
+	constants$n.beta <- n.beta
+	constants$n.plots <- n.plots
+	constants$horizon <- horizon
+	constants$ns <- 4
 
-		# finalize constants
-		constants$n.beta <- n.beta
-		constants$n.plots <- n.plots
-		constants$horizon <- horizon
-		constants$ns <- 4
-
-		area.init <- area
-		nai <- which(is.na(area))
-		area.init[nai] <- 160
-		area.init[-nai] <- NA
-
-		# build inits
-		# if (ua.job == "ic_parameter_driver_process") {
-		# 	inits <- function() {
-		# 		list(
-		# 			area = area.init,
-		# 			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-		# 			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-		# 			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-		# 			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-		# 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-		# 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-		# 			sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
-		# 			x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-		# 			Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y)),
-		# 			tau.temp = rexp(1),
-		# 			tau.maxrh = rexp(1),
-		# 			tau.minrh = rexp(1),
-		# 			tau.precip = rexp(1),
-		# 			tau.cgdd = rexp(1),
-		# 			x1 = jitter(data$maxtemp),
-		# 			x2 = jitter(data$maxrh),
-		# 			x3 = jitter(data$minrh),
-		# 			x4 = jitter(data$precip),
-		# 			gdd = jitter(data$cgdd)
-		# 		)
-		# 	}
-		# } else if (ua.job == "ic_parameter_driver") {
-		# 	inits <- function() {
-		# 		x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
-		# 		list(
-		# 			area = area.init,
-		# 			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-		# 			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-		# 			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-		# 			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-		# 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-		# 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-		# 			x = x.init,
-		# 			Ex = x.init,
-		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y)),
-		# 			tau.temp = rexp(1),
-		# 			tau.maxrh = rexp(1),
-		# 			tau.minrh = rexp(1),
-		# 			tau.precip = rexp(1),
-		# 			tau.cgdd = rexp(1),
-		# 			x1 = jitter(data$maxtemp),
-		# 			x2 = jitter(data$maxrh),
-		# 			x3 = jitter(data$minrh),
-		# 			x4 = jitter(data$precip),
-		# 			gdd = jitter(data$cgdd)
-		# 		)
-		# 	}
-		# } else if (ua.job == "ic_parameter") {
-		# 	inits <- function() {
-		# 		x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
-		# 		list(
-		# 			area = area.init,
-		# 			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-		# 			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-		# 			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-		# 			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-		# 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-		# 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-		# 			x = x.init,
-		# 			Ex = x.init,
-		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y))
-		# 		)
-		# 	}
-		# } else if (ua.job == "ic") {
-		# 	inits <- function() {
-		# 		x.init <- matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon)
-		# 		list(
-		# 			area = area.init,
-		# 			x = x.init,
-		# 			Ex = x.init,
-		# 			y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y))
-		# 		)
-		# 	}
-		# }
+	# Initialize area
+	area.init <- area
+	nai <- which(is.na(area))	
+	area.init[nai] <- 160
+	area.init[-nai] <- NA
 		
-			inits <- function() {
-				list(
-					area = area.init,
-					phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-					phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-					phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-					theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-					theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-					beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-					sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
-					x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-					Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-					y = array(rpois(4 * horizon * n.plots, 5), dim = dim(data$y)),
-					tau.temp = rexp(1),
-					tau.maxrh = rexp(1),
-					tau.minrh = rexp(1),
-					tau.precip = rexp(1),
-					tau.cgdd = rexp(1),
-					x1 = jitter(data$maxtemp),
-					x2 = jitter(data$maxrh),
-					x3 = jitter(data$minrh),
-					x4 = jitter(data$precip),
-					gdd = jitter(data$cgdd)
-				)
-			}
+	# Initial values to send to nimble
+	inits <- function() {
+	  list(
+	    area = area.init,
+			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
+			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
+			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
+			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
+			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
+			sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
+			x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+			Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+			y = array(rpois(4 * horizon * n.plots * length(sites), 5), 
+			          dim = dim(data$y)),
+			tau.temp = rexp(1),
+			tau.maxrh = rexp(1),
+			tau.minrh = rexp(1),
+			tau.precip = rexp(1),
+			tau.cgdd = rexp(1),
+			x1 = jitter(data$maxtemp),
+			x2 = jitter(data$maxrh),
+			x3 = jitter(data$minrh),
+			x4 = jitter(data$precip),
+			gdd = jitter(data$cgdd)
+		)
+	}
 
-		source("./R/nimble_forecast.R")
-		source("./R/run_transfer_nimble.R")
-		cl <- makeCluster(n.slots) 
-		
-		# Check this function- comment out if/else statements 
-		# related to uncertainty analysis
-		out.nchains <- run_transfer_nimble(
-			cl = cl,
-			model = model.code,
-			data = data,
-			constants = constants,
-			inits = inits,
-			n.iter = n.iter,
-			notStatic = notStatic,
-			# ic = ic,
-			# parameter = parameter,
-			# driver = driver,
-			# process = process,
-			miceMNA = miceMNA,
-			miceAndWeather = miceAndWeather,
-			use.daymet = use.daymet
+	source("./R/nimble_forecast_hierarchical.R")
+	source("./R/run_transfer_nimble_hierarchical.R")
+	cl <- makeCluster(n.slots) 
+	
+	# Run the model	
+	# FIX ERROR HERE ------------------
+	out.nchains <- run_transfer_nimble(
+		cl = cl,
+		model = model.code,
+		data = data,
+		constants = constants,
+		inits = inits,
+		n.iter = n.iter,
+		miceAndWeather = miceAndWeather,
+		use.daymet = use.daymet
 		)
 		stopCluster(cl)
 

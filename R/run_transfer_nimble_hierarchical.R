@@ -5,8 +5,6 @@ run_transfer_nimble <- function(
 	constants,
 	inits,
 	n.iter,
-	notStatic, # What is notStatic? -------------
-	miceMNA,
 	miceAndWeather,
 	use.daymet
 ) {
@@ -14,7 +12,7 @@ run_transfer_nimble <- function(
 	library(nimble)
 	library(coda)
 
-	source("./DataProcessing/functions.R")
+	source("./DataProcessing/functions_hierarchical.R")
 
 	n.cores <- length(cl) # number of cores used
 
@@ -24,9 +22,7 @@ run_transfer_nimble <- function(
 		"data",
 		"n.iter",
 		"if_else_nimble",
-		"notStatic", # Might remove this depending on what it is
 		"miceAndWeather",
-		"miceMNA",
 		"use.daymet"
 	)
 
