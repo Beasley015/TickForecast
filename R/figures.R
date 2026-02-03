@@ -1,3 +1,11 @@
+######################################################
+# Figure creation for tick forecasting at NEON sites #
+# original script by J. Foster                       #
+# Update by E.M. Beasley                             #
+# Fall 2025                                          #
+######################################################
+
+# Load packages ------------------
 library(tidyverse)
 library(lubridate)
 library(nimble)
@@ -7,7 +15,7 @@ library(ggpubr)
 library(MetBrewer)
 library(NatParksPalettes)
 
-# Create function for saving plots
+# Create function for saving plots------------
 save_gg <- function(dest, gg, path) {
 	if (!dir.exists(path)) {
 		dir.create(path, showWarnings = FALSE, recursive = TRUE)
@@ -61,88 +69,107 @@ df.null <- null.quants %>%
 	rename(lower95 = ymin, upper95 = ymax, variance = var, median = fx) %>%
 	select(-n.days, -n.drags, -count.flag, -site)
 
-# dir.analysis <- "/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraintForestUpdate/"
-# all.days <- list.files(dir.analysis, recursive = TRUE)
-# all.days <- grep("allDaysQuants.csv", all.days, value = TRUE)
-# all.days.proc <- read_csv(file.path(dir.analysis, all.days))
 
-# dir.analysis <- "/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraintControl"
-# all.days <- list.files(dir.analysis, recursive = TRUE)
-# all.days <- grep("allDaysQuants.csv", all.days, value = TRUE)
-# all.days.cont <- read_csv(file.path(dir.analysis, all.days))
-#
-# all.days.df <- bind_rows(
-#   all.days.cont %>% mutate(parameters = "Constant"),
-#   all.days.proc %>% mutate(parameters = "Updated")
-# )
+# Retrieve process model outputs --------------------
+dir.out <- "./out/"
+dir.analysis <- "./analysis/"
 
-all.days.df <- all.days.proc
+# File names for quant scores
+out.files <- list.files(dir.out, recursive = TRUE)
+quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
 
-# source("Functions/neon_tick_data.R")
-# neon.ix <- neon_tick_data("Ixodes scapularis") %>% suppressMessages()
-# neon.aa <- neon_tick_data("Amblyomma americanum") %>% suppressMessages()
-#
-# data <- bind_rows(neon.ix, neon.aa) %>%
-#   filter(time >= "2018-01-01") %>%
-#   select(-n.drags, -n.days, -count.flag) %>%
-#   pivot_longer(cols = c(Larva, Nymph, Adult),
-#                names_to = "lifeStage",
-#                values_to = "observed") %>%
-#   mutate(density = observed / totalSampledArea)
+models <- c("Weather", "WithWeatherAndMiceGlobal")
+species <- c("Ixodesscapularis", "Amblyommaamericanum") 
+neon.sites <- c(
+  "BLAN",
+  "HARV",
+  "KONZ",
+  "LENO",
+  "OSBS",
+  "SCBI",
+  "SERC",
+  "TALL",
+  "TREE",
+  "UKFS"
+)
 
-find_ua <- function(x) {
-	if (grepl("ic", x)) {
-		ua <- "IC"
-	}
-	if (grepl("ic_parameter", x)) {
-		ua <- "+ Parameter"
-	}
-	if (grepl("ic_parameter_driver", x)) {
-		ua <- "+ Driver"
-	}
-	if (grepl("ic_parameter_driver_process", x)) {
-		ua <- "+ Process"
-	}
-	ua
+cary.sites <- c(
+  "GREN",
+  "HNRY",
+  "TEA"
+) 
+
+# Create all possible combos
+jobs <- expand_grid(
+  model = models,
+  species = species,
+  site = c(neon.sites, cary.sites)
+)
+
+# Not all sites have both tick species
+jobs <- jobs %>%
+  filter(
+    !(site == "HARV" & species == "Amblyommaamericanum"),
+    !(site == "TREE" & species == "Amblyommaamericanum"),
+    !(site == "KONZ" & species == "Ixodesscapularis"),
+    !(site == "OSBS" & species == "Ixodesscapularis"),
+    !(site == "TALL" & species == "Ixodesscapularis"),
+    !(site == "UKFS" & species == "Ixodesscapularis"),
+    !(site == "GREN" & species == "Amblyommaamericanum"),,
+    !(site == "HNRY" & species == "Amblyommaamericanum"),,
+    !(site == "TEA" & species == "Amblyommaamericanum"),
+  )
+
+#Fix this; hitting memory error
+for(j in 1:nrow(jobs)){
+  # Get subset of jobs
+  strings <- c(as.character(jobs[j,2]), as.character(jobs[j,3]))
+  string.check <- sapply(quantScore, str_detect, strings)
+  quant.files <- quantScore[which(colSums(string.check)==2)]
+  
+  # empty tibble
+  df.process <- tibble()
+  
+  for(i in seq_along(quant.files)){
+      dfi <- read_csv(file.path(dir.out, quant.files[i])) %>%
+        mutate(start.date = str_extract(quant.files[i], "\\d{4}-\\d{2}-\\d{2}")) %>%
+        filter(lifeStage=="Nymph") %>%
+        dplyr::select(-c(nlcd, percentBias, rmse, bayesP)) %>%
+        suppressMessages()
+      
+      df.process <- bind_rows(df.process, dfi)
+      if(i %% 10 == 0) message(i, " of ", length(quant.files), " complete ", round(i/length(quant.files)*100), "%")
+  }
+  
+  df.process <- df.process %>%
+    mutate(mice = if_else(grepl("Mice", jobs$model[j]), "Mice", "No mice"),
+           weather = if_else(grepl("Weather", jobs$model[j]), "Weather", "No weather")) 
+  
+  write_csv(df.process, file=paste(dir.analysis, as.character(jobs[j,3]), as.character(jobs[j,2]), sep = ""))
+  
+  print(paste("Job = ", j))
 }
 
-# out.files <- list.files(dir.out, recursive = TRUE)
-# quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
-# length(quantScore)
-# df.process <- tibble()
-# for(i in seq_along(quantScore)){
-#     u <- find_ua(quantScore[i])
-#     dfi <- read_csv(file.path(dir.out, quantScore[i])) %>%
-#     mutate(start.date = str_extract(quantScore[i], "\\d{4}-\\d{2}-\\d{2}"),
-#            ua = u) %>%
-#     suppressMessages()
-#   df.process <- bind_rows(df.process, dfi)
-#   if(i %% 500 == 0) message(i, " of ", length(quantScore), " complete ", round(i/length(quantScore)*100), "%")
-# }
-#
-# df.mutate <- df.process %>%
-#   mutate(mice = if_else(grepl("Mice", model), "Mice", "No mice"),
-#          weather = if_else(grepl("Weather", model), "Weather", "No weather"))
-#
-# unique(df.mutate$model)
-# write_csv(df.mutate, file = file.path(dir.analysis, "allFXQuants.csv"))
-df.mutate <- read_csv(file = file.path(dir.analysis, "allFXQuants.csv"))
+# Raw NEON data ----------------
+source("./DataProcessing/functions.R")
+neon.ix <- neon_tick_data("Ixodes scapularis") %>% suppressMessages()
+neon.aa <- neon_tick_data("Amblyomma americanum") %>% suppressMessages()
 
-# df.control <- read_csv("/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraintControl/allFXQuants.csv")
-# df.process <- read_csv("/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraint/allFXQuants.csv")
-#
-# df.mutate <- bind_rows(
-#   df.control %>% mutate(parameters = "Constant"),
-#   df.process %>% mutate(parameters = "Updated")
-# )
-
-ls.vec <- c("Larva", "Nymph", "Adult")
-site.vec <- unique(df.mutate$siteID)
+data <- bind_rows(neon.ix, neon.aa) %>%
+  filter(time >= "2018-01-01") %>%
+  select(-n.drags, -n.days, -count.flag) %>%
+  pivot_longer(cols = c(Larva, Nymph, Adult),
+               names_to = "lifeStage",
+               values_to = "observed") %>%
+  mutate(density = observed / totalSampledArea)
 
 site.info <- neonstore::neon_sites()
 df.site <- site.info %>% filter(siteCode %in% site.vec)
 
-# time series figures -------------------------------------------------------------------
+# time series figures RESUME HERE-------------------------------------------------------------------
+# ls.vec <- c("Larva", "Nymph", "Adult")
+# site.vec <- unique(df.mutate$siteID)
+
 data.density <- df.mutate %>%
 	select(
 		time,

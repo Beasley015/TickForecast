@@ -118,6 +118,7 @@ for (job.num in 1:nrow(jobs)) {
 
 	drag.dates <- neon.job |>
 		filter(time >= "2018-01-01" & time <= "2022-01-01") |> 
+	  mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
 		pull(time) |>
 		unique()
 
@@ -136,14 +137,16 @@ for (job.num in 1:nrow(jobs)) {
 			fx.larvae,
 			fx.nymphs,
 			fx.adults
-		)
+		) %>%
+		  mutate(time = as.Date(time, format = "%Y-%m-%d"))
 
 		tick.obs <- neon.job |>
-			filter(time %in% fx.date)
+			filter(time %in% fx.date) %>%
+		  mutate(time = as.Date(time, format = "%Y-%m-%d"))
 
 		quants.with.data <- left_join(
 			df.quants,
-			neon.job,
+			tick.obs,
 			by = c("time", "lifeStage")
 		)
 
