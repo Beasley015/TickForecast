@@ -324,6 +324,10 @@ inv_gamma_mm <- function(x) {
 
 # get invgamma parameters
 pr.sig <- df.params %>%
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchical",
+                           model == "WithWeatherAndMiceGlobal" ~
+                             "WeatherMice_hierarchical",
+                           TRUE ~ model)) %>%
 	filter(model == model.job, grepl("sig", parameter)) %>%
 	select(parameter, value) %>%
 	group_by(parameter) %>%
@@ -531,7 +535,7 @@ for (t in seq_len(n.drags)) {
 	  summarise(max.cgdd = max(cumGDD)*1.2) %>%
 	  pull(max.cgdd)
 	
-	data$xind <- matrix(1, 4, horizon)
+	data$xind <- array(1, dim=c(4, horizon, length(sites)))
 
 	if (miceAndWeather){
 	  data$mice <- mna.scaled %>%
@@ -563,6 +567,7 @@ for (t in seq_len(n.drags)) {
 
 	# finalize constants
 	constants$n.beta <- n.beta
+	constants$nsite <- length(sites)
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
@@ -584,20 +589,22 @@ for (t in seq_len(n.drags)) {
 			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
 			sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
-			x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-			Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+			x = array(rpois(4 * horizon * length(sites), 2) / 160 * 450, 
+			          dim=c(4, horizon, length(sites))),
+			Ex = array(rpois(4 * horizon * length(sites), 2) / 160 * 450,
+			           dim=c(4, horizon, length(sites))),
 			y = array(rpois(4 * horizon * n.plots * length(sites), 5), 
 			          dim = dim(data$y)),
-			tau.temp = rexp(1),
-			tau.maxrh = rexp(1),
-			tau.minrh = rexp(1),
-			tau.precip = rexp(1),
-			tau.cgdd = rexp(1),
+			tau.temp = rexp(length(sites)),
+			tau.maxrh = rexp(length(sites)),
+			tau.minrh = rexp(length(sites)),
+			tau.precip = rexp(length(sites)),
+			tau.cgdd = rexp(length(sites)),
 			x1 = jitter(data$maxtemp),
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
 			x4 = jitter(data$precip),
-			gdd = jitter(data$cgdd)
+			gdd = jitter(as.matrix(data$cgdd))
 		)
 	}
 
@@ -606,7 +613,7 @@ for (t in seq_len(n.drags)) {
 	cl <- makeCluster(n.slots) 
 	
 	# Run the model	
-	# FIX ERROR HERE ------------------
+	# FIX ERRORS HERE ------------------
 	out.nchains <- run_transfer_nimble(
 		cl = cl,
 		model = model.code,
@@ -617,7 +624,8 @@ for (t in seq_len(n.drags)) {
 		miceAndWeather = miceAndWeather,
 		use.daymet = use.daymet
 		)
-		stopCluster(cl)
+	
+	stopCluster(cl)
 
 		# nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
 		# model <- nimbleModel(model.code,

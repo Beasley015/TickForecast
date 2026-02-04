@@ -42,7 +42,7 @@ run_transfer_nimble <- function(
 		library(coda)
 
 		nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
-
+		
 		model <- nimbleModel(
 			model,
 			constants = constants,
