@@ -15,6 +15,9 @@ library(ggpubr)
 library(MetBrewer)
 library(NatParksPalettes)
 
+dir.out <- "./out/"
+dir.analysis <- "./analysis/"
+
 # Create function for saving plots------------
 save_gg <- function(dest, gg, path) {
 	if (!dir.exists(path)) {
@@ -70,92 +73,93 @@ df.null <- null.quants %>%
 	select(-n.days, -n.drags, -count.flag, -site)
 
 
-# Retrieve process model outputs --------------------
-dir.out <- "./out/"
-dir.analysis <- "./analysis/"
+# Process model outputs -------------------
 
-# File names for quant scores
-out.files <- list.files(dir.out, recursive = TRUE)
-quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
-
-models <- c("Weather", "WithWeatherAndMiceGlobal")
-species <- c("Ixodesscapularis", "Amblyommaamericanum") 
-neon.sites <- c(
-  "BLAN",
-  "HARV",
-  "KONZ",
-  "LENO",
-  "OSBS",
-  "SCBI",
-  "SERC",
-  "TALL",
-  "TREE",
-  "UKFS"
-)
-
-cary.sites <- c(
-  "GREN",
-  "HNRY",
-  "TEA"
-) 
-
-# Create all possible combos
-jobs <- expand_grid(
-  model = models,
-  species = species,
-  site = c(neon.sites, cary.sites)
-)
-
-# Not all sites have both tick species
-jobs <- jobs %>%
-  filter(
-    !(site == "HARV" & species == "Amblyommaamericanum"),
-    !(site == "TREE" & species == "Amblyommaamericanum"),
-    !(site == "KONZ" & species == "Ixodesscapularis"),
-    !(site == "OSBS" & species == "Ixodesscapularis"),
-    !(site == "TALL" & species == "Ixodesscapularis"),
-    !(site == "UKFS" & species == "Ixodesscapularis"),
-    !(site == "GREN" & species == "Amblyommaamericanum"),,
-    !(site == "HNRY" & species == "Amblyommaamericanum"),,
-    !(site == "TEA" & species == "Amblyommaamericanum"),
-  )
-
-#Fix this; hitting memory error
-for(j in 1:nrow(jobs)){
-  # Get subset of jobs
-  strings <- c(as.character(jobs[j,2]), as.character(jobs[j,3]))
-  string.check <- sapply(quantScore, str_detect, strings)
-  quant.files <- quantScore[which(colSums(string.check)==2)]
-  
-  # empty tibble
-  df.process <- tibble()
-  
-  for(i in seq_along(quant.files)){
-      dfi <- read_csv(file.path(dir.out, quant.files[i])) %>%
-        mutate(start.date = str_extract(quant.files[i], "\\d{4}-\\d{2}-\\d{2}")) %>%
-        filter(lifeStage=="Nymph") %>%
-        dplyr::select(-c(nlcd, percentBias, rmse, bayesP)) %>%
-        suppressMessages()
-      
-      df.process <- bind_rows(df.process, dfi)
-      if(i %% 10 == 0) message(i, " of ", length(quant.files), " complete ", round(i/length(quant.files)*100), "%")
-  }
-  
-  df.process <- df.process %>%
-    mutate(mice = if_else(grepl("Mice", jobs$model[j]), "Mice", "No mice"),
-           weather = if_else(grepl("Weather", jobs$model[j]), "Weather", "No weather")) 
-  
-  write_csv(df.process, file=paste(dir.analysis, as.character(jobs[j,3]), as.character(jobs[j,2]), sep = ""))
-  
-  print(paste("Job = ", j))
-}
+# # File names for quant scores
+# out.files <- list.files(dir.out, recursive = TRUE)
+# quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
+# 
+# models <- c("Weather", "WithWeatherAndMiceGlobal")
+# species <- c("Ixodesscapularis", "Amblyommaamericanum") 
+# neon.sites <- c(
+#   "BLAN",
+#   "HARV",
+#   "KONZ",
+#   "LENO",
+#   "OSBS",
+#   "SCBI",
+#   "SERC",
+#   "TALL",
+#   "TREE",
+#   "UKFS"
+# )
+# 
+# cary.sites <- c(
+#   "GREN",
+#   "HNRY",
+#   "TEA"
+# ) 
+# 
+# # Create all possible combos
+# jobs <- expand_grid(
+#   model = models,
+#   species = species,
+#   site = c(neon.sites, cary.sites)
+# )
+# 
+# # Not all sites have both tick species
+# jobs <- jobs %>%
+#   filter(
+#     !(site == "HARV" & species == "Amblyommaamericanum"),
+#     !(site == "TREE" & species == "Amblyommaamericanum"),
+#     !(site == "KONZ" & species == "Ixodesscapularis"),
+#     !(site == "OSBS" & species == "Ixodesscapularis"),
+#     !(site == "TALL" & species == "Ixodesscapularis"),
+#     !(site == "UKFS" & species == "Ixodesscapularis"),
+#     !(site == "GREN" & species == "Amblyommaamericanum"),,
+#     !(site == "HNRY" & species == "Amblyommaamericanum"),,
+#     !(site == "TEA" & species == "Amblyommaamericanum"),
+#   )
+# 
+# # Process outputs
+# for(j in 1:nrow(jobs)){
+#   # Get subset of jobs
+#   strings <- c(as.character(jobs[j,1]),as.character(jobs[j,2]), as.character(jobs[j,3]))
+#   string.check <- sapply(quantScore, str_detect, strings)
+#   quant.files <- quantScore[which(colSums(string.check)==3)]
+#   
+#   # empty tibble
+#   df.process <- tibble()
+#   
+#   for(i in seq_along(quant.files)){
+#       dfi <- read_csv(file.path(dir.out, quant.files[i])) %>%
+#         mutate(start.date = str_extract(quant.files[i], "\\d{4}-\\d{2}-\\d{2}")) %>%
+#         filter(lifeStage=="Nymph") %>%
+#         dplyr::select(-c(nlcd, percentBias, rmse, bayesP)) %>%
+#         suppressMessages()
+#       
+#       df.process <- bind_rows(df.process, dfi)
+#       if(i %% 10 == 0) message(i, " of ", length(quant.files), " complete ", round(i/length(quant.files)*100), "%")
+#   }
+#   
+#   df.process <- df.process %>%
+#     mutate(mice = if_else(grepl("Mice", jobs$model[j]), "Mice", "No mice"),
+#            weather = if_else(grepl("Weather", jobs$model[j]), "Weather", "No weather")) 
+#   
+#   write_csv(df.process, file=paste(dir.analysis, as.character(jobs[j,3]), as.character(jobs[j,2]),
+#                                    as.character(jobs[j,1]), sep = ""))
+#   
+#   print(paste("Job = ", j))
+#   
+#   rm(df.process)
+# }
 
 # Raw NEON data ----------------
 source("./DataProcessing/functions.R")
 neon.ix <- neon_tick_data("Ixodes scapularis") %>% suppressMessages()
 neon.aa <- neon_tick_data("Amblyomma americanum") %>% suppressMessages()
 
-data <- bind_rows(neon.ix, neon.aa) %>%
+neon.data <- bind_rows(neon.ix, neon.aa) %>%
   filter(time >= "2018-01-01") %>%
   select(-n.drags, -n.days, -count.flag) %>%
   pivot_longer(cols = c(Larva, Nymph, Adult),
@@ -164,12 +168,13 @@ data <- bind_rows(neon.ix, neon.aa) %>%
   mutate(density = observed / totalSampledArea)
 
 site.info <- neonstore::neon_sites()
-df.site <- site.info %>% filter(siteCode %in% site.vec)
 
-# time series figures RESUME HERE-------------------------------------------------------------------
-# ls.vec <- c("Larva", "Nymph", "Adult")
-# site.vec <- unique(df.mutate$siteID)
+# Model output ------------------
+analysis.files <- list.files(dir.analysis)
 
+df.mutate <- read.csv(paste(dir.analysis, analysis.files[1], sep = ""))
+
+# time series figures-------------------------------------------------------------------
 data.density <- df.mutate %>%
 	select(
 		time,
@@ -183,9 +188,10 @@ data.density <- df.mutate %>%
 	distinct() %>%
 	mutate(density = observed / totalSampledArea * 450)
 
-site <- c("SERC")
 ls <- "Nymph"
-fx.issue.date <- all.days.df %>%
+site.vec <- unique(df.mutate$siteID)
+
+fx.issue.date <- neon.data %>%
 	filter(siteID == site) %>%
 	pull(start.date) %>%
 	unique()
@@ -198,35 +204,9 @@ dist.cols <- c(
 	"Analysis" = "#43b284"
 )
 
-gg <- all.days.df %>%
-	filter(
-		ua == "+ Process",
-		# parameters == "Updated",
-		model == "Mice & Weather",
-		siteID %in% site,
-		start.date == fx.issue.date[i],
-		lifeStage == ls
-	) %>%
-	mutate(
-		ua = if_else(ua == "IC", "IC (1)", ua),
-		ua = if_else(ua == "+ Parameter", "+ Parameter (2)", ua),
-		ua = if_else(ua == "+ Driver", "+ Driver (3)", ua),
-		ua = if_else(ua == "+ Process", "+ Process (4)", ua)
-	) %>%
-	mutate(
-		ua = factor(
-			ua,
-			levels = c("IC (1)", "+ Parameter (2)", "+ Driver (3)", "+ Process (4)")
-		)
-	) %>%
-	ggplot() +
-	aes(x = time) +
-	geom_ribbon(
-		aes(ymin = lower95, ymax = upper95, fill = ua),
-		alpha = 0.7,
-		fill = "#0f7ba2"
-	) +
-	geom_line(aes(y = median)) +
+gg <-	ggplot(aes(x = time)) +
+	# geom_ribbon(aes(ymin = lower95, ymax = upper95), alpha = 0.7, fill = "#0f7ba2") +
+	# geom_line(aes(y = median)) +
 	geom_point(
 		data = data.density %>%
 			filter(
@@ -238,7 +218,7 @@ gg <- all.days.df %>%
 		aes(y = density),
 		color = "#dd5129",
 		size = 3
-	) +
+	) #+
 	# scale_fill_manual(values = natparks.pals("DeathValley")) +
 	# coord_cartesian(ylim = c(0, 80)) +
 	labs(x = "Time", y = "Ticks/450m^2", fill = "Uncertainty\nAdded") +
