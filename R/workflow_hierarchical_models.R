@@ -626,15 +626,20 @@ for (t in seq_len(n.drags)) {
 		n.iter = n.iter,
 		miceAndWeather = miceAndWeather,
 		use.daymet = use.daymet
-		) # Check output dimensions -------------------
+		) 
 	
 	stopCluster(cl)
+  
+	# Merge outputs of chains
+	dat.hindcast <- list()
+	for(i in 1:length(out.nchains[[1]])){
+	  
+	}
 
-	dat.hindcast <- do.call(rbind, out.nchains)
-
+	# RESUME HERE -------------------
 	# Test MCMC convergence with Gelman-Rubin statistic
 	message("Checking convergence...")
-	nodes <- colnames(out.nchains[[1]])
+	nodes <- names(out.nchains[[1]])
 	gelman.keep <- numeric(length(nodes))
 	
 	for (ff in seq_along(nodes)) {
@@ -664,9 +669,9 @@ for (t in seq_len(n.drags)) {
 	# Thin the chains
 	if (nrow(dat.hindcast) > 5000) {
 	  draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))
-		} else {
+  } else {
 		  draws <- seq_len(nrow(dat.hindcast))
-		}
+	}
 
 	dat.draws <- dat.hindcast[draws, ]
 

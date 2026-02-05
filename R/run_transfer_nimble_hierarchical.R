@@ -55,9 +55,10 @@ run_transfer_nimble <- function(
 		Rmcmc <- buildMCMC(mcmcConf)
 		Cmcmc <- compileNimble(Rmcmc)
 		Cmcmc$run(niter = n.iter, nburnin = n.iter / 2)
-		return(as.mcmc(as.matrix(Cmcmc$mvSamples)))
+		return(as.list(Cmcmc$mvSamples))
 	})
 
-	out.mcmc <- as.mcmc.list(out)
+	out.mcmc <- as.mcmc(out)
+	
 	return(out.mcmc)
 }

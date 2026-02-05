@@ -67,13 +67,12 @@ for (i in seq_along(null.scores.files)) {
 	null.quants <- bind_rows(null.quants, dfq)
 }
 
-
 df.null <- null.quants %>%
 	rename(lower95 = ymin, upper95 = ymax, variance = var, median = fx) %>%
-	select(-n.days, -n.drags, -count.flag, -site)
+	select(-n.days, -n.drags, -count.flag, -siteID)
 
 
-# Process model outputs -------------------
+# Process model quant scores -------------------
 
 # # File names for quant scores
 # out.files <- list.files(dir.out, recursive = TRUE)
@@ -175,7 +174,9 @@ analysis.files <- list.files(dir.analysis)
 df.mutate <- read.csv(paste(dir.analysis, analysis.files[1], sep = ""))
 
 # time series figures-------------------------------------------------------------------
-data.density <- df.mutate %>%
+# Condense forecast across plots
+# RESUME HERE: FIGURE OUT WHAT IS GOING ON W/DF.MUTATE -----------------
+forecast.density <- df.mutate %>%
 	select(
 		time,
 		lifeStage,
@@ -183,45 +184,58 @@ data.density <- df.mutate %>%
 		plotID,
 		species,
 		totalSampledArea,
-		observed
+		forecast
 	) %>%
 	distinct() %>%
-	mutate(density = observed / totalSampledArea * 450)
+	mutate(density = forecast / totalSampledArea * 450)
 
+# Get constants for filtering
 ls <- "Nymph"
 site.vec <- unique(df.mutate$siteID)
 
 fx.issue.date <- neon.data %>%
-	filter(siteID == site) %>%
-	pull(start.date) %>%
+	filter(siteID == site.vec) %>%
+	pull(time) %>%
 	unique()
+fx.issue.date <- as.Date(fx.issue.date, format = "%Y-%m-%d")
 
-i <- 11
+# Filter null model data
+df.null.timeseries <- df.null %>%
+  filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date)+364,
+         lifeStage==ls) %>%
+  rename(siteID = site) %>%
+  select(median, lower95, upper95, variance, time) %>%
+  group_by(time) %>%
+  summarise(median=mean(median)/450, lower95=mean(lower95)/450, upper95=mean(upper95)/450,
+            variance=mean(variance)/450)
+
+# Filter raw data
+neon.timeseries <- neon.data %>%
+  mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
+  filter(siteID==site.vec, lifeStage==ls, time>=min(fx.issue.date),
+         time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
+  select(time, density) 
+
+# Filter forecast data
+forecast.density <- forecast.density %>%
+  filter(time >= min(fx.issue.date),time <= max(fx.issue.date) + 364,
+         lifeStage == ls)
 
 dist.cols <- c(
-	"Forecast" = "#dd5129",
-	"Data" = "#0f7ba2",
-	"Analysis" = "#43b284"
+	"Data" = "#dd5129",
+	"Forecast" = "#0f7ba2",
+	"Null" = "#43b284"
 )
 
-gg <-	ggplot(aes(x = time)) +
-	# geom_ribbon(aes(ymin = lower95, ymax = upper95), alpha = 0.7, fill = "#0f7ba2") +
-	# geom_line(aes(y = median)) +
-	geom_point(
-		data = data.density %>%
-			filter(
-				siteID == site,
-				time >= fx.issue.date[i],
-				time <= fx.issue.date[i] + 364,
-				lifeStage == ls
-			),
-		aes(y = density),
-		color = "#dd5129",
-		size = 3
-	) #+
-	# scale_fill_manual(values = natparks.pals("DeathValley")) +
+# gg <-	
+ggplot() +
+	geom_ribbon(data=df.null.timeseries, aes(x = time, ymin = lower95, ymax = upper95), 
+	            alpha = 0.5, fill = "#43b284") +
+	geom_line(data=df.null.timeseries, aes(x=time, y = median), color = "#43b284",
+	          size=1) +
+	geom_point(data = neon.timeseries, aes(x=time, y = density), color = "#dd5129", size = 3) +
 	# coord_cartesian(ylim = c(0, 80)) +
-	labs(x = "Time", y = "Ticks/450m^2", fill = "Uncertainty\nAdded") +
+	labs(x = "Date", y = "Ticks/450m^2") #+
 	# scale_y_continuous(limits = c(0, NA)) +
 	facet_wrap(~species, scales = "fixed") +
 	theme_pubr() +
