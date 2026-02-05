@@ -5,6 +5,7 @@ X Fix daymet intake script
 X Reproduce existing model
 - Make submodel intercepts hierarchical
 - Reproduce some of John's figures
+- Add detailed ReadMe
 
 In the distance:
 - Make model fully hierarchical

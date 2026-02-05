@@ -2,9 +2,6 @@ library(nimble)
 source("./DataProcessing/functions.R")
 
 model.code <- nimbleCode({
-  # Transition matrix
-  A <- array(0, dim = c(4,4,horizon,nsite))
-  
   for(site in 1:nsite){
 	  ### priors
 	  phi.l.mu[site] ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
@@ -33,15 +30,13 @@ model.code <- nimbleCode({
 		}
 
 		### precision priors with process error
-		OMEGA <- matrix(0, nrow = ns, ncol = ns)
-		
 		OMEGA[1, 1] <- sig[1]
 		OMEGA[2, 2] <- sig[2]
 		OMEGA[3, 3] <- sig[3]
 		OMEGA[4, 4] <- sig[4]
 
 	  # Cholesky decomposition
-	  Ochol <- chol(OMEGA)
+	  Ochol[1:4, 1:4] <- chol(OMEGA[1:4, 1:4])
 	  
 	  # Omega and the Cholensky decomp are eventually used
 	  # To estimate questing ticks
@@ -65,7 +60,7 @@ model.code <- nimbleCode({
 		  }
 	    
 		  cgdd[t, site] ~ dnorm(gdd[t, site], tau = tau.cgdd[site])
-		  gdd[t, site] ~ dunif(0, max.cgdd)
+		  gdd[t, site] ~ dunif(0, max.cgdd[site])
 
 		  theta.n2a[t, site] <- if_else_nimble(
 			  (gdd[t, site] <= 1000) | (gdd[t, site] >= 2500),
@@ -144,7 +139,6 @@ model.code <- nimbleCode({
 
 	  for (t in 2:horizon) {
 		  # expected number questing
-	    #  ERROR HERE: SAME AS OMEGA --------------
 		  Ex[1:4, t, site] <- A[1:4, 1:4, t-1, site] %*% x[1:4, t-1, site]
 
 		  x[1:ns, t, site] ~

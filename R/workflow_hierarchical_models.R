@@ -582,11 +582,13 @@ for (t in seq_len(n.drags)) {
 	inits <- function() {
 	  list(
 	    area = area.init,
-			phi.l.mu = rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])),
-			phi.n.mu = rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])),
-			phi.a.mu = rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])),
-			theta.ln = rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-			theta.na = rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+			phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
+			phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
+			phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
+			theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
+			               length(sites)),
+			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
+			               length(sites)),
 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
 			sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
 			x = array(rpois(4 * horizon * length(sites), 2) / 160 * 450, 
@@ -604,7 +606,9 @@ for (t in seq_len(n.drags)) {
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
 			x4 = jitter(data$precip),
-			gdd = jitter(as.matrix(data$cgdd))
+			gdd = jitter(as.matrix(data$cgdd)),
+			OMEGA = matrix(0, nrow = 4, ncol = 4),
+			A = array(0, dim=c(4, 4, horizon, length(sites)))
 		)
 	}
 
@@ -613,7 +617,6 @@ for (t in seq_len(n.drags)) {
 	cl <- makeCluster(n.slots) 
 	
 	# Run the model	
-	# FIX ERRORS HERE ------------------
 	out.nchains <- run_transfer_nimble(
 		cl = cl,
 		model = model.code,
@@ -623,78 +626,60 @@ for (t in seq_len(n.drags)) {
 		n.iter = n.iter,
 		miceAndWeather = miceAndWeather,
 		use.daymet = use.daymet
-		)
+		) # Check output dimensions -------------------
 	
 	stopCluster(cl)
 
-		# nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE)
-		# model <- nimbleModel(model.code,
-		#                      constants = constants,
-		#                      data = data,
-		#                      inits = inits())
-		# model$initializeInfo()
-		# cModel <- compileNimble(model)
-		# mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
-		# mcmcBuild <- buildMCMC(mcmcConf)
-		# compMCMC <- compileNimble(mcmcBuild)
-		#
-		# out.nchains <- list()
-		# for(i in 1:3){
-		#   compMCMC$run(niter = 3000, nburnin = 100)
-		#   out.nchains[[i]] <- as.matrix(compMCMC$mvSamples)
-		# }
+	dat.hindcast <- do.call(rbind, out.nchains)
 
-		dat.hindcast <- do.call(rbind, out.nchains)
+	# Test MCMC convergence with Gelman-Rubin statistic
+	message("Checking convergence...")
+	nodes <- colnames(out.nchains[[1]])
+	gelman.keep <- numeric(length(nodes))
+	
+	for (ff in seq_along(nodes)) {
+	  mcmc.check <- list()
+		col <- nodes[ff]
+				
+		for (c in seq_along(out.nchains)) {
+		  mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
+		  }
+		
+		gelman.keep[ff] <- try(coda::gelman.diag(mcmc.check, 
+		                                         transform = TRUE)$psrf[1])
 
-		# if (ua.job == "ic_parameter_driver_process") {
-			message("Checking convergence...")
-			nodes <- colnames(out.nchains[[1]])
-			gelman.keep <- numeric(length(nodes))
-			for (ff in seq_along(nodes)) {
-				mcmc.check <- list()
-				col <- nodes[ff]
-				for (c in seq_along(out.nchains)) {
-					mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
-				}
-				gelman.keep[ff] <- try(coda::gelman.diag(
-					mcmc.check,
-					transform = TRUE
-				)$psrf[1])
-			#}
-
-			if (any(gelman.keep > 1.2)) {
-				# message("WARNING: Convergence not reached!")
-				bad.nodes <- which(gelman.keep > 1.2)
-				bad.params <- tibble(
-					node = nodes[bad.nodes],
-					psrf = as.numeric(gelman.keep[bad.nodes])
-				) %>%
-					arrange(psrf)
+		if (any(gelman.keep > 1.2)) {
+		  # message("WARNING: Convergence not reached!")
+		  bad.nodes <- which(gelman.keep > 1.2)
+		  bad.params <- tibble(node = nodes[bad.nodes],
+		    psrf = as.numeric(gelman.keep[bad.nodes])) %>%
+		    arrange(psrf)
 				# print(tail(bad.params))
-			} else {
-				# message("Convergence = TRUE")
-			}
-		}
-
-		if (nrow(dat.hindcast) > 5000) {
-			draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))
+		  
+		  } else {
+		    # message("Convergence = TRUE")
+		  }
+	}
+  
+	# Thin the chains
+	if (nrow(dat.hindcast) > 5000) {
+	  draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))
 		} else {
-			draws <- seq_len(nrow(dat.hindcast))
+		  draws <- seq_len(nrow(dat.hindcast))
 		}
 
-		dat.draws <- dat.hindcast[draws, ]
+	dat.draws <- dat.hindcast[draws, ]
 
-		fileDest <- file.path(dir.save, fx.start.date)
-		message("Running analysis...")
-		transfer_analysis(
-			fx.df = dat.draws,
-			observations = neon.job,
-			fx.dates = fx.sequence,
-			model = model.job,
-			# ua = ua.job,
-			spp = species.job,
-			out.dir = fileDest
-		)
-		# message(ua.job, " complete")
-	#}
+	# Output processing and save
+	fileDest <- file.path(dir.save, fx.start.date)
+	
+	message("Running analysis...")
+	
+	transfer_analysis(
+	  fx.df = dat.draws,
+		observations = neon.job,
+		fx.dates = fx.sequence,
+		model = model.job,
+		spp = species.job,
+		out.dir = fileDest)
 }
