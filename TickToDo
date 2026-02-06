@@ -12,4 +12,5 @@ In the distance:
 - Compare hierarchical vs. OG vs. null models
 - Rename model covariates so they correspond to specific components of model,
     not just "beta" with a subscript
+- Update site level lat/long in intake_daymet.R script so it actually gets the midpoint of the sites
 
