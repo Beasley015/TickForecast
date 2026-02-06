@@ -1,11 +1,13 @@
+# Load packages
 library(tidyverse)
 library(lubridate)
 library(daymetr)
 library(curl)
 
-
+# Read in site coords if they already exist
 site.coord <- readr::read_csv("./Data/siteLatLon.csv") %>% suppressMessages()
 
+# Read in mouse data (plots)
 mouse.data <- read_csv("./Data/allSmallMammals.csv")
 mouse.plots <- mouse.data %>%
   group_by(plotID) %>%
@@ -13,6 +15,7 @@ mouse.plots <- mouse.data %>%
   distinct() %>%
   mutate(plotID = paste0("smam", plotID))
 
+# Read in tick data (plots)
 tick.data <- read_csv("./Data/tickLong.csv", show_col_types=F)
 tick.plots <- tick.data %>%
   group_by(plotID) %>%
@@ -20,13 +23,14 @@ tick.plots <- tick.data %>%
   distinct() %>%
   mutate(plotID = paste0("tick", plotID))
 
+# Write csv for plot coords
 plot.df <- bind_rows(mouse.plots, tick.plots)
 plot.df <- plot.df %>%
-  filter(#grepl("HARV", plotID),
-         !grepl("tick", plotID)) %>%
+  filter(!grepl("tick", plotID)) %>%
   rename_with( ~ c("site", "latitude", "longitude"), everything())
 write_csv(plot.df, file = "./Data/plotLatLon.csv")
 
+# Daymet download
 dm <- download_daymet_batch(
   file_location = './Data/siteLatLon.csv',
   # file_location = './Data/plotLatLon.csv', #uncomment for plot level
