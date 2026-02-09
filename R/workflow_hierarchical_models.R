@@ -21,6 +21,7 @@ library(lubridate)
 library(zoo)
 library(nimble)
 library(parallel)
+library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
@@ -629,26 +630,36 @@ for (t in seq_len(n.drags)) {
 		) 
 	
 	stopCluster(cl)
+	
+	# NOTE: delete this line when done! --------------
+	saveRDS(out.nchains, file = "tempouts.rds")
   
 	# Merge outputs of chains
 	dat.hindcast <- list()
-	for(i in 1:length(out.nchains[[1]])){
-	  
+	for(i in seq_along(names(out.nchains[[1]]))){
+	  if(length(dim(out.nchains[[1]][[i]]))==2){
+	    dat.hindcast[[i]] <- do.call(rbind, lapply(out.nchains, `[[`, i))
+	  } else{
+	    dat.hindcast[[i]] <- do.call(abind, list(lapply(out.nchains, `[[`, i),
+	                                 along = 1))
+	  }
 	}
+	names(dat.hindcast) <- names(out.nchains[[1]])
 
-	# RESUME HERE -------------------
 	# Test MCMC convergence with Gelman-Rubin statistic
 	message("Checking convergence...")
-	nodes <- names(out.nchains[[1]])
+	nodes <- names(dat.hindcast)
 	gelman.keep <- numeric(length(nodes))
 	
 	for (ff in seq_along(nodes)) {
 	  mcmc.check <- list()
 		col <- nodes[ff]
+		
+		if(length(dim(out.nchains[[1]][[ff]]))!=2){next}
 				
 		for (c in seq_along(out.nchains)) {
-		  mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
-		  }
+		    mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
+		}
 		
 		gelman.keep[ff] <- try(coda::gelman.diag(mcmc.check, 
 		                                         transform = TRUE)$psrf[1])
@@ -667,19 +678,29 @@ for (t in seq_len(n.drags)) {
 	}
   
 	# Thin the chains
-	if (nrow(dat.hindcast) > 5000) {
-	  draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))
-  } else {
-		  draws <- seq_len(nrow(dat.hindcast))
-	}
+	dat.draws <- list()
+	for(i in 1:length(dat.hindcast)){
+	  if (nrow(dat.hindcast[[i]]) > 5000) {
+	    draws <- round(seq.int(1, nrow(dat.hindcast[[i]]), length.out = 5000))
+    } else {
+		  draws <- seq_len(nrow(dat.hindcast[[i]]))
+    }
 
-	dat.draws <- dat.hindcast[draws, ]
+	  if(length(dim(dat.hindcast[[i]]))==2){
+	    dat.draws[[i]] <- dat.hindcast[[i]][draws, ]
+	  } else if(length(dim(dat.hindcast[[i]]))==3){
+	    dat.draws[[i]] <- dat.hindcast[[i]][draws,,]
+	  } else{
+	    dat.draws[[i]] <- dat.hindcast[[i]][draws,,,]
+	  }
+	}
 
 	# Output processing and save
 	fileDest <- file.path(dir.save, fx.start.date)
 	
 	message("Running analysis...")
 	
+	# RESUME: fix this function in functions script ---------------
 	transfer_analysis(
 	  fx.df = dat.draws,
 		observations = neon.job,

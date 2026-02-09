@@ -513,21 +513,24 @@ transfer_analysis <- function(
 	observations,
 	fx.dates,
 	model,
-	# ua,
 	spp,
 	out.dir
 ) {
+  # Total number of mcmc iterations
 	nmcmc <- nrow(fx.df)
+	
+	# Create life stage table
 	ls.tb <- tibble(
 		lifeStage = c("Larva", "Dormant", "Nymph", "Adult"),
 		ls.index = 1:4
 	)
 
+	# Time steps table
 	time.tb <- tibble(
 		time = fx.dates,
 		time.index = 1:length(fx.dates)
 	)
-
+	
 	fx.tb <- fx.df %>%
 		as_tibble() %>%
 		pivot_longer(cols = everything(), names_to = "node")
