@@ -1,13 +1,3 @@
----
-title: "Tick Density Forecasting Project"
-output: html_document
-author: E.M. Beasley, S.L. Ladeau, & M.C. Dietze
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
 Data and code for forecasting tick densities across sampling locations of the National Ecological Observatory Network (NEON) and Cary Institute for Ecosystem Studies (hereafter, Cary). For a full list of files and metadata, see the metadata file (coming soon). 
 
 ## Associated Publications
