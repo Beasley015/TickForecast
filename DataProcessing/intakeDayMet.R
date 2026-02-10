@@ -4,9 +4,6 @@ library(lubridate)
 library(daymetr)
 library(curl)
 
-# Read in site coords if they already exist
-site.coord <- readr::read_csv("./Data/siteLatLon.csv") %>% suppressMessages()
-
 # Read in mouse data (plots)
 mouse.data <- read_csv("./Data/allSmallMammals.csv")
 mouse.plots <- mouse.data %>%
@@ -29,6 +26,11 @@ plot.df <- plot.df %>%
   filter(!grepl("tick", plotID)) %>%
   rename_with( ~ c("site", "latitude", "longitude"), everything())
 write_csv(plot.df, file = "./Data/plotLatLon.csv")
+
+# Read in site coords if they already exist
+site.coord <- readr::read_csv("./Data/siteLatLon.csv") %>% suppressMessages()
+
+# Create site coords if needed TO DO--------------------
 
 # Daymet download
 dm <- download_daymet_batch(
