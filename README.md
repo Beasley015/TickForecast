@@ -53,4 +53,33 @@ Coming Soon
 
 ## Model Workflow
 
+The model workflows include the last data processing steps and initializing/running the tick forecasting model in both hierarchical and non-hierarchical formats. Main workflow scripts are located in the [R](/R) directory. Data inputs are the same for both the hierarchical and non-hierarchical models. Required scripts vary slightly: scripts required for the hierarchical version of the model have "hierarchical" in the file name. The null model, which is a generalized additive model that calculates the average tick abundance for each day of the year, is analyzed differently than the process model and can be found under the sub-heading below.
+
+MAIN SCRIPTS: [workflow_process_model.R](/R/workflow_process_models.R)/[workflow_hierarchical_models.R](/R/workflow_hierarchical_models.R)
+
+Supporting scripts:
+* [functions.R](/DataProcessing/functions.R) and [functions_hierarchical.R](/DataProcessing/functions_hierarchical.R): Contains several miscellaneous functions for, e.g., importing tick and small mammal data, scaling meteorological data, and processing and saving model outputs.
+* [capture_matrix.R](/DataProcessing/capture_matrix.R) and [capture_matrix_hierarchical.R](/DataProcessing/capture_matrix_hierarchical.R): Creates capture matrix from NEON small mammal data for calculation of MNA
+* [daymet_downscale.R](/DataProcessing/daymet_downscale.R) and [daymet_downscale_hierarchical.R](/DataProcessing/daymet_downscale_hierarchical.R): Downscales DayMet meteorological data to match resolution needed for forecast model
+* [nimble_forecast.R](/R/nimble_forecast.R) and [nimble_forecast_hierarchical.R](/R/nimble_forecast_hierarchical.R): Scripts for the forecast model itself
+* [run_transfer_nimble.R](/R/run_transfer_nimble.R) and [run_transfer_nimble_hierarchical.R](/R/run_transfer_nimble_hierarchical.R): collects initial values, observed data, forecast model scripts, etc. and executes forecasting model using Nimble
+
+Data inputs not listed in Data Processing subheading:
+* [dormantNymphTimeSeries.csv](/Data/dormantNymphTimeSeries.csv): data on dormant nymph abundance, used as an informative prior for the corresponding latent state in the forecasting model
+* [dormantNymphParams.csv](/Data/dormantNymphParams.csv): transition parameters to and from the dormant nymph state originally calibrated by Foster et al. (in preparation), used as informative priors for dormant nymph transition parameters
+
+Outputs: Forecasts, estimated parameter values, and forecast scores from the forecasting model. Outputs are too large to be pushed to GitHub and so can't be found here. When executing the scripts, outputs are saved to a directory called /outs. Single-site models are organized into directories labeled by site; hierarchical multi-site models are arranged into directories by species.
+
+### Null model workflow
+
+Scripts:
+* [workflow_null_model.R](/R/workflow_null_model.R): Executes the GAM for all sites and species included in Foster et al. (in preparation)
+* [functions.R](/DataProcessing/functions.R): Support functions for data processing
+
+Data inputs: [tickTargets.csv](/Data/tickTargets.csv)
+
+Outputs: GAM results and forecast scores. Results are saved to /outs/Null.
+
+## Post-Processing
+
 Coming Soon
