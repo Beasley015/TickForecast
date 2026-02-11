@@ -17,6 +17,7 @@ library(NatParksPalettes)
 
 dir.out <- "./out/"
 dir.analysis <- "./analysis/"
+dir.plot <- "./figures/"
 
 # Create function for saving plots------------
 save_gg <- function(dest, gg, path) {
@@ -43,34 +44,21 @@ out.files.null <- list.files(dir.out.null, recursive = TRUE)
 null.scores.files <- grep("Scores", out.files.null, value = TRUE)
 null.quants.files <- grep("Quants", out.files.null, value = TRUE)
 
-find_species <- function(x) {
-	species <- if_else(
-		grepl("Amblyommaamericanum", x),
-		"Amblyomma americanum",
-		"Ixodes scapularis"
-	)
-	species
-}
-
 null.scores <- null.quants <- tibble()
 for (i in seq_along(null.scores.files)) {
 	null.s <- read_csv(file.path(dir.out.null, null.scores.files[i])) %>%
 		suppressMessages()
-	sp <- find_species(null.scores.files[i])
-	dfs <- null.s %>% mutate(species = sp)
-	null.scores <- bind_rows(null.scores, dfs)
+	null.scores <- bind_rows(null.scores, null.s)
 
 	null.q <- read_csv(file.path(dir.out.null, null.quants.files[i])) %>%
 		suppressMessages()
-	sp <- find_species(null.quants.files[i])
-	dfq <- null.q %>% mutate(species = sp)
-	null.quants <- bind_rows(null.quants, dfq)
+	null.quants <- bind_rows(null.quants, null.q)
 }
 
 df.null <- null.quants %>%
 	rename(lower95 = ymin, upper95 = ymax, variance = var, median = fx) %>%
-	select(-n.days, -n.drags, -count.flag, -siteID)
-
+	select(-n.days, -n.drags, -count.flag, -siteID) %>%
+  filter(!(is.na(species)))
 
 # Process model quant scores -------------------
 
@@ -164,92 +152,94 @@ neon.data <- bind_rows(neon.ix, neon.aa) %>%
   pivot_longer(cols = c(Larva, Nymph, Adult),
                names_to = "lifeStage",
                values_to = "observed") %>%
-  mutate(density = observed / totalSampledArea)
+  mutate(density = observed / totalSampledArea * 450)
 
 site.info <- neonstore::neon_sites()
 
 # Model output ------------------
 analysis.files <- list.files(dir.analysis)
 
-df.mutate <- read.csv(paste(dir.analysis, analysis.files[1], sep = ""))
-
 # time series figures-------------------------------------------------------------------
-# Condense forecast across plots
-# RESUME HERE: FIGURE OUT WHAT IS GOING ON W/DF.MUTATE -----------------
-forecast.density <- df.mutate %>%
-	select(
-		time,
-		lifeStage,
-		siteID,
-		plotID,
-		species,
-		totalSampledArea,
-		forecast
-	) %>%
-	distinct() %>%
-	mutate(density = forecast / totalSampledArea * 450)
+for(i in 1:length(analysis.files)){
+  df.mutate <- read.csv(paste(dir.analysis, analysis.files[i], sep = ""))
 
-# Get constants for filtering
-ls <- "Nymph"
-site.vec <- unique(df.mutate$siteID)
+  # Condense forecast across plots
+  forecast.density <- df.mutate %>%
+	  select(
+		  time,
+		  lifeStage,
+		  siteID,
+		  plotID,
+		  species,
+		  totalSampledArea,
+		  forecast
+	  ) %>%
+	  group_by(time) %>%
+    summarise(mean.forecast = mean(forecast), forecast05 = quantile(forecast, 0.025),
+              forecast95=quantile(forecast,0.075), totalSampledArea=mean(totalSampledArea)) %>%
+    mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
+	  mutate(density = mean.forecast / totalSampledArea * 450, density95=forecast95/totalSampledArea * 450,
+	        density05=forecast05/totalSampledArea*450)
 
-fx.issue.date <- neon.data %>%
-	filter(siteID == site.vec) %>%
-	pull(time) %>%
-	unique()
-fx.issue.date <- as.Date(fx.issue.date, format = "%Y-%m-%d")
+  # Get constants for filtering
+  ls <- "Nymph"
+  sp <- unique(df.mutate$species)
+  site.vec <- unique(df.mutate$siteID)
+  mod <- ifelse(grepl("Mice", analysis.files[i]), "Weather&Mice", "Weather")
 
-# Filter null model data
-df.null.timeseries <- df.null %>%
-  filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date)+364,
-         lifeStage==ls) %>%
-  rename(siteID = site) %>%
-  select(median, lower95, upper95, variance, time) %>%
-  group_by(time) %>%
-  summarise(median=mean(median)/450, lower95=mean(lower95)/450, upper95=mean(upper95)/450,
-            variance=mean(variance)/450)
+  fx.issue.date <- neon.data %>%
+	  filter(siteID == site.vec) %>%
+	  pull(time) %>%
+	  unique()
+  fx.issue.date <- as.Date(fx.issue.date, format = "%Y-%m-%d")
 
-# Filter raw data
-neon.timeseries <- neon.data %>%
-  mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
-  filter(siteID==site.vec, lifeStage==ls, time>=min(fx.issue.date),
-         time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
-  select(time, density) 
+  # Filter null model data
+  df.null.timeseries <- df.null %>%
+    filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date),
+           lifeStage==ls, species==sp) %>%
+    rename(siteID = site) %>%
+    select(median, lower95, upper95, variance, time) %>%
+    group_by(time)
 
-# Filter forecast data
-forecast.density <- forecast.density %>%
-  filter(time >= min(fx.issue.date),time <= max(fx.issue.date) + 364,
-         lifeStage == ls)
+  # Filter raw data
+  neon.timeseries <- neon.data %>%
+    mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
+    filter(siteID==site.vec, lifeStage==ls, time>=min(fx.issue.date),
+           time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
+    select(time, plotID, density) %>%
+    group_by(time) %>%
+    summarise(meandensity = mean(density))
 
-dist.cols <- c(
-	"Data" = "#dd5129",
-	"Forecast" = "#0f7ba2",
-	"Null" = "#43b284"
-)
+  # Filter forecast data
+  forecast.density <- forecast.density %>%
+    filter(time >= min(fx.issue.date),time <= max(fx.issue.date) + 364)
 
-# gg <-	
-ggplot() +
-	geom_ribbon(data=df.null.timeseries, aes(x = time, ymin = lower95, ymax = upper95), 
-	            alpha = 0.5, fill = "#43b284") +
-	geom_line(data=df.null.timeseries, aes(x=time, y = median), color = "#43b284",
-	          size=1) +
-	geom_point(data = neon.timeseries, aes(x=time, y = density), color = "#dd5129", size = 3) +
-	# coord_cartesian(ylim = c(0, 80)) +
-	labs(x = "Date", y = "Ticks/450m^2") #+
-	# scale_y_continuous(limits = c(0, NA)) +
-	facet_wrap(~species, scales = "fixed") +
-	theme_pubr() +
-	theme(
-		legend.position = "bottom",
-		axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5)
-	)
-gg
-save_gg(
-	dest = paste0("timeSeries_Control_", site, "_", ls, ".jpeg"),
-	gg = gg,
-	path = dir.plot
-)
+  dist.cols <- c(
+	  "Data" = "#dd5129",
+	  "Forecast" = "#0f7ba2",
+	  "Null" = "#43b284"
+  )
 
+  gg <- ggplot() +
+	  geom_ribbon(data=df.null.timeseries, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null"), 
+	             alpha = 0.5) +
+	  geom_point(data = neon.timeseries, aes(x=time, y = meandensity, fill = "Observed Data"), 
+	             color = "#dd5129", size = 3) +
+    geom_ribbon(data=forecast.density, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"), 
+                alpha = 0.5)+
+	  labs(x = "Date", y = "Ticks/450m^2", title = paste(site.vec, ", ", sp, ", ", mod, sep = "")) +
+    scale_fill_manual(values = c("#0f7ba2", "#43b284", "#dd5129"), name = "")+
+	  theme_pubr() +
+	  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5),
+	        legend.position = "bottom")
+  gg
+  save_gg(
+	  dest = paste0("/timeseries_singlemods/", site.vec, "_", sp, "_", mod, ".jpeg"),
+	  gg = gg,
+	  path = dir.plot
+  )
+  print(paste("Site = ", site.vec, ", Species = ", sp, ", Model = ", mod, sep = ""))
+}
 
 # score figures --------------------------------------------------------------------------
 
