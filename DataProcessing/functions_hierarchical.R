@@ -517,7 +517,7 @@ transfer_analysis <- function(
 	out.dir
 ) {
   # Total number of mcmc iterations
-	nmcmc <- nrow(fx.df)
+	nmcmc <- nrow(fx.df[[1]])
 	
 	# Create life stage table
 	ls.tb <- tibble(
@@ -531,43 +531,27 @@ transfer_analysis <- function(
 		time.index = 1:length(fx.dates)
 	)
 	
-	fx.tb <- fx.df %>%
-		as_tibble() %>%
-		pivot_longer(cols = everything(), names_to = "node")
+	# Pull and process states
+	states <- fx.df$x
+	colnames(states) <- ls.tb$lifeStage
+	
+	# Convert to giant-ass data frame
+	states <- apply(states, c(2,4), "c")
+	states <- abind(states, 
+	                array(rep(time.tb$time.index, each = nmcmc),
+	                      replace(dim(states), 2, 1)), 
+	                along = 2)
+	states <- as.data.frame(apply(states, 2, "c")) %>%
+	  mutate(siteID = rep(sites, each = nmcmc*365)) %>%
+	  arrange(V5) %>%
+	  mutate(time = rep(time.tb$time, each = nmcmc*length(sites))) %>%
+	  select(-V5)
+	# I hate it but it works
 
-	state.nodes <- fx.tb %>%
-		filter(grepl("x[", node, fixed = TRUE)) %>%
-		pull(node) %>%
-		unique()
+	# Pull weather-related nodes
+	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
 
-	weather.nodes <- fx.tb %>%
-		filter(
-			grepl("x1", node, fixed = TRUE) |
-				grepl("x2", node, fixed = TRUE) |
-				grepl("x3", node, fixed = TRUE) |
-				grepl("x4", node, fixed = TRUE)
-		) %>%
-		pull(node) %>%
-		unique()
-
-	weather <- length(weather.nodes) > 1
-
-	states <- fx.tb %>%
-		filter(node %in% state.nodes) %>%
-		mutate(
-			time.index = as.numeric(str_extract(node, "(?<=\\s)\\d*(?=\\])")),
-			ls.index = as.numeric(str_extract(node, "(?<=x\\[)\\d(?=\\,)"))
-		)
-
-	join1 <- left_join(states, ls.tb, by = "ls.index")
-	join2 <- left_join(join1, time.tb, by = "time.index")
-
-	site <- observations$siteID %>% unique()
-
-	fx.samples <- join2 %>%
-		select(value, lifeStage, time) %>%
-		mutate(siteID = site)
-
+	# Clean up observation data
 	data.site <- observations %>%
 		filter(time %in% fx.sequence) %>%
 		select(-n.drags, -n.days, -count.flag) %>%
@@ -577,15 +561,22 @@ transfer_analysis <- function(
 			values_to = "observed"
 		)
 
-	pred.obs <- tibble() # pred.obs will only have forecasts for the dates tick drags occured
+	# pred.obs will only have forecasts for the dates tick drags occurred
+	pred.obs <- tibble() 
 	plots <- data.site$plotID %>% unique()
 	for (p in seq_along(plots)) {
+	  # Subset data by plot
 		data.sub <- data.site %>%
 			filter(plotID == plots[p]) %>%
 		  mutate(time=as.Date(time, format = "%Y-%m-%d"))
 		plot.time <- unique(data.sub$time)
-		fx.sub <- fx.samples %>%
-			filter(time %in% plot.time, lifeStage != "Dormant")
+		
+		# Subset forecast so it only has sampled days
+		fx.sub  <- states %>%
+			filter(time %in% plot.time, siteID==unique(data.sub$siteID)) %>%
+		  select(-Dormant) %>%
+		  pivot_longer(cols = Larva:Adult, names_to = 'lifeStage', 
+		               values_to = 'value')
 		pred.obs.plot <- left_join(
 			fx.sub,
 			data.sub,
@@ -598,7 +589,6 @@ transfer_analysis <- function(
 		mutate(
 			forecast = value / 450 * totalSampledArea,
 			start.date = start.date,
-			# ua = ua,
 			model = model
 		)
 
@@ -608,7 +598,6 @@ transfer_analysis <- function(
 			time,
 			siteID,
 			start.date,
-			# ua,
 			model,
 			species,
 			totalSampledArea,
@@ -628,22 +617,48 @@ transfer_analysis <- function(
 
 	# get scores
 	scores <- score(fx.data, nmcmc) %>%
-		mutate(siteID = site, #ua = ua, 
+		mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
 		       species = spp, model = model)
 
 	fx.out <- left_join(
 		fx.quantiles,
 		scores,
-		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")#, "ua")
+		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")
 	)
 
-	# parameters
-	param.samples <- fx.tb %>%
-		filter(!node %in% state.nodes, !node %in% weather.nodes) %>%
-		mutate(siteID = site, #ua = ua, 
-		       model = model)
-
-	param.quants <- param.samples %>%
+	# parameters (non-beta)
+	param.list <- fx.df[-c(weather.nodes, which(names(fx.df) %in% c("x", "beta",
+	                                                                "gdd", "sig")))]
+	for(i in 1:length(param.list)){
+	  param.list[[i]] <- as.data.frame(param.list[[i]])
+	  param.list[[i]]$node <- names(param.list)[i]
+	}
+	
+	param.df <- do.call(rbind, param.list)
+	colnames(param.df)[1:8] <- sites
+	
+	param.quant <- param.df %>%
+	  pivot_longer(cols = BLAN:UKFS, names_to='siteID', values_to = 'value') %>%		
+	  group_by(node, siteID) %>%
+	  summarise(
+	    lower95 = quantile(value, 0.025, na.rm=T),
+	    lower75 = quantile(value, 0.125, na.rm=T),
+	    median = median(value, na.rm=T),
+	    mean = mean(value, na.rm=T),
+	    upper75 = quantile(value, 0.875, na.rm=T),
+	    upper95 = quantile(value, 0.975, na.rm=T),
+	    variance = var(value, na.rm=T)
+	  ) %>%
+	  ungroup() %>%
+	  mutate(species = spp, start.date = start.date, model = model)
+	  
+	
+	# Betas (will include with other params when fully hierarchical)
+	betas <- as.data.frame(param.list$beta)
+	colnames(betas) <- str_replace(colnames(betas), "V", "beta")
+	
+	betas <- betas %>%
+	  pivot_longer(cols = everything(), names_to="node", values_to="value") %>%
 		group_by(node) %>%
 		summarise(
 			lower95 = quantile(value, 0.025, na.rm=T),
@@ -655,13 +670,7 @@ transfer_analysis <- function(
 			variance = var(value, na.rm=T)
 		) %>%
 		ungroup() %>%
-		mutate(
-			siteID = site,
-			#ua = ua,
-			species = spp,
-			start.date == start.date,
-			model = model
-		)
+		mutate(species = spp, start.date = start.date, model = model)
 
 	if (!dir.exists(out.dir)) {
 		dir.create(out.dir, recursive = TRUE, showWarnings = FALSE)
@@ -669,10 +678,14 @@ transfer_analysis <- function(
 
 	# save
 	message("  Writing files to ", out.dir)
+	write_csv(ungroup(states), file.path(out.dir, "stateSamples.csv"))
 	write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
-	write_csv(ungroup(fx.samples), file.path(out.dir, "stateSamples.csv"))
+	write_csv(ungroup(param.quant), file.path(out.dir, "parameterSummary.csv"))
+	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
+
+	# Still need these: --------------
 	write_csv(ungroup(param.samples), file.path(out.dir, "parameterSamples.csv"))
-	write_csv(ungroup(param.quants), file.path(out.dir, "parameterSummary.csv"))
+	
 
 	# weather - if used
 	if (weather) {

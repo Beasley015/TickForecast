@@ -631,8 +631,9 @@ for (t in seq_len(n.drags)) {
 	
 	stopCluster(cl)
 	
-	# NOTE: delete this line when done! --------------
+	# NOTE: delete these lines when done! --------------
 	saveRDS(out.nchains, file = "tempouts.rds")
+	out.nchains <- readRDS("tempouts.rds")
   
 	# Merge outputs of chains
 	dat.hindcast <- list()
@@ -694,6 +695,8 @@ for (t in seq_len(n.drags)) {
 	    dat.draws[[i]] <- dat.hindcast[[i]][draws,,,]
 	  }
 	}
+	
+	names(dat.draws) <- names(dat.hindcast)
 
 	# Output processing and save
 	fileDest <- file.path(dir.save, fx.start.date)
@@ -706,6 +709,7 @@ for (t in seq_len(n.drags)) {
 		observations = neon.job,
 		fx.dates = fx.sequence,
 		model = model.job,
+		sites = sites,
 		spp = species.job,
 		out.dir = fileDest)
 }
