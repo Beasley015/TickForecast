@@ -1,5 +1,9 @@
 Data and code for forecasting tick densities across sampling locations of the National Ecological Observatory Network (NEON) and Cary Institute for Ecosystem Studies (hereafter, Cary). 
 
+### Known Issues
+
+- Duplicate entries in plot "STEI_019" in NEON data. The site is not currently being used in the model but we may need to follow up on it in the future.
+
 ## Associated Publications
 
 Coming Soon
