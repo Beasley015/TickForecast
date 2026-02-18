@@ -513,6 +513,7 @@ transfer_analysis <- function(
 	observations,
 	fx.dates,
 	model,
+	weather,
 	spp,
 	out.dir
 ) {
@@ -531,6 +532,9 @@ transfer_analysis <- function(
 		time.index = 1:length(fx.dates)
 	)
 	
+	# Pull weather-related nodes
+	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
+	
 	# Pull and process states
 	states <- fx.df$x
 	colnames(states) <- ls.tb$lifeStage
@@ -547,9 +551,6 @@ transfer_analysis <- function(
 	  mutate(time = rep(time.tb$time, each = nmcmc*length(sites))) %>%
 	  select(-V5)
 	# I hate it but it works
-
-	# Pull weather-related nodes
-	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
 
 	# Clean up observation data
 	data.site <- observations %>%
@@ -654,7 +655,7 @@ transfer_analysis <- function(
 	  
 	
 	# Betas (will include with other params when fully hierarchical)
-	betas <- as.data.frame(param.list$beta)
+	betas <- as.data.frame(fx.df$beta)
 	colnames(betas) <- str_replace(colnames(betas), "V", "beta")
 	
 	betas <- betas %>%
@@ -682,16 +683,30 @@ transfer_analysis <- function(
 	write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
 	write_csv(ungroup(param.quant), file.path(out.dir, "parameterSummary.csv"))
 	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
-
-	# Still need these: --------------
-	write_csv(ungroup(param.samples), file.path(out.dir, "parameterSamples.csv"))
+	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
 	
 
 	# weather - if used
 	if (weather) {
-		daymet <- fx.tb %>%
-			filter(node %in% weather.nodes) %>%
-			group_by(node) %>%
+	  weather.list <- fx.df[weather.nodes]
+	  
+	  weather.list <- lapply(weather.list, function(x) apply(x, 3, "c"))
+	  
+	  weather.list <- lapply(weather.list, 
+	                 function(x) cbind(rep(time.tb$time.index, each = nmcmc),x))
+	  
+	  for(i in 1:length(weather.list)){
+	    weather.list[[i]] <- cbind(names(weather.list)[i], weather.list[[i]])
+	  }
+	  
+	  weather.df <- as.data.frame(do.call(rbind, weather.list))
+	  colnames(weather.df) <- c("node", "time", sites)
+	  
+		daymet <- weather.df %>%
+		  pivot_longer(cols = BLAN:UKFS, names_to = "site", 
+		               values_to = "value") %>%
+		  mutate(value= as.numeric(value)) %>%
+		  group_by(node, time, site) %>%
 			summarise(
 				lower95 = quantile(value, 0.025, na.rm=T),
 				lower75 = quantile(value, 0.125, na.rm=T),
@@ -702,19 +717,13 @@ transfer_analysis <- function(
 				variance = var(value, na.rm=T)
 			) %>%
 			ungroup() %>%
-			mutate(time.index = as.numeric(str_extract(node, "(?<=\\[)\\d*(?=\\])")))
-
-		daymet.time <- left_join(time.tb, daymet, by = "time.index") %>%
-			select(-time.index) %>%
 			mutate(
-				siteID = site,
-				#ua = ua,
 				species = spp,
-				start.date == start.date,
+				start.date = start.date,
 				model = model
 			)
 
-		write_csv(daymet.time, file.path(out.dir, "weatherSummary.csv"))
+		write_csv(daymet, file.path(out.dir, "weatherSummary.csv"))
 	}
 }
 

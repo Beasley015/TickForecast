@@ -703,13 +703,13 @@ for (t in seq_len(n.drags)) {
 	
 	message("Running analysis...")
 	
-	# RESUME: fix this function in functions script ---------------
 	transfer_analysis(
 	  fx.df = dat.draws,
 		observations = neon.job,
 		fx.dates = fx.sequence,
 		model = model.job,
-		sites = sites,
+		# sites = sites,
 		spp = species.job,
+		weather = use.daymet,
 		out.dir = fileDest)
 }
