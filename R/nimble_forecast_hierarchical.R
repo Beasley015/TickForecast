@@ -43,7 +43,7 @@ model.code <- nimbleCode({
 
 	  ### first latent process
 		for (i in 1:4) {
-			x[i, 1, site] ~ T(dnorm(IC[i, 1], tau = IC[i, 2]), 0, Inf)
+			x[i, 1, site] ~ T(dnorm(IC[i, 1, site], tau = IC[i, 2, site]), 0, Inf)
 		}
 
 	  ### define parameters

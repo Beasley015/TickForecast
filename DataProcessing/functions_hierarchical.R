@@ -659,7 +659,9 @@ transfer_analysis <- function(
 	colnames(betas) <- str_replace(colnames(betas), "V", "beta")
 	
 	betas <- betas %>%
-	  pivot_longer(cols = everything(), names_to="node", values_to="value") %>%
+	  pivot_longer(cols = everything(), names_to="node", values_to="value")
+	
+	betas.quant <- betas %>%
 		group_by(node) %>%
 		summarise(
 			lower95 = quantile(value, 0.025, na.rm=T),
@@ -672,6 +674,13 @@ transfer_analysis <- function(
 		) %>%
 		ungroup() %>%
 		mutate(species = spp, start.date = start.date, model = model)
+	
+	# Sigma
+	sigma <- as.data.frame(fx.df[['sig']])
+	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
+	
+	sig <- sigma %>%
+	  pivot_longer(cols=everything(), names_to = 'parameter', values_to='value')
 
 	if (!dir.exists(out.dir)) {
 		dir.create(out.dir, recursive = TRUE, showWarnings = FALSE)
@@ -683,8 +692,9 @@ transfer_analysis <- function(
 	write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
 	write_csv(ungroup(param.quant), file.path(out.dir, "parameterSummary.csv"))
 	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
+	write_csv(ungroup(betas.quant), file.path(out.dir, "betaQuant.csv"))
 	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
-	
+	write_csv(sig, file.path(out.dir, "sigma.csv"))
 
 	# weather - if used
 	if (weather) {

@@ -34,7 +34,7 @@ if (update) {
 }
 
 # Define models to run
-models <- c("Weather_hierarchical", "WeatherMice_hierarchical")
+models <- c("Weather_hierarchicalIntercept", "WeatherMice_hierarchicalIntercept")
 species <- c("Ixodes scapularis", "Amblyomma americanum") 
 
 # Create all possible combos
@@ -363,7 +363,7 @@ for (t in seq_len(n.drags)) {
 
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
-		} else { # EDIT AFTER 1 SUCCESSFUL TIME STEP ---------------------------
+		} else {
 			# read last forecast parameters and state
 			readDest <- file.path(
 				dir.base,
@@ -375,31 +375,40 @@ for (t in seq_len(n.drags)) {
 
 			# get parameter posterior summary
 			params.stats <- last.params %>%
-				rename(parameter = node) %>%
-				select(parameter, value) %>%
+			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
+			  rename("parameter" = "node") %>%
 				group_by(parameter) %>%
 				summarise(mu = mean(value), tau = 1 / var(value))
 
 			if (update) {
+			  # Priors for transitions (priors are constant across sites)
 				phi.l <- get_prior("phi.l.mu")
 				phi.n <- get_prior("phi.n.mu")
 				phi.a <- get_prior("phi.a.mu")
 				theta.l2n <- get_prior("theta.ln")
 				theta.n2a <- get_prior("theta.na")
-				# repro <- get_prior("repro.mu")
 
-				if (model.job != "Static") {
-					pr.beta <- matrix(NA, n.beta, 2)
-					for (i in seq_len(n.beta)) {
-						pr.beta[i, ] <- get_prior(paste0("beta[", i, "]"))
-					}
+				# Priors for betas (betas will vary across sites)
+				betas <- read_csv(file.path(readDest, "beta.csv")) %>%
+				  rename("parameter" = "node") %>%
+				  group_by(parameter) %>%
+				  summarise(mu = mean(value), tau = 1/var(value)) %>%
+				  suppressMessages()
+				
+				pr.beta <- matrix(NA, n.beta, 2)
+				for (i in seq_len(n.beta)) {
+    			pr <- numeric(2)
+					xx <- betas %>%
+					  filter(parameter == paste("beta", i, sep = ""))
+					pr[1] <- xx %>% pull(mu)
+					pr[2] <- xx %>% pull(tau)
+					pr.beta[i, ] <- pr
 				}
 
 				# get invgamma parameters
-				pr.sig <- last.params %>%
-					rename(parameter = node) %>%
-					filter(grepl("sig", parameter)) %>%
-					select(parameter, value) %>%
+				sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
+				  suppressMessages()
+				pr.sig <- sig.last %>%
 					group_by(parameter) %>%
 					summarise(
 						alpha = inv_gamma_mm(value)[1],
@@ -408,22 +417,50 @@ for (t in seq_len(n.drags)) {
 			}
 
 			last.fx <- read_csv(file.path(readDest, "stateSamples.csv")) %>%
+			  pivot_longer(cols=Larva:Adult, names_to = 'lifeStage', 
+			               values_to='value') %>%
 				suppressMessages()
 
 			tick.stats <- last.fx %>%
 				filter(time == fx.start.date) %>%
-				group_by(lifeStage, time) %>%
+				group_by(lifeStage, time, siteID) %>%
 			  summarise(mu = mean(value), tau = 1 / var(value))
 
-			IC <- matrix(NA, 4, 2)
-			IC[1, 1] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(mu)
-			IC[1, 2] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(tau)
-			IC[2, 1] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(mu)
-			IC[2, 2] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(tau)
-			IC[3, 1] <- tick.stats %>% filter(lifeStage == "Nymph") %>% pull(mu)
-			IC[3, 2] <- tick.stats %>% filter(lifeStage == "Nymph") %>% pull(tau)
-			IC[4, 1] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(mu)
-			IC[4, 2] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(tau)
+			IC <- array(NA, dim = c(4, 2, length(sites)))
+			
+			for(i in 1:length(sites)){
+			  IC[1, 1, i] <- tick.stats %>% 
+			    filter(lifeStage == "Larva" & siteID==sites[i]) %>% 
+			    pull(mu)
+			  
+			  IC[1, 2, i] <- tick.stats %>% 
+			    filter(lifeStage == "Larva" & siteID==sites[i]) %>% 
+			    pull(tau)
+			
+			  IC[2, 1, i] <- tick.stats %>% 
+			    filter(lifeStage == "Dormant"& siteID==sites[i]) %>% 
+			    pull(mu)
+			
+			  IC[2, 2, i] <- tick.stats %>% 
+			    filter(lifeStage == "Dormant" & siteID==sites[i]) %>% 
+			    pull(tau)
+			
+			  IC[3, 1, i] <- tick.stats %>% 
+			    filter(lifeStage == "Nymph" & siteID==sites[i]) %>% 
+			    pull(mu)
+			
+			  IC[3, 2, i] <- tick.stats %>% 
+			    filter(lifeStage == "Nymph" & siteID==sites[i]) %>% 
+			    pull(tau)
+			
+			  IC[4, 1, i] <- tick.stats %>% 
+			    filter(lifeStage == "Adult" & siteID==sites[i]) %>% 
+			    pull(mu)
+			
+			  IC[4, 2, i] <- tick.stats %>% 
+			    filter(lifeStage == "Adult" & siteID==sites[i]) %>% 
+			    pull(tau)
+			}
 
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 			n.days <- length(fx.sequence)
@@ -630,10 +667,6 @@ for (t in seq_len(n.drags)) {
 		) 
 	
 	stopCluster(cl)
-	
-	# NOTE: delete these lines when done! --------------
-	saveRDS(out.nchains, file = "tempouts.rds")
-	out.nchains <- readRDS("tempouts.rds")
   
 	# Merge outputs of chains
 	dat.hindcast <- list()
@@ -645,6 +678,7 @@ for (t in seq_len(n.drags)) {
 	                                 along = 1))
 	  }
 	}
+	
 	names(dat.hindcast) <- names(out.nchains[[1]])
 
 	# Test MCMC convergence with Gelman-Rubin statistic
@@ -708,7 +742,6 @@ for (t in seq_len(n.drags)) {
 		observations = neon.job,
 		fx.dates = fx.sequence,
 		model = model.job,
-		# sites = sites,
 		spp = species.job,
 		weather = use.daymet,
 		out.dir = fileDest)
