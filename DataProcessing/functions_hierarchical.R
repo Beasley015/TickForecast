@@ -636,10 +636,10 @@ transfer_analysis <- function(
 	}
 	
 	param.df <- do.call(rbind, param.list)
-	colnames(param.df)[1:8] <- sites
+	colnames(param.df)[1:length(sites)] <- sites
 	
 	param.quant <- param.df %>%
-	  pivot_longer(cols = BLAN:UKFS, names_to='siteID', values_to = 'value') %>%		
+	  pivot_longer(cols = -node, names_to='siteID', values_to = 'value') %>%		
 	  group_by(node, siteID) %>%
 	  summarise(
 	    lower95 = quantile(value, 0.025, na.rm=T),
@@ -713,7 +713,7 @@ transfer_analysis <- function(
 	  colnames(weather.df) <- c("node", "time", sites)
 	  
 		daymet <- weather.df %>%
-		  pivot_longer(cols = BLAN:UKFS, names_to = "site", 
+		  pivot_longer(cols = -c(node, time), names_to = "site", 
 		               values_to = "value") %>%
 		  mutate(value= as.numeric(value)) %>%
 		  group_by(node, time, site) %>%

@@ -28,7 +28,7 @@ run_transfer_nimble <- function(
 
 	clusterExport(cl, export.vec, envir = environment())
 
-	# export inits to clusters
+	# export inits to clusters 
 	for (j in seq_along(cl)) {
 		set.seed(j)
 		init <- inits()

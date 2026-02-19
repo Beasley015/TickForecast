@@ -50,14 +50,14 @@ ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 1
+	job.num <- 3
 }
 
 species.job <- jobs$species[job.num] %>%
   str_replace(., " ", "_")
 model.job <- jobs$model[job.num]
 
-if(species.job=="Ixodes scapularis"){
+if(species.job=="Ixodes_scapularis"){
   sites <- iscap.sites
   } else{
     sites <- ambly.sites
@@ -107,9 +107,9 @@ df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"),
 month.get <- if_else(month(start.date) < 5, 4, month(start.date))
 data.latent <- df.latent %>%
 	mutate(model = gsub("DormantNymph", "", model)) %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchical",
-                           model == "WeatherAndMiceGlobal" ~ 
-                             "WeatherMice_hierarchical",
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalIntercept",
+                           model == "WithWeatherAndMiceGlobal" ~ 
+                             "WeatherMice_hierarchicalIntercept",
                            TRUE ~ model)) %>%
 	filter(
 		model == model.job,
@@ -137,6 +137,8 @@ IC <- tibble(
 	)
 ) %>%
 	as.matrix()
+
+IC <- array(IC, dim = c(nrow(IC), ncol(IC), length(sites)))
 
 # =========================================== #
 #       mouse data intake ---------------
@@ -256,9 +258,9 @@ df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
                       show_col_types = F)
 
 params.stats <- df.params %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchical",
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalIntercept",
                            model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchical",
+                             "WeatherMice_hierarchicalIntercept",
                            TRUE ~ model)) %>%
 	filter(model == model.job) %>%
 	select(parameter, value) %>%
@@ -325,9 +327,9 @@ inv_gamma_mm <- function(x) {
 
 # get invgamma parameters
 pr.sig <- df.params %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchical",
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalIntercept",
                            model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchical",
+                             "WeatherMice_hierarchicalIntercept",
                            TRUE ~ model)) %>%
 	filter(model == model.job, grepl("sig", parameter)) %>%
 	select(parameter, value) %>%
@@ -340,14 +342,14 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
-for (t in seq_len(n.drags)) {
+for (t in 1:5){ #seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
 	message(mm)
 
   # flags for if statements
-	miceAndWeather <- model.job == "WeatherMice_hierarchical"
+	miceAndWeather <- model.job == "WeatherMice_hierarchicalIntercept"
 	use.daymet <- grepl("Weather", model.job)
 
 	dir.base <- file.path(
@@ -576,9 +578,13 @@ for (t in seq_len(n.drags)) {
 	data$xind <- array(1, dim=c(4, horizon, length(sites)))
 
 	if (miceAndWeather){
+	  # FIX MNA SCALED, MISSING SITES -------------
 	  data$mice <- mna.scaled %>%
 	    filter(Date %in% fx.sequence) %>%
-	    pivot_wider(names_from=siteID, values_from=mna_scaled)
+	    pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
+	    select(-Date) %>%
+	    relocate(sites) %>%
+	    as.matrix()
 
 	  if (nrow(data$mice) < length(fx.sequence)) {
 	    horizon <- min(length(data$cgdd), hrow(data$mice))
@@ -587,7 +593,7 @@ for (t in seq_len(n.drags)) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))) {
-	  if (model.job == "Weather_hierarchical") {
+	  if (model.job == "Weather_hierarchicalIntercept") {
 	    # Make sure horizon does not go past empirical data
 	    horizon <- nrow(data$cgdd)
 	    data$y <- as.array(y[, 1:horizon, ,])
@@ -746,3 +752,4 @@ for (t in seq_len(n.drags)) {
 		weather = use.daymet,
 		out.dir = fileDest)
 }
+

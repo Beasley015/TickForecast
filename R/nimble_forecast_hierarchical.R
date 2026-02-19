@@ -1,5 +1,5 @@
 library(nimble)
-source("./DataProcessing/functions.R")
+source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
   for(site in 1:nsite){
