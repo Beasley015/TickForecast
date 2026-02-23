@@ -60,87 +60,6 @@ df.null <- null.quants %>%
 	select(-n.days, -n.drags, -count.flag, -siteID) %>%
   filter(!(is.na(species)))
 
-# Process model quant scores -------------------
-
-# # File names for quant scores
-# out.files <- list.files(dir.out, recursive = TRUE)
-# quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
-# 
-# models <- c("Weather", "WithWeatherAndMiceGlobal")
-# species <- c("Ixodesscapularis", "Amblyommaamericanum") 
-# neon.sites <- c(
-#   "BLAN",
-#   "HARV",
-#   "KONZ",
-#   "LENO",
-#   "OSBS",
-#   "SCBI",
-#   "SERC",
-#   "TALL",
-#   "TREE",
-#   "UKFS"
-# )
-# 
-# cary.sites <- c(
-#   "GREN",
-#   "HNRY",
-#   "TEA"
-# ) 
-# 
-# # Create all possible combos
-# jobs <- expand_grid(
-#   model = models,
-#   species = species,
-#   site = c(neon.sites, cary.sites)
-# )
-# 
-# # Not all sites have both tick species
-# jobs <- jobs %>%
-#   filter(
-#     !(site == "HARV" & species == "Amblyommaamericanum"),
-#     !(site == "TREE" & species == "Amblyommaamericanum"),
-#     !(site == "KONZ" & species == "Ixodesscapularis"),
-#     !(site == "OSBS" & species == "Ixodesscapularis"),
-#     !(site == "TALL" & species == "Ixodesscapularis"),
-#     !(site == "UKFS" & species == "Ixodesscapularis"),
-#     !(site == "GREN" & species == "Amblyommaamericanum"),,
-#     !(site == "HNRY" & species == "Amblyommaamericanum"),,
-#     !(site == "TEA" & species == "Amblyommaamericanum"),
-#   )
-# 
-# # Process outputs
-# for(j in 1:nrow(jobs)){
-#   # Get subset of jobs
-#   strings <- c(as.character(jobs[j,1]),as.character(jobs[j,2]), as.character(jobs[j,3]))
-#   string.check <- sapply(quantScore, str_detect, strings)
-#   quant.files <- quantScore[which(colSums(string.check)==3)]
-#   
-#   # empty tibble
-#   df.process <- tibble()
-#   
-#   for(i in seq_along(quant.files)){
-#       dfi <- read_csv(file.path(dir.out, quant.files[i])) %>%
-#         mutate(start.date = str_extract(quant.files[i], "\\d{4}-\\d{2}-\\d{2}")) %>%
-#         filter(lifeStage=="Nymph") %>%
-#         dplyr::select(-c(nlcd, percentBias, rmse, bayesP)) %>%
-#         suppressMessages()
-#       
-#       df.process <- bind_rows(df.process, dfi)
-#       if(i %% 10 == 0) message(i, " of ", length(quant.files), " complete ", round(i/length(quant.files)*100), "%")
-#   }
-#   
-#   df.process <- df.process %>%
-#     mutate(mice = if_else(grepl("Mice", jobs$model[j]), "Mice", "No mice"),
-#            weather = if_else(grepl("Weather", jobs$model[j]), "Weather", "No weather")) 
-#   
-#   write_csv(df.process, file=paste(dir.analysis, as.character(jobs[j,3]), as.character(jobs[j,2]),
-#                                    as.character(jobs[j,1]), sep = ""))
-#   
-#   print(paste("Job = ", j))
-#   
-#   rm(df.process)
-# }
-
 # Raw NEON data ----------------
 source("./DataProcessing/functions.R")
 neon.ix <- neon_tick_data("Ixodes scapularis") %>% suppressMessages()
@@ -157,35 +76,30 @@ neon.data <- bind_rows(neon.ix, neon.aa) %>%
 site.info <- neonstore::neon_sites()
 
 # Model output ------------------
-analysis.files <- list.files(dir.analysis)
+analysis.files <- list.files(dir.analysis, recursive = T)
 
 # time series figures-------------------------------------------------------------------
-for(i in 1:length(analysis.files)){
-  df.mutate <- read.csv(paste(dir.analysis, analysis.files[i], sep = ""))
+series.files <- analysis.files[str_detect(analysis.files, "allDays")]
+
+analysis.files <- analysis.files[str_detec(analysis.files, "")]
+for(i in 1:length(series.files)){
+  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = ""))
 
   # Condense forecast across plots
   forecast.density <- df.mutate %>%
-	  select(
-		  time,
-		  lifeStage,
-		  siteID,
-		  plotID,
-		  species,
-		  totalSampledArea,
-		  forecast
-	  ) %>%
-	  group_by(time) %>%
-    summarise(mean.forecast = mean(forecast), forecast05 = quantile(forecast, 0.025),
-              forecast95=quantile(forecast,0.075), totalSampledArea=mean(totalSampledArea)) %>%
-    mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
-	  mutate(density = mean.forecast / totalSampledArea * 450, density95=forecast95/totalSampledArea * 450,
-	        density05=forecast05/totalSampledArea*450)
-
+	  select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
+	  group_by(time, lifeStage, model, species) %>%
+    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
+              forecast95=mean(upper95)) %>%
+    mutate(time = as.Date(time, format = "%Y-%m-%d")) 
+  
   # Get constants for filtering
-  ls <- "Nymph"
+  ls <- c("Larva", "Nymph", "Adult")
   sp <- unique(df.mutate$species)
   site.vec <- unique(df.mutate$siteID)
-  mod <- ifelse(grepl("Mice", analysis.files[i]), "Weather&Mice", "Weather")
+  mod <- unique(forecast.density$model)
+  
+  all_combos <- expand_grid(ls, sp, mod)
 
   fx.issue.date <- neon.data %>%
 	  filter(siteID == site.vec) %>%
@@ -196,23 +110,23 @@ for(i in 1:length(analysis.files)){
   # Filter null model data
   df.null.timeseries <- df.null %>%
     filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date),
-           lifeStage==ls, species==sp) %>%
+           lifeStage %in% ls, species %in% sp) %>%
     rename(siteID = site) %>%
-    select(median, lower95, upper95, variance, time) %>%
+    select(median, lower95, upper95, variance, time, lifeStage, species) %>%
     group_by(time)
 
   # Filter raw data
   neon.timeseries <- neon.data %>%
     mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
-    filter(siteID==site.vec, lifeStage==ls, time>=min(fx.issue.date),
+    filter(siteID==site.vec, lifeStage %in% ls, species %in% sp, time>=min(fx.issue.date),
            time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
-    select(time, plotID, density) %>%
-    group_by(time) %>%
+    select(time, plotID, density, lifeStage, species) %>%
+    group_by(time, lifeStage, species) %>%
     summarise(meandensity = mean(density))
 
   # Filter forecast data
   forecast.density <- forecast.density %>%
-    filter(time >= min(fx.issue.date),time <= max(fx.issue.date) + 364)
+    filter(time >= min(fx.issue.date),time <= max(fx.issue.date+364))
 
   dist.cols <- c(
 	  "Data" = "#dd5129",
@@ -220,25 +134,41 @@ for(i in 1:length(analysis.files)){
 	  "Null" = "#43b284"
   )
 
-  gg <- ggplot() +
-	  geom_ribbon(data=df.null.timeseries, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null"), 
-	             alpha = 0.5) +
-	  geom_point(data = neon.timeseries, aes(x=time, y = meandensity, fill = "Observed Data"), 
-	             color = "#dd5129", size = 3) +
-    geom_ribbon(data=forecast.density, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"), 
-                alpha = 0.5)+
-	  labs(x = "Date", y = "Ticks/450m^2", title = paste(site.vec, ", ", sp, ", ", mod, sep = "")) +
-    scale_fill_manual(values = c("#0f7ba2", "#43b284", "#dd5129"), name = "")+
-	  theme_pubr() +
-	  theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5),
-	        legend.position = "bottom")
-  gg
-  save_gg(
-	  dest = paste0("/timeseries_singlemods/", site.vec, "_", sp, "_", mod, ".jpeg"),
-	  gg = gg,
-	  path = dir.plot
-  )
-  print(paste("Site = ", site.vec, ", Species = ", sp, ", Model = ", mod, sep = ""))
+  for(j in 1:nrow(all_combos)){
+    # Further filtering
+    forecast.smol <- forecast.density %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j], model == all_combos$mod[j])
+    
+    neon.smol <- neon.timeseries %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j])
+    
+    null.smol <- df.null.timeseries %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j])
+    
+    gg <- ggplot() +
+	    geom_ribbon(data=null.smol, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null")) +
+	    geom_point(data = neon.smol, aes(x=time, y = meandensity, fill = "Observed Data"),
+	               color = "#dd5129", size = 3) +
+      geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"),
+                  alpha = 0.5)+
+      lims(x = c(fx.issue.date[1], as.Date("2022-01-01", format = "%Y-%m-%d"))) +
+	    labs(x = "Date", y = "Ticks/450m^2", 
+	         title = paste(site.vec, ", ", all_combos$sp[j], ", ", all_combos$ls[j], ", ", 
+	                       all_combos$mod[j], sep = "")) +
+      scale_fill_manual(values = c("#0f7ba2", "#43b284", "#dd5129"), name = "")+
+	    theme_pubr() +
+	    theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5),
+	          legend.position = "bottom")
+    gg
+    save_gg(
+	    dest = paste0("/timeseries_singlemods/", site.vec, "_", all_combos$sp[j], "_", 
+	                  all_combos$ls[j], "_", all_combos$mod[j], ".jpeg"),
+	    gg = gg,
+	    path = dir.plot
+    )
+    print(paste("Site = ", site.vec, ", Species = ", all_combos$sp[j], ", Life Stage = ", all_combos$ls[j], 
+                ", Model = ", all_combos$mod[j], sep = ""))
+  }
 }
 
 # score figures --------------------------------------------------------------------------
