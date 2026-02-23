@@ -36,7 +36,6 @@ find_species <- function(x){
 sites <- c("BLAN","HARV","KONZ","LENO","OSBS","SCBI","SERC","TALL","TREE","UKFS",
            "GREN","HNRY","TEA")
 
-
 for(j in 1:length(sites)){
   # Blank df for each site
   df.process <- tibble()
@@ -52,6 +51,8 @@ for(j in 1:length(sites)){
     spp <- find_species(quantScore[i])
     m <- find_model(quantScore[i])
     site <- sites[j]
+    
+    if(year(as.Date(st, format = "%Y-%m-%d")) < 2018){next}
   
     df.summary <- dfi %>% 
       group_by(time, lifeStage, siteID) %>%

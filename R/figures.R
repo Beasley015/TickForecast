@@ -81,23 +81,53 @@ analysis.files <- list.files(dir.analysis, recursive = T)
 # time series figures-------------------------------------------------------------------
 series.files <- analysis.files[str_detect(analysis.files, "allDays")]
 
-analysis.files <- analysis.files[str_detec(analysis.files, "")]
 for(i in 1:length(series.files)){
+  # Read in time series from forecasting model
   df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = ""))
-
-  # Condense forecast across plots
-  forecast.density <- df.mutate %>%
-	  select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
-	  group_by(time, lifeStage, model, species) %>%
-    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
-              forecast95=mean(upper95)) %>%
-    mutate(time = as.Date(time, format = "%Y-%m-%d")) 
   
   # Get constants for filtering
   ls <- c("Larva", "Nymph", "Adult")
   sp <- unique(df.mutate$species)
   site.vec <- unique(df.mutate$siteID)
-  mod <- unique(forecast.density$model)
+  mod <- unique(df.mutate$model)
+  
+  # Get associated scoring files because they have plot areas
+  score.files <- analysis.files[str_detect(analysis.files, site.vec)]
+  score.files <- score.files[-length(score.files)]
+  
+  # Read in score files
+  scores <- tibble()
+  for(j in 1:length(score.files)){
+    file <- read_csv(file=paste(dir.analysis,score.files[j], sep = "")) %>%
+      suppressMessages()
+    scores <- bind_rows(scores, file)
+    rm(file)
+  }
+  
+  scores <- scores %>%
+    select(time, siteID, totalSampledArea, plotID, species, model) %>%
+    group_by(time, species, model, plotID) %>%
+    distinct() %>%
+    ungroup() %>%
+    group_by(time, species, model) %>%
+    summarise(sampledArea = sum(totalSampledArea))
+
+  # Condense forecast across plots
+  forecast.density <- df.mutate %>%
+	  select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
+    mutate(time=as.Date(time, format = "%Y-%m-%d")) %>%
+    left_join(scores, by = c("time", "species","model")) %>%
+    fill(sampledArea, .direction="down") %>%
+    group_by(time, lifeStage, model, species, sampledArea) %>% 
+    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
+              forecast95=mean(upper95)) 
+    
+  if(!(site.vec %in% c("GREN", "HNRY", "TEA"))){
+    forecast.density <- forecast.density %>%
+      mutate(mean.density = (mean.forecast/sampledArea)*450,
+             density05 = (forecast05/sampledArea)*450,
+             density95 = (forecast95/sampledArea)*450)
+  }
   
   all_combos <- expand_grid(ls, sp, mod)
 
@@ -149,7 +179,7 @@ for(i in 1:length(series.files)){
 	    geom_ribbon(data=null.smol, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null")) +
 	    geom_point(data = neon.smol, aes(x=time, y = meandensity, fill = "Observed Data"),
 	               color = "#dd5129", size = 3) +
-      geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"),
+      geom_ribbon(data=forecast.smol, aes(x = time, ymin=density05, ymax=density95, fill = "Forecast"),
                   alpha = 0.5)+
       lims(x = c(fx.issue.date[1], as.Date("2022-01-01", format = "%Y-%m-%d"))) +
 	    labs(x = "Date", y = "Ticks/450m^2", 
