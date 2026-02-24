@@ -71,10 +71,10 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-n.slots <- 2
+n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+# n.slots <- 2
 production <- TRUE
-n.iter <- 1000 #50000
+n.iter <- 50000
 Nmc <- 2000
 horizon <- 365
 
@@ -156,9 +156,10 @@ ch.ls <- capture_matrix(smam_neon, sites=sites)
 ch <- ch.ls$ch %>%
   mutate_at(.vars = vars(-siteID), ~case_when(. %in% 1:3 ~ 1,
                                               TRUE ~ 0)) %>%
-  mutate(ncaps = rowSums(.[2:156])) %>%
+  mutate(ncaps = rowSums(.[2:ncol(.)])) %>%
   filter(ncaps > 0) %>%
-  select(-ncaps)
+  select(-ncaps) %>%
+  arrange(siteID)
 
 # mna: NEON
 ks <- known_states(ch)
@@ -176,7 +177,8 @@ mna.full <- smam_cary %>%
   pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
               values_fn = sum) %>%
   mutate(pmap_df(., ~ na.locf(c(...)[-1]))) %>%
-  mutate(across(-siteID, .fns = as.numeric))
+  mutate(across(-siteID, .fns = as.numeric)) %>%
+  arrange(siteID)
 
 mice.obs <- ymd(colnames(mna.full)[-1]) # unique sampling days: mice
 
@@ -578,7 +580,6 @@ for (t in 1:5){ #seq_len(n.drags)) {
 	data$xind <- array(1, dim=c(4, horizon, length(sites)))
 
 	if (miceAndWeather){
-	  # FIX MNA SCALED, MISSING SITES -------------
 	  data$mice <- mna.scaled %>%
 	    filter(Date %in% fx.sequence) %>%
 	    pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
