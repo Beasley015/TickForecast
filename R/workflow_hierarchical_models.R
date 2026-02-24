@@ -344,7 +344,7 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
-for (t in 1:5){ #seq_len(n.drags)) {
+for (t in 1:seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
@@ -707,12 +707,12 @@ for (t in 1:5){ #seq_len(n.drags)) {
 		                                         transform = TRUE)$psrf[1])
 
 		if (any(gelman.keep > 1.2)) {
-		  # message("WARNING: Convergence not reached!")
+		  message("WARNING: Convergence not reached!")
 		  bad.nodes <- which(gelman.keep > 1.2)
 		  bad.params <- tibble(node = nodes[bad.nodes],
 		    psrf = as.numeric(gelman.keep[bad.nodes])) %>%
 		    arrange(psrf)
-				# print(tail(bad.params))
+				print(tail(bad.params))
 		  
 		  } else {
 		    # message("Convergence = TRUE")
