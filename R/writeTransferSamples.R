@@ -44,16 +44,19 @@ for(j in 1:length(sites)){
   quantScore <- grep(sites[j], process.samples, value = T)
   
   for(i in seq_along(quantScore)){
-    dfi <- read_csv(file.path(dir.out, quantScore[i])) %>% 
-      suppressMessages()
-    
+    # Extract constants
     st <- str_extract(quantScore[i], "\\d{4}-\\d{2}-\\d{2}")
     spp <- find_species(quantScore[i])
     m <- find_model(quantScore[i])
     site <- sites[j]
     
+    # Skip pre-2018 outputs- essentially a burn-in period
     if(year(as.Date(st, format = "%Y-%m-%d")) < 2018){next}
-  
+    
+    # Load file and clean up
+    dfi <- read_csv(file.path(dir.out, quantScore[i])) %>% 
+      suppressMessages()
+    
     df.summary <- dfi %>% 
       group_by(time, lifeStage, siteID) %>%
       summarise(lower95 = quantile(value, 0.025),
