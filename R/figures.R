@@ -219,8 +219,6 @@ aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
 null.crps <- null.scores %>%
 	mutate(crps = score, doy = yday(time)) 
 
-ls <- 2
-
 score.files <- analysis.files[str_detect(analysis.files, "analysis")]
 
 df.mutate <- tibble()
@@ -362,9 +360,75 @@ both.tab <- both.df %>%
   group_by(siteID, model, species) %>%
   summarise(mean.diff = mean(crps.diff))
 
-save_gg("aa_crps_diff.jpeg", aa.fig, dir.plot)
-save_gg("ix_crps_diff.jpeg", ix.fig, dir.plot)
-save_gg("both_crps_diff.jpeg", both.fig, dir.plot)
+# save_gg("aa_crps_diff.jpeg", aa.fig, dir.plot)
+# save_gg("ix_crps_diff.jpeg", ix.fig, dir.plot)
+# save_gg("both_crps_diff.jpeg", both.fig, dir.plot)
 
 # Scores across model iterations --------------------------
+score.files <- analysis.files[str_detect(analysis.files, "analysis")]
 
+both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
+ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
+aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
+
+df.mutate <- tibble()
+for(i in 1:length(score.files)){
+  score <- read_csv(file=file.path(dir.analysis, score.files[i])) %>%
+    suppressMessages()
+  
+  score <- score %>%
+    filter(year(time) >= 2018) %>%
+    select(lifeStage, siteID, species, model, start.date, crps) %>%
+    group_by(lifeStage, siteID, species, model, start.date) %>%
+    summarise(crps = mean(crps)) %>%
+    suppressMessages()
+  
+  df.mutate <- bind_rows(df.mutate, score)
+  rm(score)
+}
+
+aa.sites <- df.mutate %>%
+  filter(siteID %in% aa.plots)
+
+aa.score.ts <- ggplot(data=aa.sites, aes(x = start.date, y = crps, color = model,
+                          fill=model))+
+  geom_smooth(method='lm', linewidth = 1.5)+
+  facet_wrap(~siteID, nrow = 2, ncol = 2)+
+  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
+       fill = "Model")+
+  scale_color_manual(values = natparks.pals("DeathValley"))+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+ix.sites <- df.mutate %>%
+  filter(siteID %in% ix.plots)
+
+ix.score.ts <- ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
+                          fill=model))+
+  geom_smooth(method='lm', linewidth = 1.5)+
+  facet_wrap(~siteID)+
+  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
+       fill = "Model")+
+  scale_color_manual(values = natparks.pals("DeathValley"))+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+both.sites <- df.mutate %>%
+  filter(siteID %in% both.plots)
+
+both.score.ts <- ggplot(data=both.sites, aes(x = start.date, y = crps, color = model,
+                          fill=model))+
+  geom_smooth(method='lm', linewidth = 1.5)+
+  facet_grid(rows = vars(siteID), cols = vars(species))+
+  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
+       fill = "Model")+
+  scale_color_manual(values = natparks.pals("DeathValley"))+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+# save_gg("aa_score_ts.jpeg", aa.score.ts, dir.plot)
+# save_gg("ix_score_ts.jpeg", ix.score.ts, dir.plot)
+# save_gg("both_score_ts.jpeg", both.score.ts, dir.plot)
