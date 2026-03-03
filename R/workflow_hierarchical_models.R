@@ -71,12 +71,12 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-# n.slots <- 2
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+n.slots <- 2
 production <- TRUE
-n.iter <- 50000
+n.iter <- 1000 #50000
 Nmc <- 2000
-horizon <- 365
+horizon <- 20 #365
 
 # =========================================== #
 #       tick data intake ----------------
@@ -384,41 +384,41 @@ for (t in seq_len(n.drags)) {
 				group_by(parameter) %>%
 				summarise(mu = mean(value), tau = 1 / var(value))
 
-			if (update) {
-			  # Priors for transitions (priors are constant across sites)
-				phi.l <- get_prior("phi.l.mu")
-				phi.n <- get_prior("phi.n.mu")
-				phi.a <- get_prior("phi.a.mu")
-				theta.l2n <- get_prior("theta.ln")
-				theta.n2a <- get_prior("theta.na")
-
-				# Priors for betas (betas will vary across sites)
-				betas <- read_csv(file.path(readDest, "beta.csv")) %>%
-				  rename("parameter" = "node") %>%
-				  group_by(parameter) %>%
-				  summarise(mu = mean(value), tau = 1/var(value)) %>%
-				  suppressMessages()
-				
-				pr.beta <- matrix(NA, n.beta, 2)
-				for (i in seq_len(n.beta)) {
-    			pr <- numeric(2)
-					xx <- betas %>%
-					  filter(parameter == paste("beta", i, sep = ""))
-					pr[1] <- xx %>% pull(mu)
-					pr[2] <- xx %>% pull(tau)
-					pr.beta[i, ] <- pr
-				}
-
-				# get invgamma parameters
-				sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
-				  suppressMessages()
-				pr.sig <- sig.last %>%
-					group_by(parameter) %>%
-					summarise(
-						alpha = inv_gamma_mm(value)[1],
-						beta = inv_gamma_mm(value)[2]
-					)
-			}
+# 			if (update) {
+# 			  # Priors for transitions (priors are constant across sites)
+# 				phi.l <- get_prior("phi.l.mu")
+# 				phi.n <- get_prior("phi.n.mu")
+# 				phi.a <- get_prior("phi.a.mu")
+# 				theta.l2n <- get_prior("theta.ln")
+# 				theta.n2a <- get_prior("theta.na")
+# 
+# 				# Priors for betas (betas will vary across sites)
+# 				betas <- read_csv(file.path(readDest, "beta.csv")) %>%
+# 				  rename("parameter" = "node") %>%
+# 				  group_by(parameter) %>%
+# 				  summarise(mu = mean(value), tau = 1/var(value)) %>%
+# 				  suppressMessages()
+# 				
+# 				pr.beta <- matrix(NA, n.beta, 2)
+# 				for (i in seq_len(n.beta)) {
+#     			pr <- numeric(2)
+# 					xx <- betas %>%
+# 					  filter(parameter == paste("beta", i, sep = ""))
+# 					pr[1] <- xx %>% pull(mu)
+# 					pr[2] <- xx %>% pull(tau)
+# 					pr.beta[i, ] <- pr
+# 				}
+# 
+# 				# get invgamma parameters
+# 				sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
+# 				  suppressMessages()
+# 				pr.sig <- sig.last %>%
+# 					group_by(parameter) %>%
+# 					summarise(
+# 						alpha = inv_gamma_mm(value)[1],
+# 						beta = inv_gamma_mm(value)[2]
+# 					)
+# 			}
 
 			last.fx <- read_csv(file.path(readDest, "stateSamples.csv")) %>%
 			  pivot_longer(cols=Larva:Adult, names_to = 'lifeStage', 
