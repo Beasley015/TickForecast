@@ -213,632 +213,222 @@ for(i in 1:length(series.files)){
 # score figures --------------------------------------------------------------------------
 
 both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
-ix.plots <- c("TREE", "HARV")
+ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
 aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
 
 null.crps <- null.scores %>%
-	mutate(crps = score, doy = yday(time)) #%>%
-	# select(-metric)
+	mutate(crps = score, doy = yday(time)) 
 
-ls <- 2
+score.files <- analysis.files[str_detect(analysis.files, "analysis")]
 
-df.model.names <- df.mutate %>%
-	mutate(
-		start.date = ymd(start.date),
-		doy = yday(time),
-		model = if_else(grepl("MNA", model), "Mice", model),
-		model = if_else(grepl("Global", model), "Weather & Mice", model),
-		model = factor(
-			model,
-			levels = c("Static", "Mice", "Weather", "Weather & Mice")
-		)
-	)
-
-plot.sub <- ix.plots
-
-plot_doy <- function(ua.sub, plot.sub, ls, spp) {
-	rect <- tibble(
-		lifeStage = c("Larva", "Nymph", "Adult"),
-		xmin = c(yday("2022-07-01"), yday("2022-05-01"), yday("2022-08-01")),
-		xmax = c(yday("2022-10-01"), yday("2022-08-01"), yday("2022-05-01"))
-	)
-
-	rect.use <- rect %>% filter(lifeStage == ls)
-	gg <- df.model.names %>%
-		filter(
-			ua == ua.sub,
-			time != start.date,
-			# observed > 0,
-			siteID %in% plot.sub,
-			species %in% spp,
-			# model == "Weather & Mice",
-			lifeStage == ls
-		) %>%
-		# mutate(siteID = factor(siteID, levels = c("TREE", "HARV", "BLAN", "SCBI", "SERC", "LENO"))) %>%
-		mutate(
-			ua = factor(ua, levels = c("IC", "+ Parameter", "+ Driver", "+ Process"))
-		) %>%
-		# mutate(crps = log(crps+1)) %>%
-		ggplot() +
-		aes(x = doy, y = crps) +
-		# geom_point() +
-		geom_smooth(
-			se = FALSE,
-			size = 1,
-			method = "loess",
-			alpha = 0.6,
-			aes(color = model)
-		) +
-		geom_smooth(
-			data = null.crps %>%
-				select(-ua) %>%
-				mutate(
-					#crps = log(crps+1),
-					start.date = time
-				) %>%
-				filter(siteID %in% plot.sub, species %in% spp, lifeStage == ls),
-			se = FALSE,
-			size = 1,
-			method = "loess",
-			color = "black",
-			linetype = "dashed"
-		) +
-		scale_color_manual(values = natparks.pals("DeathValley")) +
-		scale_y_continuous(limits = c(0, NA)) +
-		# scale_y_log10() +
-		labs(
-			x = "Day of Year",
-			y = "RMSE",
-			title = ls,
-			color = "Model",
-			linetype = "Parameter DA"
-		) +
-		theme_pubr() +
-		theme(legend.position = "right")
-	if (ls == "Adult") {
-		gg <- gg +
-			annotate(
-				geom = "rect",
-				xmin = -Inf,
-				xmax = rect.use$xmax,
-				ymin = 0,
-				ymax = Inf,
-				alpha = 0.25
-			) +
-			annotate(
-				geom = "rect",
-				xmin = rect.use$xmin,
-				xmax = Inf,
-				ymin = 0,
-				ymax = Inf,
-				alpha = 0.25
-			)
-	} else {
-		gg <- gg +
-			annotate(
-				geom = "rect",
-				xmin = rect.use$xmin,
-				xmax = rect.use$xmax,
-				ymin = 0,
-				ymax = Inf,
-				alpha = 0.25
-			)
-	}
-	if ("BLAN" %in% plot.sub) {
-		gg <- gg + facet_grid(siteID ~ species, scales = "fixed")
-	} else {
-		gg <- gg + facet_grid(species ~ siteID, scales = "fixed")
-	}
-	dd <- paste0(
-		"doy_",
-		gsub("+ ", "", ua.sub),
-		"_",
-		gsub(" ", "", plot.sub),
-		"_",
-		ls,
-		"_",
-		".jpeg"
-	)
-	# print(gg)
-	save_gg(
-		dest = dd,
-		gg = gg,
-		path = file.path(dir.plot, "scoresDOY")
-	)
+df.mutate <- tibble()
+for(i in 1:length(score.files)){
+  score <- read_csv(file=file.path(dir.analysis, score.files[i])) %>%
+    suppressMessages()
+  
+  score <- score %>%
+    filter(year(time) >= 2018) %>%
+    select(lifeStage, time, siteID, species, model, crps) %>%
+    group_by(lifeStage, time, siteID, species, model) %>%
+    summarise(crps = mean(crps)) %>%
+    suppressMessages()
+  
+  df.mutate <- bind_rows(df.mutate, score)
+  rm(score)
 }
 
-ua.vec <- c("+ Driver", "+ Process", "IC", "+ Parameter")
+df.mutate <- df.mutate %>%
+	mutate(doy = yday(time))
 
-for (u in 1:4) {
-	for (ls in 1:3) {
-		plot_doy(ua.vec[u], ix.plots, ls.vec[ls], "Ixodes scapularis")
-		plot_doy(ua.vec[u], aa.plots, ls.vec[ls], "Amblyomma americanum")
-		plot_doy(
-			ua.vec[u],
-			both.plots,
-			ls.vec[ls],
-			c("Amblyomma americanum", "Ixodes scapularis")
-		)
-	}
+all.combos <- expand_grid(unique(df.mutate$lifeStage), unique(df.mutate$siteID),
+                          unique(df.mutate$species))
+colnames(all.combos) <- c("lifeStage", "siteID", "species")
+
+# Score per day of year
+for(i in 1:nrow(all.combos)){
+  scores.smol <- df.mutate %>%
+    filter(lifeStage==all.combos$lifeStage[i], siteID==all.combos$siteID[i],
+           species==all.combos$species[i])
+
+  null.smol <- null.crps %>%
+    filter(lifeStage==all.combos$lifeStage[i], siteID==all.combos$siteID[i],
+           species==all.combos$species[i])
+
+  gg <- ggplot() +
+    aes(x = doy, y = crps)+
+    geom_smooth(data=scores.smol, se = FALSE, size = 1, method = "loess", alpha = 0.6, 
+                aes(color = model)) +
+    geom_smooth(data = null.smol, se = FALSE, size = 1, method = "loess", 
+                color = "black", linetype = "dashed") +
+    scale_color_manual(values = natparks.pals("DeathValley")) +
+    scale_y_continuous(limits = c(0, NA)) +
+    labs(x = "Day of Year", y = "CRPS",  color = "Model", linetype = "Null",
+      title = paste(all.combos$siteID[i], ", ", all.combos$species[i], ", ",
+                    all.combos$lifeStage[i], sep = "")) +
+    theme_pubr() +
+    theme(legend.position = "right")
+
+  save_gg(dest = paste(all.combos$siteID[i], "_", str_replace_all(all.combos$species[i], " ", ""), 
+                       "_", all.combos$lifeStage[i], sep = ""), 
+          gg = gg, path = file.path(dir.plot, "scoresDOY"))
 }
 
-fx.scores <- read_csv(
-	"/projectnb/dietzelab/fosterj/FinalOut/Chapter2/analysis/allForecastScores.csv"
-)
+# Boxplots
+scores.all <- bind_rows(df.mutate, null.crps)
 
-ch2 <- fx.scores %>%
-	filter(
-		model %in% c("Weather", "WithWeatherAndMiceGlobal"),
-		time != start.date,
-		metric == "crps",
-		!grepl("remove", experiment),
-		!grepl("nmme", experiment),
-		lifeStage == "Nymphs"
-	) %>%
-	group_by(model, paramsFrom, ticksFrom) %>%
-	summarise(mu = mean(score))
+aa.df <- scores.all %>%
+  filter(siteID %in% aa.plots, lifeStage=="Nymph") %>%
+  select(siteID, time, model, crps) %>%
+  group_by(siteID, time, model) %>%
+  summarise(crps = mean(crps, na.rm=T)) %>%
+  pivot_wider(names_from = model, values_from = crps) %>%
+  filter(is.na(Weather) == F) %>%
+  rename("WeatherMice" = "Weather & Mice") %>%
+  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice) %>%
+  select(-c(Null, Weather, WeatherMice)) %>%
+  pivot_longer(NullWeather:NullWeatherMice, names_to = 'model', 
+               values_to = 'crps.diff') %>%
+  mutate(model = case_when(model=="NullWeather" ~ "Weather",
+                           model=="NullWeatherMice" ~ "Weather & Mice"))
 
+aa.fig <- ggplot(data=aa.df, aes(x = model, y = crps.diff))+
+  geom_boxplot(fill='lightgray')+
+  geom_hline(yintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID)+
+  labs(x = "Model", y = "Null CRPS - Model CRPS",
+       title = "A. americanum")+
+  theme_bw()+
+  theme(panel.grid=element_blank())
 
-df.model.names %>%
-	filter(
-		# ua == ua.sub,
-		time != start.date,
-		observed > 0,
-		siteID %in% c(ix.plots, both.plots),
-		species == "Ixodes scapularis",
-		# model == "Weather & Mice",
-		lifeStage == ls
-	) %>%
-	group_by(siteID, model) %>%
-	summarise(mu = mean(crps)) %>%
-	mutate(
-		siteID = factor(
-			siteID,
-			levels = c("TREE", "HARV", "BLAN", "SCBI", "SERC", "LENO")
-		)
-	) %>%
-	ggplot() +
-	aes(x = siteID, y = mu, color = model) +
-	geom_point(position = position_dodge(width = 0.5)) +
-	geom_linerange(
-		aes(ymin = 0, ymax = mu),
-		position = position_dodge(width = 0.5)
-	)
+aa.tab <- aa.figs %>%
+  group_by(siteID, model) %>%
+  summarise(mean.diff = mean(crps.diff))
 
+ix.df <- scores.all %>%
+  filter(siteID %in% ix.plots, lifeStage=="Nymph") %>%
+  select(siteID, time, model, crps) %>%
+  group_by(siteID, time, model) %>%
+  summarise(crps = mean(crps, na.rm=T)) %>%
+  pivot_wider(names_from = model, values_from = crps) %>%
+  filter(is.na(Weather) == F) %>%
+  rename("WeatherMice" = "Weather & Mice") %>%
+  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice) %>%
+  select(-c(Null, Weather, WeatherMice)) %>%
+  pivot_longer(NullWeather:NullWeatherMice, names_to = 'model', 
+               values_to = 'crps.diff') %>%
+  mutate(model = case_when(model=="NullWeather" ~ "Weather",
+                           model=="NullWeatherMice" ~ "Weather & Mice"))
 
-plot_pred_obs <- function(ua.sub, plot.sub, ls) {
-	gg <- df.model.names %>%
-		filter(
-			#ua == ua.sub,
-			siteID %in% c("HARV", "TREE"),
-			model == "Weather & Mice",
-			time != start.date,
-			lifeStage == ls
-		) %>%
-		group_by(siteID, time, start.date, ua, model, median) %>%
-		mutate(mu = mean(observed)) %>%
-		# filter(observed > 0.2*max(observed)) %>%
-		ggplot() +
-		aes(x = mu, y = mean, color = ua) +
-		geom_point(size = 0.6) +
-		geom_smooth(method = "loess", se = FALSE) +
-		scale_color_manual(values = met.brewer("Egypt")) +
-		geom_abline() +
-		labs(
-			x = "Observed",
-			y = "Median Forecast",
-			color = "Model",
-			linetype = "Parameter DA"
-		) +
-		facet_grid(species ~ siteID, scales = "free") +
-		coord_cartesian(ylim = c(0, NA)) +
-		theme_pubr() +
-		theme(legend.position = "right")
-	dd <- paste0(
-		"predObs_",
-		gsub("+ ", "", ua.sub),
-		"_",
-		gsub(" ", "", plot.sub),
-		"_",
-		ls,
-		".jpeg"
-	)
-	# print(gg)
-	save_gg(
-		dest = dd,
-		gg = gg,
-		path = file.path(dir.plot, "predObs")
-	)
+ix.fig <- ggplot(data=ix.df, aes(x = model, y = crps.diff))+
+  geom_boxplot(fill='lightgray')+
+  geom_hline(yintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID)+
+  labs(x = "Model", y = "Null CRPS - Model CRPS",
+       title = "I. scapularis")+
+  theme_bw()+
+  theme(panel.grid=element_blank())
+
+ix.tab <- ix.df %>%
+  group_by(siteID, model) %>%
+  summarise(mean.diff = mean(crps.diff))
+
+both.df <-  scores.all %>%
+  filter(siteID %in% both.plots, lifeStage=="Nymph") %>%
+  select(siteID, time, model, crps, species) %>%
+  group_by(siteID, time, model, species) %>%
+  summarise(crps = mean(crps, na.rm=T)) %>%
+  pivot_wider(names_from = model, values_from = crps) %>%
+  filter(is.na(Weather) == F) %>%
+  rename("WeatherMice" = "Weather & Mice") %>%
+  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice) %>%
+  select(-c(Null, Weather, WeatherMice)) %>%
+  pivot_longer(NullWeather:NullWeatherMice, names_to = 'model', 
+               values_to = 'crps.diff') %>%
+  mutate(model = case_when(model=="NullWeather" ~ "Weather",
+                           model=="NullWeatherMice" ~ "Weather & Mice"))
+
+ggplot(data=both.df, aes(x = model, y = crps.diff, fill = species))+
+  geom_boxplot()+
+  geom_hline(yintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID)+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  labs(x = "Model", y = "Null CRPS - Model CRPS")+
+  theme_bw()+
+  theme(panel.grid=element_blank())
+
+both.tab <- both.df %>%
+  group_by(siteID, model, species) %>%
+  summarise(mean.diff = mean(crps.diff))
+
+# save_gg("aa_crps_diff.jpeg", aa.fig, dir.plot)
+# save_gg("ix_crps_diff.jpeg", ix.fig, dir.plot)
+# save_gg("both_crps_diff.jpeg", both.fig, dir.plot)
+
+# Scores across model iterations --------------------------
+score.files <- analysis.files[str_detect(analysis.files, "analysis")]
+
+both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
+ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
+aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
+
+df.mutate <- tibble()
+for(i in 1:length(score.files)){
+  score <- read_csv(file=file.path(dir.analysis, score.files[i])) %>%
+    suppressMessages()
+  
+  score <- score %>%
+    filter(year(time) >= 2018) %>%
+    select(lifeStage, siteID, species, model, start.date, crps) %>%
+    group_by(lifeStage, siteID, species, model, start.date) %>%
+    summarise(crps = mean(crps)) %>%
+    suppressMessages()
+  
+  df.mutate <- bind_rows(df.mutate, score)
+  rm(score)
 }
 
-for (u in 1:2) {
-	for (ls in 1:3) {
-		plot_pred_obs(ua.vec[u], ix.plots, ls.vec[ls])
-		plot_pred_obs(ua.vec[u], aa.plots, ls.vec[ls])
-		plot_pred_obs(ua.vec[u], both.plots, ls.vec[ls])
-	}
-}
+aa.sites <- df.mutate %>%
+  filter(siteID %in% aa.plots)
 
-# time series figures --------------------------------------------------------------------------
+aa.score.ts <- ggplot(data=aa.sites, aes(x = start.date, y = crps, color = model,
+                          fill=model))+
+  geom_smooth(method='lm', linewidth = 1.5)+
+  facet_wrap(~siteID, nrow = 2, ncol = 2)+
+  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
+       fill = "Model")+
+  scale_color_manual(values = natparks.pals("DeathValley"))+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  theme_bw()+
+  theme(panel.grid = element_blank())
 
-site <- "HARV"
-start.dates.site <- df.mutate %>%
-	filter(siteID == site) %>%
-	pull(start.date) %>%
-	unique()
+ix.sites <- df.mutate %>%
+  filter(siteID %in% ix.plots)
 
-df.mutate %>%
-	filter(
-		lifeStage == "Nymph",
-		siteID == "HARV",
-		ua == "+ Driver",
-		start.date == start.dates.site[4]
-	) %>%
-	mutate(time = as.character(time)) %>%
-	ggplot(aes(x = time, color = ua)) +
-	geom_linerange(aes(ymin = lower95, ymax = upper95)) +
-	geom_point(aes(y = observed, color = "Data")) +
-	facet_wrap(~model) +
-	theme_pubclean()
+ix.score.ts <- ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
+                          fill=model))+
+  geom_smooth(method='lm', linewidth = 1.5)+
+  facet_wrap(~siteID)+
+  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
+       fill = "Model")+
+  scale_color_manual(values = natparks.pals("DeathValley"))+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  theme_bw()+
+  theme(panel.grid = element_blank())
 
+both.sites <- df.mutate %>%
+  filter(siteID %in% both.plots)
 
-data <- df %>% filter(!is.na(data))
+both.score.ts <- ggplot(data=both.sites, aes(x = start.date, y = crps, color = model,
+                          fill=model))+
+  geom_smooth(method='lm', linewidth = 1.5)+
+  facet_grid(rows = vars(siteID), cols = vars(species))+
+  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
+       fill = "Model")+
+  scale_color_manual(values = natparks.pals("DeathValley"))+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  theme_bw()+
+  theme(panel.grid = element_blank())
 
-# time series plots
-life.stage.vec <- unique(df$lifeStage)
-model.vec <- unique(df$model[!is.na(df$model)])
-site.vec <- unique(df$siteID[!is.na(df$siteID)])
-
-
-ls <- "Nymph"
-
-df.spp <- df %>% filter(species == "Ixodes scapularis")
-start.dates <- df.spp %>% pull(start.date) %>% unique()
-start.dates <- start.dates[!is.na(start.dates)]
-df.start <- df.spp %>%
-	filter(
-		start.date == start.dates[7],
-		lifeStage == ls,
-		# siteID == "HARV",
-		!is.na(model)
-	)
-fx.time <- df.start %>% pull(time) %>% unique()
-data <- df %>%
-	filter(
-		!is.na(data),
-		time %in% fx.time,
-		# grepl("HARV", plotID),
-		lifeStage == ls,
-		species == "Ixodes scapularis"
-	) %>%
-	select(time, data, plotID)
-
-df.plot <- bind_rows(df.start, data)
-
-df.start %>%
-	ggplot() +
-	aes(x = time) +
-	geom_ribbon(aes(ymin = lower95, ymax = upper95, fill = model), alpha = 0.4) +
-	# geom_point(data = data, aes(y = data, shape = plotID)) +
-	# geom_line(aes(y = median)) +
-	scale_fill_manual(values = met.brewer("Egypt")) +
-	facet_grid(siteID ~ model) +
-	theme_pubclean()
-
-
-## Predicted observed
-df <- read_csv(file.path(dir.analysis, "stateSummary_ic.csv"))
-
-
-df %>%
-	filter(lifeStage == "Nymph") %>%
-	ggplot() +
-	aes(x = density, y = median) +
-	geom_point() +
-	geom_abline(intercept = 0, slope = 1) +
-	facet_grid(lifeStage ~ species, scales = "free") +
-	theme_pubclean()
-
-
-scores <- read_csv(file.path(dir.analysis, "stateSamples_ic.csv"))
-
-
-scores %>%
-	group_by(lifeStage) %>%
-	summarise(best = min(crps))
-
-scores %>%
-	filter(lifeStage == "Nymph")
-
-
-### ua figures ---------------------------------------------------------------------------
-unique(df.mutate$ua)
-
-df.rel.var <- df.mutate %>%
-	filter(horizon > 0) %>%
-	ungroup() %>%
-	select(
-		lifeStage,
-		time,
-		siteID,
-		plotID,
-		start.date,
-		species,
-		nlcd,
-		observed,
-		horizon,
-		mice,
-		weather,
-		ua,
-		variance
-	) %>%
-	pivot_wider(names_from = ua, values_from = variance) %>%
-	group_by(
-		lifeStage,
-		time,
-		siteID,
-		start.date,
-		species,
-		nlcd,
-		observed,
-		horizon,
-		mice,
-		weather
-	) %>%
-	summarise(
-		max.var = max(c(IC, `+ Process`, `+ Driver`, `+ Parameter`)),
-		`IC` = IC / max.var,
-		`+ Driver` = `+ Driver` / max.var,
-		`+ Parameter` = `+ Parameter` / max.var,
-		`+ Process` = `+ Process` / max.var
-	) %>%
-	pivot_longer(
-		cols = c(IC, `+ Driver`, `+ Parameter`, `+ Process`),
-		names_to = "ua",
-		values_to = "relativeVariance"
-	) %>%
-	distinct()
-
-n.sites.per.fx <- df.rel.var %>%
-	ungroup() %>%
-	mutate(siteID = str_extract(plotID, "[[:alpha:]]{4}")) %>%
-	select(start.date, siteID) %>%
-	distinct() %>%
-	group_by(start.date) %>%
-	count() %>%
-	filter(n > 2)
-
-
-site <- "SERC"
-fx.issue.date <- all.days.df %>%
-	filter(siteID == site) %>%
-	pull(start.date) %>%
-	unique()
-
-i <- 9
-
-gg <- df.rel.var %>%
-	filter(
-		grepl(site, siteID),
-		mice == "Mice",
-		weather == "Weather",
-		start.date == "2018-08-15"
-		# lifeStage == "Nymph"
-	) %>%
-	mutate(time = as.character(time)) %>%
-	mutate(
-		ua = if_else(ua == "IC", "IC (1)", ua),
-		ua = if_else(ua == "+ Parameter", "+ Parameter (2)", ua),
-		ua = if_else(ua == "+ Driver", "+ Driver (3)", ua),
-		ua = if_else(ua == "+ Process", "+ Process (4)", ua)
-	) %>%
-	mutate(
-		ua = factor(
-			ua,
-			levels = c("IC (1)", "+ Parameter (2)", "+ Driver (3)", "+ Process (4)")
-		),
-		lifeStage = factor(lifeStage, levels = c("Larva", "Nymph", "Adult"))
-	) %>%
-	ggplot() +
-	aes(x = time, y = relativeVariance, fill = ua) +
-	scale_fill_manual(values = natparks.pals("DeathValley")) +
-	geom_bar(position = "fill", stat = "identity") +
-	labs(x = "", y = "Relative variance", fill = "Uncertainty\nsource") +
-	facet_grid(lifeStage ~ species) +
-	theme_bw() +
-	theme(
-		axis.text.x = element_text(angle = 90, hjust = 0.5),
-		legend.position = "bottom"
-	)
-gg
-
-save_gg(
-	dest = paste0("relVar_2018-08-15_", site, ".jpeg"),
-	gg = gg,
-	path = dir.plot
-)
-
-#### parameter figures
-
-dd <- "/projectnb/dietzelab/fosterj/FinalOut/Chapter3/analysisConstraint"
-df.params <- read_csv(file.path(
-	dd,
-	"ic_parameter_driver_process_allParamQuants.csv"
-))
-df.params.hindcast <- read_csv(
-	"/projectnb/dietzelab/fosterj/FinalOut/Chapter2/analysis/allParameterQuants.csv"
-)
-
-r <- df.params.hindcast %>%
-	filter(model == "WithWeatherAndMiceGlobal", experiment == "base_mna") %>%
-	pull(start.date) %>%
-	range()
-
-hindcast.sig <- df.params.hindcast %>%
-	filter(
-		model == "WithWeatherAndMiceGlobal",
-		experiment == "base_mna",
-		start.date == r[1] | start.date == r[2]
-	) %>%
-	rename(
-		node = parameter,
-		siteID = paramsFrom,
-		lower95 = q0.025,
-		upper95 = q0.975,
-		median = q0.5
-	) %>%
-	select(node, lower95, median, upper95, start.date, siteID) %>%
-	mutate(
-		species = "Ixodes scapularis",
-		Transfer = "Time",
-		start = if_else(start.date == first(start.date), "start", "end")
-	) %>%
-	select(-start.date)
-
-
-transfer.sig <- df.params %>%
-	filter(model == "Mice & Weather", ua == "+ Process", !grepl("gdd", node)) %>%
-	group_by(siteID) %>%
-	filter(start.date == last(start.date)) %>%
-	select(node, lower95, median, upper95, siteID, species) %>%
-	mutate(Transfer = "Space", start = "end")
-
-
-params.bind <- bind_rows(hindcast.sig, transfer.sig) %>%
-	mutate(
-		name = if_else(node == "beta[1]", "Max temp (L)", node),
-		name = if_else(node == "beta[2]", "Max RH (L)", name),
-		name = if_else(node == "beta[3]", "Min RH (L)", name),
-		name = if_else(node == "beta[4]", "Precip (L)", name),
-		name = if_else(node == "beta[5]", "Max Temp (N)", name),
-		name = if_else(node == "beta[6]", "Max RH (N)", name),
-		name = if_else(node == "beta[7]", "Min RH (N)", name),
-		name = if_else(node == "beta[8]", "Precip (N)", name),
-		name = if_else(node == "beta[9]", "Max temp (A)", name),
-		name = if_else(node == "beta[10]", "Max RH (A)", name),
-		name = if_else(node == "beta[11]", "Min RH (A)", name),
-		name = if_else(node == "beta[12]", "Precip (A)", name),
-		name = if_else(node == "beta[13]", "Mice (L-N)", name),
-		name = if_else(node == "beta[14]", "Mice (N-A)", name),
-		name = if_else(node == "phi.l.mu", "Survival (L)", name),
-		name = if_else(node == "phi.n.mu", "Survival (N)", name),
-		name = if_else(node == "phi.a.mu", "Survival (A)", name),
-		name = if_else(node == "theta.ln", "Transition (L-N)", name),
-		name = if_else(node == "theta.na", "Transition (N-A)", name),
-		name = if_else(node == "sig[1]", "Variance (L)", name),
-		name = if_else(node == "sig[2]", "Variance (D)", name),
-		name = if_else(node == "sig[3]", "Variance (N)", name),
-		name = if_else(node == "sig[4]", "Variance (A)", name)
-	)
-
-plot_95 <- function(n, spp) {
-	p1 <- params.bind %>%
-		filter(siteID == "CARY", grepl(n, node))
-	p2 <- params.bind %>%
-		filter(grepl(n, node), siteID != "CARY", species == spp)
-
-	size <- if_else(n == "beta", 0.2, 0.5)
-	sc <- if_else(n == "sig", "free", "fixed")
-
-	gg <- bind_rows(p1, p2) %>%
-		ggplot() +
-		aes(
-			y = siteID,
-			x = median,
-			xmax = upper95,
-			xmin = lower95,
-			color = Transfer,
-			linetype = start
-		) +
-		geom_pointrange(size = size, position = position_dodge(w = 1)) +
-		facet_wrap(~name, scales = "fixed") +
-		scale_color_manual(values = met.brewer("Egypt")) +
-		labs(
-			y = element_blank(),
-			x = "Value",
-			# color = "",
-			linetype = ""
-		) +
-		theme_pubr() +
-		theme(legend.position = "bottom") +
-		theme(axis.text.y = element_text(size = 6))
-
-	if (n %in% c("beta", "Mice")) {
-		gg <- gg + geom_vline(xintercept = 0, linetype = "dashed")
-	}
-	if (n == "sig") {
-		gg <- gg + scale_x_log10()
-	}
-
-	save_gg(
-		dest = paste0(n, "_", gsub(" ", "", spp), ".jpeg"),
-		gg = gg,
-		path = file.path(dir.plot, "parameterComparisonToHindcast")
-	)
-	print(gg)
-	return(gg)
-}
-
-gg1 <- plot_95("Mice", "Amblyomma americanum") +
-	labs(title = "Amblyomma americanum", x = "")
-gg2 <- plot_95("Mice", "Ixodes scapularis") + labs(title = "Ixodes scapularis")
-
-
-gg3 <- ggarrange(gg1, gg2, nrow = 2, common.legend = TRUE, legend = "bottom")
-save_gg(
-	dest = "miceBothSpecies.jpeg",
-	gg = gg3,
-	path = file.path(dir.plot, "parameterComparisonToHindcast")
-)
-
-
-plot_95("beta", "Amblyomma americanum")
-plot_95("phi", "Ixodes scapularis")
-plot_95("theta", "Ixodes scapularis")
-plot_95("sig", "Ixodes scapularis")
-plot_95("beta", "Ixodes scapularis")
-plot_95("phi", "Amblyomma americanum")
-plot_95("theta", "Amblyomma americanum")
-plot_95("sig", "Amblyomma americanum")
-
-
-sig <- df.params %>%
-	filter(model == "Mice & Weather", ua == "+ Process", !grepl("gdd", node)) %>%
-	mutate(
-		name = if_else(node == "beta[1]", "Max temp (L)", node),
-		name = if_else(node == "beta[2]", "Max RH (L)", name),
-		name = if_else(node == "beta[3]", "Min RH (L)", name),
-		name = if_else(node == "beta[4]", "Precip (L)", name),
-		name = if_else(node == "beta[5]", "Max Temp (N)", name),
-		name = if_else(node == "beta[6]", "Max RH (N)", name),
-		name = if_else(node == "beta[7]", "Min RH (N)", name),
-		name = if_else(node == "beta[8]", "Precip (N)", name),
-		name = if_else(node == "beta[9]", "Max temp (A)", name),
-		name = if_else(node == "beta[10]", "Max RH (A)", name),
-		name = if_else(node == "beta[11]", "Min RH (A)", name),
-		name = if_else(node == "beta[12]", "Precip (A)", name),
-		name = if_else(node == "beta[13]", "Mice (L-N)", name),
-		name = if_else(node == "beta[14]", "Mice (N-A)", name),
-		name = if_else(node == "phi.l.mu", "Survival (L)", name),
-		name = if_else(node == "phi.n.mu", "Survival (N)", name),
-		name = if_else(node == "phi.a.mu", "Survival (A)", name),
-		name = if_else(node == "theta.ln", "Transition (L-N)", name),
-		name = if_else(node == "theta.na", "Transition (N-A)", name),
-		name = if_else(node == "sig[1]", "Variance (L)", name),
-		name = if_else(node == "sig[2]", "Variance (D)", name),
-		name = if_else(node == "sig[3]", "Variance (N)", name),
-		name = if_else(node == "sig[4]", "Variance (A)", name)
-	)
-
-
-sig %>%
-	filter(siteID == "SERC", grepl("sig", node)) %>%
-	ggplot() +
-	aes(x = start.date) +
-	geom_ribbon(
-		aes(ymin = lower95, ymax = upper95, fill = species),
-		alpha = 0.5
-	) +
-	scale_fill_manual(values = met.brewer("Egypt")) +
-	facet_wrap(~name, scales = "free") +
-	theme_pubr()
+# save_gg("aa_score_ts.jpeg", aa.score.ts, dir.plot)
+# save_gg("ix_score_ts.jpeg", ix.score.ts, dir.plot)
+# save_gg("both_score_ts.jpeg", both.score.ts, dir.plot)
