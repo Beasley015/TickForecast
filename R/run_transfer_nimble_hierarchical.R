@@ -10,7 +10,6 @@ run_transfer_nimble <- function(
 ) {
 	library(parallel)
 	library(nimble)
-  library(nimbleHMC)
 	library(coda)
 
 	source("./DataProcessing/functions_hierarchical.R")
@@ -41,8 +40,11 @@ run_transfer_nimble <- function(
 		# sample on each cluster
 		library(nimble)
 		library(coda)
+	  library(nimbleHMC)
 
 		nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE,
+		              'MCMCusePredictiveDependenciesInCalculations' = TRUE,
+		              unsupportedDerivativeHandling='warn',
 		              enableDerivs = TRUE)
 		
 		model <- nimbleModel(
@@ -55,8 +57,7 @@ run_transfer_nimble <- function(
 		cModel <- compileNimble(model)
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
 		
-		mcmcConf$addSampler(target = mcmcConf$monitors[-which(mcmcConf$monitors %in% c("x", "gdd"))],
-		                    type = 'NUTS')
+		mcmcConf$addSampler(target = mcmcConf$monitors, type = 'NUTS')
 
 		Rmcmc <- buildMCMC(mcmcConf)
 		Cmcmc <- compileNimble(Rmcmc)

@@ -16,6 +16,7 @@
 #       1 - setup ------------
 # =========================================== #
 
+library(fitdistrplus)
 library(tidyverse)
 library(lubridate)
 library(zoo)
@@ -76,7 +77,7 @@ n.slots <- 2
 production <- TRUE
 n.iter <- 1000 #50000
 Nmc <- 2000
-horizon <- 20 #365
+horizon <- 365
 
 # =========================================== #
 #       tick data intake ----------------
@@ -119,21 +120,21 @@ data.latent <- df.latent %>%
 		month(DATE) == month.get
 	) %>%
 	group_by(lifeStage) %>%
-	summarise(mu = mean(value), prec = 1 / var(value)) %>%
-	pivot_wider(names_from = lifeStage, values_from = c(mu, prec))
+	summarise(shape=fitdist(value, distr='gamma')[[1]][1], rate=fitdist(value, distr='gamma')[[1]][2]) %>%
+	pivot_wider(names_from = lifeStage, values_from = c(shape,rate))
 
 IC <- tibble(
-	mu = c(
-		pull(data.latent, mu_larvae),
-		pull(data.latent, mu_dormant),
-		pull(data.latent, mu_nymphs),
-		pull(data.latent, mu_adults)
+	shape = c(
+		pull(data.latent, shape_larvae),
+		pull(data.latent, shape_dormant),
+		pull(data.latent, shape_nymphs),
+		pull(data.latent, shape_adults)
 	),
-	prec = c(
-		pull(data.latent, prec_larvae),
-		pull(data.latent, prec_dormant),
-		pull(data.latent, prec_nymphs),
-		pull(data.latent, prec_adults)
+	rate = c(
+		pull(data.latent, rate_larvae),
+		pull(data.latent, rate_dormant),
+		pull(data.latent, rate_nymphs),
+		pull(data.latent, rate_adults)
 	)
 ) %>%
 	as.matrix()
@@ -158,7 +159,7 @@ ch <- ch.ls$ch %>%
                                               TRUE ~ 0)) %>%
   mutate(ncaps = rowSums(.[2:ncol(.)])) %>%
   filter(ncaps > 0) %>%
-  select(-ncaps) %>%
+  dplyr::select(-ncaps) %>%
   arrange(siteID)
 
 # mna: NEON
@@ -171,7 +172,7 @@ mna <- ks %>%
 
 # Add Cary mna
 mna.full <- smam_cary %>%
-  select(-plotID) %>%
+  dplyr::select(-plotID) %>%
   filter(collectDate >= ymd("2013-01-01")) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
   pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
@@ -214,21 +215,21 @@ source("./DataProcessing/daymet_downscale_hierarchical.R")
 
 cgdd <- daymet_cumGDD(sites=sites) %>%
   ungroup() %>%
-  select(-year) %>%
+  dplyr::select(-year) %>%
   suppressMessages()
 
 maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
   ungroup() %>%
-  select(Date, siteID, maxTempCorrect) %>%
+  dplyr::select(Date, siteID, maxTempCorrect) %>%
   mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
   suppressMessages()
 
 rh <- daymet_rh(sites) %>%
-    select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
+    dplyr::select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
     suppressMessages()
 
 precip <- daymet_precip(sites) %>%
-    select(Date, precipitation, siteID) %>%
+    dplyr::select(Date, precipitation, siteID) %>%
     suppressMessages()
  
 # Combine all met variables
@@ -250,7 +251,7 @@ df.daymet <- join2 %>%
         hist.means$sds["TOT_PREC"]
   ) %>%
   ungroup() %>%
-  select(Date, siteID, contains("Scale")) %>%
+  dplyr::select(Date, siteID, contains("Scale")) %>%
   filter(Date >= "2016-01-01" & Date < "2022-01-01")
 
 # =========================================== #
@@ -265,7 +266,7 @@ params.stats <- df.params %>%
                              "WeatherMice_hierarchicalIntercept",
                            TRUE ~ model)) %>%
 	filter(model == model.job) %>%
-	select(parameter, value) %>%
+	dplyr::select(parameter, value) %>%
 	group_by(parameter) %>%
 	summarise(mu = mean(value), tau = 1 / var(value))
 
@@ -334,7 +335,7 @@ pr.sig <- df.params %>%
                              "WeatherMice_hierarchicalIntercept",
                            TRUE ~ model)) %>%
 	filter(model == model.job, grepl("sig", parameter)) %>%
-	select(parameter, value) %>%
+	dplyr::select(parameter, value) %>%
 	group_by(parameter) %>%
 	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
 
@@ -344,7 +345,8 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
-for (t in seq_len(n.drags)) {
+for (t in 1){#seq_len(n.drags)) {
+  start.time <- Sys.time()
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
@@ -477,31 +479,31 @@ for (t in seq_len(n.drags)) {
 			
 		# Create day x site matrices for each variable
 		data$maxtemp <- daymet.sub %>% 
-			select(Date, siteID, maxTempScale) %>%
+			dplyr::select(Date, siteID, maxTempScale) %>%
 			pivot_wider(names_from= siteID, values_from = maxTempScale,
 		              values_fill=NA) %>%
-			select(-Date) %>%
+			dplyr::select(-Date) %>%
 			as.matrix()
 			
 		data$maxrh <- daymet.sub %>%
-		  select(Date, siteID, maxRHScale) %>%
+		  dplyr::select(Date, siteID, maxRHScale) %>%
 			pivot_wider(names_from=siteID, values_from=maxRHScale,
 			           values_fill=NA) %>%
-			select(-Date) %>%
+			dplyr::select(-Date) %>%
 			as.matrix()
 			
 		data$minrh <- daymet.sub %>% 
-      select(Date, siteID, minRHScale) %>%
+      dplyr::select(Date, siteID, minRHScale) %>%
 	    pivot_wider(names_from=siteID, values_from=minRHScale,
 	                values_fill=NA) %>%
-		  select(-Date) %>%
+		  dplyr::select(-Date) %>%
 		  as.matrix()
 			
 		data$precip <- daymet.sub %>% 
-		  select(Date, siteID, precipScale) %>%
+		  dplyr::select(Date, siteID, precipScale) %>%
 			pivot_wider(names_from=siteID, values_from=precipScale,
 			            values_fill=NA) %>%
-			select(-Date) %>%
+			dplyr::select(-Date) %>%
 			as.matrix()
 	}
     
@@ -511,7 +513,7 @@ for (t in seq_len(n.drags)) {
 	
 	# Get number of plots per site
 	plots <- neon.job %>%
-	  select(siteID, plotID) %>%
+	  dplyr::select(siteID, plotID) %>%
 	  filter(siteID %in% sites) %>%
 	  distinct() 
 	
@@ -563,27 +565,21 @@ for (t in seq_len(n.drags)) {
 	data$pr.theta.n2a <- theta.n2a
 	data$repro.mu <- repro.mu
 	data$pr.beta <- pr.beta
-	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
+	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
 	
 	# Cumulative degree days
 	data$cgdd <- cgdd %>%
 	  filter(Date %in% ymd(fx.sequence)) %>%
 	  pivot_wider(names_from=siteID, values_from=cumGDD) %>%
-	  select(-Date)
+	  dplyr::select(-Date)
 	
-	data$max.cgdd <- cgdd %>%
-	  filter(Date %in% ymd(fx.sequence)) %>%
-	  group_by(siteID) %>%
-	  summarise(max.cgdd = max(cumGDD)*1.2) %>%
-	  pull(max.cgdd)
-	
-	data$xind <- array(1, dim=c(4, horizon, length(sites)))
+	# data$xind <- array(1, dim=c(4, horizon, length(sites)))
 
 	if (miceAndWeather){
 	  data$mice <- mna.scaled %>%
 	    filter(Date %in% fx.sequence) %>%
 	    pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
-	    select(-Date) %>%
+	    dplyr::select(-Date) %>%
 	    relocate(sites) %>%
 	    as.matrix()
 
@@ -616,7 +612,14 @@ for (t in seq_len(n.drags)) {
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
-
+	constants$max.cgdd <- cgdd %>%
+	  group_by(siteID) %>%
+	  filter(Date >= min(fx.sequence)) %>%
+	  mutate(max.cgdd = cumGDD*1.2) %>%
+	  summarise(min = min(max.cgdd), max = max(max.cgdd)) %>%
+	  select(-siteID) %>%
+	  t()
+	
 	# Initialize area
 	area.init <- area
 	nai <- which(is.na(area))	
@@ -691,7 +694,7 @@ for (t in seq_len(n.drags)) {
 	# Test MCMC convergence with Gelman-Rubin statistic
 	message("Checking convergence...")
 	nodes <- names(dat.hindcast)
-	gelman.keep <- numeric(length(nodes))
+	gelman.keep <-list()
 	
 	for (ff in seq_along(nodes)) {
 	  mcmc.check <- list()
@@ -703,14 +706,16 @@ for (t in seq_len(n.drags)) {
 		    mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
 		}
 		
-		gelman.keep[ff] <- try(coda::gelman.diag(mcmc.check, 
-		                                         transform = TRUE)$psrf[1])
+		gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
+		                                         transform = TRUE)$psrf[,1])
+		
+		if(typeof(gelman.keep[[ff]])=='character'){next}
 
-		if (any(gelman.keep > 1.2)) {
+		if (any(gelman.keep[[ff]] > 1.2)) {
 		  message("WARNING: Convergence not reached!")
-		  bad.nodes <- which(gelman.keep > 1.2)
-		  bad.params <- tibble(node = nodes[bad.nodes],
-		    psrf = as.numeric(gelman.keep[bad.nodes])) %>%
+		  bad.nodes <- which(gelman.keep[[ff]] > 1.2)
+		  bad.params <- tibble(node = nodes[[ff]],
+		    psrf = as.numeric(gelman.keep[[ff]][bad.nodes])) %>%
 		    arrange(psrf)
 				print(tail(bad.params))
 		  
@@ -755,5 +760,9 @@ for (t in seq_len(n.drags)) {
 	
 	# Clear environment
 	rm(out.nchains, dat.hindcast, dat.draws)
+	
+	end.time <- Sys.time()
+	
+	end.time-start.time
 }
 

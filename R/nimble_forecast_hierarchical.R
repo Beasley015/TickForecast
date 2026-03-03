@@ -43,7 +43,7 @@ model.code <- nimbleCode({
 
 	  ### first latent process
 		for (i in 1:4) {
-			x[i, 1, site] ~ T(dnorm(IC[i, 1, site], tau = IC[i, 2, site]), 0, Inf)
+			x[i, 1, site] ~ dgamma(shape=IC[i, 1, site], rate = IC[i, 2, site])
 		}
 
 	  ### define parameters
@@ -60,7 +60,7 @@ model.code <- nimbleCode({
 		  }
 	    
 		  cgdd[t, site] ~ dnorm(gdd[t, site], tau = tau.cgdd[site])
-		  gdd[t, site] ~ dunif(0, max.cgdd[site])
+		  gdd[t, site] ~ dunif(min = 0, max = max.cgdd[2,site])
 
 		  theta.n2a[t, site] <- if_else_nimble(
 			  (gdd[t, site] <= 1000) | (gdd[t, site] >= 2500),
@@ -144,10 +144,6 @@ model.code <- nimbleCode({
 		  x[1:ns, t, site] ~
 			  dmnorm(mean = Ex[1:ns, t, site], 
 			         cholesky = Ochol[1:ns, 1:ns], prec_param = 0)
-
-		  for (c in 1:ns) {
-			  xind[c, t, site] ~ dconstraint(x[c, t, site] >= 0)
-		  }
 		}
   }
 }

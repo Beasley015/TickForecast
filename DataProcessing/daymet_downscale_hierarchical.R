@@ -30,9 +30,9 @@ daymet_cumGDD <- function(sites) {
   }
 	
 	df <- df.all %>%
+	  filter(year > 2010) %>%
 		group_by(year) %>%
-		mutate(
-			growingDegree = if_else(maxTemperature > 10, maxTemperature - 10, 0),
+		mutate(growingDegree = if_else(maxTemperature > 10, maxTemperature - 10, 0),
 			cumGDD = cumsum(growingDegree)
 		) %>%
 		select(Date, siteID, cumGDD, year)
