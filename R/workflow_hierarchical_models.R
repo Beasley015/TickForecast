@@ -75,7 +75,7 @@ ua.cal <-
 # n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 n.slots <- 2
 production <- TRUE
-n.iter <- 5000 #50000
+n.iter <- 25000 
 Nmc <- 2000
 horizon <- 365
 
@@ -345,8 +345,7 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
-for (t in 2){#seq_len(n.drags)) {
-  start.time <- Sys.time()
+for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
@@ -761,9 +760,5 @@ for (t in 2){#seq_len(n.drags)) {
 	
 	# Clear environment
 	rm(out.nchains, dat.hindcast, dat.draws)
-	
-	end.time <- Sys.time()
-	
-	end.time-start.time
 }
 
