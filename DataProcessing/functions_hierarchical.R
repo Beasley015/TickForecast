@@ -430,15 +430,15 @@ scale_met_forecast <- function() {
 #' @param nmcmc number of MCMC samples
 
 score <- function(df.pred.obs, nmcmc) {
-	pred.obs <- df.pred.obs
-	ls.vec <- unique(pred.obs$lifeStage)
+	ls.vec <- unique(df.pred.obs$lifeStage)
 
 	# crps scores and other metrics
-	start.date <- min(pred.obs$time)
-	obs.plots <- unique(pred.obs$plotID)
+	start.date <- min(df.pred.obs$time)
+	obs.plots <- unique(df.pred.obs$plotID)
 	all.scores <- tibble()
+	
 	for (p in seq_along(obs.plots)) {
-		plot.subset <- pred.obs %>% filter(plotID == obs.plots[p])
+		plot.subset <- df.pred.obs %>% filter(plotID == obs.plots[p])
 		obs.dates <- unique(plot.subset$time)
 		for (i in seq_along(ls.vec)) {
 			ls.subset <- plot.subset %>%
@@ -484,7 +484,7 @@ score <- function(df.pred.obs, nmcmc) {
 				lifeStage = ls.vec[i],
 				time = unique(ls.subset$time),
 				plotID = obs.plots[p],
-				horizon = as.numeric(time - start.date),
+				horizon = as.numeric(unique(ls.subset$time) - start.date),
 				percentBias = scoringutils::bias_sample(ls.observed, ls.predicted),
 				crps = scoringutils::crps_sample(ls.observed, ls.predicted),
 				rmse = rmse(ls.observed, ls.predicted),
@@ -616,7 +616,7 @@ transfer_analysis <- function(
 			variance = var(forecast, na.rm=T)
 		))
 
-	# get scores
+	# get scores # CHECK THIS FUNCTION ------------
 	scores <- score(fx.data, nmcmc) %>%
 		mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
 		       species = spp, model = model)
