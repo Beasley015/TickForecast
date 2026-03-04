@@ -42,7 +42,7 @@ run_transfer_nimble <- function(
 		library(coda)
 	  library(nimbleHMC)
 
-		nimbleOptions('MCMCjointlySamplePredictiveBranches' = FALSE,
+		nimbleOptions(#'MCMCjointlySamplePredictiveBranches' = FALSE,
 		              'MCMCusePredictiveDependenciesInCalculations' = TRUE,
 		              unsupportedDerivativeHandling='warn',
 		              enableDerivs = TRUE)

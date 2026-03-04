@@ -75,7 +75,7 @@ ua.cal <-
 # n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 n.slots <- 2
 production <- TRUE
-n.iter <- 1000 #50000
+n.iter <- 5000 #50000
 Nmc <- 2000
 horizon <- 365
 
@@ -345,7 +345,7 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
-for (t in 1){#seq_len(n.drags)) {
+for (t in 2){#seq_len(n.drags)) {
   start.time <- Sys.time()
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
@@ -709,6 +709,7 @@ for (t in 1){#seq_len(n.drags)) {
 		gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
 		                                         transform = TRUE)$psrf[,1])
 		
+		if(all(is.na(gelman.keep[[ff]]=='character'))){next}
 		if(typeof(gelman.keep[[ff]])=='character'){next}
 
 		if (any(gelman.keep[[ff]] > 1.2)) {
