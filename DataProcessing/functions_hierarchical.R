@@ -616,16 +616,17 @@ transfer_analysis <- function(
 			variance = var(forecast, na.rm=T)
 		))
 
-	# get scores # CHECK THIS FUNCTION ------------
-	scores <- score(fx.data, nmcmc) %>%
-		mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
-		       species = spp, model = model)
+	if(min(year(fx.dates))>=2018){
+	  scores <- score(fx.data, nmcmc) %>%
+		  mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
+		         species = spp, model = model)
 
-	fx.out <- left_join(
-		fx.quantiles,
-		scores,
-		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")
-	)
+	  fx.out <- left_join(
+		  fx.quantiles,
+		  scores,
+		  by = c("lifeStage", "time", "species", "plotID", "model", "siteID")
+	  )
+	}
 
 	# parameters (non-beta)
 	param.list <- fx.df[-c(weather.nodes, which(names(fx.df) %in% c("x", "beta",
@@ -689,12 +690,15 @@ transfer_analysis <- function(
 	# save
 	message("  Writing files to ", out.dir)
 	write_csv(ungroup(states), file.path(out.dir, "stateSamples.csv"))
-	write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
 	write_csv(ungroup(param.quant), file.path(out.dir, "parameterSummary.csv"))
 	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
 	write_csv(ungroup(betas.quant), file.path(out.dir, "betaQuant.csv"))
 	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
 	write_csv(sig, file.path(out.dir, "sigma.csv"))
+	
+	if(min(year(fx.dates))>=2018){
+	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
+	}
 
 	# weather - if used
 	if (weather) {

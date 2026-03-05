@@ -30,9 +30,9 @@ update <- FALSE
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
-if (update) {
-	dir.out <- paste0(dir.out, "Update")
-}
+# if (update) {
+# 	dir.out <- paste0(dir.out, "Update")
+# }
 
 # Define models to run
 models <- c("Weather_hierarchicalIntercept", "WeatherMice_hierarchicalIntercept")
@@ -72,11 +72,10 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-n.slots <- 2
+n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 production <- TRUE
-n.iter <- 25000 
-Nmc <- 2000
+n.iter <- 20000
+# Nmc <- 2000
 horizon <- 365
 
 # =========================================== #
@@ -507,8 +506,11 @@ for (t in seq_len(n.drags)) {
 	}
     
 	# Get observational data
+	obs.dates <- as.Date(fx.start.date:(fx.start.date+6),
+	                     format = "%Y-%m-%d")
 	obs <- neon.job %>%
-	  filter(time == fx.start.date)
+	  filter(time %in% obs.dates) %>%
+	  mutate(index = match(time, obs.dates))
 	
 	# Get number of plots per site
 	plots <- neon.job %>%
@@ -544,10 +546,10 @@ for (t in seq_len(n.drags)) {
 			    filter(plotID == plt.t$plotID[p])
 			
 			  if(nrow(obs.plot != 0)){
-			    y[1, 1, p, site] <- obs.plot %>% pull(Larva)
-			    y[3, 1, p, site] <- obs.plot %>% pull(Nymph)
-			    y[4, 1, p, site] <- obs.plot %>% pull(Adult)
-			    area[1, p, site] <- obs.plot %>% pull(totalSampledArea)
+			    y[1, obs.plot$index, p, site] <- obs.plot %>% pull(Larva)
+			    y[3, obs.plot$index, p, site] <- obs.plot %>% pull(Nymph)
+			    y[4, obs.plot$index, p, site] <- obs.plot %>% pull(Adult)
+			    area[obs.plot$index, p, site] <- obs.plot %>% pull(totalSampledArea)
 			  }
 		  }
 	  }
@@ -642,7 +644,7 @@ for (t in seq_len(n.drags)) {
 			          dim=c(4, horizon, length(sites))),
 			Ex = array(rpois(4 * horizon * length(sites), 2) / 160 * 450,
 			           dim=c(4, horizon, length(sites))),
-			y = array(rpois(4 * horizon * n.plots * length(sites), 5), 
+			y = array(rpois(4 * horizon * n.plots * length(sites), 1), 
 			          dim = dim(data$y)),
 			tau.temp = rexp(length(sites)),
 			tau.maxrh = rexp(length(sites)),
@@ -691,37 +693,39 @@ for (t in seq_len(n.drags)) {
 	names(dat.hindcast) <- names(out.nchains[[1]])
 
 	# Test MCMC convergence with Gelman-Rubin statistic
-	message("Checking convergence...")
-	nodes <- names(dat.hindcast)
-	gelman.keep <-list()
+	if(year(fx.start.date)>=2018){
+	  message("Checking convergence...")
+	  nodes <- names(dat.hindcast)
+	  gelman.keep <-list()
 	
-	for (ff in seq_along(nodes)) {
-	  mcmc.check <- list()
-		col <- nodes[ff]
+	  for (ff in seq_along(nodes)) {
+	    mcmc.check <- list()
+		  col <- nodes[ff]
 		
-		if(length(dim(out.nchains[[1]][[ff]]))!=2){next}
+		  if(length(dim(out.nchains[[1]][[ff]]))!=2){next}
 				
-		for (c in seq_along(out.nchains)) {
-		    mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
-		}
-		
-		gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
-		                                         transform = TRUE)$psrf[,1])
-		
-		if(all(is.na(gelman.keep[[ff]]=='character'))){next}
-		if(typeof(gelman.keep[[ff]])=='character'){next}
-
-		if (any(gelman.keep[[ff]] > 1.2)) {
-		  message("WARNING: Convergence not reached!")
-		  bad.nodes <- which(gelman.keep[[ff]] > 1.2)
-		  bad.params <- tibble(node = nodes[[ff]],
-		    psrf = as.numeric(gelman.keep[[ff]][bad.nodes])) %>%
-		    arrange(psrf)
-				print(tail(bad.params))
-		  
-		  } else {
-		    # message("Convergence = TRUE")
+		  for (c in seq_along(out.nchains)) {
+		      mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
 		  }
+		
+		  gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
+		                                           transform = TRUE)$psrf[,1])
+		
+		  if(all(is.na(gelman.keep[[ff]]=='character'))){next}
+		  if(typeof(gelman.keep[[ff]])=='character'){next}
+
+		  if (any(gelman.keep[[ff]] > 1.2)) {
+		    message("WARNING: Convergence not reached!")
+		    bad.nodes <- which(gelman.keep[[ff]] > 1.2)
+		    bad.params <- tibble(node = nodes[[ff]],
+		      psrf = as.numeric(gelman.keep[[ff]][bad.nodes])) %>%
+		      arrange(psrf)
+				  print(tail(bad.params))
+		  
+		    } else {
+		      # message("Convergence = TRUE")
+		    }
+	  }
 	}
   
 	# Thin the chains
