@@ -118,8 +118,12 @@ data.latent <- df.latent %>%
 		ua == ua.cal,
 		month(DATE) == month.get
 	) %>%
+  mutate(value = case_when(value == 0 ~ 1e-10,
+                           TRUE ~ value)) %>%
 	group_by(lifeStage) %>%
-	summarise(shape=fitdist(value, distr='gamma')[[1]][1], rate=fitdist(value, distr='gamma')[[1]][2]) %>%
+	summarise(shape=fitdist(value, distr='gamma')[[1]][1], 
+	          rate=fitdist(value, distr='gamma')[[1]][2]) %>%
+  suppressWarnings() %>%
 	pivot_wider(names_from = lifeStage, values_from = c(shape,rate))
 
 IC <- tibble(
