@@ -164,5 +164,3 @@ for(j in 1:nrow(jobs)){
 
   rm(df.process)
 }
-
-

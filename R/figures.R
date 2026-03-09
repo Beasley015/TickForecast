@@ -14,6 +14,7 @@ library(utils)
 library(ggpubr)
 library(MetBrewer)
 library(NatParksPalettes)
+library(sf)
 
 dir.out <- "./out/"
 dir.analysis <- "./analysis/"
@@ -432,3 +433,159 @@ both.score.ts <- ggplot(data=both.sites, aes(x = start.date, y = crps, color = m
 # save_gg("aa_score_ts.jpeg", aa.score.ts, dir.plot)
 # save_gg("ix_score_ts.jpeg", ix.score.ts, dir.plot)
 # save_gg("both_score_ts.jpeg", both.score.ts, dir.plot)
+
+# Model coefficients ---------------------
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "parameterSummary.csv")]
+
+betas <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    filter(str_detect(node, "beta")) %>%
+    suppressMessages()
+  
+  betas <- bind_rows(betas, wee.tab)
+}
+
+betas <- betas %>%
+  select(-(`start.date == start.date`)) %>%
+  filter(model=='WithWeatherAndMiceGlobal') %>%
+  group_by(siteID, species, node) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages() %>%
+  mutate(node = case_when(node == 'beta[1]' ~ 'MaxTempLarvalSurvival',
+                          node == 'beta[2]' ~ 'MaxRHLarvalSurvival',
+                          node == 'beta[3]' ~ 'MinRHLarvalSurvival',
+                          node == 'beta[4]' ~ 'PrecipLarvalSurvival',
+                          node == 'beta[5]' ~ 'MaxTempNymphSurvival',
+                          node == 'beta[6]' ~ 'MaxRHNymphSurvival',
+                          node == 'beta[7]' ~ 'MinRHNymphSurvival',
+                          node == 'beta[8]' ~ 'PrecipNymphSurvival',
+                          node == 'beta[9]' ~ 'MaxTempAdultSurvival',
+                          node == 'beta[10]' ~ 'MaxRHAdultSurvival',
+                          node == 'beta[11]' ~ 'MinRHAdultSurvival',
+                          node == 'beta[12]' ~ 'PrecipAdultSurvival',
+                          node == 'beta[13]' ~ 'MiceLarvaToNymph',
+                          node == 'beta[14]' ~ 'MiceNymphToAdult'))
+
+both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
+ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
+aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
+
+ix.sub <- betas %>%
+  filter(siteID %in% ix.plots) %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA))
+
+ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = node))+
+  geom_point()+
+  geom_point(aes(x = 4, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID) +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = node))+
+  geom_point()+
+  geom_point(aes(x = 2, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID) +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.sub <- betas %>%
+  filter(siteID %in% aa.plots) %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA))
+
+aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = node))+
+  geom_point()+
+  geom_point(aes(x = 4, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID) +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = node))+
+  geom_point()+
+  geom_point(aes(x = 2, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~siteID) +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+both.sub <- betas %>%
+  filter(siteID %in% both.plots) %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA))
+
+both.survival <- ggplot(data = both.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = node))+
+  geom_point()+
+  geom_point(aes(x = 4, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_grid(rows=vars(siteID), cols=vars(species)) +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+both.transition <- ggplot(data = both.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = node))+
+  geom_point()+
+  # geom_point(aes(x = 2.5, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_grid(rows=vars(siteID), cols=vars(species)) +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+# save_gg("aa_survival.jpeg", aa.survival, dir.plot)
+# save_gg("aa_transition.jpeg", aa.transition, dir.plot)
+# save_gg("ix_survival.jpeg", ix.survival, dir.plot)
+# save_gg("ix_transition.jpeg", ix.transition, dir.plot)
+# save_gg("both_survival.jpeg", both.survival, dir.plot)
+# save_gg("both_transition.jpeg", both.transition, dir.plot)
+
+# Maps?
+site.coords <- read_csv(file.path(dir.top, "/Data/siteLatLon.csv")) %>%
+  suppressMessages()
+
+betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
+  filter(str_detect(node, 'Survival')) %>%
+  filter(is.na(decimalLongitude)==F) %>%
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326) %>%
+  st_jitter(amount = 0.5)
+
+state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
+state_map <- st_make_valid(st_transform(state_map, crs = 5070))
+
+# Clip map at given latitude
+state_map <- st_transform(state_map, crs = 4326)
+state_map <- st_crop(state_map, st_bbox(betas.loc))
+
+coef.map <- ggplot(data = betas.loc)+
+  geom_sf(data=state_map)+
+  geom_sf(aes(shape = species, fill = mean), size = 3.5)+
+  scale_shape_manual(values = c(21,24))+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node)+
+  theme_bw()
+
+# save_gg("coef_map.jpeg", coef.map, dir.plot)
