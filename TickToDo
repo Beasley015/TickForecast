@@ -1,15 +1,18 @@
-Immediate to do's:
+Done:
 X Add Cary data to null model workflow
 X Add Cary data to process model workflow
 X Fix daymet intake script
 X Reproduce existing model
-- Make submodel intercepts hierarchical
-- Reproduce some of John's figures
-- Add detailed ReadMe
+X Make submodel intercepts hierarchical
+X Reproduce some of John's figures
+X Add detailed ReadMe
 
-In the distance:
+Immediate to do's:
+- Speed up hierarchical model because she is sloooooooow
 - Make model fully hierarchical
 - Compare hierarchical vs. OG vs. null models
+
+In the distance:
 - Rename model covariates so they correspond to specific components of model,
     not just "beta" with a subscript
 - Update site level lat/long in intake_daymet.R script so it actually gets the midpoint of the sites

@@ -26,13 +26,10 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- FALSE
+update <- T
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
-# if (update) {
-# 	dir.out <- paste0(dir.out, "Update")
-# }
 
 # Define models to run
 models <- c("Weather_hierarchicalIntercept", "WeatherMice_hierarchicalIntercept")
@@ -348,7 +345,22 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
-for (t in seq_len(n.drags)) {
+dir.base <- file.path(
+  dir.out,
+  species.job,
+  model.job
+)
+
+dir.save <- file.path(dir.base)
+
+if(update == T){
+  comp.dates <- list.dirs(path=dir.save)[-1]
+  comp.dates <- str_extract(comp.dates, pattern = "\\d+-\\d+-\\d+")
+  
+  t <- t+length(comp.dates)
+}
+
+for (t in t:n.drags) { 
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
@@ -357,14 +369,6 @@ for (t in seq_len(n.drags)) {
   # flags for if statements
 	miceAndWeather <- model.job == "WeatherMice_hierarchicalIntercept"
 	use.daymet <- grepl("Weather", model.job)
-
-	dir.base <- file.path(
-		dir.out,
-		species.job,
-		model.job
-	)
-	
-	dir.save <- file.path(dir.base)
 
 	# initialize nimble lists
 	constants <- data <- list()
