@@ -585,7 +585,7 @@ transfer_analysis <- function(
 		)
 		pred.obs <- bind_rows(pred.obs, pred.obs.plot)
 	}
-
+	
 	fx.data <- pred.obs %>%
 		mutate(
 			forecast = value / 450 * totalSampledArea,
