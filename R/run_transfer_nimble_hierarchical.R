@@ -53,8 +53,7 @@ run_transfer_nimble <- function(
 			data = data,
 			inits = init,
 			buildDerivs=T
-		) # need to fix here: -Inf in logprob for y
-		# Seems to be a problem with inits 
+		)  
 		cModel <- compileNimble(model)
 		registerDistributions('dnorm_vec')
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
