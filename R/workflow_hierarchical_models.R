@@ -674,7 +674,7 @@ for (t in t:n.drags) {
 	cl <- makeCluster(n.slots) 
 	
 	# Run the model	
-	out.nchains <- run_transfer_nimble(
+	system.time(out.nchains <- run_transfer_nimble(
 		cl = cl,
 		model = model.code,
 		data = data,
@@ -683,7 +683,7 @@ for (t in t:n.drags) {
 		n.iter = n.iter,
 		miceAndWeather = miceAndWeather,
 		use.daymet = use.daymet
-		) 
+		))
 	
 	stopCluster(cl)
   

@@ -22,6 +22,7 @@ run_transfer_nimble <- function(
 		"data",
 		"n.iter",
 		"if_else_nimble",
+		"dnorm_vec",
 		"miceAndWeather",
 		"use.daymet"
 	)
@@ -55,6 +56,7 @@ run_transfer_nimble <- function(
 		) # need to fix here: -Inf in logprob for y
 		# Seems to be a problem with inits 
 		cModel <- compileNimble(model)
+		registerDistributions('dnorm_vec')
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
 		
 		mcmcConf$addSampler(target = mcmcConf$monitors, type = 'NUTS')

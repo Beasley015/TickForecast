@@ -778,3 +778,13 @@ if_else_nimble <- nimbleFunction(
     }
   }
 )
+
+dnorm_vec <- nimbleFunction(
+  run = function(x = double(1), mean = double(0),
+                 tau = double(0), log = logical(0, default = 0)) {
+    returnType(double(0))
+    logdens <- dnorm(x, mean, sd = sqrt(1/tau), log = TRUE)
+    if(log) return(sum(logdens)) else return(exp(sum(logdens)))
+  },
+  buildDerivs = T
+)
