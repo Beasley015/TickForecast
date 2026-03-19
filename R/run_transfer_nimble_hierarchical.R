@@ -22,7 +22,6 @@ run_transfer_nimble <- function(
 		"data",
 		"n.iter",
 		"if_else_nimble",
-		"dnorm_vec",
 		"miceAndWeather",
 		"use.daymet"
 	)
@@ -55,7 +54,6 @@ run_transfer_nimble <- function(
 			buildDerivs=T
 		)  
 		cModel <- compileNimble(model)
-		registerDistributions('dnorm_vec')
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
 		
 		mcmcConf$addSampler(target = mcmcConf$monitors, type = 'NUTS')
