@@ -5,6 +5,7 @@ run_transfer_nimble <- function(
 	constants,
 	inits,
 	n.iter,
+	parms,
 	miceAndWeather,
 	use.daymet
 ) {
@@ -16,11 +17,13 @@ run_transfer_nimble <- function(
 
 	n.cores <- length(cl) # number of cores used
 
+	# Need to add nimble function here?
 	export.vec <- c(
 		"model",
 		"constants",
 		"data",
 		"n.iter",
+		"parms",
 		"if_else_nimble",
 		"miceAndWeather",
 		"use.daymet"
@@ -54,7 +57,7 @@ run_transfer_nimble <- function(
 			buildDerivs=T
 		)  
 		cModel <- compileNimble(model)
-		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
+		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE, monitors = parms) 
 		
 		mcmcConf$addSampler(target = mcmcConf$monitors, type = 'NUTS')
 

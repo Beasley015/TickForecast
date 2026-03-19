@@ -2,6 +2,23 @@ library(nimble)
 source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
+  # Set up nodes that don't vary by site
+  for (i in 1:ns) { # ns = number of life stages
+    sig[i] ~ dinvgamma(pr.sig[i, 1], pr.sig[i, 2]) 
+  }
+  
+  ### precision priors with process error
+  OMEGA[1, 1] <- sig[1]
+  OMEGA[2, 2] <- sig[2]
+  OMEGA[3, 3] <- sig[3]
+  OMEGA[4, 4] <- sig[4]
+  
+  # Cholesky decomposition
+  Ochol[1:4, 1:4] <- chol(OMEGA[1:4, 1:4])
+  
+  # Omega and the Cholensky decomp are eventually used
+  # To estimate questing ticks
+  
   for(site in 1:nsite){
 	  ### priors
 	  phi.l.mu[site] ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
@@ -24,22 +41,6 @@ model.code <- nimbleCode({
 		tau.minrh[site] ~ dexp(1)
 		tau.precip[site] ~ dexp(1)
 		tau.cgdd[site] ~ dexp(1)
-  
-		for (i in 1:ns) { # ns = number of life stages
-			sig[i] ~ dinvgamma(pr.sig[i, 1], pr.sig[i, 2]) 
-		}
-
-		### precision priors with process error
-		OMEGA[1, 1] <- sig[1]
-		OMEGA[2, 2] <- sig[2]
-		OMEGA[3, 3] <- sig[3]
-		OMEGA[4, 4] <- sig[4]
-
-	  # Cholesky decomposition
-	  Ochol[1:4, 1:4] <- chol(OMEGA[1:4, 1:4])
-	  
-	  # Omega and the Cholensky decomp are eventually used
-	  # To estimate questing ticks
 
 	  ### first latent process
 		for (i in 1:4) {

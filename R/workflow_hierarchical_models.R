@@ -69,9 +69,10 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+n.slots <- 2
 production <- TRUE
-n.iter <- 20000
+n.iter <- 1000 #15000
 # Nmc <- 2000
 horizon <- 365
 
@@ -345,6 +346,7 @@ pr.sig <- df.params %>%
 # Make sure start is on the first time step
 t = 1
 
+# Define directories
 dir.base <- file.path(
   dir.out,
   species.job,
@@ -353,12 +355,15 @@ dir.base <- file.path(
 
 dir.save <- file.path(dir.base)
 
+# Pick up where you left off if an update
 if(update == T){
   comp.dates <- list.dirs(path=dir.save)[-1]
   comp.dates <- str_extract(comp.dates, pattern = "\\d+-\\d+-\\d+")
   
   t <- t+length(comp.dates)
 }
+
+# Filter drag dates so 1 week is analyzed at a time
 
 for (t in t:n.drags) { 
 	fx.start.date <- drag.dates[t]
@@ -668,22 +673,28 @@ for (t in t:n.drags) {
 			A = array(0, dim=c(4, 4, horizon, length(sites)))
 		)
 	}
+	
+	params.to.save <-  c("beta", "gdd", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",        
+	                     "tau.cgdd", "tau.maxrh", "tau.minrh", "tau.precip", 
+	                     "tau.temp", "theta.ln", "theta.na", "x", "x1", "x2", 
+	                     "x3", "x4")     
 
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
 	cl <- makeCluster(n.slots) 
 	
 	# Run the model	
-	out.nchains <- run_transfer_nimble(
+	system.time(out.nchains <- run_transfer_nimble(
 		cl = cl,
 		model = model.code,
 		data = data,
 		constants = constants,
 		inits = inits,
 		n.iter = n.iter,
+		parms = params.to.save,
 		miceAndWeather = miceAndWeather,
 		use.daymet = use.daymet
-		) 
+		) )
 	
 	stopCluster(cl)
   
