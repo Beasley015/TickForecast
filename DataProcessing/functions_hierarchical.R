@@ -563,28 +563,22 @@ transfer_analysis <- function(
 		)
 
 	# pred.obs will only have forecasts for the dates tick drags occurred
-	pred.obs <- tibble() 
 	plots <- data.site$plotID %>% unique()
-	for (p in seq_along(plots)) {
-	  # Subset data by plot
-		data.sub <- data.site %>%
-			filter(plotID == plots[p]) %>%
-		  mutate(time=as.Date(time, format = "%Y-%m-%d"))
-		plot.time <- unique(data.sub$time)
-		
-		# Subset forecast so it only has sampled days
-		fx.sub  <- states %>%
-			filter(time %in% plot.time, siteID==unique(data.sub$siteID)) %>%
-		  select(-Dormant) %>%
-		  pivot_longer(cols = Larva:Adult, names_to = 'lifeStage', 
-		               values_to = 'value')
-		pred.obs.plot <- left_join(
-			fx.sub,
-			data.sub,
-			by = c("time", "lifeStage", "siteID")
-		)
-		pred.obs <- bind_rows(pred.obs, pred.obs.plot)
-	}
+	
+	data.site$time <- as.Date(data.site$time, format = "%Y-%m-%d")
+	
+	fx.sub <- states %>%
+	  filter(time %in% unique(data.site$time), 
+	                          siteID %in% unique(data.site$siteID)) %>%
+	  mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
+	  select(-Dormant) %>%
+	  pivot_longer(cols = Larva:Adult, names_to = 'lifeStage', 
+	               values_to = 'value')
+	
+	pred.obs <- left_join(fx.sub, data.site, 
+	                      by = c("time", "lifeStage", "siteID"),
+	                      relationship = "many-to-many") %>%
+	  filter(is.na(observed) == F)
 	
 	fx.data <- pred.obs %>%
 		mutate(
@@ -594,19 +588,10 @@ transfer_analysis <- function(
 		)
 
 	fx.quantiles <- fx.data %>%
-		group_by(
-			lifeStage,
-			time,
-			siteID,
-			start.date,
-			model,
-			species,
-			totalSampledArea,
-			plotID,
-			nlcd,
-			observed
-		) %>%
-		suppressMessages(summarise(
+	  ungroup() %>%
+		group_by(lifeStage, time, siteID, start.date, model, species,
+		         totalSampledArea, plotID, nlcd, observed) %>%
+		summarise(
 			lower95 = quantile(forecast, 0.025, na.rm=T),
 			lower75 = quantile(forecast, 0.125, na.rm=T),
 			median = median(forecast, na.rm=T),
@@ -614,23 +599,22 @@ transfer_analysis <- function(
 			upper75 = quantile(forecast, 0.875, na.rm=T),
 			upper95 = quantile(forecast, 0.975, na.rm=T),
 			variance = var(forecast, na.rm=T)
-		))
+		)
 
 	if(min(year(fx.dates))>=2018){
 	  scores <- score(fx.data, nmcmc) %>%
 		  mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
-		         species = spp, model = model)
+		         species = spp, model = model) %>%
+	    mutate(species = str_replace(species, pattern = "_", replacement = " "))
 
-	  fx.out <- left_join(
-		  fx.quantiles,
-		  scores,
-		  by = c("lifeStage", "time", "species", "plotID", "model", "siteID")
-	  )
+	  fx.out <- left_join(fx.quantiles, scores,
+	                      by = c("lifeStage", "time", "species", "plotID", 
+	                             "model", "siteID"))
 	}
 
-	# parameters (non-beta)
+	# parameters (non-beta) ADD SIG --------------
 	param.list <- fx.df[-c(weather.nodes, which(names(fx.df) %in% c("x", "beta",
-	                                                                "gdd", "sig")))]
+	                                                                "gdd")))]
 	for(i in 1:length(param.list)){
 	  param.list[[i]] <- as.data.frame(param.list[[i]])
 	  param.list[[i]]$node <- names(param.list)[i]
@@ -676,7 +660,7 @@ transfer_analysis <- function(
 		ungroup() %>%
 		mutate(species = spp, start.date = start.date, model = model)
 	
-	# Sigma
+	# Sigma FIX THIS -----------------------------
 	sigma <- as.data.frame(fx.df[['sig']])
 	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
 	

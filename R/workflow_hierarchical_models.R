@@ -355,20 +355,30 @@ dir.base <- file.path(
 
 dir.save <- file.path(dir.base)
 
+# Filter drag dates and # drags so 1 week is analyzed at a time
+weekly <- logical(length = length(drag.dates))
+weekly[1] <- T
+for(n in 2:n.drags){
+  weekly[n] <- ifelse(drag.dates[n]-drag.dates[n-1] < 7, F, T)
+}
+
+start.dates <- drag.dates[weekly]
+start.drags <- length(start.dates)
+
 # Pick up where you left off if an update
 if(update == T){
   comp.dates <- list.dirs(path=dir.save)[-1]
   comp.dates <- str_extract(comp.dates, pattern = "\\d+-\\d+-\\d+")
   
+  comp.dates <- comp.dates[which(comp.dates %in% start.dates)]
+  
   t <- t+length(comp.dates)
 }
 
-# Filter drag dates so 1 week is analyzed at a time
-
-for (t in t:n.drags) { 
-	fx.start.date <- drag.dates[t]
+for (t in t:start.drags) { 
+	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
-	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
+	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
 	message(mm)
 
   # flags for if statements
@@ -384,7 +394,7 @@ for (t in t:n.drags) {
 			# read last forecast parameters and state
 			readDest <- file.path(
 				dir.base,
-				drag.dates[t - 1]
+				start.dates[t - 1]
 			)
 
 			last.params <- read_csv(file.path(readDest, "parameterSamples.csv")) %>%
@@ -652,7 +662,8 @@ for (t in t:n.drags) {
 			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
 			               length(sites)),
 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
-			sig = rinvgamma(4, pr.sig$alpha, pr.sig$beta),
+			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
+			             nrow=4, ncol=length(sites)),
 			x = array(rpois(4 * horizon * length(sites), 2) / 160 * 450, 
 			          dim=c(4, horizon, length(sites))),
 			Ex = array(rpois(4 * horizon * length(sites), 2) / 160 * 450,
