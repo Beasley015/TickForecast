@@ -2,6 +2,13 @@ library(nimble)
 source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
+  # priors for beta - eventually moves to main loop
+  for (j in 1:n.beta) {
+    # Betas are the linear covariates for mice/weather linear models
+    # This will be hierarchical after hierarchical intercepts work
+    beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
+  }
+  
   for(site in 1:nsite){
 	  ### priors
 	  phi.l.mu[site] ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
@@ -13,11 +20,7 @@ model.code <- nimbleCode({
 	  # But this is fine for now: an informative prior
 	  # Based on previous data/model iterations
 
-    for (j in 1:n.beta) {
-      # Betas are the linear covariates for mice/weather linear models
-      # This will be hierarchical after hierarchical intercepts work
-		  beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
-	  }
+
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
@@ -127,14 +130,9 @@ model.code <- nimbleCode({
 		  # This does not associate plot samples with environmental covs
 		  # But it does treat individual plots as replicates of the site
 		  for (p in 1:n.plots[site]) {
-			  dx[1, t, p, site] <- x[1, t, site] / 450 * area[t, p, site]
-			  dx[2, t, p, site] <- x[3, t, site] / 450 * area[t, p, site]
-			  dx[3, t, p, site] <- x[4, t, site] / 450 * area[t, p, site]
-			  y[1, t, p, site] ~ dpois(dx[1, t, p, site]) 
-			  y[3, t, p, site] ~ dpois(dx[2, t, p, site])
-			  y[4, t, p, site] ~ dpois(dx[3, t, p, site])
-			  
-			  # dx is a transition variable so it only has 3 rows instead of 4
+			  y[1, t, p, site] ~ dpois((x[1, t, site] / 450 * area[t, p, site])) 
+			  y[3, t, p, site] ~ dpois((x[3, t, site] / 450 * area[t, p, site]))
+			  y[4, t, p, site] ~ dpois((x[4, t, site] / 450 * area[t, p, site]))
 		  }
 	  }
 
@@ -144,7 +142,7 @@ model.code <- nimbleCode({
 
 		  x[1:ns, t, site] ~
 			  dmnorm(mean = Ex[1:ns, t, site], 
-			         cholesky = Ochol[1:ns, 1:ns], prec_param = 0)
+			         cholesky = Ochol[1:ns, 1:ns, site], prec_param = 0)
 		}
   }
 }

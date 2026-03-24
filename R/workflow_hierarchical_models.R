@@ -69,10 +69,10 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-n.slots <- 2
+n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+# n.slots <- 2
 production <- TRUE
-n.iter <- 1000 #15000
+n.iter <- 15000
 # Nmc <- 2000
 horizon <- 365
 
@@ -680,7 +680,7 @@ for (t in t:start.drags) {
 			x3 = jitter(data$minrh),
 			x4 = jitter(data$precip),
 			gdd = jitter(as.matrix(data$cgdd)),
-			OMEGA = matrix(0, nrow = 4, ncol = 4),
+			OMEGA = array(0, dim=c(4,4,length(sites))),
 			A = array(0, dim=c(4, 4, horizon, length(sites)))
 		)
 	}
@@ -695,7 +695,7 @@ for (t in t:start.drags) {
 	cl <- makeCluster(n.slots) 
 	
 	# Run the model	
-	system.time(out.nchains <- run_transfer_nimble(
+	out.nchains <- run_transfer_nimble(
 		cl = cl,
 		model = model.code,
 		data = data,
@@ -705,7 +705,7 @@ for (t in t:start.drags) {
 		parms = params.to.save,
 		miceAndWeather = miceAndWeather,
 		use.daymet = use.daymet
-		) )
+		) 
 	
 	stopCluster(cl)
   
