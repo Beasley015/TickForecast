@@ -117,26 +117,22 @@ data.latent <- df.latent %>%
 		ua == ua.cal,
 		month(DATE) == month.get
 	) %>%
-  mutate(value = case_when(value == 0 ~ 1e-10,
-                           TRUE ~ value)) %>%
 	group_by(lifeStage) %>%
-	summarise(shape=fitdist(value, distr='gamma')[[1]][1], 
-	          rate=fitdist(value, distr='gamma')[[1]][2]) %>%
-  suppressWarnings() %>%
-	pivot_wider(names_from = lifeStage, values_from = c(shape,rate))
+  summarise(mu = mean(value), prec = 1 / var(value)) %>%
+  pivot_wider(names_from = lifeStage, values_from = c(mu, prec))
 
 IC <- tibble(
-	shape = c(
-		pull(data.latent, shape_larvae),
-		pull(data.latent, shape_dormant),
-		pull(data.latent, shape_nymphs),
-		pull(data.latent, shape_adults)
+	mu = c(
+		pull(data.latent, mu_larvae),
+		pull(data.latent, mu_dormant),
+		pull(data.latent, mu_nymphs),
+		pull(data.latent, mu_adults)
 	),
-	rate = c(
-		pull(data.latent, rate_larvae),
-		pull(data.latent, rate_dormant),
-		pull(data.latent, rate_nymphs),
-		pull(data.latent, rate_adults)
+	prec = c(
+		pull(data.latent, prec_larvae),
+		pull(data.latent, prec_dormant),
+		pull(data.latent, prec_nymphs),
+		pull(data.latent, prec_adults)
 	)
 ) %>%
 	as.matrix()
@@ -203,7 +199,7 @@ for (i in seq_along(mice.seq)) {
 mna.hist <- mna_jags("Green Control", return.mean = TRUE)
 
 # center and scale
-mna.scaled <- as.data.frame(mna.all.days-mna.hist$mean/mna.hist$sd)
+mna.scaled <- as.data.frame((mna.all.days-mna.hist$mean)/mna.hist$sd)
 colnames(mna.scaled) <- mice.seq
 
 mna.scaled <- mna.scaled %>%
@@ -605,7 +601,7 @@ for (t in t:start.drags) {
 	    filter(Date %in% fx.sequence) %>%
 	    pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
 	    dplyr::select(-Date) %>%
-	    relocate(sites) %>%
+	    relocate(all_of(sites)) %>%
 	    as.matrix() %>%
 	    suppressMessages()
 
@@ -638,13 +634,13 @@ for (t in t:start.drags) {
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
-	constants$max.cgdd <- cgdd %>%
-	  group_by(siteID) %>%
-	  filter(Date >= min(fx.sequence)) %>%
-	  mutate(max.cgdd = cumGDD*1.2) %>%
-	  summarise(min = min(max.cgdd), max = max(max.cgdd)) %>%
-	  select(-siteID) %>%
-	  t()
+	# constants$max.cgdd <- cgdd %>%
+	#   group_by(siteID) %>%
+	#   filter(Date >= min(fx.sequence)) %>%
+	#   mutate(max.cgdd = cumGDD*1.2) %>%
+	#   summarise(min = min(max.cgdd), max = max(max.cgdd)) %>%
+	#   select(-siteID) %>%
+	#   t()
 	
 	# Initialize area
 	area.init <- area
@@ -670,24 +666,22 @@ for (t in t:start.drags) {
 			          dim=c(4, horizon, length(sites))),
 			Ex = array(rpois(4 * horizon * length(sites), 2) / 160 * 450,
 			           dim=c(4, horizon, length(sites))),
-			y = array(rpois(4 * horizon * n.plots * length(sites), 1), 
+			y = array(rep(0, 4*horizon*max(n.plots)*length(sites)),#rpois(4 * horizon * max(n.plots) * length(sites), 1), 
 			          dim = dim(data$y)),
 			tau.temp = rexp(length(sites)),
 			tau.maxrh = rexp(length(sites)),
 			tau.minrh = rexp(length(sites)),
 			tau.precip = rexp(length(sites)),
-			tau.cgdd = rexp(length(sites)),
 			x1 = jitter(data$maxtemp),
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
 			x4 = jitter(data$precip),
-			gdd = jitter(as.matrix(data$cgdd)),
 			OMEGA = array(0, dim=c(4,4,length(sites))),
 			A = array(0, dim=c(4, 4, horizon, length(sites)))
 		)
 	}
 	
-	params.to.save <-  c("beta", "gdd", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",        
+	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",        
 	                     "tau.cgdd", "tau.maxrh", "tau.minrh", "tau.precip", 
 	                     "tau.temp", "theta.ln", "theta.na", "x", "x1", "x2", 
 	                     "x3", "x4")     

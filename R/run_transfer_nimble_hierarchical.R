@@ -58,10 +58,12 @@ run_transfer_nimble <- function(
 		)  
 		cModel <- compileNimble(model)
 		
-		# test for inf
+		# Test for infinite values
+		test <- names(cModel)[str_detect(names(cModel), "logProb")]
+		test <- test[str_detect(test, "\\.")==F]
 		for(i in 1:length(test)){
-		  probcheck <- any(is.infinite(cModel[[test[i]]]))
-		  if(probcheck == T){print(paste(test[i], "has inf", sep = " "))}
+		  prb <- any(is.infinite(cModel[[test[i]]]))
+		  if(prb==T){print(paste(test[i], "is infinite", sep = " "))}
 		}
 		
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE, monitors = parms) 

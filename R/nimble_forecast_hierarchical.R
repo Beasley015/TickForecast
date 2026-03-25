@@ -20,17 +20,14 @@ model.code <- nimbleCode({
 	  # But this is fine for now: an informative prior
 	  # Based on previous data/model iterations
 
-
-
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
 		tau.minrh[site] ~ dexp(1)
 		tau.precip[site] ~ dexp(1)
-		tau.cgdd[site] ~ dexp(1)
 
 	  ### first latent process
 		for (i in 1:4) {
-			x[i, 1, site] ~ dgamma(shape=IC[i, 1, site], rate = IC[i, 2, site])
+		  x[i, 1, site] ~ T(dnorm(IC[i, 1, site], tau = IC[i, 2, site]), 0, Inf)
 		}
 		
 		# Set up nodes that don't vary by site
@@ -62,25 +59,21 @@ model.code <- nimbleCode({
 			  logit(l2n[t, site]) <- theta.ln[site]
 			  logit(n2a[t, site]) <- theta.na[site]
 		  }
-	    
-		  cgdd[t, site] ~ dnorm(gdd[t, site], tau = tau.cgdd[site])
-		  # see if below is causing inf in likelihood estimate:
-		  gdd[t, site] ~ dunif(min = 0, max = max.cgdd[2,site]+(max.cgdd[2,site]*0.2))
 
 		  theta.n2a[t, site] <- if_else_nimble(
-			  (gdd[t, site] <= 1000) | (gdd[t, site] >= 2500),
+			  (cgdd[t, site] <= 1000) | (cgdd[t, site] >= 2500),
 			  n2a[t, site],
 			  0
 		  )
 		  
 		  # lambda is part of transition matrix... I think reproduction?
 		  lambda[t, site] <- if_else_nimble(
-			  (gdd[t, site] >= 1400) & (gdd[t, site] <= 2500),
+			  (cgdd[t, site] >= 1400) & (cgdd[t, site] <= 2500),
 			  repro.mu,
 			  0
 		  )
-		  l2n.quest[t, site] <- if_else_nimble((gdd[t, site] >= 400) & 
-		                                   (gdd[t, site] <= 2500), 1, 0)
+		  l2n.quest[t, site] <- if_else_nimble((cgdd[t, site] >= 400) & 
+		                                   (cgdd[t, site] <= 2500), 1, 0)
 
 		  if (use.daymet) {
 		    # Weather inputs for survival models
