@@ -69,10 +69,11 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-# n.slots <- 2
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+n.slots <- 2
 production <- TRUE
-n.iter <- 15000
+# n.iter <- 15000
+n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
 
@@ -605,7 +606,8 @@ for (t in t:start.drags) {
 	    pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
 	    dplyr::select(-Date) %>%
 	    relocate(sites) %>%
-	    as.matrix()
+	    as.matrix() %>%
+	    suppressMessages()
 
 	  if (nrow(data$mice) < length(fx.sequence)) {
 	    horizon <- min(length(data$cgdd), hrow(data$mice))
@@ -726,6 +728,9 @@ for (t in t:start.drags) {
 	if(year(fx.start.date)>=2018){
 	  message("Checking convergence...")
 	  nodes <- names(dat.hindcast)
+	  nodes <- nodes[nodes %in% c("beta", "x", "x1", "x2", "x3", "x4", 
+	                              nodes[str_detect(nodes, "phi")], 
+	                              nodes[str_detect(nodes, "theta")])]
 	  gelman.keep <-list()
 	
 	  for (ff in seq_along(nodes)) {

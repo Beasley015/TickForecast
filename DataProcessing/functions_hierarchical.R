@@ -612,9 +612,8 @@ transfer_analysis <- function(
 	                             "model", "siteID"))
 	}
 
-	# parameters (non-beta) ADD SIG --------------
 	param.list <- fx.df[-c(weather.nodes, which(names(fx.df) %in% c("x", "beta",
-	                                                                "gdd")))]
+	                                                                "gdd","sig")))]
 	for(i in 1:length(param.list)){
 	  param.list[[i]] <- as.data.frame(param.list[[i]])
 	  param.list[[i]]$node <- names(param.list)[i]
@@ -660,12 +659,14 @@ transfer_analysis <- function(
 		ungroup() %>%
 		mutate(species = spp, start.date = start.date, model = model)
 	
-	# Sigma FIX THIS -----------------------------
-	sigma <- as.data.frame(fx.df[['sig']])
+	sigma <- fx.df[['sig']]
 	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
+
+	sigma <- as.data.frame(apply(sigma, 2, "c"))
+	sigma$siteID <- rep(sites, each = nmcmc)
 	
 	sig <- sigma %>%
-	  pivot_longer(cols=everything(), names_to = 'parameter', values_to='value')
+	  pivot_longer(cols=sig1:sig4, names_to = 'parameter', values_to='value')
 
 	if (!dir.exists(out.dir)) {
 		dir.create(out.dir, recursive = TRUE, showWarnings = FALSE)

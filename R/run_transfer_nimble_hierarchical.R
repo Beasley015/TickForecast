@@ -57,6 +57,13 @@ run_transfer_nimble <- function(
 			buildDerivs=T
 		)  
 		cModel <- compileNimble(model)
+		
+		# test for inf
+		for(i in 1:length(test)){
+		  probcheck <- any(is.infinite(cModel[[test[i]]]))
+		  if(probcheck == T){print(paste(test[i], "has inf", sep = " "))}
+		}
+		
 		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE, monitors = parms) 
 		
 		mcmcConf$addSampler(target = mcmcConf$monitors, type = 'NUTS')

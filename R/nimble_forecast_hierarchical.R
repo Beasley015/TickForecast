@@ -64,7 +64,8 @@ model.code <- nimbleCode({
 		  }
 	    
 		  cgdd[t, site] ~ dnorm(gdd[t, site], tau = tau.cgdd[site])
-		  gdd[t, site] ~ dunif(min = 0, max = max.cgdd[2,site])
+		  # see if below is causing inf in likelihood estimate:
+		  gdd[t, site] ~ dunif(min = 0, max = max.cgdd[2,site]+(max.cgdd[2,site]*0.2))
 
 		  theta.n2a[t, site] <- if_else_nimble(
 			  (gdd[t, site] <= 1000) | (gdd[t, site] >= 2500),
