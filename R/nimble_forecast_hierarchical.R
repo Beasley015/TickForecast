@@ -2,6 +2,13 @@ library(nimble)
 source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
+  # priors for beta - eventually moves to main loop
+  for (j in 1:n.beta) {
+    # Betas are the linear covariates for mice/weather linear models
+    # This will be hierarchical after hierarchical intercepts work
+    beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
+  }
+  
   for(site in 1:nsite){
 	  ### priors
 	  phi.l.mu[site] ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
@@ -13,38 +20,35 @@ model.code <- nimbleCode({
 	  # But this is fine for now: an informative prior
 	  # Based on previous data/model iterations
 
-    for (j in 1:n.beta) {
-      # Betas are the linear covariates for mice/weather linear models
-      # This will be hierarchical after hierarchical intercepts work
-		  beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
-	  }
+
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
 		tau.minrh[site] ~ dexp(1)
 		tau.precip[site] ~ dexp(1)
 		tau.cgdd[site] ~ dexp(1)
-  
-		for (i in 1:ns) { # ns = number of life stages
-			sig[i] ~ dinvgamma(pr.sig[i, 1], pr.sig[i, 2]) 
-		}
-
-		### precision priors with process error
-		OMEGA[1, 1] <- sig[1]
-		OMEGA[2, 2] <- sig[2]
-		OMEGA[3, 3] <- sig[3]
-		OMEGA[4, 4] <- sig[4]
-
-	  # Cholesky decomposition
-	  Ochol[1:4, 1:4] <- chol(OMEGA[1:4, 1:4])
-	  
-	  # Omega and the Cholensky decomp are eventually used
-	  # To estimate questing ticks
 
 	  ### first latent process
 		for (i in 1:4) {
 			x[i, 1, site] ~ dgamma(shape=IC[i, 1, site], rate = IC[i, 2, site])
 		}
+		
+		# Set up nodes that don't vary by site
+		for (i in 1:ns) { # ns = number of life stages
+		  sig[i,site] ~ dinvgamma(pr.sig[i, 1], pr.sig[i, 2]) 
+		}
+		
+		### precision priors with process error
+		OMEGA[1, 1, site] <- sig[1, site]
+		OMEGA[2, 2, site] <- sig[2, site]
+		OMEGA[3, 3, site] <- sig[3, site]
+		OMEGA[4, 4, site] <- sig[4, site]
+		
+		# Cholesky decomposition
+		Ochol[1:4, 1:4, site] <- chol(OMEGA[1:4, 1:4, site])
+		
+		# Omega and the Cholensky decomp are eventually used
+		# To estimate questing ticks
 
 	  ### define parameters
 	  for (t in 1:horizon) {
@@ -126,14 +130,9 @@ model.code <- nimbleCode({
 		  # This does not associate plot samples with environmental covs
 		  # But it does treat individual plots as replicates of the site
 		  for (p in 1:n.plots[site]) {
-			  dx[1, t, p, site] <- x[1, t, site] / 450 * area[t, p, site]
-			  dx[2, t, p, site] <- x[3, t, site] / 450 * area[t, p, site]
-			  dx[3, t, p, site] <- x[4, t, site] / 450 * area[t, p, site]
-			  y[1, t, p, site] ~ dpois(dx[1, t, p, site]) 
-			  y[3, t, p, site] ~ dpois(dx[2, t, p, site])
-			  y[4, t, p, site] ~ dpois(dx[3, t, p, site])
-			  
-			  # dx is a transition variable so it only has 3 rows instead of 4
+			  y[1, t, p, site] ~ dpois((x[1, t, site] / 450 * area[t, p, site])) 
+			  y[3, t, p, site] ~ dpois((x[3, t, site] / 450 * area[t, p, site]))
+			  y[4, t, p, site] ~ dpois((x[4, t, site] / 450 * area[t, p, site]))
 		  }
 	  }
 
@@ -143,7 +142,7 @@ model.code <- nimbleCode({
 
 		  x[1:ns, t, site] ~
 			  dmnorm(mean = Ex[1:ns, t, site], 
-			         cholesky = Ochol[1:ns, 1:ns], prec_param = 0)
+			         cholesky = Ochol[1:ns, 1:ns, site], prec_param = 0)
 		}
   }
 }
