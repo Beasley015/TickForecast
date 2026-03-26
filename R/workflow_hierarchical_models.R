@@ -734,7 +734,7 @@ for (t in t:start.drags) {
 	    mcmc.check <- list()
 		  col <- nodes[ff]
 		
-		  if(length(dim(out.nchains[[1]][[ff]]))!=2){next}
+		  if(length(dim(out.nchains[[1]][[nodes[ff]]]))!=2){next}
 				
 		  for (c in seq_along(out.nchains)) {
 		      mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
