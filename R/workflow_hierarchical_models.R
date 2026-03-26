@@ -117,22 +117,26 @@ data.latent <- df.latent %>%
 		ua == ua.cal,
 		month(DATE) == month.get
 	) %>%
+  mutate(value = case_when(value == 0 ~ 1e-10,
+                           TRUE ~ value)) %>%
 	group_by(lifeStage) %>%
-  summarise(mu = mean(value), prec = 1 / var(value)) %>%
-  pivot_wider(names_from = lifeStage, values_from = c(mu, prec))
+  summarise(shape=fitdist(value, distr='gamma')[[1]][1], 
+            rate=fitdist(value, distr='gamma')[[1]][2]) %>%
+  suppressWarnings() %>%
+  pivot_wider(names_from = lifeStage, values_from = c(shape,rate))
 
 IC <- tibble(
-	mu = c(
-		pull(data.latent, mu_larvae),
-		pull(data.latent, mu_dormant),
-		pull(data.latent, mu_nymphs),
-		pull(data.latent, mu_adults)
+	shape = c(
+		pull(data.latent, shape_larvae),
+		pull(data.latent, shape_dormant),
+		pull(data.latent, shape_nymphs),
+		pull(data.latent, shape_adults)
 	),
-	prec = c(
-		pull(data.latent, prec_larvae),
-		pull(data.latent, prec_dormant),
-		pull(data.latent, prec_nymphs),
-		pull(data.latent, prec_adults)
+	rate = c(
+		pull(data.latent, rate_larvae),
+		pull(data.latent, rate_dormant),
+		pull(data.latent, rate_nymphs),
+		pull(data.latent, rate_adults)
 	)
 ) %>%
 	as.matrix()
@@ -662,11 +666,11 @@ for (t in t:start.drags) {
 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
-			x = array(rpois(4 * horizon * length(sites), 2) / 160 * 450, 
+			x = array(abs(rnorm(n=4*horizon*length(sites), mean=2)) / 160 * 450, 
 			          dim=c(4, horizon, length(sites))),
 			Ex = array(rpois(4 * horizon * length(sites), 2) / 160 * 450,
 			           dim=c(4, horizon, length(sites))),
-			y = array(rep(0, 4*horizon*max(n.plots)*length(sites)),#rpois(4 * horizon * max(n.plots) * length(sites), 1), 
+			y = array(rep(0, 4*horizon*max(n.plots)*length(sites)),
 			          dim = dim(data$y)),
 			tau.temp = rexp(length(sites)),
 			tau.maxrh = rexp(length(sites)),
@@ -681,10 +685,9 @@ for (t in t:start.drags) {
 		)
 	}
 	
-	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",        
-	                     "tau.cgdd", "tau.maxrh", "tau.minrh", "tau.precip", 
-	                     "tau.temp", "theta.ln", "theta.na", "x", "x1", "x2", 
-	                     "x3", "x4")     
+	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
+	                     "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
+	                     "theta.ln", "theta.na", "x", "x1", "x2", "x3", "x4")     
 
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")

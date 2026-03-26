@@ -27,7 +27,7 @@ model.code <- nimbleCode({
 
 	  ### first latent process
 		for (i in 1:4) {
-		  x[i, 1, site] ~ T(dnorm(IC[i, 1, site], tau = IC[i, 2, site]), 0, Inf)
+		  x[i, 1, site] ~ dgamma(shape=IC[i, 1, site], rate = IC[i, 2, site])
 		}
 		
 		# Set up nodes that don't vary by site
@@ -124,9 +124,15 @@ model.code <- nimbleCode({
 		  # This does not associate plot samples with environmental covs
 		  # But it does treat individual plots as replicates of the site
 		  for (p in 1:n.plots[site]) {
-			  y[1, t, p, site] ~ dpois((x[1, t, site] / 450 * area[t, p, site])) 
-			  y[3, t, p, site] ~ dpois((x[3, t, site] / 450 * area[t, p, site]))
-			  y[4, t, p, site] ~ dpois((x[4, t, site] / 450 * area[t, p, site]))
+		    dx[1,t,p,site] <- x[1, t, site] / 450 * area[t, p, site]
+		    dx[2,t,p,site] <- x[3, t, site] / 450 * area[t, p, site]
+		    dx[3,t,p,site] <- x[4, t, site] / 450 * area[t, p, site]
+		    
+			  y[1, t, p, site] ~ dpois(dx[1,t,p,site])
+			  y[3, t, p, site] ~ dpois(dx[2,t,p,site])
+			  y[4, t, p, site] ~ dpois(dx[3,t,p,site])
+			  
+			  # dx is an intermediate object and doesn't include dormant nymphs
 		  }
 	  }
 
