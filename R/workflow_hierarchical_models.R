@@ -69,11 +69,11 @@ ua.cal <-
 		"ic_parameter_process"
 	)
 
-# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-n.slots <- 2
+n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+# n.slots <- 2
 production <- TRUE
-# n.iter <- 15000
-n.iter <- 100
+n.iter <- 15000
+# n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
 
@@ -722,7 +722,7 @@ for (t in t:start.drags) {
 	names(dat.hindcast) <- names(out.nchains[[1]])
 
 	# Test MCMC convergence with Gelman-Rubin statistic
-	# if(year(fx.start.date)>=2018){
+	if(year(fx.start.date)>=2018){
 	  message("Checking convergence...")
 	  nodes <- names(dat.hindcast)
 	  nodes <- nodes[nodes %in% c("beta", "x", "x1", "x2", "x3", "x4", 
@@ -758,7 +758,7 @@ for (t in t:start.drags) {
 		      # message("Convergence = TRUE")
 		    }
 	  }
-	# }
+	}
   
 	# Thin the chains
 	dat.draws <- list()
