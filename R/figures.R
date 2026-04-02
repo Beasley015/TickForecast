@@ -21,7 +21,7 @@ dir.analysis <- "./analysis/"
 dir.plot <- "./figures/"
 
 # Create function for saving plots------------
-save_gg <- function(dest, gg, path) {
+save_gg <- function(dest, gg, path, width=7, height=5) {
 	if (!dir.exists(path)) {
 		dir.create(path, showWarnings = FALSE, recursive = TRUE)
 	}
@@ -30,8 +30,8 @@ save_gg <- function(dest, gg, path) {
 		plot = gg,
 		device = "jpeg",
 		path = path,
-		width = 7,
-		height = 5,
+		width = width,
+		height = height,
 		units = "in",
 		dpi = "retina",
 		bg = "white"
@@ -435,9 +435,16 @@ both.score.ts <- ggplot(data=both.sites, aes(x = start.date, y = crps, color = m
 # save_gg("both_score_ts.jpeg", both.score.ts, dir.plot)
 
 # Model coefficients ---------------------
+# Get files
 out.files <- list.files(dir.out, recursive = T)
 out.files <- out.files[str_detect(out.files, "parameterSummary.csv")]
 
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                 format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
 betas <- tibble()
 for(i in seq_along(out.files)){
   wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
@@ -473,105 +480,78 @@ ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
 aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
 
 ix.sub <- betas %>%
-  filter(siteID %in% ix.plots) %>%
+  filter(siteID %in% c(ix.plots, both.plots),
+         species == "Ixodes scapularis") %>%
   mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
                          lower95>0 & upper95>0 ~ 'sig',
-                         TRUE ~ NA))
+                         TRUE ~ NA),
+         node = factor(node))
 
-ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = node))+
+ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
-  geom_point(aes(x = 4, shape = sig))+
+  geom_point(aes(x = 4.2, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_wrap(~siteID) +
+  facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
-ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = node))+
+ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = siteID))+
   geom_point()+
   geom_point(aes(x = 2, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_wrap(~siteID) +
+  facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
 aa.sub <- betas %>%
-  filter(siteID %in% aa.plots) %>%
+  filter(siteID %in% c(aa.plots, both.plots),
+         species == "Amblyomma americanum") %>%
   mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
                          lower95>0 & upper95>0 ~ 'sig',
-                         TRUE ~ NA))
+                         TRUE ~ NA),
+         node = factor(node))
 
-aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = node))+
+aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
   geom_point(aes(x = 4, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_wrap(~siteID) +
+  facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
-aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = node))+
+aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = siteID))+
   geom_point()+
   geom_point(aes(x = 2, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_wrap(~siteID) +
+  facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
-both.sub <- betas %>%
-  filter(siteID %in% both.plots) %>%
-  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
-                         lower95>0 & upper95>0 ~ 'sig',
-                         TRUE ~ NA))
-
-both.survival <- ggplot(data = both.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = node))+
-  geom_point()+
-  geom_point(aes(x = 4, shape = sig))+
-  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
-  geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_grid(rows=vars(siteID), cols=vars(species)) +
-  labs(x = "Coefficient Estimate")+
-  theme_bw(base_size = 12) +
-  theme(panel.grid = element_blank(), legend.position = 'none', 
-        axis.title.y = element_blank())
-
-both.transition <- ggplot(data = both.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = node))+
-  geom_point()+
-  # geom_point(aes(x = 2.5, shape = sig))+
-  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
-  geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_grid(rows=vars(siteID), cols=vars(species)) +
-  labs(x = "Coefficient Estimate")+
-  theme_bw(base_size = 12) +
-  theme(panel.grid = element_blank(), legend.position = 'none', 
-        axis.title.y = element_blank())
-
-# save_gg("aa_survival.jpeg", aa.survival, dir.plot)
-# save_gg("aa_transition.jpeg", aa.transition, dir.plot)
-# save_gg("ix_survival.jpeg", ix.survival, dir.plot)
-# save_gg("ix_transition.jpeg", ix.transition, dir.plot)
-# save_gg("both_survival.jpeg", both.survival, dir.plot)
-# save_gg("both_transition.jpeg", both.transition, dir.plot)
+# save_gg("aa_survival.jpeg", aa.survival, dir.plot, height = 8)
+# save_gg("aa_transition.jpeg", aa.transition, dir.plot, height = 8)
+# save_gg("ix_survival.jpeg", ix.survival, dir.plot, height = 8)
+# save_gg("ix_transition.jpeg", ix.transition, dir.plot, height = 8)
 
 # Maps?
-site.coords <- read_csv(file.path(dir.top, "/Data/siteLatLon.csv")) %>%
+site.coords <- read_csv("./Data/siteLatLon.csv") %>%
   suppressMessages()
 
 betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
   filter(str_detect(node, 'Survival')) %>%
   filter(is.na(decimalLongitude)==F) %>%
-  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326) %>%
-  st_jitter(amount = 0.5)
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
 
 state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
 state_map <- st_make_valid(st_transform(state_map, crs = 5070))
@@ -580,12 +560,25 @@ state_map <- st_make_valid(st_transform(state_map, crs = 5070))
 state_map <- st_transform(state_map, crs = 4326)
 state_map <- st_crop(state_map, st_bbox(betas.loc))
 
-coef.map <- ggplot(data = betas.loc)+
+ix.map <- ggplot(data = betas.loc %>% filter(species == "Ixodes scapularis"))+
   geom_sf(data=state_map)+
-  geom_sf(aes(shape = species, fill = mean), size = 3.5)+
-  scale_shape_manual(values = c(21,24))+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Ixodes scapularis")+
   scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
   facet_wrap(~node)+
   theme_bw()
 
-# save_gg("coef_map.jpeg", coef.map, dir.plot)
+aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Amblyomma americanum")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node)+
+  theme_bw()
+
+# save_gg("ix_map.jpeg", ix.map, dir.plot, width = 10, height = 8)
+# save_gg("aa_map.jpeg", aa.map, dir.plot, width = 10, height = 8)
