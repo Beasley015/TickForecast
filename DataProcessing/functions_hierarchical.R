@@ -444,6 +444,9 @@ score <- function(df.pred.obs, nmcmc) {
 			ls.subset <- plot.subset %>%
 				arrange(time) %>%
 				filter(lifeStage == ls.vec[i])
+			
+			if(any(is.na(ls.subset$value)==T)){next}
+			
 			ls.observed <- ls.subset %>%
 				select(time, observed) %>%
 				distinct() %>%

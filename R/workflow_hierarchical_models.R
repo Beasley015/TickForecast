@@ -72,8 +72,8 @@ ua.cal <-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 2
 production <- TRUE
-n.iter <- 15000
-# n.iter <- 100
+# n.iter <- 15000
+n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
 
@@ -451,43 +451,47 @@ for (t in t:start.drags) {
 
 			tick.stats <- last.fx %>%
 				filter(time == fx.start.date) %>%
+			  mutate(value = case_when(value < 0 ~ 1e-6,
+			                   TRUE ~ value)) %>%
 				group_by(lifeStage, time, siteID) %>%
-			  summarise(mu = mean(value), tau = 1 / var(value))
+			  summarise(shape=fitdist(value, distr='gamma')[[1]][1], 
+			            rate=fitdist(value, distr='gamma')[[1]][2]) %>%
+			  suppressWarnings()
 
 			IC <- array(NA, dim = c(4, 2, length(sites)))
 			
 			for(i in 1:length(sites)){
 			  IC[1, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Larva" & siteID==sites[i]) %>% 
-			    pull(mu)
+			    pull(shape)
 			  
 			  IC[1, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Larva" & siteID==sites[i]) %>% 
-			    pull(tau)
+			    pull(rate)
 			
 			  IC[2, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Dormant"& siteID==sites[i]) %>% 
-			    pull(mu)
+			    pull(shape)
 			
 			  IC[2, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Dormant" & siteID==sites[i]) %>% 
-			    pull(tau)
+			    pull(rate)
 			
 			  IC[3, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Nymph" & siteID==sites[i]) %>% 
-			    pull(mu)
+			    pull(shape)
 			
 			  IC[3, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Nymph" & siteID==sites[i]) %>% 
-			    pull(tau)
+			    pull(rate)
 			
 			  IC[4, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Adult" & siteID==sites[i]) %>% 
-			    pull(mu)
+			    pull(shape)
 			
 			  IC[4, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Adult" & siteID==sites[i]) %>% 
-			    pull(tau)
+			    pull(rate)
 			}
 
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
