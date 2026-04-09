@@ -129,20 +129,20 @@ model.code <- nimbleCode({
 
 		if (use.daymet) {
 			# if (driver) {
-				maxtemp[t] ~ dnorm(x1[t], tau = tau.temp)
-				maxrh[t] ~ dnorm(x2[t], tau = tau.maxrh)
-				minrh[t] ~ dnorm(x3[t], tau = tau.minrh)
-				precip[t] ~ dnorm(x4[t], tau = tau.precip)
-
-				x1[t] ~ dnorm(0, 1)
-				x2[t] ~ dnorm(0, 1)
-				x3[t] ~ dnorm(0, 1)
-				x4[t] ~ dnorm(0, 1)
+				# maxtemp[t] ~ dnorm(x1[t], tau = tau.temp)
+				# maxrh[t] ~ dnorm(x2[t], tau = tau.maxrh)
+				# minrh[t] ~ dnorm(x3[t], tau = tau.minrh)
+				# precip[t] ~ dnorm(x4[t], tau = tau.precip)
+				# 
+				# x1[t] ~ dnorm(0, 1)
+				# x2[t] ~ dnorm(0, 1)
+				# x3[t] ~ dnorm(0, 1)
+				# x4[t] ~ dnorm(0, 1)
 			# } else {
-			# 	x1[t] <- maxtemp[t]
-			# 	x2[t] <- maxrh[t]
-			# 	x3[t] <- minrh[t]
-			# 	x4[t] <- precip[t]
+				x1[t] <- maxtemp[t]
+				x2[t] <- maxrh[t]
+				x3[t] <- minrh[t]
+				x4[t] <- precip[t]
 			# }
 
 			logit(phi.l[t]) <- phi.l.mu +

@@ -48,7 +48,7 @@ ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 3
+	job.num <- 1
 }
 
 species.job <- jobs$species[job.num] %>%
@@ -72,8 +72,8 @@ ua.cal <-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 2
 production <- TRUE
-# n.iter <- 15000
-n.iter <- 100
+n.iter <- 15000
+# n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
 
@@ -451,11 +451,11 @@ for (t in t:start.drags) {
 
 			tick.stats <- last.fx %>%
 				filter(time == fx.start.date) %>%
-			  mutate(value = case_when(value < 0 ~ 1e-6,
+			  mutate(value = case_when(value < 0 ~ 0,
 			                   TRUE ~ value)) %>%
 				group_by(lifeStage, time, siteID) %>%
-			  summarise(shape=fitdist(value, distr='gamma')[[1]][1], 
-			            rate=fitdist(value, distr='gamma')[[1]][2]) %>%
+			  summarise(shape=fitdist(value, distr='gamma', lower = c(0,0))[[1]][1], 
+			            rate=fitdist(value, distr='gamma', lower = c(0,0))[[1]][2]) %>%
 			  suppressWarnings()
 
 			IC <- array(NA, dim = c(4, 2, length(sites)))

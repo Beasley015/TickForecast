@@ -6,14 +6,17 @@ X Reproduce existing model
 X Make submodel intercepts hierarchical
 X Reproduce some of John's figures
 X Add detailed ReadMe
+X Speed up hierarchical model because she is sloooooooow
 
 Immediate to do's:
-- Speed up hierarchical model because she is sloooooooow
 - Make model fully hierarchical
 - Compare hierarchical vs. OG vs. null models
 
 In the distance:
 - Rename model covariates so they correspond to specific components of model,
     not just "beta" with a subscript
-- Update site level lat/long in intake_daymet.R script so it actually gets the midpoint of the sites
+- Update site level lat/long in intake_daymet.R script so it gets the midpoint of the sites
+- Hierarchical covariate selection
+- Extend model to most recent NEON data
+- Extend model to NEON sites with sparse data
 

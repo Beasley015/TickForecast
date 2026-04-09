@@ -641,26 +641,63 @@ transfer_analysis <- function(
 	  mutate(species = spp, start.date = start.date, model = model)
 	  
 	
-	# Betas (will include with other params when fully hierarchical)
-	betas <- as.data.frame(fx.df$beta)
-	colnames(betas) <- str_replace(colnames(betas), "V", "beta")
+	# Betas
+	if(length(dim(fx.df$beta)) == 2){
+	  # extract and rename columns
+	  betas <- as.data.frame(fx.df$beta)
+	  colnames(betas) <- str_replace(colnames(betas), "V", "beta")
 	
-	betas <- betas %>%
-	  pivot_longer(cols = everything(), names_to="node", values_to="value")
-	
-	betas.quant <- betas %>%
-		group_by(node) %>%
-		summarise(
-			lower95 = quantile(value, 0.025, na.rm=T),
-			lower75 = quantile(value, 0.125, na.rm=T),
-			median = median(value, na.rm=T),
-			mean = mean(value, na.rm=T),
-			upper75 = quantile(value, 0.875, na.rm=T),
-			upper95 = quantile(value, 0.975, na.rm=T),
-			variance = var(value, na.rm=T)
-		) %>%
-		ungroup() %>%
-		mutate(species = spp, start.date = start.date, model = model)
+	  # Long format
+	  betas <- betas %>%
+	    pivot_longer(cols = everything(), names_to="node", values_to="value")
+	  
+	  # quants
+	  betas.quant <- betas %>%
+	    group_by(node) %>%
+	    summarise(
+	      lower95 = quantile(value, 0.025, na.rm=T),
+	      lower75 = quantile(value, 0.125, na.rm=T),
+	      median = median(value, na.rm=T),
+	      mean = mean(value, na.rm=T),
+	      upper75 = quantile(value, 0.875, na.rm=T),
+	      upper95 = quantile(value, 0.975, na.rm=T),
+	      variance = var(value, na.rm=T)
+	    ) %>%
+	    ungroup() %>%
+	    mutate(species = spp, start.date = start.date, model = model)
+	  
+	} else{
+	  # extract
+	  betas <-fx.df$beta 
+	  
+	  # Create column names
+	  beta.names <- logical()
+	  for(i in 1:dim(betas)[2]){beta.names[i] <- paste("beta", i, sep = "")}
+	  
+	  # Add col for site
+	  betas <- as.data.frame(apply(betas, 2, rbind))
+	  colnames(betas) <- beta.names
+	  betas$site <- rep(sites, each = nmcmc)
+	  
+	  # Long format
+	  betas <- betas %>%
+	    pivot_longer(cols = -site, names_to="node", values_to="value")
+	  
+	  # quants
+	  betas.quant <- betas %>%
+	    group_by(node, site) %>%
+	    summarise(
+	      lower95 = quantile(value, 0.025, na.rm=T),
+	      lower75 = quantile(value, 0.125, na.rm=T),
+	      median = median(value, na.rm=T),
+	      mean = mean(value, na.rm=T),
+	      upper75 = quantile(value, 0.875, na.rm=T),
+	      upper95 = quantile(value, 0.975, na.rm=T),
+	      variance = var(value, na.rm=T)
+	    ) %>%
+	    ungroup() %>%
+	    mutate(species = spp, start.date = start.date, model = model)
+	}
 	
 	sigma <- fx.df[['sig']]
 	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')

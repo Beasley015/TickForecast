@@ -22,7 +22,7 @@ library(parallel)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- FALSE
+update <- TRUE
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
