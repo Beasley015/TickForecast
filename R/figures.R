@@ -107,11 +107,13 @@ for(i in 1:length(series.files)){
   
   scores <- scores %>%
     select(time, siteID, totalSampledArea, plotID, species, model) %>%
+    filter(time >= as.Date("2018-01-01", format = "%Y-%m-%d"),
+           is.na(plotID) == F) %>%
     group_by(time, species, model, plotID) %>%
     distinct() %>%
     ungroup() %>%
     group_by(time, species, model) %>%
-    summarise(sampledArea = sum(totalSampledArea)) %>%
+    summarise(sampledArea = sum(totalSampledArea, na.rm = T)) %>%
     suppressMessages()
 
   # Condense forecast across plots
@@ -124,18 +126,16 @@ for(i in 1:length(series.files)){
     summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
               forecast95=mean(upper95)) %>%
     suppressMessages()
+  
+  rm(df.mutate)
     
   if(!(site.vec %in% c("GREN", "HNRY", "TEA"))){
     forecast.density <- forecast.density %>%
-      mutate(mean.density = (mean.forecast/sampledArea)*450,
-             density05 = (forecast05/sampledArea)*450,
-             density95 = (forecast95/sampledArea)*450) %>%
+      mutate(mean.forecast = (mean.forecast/sampledArea)*450,
+             forecast05 = (forecast05/sampledArea)*450,
+             forecast95 = (forecast95/sampledArea)*450) %>%
       suppressMessages()
-  } else{
-    forecast.density <- forecast.density %>%
-      rename("mean.density" = "mean.forecast", "density05"="forecast05",
-             "density95"="forecast95")
-  }
+  } 
   
   all_combos <- expand_grid(ls, sp, mod)
 
@@ -188,9 +188,9 @@ for(i in 1:length(series.files)){
 	    geom_ribbon(data=null.smol, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null")) +
 	    geom_point(data = neon.smol, aes(x=time, y = meandensity, fill = "Observed Data"),
 	               color = "#dd5129", size = 3) +
-      geom_ribbon(data=forecast.smol, aes(x = time, ymin=density05, ymax=density95, fill = "Forecast"),
+      geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"),
                   alpha = 0.3)+
-      geom_line(dat=forecast.smol, aes(x=time, y=mean.density), color = "#0f7ba2")+
+      geom_line(dat=forecast.smol, aes(x=time, y=mean.forecast), color = "#0f7ba2")+
       lims(x = c(fx.issue.date[1], as.Date("2022-01-01", format = "%Y-%m-%d"))) +
 	    labs(x = "Date", y = "Ticks/450m^2", 
 	         title = paste(site.vec, ", ", all_combos$sp[j], ", ", all_combos$ls[j], ", ", 
@@ -206,9 +206,12 @@ for(i in 1:length(series.files)){
 	    gg = gg,
 	    path = dir.plot
     )
+    
     print(paste("Site = ", site.vec, ", Species = ", all_combos$sp[j], ", Life Stage = ", all_combos$ls[j], 
                 ", Model = ", all_combos$mod[j], sep = ""))
   }
+  rm(list = c("scores", 'forecast.density', 'forecast.smol'))
+  gc()
 }
 
 # score figures --------------------------------------------------------------------------
