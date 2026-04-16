@@ -1,0 +1,22 @@
+acceptedTaxonID,scientificName,taxonRank
+IXOPAC,Ixodes pacificus,species
+IXOANG,Ixodes angustus,species
+IXOSP,Ixodidae sp.,family
+AMBAME,Amblyomma americanum,species
+HAELEP,Haemaphysalis leporispalustris,species
+IXOSCA,Ixodes scapularis,species
+HAELON,Haemaphysalis longicornis,species
+DERVAR,Dermacentor variabilis,species
+IXOAFF,Ixodes affinis,species
+AMBMAC,Amblyomma maculatum,species
+IXODEN,Ixodes dentatus,species
+DERAND,Dermacentor andersoni,species
+IXOMAR1,Ixodes marxi,species
+IXOMUR,Ixodes muris,species
+IXOKIN,Ixodes kingi,species
+IXOBRU,Ixodes brunneus,species
+AMBSP,Amblyomma sp.,genus
+IXOSPP,Ixodidae spp.,family
+DEROCC,Dermacentor occidentalis,species
+AMBSPP,Amblyomma spp.,genus
+DERPAR,Dermacentor parumapertus,species

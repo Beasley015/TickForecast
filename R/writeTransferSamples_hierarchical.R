@@ -122,7 +122,7 @@ for(j in 1:nrow(jobs)){
   }
 
   write_csv(df.process, file=paste(dir.analysis, "/", as.character(jobs[j,2]),
-                                   as.character(jobs[j,1]), ".csv", sep = ""))
+                        as.character(jobs[j,1]), ".csv", sep = ""))
 
   print(paste("Job = ", j))
 
