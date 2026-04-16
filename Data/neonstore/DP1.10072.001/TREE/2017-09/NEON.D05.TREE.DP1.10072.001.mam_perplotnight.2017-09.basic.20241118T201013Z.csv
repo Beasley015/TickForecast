@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"c11a643c-00d2-466f-815d-579cf1f812cb","e25025b0-3f58-4b64-baae-a993d03bae46","TREE.2017.39","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2017-09-26","2017-09-26",,,,
+"4e91bbe2-de80-4e93-b2d9-bdfc72b76c72","f3eca853-e81d-47a3-924b-356f6e28be43","TREE.2017.39","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2017-09-26","2017-09-26",,,,
+"d21e420e-d905-4942-bd12-52f00897e143","c0ef39b5-b800-4ada-8e70-c4989c6e6da4","TREE.2017.39","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2017-09-26","2017-09-26",,,,
+"39537cb6-ca93-4c04-932b-aa921d5e8808","ce11c8c4-dbf3-40bb-94fb-c7e6650b9571","TREE.2017.39","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-09-27","2017-09-27",,,,
+"8bdb2596-053d-4eca-9170-76d8d04bbd1b","e92f5c6c-7abd-4111-be9e-8a376e4c1724","TREE.2017.39","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-09-27","2017-09-27",,,,
+"772f35bd-5304-490e-99b6-68e981c73a8a","8b2574cd-f52e-4c4d-b585-16194e125e54","TREE.2017.39","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-09-27","2017-09-27",,,,
+"b34dcd60-e077-4abb-ac5e-2550f3cd65bb","55ff6817-bba6-4f9e-9e5d-80c0d6887367","TREE.2017.39","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-09-28","2017-09-28",,,,
+"c12f7d68-4aba-4554-aba7-0384bd36bfbe","376f0b02-a63c-419e-bf9e-4e904cc7bcbb","TREE.2017.39","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-09-28","2017-09-28",,,,
+"b549e7ef-2bd2-40d5-adf7-20fbd20bcc45","2daa6960-6e19-4e87-9e81-58a89e1d31cd","TREE.2017.39","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-09-29","2017-09-29",,,,
+"f206e2d7-f000-49b0-a91f-f78e888d5a7c","a7c41f6b-cb19-4454-8a19-7102be251a7a","TREE.2017.39","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-09-29","2017-09-29",,,,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"635f87d8-3d81-4cbc-9b9f-b4b01ea34ec1","c5a175a6-8af5-4d12-ad82-461da1015281","HARV.2023.36","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2023-09-06","2023-09-06","OK","NEON.DOC.000481vP",,
+"5efe725e-6a58-4446-a3d2-955828f544de","9da859ba-1dac-4f1b-a582-e764483dc2a9","HARV.2023.36","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2023-09-06","2023-09-06","OK","NEON.DOC.000481vP","Bear 39 disturbed/destroyed",
+"9dc16473-2c1b-4e1a-bf35-ab4efce738d3","c8d4e395-1309-4c03-83ee-8bd5e19f2024","HARV.2023.36","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2023-09-06","2023-09-06","OK","NEON.DOC.000481vP",,
+"695eec17-31fc-4d87-807b-6a154bad96a9","d1be62da-b872-4673-aa4f-3db93f790256","HARV.2023.36","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","diversity","2023-09-07","2023-09-07","OK","NEON.DOC.000481vP",,
+"514a77d7-f4f0-4480-af12-122fb4557f51","d6310382-1c87-4a0b-b5e9-0629f567c17d","HARV.2023.36","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2023-09-07","2023-09-07","disturbance","NEON.DOC.000481vP","predator disturbance",
+"a4de416a-109c-40d3-9b38-5c74a8329acf","1a2b97cd-c7cb-4d8f-a5dd-34c5c3330bb5","HARV.2023.36","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2023-09-07","2023-09-07","OK","NEON.DOC.000481vP",,
+"6f94e562-5d31-41d6-9882-850fd863d7a5","a8de07cf-b7ab-4522-b4ee-8433ff4267bf","HARV.2023.36","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2023-09-07","2023-09-07","OK","NEON.DOC.000481vP",,
+"cf607d3b-7fa3-4199-887c-e503ae9b447c","b0aab345-f8a5-4f46-b20b-796c503d8ea4","HARV.2023.36","HARV_001.mammalGrid.mam","D01","HARV","HARV_001","diversity","2023-09-08","2023-09-08","OK","NEON.DOC.000481vP",,
+"850af426-1276-4d6b-832c-d8befdf9c71d","0919c545-7e6a-4b00-9171-19d88a296af9","HARV.2023.36","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2023-09-08","2023-09-08","OK","NEON.DOC.000481vP",,
+"58f7ae26-3d85-4051-bda6-283801dcb75c","3342fc08-e123-443b-95df-adaf44b2060f","HARV.2023.36","HARV_010.mammalGrid.mam","D01","HARV","HARV_010","diversity","2023-09-08","2023-09-08","OK","NEON.DOC.000481vP",,
+"cb50f3d5-8bbe-41a1-82aa-481b1c00700f","921f5db9-181a-4863-8021-0a017ed2ff86","HARV.2023.36","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2023-09-08","2023-09-08","OK","NEON.DOC.000481vP",,
+"934b01d3-5109-4574-becb-be75ce4f221d","dc6f1429-7f62-4df9-b893-cb62b1f22f5e","HARV.2023.36","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2023-09-08","2023-09-08","disturbance","NEON.DOC.000481vP","predator disturbance",

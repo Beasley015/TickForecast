@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"2fa65d04-42f3-4362-a1dc-978b6aa7b392","3937533c-bbc5-43f4-b270-48c1fc55b783","GRSM.2024.31","GRSM_070.mammalGrid.mam","D07","GRSM","GRSM_070","diversity","2024-08-01","2024-08-01","disturbance",,"NEON.DOC.000481vP",,
+"b9ce1d0c-28c5-4b58-955e-c8187dfb65c6","715f1994-1acf-4691-8907-ea2add4792e3","GRSM.2024.31","GRSM_071.mammalGrid.mam","D07","GRSM","GRSM_071","pathogen","2024-08-01","2024-08-01","disturbance",,"NEON.DOC.000481vP",,
+"53cb6da6-e9db-41b2-8096-6290d02ba97b","b08e9a6a-bccc-488b-90a9-3e1ac75430cb","GRSM.2024.31","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2024-08-01","2024-08-01","disturbance",,"NEON.DOC.000481vP",,
+"ccde1b12-3f9e-4ca1-bd59-7c254678cfef","6408607f-59a7-4f53-91fd-28527db08b4c","GRSM.2024.31","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2024-08-01","2024-08-01","disturbance",,"NEON.DOC.000481vP",,

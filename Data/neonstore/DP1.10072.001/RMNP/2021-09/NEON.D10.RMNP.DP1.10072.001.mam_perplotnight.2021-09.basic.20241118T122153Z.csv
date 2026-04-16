@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"067ba38f-a29e-4f22-8771-24f72d2f9e8a","052780c2-6bc9-4ba8-bb11-bfe47f9c536a","RMNP.2021.35","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2021-09-01","2021-09-01","OK","NEON.DOC.000481vM",,
+"30a884d5-9d25-4231-b786-03e3b50d53a3","02c8ed27-9fc7-4398-bd4e-16a64ddc981a","RMNP.2021.35","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2021-09-01","2021-09-01","OK","NEON.DOC.000481vM",,
+"b72063c2-78f8-4053-be2d-0afc8568e243","58257811-b788-4b14-829b-c0b15ad378f1","RMNP.2021.35","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2021-09-01","2021-09-01","logistical","NEON.DOC.000481vM","Insufficient Resources",
+"564b43de-3a9f-47b4-ad15-f43e4dfc0c2c","40ed9d28-229f-413f-aa8c-39c0499a2f9d","RMNP.2021.35","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"9f52977e-3941-4960-891f-16c012f11ee4","bafd22f2-4d84-46f0-92b7-0773ef42520d","RMNP.2021.35","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"8d2d84ad-9de9-4ca8-8f05-78fea470b777","e7738b82-08f9-4d94-9751-0357c5d710db","RMNP.2021.35","RMNP_005.mammalGrid.mam","D10","RMNP","RMNP_005","diversity","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"16f08362-3d19-4679-bc74-b9fe1ec4bda5","7267f91e-2038-48f9-99e8-43002efe6252","RMNP.2021.35","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"a67bd979-3713-4eaf-be23-51652fe70487","3f1dea17-e7f0-4766-b738-365961f3acb6","RMNP.2021.35","RMNP_009.mammalGrid.mam","D10","RMNP","RMNP_009","diversity","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,
+"ac736af3-7165-477d-8313-b7f81853b040","b8155f91-9f2a-4d09-9029-ab5ab21c23ee","RMNP.2021.35","RMNP_013.mammalGrid.mam","D10","RMNP","RMNP_013","diversity","2021-09-02","2021-09-02","OK","NEON.DOC.000481vM",,

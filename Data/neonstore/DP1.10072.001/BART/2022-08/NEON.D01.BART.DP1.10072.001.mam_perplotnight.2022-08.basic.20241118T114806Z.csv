@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a7f3fa5f-7d89-4ab7-bef0-f7ae6adc19ae","6f893562-fef4-4bba-9f19-38f2dd8f6224","BART.2022.35","BART_084.mammalGrid.mam","D01","BART","BART_084","diversity","2022-08-30","2022-08-30","OK","NEON.DOC.000481vN",,
+"9ddc17e7-740a-4caa-aa7b-582113ac1111","7f2a9b15-a75e-490b-a95f-ea8149b31c6c","BART.2022.35","BART_007.mammalGrid.mam","D01","BART","BART_007","diversity","2022-08-30","2022-08-30","logistical","NEON.DOC.000481vN",,
+"3aed5789-6b87-45cf-b927-b2ee10811ee4","35f10299-a8c4-4b29-9bc7-369e6c15bcdf","BART.2022.35","BART_001.mammalGrid.mam","D01","BART","BART_001","diversity","2022-08-30","2022-08-30","logistical","NEON.DOC.000481vN",,
+"677cc196-a98d-4238-8fd6-6b2bdfad39b3","1295d3cd-aa06-47d8-afce-da356dd13be6","BART.2022.35","BART_062.mammalGrid.mam","D01","BART","BART_062","pathogen","2022-08-31","2022-08-31","logistical","NEON.DOC.000481vN",,
+"4a083383-e859-4ea5-868c-9c1110dde3a6","9db7c5be-d2db-4d8c-83b3-679b8d7b957d","BART.2022.35","BART_012.mammalGrid.mam","D01","BART","BART_012","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,
+"f8db47b3-8640-445d-8350-920b4180ad5e","c6994b41-7a53-431d-9564-cb897bcb6864","BART.2022.35","BART_015.mammalGrid.mam","D01","BART","BART_015","pathogen","2022-08-31","2022-08-31","OK","NEON.DOC.000481vN",,

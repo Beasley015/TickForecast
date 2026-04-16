@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"071035b5-0f7e-4720-948f-dc2674356ddb","330a8393-4619-4e31-9fbf-91a34bd6abff","NIWO.2018.33","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2018-08-13","2018-08-13",,"NEON.DOC.000481vK",,
+"ed7ead5a-b132-44ca-a285-048d89a104ad","19e1410f-8429-4794-824e-c7e8445288c1","NIWO.2018.33","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2018-08-13","2018-08-13",,"NEON.DOC.000481vK",,
+"cfeff867-673d-4712-8502-cc3fcbd720ac","b86dbc36-74f5-4a55-975c-0cbc62bae4e4","NIWO.2018.33","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2018-08-13","2018-08-13",,"NEON.DOC.000481vK",,
+"49ba82d0-68aa-40cc-83ff-2eec4106d65c","41ab4f95-1b4f-4a13-bacc-87e686a9f462","NIWO.2018.33","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2018-08-13","2018-08-13",,"NEON.DOC.000481vK",,
+"b986b38d-e7b0-47a0-a777-8bd70f9ffb86","38964589-4a49-47b8-a30c-2984613805dd","NIWO.2018.33","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,
+"9e491b48-6324-41a1-b7ad-1953454cace1","96fdb7dc-7ff4-46f8-9bb8-0decbf189035","NIWO.2018.33","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,
+"35e243ef-39c5-4169-9a26-5aa62c56813b","82152dc2-e9ab-4245-9883-7f6eaa2a442b","NIWO.2018.33","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,
+"f30977ec-f8cf-423e-a42a-8d94c58f35dc","eb626d34-254b-4400-adc3-e645dbc5710d","NIWO.2018.33","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,
+"dc5b10e5-3737-41dd-8822-58186d441a7b","d78208c3-da8a-4dbb-9d6f-1dd99d1e5cb2","NIWO.2018.33","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2018-08-14","2018-08-14",,"NEON.DOC.000481vK",,
+"dc60bac6-15ff-4915-8e40-db2a34bae442","d17e1882-26b3-48a4-9738-329412a38e5b","NIWO.2018.33","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2018-08-15","2018-08-15",,"NEON.DOC.000481vK",,
+"4f708de5-b81d-4c34-9c30-530df16082ac","e829d1f8-8e3b-44d1-aa70-1e3245f37832","NIWO.2018.33","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2018-08-15","2018-08-15",,"NEON.DOC.000481vK",,
+"e4175ceb-b80e-4ffb-9e3b-c94026db05c7","d6d86356-ebfc-40e5-9647-f3146a1af787","NIWO.2018.33","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2018-08-15","2018-08-15",,"NEON.DOC.000481vK",,

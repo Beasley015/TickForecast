@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"0baa1acb-69e2-41e7-bbc9-6e1fbc556743","ee803cb3-7e65-4f26-971d-8d4c258343c3","OAES.2023.25","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"11c05f89-381e-473e-831a-3331d88c4bee","09e6dcc1-eec7-48fb-bd59-993b4f464fbc","OAES.2023.25","OAES_003.mammalGrid.mam","D11","OAES","OAES_003","diversity","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"573fb5ae-4e79-479b-9903-123b67cef23d","ab6313bd-793a-4576-a41e-1248ce190878","OAES.2023.25","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"64bf1608-4e81-4822-9a81-8b7d7fb89406","e652b30f-fb78-4541-a3e8-402ae397d25e","OAES.2023.25","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"4aa5df70-d5ae-4eca-84ca-0f9f15145454","bdcf9ea2-48cf-4076-92aa-e3d87264acee","OAES.2023.25","OAES_029.mammalGrid.mam","D11","OAES","OAES_029","diversity","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP",,
+"ab24d663-6eed-4ff0-be18-6dda56527944","b8655ff0-2778-4dfe-85ea-982a8b551937","OAES.2023.25","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP","Cows in plot",
+"6c2ab2e7-e71d-4d63-a095-8ba064638561","27d6d687-633c-46a7-8d6f-54a73bf4c9e8","OAES.2023.25","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP",,
+"151d7942-4f0f-467f-a5ce-22806e5e916c","59332b97-ad2a-4031-a6ed-cd83b104f028","OAES.2023.25","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP",,
+"9f1f25a2-702a-41f6-8345-f0bb9fa0953a","78ee09b8-83df-4dbd-91d9-9f64a7ac3751","OAES.2023.25","OAES_004.mammalGrid.mam","D11","OAES","OAES_004","diversity","2023-06-22","2023-06-22","logistical","NEON.DOC.000481vN","Insufficient staff availability",
+"82464959-0118-4dea-9f9d-35b5c772c94c","c7bc1241-8cd8-43f8-83cf-6b960f91973d","OAES.2023.25","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2023-06-22","2023-06-22","OK","NEON.DOC.000481vP",,
+"dc420d12-ee46-4173-9d77-5a4c810d29aa","a1ed0aca-c36c-4ce0-b65f-46f6d289a651","OAES.2023.25","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2023-06-22","2023-06-22","OK","NEON.DOC.000481vP",,
+"7beda439-bb02-4ba0-814e-3492492a39bc","1040fad4-6d17-4431-acd6-fd9258527127","OAES.2023.25","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2023-06-22","2023-06-22","OK","NEON.DOC.000481vP",,

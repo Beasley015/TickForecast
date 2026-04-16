@@ -1,0 +1,2247 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns18:eml packageId="" system="https://www.neonscience.org" scope="system" xmlns:ns2="https://eml.ecoinformatics.org/access-2.2.0" xmlns:ns4="https://eml.ecoinformatics.org/software-2.2.0" xmlns:ns3="https://eml.ecoinformatics.org/literature-2.2.0" xmlns:ns6="https://eml.ecoinformatics.org/protocol-2.2.0" xmlns:ns20="https://eml.ecoinformatics.org/text-2.2.0" xmlns:ns5="https://eml.ecoinformatics.org/project-2.2.0" xmlns:ns8="https://eml.ecoinformatics.org/physical-2.2.0" xmlns:ns7="https://eml.ecoinformatics.org/methods-2.2.0" xmlns:ns13="https://eml.ecoinformatics.org/spatialVector-2.2.0" xmlns:ns9="https://eml.ecoinformatics.org/attribute-2.2.0" xmlns:ns12="https://eml.ecoinformatics.org/spatialRaster-2.2.0" xmlns:ns11="https://eml.ecoinformatics.org/spatialReference-2.2.0" xmlns:ns22="https://eml.ecoinformatics.org/party-2.2.0" xmlns:ns10="https://eml.ecoinformatics.org/dataTable-2.2.0" xmlns:ns21="https://eml.ecoinformatics.org/semantics-2.2.0" xmlns:ns17="https://eml.ecoinformatics.org/dataset-2.2.0" xmlns:ns16="https://eml.ecoinformatics.org/entity-2.2.0" xmlns:ns15="https://eml.ecoinformatics.org/view-2.2.0" xmlns:ns14="https://eml.ecoinformatics.org/storedProcedure-2.2.0" xmlns:ns19="https://eml.ecoinformatics.org/documentation-2.2.0" xmlns:ns18="https://eml.ecoinformatics.org/eml-2.2.0">
+    <dataset id="NEON.D15.ONAQ.DP1.10072.001.20200721-20200724">
+        <shortName>NEON ONAQ Small mammal box trapping 2020-07-21 to 2020-07-24</shortName>
+        <title>NEON Small mammal box trapping at ONAQ, Great Basin Domain, 2020-07-21 to 2020-07-24</title>
+        <creator id="neon_contact"/>
+        <creator id="neon_contact">
+            <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+            <address>
+                <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                <city>Boulder</city>
+                <administrativeArea>CO</administrativeArea>
+                <postalCode>80301</postalCode>
+                <country>USA</country>
+            </address>
+            <phone phonetype="voice">720-746-4844</phone>
+            <electronicMailAddress/>
+            <onlineUrl>http://www.neonscience.org</onlineUrl>
+        </creator>
+        <metadataProvider id="neon_contact"/>
+        <metadataProvider>
+            <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+            <address>
+                <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                <city>Boulder</city>
+                <administrativeArea>CO</administrativeArea>
+                <postalCode>80301</postalCode>
+                <country>USA</country>
+            </address>
+            <phone phonetype="voice">720-746-4844</phone>
+            <electronicMailAddress/>
+            <onlineUrl>http://www.neonscience.org</onlineUrl>
+        </metadataProvider>
+        <pubDate>2024-11-18</pubDate>
+        <language>English</language>
+        <intellectualRights>
+            
+            <para>NEON Data Usage and Citation Policy</para>
+            <para>Copyright © 2024 National Ecological Observatory Network</para>
+            <para>In most countries, data and facts are not copyrightable. By putting NEON data into the public domain, we encourage broad use, particularly in scientific analyses and data aggregations. However, please be mindful of the following scholarly norms:
+	        <list type="bullet">
+		    <item>
+		        <description>NEON data should be used in a way that is mindful of the limitations of the data, using the documentation associated with the data packages as a guide.
+			</description>
+		    </item>
+		    <item>
+		        <description>Unlike most scientific data, NEON data is not associated with individual authors; rather, the ‘author’ of data produced by the Observatory is NEON itself. Attributions and citations should be made to NEON for any use of the data.
+			</description>
+		    </item>
+		</list>
+	    </para>        
+        </intellectualRights>
+        <distribution>
+            <online>
+                <url function="information">https://www.neonscience.org/</url>
+            </online>
+        </distribution>
+        <coverage>
+            <geographicCoverage id="ONAQ">
+                <geographicDescription>ONAQ, D15</geographicDescription>
+                <boundingCoordinates>
+                    <westBoundingCoordinate>-112.452452</westBoundingCoordinate>
+                    <eastBoundingCoordinate>-112.452452</eastBoundingCoordinate>
+                    <northBoundingCoordinate>40.177599</northBoundingCoordinate>
+                    <southBoundingCoordinate>40.177599</southBoundingCoordinate>
+                    <boundingAltitudes>
+                        <altitudeMinimum>1662.3947</altitudeMinimum>
+                        <altitudeMaximum>1662.3947</altitudeMaximum>
+                        <altitudeUnits>meter</altitudeUnits>
+                    </boundingAltitudes>
+                </boundingCoordinates>
+            </geographicCoverage>
+            <temporalCoverage>
+                <rangeOfDates>
+                    <beginDate>
+                        <calendarDate>2020-07-21</calendarDate>
+                    </beginDate>
+                    <endDate>
+                        <calendarDate>2020-07-24</calendarDate>
+                    </endDate>
+                </rangeOfDates>
+            </temporalCoverage>
+        </coverage>
+        <purpose>Individual- and trap-level data collected using box traps designed to capture small mammals</purpose>
+        <maintenance>
+            <description>
+                
+                <para>These data are available via the NEON website (https://www.neonscience.org).</para>
+            </description>
+            <maintenanceUpdateFrequency>asNeeded</maintenanceUpdateFrequency>
+        </maintenance>
+        <contact id="neon_contact"/>
+        <contact>
+            <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+            <address>
+                <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                <city>Boulder</city>
+                <administrativeArea>CO</administrativeArea>
+                <postalCode>80301</postalCode>
+                <country>USA</country>
+            </address>
+            <phone phonetype="voice">720-746-4844</phone>
+            <electronicMailAddress/>
+            <onlineUrl>http://www.neonscience.org</onlineUrl>
+        </contact>
+        <publisher>
+            <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+            <address>
+                <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                <city>Boulder</city>
+                <administrativeArea>CO</administrativeArea>
+                <postalCode>80301</postalCode>
+                <country>USA</country>
+            </address>
+            <phone phonetype="voice">720-746-4844</phone>
+            <electronicMailAddress/>
+            <onlineUrl>http://www.neonscience.org</onlineUrl>
+        </publisher>
+        <project>
+            <title>National Ecological Observatory Network (NEON)</title>
+            <personnel>
+                <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+                <address>
+                    <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                    <city>Boulder</city>
+                    <administrativeArea>CO</administrativeArea>
+                    <postalCode>80301</postalCode>
+                    <country>USA</country>
+                </address>
+                <phone phonetype="voice">720-746-4844</phone>
+                <electronicMailAddress>neonscience@battelleecology.org</electronicMailAddress>
+                <onlineUrl>https://www.neonscience.org</onlineUrl>
+                <role>originator</role>
+            </personnel>
+            <abstract>
+                
+                <para>The National Ecological Observatory Network is a program sponsored by the National Science Foundation and cooperatively managed by Battelle.</para>
+                
+                <para>NEON's mission is to collect and freely share critical ecological data, samples, and infrastructure with researchers and the public to advance understanding of ecological processes and inform the sustainable management of U.S. ecosystems.</para>
+            </abstract>
+            <funding>
+                <para>NEON is funded by several National Science Foundation (NSF) awards.</para>
+            </funding>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://doi.org/10.13039/00000001</funderIdentifier>
+                <awardNumber>2217817</awardNumber>
+                <title>NEON Operations and Maintenance: Evolving from a Strong Foundation</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=2217817</awardUrl>
+            </award> 
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>1724433</awardNumber>
+                <title>National Ecological Observatory Network: Operations Activities</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=1724433</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>1638696</awardNumber>
+                <title>National Ecological Observatory Network: Operations Activities</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=1638696</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>1638695</awardNumber>
+                <title>National Ecological Observatory Network: Construction and Transition</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=1638695</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>1246537</awardNumber>
+                <title>NEON Initial Operations</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=1246537</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>1138160</awardNumber>
+                <title>Construction and Operations of the National Ecological Observatory</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=1138160</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>1029808</awardNumber>
+                <title>Cooperative Support Agreement for Major Research Equipment and Facilities Construction (MREFC) of the National Ecological Observatory</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=1029808</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>0752017</awardNumber>
+                <title>Organizational and Project Management Support to complete the NEON Construction Ready Design and Project Execution Plan.</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=0752017</awardUrl>
+            </award>
+            <award>
+                <funderName>National Science Foundation</funderName>
+                <funderIdentifier>https://ror.org/021nxhr62</funderIdentifier>
+                <awardNumber>0653461</awardNumber>
+                <title>Initial NEON Procurements for Science and Organizational Development</title>
+                <awardUrl>https://www.nsf.gov/awardsearch/showAward?AWD_ID=0653461</awardUrl>
+            </award>
+            <studyAreaDescription>
+                <citation id="neon_2011_sciencedesign">
+                    <title>"2011 Science Strategy: Enabling Continental-Scale Ecological Forecasting"</title>
+                    <creator>
+                        <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+                        <address>
+                            <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                            <city>Boulder</city>
+                            <administrativeArea>CO</administrativeArea>
+                            <postalCode>80301</postalCode>
+                            <country>USA</country>
+                        </address>
+                        <phone phonetype="voice">720-746-4844</phone>
+                        <electronicMailAddress/>
+                        <onlineUrl>http://www.neonscience.org</onlineUrl>
+                    </creator>
+                    <pubDate>2011</pubDate>
+                    <language>English</language>
+                    <intellectualRights>Copyright © 2011 National Ecological Observatory Network (NEON). ALL RIGHTS RESERVED</intellectualRights>
+                    <distribution>
+                        <online>
+                            <url>https://data.neonscience.org/api/v0/documents/NEON_Strategy_2011u2_0</url>
+                        </online>
+                    </distribution>
+                    <report>
+                        <publisher>
+                            <organizationName>National Ecological Observatory Network (NEON)</organizationName>
+                            <address>
+                                <deliveryPoint>1685 38th Street, Suite 100</deliveryPoint>
+                                <city>Boulder</city>
+                                <administrativeArea>CO</administrativeArea>
+                                <postalCode>80301</postalCode>
+                                <country>USA</country>
+                            </address>
+                            <phone phonetype="voice">720-746-4844</phone>
+                            <electronicMailAddress/>
+                            <onlineUrl>http://www.neonscience.org</onlineUrl>
+                        </publisher>
+                        <totalPages>56</totalPages>
+                    </report>
+                </citation>
+            </studyAreaDescription>
+            <designDescription>
+                <citation>
+                    <references>neon_2011_sciencedesign</references>
+                </citation>
+            </designDescription>
+        </project>
+        <dataTable>
+            <entityName>NEON.D15.ONAQ.DP1.10072.001.mam_pertrapnight.2020-07.basic.20241118T220658Z</entityName>
+            <attributeList>
+                <attribute>
+                    <attributeName>uid</attributeName>
+                    <attributeDefinition>Unique ID within NEON database; an identifier for the record</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique ID within NEON database; an identifier for the record</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>nightuid</attributeName>
+                    <attributeDefinition>Unique ID of associated record in perplotnight table</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique ID of associated record in perplotnight table</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>namedLocation</attributeName>
+                    <attributeDefinition>Name of the measurement location in the NEON database</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Name of the measurement location in the NEON database</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>domainID</attributeName>
+                    <attributeDefinition>Unique identifier of the NEON domain</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier of the NEON domain</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>siteID</attributeName>
+                    <attributeDefinition>NEON site code</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>NEON site code</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>plotID</attributeName>
+                    <attributeDefinition>Plot identifier (NEON site code_XXX)</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Plot identifier (NEON site code_XXX)</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>trapCoordinate</attributeName>
+                    <attributeDefinition>Relative coordinate of the trap within the given plotID (A1 - J10). If row or column coordinate is unknown, X is used</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Relative coordinate of the trap within the given plotID (A1 - J10). If row or column coordinate is unknown, X is used</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>plotType</attributeName>
+                    <attributeDefinition>NEON plot type in which sampling occurred: tower, distributed or gradient</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>NEON plot type in which sampling occurred: tower, distributed or gradient</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>nlcdClass</attributeName>
+                    <attributeDefinition>National Land Cover Database Vegetation Type Name</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>National Land Cover Database Vegetation Type Name</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>decimalLatitude</attributeName>
+                    <attributeDefinition>The geographic latitude (in decimal degrees, WGS84) of the geographic center of the reference area</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>decimalDegree</customUnit>
+                            </unit>
+                            <precision>1.0E-6</precision>
+                            <numericDomain>
+                                <numberType>real</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>additionalParasites</attributeName>
+                    <attributeDefinition>Indicator of whether additional parasites were observed</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain/>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>decimalLongitude</attributeName>
+                    <attributeDefinition>The geographic longitude (in decimal degrees, WGS84) of the geographic center of the reference area</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>decimalDegree</customUnit>
+                            </unit>
+                            <precision>1.0E-6</precision>
+                            <numericDomain>
+                                <numberType>real</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>geodeticDatum</attributeName>
+                    <attributeDefinition>Model used to measure horizontal position on the earth</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Model used to measure horizontal position on the earth</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>coordinateUncertainty</attributeName>
+                    <attributeDefinition>The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Zero is not a valid value for this term</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>meter</customUnit>
+                            </unit>
+                            <precision>0.1</precision>
+                            <numericDomain>
+                                <numberType>real</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>elevation</attributeName>
+                    <attributeDefinition>Elevation (in meters) above sea level</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>meter</customUnit>
+                            </unit>
+                            <precision>0.1</precision>
+                            <numericDomain>
+                                <numberType>real</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>identificationHistoryID</attributeName>
+                    <attributeDefinition>Identifier for linking records related to this identification history</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Identifier for linking records related to this identification history</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>elevationUncertainty</attributeName>
+                    <attributeDefinition>Uncertainty in elevation values (in meters)</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>meter</customUnit>
+                            </unit>
+                            <precision>0.1</precision>
+                            <numericDomain>
+                                <numberType>real</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>trapStatus</attributeName>
+                    <attributeDefinition>Categorical descriptor of trap status; 0 - no data; 1 - trap not set; 2 - trap disturbed/door closed but empty; 3 - trap door open or closed w/ spoor left; 4 - &gt;1 capture in one trap; 5 - capture; 6 - trap set and empty</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>3 - trap door open or closed w/ spoor left</code>
+                                        <definition>3</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>1 - trap not set</code>
+                                        <definition>1</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>4 - more than 1 capture in one trap</code>
+                                        <definition>4</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>2 - trap disturbed/door closed but empty</code>
+                                        <definition>2</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>6 - trap set and empty</code>
+                                        <definition>6</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>5 - capture</code>
+                                        <definition>5</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>trapType</attributeName>
+                    <attributeDefinition>Type of trap from which a sample was collected</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>small mammal box trap</code>
+                                        <definition>small mammal box trap</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>ShermanLF</code>
+                                        <definition>ShermanLF</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>ShermanXLK</code>
+                                        <definition>ShermanXLK</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Tomahawk201</code>
+                                        <definition>Tomahawk201</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Double ShermanXLK</code>
+                                        <definition>Double ShermanXLK</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>ShermanXLF</code>
+                                        <definition>ShermanXLF</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>collectDate</attributeName>
+                    <attributeDefinition>Date of the collection event</attributeDefinition>
+                    <measurementScale>
+                        <dateTime>
+                            <formatString>yyyy-MM-dd(floor)</formatString>
+                        </dateTime>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>endDate</attributeName>
+                    <attributeDefinition>The end date-time or interval during which an event occurred</attributeDefinition>
+                    <measurementScale>
+                        <dateTime>
+                            <formatString>yyyy-MM-dd(floor)</formatString>
+                        </dateTime>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>tagID</attributeName>
+                    <attributeDefinition>Domain-level unique identifier of tag used to mark the individual</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Domain-level unique identifier of tag used to mark the individual</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>individualCode</attributeName>
+                    <attributeDefinition>Barcode of an individual</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Barcode of an individual</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>taxonID</attributeName>
+                    <attributeDefinition>Species code, based on one or more sources</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Species code, based on one or more sources</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>tickNumber</attributeName>
+                    <attributeDefinition>Binned range of values representing total number of ticks of any life stage or species present on the head and neck of the individual</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>6-20</code>
+                                        <definition>6-20</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>No count performed</code>
+                                        <definition>No count performed</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>1-5</code>
+                                        <definition>1-5</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>&gt;20</code>
+                                        <definition>&gt;20</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>scientificName</attributeName>
+                    <attributeDefinition>Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>taxonRank</attributeName>
+                    <attributeDefinition>The lowest level taxonomic rank that can be determined for the individual or specimen</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>The lowest level taxonomic rank that can be determined for the individual or specimen</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>identificationQualifier</attributeName>
+                    <attributeDefinition>A standard term to express the determiner's doubts about the Identification</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>cf. genus</code>
+                                        <definition>CG - roughly equals but 'not sure' about the genus</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>cf. variety</code>
+                                        <definition>CV - roughly equals but 'not sure' about the variety</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>cf. family</code>
+                                        <definition>CF - roughly equals but 'not sure' about the family</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>aff. variety</code>
+                                        <definition>AV - similar to but is not the variety</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>aff. family</code>
+                                        <definition>AF - similar to but is not the family</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>aff. subspecies</code>
+                                        <definition>AB - similar to but is not the subspecies</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>aff. species</code>
+                                        <definition>AS - similar to but is not the species</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>aff. genus</code>
+                                        <definition>AG - similar to but is not the genus</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>cf. species</code>
+                                        <definition>CS - roughly equals but 'not sure' about the species</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>cf. subspecies</code>
+                                        <definition>CB - roughly equals but 'not sure' about the subspecies</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>identificationReferences</attributeName>
+                    <attributeDefinition>A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>Stebbins, R. C. and R. T. Peterson. 2003. A Peterson Field Guide to Western Reptiles and Amphibians. 3rd Ed. Houghton Mifflin Company, New York, NY.</code>
+                                        <definition>Stebbins, R. C. and R. T. Peterson. 2003. A Peterson Field Guide to Western Reptiles and Amphibians. 3rd Ed. Houghton Mifflin Company, New York, NY.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.001907</code>
+                                        <definition>NEON.DOC.001907</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D12 - NEON.DOC.003138</code>
+                                        <definition>D12 - NEON.DOC.003138</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D07 - Whitaker 2000</code>
+                                        <definition>D07 - Whitaker 2000</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.001908</code>
+                                        <definition>NEON.DOC.001908</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D09 - Seabloom 2011</code>
+                                        <definition>D09 - Seabloom 2011</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Tennessee Watchable Wildlife http://www.tnwatchablewildlife.org/Amphibians.cfm</code>
+                                        <definition>Tennessee Watchable Wildlife http://www.tnwatchablewildlife.org/Amphibians.cfm</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Other (describe in remarks)</code>
+                                        <definition>Other (describe in remarks)</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Mitchell, J. and Gibbons, W. 2010. Salamanders of the Southeast. Athens (GA): The University of Georgia Press</code>
+                                        <definition>Mitchell, J. and Gibbons, W. 2010. Salamanders of the Southeast. Athens (GA): The University of Georgia Press</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.003135</code>
+                                        <definition>NEON.DOC.003135</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D05 - Long 2008</code>
+                                        <definition>D05 - Long 2008</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D14 - Frey 2007</code>
+                                        <definition>D14 - Frey 2007</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Schmidly 2004</code>
+                                        <definition>Schmidly 2004</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Gibbons, W., and M. Dorcas. 2005. Snakes of the Southeast. The University of Georgia Press, Athens, Georgia.</code>
+                                        <definition>Gibbons, W., and M. Dorcas. 2005. Snakes of the Southeast. The University of Georgia Press, Athens, Georgia.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.001912</code>
+                                        <definition>NEON.DOC.001912</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.003136</code>
+                                        <definition>NEON.DOC.003136</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Sievert and Sievert 2011</code>
+                                        <definition>Sievert, G. and L. Sievert. 2011. A Field Guide to Oklahoma's Amphibians and Reptiles (3rd Edition). Oklahoma Dept. of Wildlife Conservation. OKC., OK. 211 p.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Bartlett, R. D. and P. P. Bartlett. 2011. Florida's Turtles, Lizards, and Crocodilians: A Guide to Their Identification and Habits. University Press of Florida, Gainesville. 352 pp.</code>
+                                        <definition>Bartlett, R. D. and P. P. Bartlett. 2011. Florida's Turtles, Lizards, and Crocodilians: A Guide to Their Identification and Habits. University Press of Florida, Gainesville. 352 pp.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.003137</code>
+                                        <definition>NEON.DOC.003137</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.001909</code>
+                                        <definition>NEON.DOC.001909</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D16 - Nagorsen 2002</code>
+                                        <definition>D16 - Nagorsen 2002</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Powell, R., R. Conant, and J.T. Collins. 2016. Peterson Field Guide to Reptiles and Amphibians of Eastern and Central North America. 4th Ed. Houghton Mifflin Company, New York, NY.</code>
+                                        <definition>Powell, R., R. Conant, and J.T. Collins. 2016. Peterson Field Guide to Reptiles and Amphibians of Eastern and Central North America. 4th Ed. Houghton Mifflin Company, New York, NY.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D16 - NEON.DOC.003143</code>
+                                        <definition>D16 - NEON.DOC.003143</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Conant, R., and J. T. Collins. 1998. A Field Guide to Reptiles and Amphibians: Eastern and Central North America. 3rd Ed. Houghton Mifflin Company, New York, NY.</code>
+                                        <definition>Conant, R., and J. T. Collins. 1998. A Field Guide to Reptiles and Amphibians: Eastern and Central North America. 3rd Ed. Houghton Mifflin Company, New York, NY.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D11 - Caire et al. 1989</code>
+                                        <definition>D11 - Caire et al. 1989</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D02 - Whitaker 2005</code>
+                                        <definition>D02 - Whitaker 2005</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.002167</code>
+                                        <definition>NEON.DOC.002167</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D05 – Tekiela 2005</code>
+                                        <definition>D05 – Tekiela 2005</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Brennan, T. C. and A. T. Holycross. 2006. A Field Guide to Amphibians and Reptiles in Arizona. Arizona Game and Fish Department.</code>
+                                        <definition>Brennan, T. C. and A. T. Holycross. 2006. A Field Guide to Amphibians and Reptiles in Arizona. Arizona Game and Fish Department.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Kaufman, K., R. Bowers, and N. Bowers. 2007. Kaufman Field Guide to Mammals of North America. 12th Ed. Houghton Mifflin Company, New York, NY.</code>
+                                        <definition>Kaufman, K., R. Bowers, and N. Bowers. 2007. Kaufman Field Guide to Mammals of North America. 12th Ed. Houghton Mifflin Company, New York, NY.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.001914</code>
+                                        <definition>NEON.DOC.001914</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Bartlett, R. D. and P. P. Bartlett. 2011. Florida's Frogs, Toads, and Other Amphibians A Guide to Their Identification and Habits. University Press of Florida, Gainesville. 272 pp.</code>
+                                        <definition>Bartlett, R. D. and P. P. Bartlett. 2011. Florida's Frogs, Toads, and Other Amphibians A Guide to Their Identification and Habits. University Press of Florida, Gainesville. 272 pp.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D14 - NEON.DOC.003140</code>
+                                        <definition>D14 - NEON.DOC.003140</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D17 - Jameson &amp; Peeters 2004</code>
+                                        <definition>D17 - Jameson &amp; Peeters 2004</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Best, T. L., and J. L. Dusi. 2014. Mammals of Alabama. The University of Alabama Press, Tuscaloosa.</code>
+                                        <definition>Best, T. L., and J. L. Dusi. 2014. Mammals of Alabama. The University of Alabama Press, Tuscaloosa.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NEON.DOC.001911</code>
+                                        <definition>NEON.DOC.001911</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D07 - NEON.DOC.001910</code>
+                                        <definition>D07 - NEON.DOC.001910</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D13 - NEON.DOC.003139</code>
+                                        <definition>D13 - NEON.DOC.003139</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D17 - NEON.DOC.003141</code>
+                                        <definition>D17 - NEON.DOC.003141</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D18_19 - NEON.DOC.003142</code>
+                                        <definition>D18_19 - NEON.DOC.003142</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Harding, J.H. 1997. Amphibians and reptiles of the Great Lakes Region. University of Michigan Press, Ann Arbor, MI.</code>
+                                        <definition>Harding; J. H. 1997. Amphibians and Reptiles of the Great Lakes Region. University of Michigan Press; Ann Arbor; MI</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>Reid, F. 2006. A field guide to mammals of North America, north of Mexico. 4th ed. Houghton Mifflin Company, Boston.</code>
+                                        <definition>Reid, F. 2006. A field guide to mammals of North America, north of Mexico. 4th ed. Houghton Mifflin Company, Boston.</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>D10 - NEON.DOC.001913</code>
+                                        <definition>D10 - NEON.DOC.001913</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>nativeStatusCode</attributeName>
+                    <attributeDefinition>The process by which the taxon became established in the location</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>NIQ</code>
+                                        <definition>Native and Probably Introduced - some infra-taxa are native and others are probably introduced</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>GP</code>
+                                        <definition>Garden persistent - persists around gardens and old habitations, not naturalized</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NI</code>
+                                        <definition>Native and Introduced - some infra-taxa are native and others are introduced</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>WQ</code>
+                                        <definition>Probably a Waif - an ephemeral introduction, not persistently naturalized</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>I</code>
+                                        <definition>Introduced</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>A</code>
+                                        <definition>Presumed absent, due to lack of data indicating a taxon's presence in a given location</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>W</code>
+                                        <definition>Waif - an ephemeral introduction, not persistently naturalized</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>UNK</code>
+                                        <definition>Status Unknown</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>STATE</code>
+                                        <definition>State-specific conservation status of concern in at least one of the states within a domain</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>FEDERAL</code>
+                                        <definition>Federally threatened or endangered in at least one of the states within a domain</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>N</code>
+                                        <definition>Native</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NQI</code>
+                                        <definition>Probably Native and Introduced - some infra-taxa are probably native and others are introduced</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>NQ</code>
+                                        <definition>Probably Native</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>GPQ</code>
+                                        <definition>Probably Garden persistent - persists around gardens and old habitations, not naturalized</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>IQ</code>
+                                        <definition>Probably Introduced</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>sex</attributeName>
+                    <attributeDefinition>M for male, F for female, U for unknown</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>M</code>
+                                        <definition>M</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>U</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>F</code>
+                                        <definition>F</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>recapture</attributeName>
+                    <attributeDefinition>Indicates whether or not the captured individual is a recapture; 'Y' for yes, 'N' for no</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>Y</code>
+                                        <definition>Y</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>N</code>
+                                        <definition>N</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>U</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>fate</attributeName>
+                    <attributeDefinition>The fate of the individual, unless marked and released; 'dead' = dead, 'escaped' = escaped while handling, 'nontarget' = released, non-target species, 'released' = target or opportunistic species released without full processing</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>released</code>
+                                        <definition>released</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>processed</code>
+                                        <definition>processed</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>dead</code>
+                                        <definition>dead</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>nontarget</code>
+                                        <definition>nontarget</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>escaped</code>
+                                        <definition>escaped</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>not processed</code>
+                                        <definition>not processed</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>replacedTag</attributeName>
+                    <attributeDefinition>Indicates which ear tag was replaced (L#### | R####) or which ear appears to have lost a tag ('left' = left ear tag replaced; 'right' = right ear tag replaced)</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Indicates which ear tag was replaced (L#### | R####) or which ear appears to have lost a tag ('left' = left ear tag replaced; 'right' = right ear tag replaced)</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>lifeStage</attributeName>
+                    <attributeDefinition>The age class of the individual at the time the Occurrence was recorded. juvenile = obvious signs of a very young individual, small size, distinctive pelage coloration; subabult; adult</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>subadult</code>
+                                        <definition>subadult</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>juvenile</code>
+                                        <definition>juvenile</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>adult</code>
+                                        <definition>adult</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>unknown</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>testes</attributeName>
+                    <attributeDefinition>Condition of the testes at time of capture; if mature: scrotal = testes descended, nonscrotal = testes abdominal</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>unknown</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>scrotal</code>
+                                        <definition>scrotal</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>nonscrotal</code>
+                                        <definition>nonscrotal</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>nipples</attributeName>
+                    <attributeDefinition>Condition of the nipples at time of capture; if mature: enlarged = nipples enlarged, nonenlarged = nipples not enlarged</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>enlarged</code>
+                                        <definition>enlarged</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>unknown</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>nonenlarged</code>
+                                        <definition>nonenlarged</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>pregnancyStatus</attributeName>
+                    <attributeDefinition>Condition at time of capture; if mature: 'pregnant' | 'not'</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>pregnant</code>
+                                        <definition>pregnant</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>not</code>
+                                        <definition>not</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>unknown</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>vagina</attributeName>
+                    <attributeDefinition>Condition of the vagina at time of capture; if mature: swollen, plugged, neither</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>neither</code>
+                                        <definition>neither</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>plugged</code>
+                                        <definition>plugged</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>not plugged</code>
+                                        <definition>not plugged</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>swollen</code>
+                                        <definition>swollen</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>both</code>
+                                        <definition>both</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>unknown</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>hindfootLength</attributeName>
+                    <attributeDefinition>length of left hindfoot; including claws; in millimeters</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>millimeter</customUnit>
+                            </unit>
+                            <numericDomain>
+                                <numberType>integer</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>earLength</attributeName>
+                    <attributeDefinition>length of left ear; in millimeters</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>millimeter</customUnit>
+                            </unit>
+                            <numericDomain>
+                                <numberType>integer</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>tailLength</attributeName>
+                    <attributeDefinition>length of tail; in millimeters</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>millimeter</customUnit>
+                            </unit>
+                            <numericDomain>
+                                <numberType>integer</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>totalLength</attributeName>
+                    <attributeDefinition>total length (head + body); in millimeters</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>millimeter</customUnit>
+                            </unit>
+                            <numericDomain>
+                                <numberType>integer</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>weight</attributeName>
+                    <attributeDefinition>Live weight as measured with a spring scale; in grams</attributeDefinition>
+                    <measurementScale>
+                        <ratio>
+                            <unit>
+                                <customUnit>gram</customUnit>
+                            </unit>
+                            <numericDomain>
+                                <numberType>integer</numberType>
+                            </numericDomain>
+                        </ratio>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>larvalTicksAttached</attributeName>
+                    <attributeDefinition>Indicates whether larval ticks are observed on the captured individual</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>Y</code>
+                                        <definition>Y</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>N</code>
+                                        <definition>N</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>U</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>nymphalTicksAttached</attributeName>
+                    <attributeDefinition>Indicates whether nymphal ticks are observed on the captured individual</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>Y</code>
+                                        <definition>Y</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>N</code>
+                                        <definition>N</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>U</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>adultTicksAttached</attributeName>
+                    <attributeDefinition>Indicates whether adult ticks are observed on the captured individual</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>Y</code>
+                                        <definition>Y</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>N</code>
+                                        <definition>N</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>U</code>
+                                        <definition>Unknown</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>bloodSampleID</attributeName>
+                    <attributeDefinition>Unique identifier for the blood sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier for the blood sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>bloodSampleBarcode</attributeName>
+                    <attributeDefinition>Barcode of the blood sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Barcode of the blood sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>bloodSampleMethod</attributeName>
+                    <attributeDefinition>Method used to collect the blood sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>unsuccessful</code>
+                                        <definition>unsuccessful</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>mandibular</code>
+                                        <definition>mandibular</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>mandibular - QNS</code>
+                                        <definition>mandibular - QNS</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>retroorbital</code>
+                                        <definition>retroorbital</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>fecalSampleID</attributeName>
+                    <attributeDefinition>Unique identifier for the fecal sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier for the fecal sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>fecalSampleBarcode</attributeName>
+                    <attributeDefinition>Barcode of the fecal sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Barcode of the fecal sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>frozenSamplePrepMethod</attributeName>
+                    <attributeDefinition>Preparation or preservation method for a frozen sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain/>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>fecalSampleCondition</attributeName>
+                    <attributeDefinition>Condition of fecal sample at time of collection; 'fresh' = fresh fecal sample collected from mammal; 'old' = 'Old' fecal sample collected from trap</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Condition of fecal sample at time of collection; 'fresh' = fresh fecal sample collected from mammal; 'old' = 'Old' fecal sample collected from trap</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>earSampleID</attributeName>
+                    <attributeDefinition>Unique identifier for the ear sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier for the ear sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>earSampleBarcode</attributeName>
+                    <attributeDefinition>Barcode of the ear sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Barcode of the ear sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>hairSampleID</attributeName>
+                    <attributeDefinition>Unique identifier for the hair sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier for the hair sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>hairSampleBarcode</attributeName>
+                    <attributeDefinition>Barcode of the hair sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Barcode of the hair sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>hairSampleContents</attributeName>
+                    <attributeDefinition>The type(s) of hair collected</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>whiskerOnly</code>
+                                        <definition>whiskerOnly</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>hairOnly</code>
+                                        <definition>hairOnly</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>hairAndWhisker</code>
+                                        <definition>hairAndWhisker</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>voucherSampleID</attributeName>
+                    <attributeDefinition>Unique identifier for the voucher sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier for the voucher sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>voucherSampleBarcode</attributeName>
+                    <attributeDefinition>Barcode of the voucher sample</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Barcode of the voucher sample</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>measuredBy</attributeName>
+                    <attributeDefinition>An identifier for the technician who measured or collected the data</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>An identifier for the technician who measured or collected the data</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>recordedBy</attributeName>
+                    <attributeDefinition>An identifier for the technician who recorded the data</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>An identifier for the technician who recorded the data</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>remarks</attributeName>
+                    <attributeDefinition>Technician notes; free text comments accompanying the record</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Technician notes; free text comments accompanying the record</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>dataQF</attributeName>
+                    <attributeDefinition>Data quality flag</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Data quality flag</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>voucherUpdate</attributeName>
+                    <attributeDefinition>Name of any data fields updated after review of voucher specimen</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Name of any data fields updated after review of voucher specimen</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>dataEntryRecordID</attributeName>
+                    <attributeDefinition>Primary identifier for the record at the point of entry</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Primary identifier for the record at the point of entry</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+            </attributeList>
+            <caseSensitive>yes</caseSensitive>
+            <numberOfRecords>1200</numberOfRecords>
+        </dataTable>
+        <dataTable>
+            <entityName>NEON.D15.ONAQ.DP1.10072.001.mam_perplotnight.2020-07.basic.20241118T220658Z</entityName>
+            <attributeList>
+                <attribute>
+                    <attributeName>siteID</attributeName>
+                    <attributeDefinition>NEON site code</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>NEON site code</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>plotID</attributeName>
+                    <attributeDefinition>Plot identifier (NEON site code_XXX)</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Plot identifier (NEON site code_XXX)</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>collectDate</attributeName>
+                    <attributeDefinition>Date of the collection event</attributeDefinition>
+                    <measurementScale>
+                        <dateTime>
+                            <formatString>yyyy-MM-dd(floor)</formatString>
+                        </dateTime>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>endDate</attributeName>
+                    <attributeDefinition>The end date-time or interval during which an event occurred</attributeDefinition>
+                    <measurementScale>
+                        <dateTime>
+                            <formatString>yyyy-MM-dd(floor)</formatString>
+                        </dateTime>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>samplingProtocolVersion</attributeName>
+                    <attributeDefinition>The NEON document number and version where detailed information regarding the sampling method used is available; format NEON.DOC.######vX</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>The NEON document number and version where detailed information regarding the sampling method used is available; format NEON.DOC.######vX</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>remarks</attributeName>
+                    <attributeDefinition>Technician notes; free text comments accompanying the record</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Technician notes; free text comments accompanying the record</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>dataQF</attributeName>
+                    <attributeDefinition>Data quality flag</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Data quality flag</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>samplingImpractical</attributeName>
+                    <attributeDefinition>Samples and/or measurements were not collected due to the indicated circumstance</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>temperature high</code>
+                                        <definition>temperature high</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>staff gauge not installed</code>
+                                        <definition>staff gauge not installed</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>high water velocity</code>
+                                        <definition>high water velocity</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>not all samples collected on this date</code>
+                                        <definition>not all samples collected on this date</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>location frozen</code>
+                                        <definition>location frozen</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>shallow groundwater</code>
+                                        <definition>shallow groundwater</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>ambient cell not clipped, livestock absent</code>
+                                        <definition>ambient cell not clipped, livestock absent</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>temperature low</code>
+                                        <definition>temperature low</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>management</code>
+                                        <definition>management</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>location wet</code>
+                                        <definition>location wet</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>night fishing</code>
+                                        <definition>night fishing</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>wildfire</code>
+                                        <definition>wildfire</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>location flooded</code>
+                                        <definition>location flooded</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>coordinates not suitable</code>
+                                        <definition>coordinates not suitable</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>too windy</code>
+                                        <definition>too windy</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>extreme weather</code>
+                                        <definition>extreme weather</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>OK</code>
+                                        <definition>OK</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>location dry</code>
+                                        <definition>location dry</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>safety hazard</code>
+                                        <definition>safety</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>horizon not present</code>
+                                        <definition>horizon not present</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>obstruction</code>
+                                        <definition>obstruction</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>onshore protocols only</code>
+                                        <definition>onshore protocols only</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>location snow covered</code>
+                                        <definition>location snow covered</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>logistical</code>
+                                        <definition>logistical</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>low yield groundwater</code>
+                                        <definition>low yield groundwater</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>wildlife hazard</code>
+                                        <definition>wildlife hazard</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>exclosure cell not clipped, livestock absent</code>
+                                        <definition>exclosure cell not clipped, livestock absent</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>disturbance</code>
+                                        <definition>disturbance</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>other</code>
+                                        <definition>other</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>location burned</code>
+                                        <definition>location burned</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>staff gauge disturbed</code>
+                                        <definition>staff gauge disturbed</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>eventID</attributeName>
+                    <attributeDefinition>An identifier for the set of information associated with the event, which includes information about the place and time of the event</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>An identifier for the set of information associated with the event, which includes information about the place and time of the event</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>mammalGridSamplingMethod</attributeName>
+                    <attributeDefinition>Type of sampling at a mammal grid</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <enumeratedDomain>
+                                    <codeDefinition>
+                                        <code>diversity</code>
+                                        <definition>diversity</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>pathogen</code>
+                                        <definition>pathogen</definition>
+                                    </codeDefinition>
+                                    <codeDefinition>
+                                        <code>recapture</code>
+                                        <definition>recapture</definition>
+                                    </codeDefinition>
+                                </enumeratedDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>uid</attributeName>
+                    <attributeDefinition>Unique ID within NEON database; an identifier for the record</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique ID within NEON database; an identifier for the record</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>nightuid</attributeName>
+                    <attributeDefinition>Unique ID of associated record in perplotnight table</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique ID of associated record in perplotnight table</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>namedLocation</attributeName>
+                    <attributeDefinition>Name of the measurement location in the NEON database</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Name of the measurement location in the NEON database</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+                <attribute>
+                    <attributeName>domainID</attributeName>
+                    <attributeDefinition>Unique identifier of the NEON domain</attributeDefinition>
+                    <measurementScale>
+                        <nominal>
+                            <nonNumericDomain>
+                                <textDomain>
+                                    <definition>Unique identifier of the NEON domain</definition>
+                                </textDomain>
+                            </nonNumericDomain>
+                        </nominal>
+                    </measurementScale>
+                </attribute>
+            </attributeList>
+            <caseSensitive>yes</caseSensitive>
+            <numberOfRecords>12</numberOfRecords>
+        </dataTable>
+        <dataTable>
+            <entityName>NEON.D15.ONAQ.DP1.10072.001.mam_identificationHistory.basic.20241118T220658Z</entityName>
+            <attributeList/>
+            <caseSensitive>yes</caseSensitive>
+            <numberOfRecords>24</numberOfRecords>
+        </dataTable>
+        <dataTable>
+            <entityName>NEON.D15.ONAQ.DP1.10072.001.mam_voucher.basic.20241118T220658Z</entityName>
+            <attributeList/>
+            <caseSensitive>yes</caseSensitive>
+            <numberOfRecords>2</numberOfRecords>
+        </dataTable>
+    </dataset>
+    <additionalMetadata><metadata>
+<!--null-->
+<unitList xmlns="http://www.xml-cml.org/schema/stmml-1.2">
+    <unitType id="length" name="length">
+        <dimension name="length"/>
+    </unitType>
+    <unitType id="time" name="time">
+        <dimension name="time"/>
+    </unitType>
+    <unitType id="mass" name="mass">
+        <dimension name="mass"/>
+    </unitType>
+    <unitType id="current" name="current">
+        <dimension name="current"/>
+    </unitType>
+    <unitType id="temperature" name="temperature">
+        <dimension name="temperature"/>
+    </unitType>
+    <unitType id="amount" name="amount">
+        <dimension name="amount"/>
+    </unitType>
+    <unitType id="luminosity" name="luminosity">
+        <dimension name="luminosity"/>
+    </unitType>
+    <unitType id="dimensionless" name="dimensionless">
+        <dimension name="dimensionless"/>
+    </unitType>
+    <unitType id="angle" name="angle">
+        <dimension name="angle"/>
+    </unitType>
+    <unitType id="acceleration" name="acceleration">
+        <dimension name="length" power="1"/>
+        <dimension name="time" power="-2"/>
+    </unitType>
+    <unitType id="charge" name="charge">
+        <dimension name="current" power="1"/>
+        <dimension name="time" power="1"/>
+    </unitType>
+    <unitType id="magneticFieldStrength" name="magneticFieldStrength">
+        <dimension name="current" power="1"/>
+        <dimension name="length" power="-1"/>
+    </unitType>
+    <unitType id="currentDensity" name="currentDensity">
+        <dimension name="current" power="1"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="area" name="area">
+        <dimension name="length" power="2"/>
+    </unitType>
+    <unitType id="lengthReciprocal" name="lengthReciprocal">
+        <dimension name="length" power="-1"/>
+    </unitType>
+    <unitType id="frequency" name="frequency">
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="volume" name="volume">
+        <dimension name="length" power="3"/>
+    </unitType>
+    <unitType id="volumetricArea" name="volumetricArea">
+        <dimension name="length" power="3"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="speed" name="speed">
+        <dimension name="length" power="1"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="massDensity" name="massDensity">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="-3"/>
+    </unitType>
+    <unitType id="massPerMass" name="massPerMass">
+        <dimension name="mass" power="1"/>
+        <dimension name="mass" power="-1"/>
+    </unitType>
+    <unitType id="volumePerVolume" name="volumePerVolume">
+        <dimension name="length" power="3"/>
+        <dimension name="length" power="-3"/>
+    </unitType>
+    <unitType id="volumetricRate" name="volumetricRate">
+        <dimension name="length" power="3"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="volumetricMassDensityRate" name="volumetricMassDensityRate">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="-3"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="arealMassDensityRate" name="arealMassDensityRate">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="-2"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="specificVolume" name="specificVolume">
+        <dimension name="mass" power="-1"/>
+        <dimension name="length" power="3"/>
+    </unitType>
+    <unitType id="amountOfSubstanceConcentration" name="amountOfSubstanceConcentration">
+        <dimension name="amount" power="1"/>
+        <dimension name="length" power="-3"/>
+    </unitType>
+    <unitType id="amountOfSubstanceWeight" name="amountOfSubstanceWeight">
+        <dimension name="amount" power="1"/>
+        <dimension name="mass" power="-1"/>
+    </unitType>
+    <unitType id="luminance" name="luminance">
+        <dimension name="luminosity" power="1"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="volumetricDensity" name="volumetricDensity">
+        <dimension name="dimensionless" power="1"/>
+        <dimension name="length" power="-3"/>
+    </unitType>
+    <unitType id="arealDensity" name="arealDensity">
+        <dimension name="dimensionless" power="1"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="arealMassDensity" name="arealMassDensity">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="specificArea" name="specificArea">
+        <dimension name="mass" power="-1"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="force" name="force">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="1"/>
+        <dimension name="time" power="-2"/>
+    </unitType>
+    <unitType id="energy" name="energy">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-2"/>
+    </unitType>
+    <unitType id="power" name="power">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-3"/>
+    </unitType>
+    <unitType id="potentialDifference" name="potentialDifference">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-3"/>
+        <dimension name="current" power="-1"/>
+    </unitType>
+    <unitType id="capacitance" name="capacitance">
+        <dimension name="mass" power="-1"/>
+        <dimension name="length" power="-2"/>
+        <dimension name="time" power="4"/>
+        <dimension name="current" power="2"/>
+    </unitType>
+    <unitType id="resistance" name="resistance">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-3"/>
+        <dimension name="current" power="-2"/>
+    </unitType>
+    <unitType id="resistivity" name="resistivity">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="3"/>
+        <dimension name="time" power="-3"/>
+        <dimension name="current" power="-2"/>
+    </unitType>
+    <unitType id="conductance" name="conductance">
+        <dimension name="mass" power="-1"/>
+        <dimension name="length" power="-2"/>
+        <dimension name="time" power="3"/>
+        <dimension name="current" power="2"/>
+    </unitType>
+    <unitType id="magneticFlux" name="magneticFlux">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-2"/>
+        <dimension name="current" power="-1"/>
+    </unitType>
+    <unitType id="magneticFluxDensity" name="magneticFluxDensity">
+        <dimension name="mass" power="1"/>
+        <dimension name="time" power="-2"/>
+        <dimension name="current" power="-1"/>
+    </unitType>
+    <unitType id="inductance" name="inductance">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-2"/>
+        <dimension name="current" power="-2"/>
+    </unitType>
+    <unitType id="illuminance" name="illuminance">
+        <dimension name="luminosity" power="1"/>
+        <dimension name="length" power="-2"/>
+    </unitType>
+    <unitType id="radionucleotideActivity" name="radionucleotideActivity">
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="specificEnergy" name="specificEnergy">
+        <dimension name="time" power="-2"/>
+        <dimension name="length" power="2"/>
+    </unitType>
+    <unitType id="doseEquivalent" name="doseEquivalent">
+        <dimension name="time" power="-2"/>
+        <dimension name="length" power="2"/>
+    </unitType>
+    <unitType id="catalyticActivity" name="catalyticActivity">
+        <dimension name="time" power="-1"/>
+        <dimension name="amount" power="1"/>
+    </unitType>
+    <unitType id="pressure" name="pressure">
+        <dimension name="mass" power="1"/>
+        <dimension name="time" power="-2"/>
+        <dimension name="length" power="1"/>
+    </unitType>
+    <unitType id="transmissivity" name="transmissivity">
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="massSpecificLength" name="massSpecificLength">
+        <dimension name="length" power="1"/>
+        <dimension name="mass" power="-1"/>
+    </unitType>
+    <unitType id="massSpecificCount" name="massSpecificCount">
+        <dimension name="dimensionless" power="1"/>
+        <dimension name="mass" power="-1"/>
+    </unitType>
+    <unitType id="volumetricMass" name="volumetricMass">
+        <dimension name="length" power="3"/>
+        <dimension name="mass" power="1"/>
+    </unitType>
+    <unitType id="luminousFlux" name="luminousFlux">
+        <dimension name="luminosity" power="1"/>
+        <dimension name="length" power="2"/>
+    </unitType>
+    <unitType id="variance" name="variance">
+        <dimension name="amount" power="2"/>
+    </unitType>
+    <unitType id="arealAmountDensityRate" name="arealAmountDensityRate">
+        <dimension name="amount" power="1"/>
+        <dimension name="length" power="-2"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="intensity" name="intensity">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="2"/>
+        <dimension name="time" power="-3"/>
+    </unitType>
+    <unitType id="amountPerAmount" name="amountPerAmount">
+        <dimension name="amount" power="1"/>
+        <dimension name="amount" power="-1"/>
+    </unitType>
+    <unitType id="conductivity" name="conductivity">
+        <dimension name="current" power="2"/>
+        <dimension name="mass" power="-1"/>
+        <dimension name="length" power="-3"/>
+        <dimension name="time" power="-3"/>
+    </unitType>
+    <unitType id="amountOfSubstanceChargeWeight" name="amountOfSubstanceChargeWeight">
+        <dimension name="amount" power="1"/>
+        <dimension name="current" power="1"/>
+        <dimension name="time" power="1"/>
+        <dimension name="mass" power="-1"/>
+    </unitType>
+    <unitType id="massRate" name="massRate">
+        <dimension name="mass" power="1"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="massFlux" name="massFlux">
+        <dimension name="mass" power="1"/>
+        <dimension name="length" power="-2"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unitType id="amountOfSubstanceWeightRate" name="amountOfSubstanceWeightRate">
+        <dimension name="amount" power="1"/>
+        <dimension name="mass" power="-1"/>
+        <dimension name="time" power="-1"/>
+    </unitType>
+    <unit id="meter" abbreviation="m" name="meter" parentSI="meter" unitType="length" multiplierToSI="1"/>
+    <unit id="gram" abbreviation="g" name="gram" parentSI="kilogram" unitType="mass" multiplierToSI="0.001"/>
+    <unit id="decimalDegree" abbreviation="DD" name="decimalDegree" parentSI="radian" unitType="angle" multiplierToSI="0.0174533"/>
+    <unit id="millimeter" abbreviation="mm" name="millimeter" parentSI="meter" unitType="length" multiplierToSI="0.001"/>
+</unitList></metadata></additionalMetadata>
+</ns18:eml>

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2ecfbdc8-bc95-4c88-8d12-4f18f33d5a7a","7AE282D6CA244883A130FDCED1CB6EAA","TREE.2015.24","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2015-06-08","2015-06-08",,,,
+"1659a979-a19b-4123-90f0-9ddd871c5ae3","0FF01B9FE7F54CB992FA5DFC85065E5F","TREE.2015.24","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","pathogen","2015-06-08","2015-06-08",,,,
+"9f9056d0-72e9-4639-8f56-0aad54522fea","F814014B9B8F46D088D01125C14056B7","TREE.2015.24","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2015-06-08","2015-06-08",,,,
+"c2b2675d-abf4-4226-bb04-b3967e413291","EA2A60199517402ABB249478EE00FBFE","TREE.2015.24","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","pathogen","2015-06-09","2015-06-09",,,,
+"97271e84-5255-40d2-8c82-50d163d6b3e8","89A5329C773949F98A8815F6BD0487A1","TREE.2015.24","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2015-06-09","2015-06-09",,,,
+"e7159791-eeab-439d-b139-1508426f3ab3","3CC4EADE49ED4D198F0503AE61FE9C98","TREE.2015.24","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2015-06-09","2015-06-09",,,,
+"8e357339-4df7-47ce-b917-3094ab9c5038","DC5D6882591141EA82AE5B5B30B4863A","TREE.2015.24","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","pathogen","2015-06-10","2015-06-10",,,"Was not set on the night of 6/9. When the trap setters arrived at the grid they found about 20 traps destroyed by a bear. In total 74 traps were destroyed",
+"a5e360f2-52ba-49e5-ae2f-f3ec3280bcfe","EA339479C64041B68FE288C4BD722797","TREE.2015.24","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2015-06-10","2015-06-10",,,,
+"cb7e0340-5178-4621-bb0e-317a0e0b6a17","1F108CD7F63B4C1F87217CB2AE823C8D","TREE.2015.24","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2015-06-10","2015-06-10",,,,
+"28fc4e44-ba87-49a3-bd44-5a7121f88881","60E196484E4B4231BAE6A07FFFAEC9CD","TREE.2015.24","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2015-06-11","2015-06-11",,,,
+"edbf302f-d544-431d-8d61-79ec96994dd0","6D9FB902524D4953BF899928F676185E","TREE.2015.24","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","diversity","2015-06-11","2015-06-11",,,,
+"66498351-4087-498c-938f-65d86ab8d3d6","5D7A4AFC74CC43A7BEBBE7271FC6C4F5","TREE.2015.24","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2015-06-11","2015-06-11",,,,

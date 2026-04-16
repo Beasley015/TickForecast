@@ -1,0 +1,134 @@
+table,fieldName,description,dataType,units,downloadPkg,pubFormat,primaryKey,categoricalCodeName
+mam_identificationHistory,uid,"Unique ID within NEON database; an identifier for the record",string,NA,expanded,"asIs",N,
+mam_identificationHistory,identificationTable,"The table(s) containing the record to which this identification history applies",string,NA,expanded,"asIs",N,
+mam_identificationHistory,domainID,"Unique identifier of the NEON domain",string,NA,expanded,"asIs",N,
+mam_identificationHistory,siteID,"NEON site code",string,NA,expanded,"asIs",N,
+mam_identificationHistory,namedLocation,"Name of the measurement location in the NEON database",string,NA,expanded,"asIs",N,
+mam_identificationHistory,identificationHistoryID,"Identifier for linking records related to this identification history",string,NA,expanded,"asIs",Y,
+mam_identificationHistory,identifiedDate,"Date on which the sample, individual, or specimen was identified",dateTime,NA,expanded,"yyyy-MM-dd(floor)",Y,
+mam_identificationHistory,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,expanded,"yyyy-MM-dd(floor)",N,
+mam_identificationHistory,scientificName,"Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined",string,NA,expanded,"asIs",N,
+mam_identificationHistory,taxonID,"Species code, based on one or more sources",string,NA,expanded,"asIs",N,
+mam_identificationHistory,acceptedTaxonID,"Accepted species code, based on one or more sources",string,NA,expanded,"asIs",N,
+mam_identificationHistory,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,expanded,"LOV",N,"identificationQualifiersExpert"
+mam_identificationHistory,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,expanded,"LOV",N,"mam.identificationReferences"
+mam_identificationHistory,identificationRemarks,"Comments or notes about the identification",string,NA,expanded,"LOV",N,"identificationRemarks"
+mam_identificationHistory,remarks,"Technician notes; free text comments accompanying the record",string,NA,expanded,"asIs",N,
+mam_identificationHistory,identifiedBy,"An identifier for the technician who identified the specimen",string,NA,expanded,"obfuscate",N,
+mam_identificationHistory,dataQF,"Data quality flag",string,NA,expanded,"asIs",N,
+mam_perplotnight,uid,"Unique ID within NEON database; an identifier for the record",string,NA,basic,"asIs",N,
+mam_perplotnight,nightuid,"Unique ID of associated record in perplotnight table",string,NA,basic,"asIs",Y,
+mam_perplotnight,eventID,"An identifier for the set of information associated with the event, which includes information about the place and time of the event",string,NA,basic,"asIs",N,
+mam_perplotnight,namedLocation,"Name of the measurement location in the NEON database",string,NA,basic,"asIs",N,
+mam_perplotnight,domainID,"Unique identifier of the NEON domain",string,NA,basic,"asIs",N,
+mam_perplotnight,siteID,"NEON site code",string,NA,basic,"asIs",N,
+mam_perplotnight,plotID,"Plot identifier (NEON site code_XXX)",string,NA,basic,"asIs",N,
+mam_perplotnight,mammalGridSamplingMethod,"Type of sampling at a mammal grid",string,NA,basic,"LOV",N,"mam.gridType"
+mam_perplotnight,collectDate,"Date of the collection event",dateTime,NA,basic,"yyyy-MM-dd(floor)",N,
+mam_perplotnight,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,basic,"yyyy-MM-dd(floor)",N,
+mam_perplotnight,samplingImpractical,"Samples and/or measurements were not collected due to the indicated circumstance",string,NA,basic,"LOV",N,"samplingImpractical"
+mam_perplotnight,samplingProtocolVersion,"The NEON document number and version where detailed information regarding the sampling method used is available; format NEON.DOC.######vX",string,NA,basic,"asIs",N,
+mam_perplotnight,remarks,"Technician notes; free text comments accompanying the record",string,NA,basic,"asIs",N,
+mam_perplotnight,dataQF,"Data quality flag",string,NA,basic,"asIs",N,
+mam_pertrapnight,uid,"Unique ID within NEON database; an identifier for the record",string,NA,basic,"asIs",N,
+mam_pertrapnight,nightuid,"Unique ID of associated record in perplotnight table",string,NA,basic,"asIs",N,
+mam_pertrapnight,namedLocation,"Name of the measurement location in the NEON database",string,NA,basic,"asIs",N,
+mam_pertrapnight,domainID,"Unique identifier of the NEON domain",string,NA,basic,"asIs",N,
+mam_pertrapnight,siteID,"NEON site code",string,NA,basic,"asIs",N,
+mam_pertrapnight,plotID,"Plot identifier (NEON site code_XXX)",string,NA,basic,"asIs",Y,
+mam_pertrapnight,trapCoordinate,"Relative coordinate of the trap within the given plotID (A1 - J10). If row or column coordinate is unknown, X is used",string,NA,basic,"asIs",Y,
+mam_pertrapnight,plotType,"NEON plot type in which sampling occurred: tower, distributed or gradient",string,NA,basic,"asIs",N,
+mam_pertrapnight,nlcdClass,"National Land Cover Database Vegetation Type Name",string,NA,basic,"asIs",N,
+mam_pertrapnight,decimalLatitude,"The geographic latitude (in decimal degrees, WGS84) of the geographic center of the reference area",real,decimalDegree,basic,"*.######(round)",N,
+mam_pertrapnight,decimalLongitude,"The geographic longitude (in decimal degrees, WGS84) of the geographic center of the reference area",real,decimalDegree,basic,"*.######(round)",N,
+mam_pertrapnight,geodeticDatum,"Model used to measure horizontal position on the earth",string,NA,basic,"asIs",N,
+mam_pertrapnight,coordinateUncertainty,"The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Zero is not a valid value for this term",real,meter,basic,"*.#(round)",N,
+mam_pertrapnight,elevation,"Elevation (in meters) above sea level",real,meter,basic,"*.#(round)",N,
+mam_pertrapnight,elevationUncertainty,"Uncertainty in elevation values (in meters)",real,meter,basic,"*.#(round)",N,
+mam_pertrapnight,trapStatus,"Categorical descriptor of trap status; 0 - no data; 1 - trap not set; 2 - trap disturbed/door closed but empty; 3 - trap door open or closed w/ spoor left; 4 - >1 capture in one trap; 5 - capture; 6 - trap set and empty",string,NA,basic,"LOV",N,"mam.trapStatus"
+mam_pertrapnight,trapType,"Type of trap from which a sample was collected",string,NA,basic,"LOV",N,"mam.trapType"
+mam_pertrapnight,collectDate,"Date of the collection event",dateTime,NA,basic,"yyyy-MM-dd(floor)",Y,
+mam_pertrapnight,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,basic,"yyyy-MM-dd(floor)",N,
+mam_pertrapnight,tagID,"Domain-level unique identifier of tag used to mark the individual",string,NA,basic,"asIs",Y,
+mam_pertrapnight,individualCode,"Barcode of an individual",string,NA,basic,"asIs",Y,
+mam_pertrapnight,taxonID,"Species code, based on one or more sources",string,NA,basic,"asIs",N,
+mam_pertrapnight,scientificName,"Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined",string,NA,basic,"asIs",N,
+mam_pertrapnight,taxonRank,"The lowest level taxonomic rank that can be determined for the individual or specimen",string,NA,basic,"asIs",N,
+mam_pertrapnight,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,basic,"LOV",N,"Identification Qualifiers"
+mam_pertrapnight,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,basic,"LOV",N,"mam.identificationReferences"
+mam_pertrapnight,identificationHistoryID,"Identifier for linking records related to this identification history",string,NA,basic,"asIs",N,
+mam_pertrapnight,voucherUpdate,"Name of any data fields updated after review of voucher specimen",string,NA,basic,"LOV",N,"mam.voucherUpdate"
+mam_pertrapnight,nativeStatusCode,"The process by which the taxon became established in the location",string,NA,basic,"LOV",N,"Taxon Native Status"
+mam_pertrapnight,sex,"M for male, F for female, U for unknown",string,NA,basic,"LOV",N,"sex"
+mam_pertrapnight,recapture,"Indicates whether or not the captured individual is a recapture; 'Y' for yes, 'N' for no",string,NA,basic,"LOV",N,"mam.recapture"
+mam_pertrapnight,fate,"The fate of the individual, unless marked and released; 'dead' = dead, 'escaped' = escaped while handling, 'nontarget' = released, non-target species, 'released' = target or opportunistic species released without full processing",string,NA,basic,"LOV",N,"mam.fate"
+mam_pertrapnight,replacedTag,"Indicates which ear tag was replaced (L#### | R####) or which ear appears to have lost a tag ('left' = left ear tag replaced; 'right' = right ear tag replaced)",string,NA,basic,"UPPER",N,
+mam_pertrapnight,lifeStage,"The age class of the individual at the time the Occurrence was recorded. juvenile = obvious signs of a very young individual, small size, distinctive pelage coloration; subabult; adult",string,NA,basic,"LOV",N,"mam.lifeStage"
+mam_pertrapnight,testes,"Condition of the testes at time of capture; if mature: scrotal = testes descended, nonscrotal = testes abdominal",string,NA,basic,"LOV",N,"mam.testes"
+mam_pertrapnight,nipples,"Condition of the nipples at time of capture; if mature: enlarged = nipples enlarged, nonenlarged = nipples not enlarged",string,NA,basic,"LOV",N,"mam.nipples"
+mam_pertrapnight,pregnancyStatus,"Condition at time of capture; if mature: 'pregnant' | 'not'",string,NA,basic,"LOV",N,"mam.pregnancyStatus"
+mam_pertrapnight,vagina,"Condition of the vagina at time of capture; if mature: swollen, plugged, neither",string,NA,basic,"LOV",N,"mam.vagina"
+mam_pertrapnight,hindfootLength,"length of left hindfoot; including claws; in millimeters",unsigned integer,millimeter,basic,"integer",N,
+mam_pertrapnight,earLength,"length of left ear; in millimeters",unsigned integer,millimeter,basic,"integer",N,
+mam_pertrapnight,tailLength,"length of tail; in millimeters",unsigned integer,millimeter,basic,"integer",N,
+mam_pertrapnight,totalLength,"total length (head + body); in millimeters",unsigned integer,millimeter,basic,"integer",N,
+mam_pertrapnight,weight,"Live weight as measured with a spring scale; in grams",unsigned integer,gram,basic,"integer",N,
+mam_pertrapnight,larvalTicksAttached,"Indicates whether larval ticks are observed on the captured individual",string,NA,basic,"LOV",N,"mam.recapture"
+mam_pertrapnight,nymphalTicksAttached,"Indicates whether nymphal ticks are observed on the captured individual",string,NA,basic,"LOV",N,"mam.recapture"
+mam_pertrapnight,adultTicksAttached,"Indicates whether adult ticks are observed on the captured individual",string,NA,basic,"LOV",N,"mam.recapture"
+mam_pertrapnight,tickNumber,"Binned range of values representing total number of ticks of any life stage or species present on the head and neck of the individual",string,NA,basic,"LOV",N,"mam.tickNumber"
+mam_pertrapnight,additionalParasites,"Indicator of whether additional parasites were observed",string,NA,basic,"LOV",N,"mam.additionalParasites"
+mam_pertrapnight,frozenSamplePrepMethod,"Preparation or preservation method for a frozen sample",string,NA,basic,"LOV",N,"mam.frozenSamplePrepMethod"
+mam_pertrapnight,bloodSampleID,"Unique identifier for the blood sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,bloodSampleBarcode,"Barcode of the blood sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,bloodSampleMethod,"Method used to collect the blood sample",string,NA,basic,"LOV",N,"mam.bloodSampleMethod"
+mam_pertrapnight,fecalSampleID,"Unique identifier for the fecal sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,fecalSampleBarcode,"Barcode of the fecal sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,fecalSampleCondition,"Condition of fecal sample at time of collection; 'fresh' = fresh fecal sample collected from mammal; 'old' = 'Old' fecal sample collected from trap",string,NA,basic,"asIs",N,
+mam_pertrapnight,earSampleID,"Unique identifier for the ear sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,earSampleBarcode,"Barcode of the ear sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,hairSampleID,"Unique identifier for the hair sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,hairSampleBarcode,"Barcode of the hair sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,hairSampleContents,"The type(s) of hair collected",string,NA,basic,"LOV",N,"mam.hairSampleContents"
+mam_pertrapnight,voucherSampleID,"Unique identifier for the voucher sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,voucherSampleBarcode,"Barcode of the voucher sample",string,NA,basic,"asIs",N,
+mam_pertrapnight,measuredBy,"An identifier for the technician who measured or collected the data",string,NA,basic,"asIs",N,
+mam_pertrapnight,recordedBy,"An identifier for the technician who recorded the data",string,NA,basic,"asIs",N,
+mam_pertrapnight,remarks,"Technician notes; free text comments accompanying the record",string,NA,basic,"asIs",N,
+mam_pertrapnight,dataQF,"Data quality flag",string,NA,basic,"asIs",N,
+mam_pertrapnight,dataEntryRecordID,"Primary identifier for the record at the point of entry",string,NA,basic,"asIs",N,
+mam_voucher,uid,"Unique ID within NEON database; an identifier for the record",string,NA,expanded,"asIs",N,
+mam_voucher,namedLocation,"Name of the measurement location in the NEON database",string,NA,expanded,"asIs",N,
+mam_voucher,domainID,"Unique identifier of the NEON domain",string,NA,expanded,"asIs",N,
+mam_voucher,siteID,"NEON site code",string,NA,expanded,"asIs",N,
+mam_voucher,decimalLatitude,"The geographic latitude (in decimal degrees, WGS84) of the geographic center of the reference area",real,decimalDegree,expanded,"*.######(round)",N,
+mam_voucher,decimalLongitude,"The geographic longitude (in decimal degrees, WGS84) of the geographic center of the reference area",real,decimalDegree,expanded,"*.######(round)",N,
+mam_voucher,geodeticDatum,"Model used to measure horizontal position on the earth",string,NA,expanded,"asIs",N,
+mam_voucher,coordinateUncertainty,"The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Zero is not a valid value for this term",real,meter,expanded,"*.##(round)",N,
+mam_voucher,elevation,"Elevation (in meters) above sea level",real,meter,expanded,"*.#(round)",N,
+mam_voucher,elevationUncertainty,"Uncertainty in elevation values (in meters)",real,meter,expanded,"*.#(round)",N,
+mam_voucher,altLatitude,"Alternate Sampling Location coordinate - latitude",real,decimalDegree,expanded,"*.######(round)",N,
+mam_voucher,altLongitude,"Alternate Sampling Location coordinate - longitude",real,decimalDegree,expanded,"*.######(round)",N,
+mam_voucher,altCoordinateUncertainty,"The horizontal distance (in meters) from the given altLatitude and altLongitude describing the smallest circle containing the whole of the Location. Zero is not a valid value for this term",real,meter,expanded,"*.##(round)",N,
+mam_voucher,altGeodeticDatum,"Model used to measure horizontal position on the earth for alternate location coordinate",string,NA,expanded,"asIs",N,
+mam_voucher,altElevation,"Alternate elevation (in meters) above sea level",real,meter,expanded,"*.##(round)",N,
+mam_voucher,altElevationUncertainty,"Alternate uncertainty in elevation values (in meters)",real,meter,expanded,"*.##(round)",N,
+mam_voucher,altCoordinateSource,"Alternate method used to collect or create spatial information",string,NA,expanded,"asIs",N,
+mam_voucher,startDate,"The start date-time or interval during which an event occurred",dateTime,NA,expanded,"yyyy-MM-dd(floor)",N,
+mam_voucher,endDate,"The end date-time or interval during which an event occurred",dateTime,NA,expanded,"yyyy-MM-dd(floor)",N,
+mam_voucher,taxonID,"Species code, based on one or more sources",string,NA,expanded,"asIs",N,
+mam_voucher,scientificName,"Scientific name, associated with the taxonID. This is the name of the lowest level taxonomic rank that can be determined",string,NA,expanded,"asIs",N,
+mam_voucher,taxonRank,"The lowest level taxonomic rank that can be determined for the individual or specimen",string,NA,expanded,"asIs",N,
+mam_voucher,nativeStatusCode,"The process by which the taxon became established in the location",string,NA,expanded,"LOV",N,"Taxon Native Status"
+mam_voucher,identificationQualifier,"A standard term to express the determiner's doubts about the Identification",string,NA,expanded,"LOV",N,"div.identificationQualifier"
+mam_voucher,taxonIDRemarks,"Technician notes about the specific taxon; free text comments accompanying the record",string,NA,expanded,"asIs",N,
+mam_voucher,identificationReferences,"A list of sources (concatenated and semicolon separated) used to derive the specific taxon concept; including field guide editions, books, or versions of NEON keys used",string,NA,expanded,"asIs",N,
+mam_voucher,voucherSampleID,"Unique identifier for the voucher sample",string,NA,expanded,"asIs",Y,
+mam_voucher,voucherSampleCode,"Barcode of a voucher sample",string,NA,expanded,"asIs",Y,
+mam_voucher,remarks,"Technician notes; free text comments accompanying the record",string,NA,expanded,"asIs",N,
+mam_voucher,collectedBy,"An identifier for the technician who collected the sample or specimen",string,NA,expanded,"asIs",N,
+mam_voucher,identifiedBy,"An identifier for the technician who identified the specimen",string,NA,expanded,"asIs",N,
+mam_voucher,recordedBy,"An identifier for the technician who recorded the data",string,NA,expanded,"asIs",N,
+mam_voucher,tagID,"Domain-level unique identifier of tag used to mark the individual",string,NA,expanded,"asIs",N,
+mam_voucher,tagCode,"Code of domain-level unique identifier used to mark the individual",string,NA,expanded,"asIs",N,
+mam_voucher,dataQF,"Data quality flag",string,NA,expanded,"asIs",N,

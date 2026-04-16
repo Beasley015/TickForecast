@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"a4436335-d9c6-42af-b73a-ca58cc551f3a","d686446d-e397-4dc3-b42d-ef980de328b1","DELA.2025.22","DELA_026.mammalGrid.mam","D08","DELA","DELA_026","pathogen","2025-05-28","2025-05-28","OK","setting complete, no small mammals captured","NEON.DOC.000481vQ",,
+"f5fef088-0455-4b31-8f4f-3dfa10a99637","4a550c6a-be4f-4ba6-8ea3-fb11f81f2e36","DELA.2025.22","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2025-05-28","2025-05-28","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"0850d057-fb73-4f0e-b4c8-7f281338dcb4","3a9ab29f-c287-487b-9b94-8a28ac2d87a5","DELA.2025.22","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2025-05-28","2025-05-28","location flooded",,"NEON.DOC.000481vQ",,
+"0271c14c-8717-40e4-abee-8a5eefb7a50a","2a688325-3f2f-48e2-9e39-39b926cdda5e","DELA.2025.22","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2025-05-28","2025-05-28","location flooded",,"NEON.DOC.000481vQ",,

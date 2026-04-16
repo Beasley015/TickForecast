@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"dbb424ce-96a9-4603-ae11-543ad4064846","B078E6705AEC4610A8CEF4C56A6E6F39","GUAN.2016.48","GUAN_003.mammalGrid.mam","D04","GUAN","GUAN_003","pathogen","2016-11-29","2016-11-29",,"NEON.DOC.000481vH",,
+"1e28cf60-cf71-4ab1-aa94-dfc3c0a8f810","C8BFA14FCCE04FB7ABEC4DD9E779E28F","GUAN.2016.48","GUAN_025.mammalGrid.mam","D04","GUAN","GUAN_025","pathogen","2016-11-29","2016-11-29",,"NEON.DOC.000481vH",,
+"119e739e-75b8-4894-9c5d-fb9966033d1d","7FC66A251D374D0C83CC1B092082F7D3","GUAN.2016.48","GUAN_007.mammalGrid.mam","D04","GUAN","GUAN_007","pathogen","2016-11-29","2016-11-29",,"NEON.DOC.000481vH",,
+"1278baf7-acae-44ef-aab3-92d59b6cfdb9","4AAE7E29A5724EBFB03D1DAB593B519A","GUAN.2016.48","GUAN_007.mammalGrid.mam","D04","GUAN","GUAN_007","pathogen","2016-11-30","2016-11-30",,"NEON.DOC.000481vH","No captures in this plot",
+"4d6b8402-ce85-4b93-905b-ed892e9d3e8e","A4A6CFF881864F57B176AE50C1B9665B","GUAN.2016.48","GUAN_003.mammalGrid.mam","D04","GUAN","GUAN_003","pathogen","2016-11-30","2016-11-30",,"NEON.DOC.000481vH",,
+"54dbd25b-3a25-474a-ba33-550b4aa1692e","475087418BA045FE9BA2B2D0CACD1733","GUAN.2016.48","GUAN_025.mammalGrid.mam","D04","GUAN","GUAN_025","pathogen","2016-11-30","2016-11-30",,"NEON.DOC.000481vH","No captures in this plot",

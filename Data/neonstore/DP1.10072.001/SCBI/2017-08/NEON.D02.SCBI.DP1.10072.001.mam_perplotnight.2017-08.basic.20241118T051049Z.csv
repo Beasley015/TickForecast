@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f4a73a07-b549-4646-8bbb-64b03c4c73f3","59d81894-8864-442c-8e98-d080a40e68eb","SCBI.2017.33","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"62a3ce62-e2b5-4fb5-b127-7c7a037cc449","bcf158a1-8cfd-4b23-a32b-8d901d2e4b36","SCBI.2017.33","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ",,
+"0775c0c3-73c8-4b69-a8ab-7fe423161cf9","2a2e8494-9025-4f56-8b9d-11a8d549770a","SCBI.2017.33","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-08-15","2017-08-15",,"NEON.DOC.000481vJ","Plot not reset due to high levels of disturbance",
+"7e71e71d-d648-4160-b206-59c21013ec68","0bcb8f9b-b8c8-45f6-a744-dba7d94e0a55","SCBI.2017.33","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"04194c21-35e9-4d23-9076-fb0b1ff67f7a","d9905ba8-86b3-4856-8f47-bac9434966ab","SCBI.2017.33","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"798b9afc-ffb8-490e-9e68-bbf6ce23073f","cbd1f2b9-9032-4e4a-9190-339e926e71ae","SCBI.2017.33","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"a0211e80-9143-4bf9-957a-8b1673c7a391","07061154-c59e-4212-9b10-694ecd10af5b","SCBI.2017.33","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"b0133cc4-fecb-4339-a5aa-2970c7bce9c0","72310eff-05a8-41c2-a6e2-b82fc4504bb5","SCBI.2017.33","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"7dd40ff1-51da-4fc5-aa86-d183b61139df","9aae991a-ba47-4d4d-80a9-1da7a3105462","SCBI.2017.33","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"7c83ecb4-9189-438c-a5d6-d9e535563a60","d7094aaf-ad95-46c1-be4f-f24d75e39f4f","SCBI.2017.33","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,

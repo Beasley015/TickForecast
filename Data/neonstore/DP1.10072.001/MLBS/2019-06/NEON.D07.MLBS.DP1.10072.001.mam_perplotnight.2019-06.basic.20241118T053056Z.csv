@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"4a4cab22-6e12-49ce-b2d8-25bb1bee20f5","36f8e73e-601e-49be-852d-baed3696cd66","MLBS.2019.24","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2019-06-11","2019-06-11",,"NEON.DOC.000481vL",,
+"a8ea3dce-084e-40de-ad54-9d907f2a1102","c5aace3b-5910-4a91-b008-c6b90f87a0c5","MLBS.2019.24","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2019-06-11","2019-06-11",,"NEON.DOC.000481vL",,
+"fb3dc533-a769-4b39-85d2-a62bbbbeab9f","d613844a-d312-49be-9bb2-4ef67fd634ae","MLBS.2019.24","MLBS_004.mammalGrid.mam","D07","MLBS","MLBS_004","diversity","2019-06-11","2019-06-11",,"NEON.DOC.000481vL",,
+"0dc1ab5e-727a-44e0-aa02-2820f03e7476","1f7af82d-3f06-4986-9dc3-f33e1331aa99","MLBS.2019.24","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2019-06-11","2019-06-11",,"NEON.DOC.000481vL",,
+"f5868fe8-d201-4ab4-aaf6-c4cf3fc5c523","492fe302-4439-4e8a-b11a-2c0feb5fedf3","MLBS.2019.24","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2019-06-12","2019-06-12",,"NEON.DOC.000481vL",,
+"be7c9326-b5d6-4579-96ca-5589ca29c33f","61a02126-5dff-4a60-a824-185bd1c7cd11","MLBS.2019.24","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2019-06-12","2019-06-12",,"NEON.DOC.000481vL",,
+"ff3f7955-0cd7-419b-904f-cfaad2d796d7","5b6411f3-af47-4559-b459-ca290c61fc32","MLBS.2019.24","MLBS_002.mammalGrid.mam","D07","MLBS","MLBS_002","diversity","2019-06-12","2019-06-12",,"NEON.DOC.000481vL",,
+"74e38bac-0484-4644-ae27-b72c857e0900","230a66a2-0cd9-4dc1-aecd-581ae9cf6ea8","MLBS.2019.24","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2019-06-12","2019-06-12",,"NEON.DOC.000481vL",,
+"124b2f6f-42db-4afd-ae53-5416fd5461ae","527d4748-0180-4796-ac79-076c419880d4","MLBS.2019.24","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2019-06-13","2019-06-13",,"NEON.DOC.000481vL",,
+"97c78f13-40a0-4705-855c-5f007b00c5a4","a3161485-ea65-4f40-ac2b-2b757b4b4059","MLBS.2019.24","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2019-06-13","2019-06-13",,"NEON.DOC.000481vL",,
+"43ee7bd3-52fd-4bc4-9b2c-10f83371adf9","c17c9ba6-ef2f-4b91-a0e5-dac4ae838566","MLBS.2019.24","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2019-06-13","2019-06-13",,"NEON.DOC.000481vL",,
+"d447e244-3cad-458b-9387-f2f783207edf","dca6f617-6aa7-4d99-9fc1-940db61c60be","MLBS.2019.24","MLBS_009.mammalGrid.mam","D07","MLBS","MLBS_009","diversity","2019-06-13","2019-06-13",,"NEON.DOC.000481vL",,

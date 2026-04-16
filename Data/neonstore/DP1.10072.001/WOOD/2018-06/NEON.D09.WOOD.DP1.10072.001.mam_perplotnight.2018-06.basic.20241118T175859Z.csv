@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"37ecc086-1d8c-4a26-9c8d-381443517b05","c87e1f19-014c-4032-b544-54ab9debb1e1","WOOD.2018.24","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2018-06-12","2018-06-12",,"NEON.DOC.000481vK",,
+"e4683190-d689-4f7c-b92a-793844f3a835","782b482b-e50b-49b3-9266-dd7af6304f0a","WOOD.2018.24","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-06-12","2018-06-12",,"NEON.DOC.000481vK",,
+"72787c84-88bc-4936-802f-c4f4b6b05961","9b967baa-70fb-48df-8e2e-87ec586325d3","WOOD.2018.24","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-06-12","2018-06-12",,"NEON.DOC.000481vK",,
+"97f4fd51-5230-451c-b115-c7c84b05d1fa","a2821066-dbda-4dd5-af56-38ba565f2edc","WOOD.2018.24","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-06-12","2018-06-12",,"NEON.DOC.000481vK",,
+"399b54b6-7a9d-445f-bfbc-987da0e8036a","5aea2fd2-d8da-41ba-b7a3-1ed1db7fd97c","WOOD.2018.24","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK",,
+"a5f55fc8-f040-4f8a-88fe-5c5b7bfdc914","f56ea7a7-d284-4965-9fe8-ae4642f8837e","WOOD.2018.24","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2018-06-13","2018-06-13",,"NEON.DOC.000481vK","Cows on plot",
+"08e3691f-2ce0-4c21-80a8-29dba5e87620","402f2bc1-189f-43a0-845c-48b1965d7449","WOOD.2018.24","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK","A1 B1 C1 not set due to standing water",
+"607f72b2-21d5-4e3c-930f-4f21c10a9068","23ab9a95-01c1-48bb-a186-0cc51eb0e7c3","WOOD.2018.24","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK",,
+"36388954-b6f1-4804-b23b-1e6e1cd7c8fe","62ead6a1-06a5-4b76-970f-3f05af7f504a","WOOD.2018.24","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,
+"3c99aff0-a901-4ad7-a823-14a83c44f1cf","ce18d9db-284b-4ad0-959b-c7d3aaa1d17a","WOOD.2018.24","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,
+"8b4a6d44-0fd4-41a2-a1c4-396e26a19419","4cd2f4d9-d114-4312-9bd2-01ba5431f1be","WOOD.2018.24","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,
+"3ba36431-6636-48dd-98c6-7a378202e371","9e6749c2-03cc-4596-9ab3-9d28e675514d","WOOD.2018.24","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2018-06-14","2018-06-14",,"NEON.DOC.000481vK","Cows on grid",

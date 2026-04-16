@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"675b1a87-7633-483e-9702-5b0ab2c6bbc9","8a7cf53b-a5d5-4b55-997d-389e59dfe0e9","HARV.2019.22","HARV_001.mammalGrid.mam","D01","HARV","HARV_001","diversity","2019-05-28","2019-05-28",,"NEON.DOC.000481vL",,
+"11e4e4bc-cf86-41e0-b4d8-eec9e461a96d","e8d0994d-0bfe-421b-9c06-d4ba2fbccfa3","HARV.2019.22","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","diversity","2019-05-28","2019-05-28",,"NEON.DOC.000481vL",,
+"d5f8522a-38fd-4129-a2c5-a0456c85982c","d9e1d49a-b10f-4673-b07a-7a5e60163cc7","HARV.2019.22","HARV_010.mammalGrid.mam","D01","HARV","HARV_010","diversity","2019-05-28","2019-05-28",,"NEON.DOC.000481vL",,
+"aa3efde6-52e3-499c-82c3-96e31363e0dd","5896208a-88a5-400f-95de-b3c673ae7062","HARV.2019.22","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"e1f678b6-1acb-4438-bc1b-948f1ddabe5f","91211fca-6db9-41a9-a261-3dc510c97e52","HARV.2019.22","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"75ed69c6-6ab1-4c92-9d55-5bb2bb0a0f31","e8afd899-d337-460f-b7b3-0815f1287653","HARV.2019.22","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2019-05-29","2019-05-29",,"NEON.DOC.000481vL",,
+"7ba887bb-a565-4ac4-a1dc-8374b4b716f6","9d69b034-7a48-446f-a841-325f7da49e6a","HARV.2019.22","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"328a27fa-cf4e-4403-9693-67f3e784d42c","3c3d6622-0548-4729-9bb5-7f2a601aa6d5","HARV.2019.22","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL",,
+"ec34a29d-5d24-4738-9e9d-b84767b1f3f0","3cb75c5b-aa5c-44ec-81d6-227bf57ae2e3","HARV.2019.22","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2019-05-30","2019-05-30",,"NEON.DOC.000481vL","Bear disturbed all traps on grid",
+"bdc714ee-91cc-46f8-969d-e73e83da3646","57eb5542-a5a6-48cb-9918-9a6e0b49577a","HARV.2019.22","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,
+"d2a050c4-3998-41ef-8a29-9f65ea6197f1","092a4c9b-3d70-444b-83af-2ba808ce0207","HARV.2019.22","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL","Bear disturbed grid previous night. Traps not set per protocol.",
+"3e7378c5-1af3-461e-90ef-a80c78e0292d","c15d1bd8-e0db-4ea1-aa95-db431ac6a971","HARV.2019.22","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2019-05-31","2019-05-31",,"NEON.DOC.000481vL",,

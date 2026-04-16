@@ -392,13 +392,10 @@ for (t in t:start.drags) {
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 		} else {
-<<<<<<< HEAD
 		  horizon <- ifelse(as.numeric(last(drag.dates) - fx.start.date) >= 365,
 		                    365,
 		                    as.numeric(last(drag.dates) - fx.start.date))
-		  
-=======
->>>>>>> 219e2f167f9fd05fd3b3f0e183bc907263835ec0
+
 			# read last forecast parameters and state
 			readDest <- file.path(
 				dir.base,
@@ -415,7 +412,6 @@ for (t in t:start.drags) {
 				group_by(parameter) %>%
 				summarise(mu = mean(value), tau = 1 / var(value))
 
-<<<<<<< HEAD
 			# Priors for transitions (priors are constant across sites)
 			phi.l <- get_prior("phi.l.mu")
 			phi.n <- get_prior("phi.n.mu")
@@ -449,43 +445,6 @@ for (t in t:start.drags) {
 					alpha = inv_gamma_mm(value)[1],
 					beta = inv_gamma_mm(value)[2]
 				)
-=======
-# 			if (update) {
-# 			  # Priors for transitions (priors are constant across sites)
-# 				phi.l <- get_prior("phi.l.mu")
-# 				phi.n <- get_prior("phi.n.mu")
-# 				phi.a <- get_prior("phi.a.mu")
-# 				theta.l2n <- get_prior("theta.ln")
-# 				theta.n2a <- get_prior("theta.na")
-# 
-# 				# Priors for betas (betas will vary across sites)
-# 				betas <- read_csv(file.path(readDest, "beta.csv")) %>%
-# 				  rename("parameter" = "node") %>%
-# 				  group_by(parameter) %>%
-# 				  summarise(mu = mean(value), tau = 1/var(value)) %>%
-# 				  suppressMessages()
-# 				
-# 				pr.beta <- matrix(NA, n.beta, 2)
-# 				for (i in seq_len(n.beta)) {
-#     			pr <- numeric(2)
-# 					xx <- betas %>%
-# 					  filter(parameter == paste("beta", i, sep = ""))
-# 					pr[1] <- xx %>% pull(mu)
-# 					pr[2] <- xx %>% pull(tau)
-# 					pr.beta[i, ] <- pr
-# 				}
-# 
-# 				# get invgamma parameters
-# 				sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
-# 				  suppressMessages()
-# 				pr.sig <- sig.last %>%
-# 					group_by(parameter) %>%
-# 					summarise(
-# 						alpha = inv_gamma_mm(value)[1],
-# 						beta = inv_gamma_mm(value)[2]
-# 					)
-# 			}
->>>>>>> 219e2f167f9fd05fd3b3f0e183bc907263835ec0
 
 			last.fx <- read_csv(file.path(readDest, "stateSamples.csv")) %>%
 			  pivot_longer(cols=Larva:Adult, names_to = 'lifeStage', 
@@ -659,10 +618,7 @@ for (t in t:start.drags) {
 	  if (nrow(data$mice) < length(fx.sequence)) {
 	    horizon <- min(length(data$cgdd), hrow(data$mice))
 	    data$y <- y[, 1:horizon, ,]
-<<<<<<< HEAD
 	    fx.sequence <- fx.sequence[1:nrow(data$mice)]
-=======
->>>>>>> 219e2f167f9fd05fd3b3f0e183bc907263835ec0
 	  }
 	}
 
@@ -842,10 +798,7 @@ for (t in t:start.drags) {
 		fx.dates = fx.sequence,
 		model = model.job,
 		spp = species.job,
-<<<<<<< HEAD
 		horizon = horizon,
-=======
->>>>>>> 219e2f167f9fd05fd3b3f0e183bc907263835ec0
 		weather = use.daymet,
 		out.dir = fileDest)
 	

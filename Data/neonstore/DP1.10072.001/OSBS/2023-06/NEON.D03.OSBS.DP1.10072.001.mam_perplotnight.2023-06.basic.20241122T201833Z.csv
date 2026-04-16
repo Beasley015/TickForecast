@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b995a026-a3ad-4fc2-8e6d-b5b3eddd9ea9","67c9575a-cb62-48fa-9c3c-68b7471ae776","OSBS.2023.25","OSBS_063.mammalGrid.mam","D03","OSBS","OSBS_063","diversity","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"76e89f32-2cbb-4b2e-8068-a85869da22f1","207aa882-a8a2-4bab-8001-d3cb0276b305","OSBS.2023.25","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"ed96234f-22f7-4426-ad42-90cd58d3ba06","528431a5-4254-4ed7-9de5-0e15ba2da116","OSBS.2023.25","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"46e269a0-ffe2-48d6-8cdf-326914e421c8","212d70ab-c373-4a37-8723-5261ac2b006a","OSBS.2023.25","OSBS_077.mammalGrid.mam","D03","OSBS","OSBS_077","pathogen","2023-06-20","2023-06-20","OK","NEON.DOC.000481vP",,
+"03af23b1-ce27-43a8-bfb8-fbe5f05a1e64","e3136eae-06cf-418d-9ddc-0f4fc7bbae70","OSBS.2023.25","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2023-06-21","2023-06-21","extreme weather","NEON.DOC.000481vP",,
+"b7b9fb95-6c79-4587-a765-9dbf8ff3d060","6149bb0a-a0af-417c-99f6-9e2c0e5b09fd","OSBS.2023.25","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP",,
+"118f7a58-a271-4504-a171-eb89ba7cd868","bbccc022-0d98-4833-8765-74a701245b95","OSBS.2023.25","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP",,
+"4523ecca-361d-43b8-b5bc-b8442b4c77a8","8a17ea55-c28d-4123-9ee4-23e57c55d335","OSBS.2023.25","OSBS_077.mammalGrid.mam","D03","OSBS","OSBS_077","pathogen","2023-06-21","2023-06-21","OK","NEON.DOC.000481vP",,
+"ceafc955-8ea3-4d90-99e3-0ac904ad29f5","b4401ddb-6428-420d-9fb0-bdf317f98c5d","OSBS.2023.25","OSBS_077.mammalGrid.mam","D03","OSBS","OSBS_077","pathogen","2023-06-22","2023-06-22","OK","NEON.DOC.000481vP",,
+"adf7d474-9b27-4ae8-b055-78e5b9893912","46559805-8f97-4a39-ab5c-8fbfce8a1a70","OSBS.2023.25","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2023-06-22","2023-06-22","OK","NEON.DOC.000481vP",,
+"854b274d-8ff4-41aa-af92-87d643d7051a","6fabe84d-ceb0-401a-958f-ebda968ba2ed","OSBS.2023.25","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2023-06-22","2023-06-22","extreme weather","NEON.DOC.000481vP",,
+"7d2fbc45-eb44-4bbd-bae0-d2d39ebc02ed","9ba0e432-79dd-4248-af7e-0202e4f0aab2","OSBS.2023.25","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2023-06-22","2023-06-22","OK","NEON.DOC.000481vP",,

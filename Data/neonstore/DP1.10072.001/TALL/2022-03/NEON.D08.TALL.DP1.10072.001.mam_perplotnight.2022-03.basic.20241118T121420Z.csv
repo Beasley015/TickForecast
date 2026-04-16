@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"80355dde-4530-41c7-b5fc-97835246457f","e90f7eec-e21e-48e5-9cc4-f5fcc458f7dd","TALL.2022.13","TALL_005.mammalGrid.mam","D08","TALL","TALL_005","diversity","2022-03-29","2022-03-29","OK","NEON.DOC.000481vN",,
+"5d212feb-883c-4916-8cc0-d595b8893e75","45fc0acc-b9ca-4124-8d7b-e326e0d43b22","TALL.2022.13","TALL_006.mammalGrid.mam","D08","TALL","TALL_006","diversity","2022-03-29","2022-03-29","OK","NEON.DOC.000481vN",,
+"bb40107c-c696-43c7-a53e-f685865d5538","fa734166-99fc-4041-a5e6-a12edcfc78ae","TALL.2022.13","TALL_013.mammalGrid.mam","D08","TALL","TALL_013","diversity","2022-03-29","2022-03-29","OK","NEON.DOC.000481vN",,
+"cd001bff-97e6-4a9d-9340-76c1bfb102d6","b3b9ea63-d4f9-4429-95b8-5df2e81b4d7c","TALL.2022.13","TALL_031.mammalGrid.mam","D08","TALL","TALL_031","diversity","2022-03-29","2022-03-29","OK","NEON.DOC.000481vN",,
+"459bbf42-7e7b-427a-91f6-9b4b56a7a604","35735a8b-ac06-4da1-aaca-ce4eb8f994cd","TALL.2022.13","TALL_015.mammalGrid.mam","D08","TALL","TALL_015","pathogen","2022-03-30","2022-03-30","logistical","NEON.DOC.000481vN",,
+"b1576a88-fa4a-4354-a7b7-7b6ee719841c","5829fe2a-9557-40f7-94cb-897c2e449c52","TALL.2022.13","TALL_010.mammalGrid.mam","D08","TALL","TALL_010","pathogen","2022-03-30","2022-03-30","logistical","NEON.DOC.000481vN",,
+"dc02b197-cac8-4457-9ec3-b818ce328fc5","441586e4-ca2c-4981-9330-5acd0fc83d5e","TALL.2022.13","TALL_024.mammalGrid.mam","D08","TALL","TALL_024","pathogen","2022-03-30","2022-03-30","logistical","NEON.DOC.000481vN",,
+"f66514eb-5924-4c64-980b-ea5b557c816e","4a030588-f9cb-4958-88e5-fb653c61be83","TALL.2022.13","TALL_012.mammalGrid.mam","D08","TALL","TALL_012","pathogen","2022-03-30","2022-03-30","logistical","NEON.DOC.000481vN",,
+"1c6a3049-2e7f-4439-9b2e-f8df9d7e4579","36593252-3a6c-4e2b-b703-3432601feade","TALL.2022.13","TALL_012.mammalGrid.mam","D08","TALL","TALL_012","pathogen","2022-03-31","2022-03-31","extreme weather","NEON.DOC.000481vN",,
+"b4db9ee9-a24b-40c0-bd8a-fb51749ea61f","b5f17df5-b961-4801-9e8a-a01726748308","TALL.2022.13","TALL_015.mammalGrid.mam","D08","TALL","TALL_015","pathogen","2022-03-31","2022-03-31","OK","NEON.DOC.000481vN",,
+"67869cb1-ce59-413a-a08e-c7c1f611dac3","3de62791-fdf4-472e-822d-bcb25ff32ea3","TALL.2022.13","TALL_010.mammalGrid.mam","D08","TALL","TALL_010","pathogen","2022-03-31","2022-03-31","OK","NEON.DOC.000481vN",,
+"77b3ae9b-3a02-4983-962d-e01820c3b4f9","85e2c6d8-73d9-445e-86f8-6365bde4c743","TALL.2022.13","TALL_024.mammalGrid.mam","D08","TALL","TALL_024","pathogen","2022-03-31","2022-03-31","OK","NEON.DOC.000481vN",,

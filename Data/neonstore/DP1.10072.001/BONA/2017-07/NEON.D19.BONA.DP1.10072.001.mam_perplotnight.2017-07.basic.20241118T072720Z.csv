@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"f4dd70cb-a43e-4333-bbf6-3d7d0605e8c1","3f4c7677-0be4-4265-90a9-7707258462e5","BONA.2017.31","BONA_094.mammalGrid.mam","D19","BONA","BONA_094","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ",,
+"e506fced-c302-4de3-8373-2b2559f174f7","f28fe3a6-dd00-4b0d-beac-18ee0af1b259","BONA.2017.31","BONA_020.mammalGrid.mam","D19","BONA","BONA_020","diversity","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ",,
+"e9ea5339-884a-4653-b7c7-56a1528c38d5","6662d206-571c-49ea-b25e-67bc7f2aba14","BONA.2017.31","BONA_014.mammalGrid.mam","D19","BONA","BONA_014","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ",,
+"e1303edc-1019-4245-8a80-f9d8d38cf4d8","8962d38b-e0ed-4391-a6b0-f80e3fd1f2eb","BONA.2017.31","BONA_004.mammalGrid.mam","D19","BONA","BONA_004","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ",,

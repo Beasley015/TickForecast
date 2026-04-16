@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"33f92db1-1060-41d4-945c-33048f29353a","1c235e28-6859-4aab-b909-e9e7947a194f","OAES.2023.34","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2023-08-22","2023-08-22","OK","NEON.DOC.000481vP",,
+"7c147e01-77e6-4bb9-b6c5-e57bef30b034","b3f10e7f-ca86-469c-9367-97a8dc74f1e2","OAES.2023.34","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2023-08-22","2023-08-22","OK","NEON.DOC.000481vP",,
+"1dae97d3-d267-4653-a80f-629281064df5","79d5b893-ebd3-4524-b9d1-0e585696c78b","OAES.2023.34","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2023-08-22","2023-08-22","OK","NEON.DOC.000481vP",,
+"6bb34f9a-6450-4655-a941-0da43cefc367","2d66b0e6-0c36-4173-9e7c-190c0405f562","OAES.2023.34","OAES_004.mammalGrid.mam","D11","OAES","OAES_004","diversity","2023-08-22","2023-08-22","logistical","NEON.DOC.000481vP","Reduced sampling due to high captures",
+"0796227f-167d-4933-884d-b7bed99a54ee","aa35ae36-f382-4488-8674-f5d012f206e9","OAES.2023.34","OAES_003.mammalGrid.mam","D11","OAES","OAES_003","diversity","2023-08-22","2023-08-22","OK","NEON.DOC.000481vP",,
+"c6dfd0a1-f789-4bfb-a06b-a9d9901a19db","ec8bc437-2917-4938-b71c-5db012126a1c","OAES.2023.34","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2023-08-23","2023-08-23","OK","NEON.DOC.000481vP",,
+"3692926f-bdbd-4848-8d71-f456fb0d4de8","70797093-c28e-43d2-a273-2d18828fc6ea","OAES.2023.34","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2023-08-23","2023-08-23","OK","NEON.DOC.000481vP",,
+"b87fc79a-863d-4405-b6bb-558be4a2089b","15f5dd50-70c5-4ee4-91f5-9600d0b5ccd3","OAES.2023.34","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2023-08-23","2023-08-23","OK","NEON.DOC.000481vP",,
+"3c8d41e1-6995-45c5-986c-043a4cefdad9","5aa8bc6f-5304-47c1-9ee0-36246e5f1463","OAES.2023.34","OAES_029.mammalGrid.mam","D11","OAES","OAES_029","diversity","2023-08-24","2023-08-24","logistical","NEON.DOC.000481vP","Reduced sampling due to high captures",
+"094afcb1-dc94-468e-960f-d8e88441c88e","83b36cca-906c-4c49-aa08-84cd5ec0a8c8","OAES.2023.34","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2023-08-24","2023-08-24","OK","NEON.DOC.000481vP",,
+"e1ff5353-ff74-4891-a651-55059cb0e1b3","7e97b6b0-bc01-4942-a3ec-15684b02afc9","OAES.2023.34","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2023-08-24","2023-08-24","OK","NEON.DOC.000481vP",,
+"5ed34238-625c-4f36-8e3f-60095b8745c2","0888232e-451d-484c-951c-85ae271e4ca6","OAES.2023.34","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2023-08-24","2023-08-24","OK","NEON.DOC.000481vP",,

@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"0942b1f7-7f29-419d-a325-c6f33e185732","48907098-963f-4233-916c-1062ec8aa043","CLBJ.2018.41","CLBJ_041.mammalGrid.mam","D11","CLBJ","CLBJ_041","pathogen","2018-10-11","2018-10-11",,"NEON.DOC.000481vK",,
+"f54503b5-5082-43a8-9e18-c74fc454ffe3","e4a12e04-bd4a-4261-b98e-c45445e082d7","CLBJ.2018.41","CLBJ_033.mammalGrid.mam","D11","CLBJ","CLBJ_033","pathogen","2018-10-11","2018-10-11",,"NEON.DOC.000481vK",,
+"0c170824-1f93-473d-9834-f8d17cb4d7d7","16d863ea-960f-4755-bace-376c346394ce","CLBJ.2018.41","CLBJ_040.mammalGrid.mam","D11","CLBJ","CLBJ_040","diversity","2018-10-11","2018-10-11",,"NEON.DOC.000481vK",,
+"e4dbcca9-68e4-4890-8472-ffa1d92d2135","399185b9-e1ee-42c3-a354-58ad0fb20834","CLBJ.2018.41","CLBJ_042.mammalGrid.mam","D11","CLBJ","CLBJ_042","pathogen","2018-10-11","2018-10-11",,"NEON.DOC.000481vK",,
+"c2e8cffa-eb7d-4d53-b7e2-81a67db8bde3","596fd782-d283-4e32-89d4-42863b9318f2","CLBJ.2018.41","CLBJ_042.mammalGrid.mam","D11","CLBJ","CLBJ_042","pathogen","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"dd5b0c95-85e1-4fd7-862e-31e61cec5b6c","3863b1ed-2360-4424-9a8c-c34361dc0c71","CLBJ.2018.41","CLBJ_039.mammalGrid.mam","D11","CLBJ","CLBJ_039","diversity","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"f8b37532-d681-42c4-abb2-6f2ce9c92ffa","768b126b-79e8-4004-9353-15c8353cf0b9","CLBJ.2018.41","CLBJ_033.mammalGrid.mam","D11","CLBJ","CLBJ_033","pathogen","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"bad996c1-de67-4087-bae6-87ba912cb944","f440ff6c-015f-475a-b20b-4fc87c76e571","CLBJ.2018.41","CLBJ_041.mammalGrid.mam","D11","CLBJ","CLBJ_041","pathogen","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"5d3b425e-4652-484e-bd11-f3dc33766029","f3b0e2db-21d7-4239-8095-b80b708e5371","CLBJ.2018.41","CLBJ_057.mammalGrid.mam","D11","CLBJ","CLBJ_057","diversity","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"896d8313-71bd-417f-8740-2127ba9d9872","76ed3cb3-2e8d-47ba-8116-81108f55085b","CLBJ.2018.41","CLBJ_034.mammalGrid.mam","D11","CLBJ","CLBJ_034","diversity","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,

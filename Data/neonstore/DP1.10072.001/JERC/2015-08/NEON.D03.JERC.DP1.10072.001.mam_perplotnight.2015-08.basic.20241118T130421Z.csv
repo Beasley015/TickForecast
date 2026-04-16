@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"4a3f2e1c-e4b1-4724-9e93-00719350e108","E804C13D06C5434898B8BBB141DDFB75","JERC.2015.33","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2015-08-11","2015-08-11",,,,
+"9f5c9807-f150-431e-9bca-7a19b4a0890f","32D67746DB7644B19E342ACA444B31C9","JERC.2015.33","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2015-08-11","2015-08-11",,,,
+"7d9d14f5-e35a-491e-91c5-124dee3c16a3","E11FD9E890324320B3DA7CAE97849675","JERC.2015.33","JERC_019.mammalGrid.mam","D03","JERC","JERC_019","diversity","2015-08-11","2015-08-11",,,,
+"3548ac9b-fe39-47e5-80ba-38512da81b49","F6291FD450DE4DB7B95C68E02724F821","JERC.2015.33","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2015-08-11","2015-08-11",,,"14 traps were either disturbed or closed and empty - may be problem with traps closing",
+"ec192f71-7200-4ea0-b05d-7f19f5d68918","E4AC1F2B8F5E4FC1AC7807C2EA14E5FF","JERC.2015.33","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2015-08-12","2015-08-12",,,,
+"ec6ec72f-6ded-4089-86d2-d038e74dbf29","2C87BE58D0D6422F8803DE299FAF6A41","JERC.2015.33","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2015-08-12","2015-08-12",,,,
+"4cac67b5-cd90-45ac-834a-9abc6fb764e4","DB513AA0E31147F8B762CEC6A1C2B59C","JERC.2015.33","JERC_006.mammalGrid.mam","D03","JERC","JERC_006","diversity","2015-08-12","2015-08-12",,,"mice are getting smarter or traps are getting worse ; capture at H9 escaped and taxon was not identified",
+"ecaa2c52-8059-438a-899a-91dadc29c9f9","11319EA0A2D64FA4806D6108CA4420B7","JERC.2015.33","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2015-08-12","2015-08-12",,,,
+"8e408864-5547-4d9b-b703-031517f7b903","4A7850E6425B402FBA943229C7BE56E4","JERC.2015.33","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2015-08-13","2015-08-13",,,,
+"c3328807-aa3e-4274-abdd-39a0115e2e19","4834BC0381FA4D1B9D09A38ED8B3046D","JERC.2015.33","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2015-08-13","2015-08-13",,,,
+"6734123a-8c24-479e-abac-91adf4162bfa","7FFC444A15804AC8B6D33F7B6812F5B6","JERC.2015.33","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2015-08-13","2015-08-13",,,,

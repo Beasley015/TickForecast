@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"9fbdbe21-b649-4ae2-ba49-0c1268290ca9","092f2c1f-c94d-411a-a0ee-101746e78389","UKFS.2018.21","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2018-05-21","2018-05-21",,"NEON.DOC.000481vK",,
+"635cb50d-28ad-4f5a-9a39-40567f7b1baf","dc5ab88a-7a0e-43de-a096-e29a81bbee51","UKFS.2018.21","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2018-05-21","2018-05-21",,"NEON.DOC.000481vK",,
+"f1ba5cd0-23f0-4378-ab81-9d8641b406b7","75dbe613-435f-47d3-b079-495e42b08070","UKFS.2018.21","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2018-05-21","2018-05-21",,"NEON.DOC.000481vK",,
+"26a403ed-7e0c-4154-b096-879912e0ddde","61a7038a-ae2e-4a18-8bd7-f23b1b7d67cc","UKFS.2018.21","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2018-05-23","2018-05-23",,"NEON.DOC.000481vK","More than 30 disturbances so the grid is shut down for this bout",
+"a977efa8-665e-43ac-a9a3-5a12ff651d6a","55d6414a-a9e9-4142-b799-24af0045d238","UKFS.2018.21","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2018-05-23","2018-05-23",,"NEON.DOC.000481vK","I line is incorrect",
+"57f2ddc1-0727-4665-97a6-ec2f2aae5b19","0c7825c6-8253-4bdc-8c97-a144cf091592","UKFS.2018.21","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2018-05-23","2018-05-23",,"NEON.DOC.000481vK",,
+"7925be95-ff7d-479a-869a-0e53bab9bfaf","0b8ac805-df1b-4885-bade-feab3c12106e","UKFS.2018.21","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2018-05-24","2018-05-24",,"NEON.DOC.000481vK",,
+"0859c9c4-f600-40be-9ab9-3b169d82a7a9","057ceb63-d541-4849-8cda-ce56b5147e39","UKFS.2018.21","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2018-05-24","2018-05-24",,"NEON.DOC.000481vK",,
+"8957c448-2f7c-4741-81d1-f18925f0df13","5da4ed09-01b1-44fc-a82f-c4a7ab464704","UKFS.2018.21","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2018-05-25","2018-05-25",,"NEON.DOC.000481vK",,
+"48bc1746-0c7f-40d6-a214-236d8b894864","27b68d95-9ebf-4cbb-bc3e-0793ae187aba","UKFS.2018.21","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2018-05-25","2018-05-25",,"NEON.DOC.000481vK",,

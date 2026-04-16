@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a3ec9d9a-8eae-4db4-b2f2-9a2c1cfce6ba","3d207cec-4f62-4351-877e-ecd29116fb7f","MLBS.2020.47","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2020-11-16","2020-11-16","OK","NEON.DOC.000481vM",,
+"ca379c79-b534-4da6-b413-f437f518f68d","6e168c2a-9b22-492c-be0d-eca6930200fd","MLBS.2020.47","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2020-11-16","2020-11-16","OK","NEON.DOC.000481vM",,
+"cc843309-72f7-4efe-b25c-63d3ffd1e116","d09c5a0b-79ef-4670-9dc1-ac1dbd22633a","MLBS.2020.47","MLBS_008.mammalGrid.mam","D07","MLBS","MLBS_008","pathogen","2020-11-17","2020-11-17","OK","NEON.DOC.000481vM",,
+"48d885ae-f90f-4c60-a2ed-477b2c0df288","1c0443f8-1554-4c45-816c-db5b67bdb058","MLBS.2020.47","MLBS_006.mammalGrid.mam","D07","MLBS","MLBS_006","pathogen","2020-11-17","2020-11-17","OK","NEON.DOC.000481vM",,
+"6cbe54bc-f8b8-485e-9cb9-196bfbd28ee2","fb388c3f-f6f2-45a5-acc5-cd7d62096e65","MLBS.2020.47","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2020-11-18","2020-11-18","OK","NEON.DOC.000481vM",,
+"9959c100-f40a-47e6-8c76-ce61d9df6961","de7944d9-df54-4145-9e20-2f8dd0027d6a","MLBS.2020.47","MLBS_004.mammalGrid.mam","D07","MLBS","MLBS_004","diversity","2020-11-18","2020-11-18","OK","NEON.DOC.000481vM",,
+"ec85a859-d760-48a4-93e1-3d78cc7e2dd3","40259484-180b-474d-8317-4aba11594ef2","MLBS.2020.47","MLBS_002.mammalGrid.mam","D07","MLBS","MLBS_002","diversity","2020-11-19","2020-11-19","OK","NEON.DOC.000481vM",,
+"ebac6c5f-df44-4b9c-b659-cfff440aaf3c","4d7342d4-e1bc-4848-9121-4fb033e6501b","MLBS.2020.47","MLBS_003.mammalGrid.mam","D07","MLBS","MLBS_003","pathogen","2020-11-19","2020-11-19","OK","NEON.DOC.000481vM",,
+"60d426ac-5196-4c03-bd9e-fa3fc306923f","b14fa8f0-7508-4657-9b00-dd4262119014","MLBS.2020.47","MLBS_009.mammalGrid.mam","D07","MLBS","MLBS_009","diversity","2020-11-20","2020-11-20","OK","NEON.DOC.000481vM",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"fa3e92c4-da3b-4e17-a03a-3964ce8a0265","dc56ad63-9062-412d-8636-60558d518fb7","BARR.2017.29","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2017-07-17","2017-07-17",,"NEON.DOC.000481vH",,
+"b73ca057-2e8f-48d8-ab31-2d91a4724ae5","9b5e9af8-8bc5-4b66-9855-33065e4466dd","BARR.2017.29","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2017-07-17","2017-07-17",,"NEON.DOC.000481vH",,
+"cdf455b9-a5be-441f-8326-f81b3407b338","f6d3badc-03a7-4549-8870-c60482368fd5","BARR.2017.29","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","pathogen","2017-07-17","2017-07-17",,"NEON.DOC.000481vH",,
+"d516252b-3975-456b-896b-a61cb776854c","1ae291ce-95fe-4e31-915c-d956209507cc","BARR.2017.29","BARR_037.mammalGrid.mam","D18","BARR","BARR_037","diversity","2017-07-18","2017-07-18",,"NEON.DOC.000481vH",,
+"7ff34429-ab62-4ac5-8f24-9e83667fd8d2","f0ed31f8-de1a-4231-9dc5-9cfe3f7737ae","BARR.2017.29","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2017-07-18","2017-07-18",,"NEON.DOC.000481vH",,
+"4bafd824-370b-44a2-8cd1-736e26b90f02","15d4eeb5-55aa-4518-b0c5-0cdd13019bd3","BARR.2017.29","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2017-07-18","2017-07-18",,"NEON.DOC.000481vH",,
+"e32fc137-857d-4205-a427-5ea772681c32","d287b871-639e-4bad-9fab-ee51cd0565e0","BARR.2017.29","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","pathogen","2017-07-18","2017-07-18",,"NEON.DOC.000481vH",,
+"74823f49-1317-4220-b29f-e9f776d275fd","175131ae-8a8c-423f-800d-b72ce4ac2105","BARR.2017.29","BARR_084.mammalGrid.mam","D18","BARR","BARR_084","diversity","2017-07-19","2017-07-19",,"NEON.DOC.000481vG","No captures",
+"26f3faa0-e8a0-4763-a52c-be0e57c4d8af","bbd2b5fc-4f37-44c4-b5e3-f771dbde34fe","BARR.2017.29","BARR_083.mammalGrid.mam","D18","BARR","BARR_083","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ","No Captures No Disturbances",
+"2dd79ea8-bb85-47b5-a6df-cdc7e4b0a020","36dc6df4-e401-47b1-a662-cda1106d7dff","BARR.2017.29","BARR_036.mammalGrid.mam","D18","BARR","BARR_036","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ",,
+"4dd24b49-8409-4410-9d03-25c65878afb4","35b2544e-9499-41d7-8638-f1a5bf0be3cd","BARR.2017.29","BARR_030.mammalGrid.mam","D18","BARR","BARR_030","pathogen","2017-07-19","2017-07-19",,"NEON.DOC.000481vJ",,
+"990f2b4a-38b0-441c-adad-9315b330a791","7776ad60-e9fc-4077-9f8f-b1a8cf172403","BARR.2017.29","BARR_044.mammalGrid.mam","D18","BARR","BARR_044","diversity","2017-07-19","2017-07-19",,"NEON.DOC.000481vG",,

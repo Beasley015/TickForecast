@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"64b6b61b-7b63-4d69-8a6a-014439e07fbb","CE3F45B3A636420EBF76B830A911D07D","OSBS.2015.42","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2015-10-13","2015-10-13",,,,
+"5be05aaf-0f21-4241-812b-5803abaa6e14","D12B3FD554A44E6A88AF4F4C51A25646","OSBS.2015.42","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-10-13","2015-10-13",,,"no captures",
+"f09ef48a-a98a-437b-b2f8-6a4fea8ae264","FBB4E3DE2F29477A81D4277C443214E7","OSBS.2015.42","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2015-10-13","2015-10-13",,,"no captures",
+"b4a924c2-dce8-44a4-b30a-b4395eacee6f","6118AFD3A43F4E9EB0D3D6DAA52C6162","OSBS.2015.42","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-10-13","2015-10-13",,,"no captures",
+"d0d9b2f3-b57f-4e38-8d2a-e79a87dc60e3","70C3B8DF67D44307A3771D9DD58C7175","OSBS.2015.42","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-10-14","2015-10-14",,,,
+"3615b823-8ee8-4067-b552-9b550362cff7","4B42FDD00C0F4654AA1728D37B2021E3","OSBS.2015.42","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","diversity","2015-10-14","2015-10-14",,,"no captures",
+"ffbcaaa8-afbe-4e1f-9c54-d76f455e75ba","240971BB601F498A92D08C26DBB24FB2","OSBS.2015.42","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-10-14","2015-10-14",,,,
+"065faba3-5a8e-4fe4-9ba6-e210691a5986","8EFFCC83332E4088A3EEF54A7A291FFE","OSBS.2015.42","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2015-10-14","2015-10-14",,,"no captures",
+"588f5118-b901-4b4d-aee3-abd59a9feabd","E2ECBAE836EF49B29EABBA16D60CD8A1","OSBS.2015.42","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-10-15","2015-10-15",,,,
+"28515c35-055a-4c58-8dd0-6cd386bd28f3","E26ADDED4AF548FE87A76C81C3A8E055","OSBS.2015.42","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2015-10-15","2015-10-15",,,,
+"7e8a7765-72e2-4d8e-9ec0-65f05bf12f5f","058A4A6ADCE549EB92477EECB622A298","OSBS.2015.42","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-10-15","2015-10-15",,,,
+"329a28a9-7057-44ab-b3a5-b426ff8dbcb6","2DA035E63BE9438E8B3F4A774D221C3D","OSBS.2015.42","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2015-10-15","2015-10-15",,,,

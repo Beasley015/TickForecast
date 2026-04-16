@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7fa9be87-a25b-483d-bcef-49e42cccd8ec","8db57a95-ce68-455f-85e6-8f2a91c34224","BLAN.2019.31","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-07-30","2019-07-30",,"NEON.DOC.000481vL",,
+"aea8557c-3803-436e-afb5-7fc0988379ca","df7ef107-f38d-4cda-898b-79ec7a1b7e23","BLAN.2019.31","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-07-30","2019-07-30",,"NEON.DOC.000481vL",,
+"31559bc7-2e69-4b72-80f8-4522ff1399b9","394a4ca9-a395-42ae-9dc2-20e7ccde000b","BLAN.2019.31","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-07-30","2019-07-30",,"NEON.DOC.000481vL",,
+"4f9eb2b0-72c7-4fe9-ae4d-9e09b6665d2f","fb47f6f6-75b2-4bfc-ac18-ee960a6c46ec","BLAN.2019.31","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2019-07-31","2019-07-31",,"NEON.DOC.000481vL","Tablet lost data for some animals; some data recovered",
+"33338ed6-4b3d-4958-8ee5-f1841dc7df65","b777e57c-a67e-4749-873c-dbaa6fd8d9a9","BLAN.2019.31","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2019-07-31","2019-07-31",,"NEON.DOC.000481vL",,
+"7c97bcbb-f5d1-4aca-942f-328f2a52e4b1","7f8d78ff-eb18-4778-8682-a74fba5f60ec","BLAN.2019.31","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2019-07-31","2019-07-31",,"NEON.DOC.000481vL","Double check circled corrections on cards? (Emily)",

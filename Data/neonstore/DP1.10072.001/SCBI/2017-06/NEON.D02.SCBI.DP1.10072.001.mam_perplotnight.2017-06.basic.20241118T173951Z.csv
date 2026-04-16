@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"9cea4908-ca8b-446c-b6c3-1c802b95ff47","0afa8e5b-5382-49cc-92b5-19ecb230cb82","SCBI.2017.24","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-06-14","2017-06-14",,"NEON.DOC.000481vJ",,
+"ca5f5364-bd05-4cd5-9aea-8cf9191dfd53","5fb40f75-3fd4-41fb-91ef-353e9d332a71","SCBI.2017.24","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-06-14","2017-06-14",,"NEON.DOC.000481vJ",,
+"033b4b87-d262-435b-8b15-4ecd7a7fd996","c84b9bdc-2ad1-4dc5-b5d5-b2a3adde21dd","SCBI.2017.24","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-06-15","2017-06-15",,"NEON.DOC.000481vJ",,
+"5d275e49-366d-4590-b353-617c9474b4af","dd6f588a-ea2a-48ce-bb2c-837dcca4b3b7","SCBI.2017.24","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2017-06-15","2017-06-15",,"NEON.DOC.000481vJ","Temperatures in the 70s and 80s with high humidity",
+"1b497419-19c5-4322-b977-cc040125a3ad","ef822f02-2e0f-44a8-ae3b-c9ac09330ead","SCBI.2017.24","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-06-15","2017-06-15",,"NEON.DOC.000481vJ",,
+"097c26ce-1545-48fb-8795-71579c1a2273","e7af2b89-8955-4d7a-9a6a-24ec258cefa3","SCBI.2017.24","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-06-16","2017-06-16",,"NEON.DOC.000481vJ",,
+"1d22cea4-27e9-4c10-90e3-b919f406fd8c","37aee1ca-ef92-42b4-a17a-dde08d49dbf2","SCBI.2017.24","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2017-06-16","2017-06-16",,"NEON.DOC.000481vJ","Bear in plot while collecting traps",
+"4b4a3d4e-632c-485e-a8a7-1548897d01c0","a5f24aa1-9d7f-4756-8cf9-bbac37d60487","SCBI.2017.24","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-06-16","2017-06-16",,"NEON.DOC.000481vJ",,
+"4550ba2f-e6e3-44fc-8a06-7bb2a98ff9e1","42aeda22-1a06-4593-9f78-1f68ae84ebf1","SCBI.2017.24","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-06-17","2017-06-17",,"NEON.DOC.000481vJ",,
+"b4ddacd7-95bf-44e6-955c-88e33b68e8a6","cc7411d7-2bbf-453e-9c50-f87f8c786de1","SCBI.2017.24","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2017-06-17","2017-06-17",,"NEON.DOC.000481vJ","Rained during setting; foggy and 80s in AM",

@@ -1,0 +1,193 @@
+This data package was produced by and downloaded from the National Ecological Observatory Network (NEON). NEON is
+funded by the National Science Foundation (Awards 0653461, 0752017, 1029808, 1138160, 1246537, 1638695, 1638696,
+1724433) and managed cooperatively by Battelle. These data are provided under the terms of the NEON data policy at
+https://www.neonscience.org/data-policy.
+
+DATA PRODUCT INFORMATION
+------------------------
+
+ID: NEON.DOM.SITE.DP1.10093.001
+
+Name: Ticks sampled using drag cloths
+
+Description: Abundance and density of ticks collected by drag and/or flag sampling (by species and/or lifestage)
+
+NEON Science Team Supplier: Terrestrial Observation System
+
+Abstract: This data product contains the quality-controlled, native sampling resolution data from the Tick and Tick-Borne Pathogen Sampling protocol. Tick abundance and diversity are sampled at regular intervals by NEON field technicians at core and gradient sites using drag or flag sampling techniques. For additional details on protocol, see the TOS Protocol and Procedure: Tick and Tick-Borne Pathogen Sampling. Following collection, samples are sent to a professional taxonomist where ticks are identified to species and lifestage and/or sex. Identified ticks are then processed for pathogen analysis or preserved for final archiving. Products resulting from this sampling and processing include records of when ticks were sampled and the taxonomic and abundance data of ticks captured. For additional details, see the user guide, protocols, and science design listed in the Documentation section in this data product's details webpage.
+
+Latency:
+The expected time from data and/or sample collection in the field to data publication is as follows, for each of the data tables (in days) in the downloaded data package. See the Data Product User Guide for more information.
+
+tck_fielddata:  30
+
+tck_taxonomyProcessed:  300
+
+tck_taxonomyRaw:  300
+
+tck_identificationHistory: 7
+
+Brief Design Description: During the growing season, sampling is conducted every three weeks at sites where more than five ticks have been detected in the last year and every six weeks elsewhere. Beginning in 2022, sites remain at three-week sampling intervals for five years after detection of more than five ticks.  Sampling also occurs only if the high temperature on two consecutive days prior to planned sampling exceeds 0 °C, and the ground is dry.
+
+Brief Study Area Description: These data are collected at NEON terrestrial sites.
+
+
+Keywords: Acari, Animalia, Arachnida, Arthropoda, Ixodida, animals, arachnids, archived samples, arthropods, biodiversity, community composition, density, disease, drag cloths, dragging, ectoparasites, flagging, material samples, parasites, population, species composition, specimens, taxonomy, tck, ticks, vector-borne
+
+
+QUERY INFORMATION
+-----------------
+
+Date-Time for Data Publication: 2025-09-18 22:08 (UTC)
+Start Date-Time for Queried Data: 2025-08-18 20:49 (UTC)
+End Date-Time for Queried Data: 2025-08-21 21:25 (UTC)
+
+Site: MLBS
+Geographic coordinates (lat/long datum): 
+Domain: D07
+
+
+DATA PACKAGE CONTENTS
+---------------------
+
+This folder contains the following documentation files:
+- This readme file: NEON.D07.MLBS.DP1.10093.001.readme.20250918T220819Z.txt
+- Term descriptions, data types, and units: NEON.D07.MLBS.DP1.10093.001.variables.20250918T220819Z.csv
+- Data entry validation and parsing rules: NEON.D07.MLBS.DP1.10093.001.validation.20250918T220819Z.csv
+- Machine-readable metadata file describing the data package: NEON.D07.MLBS.DP1.10093.001.EML.20250818-20250821.20250918T220819Z.xml.
+This file uses the Ecological Metadata Language (EML) schema. Learn more about this specification and tools to parse
+it at https://www.neonscience.org/about/faq.
+- Other related documents are available such as engineering specifications, field protocols, and data processing 
+documentation. Please visit https://data.neonscience.org/data-products/DP1.10093.001 for more information.
+
+
+This folder also contains 1 data files:
+NEON.D07.MLBS.DP1.10093.001.tck_fielddata.2025-08.basic.20250918T220819Z.csv - Tick field collection data
+
+Basic download package definition: The basic download presents higher taxonomy information according to NEON and reassigns synonymies with the current valid name.
+
+Expanded download package definition: The expanded data package includes an additional file that includes the taxonomic nomenclature as received from the external taxonomist.
+
+
+FILE NAMING CONVENTIONS
+-----------------------
+
+NEON data files are named using a series of component abbreviations separated by periods. File naming conventions
+for NEON data files differ between NEON science teams. A file will have the same name whether it is accessed via
+NEON's data portal or API. Please visit https://www.neonscience.org/data-formats-conventions for a full description
+of the naming conventions.
+
+ISSUE LOG
+----------
+
+This log provides a list of issues identified during data collection or processing, prior to publication
+of this data package. For a more recent log, please visit this data product's detail page at
+https://data.neonscience.org/data-products/DP1.10093.001.
+
+Issue Date: 2023-12-22
+Issue: Identification history: updates to taxonomic determinations were not previously tracked.
+    Date Range: 2012-01-01 to 2023-01-01
+    Location(s) Affected: All
+Resolution Date: 2024-01-01
+Resolution: In provisional data, RELEASE-2024, and all subsequent releases, if taxonomic determinations are updated for any records, past determinations are archived in the `tck_identificationHistory` table, where the archived determinations are linked to current records using identificationHistoryID.
+
+Issue Date: 2022-09-15
+Issue: Toolik Field Station required a quarantine period prior to starting work in the 2020, 2021, and 2022 field seasons to protect all personnel during the COVID-19 pandemic. This complicated NEON field scheduling logistics, which typically involves repeated travel across the state on short time frames. Consequently, NEON reduced staff traveling to Toolik and was thus unable to complete all planned sampling efforts. Missed data collection events are indicated in data records via the samplingImpractical field.
+    Date Range: 2020-03-23 to 2022-12-31
+    Location(s) Affected: TOOL
+Resolution Date: 2022-10-31
+Resolution: The quarantine policy at Toolik Field Station ended after the 2022 field season.
+
+Issue Date: 2022-09-15
+Issue: Severe flooding destroyed several roads into Yellowstone National Park in June 2022, making the YELL and BLDE sites inaccessible to NEON staff. Observational data collection was halted during this time. Canceled data collection events are indicated in data records via the samplingImpractical field.
+    Date Range: 2022-06-12 to 2022-10-31
+    Location(s) Affected: YELL
+Resolution Date: 2022-10-31
+Resolution: Normal operations resumed on October 31, 2022, when the National Park Service opened a newly constructed road from Gardiner, MT to Mammoth, WY with minimal restrictions. For more details about data impacts, see Data Notification https://www.neonscience.org/impact/observatory-blog/data-impacts-neons-yellowstone-sites-yell-blde-due-catastrophic-flooding-0
+
+Issue Date: 2021-01-06
+Issue: Safety measures to protect personnel during the COVID-19 pandemic resulted in reduced or canceled sampling activities for extended periods at NEON sites. Data availability may be reduced during this time.
+    Date Range: 2020-03-23 to 2021-12-31
+    Location(s) Affected: All
+Resolution Date: 2021-12-31
+Resolution: The primary impact of the pandemic on observational data was reduced data collection. Training procedures and data quality reviews were maintained throughout the pandemic, although some previously in-person training was conducted virtually.  Scheduled measurements and sampling that were not carried out due to COVID-19 or any other causes are indicated in data records via the samplingImpractical data field.
+
+Issue Date: 2021-11-29
+Issue: Inconsistent sampling intensity: There was some lack of consistency in sampling intensity at tick sites.  Sites could switch back and forth from low intensity (sampling every 6 weeks) to high intensity (sampling every 3 weeks) each year.
+    Date Range: 2012-01-01 to 2021-12-01
+    Location(s) Affected: all
+Resolution Date: 2021-12-01
+Resolution: To provide more consistent sampling effort across sites, tick sites will only switch from high intensity sampling to low intensity sampling if 5 or fewer ticks are collected for five consecutive years rather than in a single year.  Sampling intensity can still switch from low to high intensity when more than five ticks are collected in one year.
+
+Issue Date: 2020-10-27
+Issue: Tick count quality flags: Several tick counts reported for field data do not match those returned by the taxonomy laboratory for different life stages. This could be due to (i) mis-identification of life stages by the field team, (ii) incomplete enumeration by the taxonomy laboratory due to unreported subsampling to meet invoice limits between 2013-2019, (iii) subsampling such that when > 500 larvae were collected, only 500 were shipped to the taxonomy laboratory between 2016-2018, or (iv) occasional entry of an incorrect number at either the field or laboratory stage or loss of tick(s) during the collection procedure.
+    Date Range: 2013-01-01 to 2019-03-18
+    Location(s) Affected: All terrestrial sites
+Resolution Date: 2020-10-27
+Resolution: To assist with determining the reliability of the different counts in the collection and identification tables, several quality flags have been added to the dataQF field along with comments in the remarks field. In all cases where >500 larvae were collected in the field between 2016-2018, the associated identification record has 'ID lab count subsample of total field larvae' in the dataQF field. The dataQF field in both the collection and identification tables also indicates the life stage(s) where the percent difference in enumeration (PDE) is >25%, and whether the field or taxonomy lab was higher (e.g., field nymph count higher than ID lab (PDE >25%)). PDE is calculated as:  |(field count – lab count)| / (field count + lab count) * 100. Finally, for all site-years where invoice limits may have been reached and the PDE is > 25%, a remark has been added to the collection and identification tables that indicates: 'site-year possibly subsampled in ID lab counts'. Beginning in 2019, field teams no longer perform counts, all larvae are sent to and counted by the taxonomy laboratory, and the taxonomy laboratory returns life stage counts of all ticks received, even if the identifications are not performed due to invoice limits. Additional quality checking procedures are being implemented to ensure reliable count data from 2020-onwards.
+
+Issue Date: 2020-10-27
+Issue: Incorrect larvae counts: Counts of larvae from 2016-2017 were temporarily reported as a count of 1 in the taxonomy laboratory data no matter what the true counts were.
+    Date Range: 2016-01-01 to 2017-12-31
+    Location(s) Affected: All terrestrial sites
+Resolution Date: 2020-10-27
+Resolution: The corrected counts from the taxonomy laboratory for these legacy larvae samples were located and uploaded.
+
+Issue Date: 2020-10-27
+Issue: No sampling impractical: There are sometimes fewer than the expected number of records for a given bout of sampling without a clear reason for the missing records.
+    Date Range: 2013-01-01 to 2020-04-01
+    Location(s) Affected: All terrestrial sites
+Resolution Date: 2020-04-01
+Resolution: The field samplingImpractical was added to the data to allow for the generation of a record when a plot or site could not be sampled. If sampling could not be conducted for all or part of a bout, the samplingImpractical field will communicate the reason for the missing records.
+
+Issue Date: 2020-10-27
+Issue: Stop field tick counts: Enumerating ticks in both the field and taxonomy laboratory is a duplication of effort that leads to confusion when field teams occasionally experience challenges correctly identifying tick life stages.
+    Date Range: 2013-01-01 to 2019-01-01
+    Location(s) Affected: All terrestrial sites
+Resolution Date: 2019-01-01
+Resolution: Field teams no longer enumerate ticks by life stage. All ticks are shipped to the taxonomy laboratory for processing.
+
+Issue Date: 2020-10-27
+Issue: Change to intensity transition: High intensity (every 3 weeks) tick sampling occurs at sites where very few ticks are collected
+    Date Range: 2013-01-01 to 2018-02-20
+    Location(s) Affected: All terrestrial sites
+Resolution Date: 2018-02-20
+Resolution: The threshold for transitioning between high (every 3 weeks) and low (every 6 weeks) intensity sampling was changed from 1 to 5 ticks collected in the previous year.
+
+Issue Date: 2020-10-27
+Issue: Storage solution change: Ticks stored in RNA buffer solution
+    Date Range: 2016-01-29 to 2017-04-05
+    Location(s) Affected: All terrestrial sites
+Resolution Date: 2017-04-05
+Resolution: Archive medium is recorded in the data. Ticks are stored in 90 or 95% ethanol except for those collected during the 2016 field season, which are stored in an RNA buffer solution. Storage reverted to ethanol after 2016 to prevent the formation of precipitates that made identification more challenging.
+
+Issue Date: 2020-10-27
+Issue: GUAN plot layout change: The density of vegetation in the randomly selected tick plots at GUAN precludes sampling of ticks according to the design in the protocol.
+    Date Range: 2016-01-01 to 2016-01-01
+    Location(s) Affected: GUAN
+Resolution Date: 2016-01-01
+Resolution: Six transect paths where sampling is feasible were located by field staff.  Each path contains between 80-160 m2 of sampled area where dragging and/or flagging occurs over one or more segments 10 or more meters long and within 10 m of another segment.
+
+
+ADDITIONAL INFORMATION
+----------------------
+
+
+Queries for this data product will return data from `tck_fielddata` and tckTaxonomy subset to data collected during the date range specified. The protocol dictates that each of 6 plotIDs per site is sampled during each eventID (six expected record per eventID). A record from `tck_fielddata` may have zero or more related records in `tck_taxonomy`, depending on whether ticks were present in the sample. Duplicates may exist where protocol and/or data entry aberrations have occurred; users should check data carefully for anomalies before joining tables. If taxonomic determinations have been updated for any records in the tables `tck_taxonomyProcessed` or `tck_taxonomyRaw`, past determinations are archived in the `tck_identificationHistory` table, where the archived determinations are linked to current records using identificationHistoryID.
+
+NEON DATA POLICY AND CITATION GUIDELINES
+----------------------------------------
+
+A citation statement is available in this data product's detail page at
+https://data.neonscience.org/data-products/DP1.10093.001. Please visit https://www.neonscience.org/data-policy for
+more information about NEON's data policy and citation guidelines.
+
+DATA QUALITY AND VERSIONING
+---------------------------
+
+NEON data are initially published with a status of Provisional, in which updates to data and/or processing
+algorithms will occur on an as-needed basis, and query reproducibility cannot be guaranteed. Once data are published
+as part of a Data Release, they are no longer provisional, and are associated with a stable DOI.
+
+To learn more about provisional versus released data, please visit
+https://www.neonscience.org/data-revisions-releases.

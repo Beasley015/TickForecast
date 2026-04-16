@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"4303ce6f-1066-4fed-b3a8-dcf6bc9e80a1","41bc4b3a-b1c2-4fa3-8006-0a344279723b","OAES.2018.28","OAES_029.mammalGrid.mam","D11","OAES","OAES_029","diversity","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"b9669aff-26de-47b9-b532-dde20e157e5b","41fe7523-f7f5-47cb-9d75-c93e32367684","OAES.2018.28","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"71fb8a39-29ad-4dc3-ae37-d54041a3b3b3","b4b7e63a-4d3a-48bc-b288-03199bc2ea2c","OAES.2018.28","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"9033e471-bd02-41e7-a75c-6302b3ea7cee","851f0135-d35d-4ec6-9eaa-3954e57e65b9","OAES.2018.28","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2018-07-10","2018-07-10",,"NEON.DOC.000481vK",,
+"147f08f6-5d53-45d8-a552-e97293358a15","d70f87b6-992d-4425-92d6-7f4ac38fedc8","OAES.2018.28","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"be6b9ec5-9cdf-4a3e-b514-b69435d5a692","c8f6a391-d3b0-4a49-a53a-0efb2b4bf72e","OAES.2018.28","OAES_003.mammalGrid.mam","D11","OAES","OAES_003","diversity","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"d138b327-a9de-427c-9364-9902a45d4566","3885fd32-42b3-4d4f-adea-422dea69daa4","OAES.2018.28","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"e14713be-46ad-4173-b9e7-fcbe03af1ede","d3e838e5-de64-4150-9b88-8ad32722e56c","OAES.2018.28","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2018-07-11","2018-07-11",,"NEON.DOC.000481vK",,
+"67a31a63-e215-44ab-a26e-5d02da9a91ba","8fe0cabf-7b97-4e38-97f7-8130e7688ffa","OAES.2018.28","OAES_004.mammalGrid.mam","D11","OAES","OAES_004","diversity","2018-07-12","2018-07-12",,"NEON.DOC.000481vK",,
+"f4df6b05-196a-4f42-93e9-78399407cdc4","55896d1b-fab2-462d-baae-90d1d10237c1","OAES.2018.28","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2018-07-12","2018-07-12",,"NEON.DOC.000481vK",,
+"f09a2637-0dd8-4706-a0c8-8f7a5f50c09f","adea904b-a250-4803-a139-59453642c658","OAES.2018.28","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2018-07-12","2018-07-12",,"NEON.DOC.000481vK",,
+"e547f462-5e9c-4da4-89c1-8d223c5b640c","72fa6228-2e68-48f2-b30d-3d9594154ac3","OAES.2018.28","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2018-07-12","2018-07-12",,"NEON.DOC.000481vK","Entire plot disturbed by some sort of mammal. Most likely raccoon",

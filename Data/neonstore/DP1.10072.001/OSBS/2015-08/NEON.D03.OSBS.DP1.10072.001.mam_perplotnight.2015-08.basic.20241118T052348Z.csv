@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"545908cb-6fb5-41cd-9407-bd8795022718","ACFD70A3994B483E951E94687C6BD158","OSBS.2015.34","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-08-19","2015-08-19",,,"Rain storm prevented setting - set next day 08/19/2015",
+"e99898c1-89f4-4763-95d9-531ae3f6e5c5","B4022102120D4C51B3915673469D20CD","OSBS.2015.34","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-08-19","2015-08-19",,,,
+"b8ff94b7-011a-43f5-891c-421077382621","B7251F5EC0F448BCBE9D596CFEA894A1","OSBS.2015.34","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2015-08-19","2015-08-19",,,"Not set due to weather",
+"adbf4abc-e3dc-42da-97b1-cad7c527500d","3ED74DA56B494F15A1BD79DDF845F7B7","OSBS.2015.34","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2015-08-19","2015-08-19",,,,
+"dfe10064-2e7e-4467-b4e0-ed94cc2fee80","3BB5C49551E4413EBB13DB24CE90EADD","OSBS.2015.34","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-08-20","2015-08-20",,,,
+"37acad91-3ca5-4627-bf9d-9bfeb86acd09","A95561D8DA6D438B9A3DBD8EF8E18AB8","OSBS.2015.34","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2015-08-20","2015-08-20",,,"Traps not set due to terrible weather - tropical storm developing",
+"00130392-dd81-4a31-8779-6dba557af147","ADBE8F2F045E4AC69591192548BE747A","OSBS.2015.34","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","diversity","2015-08-20","2015-08-20",,,"Traps not set due to terrible weather - tropical storm developing",
+"9b884746-ef61-47bc-8f98-9d2236a2c183","C3B59643D6C84839B387089FEADE8CC8","OSBS.2015.34","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-08-20","2015-08-20",,,,
+"53fb0ded-4e73-44f6-bfb4-78e487f45d0b","8EF9CED4BD1B428DBFF5877046434E42","OSBS.2015.34","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2015-08-20","2015-08-20",,,"There were single captures in traps A2 B2 and B7 - these were released due to an emergency with the technician",
+"1be06ccb-8606-4038-bbc0-a1774870d78e","615BEB3302E04E1099A51038745FEDD9","OSBS.2015.34","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2015-08-21","2015-08-21",,,,
+"439a500a-9b68-45ee-9d7c-4fcd4302f886","12D73EAAC48C48BCACF05B32473872ED","OSBS.2015.34","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2015-08-21","2015-08-21",,,,

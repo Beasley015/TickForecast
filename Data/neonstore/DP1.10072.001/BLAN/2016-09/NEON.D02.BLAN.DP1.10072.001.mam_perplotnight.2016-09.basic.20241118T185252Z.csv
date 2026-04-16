@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"546af37c-a68f-4cf3-9a0e-c595433a7a4c","BA3983221318461BBEBA1FF949902959","BLAN.2016.35","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,
+"b5fbccd9-9a57-4c99-bfb8-d2ce23c11ad1","A4FC410C103B465CA1AF59EAAEE7E73C","BLAN.2016.35","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH","Plot heavily disturbed",
+"f9a7d861-a536-40a2-9533-ac64d92eb6ac","DC745884FC144BA7BD3BD51597CE33A8","BLAN.2016.35","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2016-09-01","2016-09-01",,"NEON.DOC.000481vH",,

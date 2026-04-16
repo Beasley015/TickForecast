@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d138b0ab-359f-4a11-be85-b617ff7f31ea","b2550c6b-23f8-45a0-a516-b5ee4107b87b","WOOD.2018.41","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-10-11","2018-10-11",,"NEON.DOC.000481vK",,
+"ccdf7024-87b8-4653-95fd-09c60568db93","ecf64c71-400b-4a25-9768-b719041ed8d7","WOOD.2018.41","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-10-11","2018-10-11",,"NEON.DOC.000481vK","Snowfall kept from processing fully/time",
+"a879cca8-7883-4223-b892-ccb15a8a0f87","932ea4df-3212-4301-af32-227fd6c28992","WOOD.2018.41","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-10-11","2018-10-11",,"NEON.DOC.000481vK",,
+"b3ea4588-52d3-440a-acee-37c15d7d2ba3","073e8402-c128-4712-ad92-b093aa97564d","WOOD.2018.41","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-10-12","2018-10-12",,"NEON.DOC.000481vK","Snow on ground",
+"9073bcec-86ae-4aa1-9c0b-957f042cfafe","32d6fac2-8753-4148-89ad-3fd8a6f20325","WOOD.2018.41","WOOD_008.mammalGrid.mam","D09","WOOD","WOOD_008","diversity","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"ba01c946-6eb7-42e5-8061-ba190475b774","bbc60541-8132-4fbf-b7f6-f64fa85f18e3","WOOD.2018.41","WOOD_002.mammalGrid.mam","D09","WOOD","WOOD_002","pathogen","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"393793f3-9173-4b1d-bcd7-4122af3f0a61","fb779bb4-8f4b-4bec-a4ad-dd0b73faaf59","WOOD.2018.41","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-10-12","2018-10-12",,"NEON.DOC.000481vK",,
+"74394d03-4367-455a-b085-c2e1cc85d349","317bff9f-f9be-43fa-84f5-d6a0696ebb06","WOOD.2018.41","WOOD_009.mammalGrid.mam","D09","WOOD","WOOD_009","pathogen","2018-10-16","2018-10-16",,"NEON.DOC.000481vK",,
+"ebae91cd-ef7f-4506-ad96-873e0ac95c55","da9dab89-4eca-4df1-82ef-6a8f1d5c9a84","WOOD.2018.41","WOOD_003.mammalGrid.mam","D09","WOOD","WOOD_003","diversity","2018-10-16","2018-10-16",,"NEON.DOC.000481vK",,
+"971d10dc-891c-4a49-863e-4891c81c2372","c551dc63-b4ab-4811-9018-a0ff39e8d51f","WOOD.2018.41","WOOD_010.mammalGrid.mam","D09","WOOD","WOOD_010","diversity","2018-10-16","2018-10-16",,"NEON.DOC.000481vK",,
+"cfcb1e7f-eec4-4c4f-b423-67b3949c0cfd","f3ec0ab9-9471-42a2-8628-1defa37cdc2c","WOOD.2018.41","WOOD_007.mammalGrid.mam","D09","WOOD","WOOD_007","pathogen","2018-10-16","2018-10-16",,"NEON.DOC.000481vK",,

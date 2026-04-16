@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b559a683-e970-4c73-ae45-fa2aa623db9f","63b7e0dc-57c5-4a35-8d26-6bf28c4ade1a","RMNP.2019.39","RMNP_005.mammalGrid.mam","D10","RMNP","RMNP_005","diversity","2019-09-24","2019-09-24",,"NEON.DOC.000481vL",,
+"a1813b52-2b85-4c39-9649-e05c947b05d7","ca03787d-9d91-41fa-a5fd-b5c883481e91","RMNP.2019.39","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2019-09-24","2019-09-24",,"NEON.DOC.000481vL",,
+"e6c0d39f-df21-4549-b59b-65ad4f406370","cace844d-477f-4def-aaa1-a4c10da32e9f","RMNP.2019.39","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2019-09-24","2019-09-24",,"NEON.DOC.000481vL","Bear disturbance grid closed for bout",
+"85b94132-1f0b-43d8-8b26-076ff634a347","88d487d9-8359-4dc3-943f-eb61f839e13a","RMNP.2019.39","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2019-09-24","2019-09-24",,"NEON.DOC.000481vL",,
+"8c3dfa0b-7e33-4fb6-9aae-21848bd49995","1e60c449-bbad-446c-a55f-edc5833dfa6a","RMNP.2019.39","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2019-09-25","2019-09-25",,"NEON.DOC.000481vL",,
+"d53ed420-859e-4447-b4f5-952584823647","b2b86f31-cd23-4879-ba74-e0ec882dab2f","RMNP.2019.39","RMNP_009.mammalGrid.mam","D10","RMNP","RMNP_009","diversity","2019-09-25","2019-09-25",,"NEON.DOC.000481vL",,
+"ed016e1c-2a0e-4d38-93ad-4fbc6a7cbb0c","07b97b52-b333-4ab1-84db-ce8add57ff09","RMNP.2019.39","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2019-09-25","2019-09-25",,"NEON.DOC.000481vL","Plot not set due to bear disturbance",
+"73148b4b-1c3b-4d8e-8268-4cf8d6a3fd52","cb93fdb4-c778-4ae5-9900-4cf9886db327","RMNP.2019.39","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2019-09-25","2019-09-25",,"NEON.DOC.000481vL",,
+"16f2fc87-98dd-4372-8bd8-55ed209d8252","d7156d80-f70d-46bc-affd-255e3d85bbc6","RMNP.2019.39","RMNP_013.mammalGrid.mam","D10","RMNP","RMNP_013","diversity","2019-09-26","2019-09-26",,"NEON.DOC.000481vL",,
+"2ecfc595-21f1-498e-9ea6-c9bf6e5cc099","45f3b233-1ec3-4dd8-8049-adfe514ee6bb","RMNP.2019.39","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2019-09-26","2019-09-26",,"NEON.DOC.000481vL",,
+"13e08cf3-24ba-46d5-8453-bf5161f891ee","a9c32fac-8512-431e-851a-7e83f4c7c065","RMNP.2019.39","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2019-09-26","2019-09-26",,"NEON.DOC.000481vL",,
+"d54f0fd8-d675-4dad-a7ed-a672ee061cbb","514bec4b-2872-4a76-ac0e-b5da09850527","RMNP.2019.39","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2019-09-26","2019-09-26",,"NEON.DOC.000481vL","Plot not set due to bear disturbance",

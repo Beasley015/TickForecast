@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"25366274-91e6-45e0-8ba6-19c3a11c8fb0","099257ad-9306-446f-81a5-43debe198481","DELA.2023.32","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2023-08-08","2023-08-08","OK","NEON.DOC.000481vP",,
+"bf5532c9-423a-40d0-93f0-8c7465c62496","06f5df0a-2473-4d2f-84d6-93d76280c5a1","DELA.2023.32","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2023-08-08","2023-08-08","OK","NEON.DOC.000481vP",,
+"550ec59b-d9b3-4ffd-bfcb-2439dfa8e9e1","6a217c36-685a-4e3f-9520-572c2e0c0f25","DELA.2023.32","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2023-08-08","2023-08-08","location flooded","NEON.DOC.000481vP",,
+"28ea4b5b-4b47-48b7-b2c4-a80d10172363","10e16516-439f-49d8-b167-6d105320e263","DELA.2023.32","DELA_026.mammalGrid.mam","D08","DELA","DELA_026","pathogen","2023-08-08","2023-08-08","OK","NEON.DOC.000481vP",,
+"e1e8c65c-da37-4a0f-98a2-ff26fb75695c","d01beda8-8368-4abf-9387-97ba5bb27b58","DELA.2023.32","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2023-08-09","2023-08-09","disturbance","NEON.DOC.000481vP",,
+"eba2714e-32d7-465d-9695-e50439665473","46bcf740-3017-4d93-8bba-ef392a779707","DELA.2023.32","DELA_026.mammalGrid.mam","D08","DELA","DELA_026","pathogen","2023-08-09","2023-08-09","OK","NEON.DOC.000481vP",,
+"7299e193-ef85-4592-8559-0fe84946f409","48d089ec-73d5-4b77-86cf-5a2a65df4af0","DELA.2023.32","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2023-08-09","2023-08-09","location flooded","NEON.DOC.000481vP",,
+"a098003c-26f3-490b-8182-584dc6481c7b","79c2b04b-46b2-4528-bf14-f15c8ba47b3a","DELA.2023.32","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2023-08-09","2023-08-09","OK","NEON.DOC.000481vP",,
+"98f68e2e-ee63-44ec-96ad-0733f49949dd","a32f41d7-42fb-446f-9486-5fe2af3e7ba2","DELA.2023.32","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2023-08-10","2023-08-10","OK","NEON.DOC.000481vP",,
+"2fc6d672-208c-42a6-bae7-f8d382262a34","26dadc02-a76b-459a-9da6-f5a7f2f42738","DELA.2023.32","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2023-08-10","2023-08-10","location flooded","NEON.DOC.000481vP",,
+"7df94f79-8c1b-42b1-91f2-81e0eaa57456","c3cdd6a7-306c-4677-983f-143f304b20bb","DELA.2023.32","DELA_026.mammalGrid.mam","D08","DELA","DELA_026","pathogen","2023-08-10","2023-08-10","OK","NEON.DOC.000481vP",,
+"d65cc3fa-3437-49e1-ac69-74571b7d51ed","db767952-2e7a-4081-98a1-86f0b8ba7d44","DELA.2023.32","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2023-08-10","2023-08-10","disturbance","NEON.DOC.000481vP",,

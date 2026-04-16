@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"a5aac48e-5cfb-4b13-b748-7868bf016efe","D030E4CF08B84E6C8D47D4F1A3BDE307","NIWO.2015.29","NIWO_001.mammalGrid.mam","D13","NIWO","NIWO_001","diversity","2015-07-17","2015-07-17",,,"Used version 'vG",
+"f0bac20f-7d21-4b09-918f-b2d317b9e136","0433929736664DCB913E0636A6B279D9","NIWO.2015.29","NIWO_025.mammalGrid.mam","D13","NIWO","NIWO_025","diversity","2015-07-17","2015-07-17",,,"Used version 'vG",
+"6b8baa3f-e913-4ac6-aee6-bff7ddb4c6de","1CF1E82B3C254F15A8D556BEB1138980","NIWO.2015.29","NIWO_005.mammalGrid.mam","D13","NIWO","NIWO_005","diversity","2015-07-17","2015-07-17",,,"Used version 'vG",
+"4194490d-ed3d-4641-a1eb-b0adc844a03b","498DB51C9D3A4EF1A4D43B0AAC63B9BC","NIWO.2015.29","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-07-20","2015-07-20",,,"Used version 'vG",
+"408294a5-e48b-4108-bbc5-e42efe6cfc92","64F5114D0FAE4AAC9ECC753FA8FE9F15","NIWO.2015.29","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-07-20","2015-07-20",,,"Used version 'vG",
+"a0a3621c-9d6e-47a2-b289-0b82fa09fa4b","936B5FFA06BB4F029A86C4CD4C7015D9","NIWO.2015.29","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-07-20","2015-07-20",,,"Used version 'vG",
+"14879442-dfc9-4ede-8b4e-9bfccf026b7b","5366A1ACC49D4601B4E76457E057175D","NIWO.2015.29","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-07-21","2015-07-21",,,"Used version 'vG",
+"b96f96a6-3b83-421f-b788-9429559d0738","6E03504AD3484D3BB70F1EA08BCDE8F0","NIWO.2015.29","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-07-21","2015-07-21",,,"Used version 'vG'; Assume a bear disturbed plot due to teeth marks on traps disturbed on I row.",
+"dae08cd1-765c-47e9-acf4-5cb6b8f8e2aa","40D3F2B768064B689C263CE512FD1A2A","NIWO.2015.29","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-07-21","2015-07-21",,,"Used version 'vG",
+"f6af2946-7cc3-4e31-a657-ed9d590f51d1","E701C936BD864521AE4190A642C90F08","NIWO.2015.29","NIWO_002.mammalGrid.mam","D13","NIWO","NIWO_002","pathogen","2015-07-22","2015-07-22",,,"Used version 'vG",
+"fbec6dd4-724e-4ec7-8ceb-6ed3cc111e8e","3D331CBE2C8F4E529EAA5D9B5F9C26B9","NIWO.2015.29","NIWO_007.mammalGrid.mam","D13","NIWO","NIWO_007","pathogen","2015-07-22","2015-07-22",,,"Used version 'vG'; Assume bear disturbance on plot",
+"8c3ca575-6e2d-4dd1-b406-ab861b72de3f","0EDACC3D78044B9FAA96D57BA8D59078","NIWO.2015.29","NIWO_023.mammalGrid.mam","D13","NIWO","NIWO_023","pathogen","2015-07-22","2015-07-22",,,"Used version 'vG",

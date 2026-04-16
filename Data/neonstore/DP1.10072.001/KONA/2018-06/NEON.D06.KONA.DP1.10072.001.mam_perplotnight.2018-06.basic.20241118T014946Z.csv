@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"adfa345d-69e0-49c1-9962-01c9857865a8","f828191c-3e3f-4074-be5c-308801af097a","KONA.2018.24","KONA_006.mammalGrid.mam","D06","KONA","KONA_006","diversity","2018-06-11","2018-06-11",,"NEON.DOC.000481vK",,
+"63509456-6abd-4754-bbb2-c6beb2c33012","ebf0b50c-6444-4d40-9b11-a09f0b4c53b8","KONA.2018.24","KONA_003.mammalGrid.mam","D06","KONA","KONA_003","diversity","2018-06-11","2018-06-11",,"NEON.DOC.000481vK",,
+"5af72f3e-3d2d-4a71-892c-6abb56e104be","23fcf61e-6c93-424e-b296-ec52c03ef76b","KONA.2018.24","KONA_004.mammalGrid.mam","D06","KONA","KONA_004","diversity","2018-06-11","2018-06-11",,"NEON.DOC.000481vK",,
+"976c2fe3-6996-4bcd-abeb-7efbb1b8f248","2b09d4f0-d973-4e14-802b-678600e3be4b","KONA.2018.24","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK","Some trap locations were not written down initially and were estimated: B05 B06 B08 B09 D01 D04 D05 D08 D10 F01 G09 G10",
+"33a49297-d0c2-40cb-b7c9-73a071a79ed7","02b04a77-9fef-4289-8e3f-3e028cc14574","KONA.2018.24","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK",,
+"c22cf7ba-6e13-4c2a-b1c1-97d8cbfc66bb","8c9ed7cf-de91-4660-bf25-83419f54010a","KONA.2018.24","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2018-06-13","2018-06-13",,"NEON.DOC.000481vK","2 traps not set",
+"d18d7509-cd58-4615-8fb5-2fbcc4dfa8f1","01e8d847-1d4b-47e6-920c-26fc2cf4296c","KONA.2018.24","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,
+"f792cb2f-5f05-4e3d-9668-0b5a1e162134","cf74efe9-01c9-41c1-8e18-0bccf0626a10","KONA.2018.24","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2018-06-14","2018-06-14",,"NEON.DOC.000481vK",,
+"80b89128-3ea2-40a8-b0a4-fdbf47dd9176","45ee7b27-0fc9-4c14-8990-d53033f249a5","KONA.2018.24","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2018-06-15","2018-06-15",,"NEON.DOC.000481vK",,
+"74d4fab2-3e8d-4057-8ea1-8df6adff3a74","0a80ac1a-a276-4330-879e-253bc3287546","KONA.2018.24","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2018-06-15","2018-06-15",,"NEON.DOC.000481vK",,
+"a6659ec7-55a0-49d5-83cc-abe3006b31cd","d49f7f19-9806-4ec9-900d-b270b5831733","KONA.2018.24","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2018-06-15","2018-06-15",,"NEON.DOC.000481vK",,

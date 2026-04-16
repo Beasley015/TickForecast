@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"08c2babb-0020-4816-8027-a9243a0554f0","0c2dab20-e379-48ce-8756-ea42c1b8fadd","BLAN.2020.38","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2020-09-15","2020-09-15","OK","NEON.DOC.000481vM",,
+"1605fd6e-00f7-45a5-8d7f-021c313193f7","81fc4f90-e26c-432d-8733-b614066eab1b","BLAN.2020.38","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2020-09-15","2020-09-15","OK","NEON.DOC.000481vM",,
+"d05a5b59-ee10-49f4-9b1e-bbc9d312589c","eea6c972-98ee-46b9-a2ba-2c3f13ac3391","BLAN.2020.38","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2020-09-15","2020-09-15","OK","NEON.DOC.000481vM",,
+"ea804f3c-0216-4bed-8c71-cdea89be634e","130af303-dc26-4bbc-97c9-9b6afa860408","BLAN.2020.38","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2020-09-16","2020-09-16","OK","NEON.DOC.000481vM",,
+"dabb4749-9c24-424e-a711-20f7e25b7fbf","b705d6f9-0b09-44b1-bc83-79a16cea9c31","BLAN.2020.38","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2020-09-16","2020-09-16","OK","NEON.DOC.000481vM",,
+"1c8b942f-0daa-4be5-ac32-da003b56701d","0743fc26-b0ec-4008-b03e-92f7bdae6626","BLAN.2020.38","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2020-09-16","2020-09-16","OK","NEON.DOC.000481vM",,
+"e1ee2f8c-381f-4a91-b0f9-085baa389f2e","e644bc9a-8d82-4eef-94a7-f53fd118a096","BLAN.2020.38","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2020-09-17","2020-09-17","OK","NEON.DOC.000481vM",,
+"c32af7cc-0305-4517-97b3-55e09045a5ac","4062f6d1-4328-4f60-a045-fce6b8c3b67d","BLAN.2020.38","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2020-09-17","2020-09-17","OK","NEON.DOC.000481vM",,
+"e808f51e-12c9-46c1-8f58-72a201d28848","c1d9e89d-2325-474a-8448-2c140f1b3c7a","BLAN.2020.38","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2020-09-17","2020-09-17","OK","NEON.DOC.000481vM",,
+"92acf047-d4ea-4bf4-bf5f-2257ec02caf9","d83f4e1a-2482-4441-bf4d-82c827dd17b6","BLAN.2020.38","BLAN_006.mammalGrid.mam","D02","BLAN","BLAN_006","diversity","2020-09-17","2020-09-17","OK","NEON.DOC.000481vM",,

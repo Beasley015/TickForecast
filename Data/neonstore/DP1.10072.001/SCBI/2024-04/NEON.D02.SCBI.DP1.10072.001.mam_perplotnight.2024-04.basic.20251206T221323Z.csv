@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"71508be7-5510-4f14-8fde-c61cf31e6ffc","f458164d-1f17-43da-bb50-38c7163ed3e1","SCBI.2024.18","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,
+"6cd3d4a5-054d-490f-9691-1e039d1b4392","55343815-7bcb-4585-9ca3-ef769693e7bf","SCBI.2024.18","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2024-04-30","2024-04-30","OK","setting complete, processing complete","NEON.DOC.000481vP",,

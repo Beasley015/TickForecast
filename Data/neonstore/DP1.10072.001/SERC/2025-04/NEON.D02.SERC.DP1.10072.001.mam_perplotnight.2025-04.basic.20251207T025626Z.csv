@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"0890b722-d4da-4c57-9d77-9aaab2b57847","2d65c9fd-eb4e-4ed3-aa5a-729bd26a6b44","SERC.2025.18","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2025-04-29","2025-04-29","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"35ceb3d8-0b06-40e2-ae9a-5e3e3cf6321b","0f69ff96-3b7b-4e40-97ea-67f5eb27f7a6","SERC.2025.18","SERC_031.mammalGrid.mam","D02","SERC","SERC_031","pathogen","2025-04-29","2025-04-29","OK","setting complete, no small mammals captured","NEON.DOC.000481vQ",,
+"62b11079-9de7-4dc2-a1c1-2f4c5d384ad5","21131081-2ed3-45a4-b1dc-071d717e3232","SERC.2025.18","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2025-04-30","2025-04-30","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"68679976-893c-4230-9634-1e41e5282a17","bae20290-d9f7-478a-ba16-b7f5a762a3f5","SERC.2025.18","SERC_031.mammalGrid.mam","D02","SERC","SERC_031","pathogen","2025-04-30","2025-04-30","OK","setting complete, no small mammals captured","NEON.DOC.000481vQ",,

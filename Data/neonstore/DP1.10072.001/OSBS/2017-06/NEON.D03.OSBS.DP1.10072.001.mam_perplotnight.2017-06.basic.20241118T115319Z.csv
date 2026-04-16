@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"54dfb104-af04-4a9a-a27b-3fbb3322e0cb","cdb3db09-4172-4ed8-a2b1-0c11e9fd87b0","OSBS.2017.25","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-06-21","2017-06-21",,"NEON.DOC.000481vG","Change in protocol",
+"61628bce-3c41-4da8-9f32-21cfcdeceddd","e5c1594e-f509-4fb6-a51b-cd5a6d45e69c","OSBS.2017.25","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-06-21","2017-06-21",,"NEON.DOC.000481vG","Change in protocol",
+"4e6424ce-5fde-41a7-90cb-578eea144c49","d31a04b9-ab07-44f3-8d8b-702476c8eb1d","OSBS.2017.25","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","diversity","2017-06-21","2017-06-21",,"NEON.DOC.000481vG",,
+"9e06b287-da15-4e9e-9296-125d1c4ab257","7a916b3f-089a-4cdd-a530-7641a87b400d","OSBS.2017.25","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-06-21","2017-06-21",,"NEON.DOC.000481vG",,
+"0ca83085-a3d6-4aae-af46-edc455b657e2","50a3c0f5-23f2-475c-bc08-66a370c8fbb6","OSBS.2017.25","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-06-22","2017-06-22",,"NEON.DOC.000481vG",,
+"feea6ac0-c6ab-42d8-b59f-742da4b5f60f","c60e8c0b-19c6-43e9-a338-171e5f94976d","OSBS.2017.25","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-06-22","2017-06-22",,"NEON.DOC.000481vJ",,
+"955765d1-332e-470f-84f0-9307c3a6915f","3ec6bfdf-c310-4e56-b709-8deae37b2e6f","OSBS.2017.25","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-06-22","2017-06-22",,"NEON.DOC.000481vJ",,
+"0f6b088c-dd11-4bfb-ae79-55a604bd00e5","045fa5f2-9ea0-47e5-9cf5-238fa80eec53","OSBS.2017.25","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","diversity","2017-06-22","2017-06-22",,"NEON.DOC.000481vG",,
+"5c918c09-9a41-4449-80df-62a2316c80e7","b4fecd7c-3114-4888-8ff7-60eedb2654c8","OSBS.2017.25","OSBS_005.mammalGrid.mam","D03","OSBS","OSBS_005","diversity","2017-06-23","2017-06-23",,"NEON.DOC.000481vG",,
+"92864740-e3a0-4c56-a6eb-5b4a9ddd32f9","26be466b-a739-41fa-a671-e24aef387667","OSBS.2017.25","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2017-06-23","2017-06-23",,"NEON.DOC.000481vG",,
+"c7fe8ed2-6e6c-4560-9570-21adf6365cff","c78760f6-8fc6-40a6-aa2d-b4a762c68cdf","OSBS.2017.25","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2017-06-23","2017-06-23",,"NEON.DOC.000481vG","Data was erased but reentered by best of the abilities of techs",
+"819f937b-b24b-4b7d-9e95-feeaa57a1936","67775643-86aa-4f53-aca9-8e3640854d4c","OSBS.2017.25","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2017-06-23","2017-06-23",,"NEON.DOC.000481vG",,

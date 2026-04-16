@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"3b74d591-e934-482e-9bf3-11ca79eef8eb","0dd63530-38c4-46df-83ba-53969e9bc4e4","JERC.2023.42","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"a1f9ac73-5fd2-4fad-b03d-0d383992ed08","f7191ec4-70f2-43c1-bf72-77db0bba8204","JERC.2023.42","JERC_002.mammalGrid.mam","D03","JERC","JERC_002","diversity","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"5d1ac55e-e459-41f1-bc7f-b90d86a63ba3","b45d4026-e92c-4b47-8f4b-c92a1a78c193","JERC.2023.42","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"9f7eb9cb-672e-4f86-9917-04c48c2416b6","2265a93e-612d-471b-a0c7-458203284a65","JERC.2023.42","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"1ed5e2bc-ec8f-4e13-84d2-4c3e242158fc","7aafc8d9-cc79-4305-9f6f-7df9208d44bd","JERC.2023.42","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"1f690fc8-cf13-4989-95bd-7b5b3084f83f","8ca149b9-5745-4860-84b4-d262ac9f6742","JERC.2023.42","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"ff031395-6d66-4cf9-b75d-791bf25b53c0","12cb9911-1939-414c-b0f4-0c5fa2722543","JERC.2023.42","JERC_008.mammalGrid.mam","D03","JERC","JERC_008","diversity","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"4349017b-8d0a-4d04-8812-95e93830ef72","76f25662-802f-4ecf-861e-7fb4c5f5cd52","JERC.2023.42","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"a968d359-c8e6-4bbe-9583-e7320a00a9d7","d9165590-b17a-4aec-8ca9-1f85608386b7","JERC.2023.42","JERC_006.mammalGrid.mam","D03","JERC","JERC_006","diversity","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP",,
+"c9012480-f4ac-4b8c-a655-1e15c6d4d1d7","9f2f8b28-6513-4408-8e27-0d4ec0765313","JERC.2023.42","JERC_009.mammalGrid.mam","D03","JERC","JERC_009","pathogen","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP",,
+"badc0306-c80b-44ab-9d44-78172cb89ef0","c3f7fc58-47bc-4174-aaf2-b6698feb168e","JERC.2023.42","JERC_005.mammalGrid.mam","D03","JERC","JERC_005","pathogen","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP",,
+"bdf28b94-cf6b-4471-9d88-376e0f428d1b","33820a6e-8df0-4492-bcd3-412f81fb8d1c","JERC.2023.42","JERC_003.mammalGrid.mam","D03","JERC","JERC_003","pathogen","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP","Sampling outside 21 day new moon sampling window",

@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"62edb016-5048-4f6c-9ac7-081c2f5240f8","736627e2-8dae-46f4-a5a3-0833e6cffbb8","GUAN.2017.16","GUAN_003.mammalGrid.mam","D04","GUAN","GUAN_003","pathogen","2017-04-18","2017-04-18",,"NEON.DOC.000481vJ",,
+"093c462b-8f85-4be1-8969-05c7b6cb291f","d6686592-bd94-4c5e-af17-2f4e832b8036","GUAN.2017.16","GUAN_025.mammalGrid.mam","D04","GUAN","GUAN_025","pathogen","2017-04-18","2017-04-18",,"NEON.DOC.000481vJ",,
+"bd1a0ea3-bf34-46bb-8f79-837c8f4a9735","5a1443e1-c186-439a-84f3-d9d24490a191","GUAN.2017.16","GUAN_007.mammalGrid.mam","D04","GUAN","GUAN_007","pathogen","2017-04-18","2017-04-18",,"NEON.DOC.000481vJ",,

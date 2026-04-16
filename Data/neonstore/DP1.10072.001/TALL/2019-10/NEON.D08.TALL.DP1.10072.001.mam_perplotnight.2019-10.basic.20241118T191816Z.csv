@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"6a4e7680-563e-4bc9-ae84-e0364d610103","e02b55d6-8eb7-4777-92a4-b55fd3d8a92d","TALL.2019.44","TALL_024.mammalGrid.mam","D08","TALL","TALL_024","pathogen","2019-10-29","2019-10-29",,"NEON.DOC.000481vL",,
+"a53f090f-c7e7-439f-b6d4-994c1032d55a","1f090fb9-4aa9-4d68-9b83-83b462e468fe","TALL.2019.44","TALL_010.mammalGrid.mam","D08","TALL","TALL_010","pathogen","2019-10-29","2019-10-29",,"NEON.DOC.000481vL",,
+"2717ce6d-5550-460f-8add-4486652094c8","13b0a28d-65c7-4c31-8323-bbf9bbea3d05","TALL.2019.44","TALL_012.mammalGrid.mam","D08","TALL","TALL_012","pathogen","2019-10-29","2019-10-29",,"NEON.DOC.000481vL",,
+"c6d6df08-0bb8-4dd0-975f-d89365213ce4","6ad20d33-d272-4d26-ab98-fb7beebc4cde","TALL.2019.44","TALL_015.mammalGrid.mam","D08","TALL","TALL_015","pathogen","2019-10-29","2019-10-29",,"NEON.DOC.000481vL",,
+"f0eff976-1f44-4b02-83a6-6cf7ed88051f","1d388b2c-8c71-4234-a791-f79cbbc5cc93","TALL.2019.44","TALL_012.mammalGrid.mam","D08","TALL","TALL_012","pathogen","2019-10-30","2019-10-30",,"NEON.DOC.000481vL",,
+"72ad404b-7bb3-44e4-a307-5f19067270c8","346e0b47-77c0-4c67-9b33-9d02c425e4c0","TALL.2019.44","TALL_015.mammalGrid.mam","D08","TALL","TALL_015","pathogen","2019-10-30","2019-10-30",,"NEON.DOC.000481vL","Heavy overnight rain closed some traps",
+"cbcf327a-35cd-4bfb-93a5-f11c0cf84be3","98efe149-b3ea-4921-affc-f8caf792555a","TALL.2019.44","TALL_024.mammalGrid.mam","D08","TALL","TALL_024","pathogen","2019-10-30","2019-10-30",,"NEON.DOC.000481vL","Heavy overnight rain closed some traps. Traps in waterways intentionally not set.",
+"c6eb6071-8e5f-43e3-8964-6907911d686f","b3faec50-192c-4309-a051-adec644e4740","TALL.2019.44","TALL_010.mammalGrid.mam","D08","TALL","TALL_010","pathogen","2019-10-30","2019-10-30",,"NEON.DOC.000481vL",,

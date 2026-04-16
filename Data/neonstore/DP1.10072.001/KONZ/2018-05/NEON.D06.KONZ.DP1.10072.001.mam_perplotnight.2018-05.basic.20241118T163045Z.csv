@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e1a9a218-a222-4568-9edb-f8c7da2296e1","0a7fa47f-0f28-484e-9535-7a064a750da5","KONZ.2018.19","KONZ_002.mammalGrid.mam","D06","KONZ","KONZ_002","diversity","2018-05-07","2018-05-07",,"NEON.DOC.000481vK",,
+"3d5a9ce1-1186-4d3a-b1fa-5caf3397cd90","ea3b11f4-0a8a-4901-a047-da724797bfd4","KONZ.2018.19","KONZ_005.mammalGrid.mam","D06","KONZ","KONZ_005","diversity","2018-05-07","2018-05-07",,"NEON.DOC.000481vK",,
+"dd5e295c-d7a3-498d-b2e6-12661a3cf636","2d66048e-31fd-43d6-a59b-6d6bf00722a8","KONZ.2018.19","KONZ_003.mammalGrid.mam","D06","KONZ","KONZ_003","diversity","2018-05-07","2018-05-07",,"NEON.DOC.000481vK",,
+"4ed1c432-a140-4196-bac4-c1458e78fb7a","d4f1d3b3-61f0-4175-bb76-428cdee5a319","KONZ.2018.19","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2018-05-09","2018-05-09",,"NEON.DOC.000481vK",,
+"da7bc9a2-7c46-48ff-9cd1-b1848c3a2908","03633cf8-c2f4-4a9e-83d0-766e135075d9","KONZ.2018.19","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2018-05-09","2018-05-09",,"NEON.DOC.000481vK",,
+"b8fcc609-4ad6-4ea0-99cf-07632d7b6f0f","3a5bb9d2-4c97-4b74-af99-25b2af1d6ad2","KONZ.2018.19","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2018-05-09","2018-05-09",,"NEON.DOC.000481vK",,
+"355f2c7d-bcfd-4963-bf66-12180396ef14","7aa00aa0-0e5b-48f9-ae2e-1464a1ba6027","KONZ.2018.19","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2018-05-10","2018-05-10",,"NEON.DOC.000481vK",,
+"67a591b6-0afa-41e6-9430-03962c93beb8","14d00adb-d449-4ee6-b237-4ad503fb620b","KONZ.2018.19","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2018-05-10","2018-05-10",,"NEON.DOC.000481vK",,
+"2bc9e1c4-f9bc-4491-9541-c875a8b25ee5","a8218eef-7c3a-4e75-becc-576505568ee5","KONZ.2018.19","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2018-05-11","2018-05-11",,"NEON.DOC.000481vK",,
+"3cc415fa-f099-4967-b955-7cacc16b8a26","0494c4da-5973-46c9-bc4c-3e16aae4f276","KONZ.2018.19","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2018-05-11","2018-05-11",,"NEON.DOC.000481vK",,

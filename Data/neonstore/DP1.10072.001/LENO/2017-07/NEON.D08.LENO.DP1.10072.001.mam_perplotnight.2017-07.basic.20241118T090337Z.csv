@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5416a4f1-68e2-46e5-877e-67d0d402c0a3","6bd71afc-c1b9-4f86-9979-ee7be6e27c70","LENO.2017.31","LENO_006.mammalGrid.mam","D08","LENO","LENO_006","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ",,
+"32cdc9b5-baac-48dc-baa4-9eab22d821b1","cf93a6db-726a-4ccd-931e-c30bf6900275","LENO.2017.31","LENO_002.mammalGrid.mam","D08","LENO","LENO_002","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ",,
+"3a97d59d-ab17-46a5-bb54-dca4e0b89ec6","c80b95af-8fb7-41c3-80d0-ff492852c44b","LENO.2017.31","LENO_008.mammalGrid.mam","D08","LENO","LENO_008","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vJ","Southern side of plot flooded no traps set",
+"2973b48d-be9b-4529-ad3b-8fa919653df6","f9a37f4b-9bd4-498f-ab9a-ae2251b2c3be","LENO.2017.31","LENO_031.mammalGrid.mam","D08","LENO","LENO_031","pathogen","2017-07-31","2017-07-31",,"NEON.DOC.000481vG",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"90d1f362-b7d2-47cd-afd9-ae776fc01f0d","42A68CF6190C412FB75835690B96E863","STEI.2015.37","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2015-09-09","2015-09-09",,,,
+"f3b2d089-d7ed-4498-87b3-2075d0aff00b","B2AC7C0615F548418D0D274096D0CE62","STEI.2015.37","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2015-09-09","2015-09-09",,,,
+"0bd13aec-939d-40fb-b8be-87bbb55e75ae","7A3A6C8529C0470EB1FC3E292582B00C","STEI.2015.37","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","pathogen","2015-09-09","2015-09-09",,,,
+"2905630e-41e2-41f6-a332-c36290e3b37f","BDCDFB36BC954D44A066407E54C74928","STEI.2015.37","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2015-09-10","2015-09-10",,,,
+"c03a2a9c-5c45-42dd-a449-02ddb28c4f11","82B7B18B1917424CBCD32B470E1EB2C0","STEI.2015.37","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2015-09-10","2015-09-10",,,,
+"e318e2bb-9920-4af2-a987-04c2ee74aa01","081F8E700CB2467588FD309A48D193EC","STEI.2015.37","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","pathogen","2015-09-10","2015-09-10",,,,
+"11b6737f-965b-4192-9a53-d9b9f13a8084","389B004783C94D64A6851DEC8FEECE8F","STEI.2015.37","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","pathogen","2015-09-11","2015-09-11",,,"No traps were set on this grid on the night of Sept 11 because the supply of batting ran out and temperatures were predicted to drop below 42 degrees F",
+"d28af2b3-67cc-40bd-a6d5-17216d5a3556","1CD5D4E5D8034DE4907D8453239077FB","STEI.2015.37","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2015-09-11","2015-09-11",,,,
+"baa0ad10-5896-45f8-b195-4a3094a03c3a","5BFA1626BCB94345886CDB36732CB8F1","STEI.2015.37","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2015-09-11","2015-09-11",,,,
+"a52b72a4-c07f-4674-ae05-5f6dfc9cc1a3","F8E60A1AA9264C1B8A51BAE62014F5DE","STEI.2015.37","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2015-09-12","2015-09-12",,,,
+"06b7fbcb-628f-4644-8ff0-13e732c758ee","C0FCF985AA334062897220BCA20DCF15","STEI.2015.37","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","diversity","2015-09-12","2015-09-12",,,,
+"f3654120-3b53-4176-829f-7947911c49ac","34886DDAAEB04FF497B0BC1A30D84590","STEI.2015.37","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2015-09-12","2015-09-12",,,,

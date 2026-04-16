@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"27fab7bb-9cc6-4fd2-9c96-80e00bd35008","3bfd8338-ded3-4561-a5bc-7dcb7113d9a5","UKFS.2022.35","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2022-09-01","2022-09-01","OK","NEON.DOC.000481vN",,
+"4aa1a63c-5e26-4f2c-8b20-eee29689c29d","ba07f7a0-18d1-4d4f-91a3-d34110ad3585","UKFS.2022.35","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2022-09-01","2022-09-01","OK","NEON.DOC.000481vN",,
+"5a0aeb53-fb6f-4133-ac4b-8310c0d9d284","9caac394-d1ed-4ba0-92e5-26149200fb18","UKFS.2022.35","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2022-09-01","2022-09-01","logistical","NEON.DOC.000481vN",,
+"6692a0f1-4236-4d4b-9876-6c9e53149094","566409ac-7652-4774-aa31-284be369bfdc","UKFS.2022.35","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2022-09-02","2022-09-02","logistical","NEON.DOC.000481vN",,
+"09544b1c-029e-4a91-b344-76ab0e1eb71c","4fd1c64d-0e2c-4f92-9895-dc1e25e61b29","UKFS.2022.35","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2022-09-02","2022-09-02","logistical","NEON.DOC.000481vN",,
+"e917ac11-3ca4-4b6d-8ef1-787507f40d74","ab894323-2fc0-4a36-89b3-6302e9750ac5","UKFS.2022.35","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2022-09-02","2022-09-02","logistical","NEON.DOC.000481vN",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"91300b20-859d-4bf0-a3cc-1248b7f2d42a","6318ba11-f6be-4ac8-b25d-5ce30e8f9a32","KONA.2022.18","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2022-05-03","2022-05-03","extreme weather","NEON.DOC.000481vN",,
+"b9ad460f-e907-49f2-93fc-67171ba7acb9","f463ca8c-f93c-4db8-853a-bd36ea3bd8c0","KONA.2022.18","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2022-05-03","2022-05-03","extreme weather","NEON.DOC.000481vN",,
+"b527841b-9185-4595-9bae-cb4b29bac5ec","75d696c7-fddc-4cea-a8cb-4a99bbd3dca7","KONA.2022.18","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2022-05-03","2022-05-03","extreme weather","NEON.DOC.000481vN",,
+"02937783-86b2-4339-bd51-29a2514d3a3f","74ce1927-5525-48be-9742-6e6202a29597","KONA.2022.18","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2022-05-04","2022-05-04","OK","NEON.DOC.000481vN",,
+"cde633ab-da01-4b4b-82fa-dbca92db9deb","e43c5bb1-155c-4405-9868-5f7b014568b3","KONA.2022.18","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2022-05-04","2022-05-04","OK","NEON.DOC.000481vN",,
+"f30188f7-110d-4abe-abed-81e18bb5cac6","65aa7207-d15a-4362-96a4-14082c8d0421","KONA.2022.18","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2022-05-04","2022-05-04","OK","NEON.DOC.000481vN",,
+"8876f4bf-50e2-4891-b9dd-f132c3c25544","edeff1a0-4421-4bb9-9f2a-67a5a01c665a","KONA.2022.18","KONA_004.mammalGrid.mam","D06","KONA","KONA_004","diversity","2022-05-05","2022-05-05","extreme weather","NEON.DOC.000481vN",,
+"4dbe2d4c-5195-4553-94c0-c3c501f554a8","3a0a7a2b-9250-4e46-a9f2-782d07d3060b","KONA.2022.18","KONA_006.mammalGrid.mam","D06","KONA","KONA_006","diversity","2022-05-05","2022-05-05","extreme weather","NEON.DOC.000481vN",,
+"51541a76-a439-451f-a7c7-13c4102c6285","745a123f-b987-44cb-84b5-e5ec0c0d14dc","KONA.2022.18","KONA_003.mammalGrid.mam","D06","KONA","KONA_003","diversity","2022-05-05","2022-05-05","extreme weather","NEON.DOC.000481vN",,
+"93069cc9-9851-4b32-ae88-4b4124a8f374","3f9b0cd5-4362-4705-97e0-779a1694a36d","KONA.2022.18","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2022-05-06","2022-05-06","location flooded","NEON.DOC.000481vN",,
+"5f126789-3182-4207-ad75-fd9b519e0b30","e8462882-e897-48ee-b458-9d3ccc11a2a8","KONA.2022.18","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2022-05-06","2022-05-06","location flooded","NEON.DOC.000481vN",,
+"e86cd4b2-4e93-41b0-94f5-c053f8187fda","195df711-8de4-4c60-b3c7-b68d8ddd44db","KONA.2022.18","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2022-05-06","2022-05-06","location flooded","NEON.DOC.000481vN",,

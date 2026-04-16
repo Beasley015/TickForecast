@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"4ae8aef1-3fd9-45bb-a415-cf56416b3b6d","f900ec5f-609c-4362-bc67-936a89960898","BLAN.2017.38","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2017-09-19","2017-09-19",,"NEON.DOC.000481vJ",,
+"71f2f47b-f6e9-4ea8-b2e5-927c01169de2","28972d56-15de-4ebe-8684-58d26cd2bd45","BLAN.2017.38","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2017-09-19","2017-09-19",,"NEON.DOC.000481vJ",,
+"250a2bb2-735c-41eb-ab19-706289f015ad","5fc7701d-29d5-499c-986e-0721c2e27b3d","BLAN.2017.38","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2017-09-19","2017-09-19",,"NEON.DOC.000481vJ",,
+"ec88a3ef-933f-4f41-affa-05e9691cc367","5c9ea749-8e36-4253-8c16-7d469c5ffdf3","BLAN.2017.38","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","diversity","2017-09-20","2017-09-20",,"NEON.DOC.000481vJ","Cows haven't been in field for months; grass 1 meter tall",
+"d5a41891-c2b1-485f-86d9-125e26717941","a5d3f096-3654-4e08-a765-f7cdaf31d130","BLAN.2017.38","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2017-09-20","2017-09-20",,"NEON.DOC.000481vJ",,
+"b5224408-dd07-41d9-af8e-393172b2b0e5","455a8b2f-69b6-4a6a-b3f2-b5f61044ccd1","BLAN.2017.38","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2017-09-20","2017-09-20",,"NEON.DOC.000481vJ",,
+"70c8fb2c-e139-4406-98dc-acc03e27917a","be3af408-9ffd-4f5c-89f8-c242dfcb1ac2","BLAN.2017.38","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2017-09-20","2017-09-20",,"NEON.DOC.000481vJ",,
+"af793812-a38a-471e-b04c-13f69abae998","01cc24f7-4faa-421f-9ab2-1770fdefb501","BLAN.2017.38","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"b80d64c9-1091-4b80-9d94-461a3ab00b45","30b9beae-c63e-42d4-a8ce-5db33eface89","BLAN.2017.38","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,
+"e3b9cf50-f0ca-4320-b591-25815e459180","422705f0-2de3-49c6-93dd-b0b47af39151","BLAN.2017.38","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2017-09-21","2017-09-21",,"NEON.DOC.000481vJ",,

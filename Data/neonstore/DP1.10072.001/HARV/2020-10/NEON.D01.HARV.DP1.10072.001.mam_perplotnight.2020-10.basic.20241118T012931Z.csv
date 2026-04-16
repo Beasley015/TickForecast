@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"b719c3f3-89e0-40f4-b6e8-22636b9f4575","eb33cb35-a2eb-4599-8389-a42514c3be74","HARV.2020.42","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2020-10-15","2020-10-15","OK","NEON.DOC.000481vM",,
+"90f0a042-db9e-4894-a036-9234a9d96478","8419336c-67a9-48bf-b573-60bf60c5ff62","HARV.2020.42","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2020-10-15","2020-10-15","OK","NEON.DOC.000481vM",,
+"de0518ad-67bb-4e34-8e66-413e8360439c","60a47bbe-ee29-4d19-b646-29a952cfe54c","HARV.2020.42","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2020-10-15","2020-10-15","OK","NEON.DOC.000481vM",,
+"71027826-d484-45a4-81fd-278a797c641a","cfadcfed-3d36-457d-bb06-2affd767b36f","HARV.2020.42","HARV_001.mammalGrid.mam","D01","HARV","HARV_001","diversity","2020-10-15","2020-10-15","OK","NEON.DOC.000481vM",,
+"1ea7bc4a-759c-488b-a23f-62c5274b9ecc","0cd9fe63-b89f-47f0-9d25-b4c167f19ee9","HARV.2020.42","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2020-10-16","2020-10-16","OK","NEON.DOC.000481vM",,
+"8a3e7317-9332-47e3-9445-c8bef38e9511","12da7111-f720-42ab-8acd-9c1880c5cac6","HARV.2020.42","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2020-10-16","2020-10-16","OK","NEON.DOC.000481vM",,
+"90d2a9b6-9b18-48b6-8baa-403e10669af2","9f3f208a-db10-45ab-b133-a0a623c86a7d","HARV.2020.42","HARV_006.mammalGrid.mam","D01","HARV","HARV_006","diversity","2020-10-16","2020-10-16","OK","NEON.DOC.000481vM",,
+"cc6089c6-117e-4011-8e34-4de34867515c","6a2fe0f4-0871-4c20-95e8-55a08e75ca40","HARV.2020.42","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2020-10-16","2020-10-16","OK","NEON.DOC.000481vM",,
+"473a4f64-a646-41e3-906d-8f659e2e51a8","09ce8c5a-9e90-4d4e-84e5-081b160e8d63","HARV.2020.42","HARV_010.mammalGrid.mam","D01","HARV","HARV_010","diversity","2020-10-16","2020-10-16","OK","NEON.DOC.000481vM",,
+"8e494098-5a7e-449d-b162-76176644968c","c4095135-1abd-4cfe-a0ed-8a6789c5f2a0","HARV.2020.42","HARV_023.mammalGrid.mam","D01","HARV","HARV_023","pathogen","2020-10-17","2020-10-17","temperature low","NEON.DOC.000481vM",,
+"b28a973f-ecc2-4496-80f8-fd19393650f0","18edddca-ddfc-4fad-aa99-86fd6ef62cf8","HARV.2020.42","HARV_021.mammalGrid.mam","D01","HARV","HARV_021","pathogen","2020-10-17","2020-10-17","temperature low","NEON.DOC.000481vM",,
+"747dc822-1966-46ba-b805-349d20609ec8","4b284b05-27d3-47f1-8417-7683a64de021","HARV.2020.42","HARV_008.mammalGrid.mam","D01","HARV","HARV_008","pathogen","2020-10-17","2020-10-17","temperature low","NEON.DOC.000481vM",,

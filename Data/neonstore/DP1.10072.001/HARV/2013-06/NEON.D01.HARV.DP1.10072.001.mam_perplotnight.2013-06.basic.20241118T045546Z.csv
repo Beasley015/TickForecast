@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"aee8cdaf-eb39-4aa1-a2ff-a7015a20295e","535FAF2E8BDB45EA9C668B02B6FA9FCF","HARV.2013.25","HARV_016.mammalGrid.mam","D01","HARV","HARV_016","pathogen","2013-06-19","2013-06-19",,,,
+"7d301fed-996d-4420-8d71-5813cf21ea5f","E4447F367F5F4D20B0892786D2BD4D7C","HARV.2013.25","HARV_016.mammalGrid.mam","D01","HARV","HARV_016","pathogen","2013-06-20","2013-06-20",,,,
+"c0933ebf-e898-42f2-bd61-6f399f02e776","C6353AEE895F4ABEAC8E2571F771353B","HARV.2013.25","HARV_016.mammalGrid.mam","D01","HARV","HARV_016","pathogen","2013-06-21","2013-06-21",,,,

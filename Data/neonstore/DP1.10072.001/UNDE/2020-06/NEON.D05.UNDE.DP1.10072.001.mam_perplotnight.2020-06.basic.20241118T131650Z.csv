@@ -1,0 +1,7 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5d983114-c0d8-455e-8051-0d5eba55a2b4","e2513a4d-e38a-46a6-9dd3-9fdcf7f53e21","UNDE.2020.26","UNDE_003.mammalGrid.mam","D05","UNDE","UNDE_003","diversity","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM",,
+"727d4c58-1c25-48e1-ac1e-8d5ef081bd5a","236d2e79-fd8b-4f21-80a6-50e344b8c8c8","UNDE.2020.26","UNDE_008.mammalGrid.mam","D05","UNDE","UNDE_008","diversity","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM",,
+"ea53fd43-f11a-4e80-9e51-2995629292a0","6c860113-cd50-484b-af56-d74dfb0e6a1b","UNDE.2020.26","UNDE_001.mammalGrid.mam","D05","UNDE","UNDE_001","diversity","2020-06-24","2020-06-24","OK","NEON.DOC.000481vM","I10 not set",
+"048008e9-46e7-4642-a670-369189df90a5","6f2219bf-9c84-4dcf-bb93-ce6ccf6d8850","UNDE.2020.26","UNDE_032.mammalGrid.mam","D05","UNDE","UNDE_032","pathogen","2020-06-26","2020-06-26","extreme weather","NEON.DOC.000481vM","thunderstorms predicted for late morning so traps not set",
+"5753b62f-befe-4503-a6d0-c42fe03e2b3b","9c96ddfd-93a6-4bf7-86ab-555fdb7cc16f","UNDE.2020.26","UNDE_012.mammalGrid.mam","D05","UNDE","UNDE_012","pathogen","2020-06-26","2020-06-26","OK","NEON.DOC.000481vM",,
+"f3a925b1-ceea-4bb4-8780-b29ade9ab0a8","b2fdcb92-557b-4bf5-bc5a-54f11c86c03c","UNDE.2020.26","UNDE_027.mammalGrid.mam","D05","UNDE","UNDE_027","pathogen","2020-06-26","2020-06-26","OK","NEON.DOC.000481vM",,

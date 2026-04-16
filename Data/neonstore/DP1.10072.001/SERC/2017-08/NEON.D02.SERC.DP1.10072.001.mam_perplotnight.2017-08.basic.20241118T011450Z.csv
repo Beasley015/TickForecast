@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7ee864f0-e474-4760-963b-86f01123a94f","468ca185-7285-43d8-b796-3c701f4447da","SERC.2017.34","SERC_007.mammalGrid.mam","D02","SERC","SERC_007","diversity","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ","soybeans 4 to 5 feet tall",
+"d2832c4e-154d-4c8a-8d9a-811ad349a27d","3cd3006a-77e4-400d-a479-372faa8cff8f","SERC.2017.34","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ",,
+"d3dee913-df30-4283-ad50-45456b449e3c","5907b893-449e-4128-8170-b9d7370c5c0d","SERC.2017.34","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ",,
+"cb3eb25a-26a9-4b0a-a63f-deb3d1f45ffe","cfd1212b-03d6-4e49-8ffe-61ba51f3252e","SERC.2017.34","SERC_014.mammalGrid.mam","D02","SERC","SERC_014","diversity","2017-08-22","2017-08-22",,"NEON.DOC.000481vJ",,
+"a71f65aa-72f4-4e9d-813b-6a737ec9a5b3","21fc7b77-36e0-4735-b8bd-38e59f941e3d","SERC.2017.34","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-08-23","2017-08-23",,"NEON.DOC.000481vJ",,
+"2fee1bce-9acc-4d30-8a20-f868b7ca1f49","defea5f4-5da1-46dc-8ff1-111f805e4a7d","SERC.2017.34","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-08-23","2017-08-23",,"NEON.DOC.000481vJ",,
+"399f8d8b-4a29-4f04-944b-2a5cfe9b201c","d63b8d6e-83a6-42cb-ad2e-3411113053c1","SERC.2017.34","SERC_032.mammalGrid.mam","D02","SERC","SERC_032","diversity","2017-08-23","2017-08-23",,"NEON.DOC.000481vJ",,
+"3abce5e6-53e5-4f0b-a9ca-b256b5f6f3f7","b84ac7c3-f5b2-421c-90d4-0c1a796cb323","SERC.2017.34","SERC_016.mammalGrid.mam","D02","SERC","SERC_016","diversity","2017-08-23","2017-08-23",,"NEON.DOC.000481vJ",,
+"02eda282-9efe-4718-9481-71147942da40","c4c8a023-0240-4e6e-b707-3679176d4720","SERC.2017.34","SERC_015.mammalGrid.mam","D02","SERC","SERC_015","pathogen","2017-08-24","2017-08-24",,"NEON.DOC.000481vJ",,
+"51c201fa-ea81-4342-856a-32ab5fb0f745","a0a1a593-6d2b-4a06-b78a-1dc8d39da016","SERC.2017.34","SERC_011.mammalGrid.mam","D02","SERC","SERC_011","pathogen","2017-08-24","2017-08-24",,"NEON.DOC.000481vJ",,
+"39e9896f-781f-4f06-abe0-369c46ca87ea","769861a0-6db3-4a5e-b6bc-52d0ed0bc967","SERC.2017.34","SERC_031.mammalGrid.mam","D02","SERC","SERC_031","diversity","2017-08-24","2017-08-24",,"NEON.DOC.000481vJ",,
+"70979a0e-86f3-46d4-adcb-67eae34d81dd","fd94242a-1b1a-4471-924a-6b795816d918","SERC.2017.34","SERC_008.mammalGrid.mam","D02","SERC","SERC_008","diversity","2017-08-24","2017-08-24",,"NEON.DOC.000481vJ","Soybeans between elbow and chin height",

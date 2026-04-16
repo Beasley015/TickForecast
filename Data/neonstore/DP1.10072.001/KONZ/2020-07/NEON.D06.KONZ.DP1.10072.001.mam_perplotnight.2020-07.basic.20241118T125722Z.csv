@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"53f9629c-8c05-4056-a5b3-e0f9a90ad935","392dc92b-4cd8-450f-a893-7681e72269a7","KONZ.2020.29","KONZ_005.mammalGrid.mam","D06","KONZ","KONZ_005","diversity","2020-07-14","2020-07-14","OK","NEON.DOC.000481vM",,
+"bd60ff40-9d43-4da6-85aa-ff3cfb4bc657","db1b0484-234e-4d53-9a85-46c6be485d57","KONZ.2020.29","KONZ_002.mammalGrid.mam","D06","KONZ","KONZ_002","diversity","2020-07-14","2020-07-14","OK","NEON.DOC.000481vM",,
+"b9ebd531-01b4-4b43-b5a0-de8237a921e6","eac547b0-4aba-416b-9f81-516d326dc4b0","KONZ.2020.29","KONZ_003.mammalGrid.mam","D06","KONZ","KONZ_003","diversity","2020-07-14","2020-07-14","OK","NEON.DOC.000481vM",,
+"04a6d062-3db4-4f69-9eeb-e8d695cb768c","237ffb60-b9e2-49ec-9e5b-42cff0f8dea5","KONZ.2020.29","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2020-07-16","2020-07-16","OK","NEON.DOC.000481vM",,
+"1b6c69b1-8e90-4b09-80b5-a0ee2c141eb0","3d79b13f-ffd2-4529-b3e8-1b6832af53db","KONZ.2020.29","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2020-07-16","2020-07-16","OK","NEON.DOC.000481vM",,
+"1c22cce6-6d2a-4d34-b5db-b5d42870e1f1","084fe7d0-c5a6-4ea6-9d5b-55d811e4b13b","KONZ.2020.29","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2020-07-16","2020-07-16","OK","NEON.DOC.000481vM",,
+"37c92ff9-a577-40c8-b8da-95217cedabdd","7194e511-4679-4f9d-a00e-61c05c69761e","KONZ.2020.29","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2020-07-17","2020-07-17","OK","NEON.DOC.000481vM",,
+"7576896b-9164-4f3d-a474-3fc07aef4411","11f8ea4a-99f6-4806-bfc9-eba8ee922097","KONZ.2020.29","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2020-07-17","2020-07-17","OK","NEON.DOC.000481vM",,
+"e8086993-213e-4a16-a64c-07a17145d986","c5cae3fa-87a5-469e-9a3f-814025a09e87","KONZ.2020.29","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2020-07-17","2020-07-17","OK","NEON.DOC.000481vM",,
+"6055361e-74a6-4f4a-b677-33a8e38097d9","c6274a1c-c311-4dae-9229-de72e556bf17","KONZ.2020.29","KONZ_001.mammalGrid.mam","D06","KONZ","KONZ_001","pathogen","2020-07-22","2020-07-22","OK","NEON.DOC.000481vM",,
+"4e078d49-6d4e-4afb-ae31-ae1f400baaa6","181a14a0-5205-4d5a-a18c-955ae2320d54","KONZ.2020.29","KONZ_006.mammalGrid.mam","D06","KONZ","KONZ_006","pathogen","2020-07-22","2020-07-22","OK","NEON.DOC.000481vM",,
+"1e55b14e-5123-4ae9-a246-cdf612f07b8f","8a9db41e-fa70-4b85-8d1c-4f6c738d26a5","KONZ.2020.29","KONZ_027.mammalGrid.mam","D06","KONZ","KONZ_027","pathogen","2020-07-22","2020-07-22","disturbance","NEON.DOC.000481vM","met mortality limit after 2 trap nights",

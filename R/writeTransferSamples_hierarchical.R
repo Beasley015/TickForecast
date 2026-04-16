@@ -78,7 +78,7 @@ for(j in 1:length(species)){
   
     if(i %% 10 == 0) message(i, " of ", length(quantScore), " complete ", round(i/length(quantScore)*100), "%")
   }
-  
+
   write_csv(df.process, file = file.path(dir.analysis, paste(species[j], "allDays.csv", sep = "_")))
   
   print(paste(species[j], "Complete", sep = " "))

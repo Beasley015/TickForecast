@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e022beba-32cf-4fa7-863b-241ee886095f","2fd41a3c-bce6-47da-8012-87b307709d4e","KONA.2023.29","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP",,
+"b235bedd-943a-46f9-a73e-b955598a1ac4","59a43e7d-0141-4ba1-923e-faadbd68b634","KONA.2023.29","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP",,
+"4b495478-014a-4028-83c3-a5a10bda1975","6dafaaaf-ae0f-49cd-8613-57bb1369f31a","KONA.2023.29","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP",,
+"a52abc0e-4a65-4f97-9c8a-55fff6e51d9b","74d26605-62df-475b-ba16-ca452ac982ab","KONA.2023.29","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"747078cc-3435-4126-80cb-dab4eeb0d900","b5021823-9432-4ae9-9c84-82792d6b0d79","KONA.2023.29","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"3c89b54a-40df-4b87-88cf-bf5bfb78d152","f83af390-22f7-41a2-aa87-61346d20b5bc","KONA.2023.29","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"314921d8-d532-4ee2-8b8c-f052f0e312d9","50a81fb7-2fbe-42bc-949d-ed0234106800","KONA.2023.29","KONA_001.mammalGrid.mam","D06","KONA","KONA_001","pathogen","2023-07-20","2023-07-20","OK","NEON.DOC.000481vP",,
+"68b4bdc1-4f51-4962-bd8a-070e0016f453","99930eae-6d8f-43f7-a629-a5c6992d9d10","KONA.2023.29","KONA_016.mammalGrid.mam","D06","KONA","KONA_016","pathogen","2023-07-20","2023-07-20","OK","NEON.DOC.000481vP",,
+"0b2a8a29-8bfd-4a7e-ac7d-40c4009cb333","89202f92-4a31-4fa1-b24f-9cbdd31ef3e7","KONA.2023.29","KONA_013.mammalGrid.mam","D06","KONA","KONA_013","pathogen","2023-07-20","2023-07-20","OK","NEON.DOC.000481vP",,
+"de77e21f-6605-4ad9-9536-be99cf3f86a5","24d666b8-c8ab-463b-bde5-c194a44bc5b5","KONA.2023.29","KONA_003.mammalGrid.mam","D06","KONA","KONA_003","diversity","2023-07-21","2023-07-21","OK","NEON.DOC.000481vP",,
+"9967fd67-e09f-49df-b48f-a8bf198c3108","d9f47829-0163-4187-8288-d513efec0797","KONA.2023.29","KONA_006.mammalGrid.mam","D06","KONA","KONA_006","diversity","2023-07-21","2023-07-21","OK","NEON.DOC.000481vP",,
+"4fbd2ddc-5121-4efa-8496-b9a0c0382a08","74421d40-e8e7-485e-943e-4ab4dda76748","KONA.2023.29","KONA_004.mammalGrid.mam","D06","KONA","KONA_004","diversity","2023-07-21","2023-07-21","management","NEON.DOC.000481vP","spraying herbicides",

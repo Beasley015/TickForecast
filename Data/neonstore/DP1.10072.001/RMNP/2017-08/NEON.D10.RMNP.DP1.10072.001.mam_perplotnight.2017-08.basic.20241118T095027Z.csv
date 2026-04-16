@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"39b36dc5-3cca-4f58-9f77-54bc3c6e67b1","cc8f0d87-2ff1-4cc1-8fee-76ecaaa167d9","RMNP.2017.33","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"07786265-9e4a-4829-b488-71f70e8412f4","b6a533ec-e56d-4ed1-b717-56594fc9995e","RMNP.2017.33","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"212b73d2-d8c0-4119-9553-78b168240584","ee90eb48-2e71-425e-bd10-7cc483257ad7","RMNP.2017.33","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"a5c91875-9c45-43c2-a368-ab8498fa87fa","69188863-f9dd-43a6-955a-ef62686d3bef","RMNP.2017.33","RMNP_013.mammalGrid.mam","D10","RMNP","RMNP_013","diversity","2017-08-16","2017-08-16",,"NEON.DOC.000481vJ",,
+"03c1590b-c826-4fd1-86c6-fc3d5fbb22f7","0cd0bac7-b2f8-41c7-948c-9ffafa35f253","RMNP.2017.33","RMNP_005.mammalGrid.mam","D10","RMNP","RMNP_005","diversity","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"04f0ef5c-9d5e-482f-affa-e3844563341e","7d1e3709-2e15-49bc-9e71-b71f02e3ed81","RMNP.2017.33","RMNP_009.mammalGrid.mam","D10","RMNP","RMNP_009","diversity","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"58b46d0a-0d00-44cd-8409-33a1d175d17a","5e87c66d-881b-40bd-ae62-a0c19b046ca6","RMNP.2017.33","RMNP_014.mammalGrid.mam","D10","RMNP","RMNP_014","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"7ac97d25-0a06-415c-b083-70d70213ada8","a0fcc0c9-041c-4dd5-96fc-8d4c5eadaa76","RMNP.2017.33","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"4e5a2c3c-4a16-4420-971b-1409d1bc4043","db5251ff-e933-4ee3-890f-b43133124346","RMNP.2017.33","RMNP_003.mammalGrid.mam","D10","RMNP","RMNP_003","pathogen","2017-08-17","2017-08-17",,"NEON.DOC.000481vJ",,
+"82a74eac-45af-4234-8188-0458ce95d61b","94fbace9-bdd7-4700-b001-fc7095b3ca7e","RMNP.2017.33","RMNP_004.mammalGrid.mam","D10","RMNP","RMNP_004","pathogen","2017-08-18","2017-08-18",,"NEON.DOC.000481vJ",,

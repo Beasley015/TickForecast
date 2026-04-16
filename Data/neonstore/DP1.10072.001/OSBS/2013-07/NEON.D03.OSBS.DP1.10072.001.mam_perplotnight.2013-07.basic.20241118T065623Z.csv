@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"d031414c-060d-4b05-b3c5-5b5f4b94511e","AA1AD779FA0C4D21B4419E48BBAD532A","OSBS.2013.28","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2013-07-09","2013-07-09",,,"2013 updated to 2014 protocol format",
+"a5af7561-01a9-4bcd-ad85-984f334674f3","90A644AC03344DF4818604DC696E34AD","OSBS.2013.28","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2013-07-09","2013-07-09",,,"2013 updated to 2014 protocol format.",
+"2e667193-58a8-415d-a2d1-019d4369817b","9048F82F3C1E476FA1A97372B9C33D14","OSBS.2013.28","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2013-07-10","2013-07-10",,,"2031 updated to 2014 protocol format",
+"4dc0cf3f-7829-449f-8e26-668e0daae089","2E705498E75542999FAD2B0DE6A6A4BD","OSBS.2013.28","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2013-07-10","2013-07-10",,,"2013 updated to 2014 data format",
+"728ae8a8-5cde-48ab-b2fc-4cd2c02bcbfd","F83D1835008843BA95AF3A822C9F186B","OSBS.2013.28","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2013-07-11","2013-07-11",,,"2013 updated to 2014 data format",
+"0a7634fd-e584-4fd4-b7d6-f9d096f5e76d","650735740F6B4FE198A48FE2C8C7339C","OSBS.2013.28","OSBS_002.mammalGrid.mam","D03","OSBS","OSBS_002","pathogen","2013-07-11","2013-07-11",,,"2013 updated to 2014 protocol/ data format",
+"9d5f193e-286b-42d6-a661-e31e99067ca1","39F0ED29FE6144B090DD81835B94BBDB","OSBS.2013.28","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2013-07-12","2013-07-12",,,"2013 updated to 2014 data format",
+"b404494a-585a-4446-955b-499489f533a3","8AEF59795AC34326BA0BE05FD94BA717","OSBS.2013.28","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","pathogen","2013-07-13","2013-07-13",,,"2013 updated to 2014 format. no captures",
+"344cded3-7ecf-4428-9ab1-b3b1ff85b259","174FB95C8A9D493F9F3AC582F24AB8EA","OSBS.2013.28","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2013-07-13","2013-07-13",,,"2013 updated to 2014 data format",
+"31c6b410-68be-4ed2-899f-ea2ee3720a0f","36E952266C2C4A7B852A1661E02116DD","OSBS.2013.28","OSBS_012.mammalGrid.mam","D03","OSBS","OSBS_012","pathogen","2013-07-14","2013-07-14",,,,
+"c713a858-d9d5-4f2b-ac37-9d90f37f6308","47BF3F6FE41A4999AA437DA593606180","OSBS.2013.28","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2013-07-14","2013-07-14",,,"pulled due to storm",

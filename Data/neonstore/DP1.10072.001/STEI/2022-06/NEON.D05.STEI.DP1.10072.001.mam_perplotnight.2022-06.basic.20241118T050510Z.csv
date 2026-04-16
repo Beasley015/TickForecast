@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"623dff36-b911-4b3a-87c8-45b405f01dcc","77245017-7561-470d-95b2-e7d3a14b3b6f","STEI.2022.25","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"c4e601da-5b28-4343-b8d2-7582a68fb353","aea12449-799b-4f10-9353-97451f090530","STEI.2022.25","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"31d03a44-6a40-40ec-ae0a-c29bfd86b6ab","f621ea36-4512-42b0-9514-feea3e4a809f","STEI.2022.25","STEI_022.mammalGrid.mam","D05","STEI","STEI_022","diversity","2022-06-21","2022-06-21","other","NEON.DOC.000481vN","sampling at this grid has been discontinued",
+"7f837196-a9c0-431d-9554-29ca47b38ace","69ed1f5f-ffa7-4241-9e38-73127ad3cf26","STEI.2022.25","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2022-06-21","2022-06-21","OK","NEON.DOC.000481vN",,
+"e4456e65-8579-46f6-9235-8d0b6304994e","8e62a081-7e5d-4a13-83b2-a0c5eba63764","STEI.2022.25","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"8f05211d-2c2e-4a58-8320-61f34b91522c","cd5625aa-0146-4432-afe6-193f81cbbd29","STEI.2022.25","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"f96faad8-05d3-4f49-b228-52d259ecfce7","0bbe1a85-cbc9-40fb-91e3-1ecd62d4d3ce","STEI.2022.25","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2022-06-22","2022-06-22","OK","NEON.DOC.000481vN",,
+"f6c1c64d-c838-4c88-8a9c-3829dfb30662","a1566224-e19e-486d-89a3-c801c74cbdb2","STEI.2022.25","STEI_002.mammalGrid.mam","D05","STEI","STEI_002","pathogen","2022-06-23","2022-06-23","OK","NEON.DOC.000481vN",,
+"01ff737c-53dc-4dd7-b5b2-59755e312a46","4bf80453-7372-4adb-9451-ef1f6765b128","STEI.2022.25","STEI_005.mammalGrid.mam","D05","STEI","STEI_005","pathogen","2022-06-23","2022-06-23","OK","NEON.DOC.000481vN",,
+"0a50d5ec-0aa5-4e23-9d66-a19d412daf8e","be81d61f-a2e3-47d8-9cd8-25825d28ceee","STEI.2022.25","STEI_012.mammalGrid.mam","D05","STEI","STEI_012","pathogen","2022-06-23","2022-06-23","OK","NEON.DOC.000481vN",,
+"4eba6ba7-e61a-4eaa-bb98-38ef8305946b","c96b5068-e204-4be9-af7e-7867596bd023","STEI.2022.25","STEI_019.mammalGrid.mam","D05","STEI","STEI_019","diversity","2022-06-24","2022-06-24","OK","NEON.DOC.000481vN",,
+"e14e2389-2ba3-4633-bee4-6e72634b0df8","63966c2f-fb26-4762-96bf-d2676af4fe02","STEI.2022.25","STEI_001.mammalGrid.mam","D05","STEI","STEI_001","diversity","2022-06-24","2022-06-24","OK","NEON.DOC.000481vN",,

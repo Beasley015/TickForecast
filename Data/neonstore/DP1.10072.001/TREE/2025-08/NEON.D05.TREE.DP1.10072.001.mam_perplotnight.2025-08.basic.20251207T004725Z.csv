@@ -1,0 +1,4 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"e33d737b-420e-482b-80d4-5fcc938424b8","3d31d0b6-05a0-45d4-886e-db43117fc33e","TREE.2025.31","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2025-08-01","2025-08-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"6fd2b1cd-a890-4e34-a853-da95cf555757","ef17c902-e4e6-46ff-b253-842804ea9632","TREE.2025.31","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2025-08-01","2025-08-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,
+"04ef7bc8-3ad8-4fea-85ef-4ff4a35ce94c","222a4cb0-5e24-4807-bb80-6483a6e26241","TREE.2025.31","TREE_062.mammalGrid.mam","D05","TREE","TREE_062","diversity","2025-08-01","2025-08-01","OK","setting complete, processing complete","NEON.DOC.000481vQ",,

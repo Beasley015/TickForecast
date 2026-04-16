@@ -1,0 +1,5 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"2dd6854d-b2d1-496c-8af0-a4a137cd6000","b5b765b1-ff39-467c-864c-7583ab2dcd5d","OAES.2021.35","OAES_001.mammalGrid.mam","D11","OAES","OAES_001","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"bec040bb-dbbe-4af6-aa59-d3b9e3304620","b7d6d65d-785c-4c1e-93f8-ac035b86f4a7","OAES.2021.35","OAES_002.mammalGrid.mam","D11","OAES","OAES_002","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"5cd4536a-a99c-48b9-a6bd-3bf6377bcf0d","7cee67ca-882b-45b8-adfb-347e3543b219","OAES.2021.35","OAES_029.mammalGrid.mam","D11","OAES","OAES_029","diversity","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,
+"4567f42b-2c6a-4fe1-8d47-5aca5d6701f1","9e79b0a3-57e7-4778-8674-b5b11271545e","OAES.2021.35","OAES_007.mammalGrid.mam","D11","OAES","OAES_007","pathogen","2021-08-31","2021-08-31","OK","NEON.DOC.000481vM",,

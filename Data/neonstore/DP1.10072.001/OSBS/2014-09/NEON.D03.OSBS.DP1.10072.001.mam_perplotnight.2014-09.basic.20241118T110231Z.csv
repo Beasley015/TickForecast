@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"8933db55-8ae5-43df-a03b-b0bbbbeffaed","D5D4B653AC744AA4BAF01897E1F5F800","OSBS.2014.39","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-09-23","2014-09-23",,,,
+"b5aa8d49-0b60-48e9-9307-09a74bf89b40","7E4C2CA375BC48C8B3C00BC19304D778","OSBS.2014.39","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2014-09-23","2014-09-23",,,"All traps were set with no captures (except one trap had a frog in it; E5)",
+"a838c9fa-9703-415a-b7b7-26d7a566129c","4DD036C13439409C8D1308A78DACE429","OSBS.2014.39","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-09-24","2014-09-24",,,,
+"98643bb0-d555-4e57-a261-bd3b659c73d8","C6C55FE0887A499E8D48E077C1DD926A","OSBS.2014.39","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2014-09-24","2014-09-24",,,"no captures",
+"c9934fd5-d128-48ff-a1ad-22272cd7d7cd","BB61E0E87A0B431881642117527AA922","OSBS.2014.39","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-09-24","2014-09-24",,,,
+"bbf50427-ced9-4526-ae38-7255a5b1eb94","40F9A74293DE4F66AF7F575E10771FF1","OSBS.2014.39","OSBS_023.mammalGrid.mam","D03","OSBS","OSBS_023","pathogen","2014-09-25","2014-09-25",,,"no captures",
+"3b9bf60a-aac5-4ff8-b3eb-baa53e306372","E81A40D0F10949EAB06500D4FDAE8FDE","OSBS.2014.39","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-09-25","2014-09-25",,,,
+"a57f94a1-204b-443e-8967-0ca2ee49de35","9AEC1CE414B44AB1AF4CAAF67AEF168F","OSBS.2014.39","OSBS_003.mammalGrid.mam","D03","OSBS","OSBS_003","pathogen","2014-09-25","2014-09-25",,,,
+"bef60bae-ce34-4a85-b6f1-14afc7808321","3292B40907824F2EACFAC13F7FAB9076","OSBS.2014.39","OSBS_004.mammalGrid.mam","D03","OSBS","OSBS_004","pathogen","2014-09-26","2014-09-26",,,,

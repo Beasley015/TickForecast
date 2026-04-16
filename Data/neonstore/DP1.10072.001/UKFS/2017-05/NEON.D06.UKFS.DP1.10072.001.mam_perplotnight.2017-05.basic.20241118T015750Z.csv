@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"59ac799d-45ca-43f9-ae02-a789a875aa10","4fde4549-4579-4c9a-bcc0-7a634e9b26e6","UKFS.2017.21","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2017-05-22","2017-05-22",,"NEON.DOC.000481vJ",,
+"6a9a92bc-c41c-441b-8066-339bc1e7f4ea","ad1d2ff0-30f6-449a-abf0-08f661104cf5","UKFS.2017.21","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2017-05-22","2017-05-22",,"NEON.DOC.000481vG",,
+"4ffdd46b-90b6-4583-9fcc-4f890d35ad3b","fe8ed3b9-102a-46bb-8bc8-517b8a5759bc","UKFS.2017.21","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2017-05-22","2017-05-22",,"NEON.DOC.000481vJ",,
+"18091b4d-5044-46ef-9d7d-bcabb15833ae","ad23ae7c-f938-4205-93db-b6d727446b80","UKFS.2017.21","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2017-05-24","2017-05-24",,,,
+"e84ec59e-7f2c-40b3-8f30-c10e0331158c","b067b27d-11f5-44a0-8e76-dc110c241a88","UKFS.2017.21","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2017-05-24","2017-05-24",,"NEON.DOC.000481vG",,
+"9eadc15d-dd3a-43de-99ad-b70340db962a","2567c6f5-c9a5-46c6-b20a-0df6d6a427a4","UKFS.2017.21","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2017-05-24","2017-05-24",,"NEON.DOC.000481vG",,
+"187464bf-f0f6-4901-b24d-8b2003dec6f5","70d8169a-db2f-47f2-930f-8601ceb9a3c9","UKFS.2017.21","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2017-05-25","2017-05-25",,"NEON.DOC.000481vG",,
+"65277a6e-1c84-4966-8d21-fce07dbc13d9","aadcf51f-cb95-4b7f-8c25-5a1d69c10b67","UKFS.2017.21","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2017-05-25","2017-05-25",,"NEON.DOC.000481vG",,
+"12063010-b3ea-4211-8328-408fc63ae4f0","44e012e3-2f68-47e2-81f5-c22d61aa90e7","UKFS.2017.21","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2017-05-25","2017-05-25",,"NEON.DOC.000481vG",,
+"d4843136-84ad-4ade-908c-c9072c120a47","1e070086-593b-47bf-807d-f1b66833a208","UKFS.2017.21","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2017-05-26","2017-05-26",,"NEON.DOC.000481vG",,
+"16131bfd-4ff4-4879-8736-ab29201049e8","b5248d00-a4e9-4c0c-abbc-b4ac33ead721","UKFS.2017.21","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2017-05-26","2017-05-26",,"NEON.DOC.000481vG",,

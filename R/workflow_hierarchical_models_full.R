@@ -395,7 +395,7 @@ for (t in t:start.drags) {
 		  horizon <- ifelse(as.numeric(last(drag.dates) - fx.start.date) >= 365,
 		                    365,
 		                    as.numeric(last(drag.dates) - fx.start.date))
-		  
+
 			# read last forecast parameters and state
 			readDest <- file.path(
 				dir.base,

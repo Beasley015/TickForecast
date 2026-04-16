@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"eca9e83d-ca3c-4eb2-8789-f7dc853f605f","8d4c371e-5bb1-417f-be7e-466718421c37","TEAK.2023.29","TEAK_004.mammalGrid.mam","D17","TEAK","TEAK_004","diversity","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP","C4 and C5 not set due to boulder",
+"fa3e2b83-ff6c-403a-b26a-021f28e8114d","b45bb196-8045-4fdc-b7fd-b19b6f873a48","TEAK.2023.29","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP",,
+"efa520cc-cc6a-469a-81ce-2a6237c7806c","84e8ed9a-8779-4b77-839c-905b1859cc03","TEAK.2023.29","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP",,
+"798fde3f-288d-4842-9996-44591437464a","7306ef39-a91a-4d98-ad47-aa560148bc56","TEAK.2023.29","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2023-07-18","2023-07-18","OK","NEON.DOC.000481vP","No captures",
+"be976c79-cc0b-4bc3-a266-ff9537c32ff4","c2efd226-8a43-421a-8868-3bb06fe29966","TEAK.2023.29","TEAK_007.mammalGrid.mam","D17","TEAK","TEAK_007","diversity","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"13ae9134-7ea6-4e02-9d79-1c16c47be6f3","d28f614d-1397-47fb-8358-5dcd7f5c48b0","TEAK.2023.29","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"d18099a4-2d2f-4804-a546-7bff458080bc","5980e686-7355-4c1f-b38c-062068bc19ee","TEAK.2023.29","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"8a16f663-c26f-40b8-a010-aea51bc35637","398ab6bd-33a1-4ba9-b094-0ef09d40e19e","TEAK.2023.29","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2023-07-19","2023-07-19","OK","NEON.DOC.000481vP",,
+"b0831b4f-059f-4ced-adf5-3c209aa4ce94","46f082fb-7c33-49e2-aeb3-1b90ac9cd510","TEAK.2023.29","TEAK_001.mammalGrid.mam","D17","TEAK","TEAK_001","pathogen","2023-07-20","2023-07-20","OK","NEON.DOC.000481vP",,
+"e34db95d-736f-4fee-a1db-629ce8a80296","26875487-7c22-45ab-b7d1-6488d3555ad1","TEAK.2023.29","TEAK_025.mammalGrid.mam","D17","TEAK","TEAK_025","diversity","2023-07-20","2023-07-20","other","NEON.DOC.000481vP","tree down across road prevented grid flagging before mammal bout",
+"8a8c117b-9308-4c0d-bf9e-397492f366b7","68a04be9-1285-4d25-aca0-e1f78507a0c9","TEAK.2023.29","TEAK_010.mammalGrid.mam","D17","TEAK","TEAK_010","pathogen","2023-07-20","2023-07-20","OK","NEON.DOC.000481vP",,
+"5e817c33-bdbd-45a5-8f7f-a123fa2b98b6","7c1225af-3a41-41dc-9d59-52b782fd40a7","TEAK.2023.29","TEAK_003.mammalGrid.mam","D17","TEAK","TEAK_003","pathogen","2023-07-20","2023-07-20","OK","NEON.DOC.000481vP",,

@@ -1,0 +1,6 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"399bc39d-801f-411b-835c-4ee3ddf9ea23","ece22496-a520-4383-bf7b-60848a78878c","MOAB.2021.26","MOAB_002.mammalGrid.mam","D13","MOAB","MOAB_002","diversity","2021-06-29","2021-06-29","OK","NEON.DOC.000481vM",,
+"54e60b97-bca8-4c6c-95b8-cfeb048defe5","2365b76c-4751-46be-9c47-0d7d61c90b72","MOAB.2021.26","MOAB_003.mammalGrid.mam","D13","MOAB","MOAB_003","pathogen","2021-06-30","2021-06-30","logistical","NEON.DOC.000481vM","COVID19 - staff not trained",
+"48967309-10ea-43a0-8b97-ef0530d6cb44","507fa18e-f5db-4cd4-9a37-3e26dbbf693d","MOAB.2021.26","MOAB_006.mammalGrid.mam","D13","MOAB","MOAB_006","pathogen","2021-06-30","2021-06-30","OK","NEON.DOC.000481vM",,
+"0d37c2de-653a-4624-ba80-c3a03155ff59","f7282e88-2deb-4ce4-a2d7-41219d5f029e","MOAB.2021.26","MOAB_009.mammalGrid.mam","D13","MOAB","MOAB_009","pathogen","2021-06-30","2021-06-30","OK","NEON.DOC.000481vM",,
+"838242e0-e16c-4f58-b206-d2dc0ad9cd02","9a35fac1-7ba7-4ce4-93a7-453ad1b4797f","MOAB.2021.26","MOAB_004.mammalGrid.mam","D13","MOAB","MOAB_004","diversity","2021-06-30","2021-06-30","OK","NEON.DOC.000481vM",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"58dbba87-2d46-48bc-8f0f-e0923642fcc2","43ab0b93-59fb-452e-aff2-8fe2f402a742","JORN.2023.42","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"639bade3-6bf2-4c87-9c03-106afc30bd55","faa46557-d469-4aed-a2b2-245a1284339f","JORN.2023.42","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"5850fe8c-825c-4188-b189-ebebaa6ca4bc","e464ee7c-4c24-4a26-96d2-ef504c9f65fb","JORN.2023.42","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2023-10-17","2023-10-17","OK","NEON.DOC.000481vP",,
+"8d624c09-a86f-4872-a934-fe24fba520a5","b3ac203c-6245-438d-b75d-61bef90081ab","JORN.2023.42","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"ca1ebd54-2037-4ca8-b5f8-0add12b39270","811032ba-8707-46b2-ae57-c69ef43f5027","JORN.2023.42","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"588ce2e1-a412-44e9-82f8-dc3727b42302","e0efb355-be4b-4f71-a658-fa5315075fe5","JORN.2023.42","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2023-10-18","2023-10-18","OK","NEON.DOC.000481vP",,
+"daa862c9-1d15-4d0d-bdf9-ff29b314b838","51aeebbe-66d4-4586-8d4f-8234c7bedd1d","JORN.2023.42","JORN_001.mammalGrid.mam","D14","JORN","JORN_001","pathogen","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP",,
+"318ffcc0-f9e0-4f43-8e23-14bb9f663c5c","ce0747cd-8aa7-4678-8367-b378e5cc185e","JORN.2023.42","JORN_017.mammalGrid.mam","D14","JORN","JORN_017","pathogen","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP",,
+"63c61095-9981-48f8-8ebd-8d508c37979f","938469b2-c427-43d1-a225-049b8717a599","JORN.2023.42","JORN_018.mammalGrid.mam","D14","JORN","JORN_018","pathogen","2023-10-19","2023-10-19","OK","NEON.DOC.000481vP",,
+"0719363b-516c-4221-9231-a09b72a85966","9e6e0111-230f-432e-8aca-67403baef8f7","JORN.2023.42","JORN_011.mammalGrid.mam","D14","JORN","JORN_011","diversity","2023-10-20","2023-10-20","logistical","NEON.DOC.000481vP",,
+"24c84460-f967-4c6e-a57f-c29f614a62ff","3521b88e-6b64-4edf-a471-886c1b0f8ff8","JORN.2023.42","JORN_031.mammalGrid.mam","D14","JORN","JORN_031","diversity","2023-10-20","2023-10-20","logistical","NEON.DOC.000481vP",,
+"50167ce5-8d24-4165-9d98-b993798a9573","f12da4a8-3b5b-4103-b26a-6f8bcaa8301c","JORN.2023.42","JORN_007.mammalGrid.mam","D14","JORN","JORN_007","diversity","2023-10-20","2023-10-20","logistical","NEON.DOC.000481vP",,

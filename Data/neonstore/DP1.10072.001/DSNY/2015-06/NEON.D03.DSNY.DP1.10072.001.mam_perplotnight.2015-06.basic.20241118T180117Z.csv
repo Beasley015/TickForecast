@@ -1,0 +1,12 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"38b56bed-6e27-4de1-baa9-e3494108dfb9","056C07B1C394413AAA3AD6E5FA87358E","DSNY.2015.26","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2015-06-23","2015-06-23",,,"no captures did catch small toad site was burned last week and reestablished the evening before only a few sprigs of grass have sprouted up at this point",
+"7d3585a0-a86c-4789-82d9-f81fcecbef3a","9BBBCFCF93A84A61ABB8AEA9DE1FE45B","DSNY.2015.26","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2015-06-23","2015-06-23",,,,
+"695ed5a0-5f97-4b4e-8be1-ec7c94571c59","EEB5E4467DE045F9A96A388A066FC61A","DSNY.2015.26","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2015-06-23","2015-06-23",,,,
+"99f350db-667a-4e5e-8036-c4e4380972d1","DB7A3A9910B44FD7BE2B904452247454","DSNY.2015.26","DSNY_016.mammalGrid.mam","D03","DSNY","DSNY_016","diversity","2015-06-23","2015-06-23",,,,
+"822bdb30-ccf5-4925-b8e5-dcc0496962d4","8CD977F025E04D688A778222DB1F6004","DSNY.2015.26","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2015-06-24","2015-06-24",,,"no captures",
+"9b30ae74-6993-4c38-90e0-e0ad99001081","934D1443D8444523A3C0A9BF736DD6B9","DSNY.2015.26","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2015-06-24","2015-06-24",,,"no captures",
+"226b8ad8-6ee8-4fda-bc30-c0f10a5d3231","7ACA3685C6404101BDB5E1A7A7792261","DSNY.2015.26","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2015-06-24","2015-06-24",,,"traps not set due to thunderstorm producing lightning very close to the plot",
+"dd9a6399-59c2-4298-a519-1fe2eccd5b5a","5DC6080532184978B3F3273B4092ABD1","DSNY.2015.26","DSNY_005.mammalGrid.mam","D03","DSNY","DSNY_005","pathogen","2015-06-25","2015-06-25",,,"no captures",
+"61d4b0e4-8e92-483a-9d47-5eb3c4e4604d","4FD727BAFA7C434594BF50CD8C52B1BD","DSNY.2015.26","DSNY_004.mammalGrid.mam","D03","DSNY","DSNY_004","pathogen","2015-06-25","2015-06-25",,,,
+"bf072779-b424-48aa-aeea-796902b381c9","87D44E942AE44A4187859651AD6CFDF9","DSNY.2015.26","DSNY_009.mammalGrid.mam","D03","DSNY","DSNY_009","diversity","2015-06-25","2015-06-25",,,"no captures",
+"ec13429b-b86e-49c2-a6a6-5035c629a9a3","2A45FB9E24834FA6A523E4E168E0BD8A","DSNY.2015.26","DSNY_001.mammalGrid.mam","D03","DSNY","DSNY_001","pathogen","2015-06-26","2015-06-26",,,"no captures",

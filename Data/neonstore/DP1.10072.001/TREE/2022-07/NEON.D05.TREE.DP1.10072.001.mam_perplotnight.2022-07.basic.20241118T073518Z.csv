@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"66bf126c-8b66-4897-b350-c2b264f284a8","149c18e1-053d-46d3-8ebc-7bbe9067408a","TREE.2022.27","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2022-07-05","2022-07-05","OK","NEON.DOC.000481vN",,
+"b4a480e4-8c50-4eb2-95d0-efa7e06f6ba3","c13bf69b-5cd0-410d-bf67-130eec72276c","TREE.2022.27","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2022-07-05","2022-07-05","OK","NEON.DOC.000481vN",,
+"a2bb4b74-19c4-429d-aa7c-1f18134b744b","4924b1bd-108a-4c25-a4f8-86a7cd3bf4bd","TREE.2022.27","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2022-07-05","2022-07-05","OK","NEON.DOC.000481vN",,
+"b65ed9bc-cb20-48de-b363-e04ccf5e6db4","8fd16195-a505-4497-98e4-fe2519f4bf89","TREE.2022.27","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2022-07-06","2022-07-06","OK","NEON.DOC.000481vN",,
+"12189571-7bfd-4a08-8253-d6368696c7dc","2e6db1ff-7343-4437-a292-089ca2deef29","TREE.2022.27","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2022-07-06","2022-07-06","OK","NEON.DOC.000481vN",,
+"7e8e363d-ae9e-4c5e-a766-069e74c9d5d7","7b07e5bc-8119-4ed7-8060-5fd170f23916","TREE.2022.27","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2022-07-06","2022-07-06","OK","NEON.DOC.000481vN",,
+"99470a72-4e44-462c-b78e-c4f106576e50","89010f43-e1cc-4813-9fff-ae8ce9e672f2","TREE.2022.27","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2022-07-07","2022-07-07","OK","NEON.DOC.000481vN",,
+"58445519-04c6-4d67-8fe6-227d46846ded","e5684d7c-2b19-44df-bf7c-e55e8a3b55fa","TREE.2022.27","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2022-07-07","2022-07-07","OK","NEON.DOC.000481vN",,
+"b8b07bba-90a3-41b4-ae05-f7275bef3309","d7a6df4e-29bd-4f36-b6e7-94faa8121e03","TREE.2022.27","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2022-07-07","2022-07-07","OK","NEON.DOC.000481vN",,
+"9d7081be-009c-403f-89ed-a008e3082a04","26448778-7f8a-4649-9013-1c065549ec96","TREE.2022.27","TREE_062.mammalGrid.mam","D05","TREE","TREE_062","diversity","2022-07-08","2022-07-08","OK","NEON.DOC.000481vN",,
+"dac0b99f-66fc-4a7e-91ae-f5e0752fef2d","498669a3-981e-4b6e-be6b-6b233e3e831c","TREE.2022.27","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2022-07-08","2022-07-08","OK","NEON.DOC.000481vN",,
+"5b40426a-5fd4-418b-a69e-971dd869180c","2a6056fb-374f-4efd-851f-318f99aca22e","TREE.2022.27","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2022-07-08","2022-07-08","logistical","NEON.DOC.000481vN","Road closure at parking site",

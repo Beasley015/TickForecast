@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5947e4df-9c2c-4991-8ba1-b181d98d09eb","FAD0397C620D455CB8FB9DFEBD60EF51","SCBI.2015.32","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2015-08-04","2015-08-04",,,,
+"8a6eafff-5ed4-47ce-b986-c3d893add203","4DDA42FA45F2486B80ACD360AA9CA72D","SCBI.2015.32","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2015-08-04","2015-08-04",,,,
+"c36029a3-b218-4f70-bfe1-efb8a1acefda","C924152807CB47289CFFC0FC54570A40","SCBI.2015.32","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2015-08-04","2015-08-04",,,,
+"7ecdc691-f266-493c-abe9-927c53640585","F44815596F8A456CB3968C57AD837FBD","SCBI.2015.32","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2015-08-05","2015-08-05",,,"rained overnight",
+"8bdda863-3400-4057-97b6-357ba0111542","A4DC48FBD2F94B459E895ED29CE5C091","SCBI.2015.32","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2015-08-05","2015-08-05",,,"rained overnight",
+"545006f1-9605-48a2-b954-15481b882367","ADDA1300E6D9443EA60E09CFF4FEEE43","SCBI.2015.32","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2015-08-05","2015-08-05",,,"very high disturbance; pulled traps one night early",
+"c0fab94f-0c49-446c-9f66-47be6c96def8","A000DF8A8B584541932D409399B3D8C5","SCBI.2015.32","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2015-08-06","2015-08-06",,,"this grid was not set this night as high predator damage occurred during first 2 nights",
+"2ecfd92c-7332-4f5f-8560-b1d2404d34c8","9911BE6F472E48A1AFDB86BE6D99F125","SCBI.2015.32","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2015-08-06","2015-08-06",,,,
+"7eca17e6-f2f3-4f6d-825b-a70eb9609ace","CE31937EB2E24F27ABBB9C0E4F138CE7","SCBI.2015.32","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2015-08-06","2015-08-06",,,,
+"b77b626e-f6fe-41d5-80ff-b32d52f369e4","336CAA57F52C49A1B0BE87F5071C55E6","SCBI.2015.32","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2015-08-06","2015-08-06",,,,
+"493d759b-7d39-4afc-9f35-d047ae4b95d2","5D63CCE7351C490CBBA2EE694983715F","SCBI.2015.32","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2015-08-07","2015-08-07",,,"many traps not set due to impenetrable thorns",
+"5f6e2a2c-7d2b-421f-aee8-b04a42928983","5EEBF7027F024B7A8DA737EC1213E11F","SCBI.2015.32","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2015-08-07","2015-08-07",,,"Overnight in the 60s and rainy",

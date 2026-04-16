@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"241cba17-d4eb-48de-abfc-08f921c9c31a","B6CC05E18E5D4A1CA3A90857336D4C91","BLAN.2015.21","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","recapture","2015-05-20","2015-05-20",,,"Samples kept on ice packs due to no dry ice available.",
+"0b98dfb3-ba1c-40e6-b7f6-355f7e7f5f21","5330B94863BE4BEA991C2E1334B76382","BLAN.2015.21","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2015-05-20","2015-05-20",,,"Samples kept on ice packs due to dry ice not being available.",
+"53a915bc-49b6-462e-8866-3b3210e30799","284D20E78ADD4BD299B402C463FEC564","BLAN.2015.21","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2015-05-20","2015-05-20",,,"Samples kept on ice packs due to no dry ice available.",
+"d353dcd1-f691-4ba1-82c6-6e123fa4bab8","F43B6DCC53DE44768E2ED5F7A7FC6A6E","BLAN.2015.21","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2015-05-20","2015-05-20",,,"Samples kept on ice packs due to dry ice not being available.",
+"c3dfd818-1224-49e7-890d-8a945710e401","0DFF8776F28A4B6185A97AE6FC0D8D13","BLAN.2015.21","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2015-05-21","2015-05-21",,,,
+"3c62ad21-5c4c-47f3-97b2-bade23b99bd7","E114EE8F4D1A4AA7A8E1E18A189E8B20","BLAN.2015.21","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2015-05-21","2015-05-21",,,,
+"072d184c-fa36-4ecb-aeaa-0c37e1cccf06","B7005FFA576B4FC6AC6C623879ACA4BB","BLAN.2015.21","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2015-05-21","2015-05-21",,,,
+"2c1fa6e6-8be6-4246-9617-1f43d18c63cc","E665D36D28BD4842AB1B30524B8240E9","BLAN.2015.21","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","recapture","2015-05-21","2015-05-21",,,,
+"b9fe6720-b4da-488b-b92e-c1894ebdecd0","E3208967EB494F7BAC3C74EB5618CD9C","BLAN.2015.21","BLAN_009.mammalGrid.mam","D02","BLAN","BLAN_009","pathogen","2015-05-22","2015-05-22",,,,
+"4860156c-7655-482e-a67b-57bef4eb7a5e","FC76BBC044B84C069356A2B49443D560","BLAN.2015.21","BLAN_002.mammalGrid.mam","D02","BLAN","BLAN_002","recapture","2015-05-22","2015-05-22",,,,
+"68b5c488-850e-426a-8434-e334b123d012","628F428F848449F2A9DB20FFA78CABCE","BLAN.2015.21","BLAN_003.mammalGrid.mam","D02","BLAN","BLAN_003","pathogen","2015-05-22","2015-05-22",,,,
+"b1498d04-1f38-463d-b17b-78f83f317406","5D9AA44BC68D45C3867FF0EC0CD04407","BLAN.2015.21","BLAN_001.mammalGrid.mam","D02","BLAN","BLAN_001","pathogen","2015-05-22","2015-05-22",,,"Only 99 traps were pulled from the grid as one trapping station was not set. The unset trapping coordinate is unknown.",

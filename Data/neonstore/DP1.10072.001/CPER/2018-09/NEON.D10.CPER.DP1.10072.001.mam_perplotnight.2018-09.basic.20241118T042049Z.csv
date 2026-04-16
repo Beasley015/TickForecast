@@ -1,0 +1,11 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"e0661be3-37a7-48ec-b95d-08def5a5459e","b9022c7f-d646-4612-a161-78e1f4f76fe8","CPER.2018.35","CPER_002.mammalGrid.mam","D10","CPER","CPER_002","diversity","2018-09-01","2018-09-01",,"NEON.DOC.000481vK",,
+"6551399a-1e84-4c45-b1d0-c8fc43a28b36","b7b69522-831c-4a43-9478-0a7ee2d10c5b","CPER.2018.35","CPER_008.mammalGrid.mam","D10","CPER","CPER_008","diversity","2018-09-01","2018-09-01",,"NEON.DOC.000481vK",,
+"3e6993c7-73b2-4c4f-ab49-e7a2c3fb3c78","577b6e58-6842-48ef-a868-d9a951335992","CPER.2018.35","CPER_011.mammalGrid.mam","D10","CPER","CPER_011","pathogen","2018-09-01","2018-09-01",,"NEON.DOC.000481vK",,
+"291fe456-279e-4263-a368-25cb0187a918","7fe090be-74d1-4f55-b1f6-0d166f2fc741","CPER.2018.35","CPER_015.mammalGrid.mam","D10","CPER","CPER_015","pathogen","2018-09-01","2018-09-01",,"NEON.DOC.000481vK",,
+"20791f0e-bf7d-40a2-9a35-0db5f19eadd9","9e344ace-1cab-4766-b148-5e9698cefd24","CPER.2018.35","CPER_005.mammalGrid.mam","D10","CPER","CPER_005","pathogen","2018-09-01","2018-09-01",,"NEON.DOC.000481vK",,
+"1cf57028-2612-442d-967f-259e9943f87e","15cb5f73-8e14-45d6-b3e5-f408985a1762","CPER.2018.35","CPER_005.mammalGrid.mam","D10","CPER","CPER_005","pathogen","2018-09-02","2018-09-02",,"NEON.DOC.000481vK",,
+"0153c3f3-d12d-4b44-91a5-36688d8ced41","a16d5de0-5468-4ebf-ae65-08dae697a6d6","CPER.2018.35","CPER_015.mammalGrid.mam","D10","CPER","CPER_015","pathogen","2018-09-02","2018-09-02",,"NEON.DOC.000481vK",,
+"e5be9535-dc57-4c3b-944c-b88cf392718f","0454d12c-3b38-43f1-b45b-e1a53d731fc4","CPER.2018.35","CPER_006.mammalGrid.mam","D10","CPER","CPER_006","diversity","2018-09-02","2018-09-02",,"NEON.DOC.000481vK",,
+"395eea66-2fe1-429e-a438-c421972534ce","97a101ef-bbd9-4955-b6cd-8099b15460b0","CPER.2018.35","CPER_011.mammalGrid.mam","D10","CPER","CPER_011","pathogen","2018-09-02","2018-09-02",,"NEON.DOC.000481vK",,
+"d557c862-5b18-4bee-9538-234168d4d403","a3afcdd8-5fe2-45d4-bf22-30c013d6cb40","CPER.2018.35","CPER_009.mammalGrid.mam","D10","CPER","CPER_009","diversity","2018-09-02","2018-09-02",,"NEON.DOC.000481vK",,

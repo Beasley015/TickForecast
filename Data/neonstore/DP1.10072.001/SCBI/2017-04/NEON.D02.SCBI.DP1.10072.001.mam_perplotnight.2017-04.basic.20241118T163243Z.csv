@@ -1,0 +1,9 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"54a3cd42-4d7a-4365-991b-5d0a549ece24","a4c6a175-9e32-4140-b4a2-690a4e729ab7","SCBI.2017.16","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-04-18","2017-04-18",,"NEON.DOC.000481vJ",,
+"35eb80b3-4052-4556-bd7c-fc024b5a7b50","42f04b63-6992-4982-93c2-ea6869d0d284","SCBI.2017.16","SCBI_002.mammalGrid.mam","D02","SCBI","SCBI_002","pathogen","2017-04-18","2017-04-18",,"NEON.DOC.000481vJ","Grid shut down after one day due to high levels of disturbance",
+"f6aa2ab9-5b06-4733-8c4b-ddba8f1db2ba","5c9983f5-47ad-49f5-8a4a-056c9584c8c9","SCBI.2017.16","SCBI_039.mammalGrid.mam","D02","SCBI","SCBI_039","diversity","2017-04-18","2017-04-18",,"NEON.DOC.000481vG",,
+"5415a077-536f-49ec-9903-b8ad139e8589","a62d1d5a-1ef5-40c1-b611-ff4bd6dd6a55","SCBI.2017.16","SCBI_004.mammalGrid.mam","D02","SCBI","SCBI_004","diversity","2017-04-19","2017-04-19",,"NEON.DOC.000481vG",,
+"899b8f6f-54f1-4881-98af-a9b7d3954018","cfd96454-4db3-4232-b99b-b9e6cdf1c830","SCBI.2017.16","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-04-19","2017-04-19",,"NEON.DOC.000481vG",,
+"0b3397f7-6750-47a3-b82e-003eaeaad2e9","e3c91b1c-c683-448a-99f0-18583f2234a1","SCBI.2017.16","SCBI_003.mammalGrid.mam","D02","SCBI","SCBI_003","diversity","2017-04-19","2017-04-19",,"NEON.DOC.000481vJ",,
+"201b28dd-16e0-4b16-9a26-406694ce0716","78736b65-6cea-4a9e-aac3-6b4d5fe9a648","SCBI.2017.16","SCBI_008.mammalGrid.mam","D02","SCBI","SCBI_008","pathogen","2017-04-20","2017-04-20",,"NEON.DOC.000481vG",,
+"7638c7a6-e3e4-44ee-9392-7f1b7f943cba","bf44204d-98f8-4577-9c6e-98620694995d","SCBI.2017.16","SCBI_035.mammalGrid.mam","D02","SCBI","SCBI_035","pathogen","2017-04-21","2017-04-21",,"NEON.DOC.000481vG",,

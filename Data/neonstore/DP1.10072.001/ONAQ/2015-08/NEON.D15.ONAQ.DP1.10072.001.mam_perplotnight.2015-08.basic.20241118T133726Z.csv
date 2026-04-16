@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"fa8d5daf-4466-42ba-8a4c-7ccbe86c0e2c","31FF21F57381400FA32A352A98294A09","ONAQ.2015.33","ONAQ_023.mammalGrid.mam","D15","ONAQ","ONAQ_023","pathogen","2015-08-14","2015-08-14",,,,
+"75471a1a-4e9e-455a-8969-7efa600f03b8","10862F7A53844A61BBC9590A66AAB16E","ONAQ.2015.33","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2015-08-14","2015-08-14",,,,
+"6a64f835-6b61-4be5-9076-2064643507c4","666E67095CC24192BA66B5B388E80BA4","ONAQ.2015.33","ONAQ_023.mammalGrid.mam","D15","ONAQ","ONAQ_023","pathogen","2015-08-15","2015-08-15",,,,
+"5ef2e0fb-c4f5-410f-9089-3953f542f01b","DD10E4B4EEDA4B298E70B107A9B6A255","ONAQ.2015.33","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2015-08-15","2015-08-15",,,,
+"45d56839-108d-4e2f-851b-f021d6b662dc","DD3B2079C778428191375C0B9B2FC456","ONAQ.2015.33","ONAQ_015.mammalGrid.mam","D15","ONAQ","ONAQ_015","pathogen","2015-08-15","2015-08-15",,,,
+"b5da689c-d753-4978-8a47-ae0e04d63724","5C5124484D4F4EFF887DFA786475C805","ONAQ.2015.33","ONAQ_020.mammalGrid.mam","D15","ONAQ","ONAQ_020","pathogen","2015-08-16","2015-08-16",,,,
+"9a0f3842-5b6f-4659-9932-ec57c0b6fb1f","CD01278B8C1B49AEB49986E01951676F","ONAQ.2015.33","ONAQ_023.mammalGrid.mam","D15","ONAQ","ONAQ_023","pathogen","2015-08-16","2015-08-16",,,"Total measurements were not taken on recaptured animals because we had a large number of animals at the other grids, so we were short on time.",
+"e519b8d4-7e1b-4ddd-99c0-348a20b952a9","20B3267604F945F0B412268360BC745C","ONAQ.2015.33","ONAQ_015.mammalGrid.mam","D15","ONAQ","ONAQ_015","pathogen","2015-08-16","2015-08-16",,,,
+"d9d246f5-1d18-4e2b-a275-bc9e5af4e93c","6E7442FFBDBC462D9D21876244A28CA8","ONAQ.2015.33","ONAQ_005.mammalGrid.mam","D15","ONAQ","ONAQ_005","diversity","2015-08-17","2015-08-17",,,,
+"69a181e6-462a-4b7c-bf7e-4b6ad9744b4f","CCEAE1DD0EED48D49F1B8B7609E75A55","ONAQ.2015.33","ONAQ_015.mammalGrid.mam","D15","ONAQ","ONAQ_015","pathogen","2015-08-17","2015-08-17",,,,
+"1b51c313-e09b-4413-ae1b-0c1cb0d82d61","7BCEB57AD35B43F68BA9BA91F14FA74E","ONAQ.2015.33","ONAQ_004.mammalGrid.mam","D15","ONAQ","ONAQ_004","diversity","2015-08-17","2015-08-17",,,"Not all measurements were taken due to high capture rates at other plots.",
+"5cbab301-cf98-41a0-8e05-df72b25e87e4","478ABCB03D2A4931BB88304AA971DE6D","ONAQ.2015.33","ONAQ_019.mammalGrid.mam","D15","ONAQ","ONAQ_019","diversity","2015-08-18","2015-08-18",,,,

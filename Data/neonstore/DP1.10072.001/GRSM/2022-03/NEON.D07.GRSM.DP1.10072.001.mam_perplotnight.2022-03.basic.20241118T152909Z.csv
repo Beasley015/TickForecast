@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"7562a9a9-f015-4f7d-8bf8-9a08dbe3786e","c9b22fe7-c6b3-4b80-aabc-0b1a995d09f8","GRSM.2022.10","GRSM_070.mammalGrid.mam","D07","GRSM","GRSM_070","diversity","2022-03-08","2022-03-08","logistical","NEON.DOC.000481vM",,
+"67ff0766-9bc3-41be-b3ef-fd7ae00df888","b8f5a2ac-9211-4801-85fd-ace259f32199","GRSM.2022.10","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2022-03-08","2022-03-08","logistical","NEON.DOC.000481vM",,
+"7fe61434-d7ea-41c0-b50b-a75fe8035026","561c62c4-b511-492f-a5a5-fa11e3b15ec5","GRSM.2022.10","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2022-03-08","2022-03-08","logistical","NEON.DOC.000481vM",,
+"e57409c4-7185-4472-831d-da811c8c3888","a597a21d-7340-4248-a2d6-10293aee5e92","GRSM.2022.10","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2022-03-08","2022-03-08","logistical","NEON.DOC.000481vM",,
+"3360bdf0-5f4b-4f59-b7f6-0ba2ce5edc54","87906d93-e31c-4d40-980f-4b399136827a","GRSM.2022.10","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2022-03-09","2022-03-09","logistical","NEON.DOC.000481vM",,
+"215bb114-a09a-4a8b-9654-a9bf7dc4becb","8e0cf0ae-d5e1-43be-bac9-edd8fded6ca6","GRSM.2022.10","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2022-03-09","2022-03-09","logistical","NEON.DOC.000481vM",,
+"37c01687-4d1c-41b5-bcc7-fad5af33b7fc","a27f6c7f-5ae5-46f2-b9f8-917116bcd0fc","GRSM.2022.10","GRSM_033.mammalGrid.mam","D07","GRSM","GRSM_033","diversity","2022-03-09","2022-03-09","logistical","NEON.DOC.000481vM",,
+"badc4854-4428-4b3f-a6b0-78576a18f131","7a94d46b-ae54-4c04-9929-4b76130ececc","GRSM.2022.10","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2022-03-09","2022-03-09","logistical","NEON.DOC.000481vM",,
+"978d6e41-aa4f-45a4-bfca-61f1815f78f8","695919ad-5959-4bb8-bdf1-c7839a614b67","GRSM.2022.10","GRSM_069.mammalGrid.mam","D07","GRSM","GRSM_069","pathogen","2022-03-10","2022-03-10","logistical","NEON.DOC.000481vM",,
+"179ee0f9-fb90-4ad1-9dae-4f25ba5aebf8","0d0057f0-f14b-4d55-9953-02bc4a839319","GRSM.2022.10","GRSM_014.mammalGrid.mam","D07","GRSM","GRSM_014","pathogen","2022-03-10","2022-03-10","logistical","NEON.DOC.000481vM",,
+"7378e6c4-7e84-416f-849f-8990dac95753","f1bee7d5-1409-4621-8fb1-0206a108b489","GRSM.2022.10","GRSM_020.mammalGrid.mam","D07","GRSM","GRSM_020","pathogen","2022-03-10","2022-03-10","logistical","NEON.DOC.000481vM",,
+"76c1108a-040e-4e49-9478-a9a7393f36f2","02196411-3ec9-4453-bf70-f8687cef92fb","GRSM.2022.10","GRSM_015.mammalGrid.mam","D07","GRSM","GRSM_015","diversity","2022-03-10","2022-03-10","logistical","NEON.DOC.000481vM",,

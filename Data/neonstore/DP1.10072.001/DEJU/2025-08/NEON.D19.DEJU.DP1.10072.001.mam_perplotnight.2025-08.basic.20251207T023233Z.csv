@@ -1,0 +1,3 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,gridCompletion,samplingProtocolVersion,remarks,dataQF
+"2c74a56c-ace1-4d61-a76b-e068e1779602","3cd24974-98fa-43af-b9f9-d7f72cea2128","DEJU.2025.31","DEJU_006.mammalGrid.mam","D19","DEJU","DEJU_006","diversity","2025-08-01","2025-08-01","OK","setting complete, processing complete","NEON.DOC.000481vQ","Sampling outside 21 day new moon sampling window",
+"04e885ef-ff8c-4039-bfb2-e9732d808d9c","f9920d61-2b4d-45bb-ade9-f321679f27cc","DEJU.2025.31","DEJU_014.mammalGrid.mam","D19","DEJU","DEJU_014","diversity","2025-08-01","2025-08-01","OK","setting complete, processing complete","NEON.DOC.000481vQ","Sampling outside 21 day new moon sampling window",

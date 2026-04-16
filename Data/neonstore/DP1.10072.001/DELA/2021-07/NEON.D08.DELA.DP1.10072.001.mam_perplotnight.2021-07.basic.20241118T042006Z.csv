@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"52a82fad-5c81-4724-8e08-587636e39084","3e4cf195-876b-4cb0-ab84-fb49d57958e5","DELA.2021.27","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2021-07-07","2021-07-07","OK","NEON.DOC.000481vM",,
+"673309be-5ccd-4da0-ab09-d50bd5bd1269","be565e14-6642-4baa-b7cb-6cf039012408","DELA.2021.27","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2021-07-07","2021-07-07","OK","NEON.DOC.000481vM",,
+"6b47a97d-cace-43e4-9116-0c1cd8e00386","3a14c499-390b-48f5-95a5-8e74fd14ebd4","DELA.2021.27","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2021-07-07","2021-07-07","location flooded","NEON.DOC.000481vM",,
+"011d9bdc-c5d8-4d16-877a-52b3f732b7e7","45d26db3-4045-4db4-9d1d-b1d3eacc08db","DELA.2021.27","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2021-07-08","2021-07-08","location flooded","NEON.DOC.000481vM",,
+"2777ca8e-8640-4eeb-bd0f-70d6bec99521","7efe905e-22d7-44ec-b840-5e384ec47ff1","DELA.2021.27","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2021-07-08","2021-07-08","OK","NEON.DOC.000481vM",,
+"f6d83786-89c8-4c5a-b3b0-d10c775beb96","04547737-9c18-48e2-b4fc-138a0badaa2d","DELA.2021.27","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2021-07-08","2021-07-08","OK","NEON.DOC.000481vM",,
+"db4ff23a-a540-43a9-b95f-ee55427c0abc","6d5ee886-43bc-4e4b-976d-0bd9ecb33a97","DELA.2021.27","DELA_002.mammalGrid.mam","D08","DELA","DELA_002","pathogen","2021-07-09","2021-07-09","location flooded","NEON.DOC.000481vM",,
+"67b31848-2f9b-4c95-bb98-4554ade80daf","683ff14b-d1ac-44a2-9e9a-37c817e81802","DELA.2021.27","DELA_007.mammalGrid.mam","D08","DELA","DELA_007","pathogen","2021-07-09","2021-07-09","OK","NEON.DOC.000481vM",,
+"1d8dca9d-3f76-43b4-beb5-9f5ec510af04","085b5e74-a382-4a08-9b6e-63c494c7d905","DELA.2021.27","DELA_001.mammalGrid.mam","D08","DELA","DELA_001","pathogen","2021-07-09","2021-07-09","OK","NEON.DOC.000481vM",,

@@ -1,0 +1,13 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"59818641-4c1d-4e80-919f-acb2efa6c9c7","f47d9116-db54-4158-aec6-997c1aba1c19","UKFS.2019.32","UKFS_007.mammalGrid.mam","D06","UKFS","UKFS_007","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"37e2284b-14ba-4911-bacf-963e4026b547","c15b31ed-8652-4ba5-911c-70399c74b6ae","UKFS.2019.32","UKFS_018.mammalGrid.mam","D06","UKFS","UKFS_018","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"d19ed63a-1240-4464-875b-007e3858d776","1be7867a-1572-40f1-b2d2-c0b11f5fe7f0","UKFS.2019.32","UKFS_003.mammalGrid.mam","D06","UKFS","UKFS_003","diversity","2019-08-06","2019-08-06",,"NEON.DOC.000481vL",,
+"679fbdef-858b-4ed9-b858-d65b8f1d682e","818921c5-1c7a-4e31-85c0-7b55f36f814d","UKFS.2019.32","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"1d77fb5b-24dd-47b7-8ad6-5fa5eca51d72","4fff8395-9268-4600-8b87-aef10448fcef","UKFS.2019.32","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"c30c1942-8f8e-4800-a729-e907b1e40888","cbbd3c38-f03a-409a-aa69-8c01d976c106","UKFS.2019.32","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2019-08-07","2019-08-07",,"NEON.DOC.000481vL",,
+"9f337517-3863-4c15-a1c2-925dca74e9dc","7d847cf1-2735-41c5-b194-f77680995412","UKFS.2019.32","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"315f2ae3-6803-492d-8d64-76b646cc3bba","99de41ee-2612-44a2-9281-85d58032fc67","UKFS.2019.32","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"c059959c-a393-403c-a7d4-9fff9ce3c52f","518dd807-d351-416e-9899-12a658517e56","UKFS.2019.32","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2019-08-08","2019-08-08",,"NEON.DOC.000481vL",,
+"088bcdb4-a2fc-4db4-b5b2-b16b47b8fbc1","d9d87c35-9e0d-4f41-8c41-6c9f56065095","UKFS.2019.32","UKFS_004.mammalGrid.mam","D06","UKFS","UKFS_004","pathogen","2019-08-09","2019-08-09",,"NEON.DOC.000481vL",,
+"c572b27b-0349-4b7a-9214-2abc5493393a","9f111c30-fb4b-4c72-a996-8895ff34d426","UKFS.2019.32","UKFS_009.mammalGrid.mam","D06","UKFS","UKFS_009","pathogen","2019-08-09","2019-08-09",,"NEON.DOC.000481vL",,
+"c08e5596-5931-49dc-ba7e-bbd583150b99","f1357aa0-aa58-4692-a6fc-10d21fee5efb","UKFS.2019.32","UKFS_010.mammalGrid.mam","D06","UKFS","UKFS_010","pathogen","2019-08-09","2019-08-09",,"NEON.DOC.000481vL","Grid not set due to disturbance on previous night (8/8/2019)",

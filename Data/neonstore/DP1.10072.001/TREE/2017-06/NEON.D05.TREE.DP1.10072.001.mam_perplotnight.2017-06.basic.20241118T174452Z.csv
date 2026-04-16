@@ -1,0 +1,10 @@
+uid,nightuid,eventID,namedLocation,domainID,siteID,plotID,mammalGridSamplingMethod,collectDate,endDate,samplingImpractical,samplingProtocolVersion,remarks,dataQF
+"5be75dbc-edb0-4251-a0cd-330f6a837cd0","3ac48107-00b7-465a-83cb-ecc7ae482f86","TREE.2017.26","TREE_002.mammalGrid.mam","D05","TREE","TREE_002","diversity","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ",,
+"cc3a0732-0e2a-40c3-b2df-4a5140b08d83","4a9d709a-3e3f-4b39-8d31-aec04eb406f6","TREE.2017.26","TREE_004.mammalGrid.mam","D05","TREE","TREE_004","diversity","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ","All traps on lines B and D set upside down. They were marked as disturbed.",
+"8a59db8c-ae94-440b-b277-88679511fc7e","ae895282-5d31-40b9-beeb-8321df2fb43f","TREE.2017.26","TREE_027.mammalGrid.mam","D05","TREE","TREE_027","diversity","2017-06-27","2017-06-27",,"NEON.DOC.000481vJ","A C E G and I lines traps set upside down",
+"571a9122-5fa4-4317-ae25-8724ed26041b","c0c7fae7-3f1f-4934-8bb5-0e8be6db11e0","TREE.2017.26","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"0c3017dc-d935-49e2-a5e0-61242862c5a1","4e3c7339-4894-4747-a7a5-1fe004435804","TREE.2017.26","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"4340bef5-26b1-48d9-9ce9-b78f1f967f05","cbd1c08c-7bbc-43f9-aef6-f45762506bac","TREE.2017.26","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-06-28","2017-06-28",,"NEON.DOC.000481vJ",,
+"f12bc41f-c923-47b5-9c88-5b74c6c02dce","f5ae43ab-c0c0-42cd-9da7-0f231a09417d","TREE.2017.26","TREE_028.mammalGrid.mam","D05","TREE","TREE_028","pathogen","2017-06-30","2017-06-30",,"NEON.DOC.000481vJ",,
+"f21e0b3c-85d7-4e9f-be2b-f06894054cba","0dc7c76e-7efd-4a14-84e1-8fe460cf9b90","TREE.2017.26","TREE_019.mammalGrid.mam","D05","TREE","TREE_019","pathogen","2017-06-30","2017-06-30",,"NEON.DOC.000481vJ","Over one third of grid was disturbed by a bear.",
+"729438e8-3cf0-4678-81f9-bd80f56e48c6","4831cf30-e2c5-4cf2-a33b-d23949aca85b","TREE.2017.26","TREE_016.mammalGrid.mam","D05","TREE","TREE_016","pathogen","2017-06-30","2017-06-30",,"NEON.DOC.000481vJ",,
