@@ -67,7 +67,7 @@ neon.ix <- neon_tick_data("Ixodes scapularis") %>% suppressMessages()
 neon.aa <- neon_tick_data("Amblyomma americanum") %>% suppressMessages()
 
 neon.data <- bind_rows(neon.ix, neon.aa) %>%
-  filter(time >= "2018-01-01") %>%
+  filter(time >= "2018-01-01" & time <= "2022-01-01") %>%
   select(-n.drags, -n.days, -count.flag) %>%
   pivot_longer(cols = c(Larva, Nymph, Adult),
                names_to = "lifeStage",
@@ -215,15 +215,11 @@ for(i in 1:length(series.files)){
 }
 
 # score figures --------------------------------------------------------------------------
-
-both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
-ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
-aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
-
+# Null model
 null.crps <- null.scores %>%
 	mutate(crps = score, doy = yday(time)) 
 
-score.files <- analysis.files[str_detect(analysis.files, "analysis")]
+score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
 
 df.mutate <- tibble()
 for(i in 1:length(score.files)){
@@ -281,99 +277,94 @@ for(i in 1:nrow(all.combos)){
 scores.all <- bind_rows(df.mutate, null.crps)
 
 aa.df <- scores.all %>%
-  filter(siteID %in% aa.plots, lifeStage=="Nymph") %>%
+  filter(species == "Amblyomma americanum", lifeStage=="Nymph") %>%
   select(siteID, time, model, crps) %>%
   group_by(siteID, time, model) %>%
   summarise(crps = mean(crps, na.rm=T)) %>%
   pivot_wider(names_from = model, values_from = crps) %>%
   filter(is.na(Weather) == F) %>%
-  rename("WeatherMice" = "Weather & Mice") %>%
-  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice) %>%
-  select(-c(Null, Weather, WeatherMice)) %>%
-  pivot_longer(NullWeather:NullWeatherMice, names_to = 'model', 
+  rename("WeatherMice" = "WithWeatherAndMiceGlobal") %>%
+  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice,
+         NullWeatherIntercept = Null-Weather_hierarchicalIntercept,
+         NullWeatherFull = Null-Weather_hierarchicalFull,
+         NullWeatherMiceIntercept = Null-WeatherMice_hierarchicalIntercept,
+         NullWeatherMiceFull = Null-WeatherMice_hierarchicalFull) %>%
+  select(-c(Null, Weather, WeatherMice, Weather_hierarchicalIntercept,
+            WeatherMice_hierarchicalIntercept, Weather_hierarchicalFull,
+            WeatherMice_hierarchicalFull)) %>%
+  pivot_longer(NullWeather:NullWeatherMiceFull, names_to = 'model', 
                values_to = 'crps.diff') %>%
   mutate(model = case_when(model=="NullWeather" ~ "Weather",
-                           model=="NullWeatherMice" ~ "Weather & Mice"))
+                           model=="NullWeatherMice" ~ "Weather&Mice",
+                           model=="NullWeatherIntercept"~"WeatherIntercept",
+                           model=="NullWeatherFull"~"WeatherFull",
+                           model=="NullWeatherMiceIntercept"~"WeatherMiceIntercept",
+                           model=="NullWeatherMiceFull"~"WeatherMiceFull"))
 
 aa.fig <- ggplot(data=aa.df, aes(x = model, y = crps.diff))+
-  geom_boxplot(fill='lightgray')+
+  geom_boxplot(aes(fill=model))+
   geom_hline(yintercept = 0, linetype = 'dashed')+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  lims(y = c(-20,NA))+
   facet_wrap(~siteID)+
   labs(x = "Model", y = "Null CRPS - Model CRPS",
        title = "A. americanum")+
   theme_bw()+
-  theme(panel.grid=element_blank())
+  theme(panel.grid=element_blank(), axis.text.x = element_blank())
 
-aa.tab <- aa.figs %>%
+aa.tab <- aa.df %>%
   group_by(siteID, model) %>%
-  summarise(mean.diff = mean(crps.diff))
+  summarise(mean.diff = mean(crps.diff)) %>%
+  pivot_wider(names_from = siteID, values_from = mean.diff)
 
 ix.df <- scores.all %>%
-  filter(siteID %in% ix.plots, lifeStage=="Nymph") %>%
+  filter(species == "Ixodes scapularis", lifeStage=="Nymph") %>%
   select(siteID, time, model, crps) %>%
   group_by(siteID, time, model) %>%
   summarise(crps = mean(crps, na.rm=T)) %>%
   pivot_wider(names_from = model, values_from = crps) %>%
   filter(is.na(Weather) == F) %>%
-  rename("WeatherMice" = "Weather & Mice") %>%
-  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice) %>%
-  select(-c(Null, Weather, WeatherMice)) %>%
-  pivot_longer(NullWeather:NullWeatherMice, names_to = 'model', 
+  rename("WeatherMice" = "WithWeatherAndMiceGlobal") %>%
+  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice,
+         NullWeatherIntercept = Null-Weather_hierarchicalIntercept,
+         NullWeatherFull = Null-Weather_hierarchicalFull,
+         NullWeatherMiceIntercept = Null-WeatherMice_hierarchicalIntercept,
+         NullWeatherMiceFull = Null-WeatherMice_hierarchicalFull) %>%
+  select(-c(Null, Weather, WeatherMice, Weather_hierarchicalIntercept,
+            WeatherMice_hierarchicalIntercept, Weather_hierarchicalFull,
+            WeatherMice_hierarchicalFull)) %>%
+  pivot_longer(NullWeather:NullWeatherMiceFull, names_to = 'model', 
                values_to = 'crps.diff') %>%
   mutate(model = case_when(model=="NullWeather" ~ "Weather",
-                           model=="NullWeatherMice" ~ "Weather & Mice"))
+                           model=="NullWeatherMice" ~ "Weather&Mice",
+                           model=="NullWeatherIntercept"~"WeatherIntercept",
+                           model=="NullWeatherFull"~"WeatherFull",
+                           model=="NullWeatherMiceIntercept"~"WeatherMiceIntercept",
+                           model=="NullWeatherMiceFull"~"WeatherMiceFull"))
 
 ix.fig <- ggplot(data=ix.df, aes(x = model, y = crps.diff))+
-  geom_boxplot(fill='lightgray')+
+  geom_boxplot(aes(fill=model))+
   geom_hline(yintercept = 0, linetype = 'dashed')+
+  scale_fill_manual(values = natparks.pals("DeathValley"))+
+  lims(y = c(-20,20))+
   facet_wrap(~siteID)+
   labs(x = "Model", y = "Null CRPS - Model CRPS",
        title = "I. scapularis")+
   theme_bw()+
-  theme(panel.grid=element_blank())
+  theme(panel.grid=element_blank(), axis.text.x = element_blank())
 
 ix.tab <- ix.df %>%
   group_by(siteID, model) %>%
-  summarise(mean.diff = mean(crps.diff))
-
-both.df <-  scores.all %>%
-  filter(siteID %in% both.plots, lifeStage=="Nymph") %>%
-  select(siteID, time, model, crps, species) %>%
-  group_by(siteID, time, model, species) %>%
-  summarise(crps = mean(crps, na.rm=T)) %>%
-  pivot_wider(names_from = model, values_from = crps) %>%
-  filter(is.na(Weather) == F) %>%
-  rename("WeatherMice" = "Weather & Mice") %>%
-  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice) %>%
-  select(-c(Null, Weather, WeatherMice)) %>%
-  pivot_longer(NullWeather:NullWeatherMice, names_to = 'model', 
-               values_to = 'crps.diff') %>%
-  mutate(model = case_when(model=="NullWeather" ~ "Weather",
-                           model=="NullWeatherMice" ~ "Weather & Mice"))
-
-ggplot(data=both.df, aes(x = model, y = crps.diff, fill = species))+
-  geom_boxplot()+
-  geom_hline(yintercept = 0, linetype = 'dashed')+
-  facet_wrap(~siteID)+
-  scale_fill_manual(values = natparks.pals("DeathValley"))+
-  labs(x = "Model", y = "Null CRPS - Model CRPS")+
-  theme_bw()+
-  theme(panel.grid=element_blank())
-
-both.tab <- both.df %>%
-  group_by(siteID, model, species) %>%
-  summarise(mean.diff = mean(crps.diff))
+  summarise(mean.diff = mean(crps.diff, na.rm = T)) %>%
+  pivot_wider(names_from = siteID, values_from = mean.diff)
 
 # save_gg("aa_crps_diff.jpeg", aa.fig, dir.plot)
 # save_gg("ix_crps_diff.jpeg", ix.fig, dir.plot)
-# save_gg("both_crps_diff.jpeg", both.fig, dir.plot)
+# write_csv(aa.tab, "./figures/aa_crps_diff.csv")
+# write_csv(ix.tab, "./figures/ix_crps_diff.csv")
 
 # Scores across model iterations --------------------------
-score.files <- analysis.files[str_detect(analysis.files, "analysis")]
-
-both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
-ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
-aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
+score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
 
 df.mutate <- tibble()
 for(i in 1:length(score.files)){
@@ -392,25 +383,11 @@ for(i in 1:length(score.files)){
 }
 
 aa.sites <- df.mutate %>%
-  filter(siteID %in% aa.plots)
+  filter(species == "Amblyomma americanum")
 
-aa.score.ts <- ggplot(data=aa.sites, aes(x = start.date, y = crps, color = model,
+aa.score.ts <-ggplot(data=aa.sites, aes(x = start.date, y = crps, color = model,
                           fill=model))+
-  geom_smooth(method='lm', linewidth = 1.5)+
-  facet_wrap(~siteID, nrow = 2, ncol = 2)+
-  labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
-       fill = "Model")+
-  scale_color_manual(values = natparks.pals("DeathValley"))+
-  scale_fill_manual(values = natparks.pals("DeathValley"))+
-  theme_bw()+
-  theme(panel.grid = element_blank())
-
-ix.sites <- df.mutate %>%
-  filter(siteID %in% ix.plots)
-
-ix.score.ts <- ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
-                          fill=model))+
-  geom_smooth(method='lm', linewidth = 1.5)+
+  geom_smooth(method='gam', linewidth = 1.5)+
   facet_wrap(~siteID)+
   labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
        fill = "Model")+
@@ -419,13 +396,13 @@ ix.score.ts <- ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model
   theme_bw()+
   theme(panel.grid = element_blank())
 
-both.sites <- df.mutate %>%
-  filter(siteID %in% both.plots)
+ix.sites <- df.mutate %>%
+  filter(species == "Ixodes scapularis")
 
-both.score.ts <- ggplot(data=both.sites, aes(x = start.date, y = crps, color = model,
+ix.score.ts <-ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
                           fill=model))+
-  geom_smooth(method='lm', linewidth = 1.5)+
-  facet_grid(rows = vars(siteID), cols = vars(species))+
+  geom_smooth(method='gam', linewidth = 1.5)+
+  facet_wrap(~siteID)+
   labs(x = "Forecast Start Date", y = "CRPS", color = "Model",
        fill = "Model")+
   scale_color_manual(values = natparks.pals("DeathValley"))+
@@ -435,7 +412,6 @@ both.score.ts <- ggplot(data=both.sites, aes(x = start.date, y = crps, color = m
 
 # save_gg("aa_score_ts.jpeg", aa.score.ts, dir.plot)
 # save_gg("ix_score_ts.jpeg", ix.score.ts, dir.plot)
-# save_gg("both_score_ts.jpeg", both.score.ts, dir.plot)
 
 # Model coefficients ---------------------
 # Get files
