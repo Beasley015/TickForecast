@@ -7,6 +7,7 @@ Sys.setenv("NEONSTORE_DB" = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neo
 library(neonstore)
 
 neon_download("DP1.10093.001")
+neon_citation("DP1.10093.001")
 
 neon_store()
 tck_taxonomyProcessed <- neon_table("tck_taxonomyProcessed-basic")
