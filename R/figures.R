@@ -79,7 +79,7 @@ site.info <- neonstore::neon_sites()
 # Model output ------------------
 analysis.files <- list.files(dir.analysis, recursive = T)
 
-# time series figures-------------------------------------------------------------------
+# time series figures (single site) ----------------------------------------------
 series.files <- analysis.files[str_detect(analysis.files, "allDays")]
 
 for(i in 1:length(series.files)){
@@ -213,6 +213,168 @@ for(i in 1:length(series.files)){
   rm(list = c("scores", 'forecast.density', 'forecast.smol'))
   gc()
 }
+
+# Time series figures (hierarchical) ---------------------------
+series.files <- analysis.files[str_detect(analysis.files, "allDays")]
+hierarchical.files <- c(series.files[str_detect(series.files, "Ixodes_scapularis")],
+                        series.files[str_detect(series.files, "Amblyomma_americanum")])
+
+for(i in 1:length(hierarchical.files)){
+  # Read in time series from forecasting model
+  df.mutate <- read.csv(paste(dir.analysis, "/",hierarchical.files[i], sep = "")) %>%
+    unite(col = model, model, hierarchy, sep = "_")
+  
+  # Get constants for filtering
+  ls <- c("Larva", "Nymph", "Adult")
+  sp <- unique(df.mutate$species)
+  site.vec <- unique(df.mutate$siteID)
+  mod <- unique(df.mutate$model) 
+  h <- unique(df.mutate$hierarchy)
+  
+  # Get associated scoring files because they have plot areas
+  score.files <- analysis.files[str_detect(analysis.files, "hierarchical")]
+  score.files <- score.files[str_detect(score.files, sp)]
+  
+  # Read in score files
+  scores <- tibble()
+  for(j in 1:length(score.files)){
+    file <- read_csv(file=paste(dir.analysis,"/",score.files[j], sep = "")) %>%
+      suppressMessages()
+    scores <- bind_rows(scores, file)
+    rm(file)
+  }
+  
+  scores <- scores %>%
+    select(time, siteID, totalSampledArea, plotID, species, model) %>%
+    filter(time >= as.Date("2018-01-01", format = "%Y-%m-%d"),
+           is.na(plotID) == F) %>%
+    group_by(time, siteID, model, plotID) %>%
+    distinct() %>%
+    ungroup() %>%
+    group_by(time, siteID, model) %>%
+    summarise(sampledArea = sum(totalSampledArea, na.rm = T)) %>%
+    suppressMessages()
+  
+  # Condense forecast across plots
+  forecast.density <- df.mutate %>%
+    select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
+    mutate(time=as.Date(time, format = "%Y-%m-%d")) %>%
+    mutate(model = case_when(model == "Weather_FullHierarchical" ~ 
+                               "Weather_hierarchicalFull",
+                             model == "Weather_HierarchicalIntercept" ~ 
+                               "Weather_hierarchicalIntercept",
+                             model == "WeatherMice_HierarchicalIntercept" ~ 
+                               "WeatherMice_hierarchicalIntercept",
+                             model == "WeatherMice_FullHierarchical" ~ 
+                               "WeatherMice_hierarchicalFull",
+                             TRUE ~ model)) %>%
+    left_join(scores, by = c("time", "siteID","model")) %>%
+    ungroup() %>%
+    group_by(siteID) %>%
+    mutate(sampledArea = case_when(is.na(sampledArea)==T ~ 
+                                     mean(sampledArea,na.rm=T),
+                                   TRUE ~ sampledArea)) %>%
+    group_by(time, lifeStage, model, siteID, sampledArea) %>% 
+    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
+              forecast95=mean(upper95)) %>%
+    suppressMessages()
+  
+  rm(df.mutate)
+  
+  # Adjust densities for Cary sites because they were smapled differently
+  if(sp == "Ixodes_scapularis"){
+    forecast.density <- forecast.density %>%
+      mutate(mean.forecast = case_when(siteID %in% c("GREN", "HNRY","TEA") ~
+                                         (mean.forecast/sampledArea)*450,
+                                       TRUE ~ mean.forecast),
+             forecast05 = case_when(siteID %in% c("GREN", "HNRY","TEA") ~
+                                     (forecast05/sampledArea)*450,
+                                   TRUE ~ forecast05),
+             forecast95 = case_when(siteID %in% c("GREN", "HNRY","TEA") ~
+                                       (forecast95/sampledArea)*450,
+                                     TRUE ~ forecast95)) %>%
+      suppressMessages()
+  }
+  
+  all_combos <- expand_grid(ls, sp, unique(forecast.density$model))
+  
+  # RESUME HERE -----------
+  
+  fx.issue.date <- neon.data %>%
+    filter(siteID == site.vec) %>%
+    pull(time) %>%
+    unique()
+  fx.issue.date <- as.Date(fx.issue.date, format = "%Y-%m-%d")
+  
+  # Filter null model data
+  df.null.timeseries <- df.null %>%
+    filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date),
+           lifeStage %in% ls, species %in% sp) %>%
+    rename(siteID = site) %>%
+    select(median, lower95, upper95, variance, time, lifeStage, species) %>%
+    group_by(time)
+  
+  # Filter raw data
+  neon.timeseries <- neon.data %>%
+    mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
+    filter(siteID==site.vec, lifeStage %in% ls, species %in% sp, time>=min(fx.issue.date),
+           time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
+    select(time, plotID, density, lifeStage, species) %>%
+    group_by(time, lifeStage, species) %>%
+    summarise(meandensity = mean(density)) %>%
+    suppressMessages()
+  
+  # Filter forecast data
+  forecast.density <- forecast.density %>%
+    filter(time >= min(fx.issue.date),time <= max(fx.issue.date+364))
+  
+  dist.cols <- c(
+    "Data" = "#dd5129",
+    "Forecast" = "#0f7ba2",
+    "Null" = "#43b284"
+  )
+  
+  for(j in 1:nrow(all_combos)){
+    # Further filtering
+    forecast.smol <- forecast.density %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j], model == all_combos$mod[j])
+    
+    neon.smol <- neon.timeseries %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j])
+    
+    null.smol <- df.null.timeseries %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j])
+    
+    gg <- ggplot() +
+      geom_ribbon(data=null.smol, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null")) +
+      geom_point(data = neon.smol, aes(x=time, y = meandensity, fill = "Observed Data"),
+                 color = "#dd5129", size = 3) +
+      geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"),
+                  alpha = 0.3)+
+      geom_line(dat=forecast.smol, aes(x=time, y=mean.forecast), color = "#0f7ba2")+
+      lims(x = c(fx.issue.date[1], as.Date("2022-01-01", format = "%Y-%m-%d"))) +
+      labs(x = "Date", y = "Ticks/450m^2", 
+           title = paste(site.vec, ", ", all_combos$sp[j], ", ", all_combos$ls[j], ", ", 
+                         all_combos$mod[j], sep = "")) +
+      scale_fill_manual(values = c("#0f7ba2", "#43b284", "#dd5129"), name = "")+
+      theme_pubr() +
+      theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5),
+            legend.position = "bottom")
+    gg
+    save_gg(
+      dest = paste0("/timeseries_singlemods/", site.vec, "_", all_combos$sp[j], "_", 
+                    all_combos$ls[j], "_", all_combos$mod[j], ".jpeg"),
+      gg = gg,
+      path = dir.plot
+    )
+    
+    print(paste("Site = ", site.vec, ", Species = ", all_combos$sp[j], ", Life Stage = ", all_combos$ls[j], 
+                ", Model = ", all_combos$mod[j], sep = ""))
+  }
+  rm(list = c("scores", 'forecast.density', 'forecast.smol'))
+  gc()
+}
+
 
 # score figures --------------------------------------------------------------------------
 # Null model

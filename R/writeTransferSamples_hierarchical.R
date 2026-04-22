@@ -31,8 +31,7 @@ find_model <- function(x){
 find_hierarchy <- function(x){
   if(grepl("Full", x)){
     h <- "FullHierarchical"
-  }
-  if(grepl("Intercept",x)){
+  } else if(grepl("Intercept",x)){
     h <- "HierarchicalIntercept"
   }
 }
