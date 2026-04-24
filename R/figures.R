@@ -257,7 +257,7 @@ for(i in 1:length(hierarchical.files)){
   
   # Condense forecast across plots
   forecast.density <- df.mutate %>%
-    select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
+    select(time, lifeStage, siteID, species, model, mean, lower75, upper75) %>%
     mutate(time=as.Date(time, format = "%Y-%m-%d")) %>%
     mutate(model = case_when(model == "Weather_FullHierarchical" ~ 
                                "Weather_hierarchicalFull",
@@ -278,10 +278,10 @@ for(i in 1:length(hierarchical.files)){
                                    TRUE ~ sampledArea)) %>%
     group_by(time, lifeStage, model, siteID, sampledArea) %>% 
     mutate(mean = case_when(mean < 0 ~ 0, TRUE ~ mean),
-           lower95 = case_when(lower95 < 0 ~ 0, TRUE ~ lower95),
-           upper95 = case_when(upper95 < 0 ~ 0, TRUE ~ upper95)) %>%
-    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
-              forecast95=mean(upper95)) %>%
+           lower75 = case_when(lower75 < 0 ~ 0, TRUE ~ lower75),
+           upper75 = case_when(upper75 < 0 ~ 0, TRUE ~ upper75)) %>%
+    summarise(mean.forecast = mean(mean), forecast05 = mean(lower75),
+              forecast95=mean(upper75)) %>%
     suppressMessages()
   
   rm(df.mutate)
