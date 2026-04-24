@@ -18,7 +18,6 @@ Immediate to do's:
 In the distance:
 - Rename model covariates so they correspond to specific components of model,
     not just "beta" with a subscript
-- Hierarchical covariate selection
 - Extend model to most recent NEON data
 - Extend model to NEON sites with sparse data
 

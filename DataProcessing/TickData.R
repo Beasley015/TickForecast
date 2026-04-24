@@ -2,7 +2,6 @@
 # download with neonstore
 # clean data into usable csv
 
-
 library(tidyverse)
 library(lubridate)
 library(uuid)
@@ -158,7 +157,6 @@ df.nymph.adult <- target.ls %>%
 df.all.stages <- bind_rows(df.larva.sum, df.nymph.adult)
 df <- left_join(df.all.stages, cols.keep, by = c("occasionID", "lifeStage"))
 
-
 # df.standard <- df %>%
 #   group_by(siteID, plotID, time, scientificName, lifeStage) %>% 
 #   summarise(totalCount = sum(processedCount),
@@ -173,4 +171,22 @@ write_csv(tick.long, "./Data/tickLong.csv")
 write_csv(taxon.ids, "./Data/tickTaxonID.csv")
 write_csv(target, "./Data/tickTargets.csv")
 
+# Get vectors of sites w/both species ----------------
+ix <- tick.long %>%
+  filter(scientificName == "Ixodes scapularis") %>%
+  group_by(siteID) %>%
+  summarise(total_count = sum(processedCount)) %>%
+  filter(total_count > 10)
 
+am <- tick.long %>%
+  filter(scientificName == "Amblyomma americanum")%>%
+  group_by(siteID) %>%
+  summarise(total_count = sum(processedCount)) %>%
+  filter(total_count > 10)
+
+ix.sites <- unique(ix$siteID)
+
+am.sites <- unique(am$siteID)
+
+write_lines(ix.sites, file = "./Data/ix_sites.txt")
+write_lines(am.sites, file = "./Data/am_sites.txt")
