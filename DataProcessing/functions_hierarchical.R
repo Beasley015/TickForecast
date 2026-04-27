@@ -668,6 +668,7 @@ transfer_analysis <- function(
 	    mutate(species = spp, start.date = start.date, model = model)
 	  
 	} else{
+	  # Make sure dimnsions are correct --------------
 	  # extract
 	  betas <-fx.df$beta 
 	  

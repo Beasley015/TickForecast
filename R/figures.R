@@ -569,20 +569,20 @@ ix.score.ts <-ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
 # save_gg("aa_score_ts.jpeg", aa.score.ts, dir.plot)
 # save_gg("ix_score_ts.jpeg", ix.score.ts, dir.plot)
 
-# Model coefficients ---------------------
+# Model coefficients: single-site ----------------
 # Get files
-out.files <- list.files(dir.out, recursive = T)
+out.files <- list.files("./outUpdate/", recursive = T)
 out.files <- out.files[str_detect(out.files, "parameterSummary.csv")]
 
 # Omit pre-2018 results
 years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
-                 format = "%Y-%m-%d"))
+                      format = "%Y-%m-%d"))
 out.files <- out.files[which(years >= 2018)]
 
 # Get coefficients
 betas <- tibble()
 for(i in seq_along(out.files)){
-  wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+  wee.tab <- read_csv(file.path("./outUpdate/", out.files[i])) %>%
     filter(str_detect(node, "beta")) %>%
     suppressMessages()
   
@@ -591,8 +591,8 @@ for(i in seq_along(out.files)){
 
 betas <- betas %>%
   select(-(`start.date == start.date`)) %>%
-  filter(model=='WithWeatherAndMiceGlobal') %>%
-  group_by(siteID, species, node) %>%
+  filter(str_detect(model, "WithWeatherAndMiceGlobal") == T) %>%
+  group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages() %>%
   mutate(node = case_when(node == 'beta[1]' ~ 'MaxTempLarvalSurvival',
@@ -610,18 +610,159 @@ betas <- betas %>%
                           node == 'beta[13]' ~ 'MiceLarvaToNymph',
                           node == 'beta[14]' ~ 'MiceNymphToAdult'))
 
-both.plots <- c("BLAN", "LENO", "SCBI", "SERC")
-ix.plots <- c("TREE", "HARV", "GREN", "HNRY", "TEA")
-aa.plots <- c("KONZ", "OSBS", "TALL", "UKFS")
-
 ix.sub <- betas %>%
-  filter(siteID %in% c(ix.plots, both.plots),
-         species == "Ixodes scapularis") %>%
+  filter(species == "Ixodes scapularis") %>%
   mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
                          lower95>0 & upper95>0 ~ 'sig',
                          TRUE ~ NA),
          node = factor(node))
 
+ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 4.2, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 3, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.sub <- betas %>%
+  filter(species == "Amblyomma americanum") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+# Fix these sigs too
+aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 4, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 3.5, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+# save_gg("aa_survival_singlesite.jpeg", aa.survival, dir.plot, height = 8)
+# save_gg("aa_transition_singlesite.jpeg", aa.transition, dir.plot, height = 8)
+# save_gg("ix_survival_singlesite.jpeg", ix.survival, dir.plot, height = 8)
+# save_gg("ix_transition_singlesite.jpeg", ix.transition, dir.plot, height = 8)
+
+# Maps?
+site.coords <- read_csv("./Data/siteLatLon.csv") %>%
+  suppressMessages()
+
+betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
+  filter(str_detect(node, 'Survival')) %>%
+  filter(is.na(decimalLongitude)==F) %>%
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+
+state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
+state_map <- st_make_valid(st_transform(state_map, crs = 5070))
+
+# Clip map at given latitude
+state_map <- st_transform(state_map, crs = 4326)
+state_map <- st_crop(state_map, st_bbox(betas.loc))
+
+ix.map <- ggplot(data = betas.loc %>% filter(species == "Ixodes scapularis"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Ixodes scapularis")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node, dir = "v")+
+  theme_bw()
+
+aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Amblyomma americanum")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node, dir = "v")+
+  theme_bw()
+
+# save_gg("ix_map_singlesite.jpeg", ix.map, dir.plot, width = 10, height = 8)
+# save_gg("aa_map_singlesite.jpeg", aa.map, dir.plot, width = 10, height = 8)
+
+# Model coefficients: hierarchical ---------------------
+# Get files
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "betaQuant")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                 format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
+betas <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    suppressMessages()
+  
+  betas <- bind_rows(betas, wee.tab)
+}
+
+betas <- betas %>%
+  select(-start.date) %>%
+  filter(str_detect(model, "WeatherMice") == T) %>%
+  rename(siteID = site) %>%
+  group_by(siteID, species, node, model) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages() %>%
+  mutate(node = case_when(node == 'beta1' ~ 'MaxTempLarvalSurvival',
+                          node == 'beta2' ~ 'MaxRHLarvalSurvival',
+                          node == 'beta3' ~ 'MinRHLarvalSurvival',
+                          node == 'beta4' ~ 'PrecipLarvalSurvival',
+                          node == 'beta5' ~ 'MaxTempNymphSurvival',
+                          node == 'beta6' ~ 'MaxRHNymphSurvival',
+                          node == 'beta7' ~ 'MinRHNymphSurvival',
+                          node == 'beta8' ~ 'PrecipNymphSurvival',
+                          node == 'beta9' ~ 'MaxTempAdultSurvival',
+                          node == 'beta10' ~ 'MaxRHAdultSurvival',
+                          node == 'beta11' ~ 'MinRHAdultSurvival',
+                          node == 'beta12' ~ 'PrecipAdultSurvival',
+                          node == 'beta13' ~ 'MiceLarvaToNymph',
+                          node == 'beta14' ~ 'MiceNymphToAdult'))
+
+ix.sub <- betas %>%
+  filter(species == "Ixodes_scapularis") %>%
+  filter(is.na(siteID) == F) %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+# Fix the sig points in this figure:
 ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
   geom_point(aes(x = 4.2, shape = sig))+
@@ -645,13 +786,14 @@ ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x 
         axis.title.y = element_blank())
 
 aa.sub <- betas %>%
-  filter(siteID %in% c(aa.plots, both.plots),
-         species == "Amblyomma americanum") %>%
+  filter(species == "Amblyomma_americanum") %>%
+  filter(is.na(siteID) == F) %>%
   mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
                          lower95>0 & upper95>0 ~ 'sig',
                          TRUE ~ NA),
          node = factor(node))
 
+# Fix these sigs too
 aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
   geom_point(aes(x = 4, shape = sig))+
@@ -695,7 +837,7 @@ state_map <- st_make_valid(st_transform(state_map, crs = 5070))
 state_map <- st_transform(state_map, crs = 4326)
 state_map <- st_crop(state_map, st_bbox(betas.loc))
 
-ix.map <- ggplot(data = betas.loc %>% filter(species == "Ixodes scapularis"))+
+ix.map <- ggplot(data = betas.loc %>% filter(species == "Ixodes_scapularis"))+
   geom_sf(data=state_map)+
   geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
   # geom_sf_text(aes(label = siteID))+
@@ -705,7 +847,7 @@ ix.map <- ggplot(data = betas.loc %>% filter(species == "Ixodes scapularis"))+
   facet_wrap(~node)+
   theme_bw()
 
-aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))+
+aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma_americanum"))+
   geom_sf(data=state_map)+
   geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
   # geom_sf_text(aes(label = siteID))+
@@ -717,3 +859,5 @@ aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))
 
 # save_gg("ix_map.jpeg", ix.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_map.jpeg", aa.map, dir.plot, width = 10, height = 8)
+
+# Full beta posteriors ----------------
