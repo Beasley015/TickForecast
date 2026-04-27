@@ -8,9 +8,10 @@ X Reproduce some of John's figures
 X Add detailed ReadMe
 X Speed up hierarchical model because she is sloooooooow
 X Make model fully hierarchical
+X Write code to find add'l Iscap and Aam sites
 
 Immediate to do's:
-- Write code to find add'l Iscap and Aam sites
+- Fix prior mis-specification for latent tick density
 - Compare hierarchical vs. OG vs. null models
 - Update site level lat/long in intake_daymet.R script so it gets the midpoint of the sites
 - Prep Cary lat-longs
