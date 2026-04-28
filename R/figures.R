@@ -916,8 +916,8 @@ combos.site <- combos %>%
 for(i in 1:nrow(combos.site)){
   smol <- betas %>%
     filter(str_detect(model, "WeatherMice") == T,
-           species == combos$species[i],
-           node == combos$node[i]) %>%
+           species == combos.site$species[i],
+           node == combos.site$node[i]) %>%
     mutate(node = case_when(node == 'beta1' ~ 'MaxTempLarvalSurvival',
                             node == 'beta2' ~ 'MaxRHLarvalSurvival',
                             node == 'beta3' ~ 'MinRHLarvalSurvival',
@@ -942,7 +942,6 @@ for(i in 1:nrow(combos.site)){
     theme(panel.grid=element_blank())
   
   save_gg(path = paste(dir.plot, "beta_hists/"), gg = hist,
-          dest = paste(unique(smol$node), str_replace(combos$species[i], ". ", "_"),
+          dest = paste(unique(smol$node), str_replace(smol$species, ". ", "_"),
                        sep = "_"))
 }
-
