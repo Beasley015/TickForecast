@@ -860,4 +860,89 @@ aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma_americanum"))
 # save_gg("ix_map.jpeg", ix.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_map.jpeg", aa.map, dir.plot, width = 10, height = 8)
 
-# Full beta posteriors ----------------
+# Beta posteriors ----------------
+# Get files
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "beta.csv")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
+betas <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    suppressMessages()
+  
+  if(ncol(wee.tab) != 3){next}
+  
+  wee.tab <- wee.tab %>%
+    group_by(site, node) %>%
+    mutate(model = case_when(str_detect(out.files[i], "Mice")==T ~ "WeatherMice",
+                             TRUE ~ "Weather",),
+           iter = i,
+           species = case_when(str_detect(out.files[i], "Ixodes") ~ "I. scapularis",
+                               TRUE ~ "A. americanum")) %>%
+    suppressMessages()
+  
+  betas <- bind_rows(betas, wee.tab)
+}
+
+combos <- betas %>%
+  ungroup() %>%
+  select(site, species, node) %>%
+  distinct()
+
+# Quick glance at some histograms
+for(i in 1:5){
+  randrow <- sample(1:nrow(combos), size = 1)
+  
+  smol <- betas %>%
+    filter(node == combos$node[randrow], species == combos$species[randrow], 
+           site == combos$site[randrow])
+  
+  print(paste(combos$site[randrow], combos$species[randrow],
+        combos$node[randrow], sep = ", "))
+  hist(smol$value)
+}
+
+# Better figures
+combos.site <- combos %>%
+  select(species, node) %>%
+  distinct()
+
+for(i in 1:nrow(combos.site)){
+  smol <- betas %>%
+    filter(str_detect(model, "WeatherMice") == T,
+           species == combos$species[i],
+           node == combos$node[i]) %>%
+    mutate(node = case_when(node == 'beta1' ~ 'MaxTempLarvalSurvival',
+                            node == 'beta2' ~ 'MaxRHLarvalSurvival',
+                            node == 'beta3' ~ 'MinRHLarvalSurvival',
+                            node == 'beta4' ~ 'PrecipLarvalSurvival',
+                            node == 'beta5' ~ 'MaxTempNymphSurvival',
+                            node == 'beta6' ~ 'MaxRHNymphSurvival',
+                            node == 'beta7' ~ 'MinRHNymphSurvival',
+                            node == 'beta8' ~ 'PrecipNymphSurvival',
+                            node == 'beta9' ~ 'MaxTempAdultSurvival',
+                            node == 'beta10' ~ 'MaxRHAdultSurvival',
+                            node == 'beta11' ~ 'MinRHAdultSurvival',
+                            node == 'beta12' ~ 'PrecipAdultSurvival',
+                            node == 'beta13' ~ 'MiceLarvaToNymph',
+                            node == 'beta14' ~ 'MiceNymphToAdult')) %>%
+    suppressMessages()
+  
+  hist <- ggplot(data = smol, aes(x = value, fill = site))+
+    geom_density(alpha = 0.3)+
+    scale_fill_viridis_d()+
+    labs(x = unique(smol$node), y = "Density")+
+    theme_bw(base_size=12)+
+    theme(panel.grid=element_blank())
+  
+  save_gg(path = paste(dir.plot, "beta_hists/"), gg = hist,
+          dest = paste(unique(smol$node), str_replace(combos$species[i], ". ", "_"),
+                       sep = "_"))
+}
+
