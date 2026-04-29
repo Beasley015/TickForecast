@@ -30,7 +30,7 @@ neon_tick_data <- function(species) {
 
 		df.na <- sub.df |>
 			filter(lifeStage %in% c("Nymph", "Adult")) |>
-			select(time, processedCount, totalSampledArea, lifeStage) |>
+			dplyr::select(time, processedCount, totalSampledArea, lifeStage) |>
 			distinct()
 
 		counts <- bind_rows(df.l, df.na) |>
@@ -107,7 +107,7 @@ capture_matrix <- function(site, neon.smam) {
 		fill.days <- neon.smam %>%
 			filter(collectDate %in% missing.days) %>%
 			distinct(collectDate, .keep_all = TRUE) %>%
-			select(collectDate, tagID) %>%
+			dplyr::select(collectDate, tagID) %>%
 			mutate(tagID = "noCapture", state = unobserved)
 	}
 
@@ -668,7 +668,6 @@ transfer_analysis <- function(
 	    mutate(species = spp, start.date = start.date, model = model)
 	  
 	} else{
-	  # Make sure dimnsions are correct --------------
 	  # extract
 	  betas <-fx.df$beta 
 	  
@@ -677,17 +676,23 @@ transfer_analysis <- function(
 	  for(i in 1:dim(betas)[2]){beta.names[i] <- paste("beta", i, sep = "")}
 	  
 	  # Add col for site
+	  betas <- abind(betas, array(NA, replace(dim(betas), 2, 1)), along = 2)
+	  
+	  for(i in 1:length(sites)){
+	    betas[,ncol(betas),i] <- sites[i]
+	  }
+	  
 	  betas <- as.data.frame(apply(betas, 2, rbind))
-	  colnames(betas) <- beta.names
-	  betas$site <- rep(sites, each = nmcmc)
+	  colnames(betas) <- c(beta.names, "siteID")
 	  
 	  # Long format
 	  betas <- betas %>%
-	    pivot_longer(cols = -site, names_to="node", values_to="value")
+	    pivot_longer(cols = -siteID, names_to="node", values_to="value") %>%
+	    mutate(value = as.numeric(value))
 	  
 	  # quants
 	  betas.quant <- betas %>%
-	    group_by(node, site) %>%
+	    group_by(node, siteID) %>%
 	    summarise(
 	      lower95 = quantile(value, 0.025, na.rm=T),
 	      lower75 = quantile(value, 0.125, na.rm=T),

@@ -942,6 +942,6 @@ for(i in 1:nrow(combos.site)){
     theme(panel.grid=element_blank())
   
   save_gg(path = paste(dir.plot, "beta_hists/"), gg = hist,
-          dest = paste(unique(smol$node), str_replace(smol$species, ". ", "_"),
+          dest = paste(unique(smol$node), unique(str_replace(smol$species, ". ", "_")),
                        sep = "_"))
 }

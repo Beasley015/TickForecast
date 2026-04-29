@@ -72,7 +72,7 @@ ua.cal <-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 2
 production <- TRUE
-n.iter <- 15000
+n.iter <- 1000
 # n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
@@ -427,12 +427,12 @@ for (t in t:start.drags) {
 				suppressMessages()
 
 			pr.beta <- matrix(NA, n.beta, 2)
-			for (i in seq_len(n.beta)) {
+			for (i in 1:n.beta) {
     		pr <- numeric(2)
 				xx <- betas %>% filter(parameter == paste("beta", i, sep = ""))
 				pr[1] <- xx %>% pull(mu)
 				pr[2] <- xx %>% pull(tau)
-				pr.beta[i, ] <- pr
+				pr.beta[i,] <- pr
 			}
 
 			# get invgamma parameters
