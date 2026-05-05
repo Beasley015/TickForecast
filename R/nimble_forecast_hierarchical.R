@@ -2,6 +2,23 @@ library(nimble)
 source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
+  # Hyperpriors for intercepts 
+  phi.l.mean ~ dnorm(pr.phi.l[1], pr.phi.l[2])
+  phi.l.prec ~ dgamma(1, 1)
+  
+  phi.n.mean ~ dnorm(pr.phi.n[1], pr.phi.n[2])
+  phi.n.prec ~ dgamma(1, 1)
+  
+  phi.a.mean ~ dnorm(pr.phi.a[1], pr.phi.a[2])
+  phi.a.prec ~ dgamma(1, 1)
+  
+  theta.ln.mean ~ dnorm(pr.theta.l2n[1], tau = pr.theta.l2n[2])
+  theta.ln.prec ~ dgamma(1,1)
+  
+  theta.na.mean ~ dnorm(pr.theta.n2a[1], tau = pr.theta.n2a[2])
+  theta.na.prec ~ dgamma(1,1)
+  # Means are informative based on previous iterations
+  
   # priors for beta - eventually moves to main loop
   for (j in 1:n.beta) {
     # Betas are the linear covariates for mice/weather linear models
@@ -11,14 +28,11 @@ model.code <- nimbleCode({
   
   for(site in 1:nsite){
 	  ### priors
-	  phi.l.mu[site] ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
-	  phi.n.mu[site] ~ dnorm(pr.phi.n[1], tau = pr.phi.n[2])
-	  phi.a.mu[site] ~ dnorm(pr.phi.a[1], tau = pr.phi.a[2])
-	  theta.ln[site] ~ dnorm(pr.theta.l2n[1], tau = pr.theta.l2n[2])
-	  theta.na[site] ~ dnorm(pr.theta.n2a[1], tau = pr.theta.n2a[2])
-	  # Params can also be drawn from prior distributions
-	  # But this is fine for now: an informative prior
-	  # Based on previous data/model iterations
+	  phi.l.mu[site] ~ dnorm(phi.l.mean, tau = phi.l.prec)
+	  phi.n.mu[site] ~ dnorm(phi.n.mean, tau = phi.n.prec)
+	  phi.a.mu[site] ~ dnorm(phi.a.mean, tau = phi.a.prec)
+	  theta.ln[site] ~ dnorm(theta.ln.mean, theta.ln.prec)
+	  theta.na[site] ~ dnorm(theta.na.mean, theta.na.prec)
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
@@ -66,7 +80,7 @@ model.code <- nimbleCode({
 			  0
 		  )
 		  
-		  # lambda is part of transition matrix... I think reproduction?
+		  # lambda is reproduction in transition matrix
 		  lambda[t, site] <- if_else_nimble(
 			  (cgdd[t, site] >= 1400) & (cgdd[t, site] <= 2500),
 			  repro.mu,

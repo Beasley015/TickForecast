@@ -13,10 +13,9 @@ model.code <- nimbleCode({
 	  # But this is fine for now: an informative prior
 	  # Based on previous data/model iterations
 	  
-	  # priors for beta - eventually moves to main loop
+	  # need hyperprior here --------------
 	  for (j in 1:n.beta) {
 	    # Betas are the linear covariates for mice/weather linear models
-	    # This will be hierarchical after hierarchical intercepts work
 	    beta[j, site] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
 	  }
 
