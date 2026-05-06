@@ -31,8 +31,8 @@ model.code <- nimbleCode({
 	  phi.l.mu[site] ~ dnorm(phi.l.mean, tau = phi.l.prec)
 	  phi.n.mu[site] ~ dnorm(phi.n.mean, tau = phi.n.prec)
 	  phi.a.mu[site] ~ dnorm(phi.a.mean, tau = phi.a.prec)
-	  theta.ln[site] ~ dnorm(theta.ln.mean, theta.ln.prec)
-	  theta.na[site] ~ dnorm(theta.na.mean, theta.na.prec)
+	  theta.ln[site] ~ dnorm(theta.ln.mean, tau = theta.ln.prec)
+	  theta.na[site] ~ dnorm(theta.na.mean, tau = theta.na.prec)
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
