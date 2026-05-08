@@ -3,13 +3,13 @@ source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
   # Hyperpriors for intercepts 
-  phi.l.mean ~ dnorm(pr.phi.l[1], pr.phi.l[2])
+  phi.l.mean ~ dnorm(pr.phi.l[1], tau=pr.phi.l[2])
   phi.l.prec ~ dgamma(1, 1)
   
-  phi.n.mean ~ dnorm(pr.phi.n[1], pr.phi.n[2])
+  phi.n.mean ~ dnorm(pr.phi.n[1], tau=pr.phi.n[2])
   phi.n.prec ~ dgamma(1, 1)
   
-  phi.a.mean ~ dnorm(pr.phi.a[1], pr.phi.a[2])
+  phi.a.mean ~ dnorm(pr.phi.a[1], tau=pr.phi.a[2])
   phi.a.prec ~ dgamma(1, 1)
   
   theta.ln.mean ~ dnorm(pr.theta.l2n[1], tau = pr.theta.l2n[2])
