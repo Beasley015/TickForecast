@@ -11,8 +11,7 @@ Sys.setenv(NEONSTORE_DB = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neons
 Sys.setenv(NEONSTORE_HOME = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
 library(neonstore)
 
-# Last check 2025-11-10
-# latest taxon id: 2020-10-06
+# Last download 11 may 2026
 product <- "DP1.10093.001"
 # neon_download(product = product) # Un-comment to redownload
 

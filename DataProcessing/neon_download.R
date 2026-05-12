@@ -11,4 +11,6 @@ neon_citation("DP1.10093.001")
 
 neon_store()
 tck_taxonomyProcessed <- neon_table("tck_taxonomyProcessed-basic")
-tck_fielddata <- neon_table("tck_fielddata-basic")
+tck_fielddata <- neon_table("tck_fielddata-basic") # potential error here
+
+# LAST DOWNLOAD 11 may 2026

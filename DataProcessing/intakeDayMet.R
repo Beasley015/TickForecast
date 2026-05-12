@@ -4,48 +4,26 @@ library(lubridate)
 library(daymetr)
 library(curl)
 
-# Read in mouse data (plots)
-mouse.data <- read_csv("./Data/allSmallMammals.csv")
-mouse.plots <- mouse.data %>%
-  group_by(plotID) %>%
-  select(plotID, decimalLatitude, decimalLongitude) %>%
-  distinct() %>%
-  mutate(plotID = paste0("smam", plotID))
-
-# Read in tick data (plots)
-tick.data <- read_csv("./Data/tickLong.csv", show_col_types=F)
-tick.plots <- tick.data %>%
-  group_by(plotID) %>%
-  select(plotID, decimalLatitude, decimalLongitude) %>%
-  distinct() %>%
-  mutate(plotID = paste0("tick", plotID))
-
-# Write csv for plot coords
-plot.df <- bind_rows(mouse.plots, tick.plots)
-plot.df <- plot.df %>%
-  filter(!grepl("tick", plotID)) %>%
-  rename_with( ~ c("site", "latitude", "longitude"), everything())
-write_csv(plot.df, file = "./Data/plotLatLon.csv")
-
-# Read in site coords if they already exist
+# Read in site and plot coords 
 site.coord <- readr::read_csv("./Data/siteLatLon.csv") %>% suppressMessages()
+plot.coord <- read_csv("./Data/plotLatLon.csv") %>% suppressMessages()
 
 # Create site coords if needed TO DO--------------------
 
 # Daymet download
 dm <- download_daymet_batch(
-  file_location = './Data/siteLatLon.csv',
-  # file_location = './Data/plotLatLon.csv', #uncomment for plot level
+  # file_location = './Data/siteLatLon.csv',
+  file_location = './Data/plotLatLon.csv', #uncomment for plot level
   start = 2016,
-  end = 2021,
+  end = 2025,
   internal = TRUE
 )
 
 dm_unlist <- function(x){
   dat <- x$data
   dat$site <- x$site
-  dat$lat <- x$latitude
-  dat$long <- x$longitude
+  dat$lat <- x$decimalLatitude
+  dat$long <- x$decimalLongitude
   dat$alt <- x$altitude
 
   return(dat)
@@ -55,7 +33,7 @@ dm_tst <- lapply(dm, dm_unlist)
 
 dm_df <- do.call(rbind, dm_tst)
 
-write_csv(dm_df, file = "./Data/daymetSite.csv")
+write_csv(dm_df, file = "./Data/daymetPlot.csv")
 
 variables <- c(
   "dayl..s.",      # day length
@@ -82,7 +60,7 @@ make_csvs <- function(size){
   if(size == "Site"){
     data <- read_csv("./Data/daymetSite.csv") 
   } else if (size == "Plot"){
-    data <- read_csv("./Data/daymet.csv")
+    data <- read_csv("./Data/daymetPlot.csv")
   }
   
   df <- data %>% 
