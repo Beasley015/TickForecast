@@ -1,7 +1,7 @@
 library(dplyr)
 library(terra)
 
-dat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/bounding_boxes.csv")
+dat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/UPDATED_bounding_boxes.csv")
 dat_2 <- data.frame(site = character(nrow(dat)))
 
 
@@ -10,12 +10,14 @@ rows <- 1:nrow(dat)
 
 for(r in rows){
   
-  ID <- dat[r,1]
+  ID <- dat[r,6]
   dat_2[r, 1] <- gsub("[^A-Z]", "", ID)
   
 }
 
 dat$site <- dat_2$site
+
+dat <- dat[, c("site", setdiff(names(dat), "site"))]
 
 n <- n_distinct(dat_2$site)
 sites <- unique(dat_2$site)
@@ -131,4 +133,4 @@ for(s in sites){
 
 
 
-write.csv(dat_3, "FINAL_bounders.csv", row.names = FALSE)
+

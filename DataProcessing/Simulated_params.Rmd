@@ -1,0 +1,145 @@
+---
+title: "Monte Carlo simulation of Ixodes parameter values along with associated R^2's"
+author: "Neo Chatterjee"
+date: "2026-04-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Plots and model summaries for each parameter-covariate combination
+```{r, echo = FALSE}
+library(dplyr)
+library(lubridate)
+library(broom)
+
+#obtain parameter .csv's
+files <- list.files("/usr4/ugrad/neochatt/TickForecast/Data", pattern = "Ixodes", full.names = TRUE)
+
+#parameter names
+pars <- c("phi.l.mu", "phi.n.mu", "phi.a.mu", "theta.ln", "theta.na", "beta[1]", "beta[2]", "beta[3]", "beta[4]", "beta[5]", "beta[6]", "beta[7]", "beta[8]", "beta[9]", "beta[10]", "beta[11]", "beta[12]", "beta[13]", "beta[14]")
+
+
+NDVI_R_sq <- data.frame(matrix(nrow = 1000, ncol = 19))
+colnames(NDVI_R_sq) <- pars
+
+LAI_R_sq <- data.frame(matrix(nrow = 1000, ncol = 19))
+colnames(LAI_R_sq) <- pars
+
+c = 1
+
+for(par in pars){
+  
+  deer_files <- list()
+  
+  #load vegetation data
+  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/all_LAIs.csv")
+  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/all_VIs.csv")
+
+  #render it plottable
+  lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
+  ndvi$date <- as.Date(ndvi$date)
+  
+  for (f in files) {
+    dat <- read.csv(f)
+    dat <- dat |> filter(node == par)
+    dat$start.date <- as.Date(dat$start.date)
+    deer_files[[length(deer_files) + 1]] <- dat
+  }
+
+  deer_files <- bind_rows(deer_files)
+
+  deer_files <- deer_files |>
+    mutate(week = floor_date(start.date, "week")) |>
+    group_by(week, siteID) |>
+    mutate(par = mean(mean, na.rm = TRUE)) 
+  
+  params <- deer_files |>
+    group_by(siteID) |>
+    summarize(par = mean[which.max(as.Date(start.date))], 
+              sd = variance[which.max(as.Date(start.date))]^0.5)
+  
+  lai <- lai |>
+    group_by(siteID) |>
+    summarize(lai = mean(lai_mean, na.rm = TRUE))
+  
+  ndvi <- ndvi |>
+    group_by(siteID) |>
+    summarize(ndvi = mean(ndvi_mean, na.rm = TRUE))
+  
+  kat <- params |>
+    inner_join(lai, by = "siteID") |>
+    inner_join(ndvi, by = "siteID")
+  
+  
+  
+  n <- 1000
+  sites <- nrow(kat)
+
+  vals <- matrix(NA, nrow = n, ncol = sites)
+
+  for (i in 1:sites) {
+   vals[, i] <- rnorm(n, mean = kat$par[i], sd = kat$sd[i])
+  }
+  
+  
+  R1 <- vector(mode = "numeric", length = 1000)
+  R2 <- vector(mode = "numeric", length = 1000)
+  
+  for(r in 1:nrow(vals)){
+    
+    R1[r] <- summary(lm(vals[r, ] ~ kat$ndvi))$adj.r.squared
+    R2[r] <- summary(lm(vals[r, ] ~ kat$lai))$adj.r.squared
+  }
+  
+  NDVI_R_sq[, c] <- R1
+  LAI_R_sq[, c] <- R2
+  
+  
+  
+  
+  
+  
+  c <- c+1
+}
+
+```
+
+
+Histograms of NDVI R^2's:
+```{r, echo = FALSE}
+
+dat <- NDVI_R_sq
+
+for(c in 1:ncol(dat)){
+  hist(dat[, c],
+      breaks = 30,
+      main = paste0("Distribution of R² (", colnames(dat)[c], " ~ NDVI)"),
+      xlab = "R²")
+}
+
+
+
+
+
+```
+
+Histograms of LAI R^2's:
+
+```{r, echo = FALSE}
+
+dat <- LAI_R_sq
+
+for(c in 1:ncol(dat)){
+  hist(dat[, c],
+      breaks = 30,
+      main = paste0("Distribution of R² (", colnames(dat)[c], " ~ LAI)"),
+      xlab = "R²")
+}
+
+
+
+
+```
