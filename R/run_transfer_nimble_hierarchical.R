@@ -72,7 +72,7 @@ run_transfer_nimble <- function(
 
 		Rmcmc <- buildMCMC(mcmcConf)
 		Cmcmc <- compileNimble(Rmcmc)
-		Cmcmc$run(niter = n.iter, nburnin = n.iter / 2)
+		Cmcmc$run(niter = n.iter, nburnin = n.iter / 5)
 		return(as.list(Cmcmc$mvSamples))
 	})
 

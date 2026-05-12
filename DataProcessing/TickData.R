@@ -7,8 +7,8 @@ library(lubridate)
 library(uuid)
 
 # NEONSTORE_HOME, NEONSTORE_DB, and NEON_TOKEN defined in .Renviron
-Sys.setenv(NEONSTORE_DB = "/home/ebeez/Documents/TickForecast/Data/neonstore")
-Sys.setenv(NEONSTORE_HOME = "/home/ebeez/Documents/TickForecast/Data/neonstore")
+Sys.setenv(NEONSTORE_DB = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
+Sys.setenv(NEONSTORE_HOME = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
 library(neonstore)
 
 # Last check 2025-11-10

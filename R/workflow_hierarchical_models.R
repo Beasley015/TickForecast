@@ -270,24 +270,40 @@ params.stats <- df.params %>%
 	filter(model == model.job) %>%
 	dplyr::select(parameter, value) %>%
 	group_by(parameter) %>%
-	summarise(mu = mean(value), tau = 1 / var(value))
+	summarise(mu = mean(value), 
+	          tau = 1 / var(value))
 
 get_prior <- function(name) {
 	pr <- numeric(2)
 	xx <- params.stats %>%
 		filter(parameter == name)
-	pr[1] <- xx %>% pull(mu)
-	pr[2] <- xx %>% pull(tau)
-	pr
+	
+	if(str_detect(name, "prec")==T){
+	  pr[1] <- xx %>% pull(alpha)
+	  pr[2] <- xx %>% pull(beta)
+	} else{
+	  pr[1] <- xx %>% pull(mu)
+	  pr[2] <- xx %>% pull(tau)
+	  pr
+	}
 }
 
-# Get informative priors for model parameters
-# All site priors drawn from dist with the below parameters
+# Get informative priors for mean model parameters
+# and start with uninformative priors for precision
 phi.l <- get_prior("phi.l.mu")
 phi.n <- get_prior("phi.n.mu")
 phi.a <- get_prior("phi.a.mu")
+
+prec.l <- c(1,1)
+prec.n <- c(1,1)
+prec.a <- c(1,1)
+
 theta.l2n <- get_prior("theta.ln")
 theta.n2a <- get_prior("theta.na")
+
+prec.l2n <- c(1,1)
+prec.n2a <- c(1,1)
+
 repro <- get_prior("repro.mu")
 repro.mu <- repro[1] # goes to reproduction portion of transition matrix
 
@@ -376,7 +392,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:start.drags) { 
+for (t in 1:3){ #t:start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -410,14 +426,24 @@ for (t in t:start.drags) {
 			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
 			  rename("parameter" = "node") %>%
 				group_by(parameter) %>%
-				summarise(mu = mean(value), tau = 1 / var(value))
+				summarise(mu = mean(value), tau = 1 / var(value),
+				          alpha = mean(value)/var(value),
+				          beta = mean(value)*(((mean(value)^2)/var(value))+1))
 
 			# Priors for transitions (priors are constant across sites)
 			phi.l <- get_prior("phi.l.mu")
 			phi.n <- get_prior("phi.n.mu")
 			phi.a <- get_prior("phi.a.mu")
+			
+			prec.l <- get_prior("phi.l.prec")
+			prec.n <- get_prior("phi.n.prec")
+			prec.a <- get_prior("phi.a.prec")
+			
 			theta.l2n <- get_prior("theta.ln")
 			theta.n2a <- get_prior("theta.na")
+			
+			prec.l2n <- get_prior("theta.ln.prec")
+			prec.n2a <- get_prior("theta.na.prec")
 
 			# Priors for betas
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
@@ -592,8 +618,13 @@ for (t in t:start.drags) {
 	data$pr.phi.l <- phi.l
 	data$pr.phi.n <- phi.n
 	data$pr.phi.a <- phi.a
+	data$prec.l <- prec.l
+	data$prec.n <- prec.n
+	data$prec.a <- prec.a
 	data$pr.theta.l2n <- theta.l2n
 	data$pr.theta.n2a <- theta.n2a
+	data$prec.ln <- prec.l2n
+	data$prec.na <- prec.n2a
 	data$repro.mu <- repro.mu
 	data$pr.beta <- pr.beta
 	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
@@ -666,9 +697,16 @@ for (t in t:start.drags) {
 			phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
 			phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
 			phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
+			phi.l.prec = rep(rnorm(1, prec.l[1], 1/sqrt(prec.l[2])), length(sites)),
+			phi.n.prec = rep(rnorm(1, prec.n[1], 1/sqrt(prec.n[2])), length(sites)),
+			phi.l.prec = rep(rnorm(1, prec.a[1], 1/sqrt(prec.a[2])), length(sites)),
 			theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
 			               length(sites)),
 			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
+			               length(sites)),
+			prec.ln = rep(rnorm(1, prec.l2n[1], 1 / sqrt(prec.l2n[2])), 
+			               length(sites)),
+			prec.na = rep(rnorm(1, prec.n2a[1], 1 / sqrt(prec.n2a[2])), 
 			               length(sites)),
 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
@@ -692,9 +730,11 @@ for (t in t:start.drags) {
 		)
 	}
 	
-	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
+	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "phi.l.prec",
+	                     "phi.n.prec", "phi.a.prec", "sig",
 	                     "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
-	                     "theta.ln", "theta.na", "x", "x1", "x2", "x3", "x4")     
+	                     "theta.ln", "theta.na", "theta.ln.prec", "theta.na.prec",
+	                     "x", "x1", "x2", "x3", "x4")     
 
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
