@@ -35,7 +35,7 @@ find_species <- function(x){
   species
 }
 
-sites <- c("HARV", "KONZ", "LENO", "OSBS", "SCBI", "SERC", "TALL", "TREE", "UKFS")
+sites <- c("GREN", "HNRY", "TEA")
 
 for(j in 1:length(sites)){
   # Blank df for each site
