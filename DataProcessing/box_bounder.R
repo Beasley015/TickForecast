@@ -1,6 +1,6 @@
 library(terra)
 
-dat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/plotLatLon.csv")
+dat <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/plotLatLon.csv")
 
 
 dat2 <- data.frame(
@@ -20,8 +20,8 @@ for(r in rows){
   crs_projected <- "EPSG:3857"
   crs_geo <- "EPSG:4326"
   
-  lat <- dat[r, 2]
-  lon <- dat[r, 3]
+  lat <- dat[r, 5]
+  lon <- dat[r, 4]
   
   
   pts <- vect(matrix(c(lon, lat), ncol = 2), crs = crs_geo)
@@ -57,7 +57,9 @@ for(r in rows){
   dat2[r, 4] <- xy_geo[2,2]
   dat2[r, 5] <- xy_geo[2,1]
   
+  dat2$siteID[r] <- dat$siteID[r]
+  dat2$plotID[r] <- dat$plotID[r]
+  
 }
 
-
-write.csv(dat2, "bounding_boxes.csv", row.names = FALSE)
+dat2 <- dat2[, -1]
