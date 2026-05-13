@@ -1,0 +1,83 @@
+---
+title: "Land_cover_analysis (NLCD, fragstats)"
+author: "Neo Chatterjee"
+date: "2026-05-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+### Shannon Diversity 
+```{r, echo = FALSE}
+
+nlcd <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_NLCD.csv")
+frag <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/fragstats.csv")
+
+
+nlcd$Shannon <- 0
+
+for(r in 1:nrow(nlcd)){
+  for(c in 2:ncol(nlcd)){
+    p <- nlcd[r, c]
+    
+    if(!is.na(p) && p > 0){
+      nlcd$Shannon[r] <- nlcd$Shannon[r] - (p * log(p))
+    }
+  }
+}
+
+
+plot(nlcd$Shannon, frag$mean_nymph_count, xlab = "Shannon diversity", ylab = "Mean nymph count", main = "Mean nymph count vs Shannon diversity", pch = 16, cex = 0.7)
+abline(lm(frag$mean_nymph_count ~ nlcd$Shannon), col = "red")
+print(summary(lm(frag$mean_nymph_count ~ nlcd$Shannon)))
+
+plot(nlcd$Shannon, frag$mean_adult_count, xlab = "Shannon diversity", ylab = "Mean adult count", main = "Mean adult count vs Shannon diversity", pch = 16, cex = 0.7)
+abline(lm(frag$mean_adult_count ~ nlcd$Shannon), col = "red")
+print(summary(lm(frag$mean_adult_count ~ nlcd$Shannon)))
+
+
+```
+
+
+
+
+
+
+
+### %-dominant land cover and edge
+```{r, echo = FALSE}
+
+
+plot(frag$pct_dominant, frag$mean_nymph_count, xlab = "%-dominant land cover", ylab = "Mean nymph count", main = "Mean nymph count vs %-dominant", pch = 16, cex = 0.7)
+abline(lm(frag$mean_nymph_count ~ frag$pct_dominant), col = "red")
+print(summary(lm(frag$mean_nymph_count ~ frag$pct_dominant)))
+
+
+plot(frag$pct_dominant, frag$mean_adult_count, xlab = "%-dominant land cover", ylab = "Mean adult count", main = "Mean adult count vs %-dominant", pch = 16, cex = 0.7)
+abline(lm(frag$mean_adult_count ~ frag$pct_dominant), col = "red")
+print(summary(lm(frag$mean_adult_count ~ frag$pct_dominant)))
+
+
+```
+
+```{r, echo = FALSE}
+
+
+plot(frag$edge_m_per_ha, frag$mean_nymph_count, xlab = "Edge (m/ha)", ylab = "Mean nymph count", main = "Mean nymph count vs edge", pch = 16, cex = 0.7)
+abline(lm(frag$mean_nymph_count ~ frag$edge_m_per_ha), col = "red")
+print(summary(lm(frag$mean_nymph_count ~ frag$edge_m_per_ha)))
+
+
+plot(frag$edge_m_per_ha, frag$mean_adult_count, xlab = "Edge m/ha", ylab = "Mean adult count", main = "Mean adult count vs edge", pch = 16, cex = 0.7)
+abline(lm(frag$mean_adult_count ~ frag$edge_m_per_ha), col = "red")
+print(summary(lm(frag$mean_adult_count ~ frag$edge_m_per_ha)))
+
+```
+
+
+
+
