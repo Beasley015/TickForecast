@@ -1,0 +1,264 @@
+---
+title: "Exploratory analysis of covariates (LAI, NDVI, EVI) against gross tick counts"
+author: "Neo Chatterjee"
+date: "2026-05-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This document contains scatterplots of gross tick counts vs each covariate (both time-averaged), with the former variable in turn disaggregated by the following means:
+
+- *All* life stages of *all* species (no disaggregation)
+- *Nymphs* of all species 
+- *Adults* of all species 
+- All life stages of *only Ixodes and Amblyomma* 
+- Ixodes and Amblyomma *nymphs* 
+- Ixodes and Amblyomma *adults* 
+
+As a reminder, the sample size is constrained by the sites (Cary + 10 NEON) for which vegetation data have been downloaded and prepared. 
+
+
+### ALL-SPECIES PLOTS 
+```{r, echo = FALSE}
+library(dplyr)
+library(lubridate)
+
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
+ticks$collectDate <- as.Date(ticks$collectDate)
+
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
+lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
+
+ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+ndvi$date <- as.Date(ndvi$date, format = "%m/%d/%Y")
+
+evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+evi$date <- as.Date(evi$date, format = "%m/%d/%Y")
+
+
+
+ticks <- ticks |>
+  mutate(week = floor_date(collectDate, "week"))
+
+lai <- lai |>
+  mutate(week = floor_date(date,  "week"))
+
+ndvi <- ndvi |>
+  mutate(week = floor_date(date,  "week"))
+
+evi <- evi |>
+  mutate(week = floor_date(date,  "week"))
+
+life_stage_groups <- list(
+  "all life stages" = c("Larva", "Nymph", "Adult"),
+  "nymph" = c("Nymph"),
+  "adult" = c("Adult")
+)
+
+
+
+
+lai <- lai |>
+  group_by(siteID) |>
+  summarise(lai = mean(lai_mean, na.rm = TRUE))
+
+ndvi <- ndvi |>
+  group_by(siteID) |>
+  summarise(ndvi = mean(ndvi_mean, na.rm = TRUE))
+
+evi <- evi |>
+  group_by(siteID) |>
+  summarise(evi = mean(evi_mean, na.rm = TRUE))
+
+
+
+
+for(stage_name in names(life_stage_groups)){
+  
+  stages <- life_stage_groups[[stage_name]]
+  
+  ticks_summary <- ticks |>
+    filter(!is.na(collectDate)) |>
+    filter(lifeStage %in% stages) |>
+    group_by(siteID, collectDate) |>
+    summarise(total_count = sum(processedCount, na.rm = TRUE), .groups = "drop") |>
+    group_by(siteID) |>
+    summarise(mean_count = mean(total_count, na.rm = TRUE), .groups = "drop")
+  
+  
+  #==========LAI=============
+  dat <- inner_join(ticks_summary, lai, by = "siteID")
+  
+  model <- lm(mean_count ~ lai, data = dat)
+  
+  plot(dat$lai, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "LAI",
+       ylab = paste0("Mean ", stage_name, " count"),
+       main = paste0("Mean ", stage_name, " count vs LAI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  #==========NDVI=============
+  dat <- inner_join(ticks_summary, ndvi, by = "siteID")
+  
+  model <- lm(mean_count ~ ndvi, data = dat)
+  
+  plot(dat$ndvi, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "NDVI",
+       ylab = paste0("Mean ", stage_name, " count"),
+       main = paste0("Mean ", stage_name, " count vs NDVI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  #==========EVI=============
+  dat <- inner_join(ticks_summary, evi, by = "siteID")
+  
+  model <- lm(mean_count ~ evi, data = dat)
+  
+  plot(dat$evi, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "EVI",
+       ylab = paste0("Mean ", stage_name, " count"),
+       main = paste0("Mean ", stage_name, " count vs EVI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+
+}
+
+```
+
+
+### IXODES AND AMBLYOMMA-ONLY
+
+```{r, echo = FALSE}
+library(dplyr)
+library(lubridate)
+
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
+ticks$collectDate <- as.Date(ticks$collectDate)
+
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
+lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
+
+ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+ndvi$date <- as.Date(ndvi$date, format = "%m/%d/%Y")
+
+evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+evi$date <- as.Date(evi$date, format = "%m/%d/%Y")
+
+
+
+ticks <- ticks |>
+  mutate(week = floor_date(collectDate, "week")) |>
+  filter(scientificName %in% c("Ixodes scapularis", "Amblyomma americanum"))
+
+
+lai <- lai |>
+  mutate(week = floor_date(date,  "week"))
+
+ndvi <- ndvi |>
+  mutate(week = floor_date(date,  "week"))
+
+evi <- evi |>
+  mutate(week = floor_date(date,  "week"))
+
+life_stage_groups <- list(
+  "all life stages" = c("Larva", "Nymph", "Adult"),
+  "nymph" = c("Nymph"),
+  "adult" = c("Adult")
+)
+
+
+
+
+lai <- lai |>
+  group_by(siteID) |>
+  summarise(lai = mean(lai_mean, na.rm = TRUE))
+
+ndvi <- ndvi |>
+  group_by(siteID) |>
+  summarise(ndvi = mean(ndvi_mean, na.rm = TRUE))
+
+evi <- evi |>
+  group_by(siteID) |>
+  summarise(evi = mean(evi_mean, na.rm = TRUE))
+
+
+
+
+
+for(stage_name in names(life_stage_groups)){
+  
+  stages <- life_stage_groups[[stage_name]]
+  
+  ticks_summary <- ticks |>
+    filter(!is.na(collectDate)) |>
+    filter(lifeStage %in% stages) |>
+    group_by(siteID, collectDate) |>
+    summarise(total_count = sum(processedCount, na.rm = TRUE), .groups = "drop") |>
+    group_by(siteID) |>
+    summarise(mean_count = mean(total_count, na.rm = TRUE), .groups = "drop")
+  
+  
+  #==========LAI=============
+  dat <- inner_join(ticks_summary, lai, by = "siteID")
+  
+  model <- lm(mean_count ~ lai, data = dat)
+  
+  plot(dat$lai, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "LAI",
+       ylab = paste0("Mean Ixodes and Amblyomma ", stage_name, " count"),
+       main = paste0("Mean Ixodes and Amblyomma ", stage_name, " count vs LAI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  #==========NDVI=============
+  dat <- inner_join(ticks_summary, ndvi, by = "siteID")
+  
+  model <- lm(mean_count ~ ndvi, data = dat)
+  
+  plot(dat$ndvi, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "NDVI",
+       ylab = paste0("Mean Ixodes and Amblyomma ", stage_name, " count"),
+       main = paste0("Mean Ixodes and Amblyomma ", stage_name, " count vs NDVI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  #==========EVI=============
+  dat <- inner_join(ticks_summary, evi, by = "siteID")
+  
+  model <- lm(mean_count ~ evi, data = dat)
+  
+  plot(dat$evi, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "EVI",
+       ylab = paste0("Mean Ixodes and Amblyomma ", stage_name, " count"),
+       main = paste0("Mean Ixodes and Amblyomma ", stage_name, " count vs EVI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  
+}
+
+
+
+```
