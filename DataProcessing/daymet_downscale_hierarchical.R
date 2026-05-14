@@ -9,14 +9,14 @@ library(tidyverse)
 #' @param site the site being modeled
 #' @param org either "tick" or "smam"
 daymet_cumGDD <- function(sites) {
-  if(all(c("GREN", "HNRY", "TEA") %in% sites)){
-    df.cary <- read_csv("./Data/Cary_maxTemperature.csv",
-                        show_col_types = F)
-    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(df.cary))
-  
-    df.cary <- bind_rows(df.cary, df.cary, df.cary) %>%
-      mutate(siteID = cary.sites)
-  }
+  # if(all(c("GREN", "HNRY", "TEA") %in% sites)){
+  #   df.cary <- read_csv("./Data/Cary_maxTemperature.csv",
+  #                       show_col_types = F)
+  #   cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(df.cary))
+  # 
+  #   df.cary <- bind_rows(df.cary, df.cary, df.cary) %>%
+  #     mutate(siteID = cary.sites)
+  # }
 
   df.neon <- read.csv("./Data/daymetSite_maxTemperature.csv") %>%
     select(year, yday, Date, maxTemperature, siteID) %>%
@@ -43,14 +43,16 @@ daymet_cumGDD <- function(sites) {
 ## max temperature ==================================================================
 daymet_temp <- function(sites, minimum) {
 	if (minimum) {
-	  if(all(c("GREN", "HNRY", "TEA") %in% sites)){
-	    df.cary <- read_csv("./Data/Cary_minTemperature.csv",
-	                        show_col_types = F)
-	    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(df.cary))
-	    
-	    df.cary <- bind_rows(df.cary, df.cary, df.cary) %>%
-	      mutate(siteID = cary.sites)
-	  }
+	  # if(all(c("GREN", "HNRY", "TEA") %in% sites)){
+	  #   df.cary <- read_csv("./Data/Cary_minTemperature.csv",
+	  #                       show_col_types = F)
+	  #   cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(df.cary))
+	  #   
+	  #   df.cary <- bind_rows(df.cary, df.cary, df.cary) %>%
+	  #     mutate(siteID = cary.sites) %>%
+	  #     group_by(siteID, Date) %>%
+	  #     summarise(minTemperature=mean(minTemperature))
+	  # }
 	  
 	  df.all <- read.csv("./Data/daymetSite_minTemperature.csv") %>%
 	    select(year, yday, Date, minTemperature, siteID) %>%
@@ -65,14 +67,16 @@ daymet_temp <- function(sites, minimum) {
 		daymet.col <- "minTemperature"
 		
 	} else {
-	  if(all(c("GREN", "HNRY", "TEA") %in% sites)){
-	    df.cary <- read_csv("./Data/Cary_maxTemperature.csv",
-	                        show_col_types = F)
-	    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(df.cary))
-	    
-	    df.cary <- bind_rows(df.cary, df.cary, df.cary) %>%
-	      mutate(siteID = cary.sites)
-	  }
+	  # if(all(c("GREN", "HNRY", "TEA") %in% sites)){
+	  #   df.cary <- read_csv("./Data/Cary_maxTemperature.csv",
+	  #                       show_col_types = F)
+	  #   cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(df.cary))
+	  #   
+	  #   df.cary <- bind_rows(df.cary, df.cary, df.cary) %>%
+	  #     mutate(siteID = cary.sites) %>%
+	  #     group_by(siteID, Date) %>%
+	  #     summarise(maxTemperature=mean(maxTemperature), na.rm = T)
+	  # }
 	  
 	  df.all <- read.csv("./Data/daymetSite_maxTemperature.csv") %>%
 	    select(year, yday, Date, maxTemperature, siteID) %>%
@@ -130,16 +134,19 @@ daymet_temp <- function(sites, minimum) {
 ## relative humidity ==========================================================================
 
 daymet_rh <- function(sites) {
-  if(all(c("HNRY", "GREN", "TEA") %in% sites)){
-    rh.cary <- read_csv("./Data/Cary_vaporPressure.csv",
-                        show_col_types = F) 
-    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(rh.cary))
-    
-    rh.cary <- bind_rows(rh.cary, rh.cary, rh.cary) %>%
-      mutate(siteID = cary.sites) %>%
-      rename(maxRHCorrect=maxRH, minRHCorrect=minRH) %>%
-      select(-c(year, yday))
-  }
+  # if(all(c("HNRY", "GREN", "TEA") %in% sites)){
+  #   rh.cary <- read_csv("./Data/Cary_vaporPressure.csv",
+  #                       show_col_types = F) 
+  #   cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(rh.cary))
+  #   
+  #   rh.cary <- bind_rows(rh.cary, rh.cary, rh.cary) %>%
+  #     mutate(siteID = cary.sites) %>%
+  #     rename(maxRHCorrect=maxRH, minRHCorrect=minRH) %>%
+  #     select(-c(year, yday)) %>%
+  #     group_by(siteID, Date) %>%
+  #     summarise(minRHCorrect=mean(minRHCorrect),
+  #               maxRHCorrect=mean(maxRHCorrect))
+  # }
   
   # Calculate rh from existing daymet vars
   df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv",
@@ -197,15 +204,17 @@ daymet_rh <- function(sites) {
 
 daymet_precip <- function(site) {
   # Read in Cary sites, if present
-  if(all(c("HNRY", "GREN", "TEA") %in% sites)){
-    precip.cary <- read_csv("./Data/Cary_precipitation.csv",
-                        show_col_types = F) 
-    cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(precip.cary))
-    
-    precip.cary <- bind_rows(precip.cary, precip.cary, precip.cary) %>%
-      mutate(siteID = cary.sites) %>%
-      select(-c(year, yday))
-  }
+  # if(all(c("HNRY", "GREN", "TEA") %in% sites)){
+  #   precip.cary <- read_csv("./Data/Cary_precipitation.csv",
+  #                       show_col_types = F) 
+  #   cary.sites <- rep(c("GREN", "HNRY", "TEA"), each = nrow(precip.cary))
+  #   
+  #   precip.cary <- bind_rows(precip.cary, precip.cary, precip.cary) %>%
+  #     mutate(siteID = cary.sites) %>%
+  #     select(-c(year, yday)) %>%
+  #     group_by(siteID, Date) %>%
+  #     summarise(precipitation=mean(precipitation))
+  # }
   
   # Read in NEON data for some reason?
 	# neon.precip <- read_csv("./Data/precipDaily.csv")

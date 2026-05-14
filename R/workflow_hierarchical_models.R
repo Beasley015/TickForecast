@@ -217,6 +217,7 @@ source("./DataProcessing/daymet_downscale_hierarchical.R")
 
 cgdd <- daymet_cumGDD(sites=sites) %>%
   ungroup() %>%
+  filter(year(Date) < 2022) %>%
   dplyr::select(-year) %>%
   suppressMessages()
 
@@ -224,14 +225,17 @@ maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
   ungroup() %>%
   dplyr::select(Date, siteID, maxTempCorrect) %>%
   mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
+  filter(year(Date) < 2022) %>%
   suppressMessages()
 
 rh <- daymet_rh(sites) %>%
     dplyr::select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
+  filter(year(Date) < 2022) %>%
     suppressMessages()
 
 precip <- daymet_precip(sites) %>%
     dplyr::select(Date, precipitation, siteID) %>%
+  filter(year(Date) < 2022) %>%
     suppressMessages()
  
 # Combine all met variables
@@ -358,7 +362,7 @@ pr.sig <- df.params %>%
 	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
 
 
-# iterate ======================================================================================
+# iterate ===============================================================
 
 # Make sure start is on the first time step
 t = 1
@@ -392,7 +396,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in 1:3){ #t:start.drags) { 
+for (t in 1:t:start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -426,24 +430,30 @@ for (t in 1:3){ #t:start.drags) {
 			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
 			  rename("parameter" = "node") %>%
 				group_by(parameter) %>%
-				summarise(mu = mean(value), tau = 1 / var(value),
-				          alpha = mean(value)/var(value),
-				          beta = mean(value)*(((mean(value)^2)/var(value))+1))
+				summarise(mu = mean(value), tau = 1 / var(value))
 
-			# Priors for transitions (priors are constant across sites)
+			# Priors for interepts (priors are constant across sites)
 			phi.l <- get_prior("phi.l.mu")
 			phi.n <- get_prior("phi.n.mu")
 			phi.a <- get_prior("phi.a.mu")
 			
-			prec.l <- get_prior("phi.l.prec")
-			prec.n <- get_prior("phi.n.prec")
-			prec.a <- get_prior("phi.a.prec")
-			
 			theta.l2n <- get_prior("theta.ln")
 			theta.n2a <- get_prior("theta.na")
 			
-			prec.l2n <- get_prior("theta.ln.prec")
-			prec.n2a <- get_prior("theta.na.prec")
+			# Precision priors
+			prec.params <- read_csv(file.path(readDest, "precSamples.csv")) %>%
+			  group_by(node) %>%
+			  summarise(mu = mean(value), v = var(value)) %>%
+			  mutate(alpha = (mu^2 / v) + 2,
+			         beta = mu * ((mu^2 / v) + 1)) %>%
+			  suppressMessages() 
+			
+			prec.l <- c(prec.params$alpha[2], prec.params$beta[2])
+			prec.n <- c(prec.params$alpha[3], prec.params$beta[3])
+			prec.a <- c(prec.params$alpha[1], prec.params$beta[1])
+			
+			prec.l2n <- c(prec.params$alpha[4], prec.params$beta[4])
+			prec.n2a <- c(prec.params$alpha[5], prec.params$beta[5])
 
 			# Priors for betas
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
@@ -697,17 +707,15 @@ for (t in 1:3){ #t:start.drags) {
 			phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
 			phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
 			phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
-			phi.l.prec = rep(rnorm(1, prec.l[1], 1/sqrt(prec.l[2])), length(sites)),
-			phi.n.prec = rep(rnorm(1, prec.n[1], 1/sqrt(prec.n[2])), length(sites)),
-			phi.l.prec = rep(rnorm(1, prec.a[1], 1/sqrt(prec.a[2])), length(sites)),
+			phi.l.prec = rep(rnorm(1, prec.l[1], 1/sqrt(prec.l[2]))),
+			phi.n.prec = rep(rnorm(1, prec.n[1], 1/sqrt(prec.n[2]))),
+			phi.l.prec = rep(rnorm(1, prec.a[1], 1/sqrt(prec.a[2]))),
 			theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
 			               length(sites)),
 			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
 			               length(sites)),
-			prec.ln = rep(rnorm(1, prec.l2n[1], 1 / sqrt(prec.l2n[2])), 
-			               length(sites)),
-			prec.na = rep(rnorm(1, prec.n2a[1], 1 / sqrt(prec.n2a[2])), 
-			               length(sites)),
+			prec.ln = rep(rnorm(1, prec.l2n[1], 1 / sqrt(prec.l2n[2]))),
+			prec.na = rep(rnorm(1, prec.n2a[1], 1 / sqrt(prec.n2a[2]))),
 			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
@@ -732,10 +740,12 @@ for (t in 1:3){ #t:start.drags) {
 	
 	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "phi.l.prec",
 	                     "phi.n.prec", "phi.a.prec", "sig",
-	                     "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
+	                     # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
 	                     "theta.ln", "theta.na", "theta.ln.prec", "theta.na.prec",
-	                     "x", "x1", "x2", "x3", "x4")     
+	                     "x" #, "x1", "x2", "x3", "x4"
+	                     )     
 
+	# start <- Sys.time()
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
 	cl <- makeCluster(n.slots) 
@@ -754,6 +764,10 @@ for (t in 1:3){ #t:start.drags) {
 		) 
 	
 	stopCluster(cl)
+	
+	# end <- Sys.time()
+	
+	# end-start
   
 	# Merge outputs of chains
 	dat.hindcast <- list()
