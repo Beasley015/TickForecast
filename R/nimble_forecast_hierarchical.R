@@ -16,7 +16,7 @@ model.code <- nimbleCode({
   theta.ln.prec ~ dgamma(prec.ln[1],prec.ln[2])
   
   theta.na.mean ~ dnorm(pr.theta.n2a[1],sd=1)
-  theta.na.prec ~ dgamma(prec.ln[1],prec.ln[2])
+  theta.na.prec ~ dgamma(prec.na[1],prec.na[2])
   # Means are informative based on previous iterations
   
   # priors for beta - eventually moves to main loop

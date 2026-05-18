@@ -540,7 +540,8 @@ transfer_analysis <- function(
 	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
 	
 	# Precision nodes
-	prec.nodes <- which(str_detect(names(fx.df),"prec"))
+	prec.nodes <- which(str_detect(names(fx.df),"prec") & 
+	                      str_detect(names(fx.df),"beta")==F)
 	
 	# Pull and process states
 	states <- fx.df$x
@@ -620,7 +621,8 @@ transfer_analysis <- function(
 	}
 
 	param.list <- fx.df[-c(weather.nodes, prec.nodes,
-	                       which(names(fx.df) %in% c("x", "beta","gdd","sig")))]
+	                       which(names(fx.df) %in% c("x", "beta","gdd","sig",
+	                       "beta.prec")))]
 	
 	for(i in 1:length(param.list)){
 	  param.list[[i]] <- as.data.frame(param.list[[i]])
@@ -720,6 +722,18 @@ transfer_analysis <- function(
 	    mutate(species = spp, start.date = start.date, model = model)
 	}
 	
+	# Precisions for betas
+	if("beta.prec" %in% names(fx.df)){
+	  precisionb <- as.data.frame(fx.df$beta.prec)
+	  for(i in 1:ncol(precisionb)){
+	    colnames(precisionb)[i] <- paste("beta", i, sep = "")
+	  }
+	  
+	  beta.prec <- pivot_longer(precisionb, everything(), names_to = "node",
+	                            values_to = "value")
+	}
+	
+	# Sigma
 	sigma <- fx.df[['sig']]
 	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
 
@@ -742,6 +756,8 @@ transfer_analysis <- function(
 	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
 	write_csv(sig, file.path(out.dir, "sigma.csv"))
 	write_csv(prec.df, file.path(out.dir, "precSamples.csv"))
+	if(exists('beta.prec')==T){write_csv(beta.prec, 
+	                                     file.path(out.dir, "precBeta.csv"))}
 	
 	if(min(year(fx.dates))>=2018){
 	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))

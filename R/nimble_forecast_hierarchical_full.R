@@ -3,28 +3,26 @@ source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
   # Hyperpriors for intercepts 
-  phi.l.mean ~ dnorm(pr.phi.l[1], 2)
-  phi.l.prec ~ dgamma(0.1, 0.1)
+  phi.l.mean ~ dnorm(pr.phi.l[1],sd=1)
+  phi.l.prec ~ dgamma(prec.l[1],prec.l[2]) 
   
-  phi.n.mean ~ dnorm(pr.phi.n[1], 2)
-  phi.n.prec ~ dgamma(0.1, 0.1)
+  phi.n.mean ~ dnorm(pr.phi.n[1],sd=1)
+  phi.n.prec ~ dgamma(prec.n[1],prec.n[2])
   
-  phi.a.mean ~ dnorm(pr.phi.a[1], 2)
-  phi.a.prec ~ dgamma(0.1, 0.1)
+  phi.a.mean ~ dnorm(pr.phi.a[1],sd=1)
+  phi.a.prec ~ dgamma(prec.a[1],prec.a[2])
   
-  theta.ln.mean ~ dnorm(pr.theta.l2n[1], 2)
-  theta.ln.prec ~ dgamma(0.1, 0.1)
+  theta.ln.mean ~ dnorm(pr.theta.l2n[1],sd=1)
+  theta.ln.prec ~ dgamma(prec.ln[1],prec.ln[2])
   
-  theta.na.mean ~ dnorm(pr.theta.n2a[1], 2)
-  theta.na.prec ~ dgamma(0.1, 0.1)
-  # Means are informative based on previous iterations
+  theta.na.mean ~ dnorm(pr.theta.n2a[1],sd=1)
+  theta.na.prec ~ dgamma(prec.na[1],prec.na[2])
   
   # Hyperpriors for betas
   for(j in 1:n.beta){
-    beta.mean[j] ~ dnorm(pr.beta[j,1], tau = 2)
-    beta.prec[j] ~ dgamma(0.1, 0.1)
+    beta.mean[j] ~ dnorm(pr.beta[j,1], sd=1)
+    beta.prec[j] ~ dgamma(prec.b[j,1], prec.b[j,2])
   }
-  # Again with informative means
 
   for(site in 1:nsite){
 	  ### priors

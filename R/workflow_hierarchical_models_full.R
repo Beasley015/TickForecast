@@ -276,9 +276,15 @@ get_prior <- function(name) {
 	pr <- numeric(2)
 	xx <- params.stats %>%
 		filter(parameter == name)
-	pr[1] <- xx %>% pull(mu)
-	pr[2] <- xx %>% pull(tau)
-	pr
+	
+	if(str_detect(name, "prec")==T){
+	  pr[1] <- xx %>% pull(alpha)
+	  pr[2] <- xx %>% pull(beta)
+	} else{
+	  pr[1] <- xx %>% pull(mu)
+	  pr[2] <- xx %>% pull(tau)
+	  pr
+	}
 }
 
 # Get informative priors for model parameters
@@ -286,8 +292,17 @@ get_prior <- function(name) {
 phi.l <- get_prior("phi.l.mu")
 phi.n <- get_prior("phi.n.mu")
 phi.a <- get_prior("phi.a.mu")
+
+prec.l <- c(1,1)
+prec.n <- c(1,1)
+prec.a <- c(1,1)
+
 theta.l2n <- get_prior("theta.ln")
 theta.n2a <- get_prior("theta.na")
+
+prec.l2n <- c(1,1)
+prec.n2a <- c(1,1)
+
 repro <- get_prior("repro.mu")
 repro.mu <- repro[1] # goes to reproduction portion of transition matrix
 
@@ -321,6 +336,8 @@ get_beta <- function(model.job) {
 
 pr.beta <- get_beta(model.job)
 
+prec.b <- matrix(1, nrow = n.beta, ncol = 2)
+
 # function to approximate moment the inverse gamma
 inv_gamma_mm <- function(x) {
 	mu <- mean(x)
@@ -342,7 +359,7 @@ pr.sig <- df.params %>%
 	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
 
 
-# iterate ======================================================================================
+# iterate ====================================================================
 
 # Make sure start is on the first time step
 t = 1
@@ -410,14 +427,30 @@ for (t in t:start.drags) {
 			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
 			  rename("parameter" = "node") %>%
 				group_by(parameter) %>%
-				summarise(mu = mean(value), tau = 1 / var(value))
+				summarise(mu = mean(value,na.rm=T), tau = 1 / var(value,na.rm = ))
 
 			# Priors for transitions (priors are constant across sites)
 		  phi.l <- get_prior("phi.l.mu")
 			phi.n <- get_prior("phi.n.mu")
 			phi.a <- get_prior("phi.a.mu")
+			
 			theta.l2n <- get_prior("theta.ln")
 			theta.n2a <- get_prior("theta.na")
+			
+			# Precision priors
+			prec.params <- read_csv(file.path(readDest, "precSamples.csv")) %>%
+			  group_by(node) %>%
+			  summarise(mu = mean(value, na.rm=T), v = var(value, na.rm=T)) %>%
+			  mutate(alpha = (mu^2 / v) + 2,
+			         beta = mu * ((mu^2 / v) + 1)) %>%
+			  suppressMessages() 
+			
+			prec.l <- c(prec.params$alpha[2], prec.params$beta[2])
+			prec.n <- c(prec.params$alpha[3], prec.params$beta[3])
+			prec.a <- c(prec.params$alpha[1], prec.params$beta[1])
+			
+			prec.l2n <- c(prec.params$alpha[4], prec.params$beta[4])
+			prec.n2a <- c(prec.params$alpha[5], prec.params$beta[5])
 
 			# Priors for betas (betas will vary across sites)
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
@@ -434,6 +467,15 @@ for (t in t:start.drags) {
 				pr[2] <- xx %>% pull(tau)
 				pr.beta[i,] <- pr
 			}
+			
+			# Beta precisions
+			prec.b <- read_csv(file.path(readDest, "precBeta.csv")) %>%
+			  group_by(node) %>%
+			  summarise(mu = mean(value), v = var(value)) %>%
+			  mutate(alpha = (mu^2 / v) + 2,
+			         beta = mu * ((mu^2 / v) + 1)) %>%
+			  select(-c(node, mu, v)) %>%
+			  suppressMessages() 
 
 			# get invgamma parameters
 			sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
@@ -596,6 +638,7 @@ for (t in t:start.drags) {
 	data$pr.theta.n2a <- theta.n2a
 	data$repro.mu <- repro.mu
 	data$pr.beta <- pr.beta
+	data$prec.b <- prec.b
 	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
 	
 	# Cumulative degree days
@@ -665,12 +708,18 @@ for (t in t:start.drags) {
 			phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
 			phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
 			phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
+			phi.l.prec = rep(rnorm(1, prec.l[1], 1/sqrt(prec.l[2]))),
+			phi.n.prec = rep(rnorm(1, prec.n[1], 1/sqrt(prec.n[2]))),
+			phi.l.prec = rep(rnorm(1, prec.a[1], 1/sqrt(prec.a[2]))),
 			theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
 			               length(sites)),
 			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
 			               length(sites)),
+			prec.ln = rep(rnorm(1, prec.l2n[1], 1 / sqrt(prec.l2n[2]))),
+			prec.na = rep(rnorm(1, prec.n2a[1], 1 / sqrt(prec.n2a[2]))),
 			beta = matrix(rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),length(sites)),
 			              ncol = length(sites)),
+			prec.b = matrix(1, nrow = n.beta, ncol = 2),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
 			x = array(abs(rnorm(n=4*horizon*length(sites), mean=2)) / 160 * 450, 
@@ -692,9 +741,12 @@ for (t in t:start.drags) {
 		)
 	}
 	
-	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
-	                     "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
-	                     "theta.ln", "theta.na", "x", "x1", "x2", "x3", "x4")     
+	params.to.save <-  c("beta", "beta.prec", "phi.a.mu", "phi.l.mu", "phi.n.mu", 
+	                     "phi.l.prec", "phi.n.prec", "phi.a.prec", "sig",
+	                     # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
+	                     "theta.ln", "theta.na", "theta.ln.prec", "theta.na.prec",
+	                     "x" #, "x1", "x2", "x3", "x4"
+	                     )       
 
 	source("./R/nimble_forecast_hierarchical_full.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
