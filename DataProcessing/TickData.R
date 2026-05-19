@@ -5,11 +5,14 @@
 library(tidyverse)
 library(lubridate)
 library(uuid)
+library(neonstore)
 
 # NEONSTORE_HOME, NEONSTORE_DB, and NEON_TOKEN defined in .Renviron
-Sys.setenv(NEONSTORE_DB = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
-Sys.setenv(NEONSTORE_HOME = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
-library(neonstore)
+# Sys.setenv(NEONSTORE_DB = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
+# Sys.setenv(NEONSTORE_HOME = "/projectnb/dietzelab/ebeasley/TickForecast/Data/neonstore")
+
+Sys.setenv(NEONSTORE_DB = "/home/ebeez/Documents/TickForecast/Data/neonstore")
+Sys.setenv(NEONSTORE_HOME = "/home/ebeez/Documents/TickForecast/Data/neonstore")
 
 # Last download 11 may 2026
 product <- "DP1.10093.001"
@@ -27,8 +30,8 @@ tick.taxon.raw <- neon_read("tck_taxonomyProcessed-basic")
 tick.field <- tick.field.raw %>% 
   filter(totalSampledArea > 0) %>% 
   mutate(time = floor_date(collectDate, unit = "day")) %>% 
-  unite(namedLocation, time, col = "occasionID", sep = "_")
-
+  unite(namedLocation, time, col = "occasionID", sep = "_") %>%
+  mutate(totalSampledArea = as.numeric(totalSampledArea))
 
 tick.taxon.wide <- tick.taxon.raw %>% 
   filter(sampleCondition == "OK") %>% # remove taxonomy samples with quality issues
@@ -45,6 +48,10 @@ tick.taxon.wide <- tick.taxon.raw %>%
               values_fill = 0)
 
 # Clean Cary data -------------
+cary.field <- read.csv("./Data/plotLatLon.csv") %>%
+  filter(str_detect(plotID, "GREN|HNRY|TEA")) %>%
+  mutate(totalSampledArea=450)
+
 cary.tick <- read.csv("./Data/Ticks2006_2021.csv", sep = ",") %>%
   # Rename some cols
   rename("IXOSCA_Adult" = "Adults",
@@ -64,9 +71,6 @@ cary.tick <- read.csv("./Data/Ticks2006_2021.csv", sep = ",") %>%
   unite("occasionID", Loc, Date, sep = "_") %>%
   dplyr::select(-Grid)
 
-# May need to get lat/long, etc. from elsewhere and clean here
-# Match format to tick.field and add
-
 # Add Cary data to Neon dataframe -------------
 tick.taxon.wide <- bind_rows(tick.taxon.wide, cary.tick)
 tick.taxon.wide[is.na(tick.taxon.wide)] <- 0
@@ -78,6 +82,8 @@ tick.joined <- left_join(tick.taxon.wide, tick.field, by = "occasionID") %>%
          -measuredBy, -sampleCode, -biophysicalCriteria, -plotType) %>%
   mutate(siteID = str_extract(occasionID, "([A-Z]+)")) %>%
   mutate(plotID = str_extract(occasionID, "([A-Z]+)_[\\d]+")) 
+
+tick.joined <- rows_patch(tick.joined, cary.field, by = c("plotID"))
 
 # all the species column names
 spp.cols <- tick.joined %>% 
