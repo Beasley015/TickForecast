@@ -205,6 +205,8 @@ frag$edge_m_per_ha <- frag$perimeter_m/frag$area_ha
 stages <- c("Nymph")
 
 tick <- read.csv("tickLong.csv")
+tick <- tick |>
+  filter(scientificName %in% c("Ixodes scapularis", "Amblyomma americanum"))
 nymph <- read.csv("tickLong.csv") |>
   filter(lifeStage %in% stages) |>
   group_by(siteID) |>
