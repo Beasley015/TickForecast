@@ -59,9 +59,10 @@ for(r in rows){
   dat2$latitude_bottom_right[r] <- xy_geo[2,2]
   dat2$longitude_bottom_right[r] <- xy_geo[2,1]
  
-  
-  
-  
+ 
 }
+
+
+
 
 
