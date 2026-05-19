@@ -4,7 +4,8 @@ dat <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/plotLatLon.csv"
 
 
 dat2 <- data.frame(
-  site = character(nrow(dat)),
+  siteID = character(nrow(dat)),
+  plotID = character(nrow(dat)),
   latitude_top_left = numeric(nrow(dat)),
   longitude_top_left = numeric(nrow(dat)),
   latitude_bottom_right = numeric(nrow(dat)),
@@ -20,8 +21,8 @@ for(r in rows){
   crs_projected <- "EPSG:3857"
   crs_geo <- "EPSG:4326"
   
-  lat <- dat[r, 5]
-  lon <- dat[r, 4]
+  lat <- dat$decimalLatitude[r]
+  lon <- dat$decimalLongitude[r]
   
   
   pts <- vect(matrix(c(lon, lat), ncol = 2), crs = crs_geo)
@@ -51,15 +52,16 @@ for(r in rows){
   
   xy_geo <- crds(pts_final_geo)
   
-  dat2[r, 1] <- dat[r, 1]
-  dat2[r, 2] <- xy_geo[1,2]
-  dat2[r, 3] <- xy_geo[1,1]
-  dat2[r, 4] <- xy_geo[2,2]
-  dat2[r, 5] <- xy_geo[2,1]
-  
-  dat2$siteID[r] <- dat$siteID[r]
+  dat2$siteID[r] <- gsub("[^A-Z]", "", dat$plotID[r])
   dat2$plotID[r] <- dat$plotID[r]
+  dat2$latitude_top_left[r] <- xy_geo[1,2]
+  dat2$longitude_top_left[r] <- xy_geo[1,1]
+  dat2$latitude_bottom_right[r] <- xy_geo[2,2]
+  dat2$longitude_bottom_right[r] <- xy_geo[2,1]
+ 
+  
+  
   
 }
 
-dat2 <- dat2[, -1]
+

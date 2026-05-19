@@ -2,28 +2,13 @@ library(dplyr)
 library(terra)
 
 dat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/UPDATED_bounding_boxes.csv")
-dat_2 <- data.frame(site = character(nrow(dat)))
 
 
-
-rows <- 1:nrow(dat)
-
-for(r in rows){
-  
-  ID <- dat[r,6]
-  dat_2[r, 1] <- gsub("[^A-Z]", "", ID)
-  
-}
-
-dat$site <- dat_2$site
-
-dat <- dat[, c("site", setdiff(names(dat), "site"))]
-
-n <- n_distinct(dat_2$site)
-sites <- unique(dat_2$site)
+n <- n_distinct(dat$siteID)
+sites <- unique(dat$siteID)
 
 dat_3 <- data.frame(
-  site = character(n),
+  siteID = character(n),
   latitude_top_left = numeric(n),
   longitude_top_left = numeric(n),
   latitude_bottom_right = numeric(n),
@@ -34,34 +19,34 @@ x <- 1
 
 for(s in sites){
   
-  cat <- dat |> filter(site == s)
+  cat <- dat |> filter(siteID == s)
   rs <- 2:nrow(cat)
   
   
   
-  lat_tl <- cat[1,2]
-  lon_tl <- cat[1,3]
-  lat_br <- cat[1,4]
-  lon_br <- cat[1,5]
+  lat_tl <- cat$latitude_top_left[1]
+  lon_tl <- cat$longitude_top_left[1]
+  lat_br <- cat$latitude_bottom_right[1]
+  lon_br <- cat$longitude_bottom_right[1]
   
   
   
   for(r in rs){
     
-    if(lat_tl < cat[r,2]){
-      lat_tl <- cat[r,2]
+    if(lat_tl < cat$latitude_top_left[r]){
+      lat_tl <- cat$latitude_top_left[r]
     }
     
-    if(lon_tl > cat[r,3]){
-      lon_tl <- cat[r,3]
+    if(lon_tl > cat$longitude_top_left[r]){
+      lon_tl <- cat$longitude_top_left[r]
     }
     
-    if(lat_br > cat[r,4]){
-      lat_br <- cat[r,4]
+    if(lat_br > cat$latitude_bottom_right[r]){
+      lat_br <- cat$latitude_bottom_right[r]
     }
     
-    if(lon_br < cat[r,5]){
-      lon_br <- cat[r,5]
+    if(lon_br < cat$longitude_bottom_right[r]){
+      lon_br <- cat$longitude_bottom_right[r]
     }
     
   }
