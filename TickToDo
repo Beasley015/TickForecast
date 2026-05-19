@@ -9,16 +9,18 @@ X Add detailed ReadMe
 X Speed up hierarchical model because she is sloooooooow
 X Make model fully hierarchical
 X Write code to find add'l Iscap and Aam sites
+X Fix prior mis-specification for latent tick density
+X Update site level lat/long in intake_daymet.R script so it gets the midpoint of the sites
+X Prep Cary lat-longs
 
 Immediate to do's:
-- Fix prior mis-specification for latent tick density
 - Compare hierarchical vs. OG vs. null models
-- Update site level lat/long in intake_daymet.R script so it gets the midpoint of the sites
-- Prep Cary lat-longs
-
-In the distance:
 - Rename model covariates so they correspond to specific components of model,
     not just "beta" with a subscript
 - Extend model to most recent NEON data
 - Extend model to NEON sites with sparse data
+
+In the distance:
+- Add remotely sensed covariates
+- Add plot level to hierarchical model
 
