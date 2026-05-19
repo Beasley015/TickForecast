@@ -59,7 +59,7 @@ for(r in rows){
   
   pts_final <- vect(pts_final_mat, type = "points", crs = crs_projected)
   
-  #switch back to geometric 
+  #switch back to geographic 
   pts_final_geo <- project(pts_final, crs_geo)
   
   xy_geo <- crds(pts_final_geo)
