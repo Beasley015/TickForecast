@@ -393,7 +393,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:start.drags) { 
+for (t in t:3){#start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -634,8 +634,13 @@ for (t in t:start.drags) {
 	data$pr.phi.l <- phi.l
 	data$pr.phi.n <- phi.n
 	data$pr.phi.a <- phi.a
+	data$prec.l <- prec.l
+	data$prec.n <- prec.n
+	data$prec.a <- prec.a
 	data$pr.theta.l2n <- theta.l2n
 	data$pr.theta.n2a <- theta.n2a
+	data$prec.ln <- prec.l2n
+	data$prec.na <- prec.n2a
 	data$repro.mu <- repro.mu
 	data$pr.beta <- pr.beta
 	data$prec.b <- prec.b
@@ -708,18 +713,18 @@ for (t in t:start.drags) {
 			phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
 			phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
 			phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
-			phi.l.prec = rep(rnorm(1, prec.l[1], 1/sqrt(prec.l[2]))),
-			phi.n.prec = rep(rnorm(1, prec.n[1], 1/sqrt(prec.n[2]))),
-			phi.l.prec = rep(rnorm(1, prec.a[1], 1/sqrt(prec.a[2]))),
+			phi.l.prec = rgamma(1,1,1),
+			phi.n.prec = rgamma(1,1,1),
+			phi.a.prec = rgamma(1,1,1),
 			theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
 			               length(sites)),
 			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
 			               length(sites)),
-			prec.ln = rep(rnorm(1, prec.l2n[1], 1 / sqrt(prec.l2n[2]))),
-			prec.na = rep(rnorm(1, prec.n2a[1], 1 / sqrt(prec.n2a[2]))),
+			theta.ln.prec = rgamma(1,1,1),
+			theta.na.prec = rgamma(1,1,1),
 			beta = matrix(rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),length(sites)),
 			              ncol = length(sites)),
-			prec.b = matrix(1, nrow = n.beta, ncol = 2),
+			beta.prec = rgamma(n.beta, 1,1),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
 			x = array(abs(rnorm(n=4*horizon*length(sites), mean=2)) / 160 * 450, 
