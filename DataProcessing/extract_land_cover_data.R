@@ -215,35 +215,8 @@ frag$edge_m_per_ha <- frag$perimeter_m/frag$area_ha
 
 
 
-#Add mean nymph counts
-stages <- c("Nymph")
 
-tick <- read.csv("tickLong.csv")
-tick <- tick |>
-  filter(scientificName %in% c("Ixodes scapularis", "Amblyomma americanum"))
-nymph <- read.csv("tickLong.csv") |>
-  filter(lifeStage %in% stages) |>
-  group_by(siteID) |>
-  summarise(mean_nymph_count = mean(processedCount, na.rm = TRUE), .groups = "drop")
-
-
-frag <- left_join(frag, nymph, by = c("site" = "siteID"))
-
-#Add mean adult counts
-stages <- c("Adult")
-
-tick <- read.csv("tickLong.csv")
-adult <- read.csv("tickLong.csv") |>
-  filter(lifeStage %in% stages) |>
-  group_by(siteID) |>
-  summarise(mean_adult_count = mean(processedCount, na.rm = TRUE), .groups = "drop")
-
-
-frag <- left_join(frag, adult, by = c("site" = "siteID"))
-
-
-
-#Add mean nymph counts
+#=========Add mean Ixodes nymph counts
 stages <- c("Nymph")
 
 tick <- read.csv("tickLong.csv")
@@ -258,7 +231,7 @@ ixodes_nymph <- ixodes |>
 
 frag <- left_join(frag, ixodes_nymph, by = c("siteID"))
 
-#====================Add mean adult counts========================
+#=============Add mean Ixodes adult counts
 stages <- c("Adult")
 
 ixodes_adult <- ixodes |>
@@ -272,7 +245,7 @@ frag <- left_join(frag, ixodes_adult, by = c("siteID"))
 
 
 
-#add amblyomma nymphs 
+#==============Add mean Amblyomma nymph counts
 amblyomma <- tick |>
   filter(scientificName %in% c("Amblyomma americanum"))
 
@@ -287,7 +260,7 @@ amblyomma_nymph <- amblyomma |>
 frag <- left_join(frag, amblyomma_nymph, by = c("siteID"))
 
 
-#============add amblyomma adults===============
+#================Add mean Amblyomma adult counts
 stages = c("Adult")
 
 amblyomma_adult <- amblyomma |>
