@@ -1,9 +1,15 @@
 ---
-title: "Land_cover_analysis (NLCD, fragstats)"
+title: "Land cover analysis (NLCD, fragstats)"
 author: "Neo Chatterjee"
 date: "2026-05-13"
 output: html_document
 ---
+
+This document contains exploratory analyses of three remotely sensed variables, (a): the % of a site composed by its dominant land cover, (b): habitat edge, and (c): the dominant land cover per se. Said analyses can in turn be split into two halves:
+
+- (1): Associations between either of the first two covariates and *gross* tick counts (the latter disaggregated by species and nymph or adult status, thus yielding four plots in all for each covariate)
+- (2): The box-and-whisker distribution of the most recently estimated parameter values for sites sharing a dominant land cover 
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,61 +17,138 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-### GROSS COUNTS
+### GROSS COUNTS (%-dominant land cover)
+```{r, echo = FALSE}
+library(dplyr) 
+
+NLCD <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_NLCD.csv")
+frag <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/fragstats.csv")
+
+dat <- inner_join(NLCD, frag, by = "siteID")
+
+#Ixodes nymphs
+mod <- lm(mean_ixodes_nymphs ~ pct_dominant, data = dat)
+
+plot(dat$pct_dominant, dat$mean_ixodes_nymphs, 
+     xlab = "% dominant", 
+     ylab = "Mean Ixodes nymph count", 
+     main = "Mean Ixodes nymphs vs % dominant land cover", 
+     pch = 16, cex = 0.7)
+abline(mod, col = "red")
+print(summary(mod))
+
+#Ixodes adults
+mod <- lm(mean_ixodes_adults ~ pct_dominant, data = dat)
+
+plot(dat$pct_dominant, dat$mean_ixodes_adults, 
+     xlab = "% dominant", 
+     ylab = "Mean Ixodes adult count", 
+     main = "Mean Ixodes adults vs % dominant land cover", 
+     pch = 16, cex = 0.7)
+abline(mod, col = "red")
+print(summary(mod))
+
+
+
+
+
+
+#Amblyomma nymphs
+mod <- lm(mean_amblyomma_nymphs ~ pct_dominant, data = dat)
+
+plot(dat$pct_dominant, dat$mean_amblyomma_nymphs,
+     xlab = "% dominant",
+     ylab = "Mean Amblyomma nymph count",
+     main = "Mean Amblyomma nymphs vs % dominant land cover",
+     pch = 16, cex = 0.7)
+abline(mod, col = "red")
+print(summary(mod))
+
+#Amblyomma adults
+mod <- lm(mean_amblyomma_adults ~ pct_dominant, data = dat)
+
+plot(dat$pct_dominant, dat$mean_amblyomma_adults,
+     xlab = "% dominant",
+     ylab = "Mean Amblyomma adult count",
+     main = "Mean Amblyomma adults vs % dominant land cover",
+     pch = 16, cex = 0.7)
+abline(mod, col = "red")
+print(summary(mod))
+
+
+
+
+```
+
+
+### GROSS COUNTS (edge)
 ```{r, echo = FALSE}
 
-nlcd <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/full_NLCD.csv")
-frag <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/fragstats.csv")
+
+# Ixodes nymphs
+mod <- lm(mean_ixodes_nymphs ~ edge_m_per_ha, data = dat)
+
+plot(dat$edge_m_per_ha, dat$mean_ixodes_nymphs,
+     xlab = "Edge meters per hectare",
+     ylab = "Mean Ixodes nymph count",
+     main = "Mean Ixodes nymphs vs edge density",
+     pch = 16, cex = 0.7)
+
+abline(mod, col = "red")
+
+print(summary(mod))
 
 
-nlcd$Shannon <- 0
+# Ixodes adults
+mod <- lm(mean_ixodes_adults ~ edge_m_per_ha, data = dat)
 
-for(r in 1:nrow(nlcd)){
-  for(c in 2:ncol(nlcd)){
-    p <- nlcd[r, c]
-    
-    if(!is.na(p) && p > 0){
-      nlcd$Shannon[r] <- nlcd$Shannon[r] - (p * log(p))
-    }
-  }
-}
+plot(dat$edge_m_per_ha, dat$mean_ixodes_adults,
+     xlab = "Edge meters per hectare",
+     ylab = "Mean Ixodes adult count",
+     main = "Mean Ixodes adults vs edge density",
+     pch = 16, cex = 0.7)
 
+abline(mod, col = "red")
 
-plot(nlcd$Shannon, frag$mean_nymph_count, xlab = "Shannon diversity", ylab = "Mean nymph count", main = "Mean nymph count vs Shannon diversity", pch = 16, cex = 0.7)
-abline(lm(frag$mean_nymph_count ~ nlcd$Shannon), col = "red")
-print(summary(lm(frag$mean_nymph_count ~ nlcd$Shannon)))
-
-plot(nlcd$Shannon, frag$mean_adult_count, xlab = "Shannon diversity", ylab = "Mean adult count", main = "Mean adult count vs Shannon diversity", pch = 16, cex = 0.7)
-abline(lm(frag$mean_adult_count ~ nlcd$Shannon), col = "red")
-print(summary(lm(frag$mean_adult_count ~ nlcd$Shannon)))
+print(summary(mod))
 
 
+# Amblyomma nymphs
+mod <- lm(mean_amblyomma_nymphs ~ edge_m_per_ha, data = dat)
 
-plot(frag$pct_dominant, frag$mean_nymph_count, xlab = "%-dominant land cover", ylab = "Mean nymph count", main = "Mean nymph count vs %-dominant", pch = 16, cex = 0.7)
-abline(lm(frag$mean_nymph_count ~ frag$pct_dominant), col = "red")
-print(summary(lm(frag$mean_nymph_count ~ frag$pct_dominant)))
+plot(dat$edge_m_per_ha, dat$mean_amblyomma_nymphs,
+     xlab = "Edge meters per hectare",
+     ylab = "Mean Amblyomma nymph count",
+     main = "Mean Amblyomma nymphs vs edge density",
+     pch = 16, cex = 0.7)
 
+abline(mod, col = "red")
 
-plot(frag$pct_dominant, frag$mean_adult_count, xlab = "%-dominant land cover", ylab = "Mean adult count", main = "Mean adult count vs %-dominant", pch = 16, cex = 0.7)
-abline(lm(frag$mean_adult_count ~ frag$pct_dominant), col = "red")
-print(summary(lm(frag$mean_adult_count ~ frag$pct_dominant)))
-
-
-plot(frag$edge_m_per_ha, frag$mean_nymph_count, xlab = "Edge (m/ha)", ylab = "Mean nymph count", main = "Mean nymph count vs edge", pch = 16, cex = 0.7)
-abline(lm(frag$mean_nymph_count ~ frag$edge_m_per_ha), col = "red")
-print(summary(lm(frag$mean_nymph_count ~ frag$edge_m_per_ha)))
+print(summary(mod))
 
 
-plot(frag$edge_m_per_ha, frag$mean_adult_count, xlab = "Edge m/ha", ylab = "Mean adult count", main = "Mean adult count vs edge", pch = 16, cex = 0.7)
-abline(lm(frag$mean_adult_count ~ frag$edge_m_per_ha), col = "red")
-print(summary(lm(frag$mean_adult_count ~ frag$edge_m_per_ha)))
+# Amblyomma adults
+mod <- lm(mean_amblyomma_adults ~ edge_m_per_ha, data = dat)
+
+plot(dat$edge_m_per_ha, dat$mean_amblyomma_adults,
+     xlab = "Edge meters per hectare",
+     ylab = "Mean Amblyomma adult count",
+     main = "Mean Amblyomma adults vs edge density",
+     pch = 16, cex = 0.7)
+
+abline(mod, col = "red")
+
+print(summary(mod))
 
 
 ```
 
 
 
-###PARAMETERS
+
+
+
+### PARAMETERS (IXODES)
 ```{r, echo = FALSE}
 library(ggplot2)
 
@@ -104,33 +187,121 @@ for(par in pars){
     summarize(param_value = mean[which.max(as.Date(start.date))])
   
   
-  frag_plot <- frag |>
-    left_join(params, by = c("site" = "siteID"))
+  kat <- frag |>
+    inner_join(params, by = "siteID")
+  
+  kat <- kat |>
+    inner_join(NLCD, by = "siteID")
   
   
   
-  p <- ggplot(frag_plot, aes(x = factor(lc_dominant), y = param_value)) +
+  p <- ggplot(kat, 
+              aes(x = factor(lc_dominant), 
+                  y = param_value,
+                  fill = factor(lc_dominant))) +
     geom_boxplot() +
     labs(
       title = par,
       x = "Dominant land cover",
-      y = "Parameter value"
-    )
+      y = "Parameter value",
+      fill = "Dominant land cover"
+    ) + 
+    scale_fill_discrete(labels = c(
+      deciduous_forest_pct = "Deciduous forest",
+      mixed_forest_pct = "Mixed forest",
+      woody_wetland_pct = "Woody wetland"))
 
   
-  
-  frag_plot |>
-    count(lc_dominant, is.na(param_value))
+
   
   print(p)
-  
-  
   
 }
 
 
 
 ```
+
+### PARAMETERS (AMBLYOMMA)
+```{r, echo = FALSE}
+
+library(ggplot2)
+
+
+library(dplyr)
+library(lubridate)
+library(broom)
+
+#obtain parameter .csv's
+files <- list.files("/usr4/ugrad/neochatt/TickForecast/Data", pattern = "Amblyomma", full.names = TRUE)
+
+#parameter names
+pars <- c("phi.l.mu", "phi.n.mu", "phi.a.mu", "theta.ln", "theta.na", "beta[1]", "beta[2]", "beta[3]", "beta[4]", "beta[5]", "beta[6]", "beta[7]", "beta[8]", "beta[9]", "beta[10]", "beta[11]", "beta[12]", "beta[13]", "beta[14]")
+
+for(par in pars){
+  
+  deer_files <- list()
+
+  
+  for (f in files) {
+    dat <- read.csv(f)
+    dat <- dat |> filter(node == par)
+    dat$start.date <- as.Date(dat$start.date)
+    deer_files[[length(deer_files) + 1]] <- dat
+  }
+
+  deer_files <- bind_rows(deer_files)
+
+  deer_files <- deer_files |>
+    mutate(week = floor_date(start.date, "week")) |>
+    group_by(week, siteID) |>
+    mutate(par = mean(mean, na.rm = TRUE))
+  
+  params <- deer_files |>
+    group_by(siteID) |>
+    summarize(param_value = mean[which.max(as.Date(start.date))])
+  
+  
+  kat <- frag |>
+    inner_join(params, by = "siteID")
+  
+  kat <- kat |>
+    inner_join(NLCD, by = "siteID")
+  
+  
+  
+  p <- ggplot(kat, 
+              aes(x = factor(lc_dominant), 
+                  y = param_value,
+                  fill = factor(lc_dominant))) +
+    geom_boxplot() +
+    labs(
+      title = par,
+      x = "Dominant land cover",
+      y = "Parameter value",
+      fill = "Dominant land cover"
+    ) +
+    scale_fill_discrete(labels = c(
+      deciduous_forest_pct = "Deciduous forest",
+      evergreen_forest_pct = "Evergreen forest",
+      grassland_pct = "Grassland",
+      woody_wetland_pct = "Woody wetland"))
+
+  
+
+  
+  print(p)
+  
+}
+
+
+
+
+
+```
+
+
+
 
 
 

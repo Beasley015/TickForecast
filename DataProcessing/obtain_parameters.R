@@ -35,7 +35,18 @@ find_species <- function(x){
   species
 }
 
-sites <- c("GREN", "HNRY", "TEA")
+sites <- c("OSBS",
+            "UNDE",
+            "ORNL",
+            "MLBS",
+            "KONZ",
+            "DELA",
+            "UKFS",
+            "TALL",
+            "STEI",
+            "KONA",
+            "OAES",
+            "CLBJ")
 
 for(j in 1:length(sites)){
   # Blank df for each site
@@ -115,7 +126,7 @@ cary.sites <- c(
 jobs <- expand_grid(
   model = models,
   species = species,
-  site = c(neon.sites)
+  site = c(cary.sites)
 )
 
 # Not all sites have both tick species

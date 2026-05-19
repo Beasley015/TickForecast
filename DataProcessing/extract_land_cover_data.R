@@ -114,7 +114,16 @@ out <- out[!sapply(out, is.null)]
 # combine into final table
 full_NLCD <- do.call(rbind, out)
 
+#calculate % dominant
+prop <- full_NLCD |>
+  rowwise() |>
+  mutate(
+    pct_dominant = max(c_across(ends_with("_pct")), na.rm = TRUE),
+    lc_dominant = names(pick(ends_with("_pct")))[which.max(c_across(ends_with("_pct")))]) |>
+  ungroup() |>
+  select(siteID, pct_dominant, lc_dominant)
 
+full_NLCD <- left_join(full_NLCD, prop, by = c("site" = "siteID"))
 
 
 #=======================fragstats========================
@@ -201,6 +210,11 @@ frag <- data.frame(
 #Edge = perimeter / area
 frag$edge_m_per_ha <- frag$perimeter_m/frag$area_ha
 
+
+
+
+
+
 #Add mean nymph counts
 stages <- c("Nymph")
 
@@ -228,16 +242,63 @@ adult <- read.csv("tickLong.csv") |>
 frag <- left_join(frag, adult, by = c("site" = "siteID"))
 
 
-#load NLCD table
-LC <- full_NLCD
 
-#calculate % dominant
-prop <- LC |>
-  rowwise() |>
-  mutate(
-    pct_dominant = max(c_across(ends_with("_pct")), na.rm = TRUE),
-    lc_dominant = names(pick(ends_with("_pct")))[which.max(c_across(ends_with("_pct")))]) |>
-  ungroup() |>
-  select(siteID, pct_dominant, lc_dominant)
+#Add mean nymph counts
+stages <- c("Nymph")
 
-frag <- left_join(frag, prop, by = c("site" = "siteID"))
+tick <- read.csv("tickLong.csv")
+ixodes <- tick |>
+  filter(scientificName %in% c("Ixodes scapularis"))
+
+ixodes_nymph <- ixodes |>
+  filter(lifeStage %in% stages) |>
+  group_by(siteID) |>
+  summarise(mean_ixodes_nymphs = mean(processedCount, na.rm = TRUE), .groups = "drop")
+
+
+frag <- left_join(frag, ixodes_nymph, by = c("siteID"))
+
+#====================Add mean adult counts========================
+stages <- c("Adult")
+
+ixodes_adult <- ixodes |>
+  filter(lifeStage %in% stages) |>
+  group_by(siteID) |>
+  summarise(mean_ixodes_adults = mean(processedCount, na.rm = TRUE), .groups = "drop")
+
+
+frag <- left_join(frag, ixodes_adult, by = c("siteID"))
+
+
+
+
+#add amblyomma nymphs 
+amblyomma <- tick |>
+  filter(scientificName %in% c("Amblyomma americanum"))
+
+stages = c("Nymph")
+
+amblyomma_nymph <- amblyomma |>
+  filter(lifeStage %in% stages) |>
+  group_by(siteID) |>
+  summarise(mean_amblyomma_nymphs = mean(processedCount, na.rm = TRUE), .groups = "drop")
+
+
+frag <- left_join(frag, amblyomma_nymph, by = c("siteID"))
+
+
+#============add amblyomma adults===============
+stages = c("Adult")
+
+amblyomma_adult <- amblyomma |>
+  filter(lifeStage %in% stages) |>
+  group_by(siteID) |>
+  summarise(mean_amblyomma_adults = mean(processedCount, na.rm = TRUE), .groups = "drop")
+
+
+frag <- left_join(frag, amblyomma_adult, by = c("siteID"))
+
+
+
+
+
