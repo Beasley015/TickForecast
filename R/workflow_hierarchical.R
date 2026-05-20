@@ -335,11 +335,7 @@ inv_gamma_mm <- function(x) {
 
 # get invgamma parameters
 pr.sig <- df.params %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
-                           model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchicalFull",
-                           TRUE ~ model)) %>%
-	filter(model == model.job, grepl("sig", parameter)) %>%
+	filter(model == "WithWeatherAndMiceGlobal", grepl("sig", parameter)) %>%
 	dplyr::select(parameter, value) %>%
 	group_by(parameter) %>%
 	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
@@ -386,8 +382,8 @@ for (t in t:start.drags) {
 	message(mm)
 
   # flags for if statements
-	miceAndWeather <- model.job == "WeatherMice_hierarchicalFull"
-	use.daymet <- grepl("Weather", model.job)
+	miceAndWeather <- T
+	use.daymet <- T
 
 	# initialize nimble lists
 	constants <- data <- list()
@@ -656,20 +652,13 @@ for (t in t:start.drags) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))) {
-	  if (model.job == "Weather_hierarchicalIntercept") {
 	    # Make sure horizon does not go past empirical data
 	    horizon <- nrow(data$cgdd)
 	    data$y <- as.array(y[, 1:horizon, ,])
 	    
-	    # Fix error arising from single-site models, may remove
-	    # if(is.na(dim(data$y)[3]==T)){
-	    #   dim(data$y)[3] <- 1
-	    # }
-	    
 	    } else {
 	      horizon <- min(nrow(data$cgdd), nrow(data$mice))
 				data$y <- y[, 1:horizon, ,]
-	    }
 	}
 
 	# finalize constants
@@ -678,13 +667,6 @@ for (t in t:start.drags) {
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
-	# constants$max.cgdd <- cgdd %>%
-	#   group_by(siteID) %>%
-	#   filter(Date >= min(fx.sequence)) %>%
-	#   mutate(max.cgdd = cumGDD*1.2) %>%
-	#   summarise(min = min(max.cgdd), max = max(max.cgdd)) %>%
-	#   select(-siteID) %>%
-	#   t()
 	
 	# Initialize area
 	area.init <- area
