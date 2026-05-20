@@ -52,7 +52,7 @@ cary.field <- read.csv("./Data/plotLatLon.csv") %>%
   filter(str_detect(plotID, "GREN|HNRY|TEA")) %>%
   mutate(totalSampledArea=450)
 
-cary.tick <- read.csv("./Data/Ticks2006_2021.csv", sep = ",") %>%
+cary.tick <- read.csv("./Data/CaryTickRaw.csv", sep = ",") %>%
   # Rename some cols
   rename("IXOSCA_Adult" = "Adults",
          "IXOSCA_Nymph" = "Nymphs",
@@ -62,14 +62,17 @@ cary.tick <- read.csv("./Data/Ticks2006_2021.csv", sep = ",") %>%
                           str_detect(Grid, "Henry") ~ "HNRY",
                           str_detect(Grid, "Tea") ~ "TEA",
                           TRUE ~ NA)) %>%
-  mutate(plot = case_when(str_detect(Grid, "Control") ~ "001",
-                          str_detect(Grid, "Experimental") ~ "002",
+  mutate(plot = case_when(str_detect(Grid, "C") ~ "001",
+                          str_detect(Grid, "E|H") ~ "002",
                           TRUE ~ NA)) %>%
+  filter(!is.na(plot)) %>%
   # Merge site and plot to match neon names
   unite("Loc", site, plot, sep = "_") %>%
+  # Fix date column
+  mutate(Date = as.Date(Date, format = "%m/%d/%y")) %>%
   # Add date to match neon names
   unite("occasionID", Loc, Date, sep = "_") %>%
-  dplyr::select(-Grid)
+  dplyr::select(occasionID, IXOSCA_Larva, IXOSCA_Nymph, IXOSCA_Adult)
 
 # Add Cary data to Neon dataframe -------------
 tick.taxon.wide <- bind_rows(tick.taxon.wide, cary.tick)
@@ -102,7 +105,12 @@ tick.long <- tick.joined %>%
                names_to = "taxonAge",
                values_to = "processedCount",
                values_drop_na = TRUE) %>% 
-  separate(col = taxonAge, into = c("acceptedTaxonID", "lifeStage"), sep = "_")
+  separate(col = taxonAge, into = c("acceptedTaxonID", "lifeStage"), sep = "_") %>%
+  mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d")) %>%
+  mutate(collectDate = case_when(siteID %in% c("GREN", "HNRY", "TEA") ~ 
+                                                 as.Date(str_extract(occasionID, "[0-9]+-[0-9]+-[0-9]+"),
+                                                         format = "%Y-%m-%d"),
+                                 TRUE ~ collectDate))
 
 # add taxon ids
 tick.long <- left_join(tick.long, taxon.ids, by = "acceptedTaxonID") 
