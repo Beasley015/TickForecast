@@ -14,9 +14,10 @@ This document contains scatterplots of gross tick counts vs each covariate (both
 - *All* life stages of *all* species (no disaggregation)
 - *Nymphs* of all species 
 - *Adults* of all species 
-- All life stages of *only Ixodes and Amblyomma* 
-- Ixodes and Amblyomma *nymphs* 
-- Ixodes and Amblyomma *adults* 
+- *Ixodes* *nymphs* only
+- *Ixodes* *adults* only
+- *Amblyomma* *nymphs* only
+- *Amblyomma* *adults* only
 
 As a reminder, the sample size is constrained by the sites (Cary + 10 NEON) for which vegetation data have been downloaded and prepared. 
 
@@ -139,7 +140,7 @@ for(stage_name in names(life_stage_groups)){
 ```
 
 
-### IXODES AND AMBLYOMMA-ONLY
+### IXODES ONLY
 
 ```{r, echo = FALSE}
 library(dplyr)
@@ -159,9 +160,13 @@ evi$date <- as.Date(evi$date, format = "%m/%d/%Y")
 
 
 
-ticks <- ticks |>
+ixodes <- ticks |>
   mutate(week = floor_date(collectDate, "week")) |>
-  filter(scientificName %in% c("Ixodes scapularis", "Amblyomma americanum"))
+  filter(scientificName %in% c("Ixodes scapularis"))
+
+amblyomma <- ticks |>
+  mutate(week = floor_date(collectDate, "week")) |>
+  filter(scientificName %in% c("Amblyomma americanum"))
 
 
 lai <- lai |>
@@ -202,7 +207,7 @@ for(stage_name in names(life_stage_groups)){
   
   stages <- life_stage_groups[[stage_name]]
   
-  ticks_summary <- ticks |>
+  ticks_summary <- ixodes |>
     filter(!is.na(collectDate)) |>
     filter(lifeStage %in% stages) |>
     group_by(siteID, collectDate) |>
@@ -219,8 +224,8 @@ for(stage_name in names(life_stage_groups)){
   plot(dat$lai, dat$mean_count,
        pch = 16, cex = 0.7, col = "forestgreen",
        xlab = "LAI",
-       ylab = paste0("Mean Ixodes and Amblyomma ", stage_name, " count"),
-       main = paste0("Mean Ixodes and Amblyomma ", stage_name, " count vs LAI"))
+       ylab = paste0("Mean Ixodes ", stage_name, " count"),
+       main = paste0("Mean Ixodes ", stage_name, " count vs LAI"))
   
   abline(model, col = "red")
   print(summary(model))
@@ -234,8 +239,8 @@ for(stage_name in names(life_stage_groups)){
   plot(dat$ndvi, dat$mean_count,
        pch = 16, cex = 0.7, col = "forestgreen",
        xlab = "NDVI",
-       ylab = paste0("Mean Ixodes and Amblyomma ", stage_name, " count"),
-       main = paste0("Mean Ixodes and Amblyomma ", stage_name, " count vs NDVI"))
+       ylab = paste0("Mean Ixodes ", stage_name, " count"),
+       main = paste0("Mean Ixodes ", stage_name, " count vs NDVI"))
   
   abline(model, col = "red")
   print(summary(model))
@@ -249,8 +254,78 @@ for(stage_name in names(life_stage_groups)){
   plot(dat$evi, dat$mean_count,
        pch = 16, cex = 0.7, col = "forestgreen",
        xlab = "EVI",
-       ylab = paste0("Mean Ixodes and Amblyomma ", stage_name, " count"),
-       main = paste0("Mean Ixodes and Amblyomma ", stage_name, " count vs EVI"))
+       ylab = paste0("Mean Ixodes ", stage_name, " count"),
+       main = paste0("Mean Ixodes ", stage_name, " count vs EVI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  
+}
+
+```
+
+
+
+
+
+### AMBLYOMMA ONLY
+```{r, echo = FALSE}
+
+for(stage_name in names(life_stage_groups)){
+  
+  stages <- life_stage_groups[[stage_name]]
+  
+  ticks_summary <- amblyomma |>
+    filter(!is.na(collectDate)) |>
+    filter(lifeStage %in% stages) |>
+    group_by(siteID, collectDate) |>
+    summarise(total_count = sum(processedCount, na.rm = TRUE), .groups = "drop") |>
+    group_by(siteID) |>
+    summarise(mean_count = mean(total_count, na.rm = TRUE), .groups = "drop")
+  
+  
+  #==========LAI=============
+  dat <- inner_join(ticks_summary, lai, by = "siteID")
+  
+  model <- lm(mean_count ~ lai, data = dat)
+  
+  plot(dat$lai, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "LAI",
+       ylab = paste0("Mean Amblyomma ", stage_name, " count"),
+       main = paste0("Mean Amblyomma ", stage_name, " count vs LAI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  #==========NDVI=============
+  dat <- inner_join(ticks_summary, ndvi, by = "siteID")
+  
+  model <- lm(mean_count ~ ndvi, data = dat)
+  
+  plot(dat$ndvi, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "NDVI",
+       ylab = paste0("Mean Amblyomma ", stage_name, " count"),
+       main = paste0("Mean Amblyomma ", stage_name, " count vs NDVI"))
+  
+  abline(model, col = "red")
+  print(summary(model))
+  
+  
+  #==========EVI=============
+  dat <- inner_join(ticks_summary, evi, by = "siteID")
+  
+  model <- lm(mean_count ~ evi, data = dat)
+  
+  plot(dat$evi, dat$mean_count,
+       pch = 16, cex = 0.7, col = "forestgreen",
+       xlab = "EVI",
+       ylab = paste0("Mean Amblyomma ", stage_name, " count"),
+       main = paste0("Mean Amblyomma ", stage_name, " count vs EVI"))
   
   abline(model, col = "red")
   print(summary(model))
@@ -260,5 +335,12 @@ for(stage_name in names(life_stage_groups)){
 }
 
 
-
 ```
+
+
+
+
+
+
+
+
