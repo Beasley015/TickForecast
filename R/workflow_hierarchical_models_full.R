@@ -394,6 +394,8 @@ if(update == T){
 }
 
 for (t in t:start.drags) { 
+  if(t > start.drags){break}
+  
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
