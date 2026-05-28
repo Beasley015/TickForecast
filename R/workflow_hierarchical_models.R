@@ -48,7 +48,7 @@ ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 3
+	job.num <- 2
 }
 
 species.job <- jobs$species[job.num] %>%
@@ -397,8 +397,6 @@ if(update == T){
 }
 
 for (t in t:start.drags) { 
-  if(t > start.drags){break}
-  
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -718,7 +716,8 @@ for (t in t:start.drags) {
 			               length(sites)),
 			theta.ln.prec = rgamma(1,1,1),
 			theta.na.prec = rgamma(1,1,1),
-			beta = rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),
+			beta = matrix(rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),length(sites)),
+			              ncol = length(sites)),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
 			x = array(abs(rnorm(n=4*horizon*length(sites), mean=2)) / 160 * 450, 
