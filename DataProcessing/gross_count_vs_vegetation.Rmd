@@ -26,6 +26,12 @@ As a reminder, the sample size is constrained by the sites (Cary + 10 NEON) for 
 ```{r, echo = FALSE}
 library(dplyr)
 library(lubridate)
+library(broom)
+
+stat <- data.frame(
+ R_squared = numeric(27),
+ p = numeric(27)
+)
 
 ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
 ticks$collectDate <- as.Date(ticks$collectDate)
@@ -75,6 +81,7 @@ evi <- evi |>
   summarise(evi = mean(evi_mean, na.rm = TRUE))
 
 
+r <- 1
 
 
 for(stage_name in names(life_stage_groups)){
@@ -104,6 +111,12 @@ for(stage_name in names(life_stage_groups)){
   abline(model, col = "red")
   print(summary(model))
   
+  R_squared <- summary(lm(dat$mean_count ~ dat$lai))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$lai))$p.value[2]
+  
+  stat$R_squared[r] <- R_squared
+  stat$p[r] <- pVal
+  
   
   #==========NDVI=============
   dat <- inner_join(ticks_summary, ndvi, by = "siteID")
@@ -118,6 +131,12 @@ for(stage_name in names(life_stage_groups)){
   
   abline(model, col = "red")
   print(summary(model))
+  
+  R_squared <- summary(lm(dat$mean_count ~ dat$ndvi))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$ndvi))$p.value[2]
+  
+  stat$R_squared[r+1] <- R_squared
+  stat$p[r+1] <- pVal
   
   
   #==========EVI=============
@@ -134,7 +153,14 @@ for(stage_name in names(life_stage_groups)){
   abline(model, col = "red")
   print(summary(model))
   
+  R_squared <- summary(lm(dat$mean_count ~ dat$evi))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$evi))$p.value[2]
+  
+  stat$R_squared[r+2] <- R_squared
+  stat$p[r+2] <- pVal
+  
 
+  r <- r+3
 }
 
 ```
@@ -145,6 +171,7 @@ for(stage_name in names(life_stage_groups)){
 ```{r, echo = FALSE}
 library(dplyr)
 library(lubridate)
+
 
 ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
 ticks$collectDate <- as.Date(ticks$collectDate)
@@ -202,6 +229,7 @@ evi <- evi |>
 
 
 
+r <- 10
 
 for(stage_name in names(life_stage_groups)){
   
@@ -230,6 +258,12 @@ for(stage_name in names(life_stage_groups)){
   abline(model, col = "red")
   print(summary(model))
   
+  R_squared <- summary(lm(dat$mean_count ~ dat$lai))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$lai))$p.value[2]
+  
+  stat$R_squared[r] <- R_squared
+  stat$p[r] <- pVal
+  
   
   #==========NDVI=============
   dat <- inner_join(ticks_summary, ndvi, by = "siteID")
@@ -244,6 +278,12 @@ for(stage_name in names(life_stage_groups)){
   
   abline(model, col = "red")
   print(summary(model))
+  
+  R_squared <- summary(lm(dat$mean_count ~ dat$ndvi))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$ndvi))$p.value[2]
+  
+  stat$R_squared[r+1] <- R_squared
+  stat$p[r+1] <- pVal
   
   
   #==========EVI=============
@@ -260,7 +300,14 @@ for(stage_name in names(life_stage_groups)){
   abline(model, col = "red")
   print(summary(model))
   
+  R_squared <- summary(lm(dat$mean_count ~ dat$evi))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$evi))$p.value[2]
   
+  stat$R_squared[r+2] <- R_squared
+  stat$p[r+2] <- pVal
+  
+
+  r <- r+3
   
 }
 
@@ -272,6 +319,7 @@ for(stage_name in names(life_stage_groups)){
 
 ### AMBLYOMMA ONLY
 ```{r, echo = FALSE}
+r <- 19
 
 for(stage_name in names(life_stage_groups)){
   
@@ -300,6 +348,12 @@ for(stage_name in names(life_stage_groups)){
   abline(model, col = "red")
   print(summary(model))
   
+  R_squared <- summary(lm(dat$mean_count ~ dat$lai))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$lai))$p.value[2]
+  
+  stat$R_squared[r] <- R_squared
+  stat$p[r] <- pVal
+  
   
   #==========NDVI=============
   dat <- inner_join(ticks_summary, ndvi, by = "siteID")
@@ -314,6 +368,12 @@ for(stage_name in names(life_stage_groups)){
   
   abline(model, col = "red")
   print(summary(model))
+  
+  R_squared <- summary(lm(dat$mean_count ~ dat$ndvi))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$ndvi))$p.value[2]
+  
+  stat$R_squared[r+1] <- R_squared
+  stat$p[r+1] <- pVal
   
   
   #==========EVI=============
@@ -330,7 +390,14 @@ for(stage_name in names(life_stage_groups)){
   abline(model, col = "red")
   print(summary(model))
   
+  R_squared <- summary(lm(dat$mean_count ~ dat$evi))$adj.r.squared
+  pVal <- tidy(lm(dat$mean_count ~ dat$evi))$p.value[2]
   
+  stat$R_squared[r+2] <- R_squared
+  stat$p[r+2] <- pVal
+  
+
+  r <- r+3
   
 }
 

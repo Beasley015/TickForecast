@@ -8,9 +8,9 @@ library(dplyr)
 library(lubridate)
 library(tidyr)
 
-site <- "BLAN"
+site <- "HARV"
 
-ticks <- read.csv("tickLong.csv", stringsAsFactors = FALSE)
+ticks <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/tickLong.csv", stringsAsFactors = FALSE)
 ticks$collectDate <- as.Date(ticks$collectDate)
 ticks <- ticks[ticks$scientificName %in% c("Ixodes scapularis", "Amblyomma americanum"), ]
 
@@ -21,9 +21,10 @@ ticks_wide <- ticks |>
 
 site_ticks <- ticks_wide |> filter(siteID == site)
 
+d <- 1
 
 #===============================LAI================================
-lai <- read.csv("full_LAIs.csv", stringsAsFactors = FALSE)
+lai <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/full_LAIs.csv", stringsAsFactors = FALSE)
 lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
 lai <- lai |> filter(siteID == site)
 lai <- lai |>
@@ -54,15 +55,15 @@ lai <- lai |>
 #Disaggregate by life stage 
 larvae <- site_ticks |> 
   group_by(week) |>
-  summarise(weekly_mean = mean(Larva, na.rm = TRUE))
+  summarise(weekly_mean = mean(as.numeric(Larva), na.rm = TRUE))
 
 nymphs <- site_ticks |>
   group_by(week) |>
-  summarise(weekly_mean = mean(Nymph, na.rm = TRUE))
+  summarise(weekly_mean = mean(as.numeric(Nymph), na.rm = TRUE))
 
 adults <- site_ticks |>
   group_by(week) |>
-  summarise(weekly_mean = mean(Adult, na.rm = TRUE))
+  summarise(weekly_mean = mean(as.numeric(Adult), na.rm = TRUE))
 
 lais <- lai |>
   group_by(week) |>
@@ -207,7 +208,7 @@ title(
 #===============================NDVI================================
 site_ticks <- ticks_wide |> filter(siteID == site)
 
-ndvi <- read.csv("full_VIs.csv", stringsAsFactors = FALSE)
+ndvi <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/full_VIs.csv", stringsAsFactors = FALSE)
 
 ndvi$date_raw <- ndvi$date
 

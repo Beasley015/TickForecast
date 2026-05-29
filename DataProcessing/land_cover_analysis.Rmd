@@ -77,7 +77,6 @@ print(summary(mod))
 
 
 
-
 ```
 
 
@@ -144,13 +143,93 @@ print(summary(mod))
 ```
 
 
-
-
-
-
-### PARAMETERS (IXODES)
+### GROSS COUNTS (DOMINANT LAND COVER PER SE)
 ```{r, echo = FALSE}
 library(ggplot2)
+
+
+
+#======================IXODES=======================
+p1 <- ggplot(dat, 
+              aes(x = factor(lc_dominant), 
+                  y = mean_ixodes_nymphs,
+                  fill = factor(lc_dominant))) +
+    geom_boxplot() +
+    labs(
+      x = "Dominant land cover",
+      y = "Mean Ixodes nymphs",
+      fill = "Dominant land cover"
+    ) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+print(p1)
+
+p2 <- ggplot(dat, 
+              aes(x = factor(lc_dominant), 
+                  y = mean_ixodes_adults,
+                  fill = factor(lc_dominant))) +
+    geom_boxplot() +
+    labs(
+      x = "Dominant land cover",
+      y = "Mean Ixodes adults",
+      fill = "Dominant land cover"
+    ) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+print(p2)
+
+
+
+#===================AMBLYOMMA======================
+p3 <- ggplot(dat, 
+              aes(x = factor(lc_dominant), 
+                  y = mean_amblyomma_nymphs,
+                  fill = factor(lc_dominant))) +
+    geom_boxplot() +
+    labs(
+      x = "Dominant land cover",
+      y = "Mean Amblyomma nymphs",
+      fill = "Dominant land cover"
+    ) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+print(p3)
+
+p4 <- ggplot(dat, 
+              aes(x = factor(lc_dominant), 
+                  y = mean_amblyomma_adults,
+                  fill = factor(lc_dominant))) +
+    geom_boxplot() +
+    labs(
+      x = "Dominant land cover",
+      y = "Mean Amblyomma adults",
+      fill = "Dominant land cover"
+    ) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+print(p4)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### PARAMETERS (IXODES) 
+```{r, echo = FALSE}
 
 
 library(dplyr)
@@ -222,7 +301,7 @@ for(par in pars){
 
 ```
 
-### PARAMETERS (AMBLYOMMA)
+### PARAMETERS (AMBLYOMMA) 
 ```{r, echo = FALSE}
 
 library(ggplot2)
@@ -301,8 +380,78 @@ for(par in pars){
 ```
 
 
+### PARAMETERS (IXODES) (EDGE REGRESSION)
+```{r, echo = FALSE}
+library(ggplot2)
 
 
+library(dplyr)
+library(lubridate)
+library(broom)
+
+#obtain parameter .csv's
+files <- list.files("/usr4/ugrad/neochatt/TickForecast/Data", pattern = "Amblyomma", full.names = TRUE)
+
+#parameter names
+pars <- c("phi.l.mu", "phi.n.mu", "phi.a.mu", "theta.ln", "theta.na", "beta[1]", "beta[2]", "beta[3]", "beta[4]", "beta[5]", "beta[6]", "beta[7]", "beta[8]", "beta[9]", "beta[10]", "beta[11]", "beta[12]", "beta[13]", "beta[14]")
+
+stats_edge <- data.frame(
+ parameter = character(length(pars)),
+ R_squared = numeric(length(pars)),
+ p = numeric(length(pars)),
+ significant = logical(length(pars))
+)
+
+r = 1
+
+for(par in pars){
+  
+  deer_files <- list()
+
+  
+  for (f in files) {
+    dat <- read.csv(f)
+    dat <- dat |> filter(node == par)
+    dat$start.date <- as.Date(dat$start.date)
+    deer_files[[length(deer_files) + 1]] <- dat
+  }
+
+  deer_files <- bind_rows(deer_files)
+
+  deer_files <- deer_files |>
+    mutate(week = floor_date(start.date, "week")) |>
+    group_by(week, siteID) |>
+    mutate(par = mean(mean, na.rm = TRUE))
+  
+  params <- deer_files |>
+    group_by(siteID) |>
+    summarize(param_value = mean[which.max(as.Date(start.date))])
+  
+  
+  kat <- frag |>
+    inner_join(params, by = "siteID")
+
+  
+  plot(kat$edge_m_per_ha, kat$par, pch = 16, cex = 0.7, xlab = "Edge", ylab = par, main     = paste0("Deer ", par, " vs LAI"))
+  abline(lm(kat$par ~ kat$edge_m_per_ha), col = "red")
+  print(summary(lm(kat$par ~ kat$edge_m_per_ha)))
+  
+  
+  R_squared <- summary(lm(kat$par ~ kat$edge_m_per_ha))$adj.r.squared
+  pVal <- tidy(lm(kat$par ~ kat$edge_m_per_ha))$p.value[2]
+  
+  stats_edge$parameter[r] <- par
+  stats_edge$R_squared[r] <- R_squared
+  stats_edge$p[r] <- pVal
+  stats_edge$significant[r] <- pVal < 0.1
+
+
+  r <- r+1
+}
+
+stats_edge
+
+```
 
 
 
