@@ -70,15 +70,15 @@ life_stage_groups <- list(
 
 lai <- lai |>
   group_by(siteID) |>
-  summarise(lai = mean(lai_mean, na.rm = TRUE))
+  summarise(lai = mean(lai_median, na.rm = TRUE))
 
 ndvi <- ndvi |>
   group_by(siteID) |>
-  summarise(ndvi = mean(ndvi_mean, na.rm = TRUE))
+  summarise(ndvi = mean(ndvi_median, na.rm = TRUE))
 
 evi <- evi |>
   group_by(siteID) |>
-  summarise(evi = mean(evi_mean, na.rm = TRUE))
+  summarise(evi = mean(evi_median, na.rm = TRUE))
 
 
 r <- 1
@@ -216,15 +216,15 @@ life_stage_groups <- list(
 
 lai <- lai |>
   group_by(siteID) |>
-  summarise(lai = mean(lai_mean, na.rm = TRUE))
+  summarise(lai = mean(lai_median, na.rm = TRUE))
 
 ndvi <- ndvi |>
   group_by(siteID) |>
-  summarise(ndvi = mean(ndvi_mean, na.rm = TRUE))
+  summarise(ndvi = mean(ndvi_median, na.rm = TRUE))
 
 evi <- evi |>
   group_by(siteID) |>
-  summarise(evi = mean(evi_mean, na.rm = TRUE))
+  summarise(evi = mean(evi_median, na.rm = TRUE))
 
 
 
