@@ -24,13 +24,11 @@ site_ticks <- ticks_wide |> filter(siteID == site)
 d <- 1
 
 #===============================LAI================================
-lai <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/full_LAIs.csv", stringsAsFactors = FALSE)
-lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
 lai <- lai |> filter(siteID == site)
+lai$date <- as.Date(lai$date)
 lai <- lai |>
   arrange(date)
-
-floor <- "2015-12-27" 
 
 site_ticks <- site_ticks |> filter(collectDate >= as.Date("2015-12-27"))
 site_ticks <- site_ticks |>
@@ -42,14 +40,6 @@ site_ticks <- site_ticks |>
 
 lai <- lai |> 
   mutate(week = floor_date(date, "week"))
-
-site_ticks <- site_ticks |>
-  filter(format(week, "%m-%d") >= "02-15",
-         format(week, "%m-%d") <= "05-31")
-
-lai <- lai |>
-  filter(format(week, "%m-%d") >= "02-15",
-         format(week, "%m-%d") <= "05-31")
 
 
 #Disaggregate by life stage 
@@ -67,7 +57,7 @@ adults <- site_ticks |>
 
 lais <- lai |>
   group_by(week) |>
-  summarise(weekly_lai = mean(lai_mean, na.rm = TRUE))
+  summarise(weekly_lai = mean(lai_median, na.rm = TRUE))
 
 final <- inner_join(larvae, lais, by = "week")
 final2 <- inner_join(nymphs, lais, by = "week")

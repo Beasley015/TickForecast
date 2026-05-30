@@ -9,11 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This document contains three diagnostic tests of every parameter (Φ, θ, β) and covariate (LAI, NDVI, EVI) combination:
+This document contains two diagnostic tests of every parameter (Φ, θ, β) and covariate (LAI, NDVI, EVI) combination:
 
 - (1): Simple regression of the most recent parameter estimate against a time-averaged covariate; table of R^2, p-values, and significance (p < 0.10) tacked onto the end for convenience
 - (2): Frequency distribution of R^2 for regressions of 1000 simulated (based on mean and SD and assuming normality) parameter values against a time-averaged covariate
-- (3): Sensitivity analysis 
 
 
 ### TEST 1 - SIMPLE REGRESSION
@@ -86,15 +85,15 @@ for(par in pars){
   
   lai <- lai |>
     group_by(siteID) |>
-    summarize(lai = mean(lai_mean, na.rm = TRUE))
+    summarize(lai = mean(lai_median, na.rm = TRUE))
   
   ndvi <- ndvi |>
     group_by(siteID) |>
-    summarize(ndvi = mean(ndvi_mean, na.rm = TRUE))
+    summarize(ndvi = mean(ndvi_median, na.rm = TRUE))
   
   evi <- evi |>
     group_by(siteID) |>
-    summarize(evi = mean(evi_mean, na.rm = TRUE))
+    summarize(evi = mean(evi_median, na.rm = TRUE))
   
   kat <- params |>
     inner_join(lai, by = "siteID") |>
@@ -232,15 +231,15 @@ for(par in pars){
   
   lai <- lai |>
     group_by(siteID) |>
-    summarize(lai = mean(lai_mean, na.rm = TRUE))
+    summarize(lai = mean(lai_median, na.rm = TRUE))
   
   ndvi <- ndvi |>
     group_by(siteID) |>
-    summarize(ndvi = mean(ndvi_mean, na.rm = TRUE))
+    summarize(ndvi = mean(ndvi_median, na.rm = TRUE))
   
   evi <- evi |>
     group_by(siteID) |>
-    summarize(evi = mean(evi_mean, na.rm = TRUE))
+    summarize(evi = mean(evi_median, na.rm = TRUE))
   
   kat <- params |>
     inner_join(lai, by = "siteID") |>
@@ -313,134 +312,3 @@ for(c in 1:ncol(dat)){
 ```
 
 
-### TEST 3: SENSITIVITY ANALYSIS
-
-TABLE CONTEXT: propagated_var = b1^2 * var(covariate), prop_total_param_var = propagated_var/var(param)
-
-```{r, echo = FALSE}
-
-library(dplyr)
-library(lubridate)
-library(broom)
-options(scipen = 999)
-
-#obtain parameter .csv's
-files <- list.files("/usr4/ugrad/neochatt/TickForecast/Data", pattern = "Ixodes", full.names = TRUE)
-
-#parameter names
-pars <- c("phi.l.mu", "phi.n.mu", "phi.a.mu", "theta.ln", "theta.na", "beta[1]", "beta[2]", "beta[3]", "beta[4]", "beta[5]", "beta[6]", "beta[7]", "beta[8]", "beta[9]", "beta[10]", "beta[11]", "beta[12]", "beta[13]", "beta[14]")
-
-ndvi_prop <- data.frame(
-  parameter = character(length(pars)),
-  b1 = numeric(length(pars)),
-  var_NDVI = numeric(length(pars)),
-  propagated_var = numeric(length(pars)),
-  prop_total_param_var = numeric(length(pars))
-)
-
-lai_prop <- data.frame(
-  parameter = character(length(pars)),
-  b1 = numeric(length(pars)),
-  var_LAI = numeric(length(pars)),
-  propagated_var = logical(length(pars)),
-  prop_total_param_var = numeric(length(pars))
-)
-
-evi_prop <- data.frame(
-  parameter = character(length(pars)),
-  b1 = numeric(length(pars)),
-  var_EVI = numeric(length(pars)),
-  propagated_var = logical(length(pars)),
-  prop_total_param_var = numeric(length(pars))
-)
-
-r = 1
-
-for(par in pars){
-  
-  deer_files <- list()
-  
-  #load vegetation data
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
-  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
-  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
-  
-  #render it plottable
-  lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
-  ndvi$date <- as.Date(ndvi$date, format = "%m/%d/%Y")
-  evi$date <- as.Date(evi$date, format = "%m/%d/%Y")
-  
-  for (f in files) {
-    dat <- read.csv(f)
-    dat <- dat |> filter(node == par)
-    dat$start.date <- as.Date(dat$start.date)
-    deer_files[[length(deer_files) + 1]] <- dat
-  }
-  
-  deer_files <- bind_rows(deer_files)
-  
-  deer_files <- deer_files |>
-    mutate(week = floor_date(start.date, "week")) |>
-    group_by(week, siteID) |>
-    mutate(par = mean(mean, na.rm = TRUE))
-  
-  params <- deer_files |>
-    group_by(siteID) |>
-    summarize(par = mean[which.max(as.Date(start.date))])
-  
-  lai <- lai |>
-    group_by(siteID) |>
-    summarize(lai = mean(lai_mean, na.rm = TRUE))
-  
-  ndvi <- ndvi |>
-    group_by(siteID) |>
-    summarize(ndvi = mean(ndvi_mean, na.rm = TRUE))
-  
-  evi <- evi |>
-    group_by(siteID) |>
-    summarize(evi = mean(evi_mean, na.rm = TRUE))
-  
-  kat <- params |>
-    inner_join(lai, by = "siteID") |>
-    inner_join(ndvi, by = "siteID") |> 
-    inner_join(evi, by = "siteID")
-  
-  
-  
-
-  s <- coef(lm(kat$par ~ kat$ndvi))[2]
-  
-  ndvi_prop$parameter[r] <- par
-  ndvi_prop$b1[r] <- s
-  ndvi_prop$var_NDVI <- var(kat$ndvi)
-  ndvi_prop$propagated_var[r] <- s^2 * var(kat$ndvi)
-  ndvi_prop$prop_total_param_var[r] <- (s^2 * var(kat$ndvi))/var(kat$par)
-  
-  
-  s <- coef(lm(kat$par ~ kat$lai))[2]
-  
-  lai_prop$parameter[r] <- par
-  lai_prop$b1[r] <- s
-  lai_prop$var_LAI <- var(kat$lai)
-  lai_prop$propagated_var[r] <- s^2 * var(kat$lai)
-  lai_prop$prop_total_param_var[r] <- (s^2 * var(kat$lai))/var(kat$par)
-  
-  s <- coef(lm(kat$par ~ kat$evi))[2]
-  
-  evi_prop$parameter[r] <- par
-  evi_prop$b1[r] <- s
-  evi_prop$var_EVI <- var(kat$evi)
-  evi_prop$propagated_var[r] <- s^2 * var(kat$evi)
-  evi_prop$prop_total_param_var[r] <- (s^2 * var(kat$evi))/var(kat$par)
- 
-  
-  r <- r+1
-}
-
-
-
-ndvi_prop
-lai_prop
-evi_prop
-
-```

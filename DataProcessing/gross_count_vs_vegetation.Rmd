@@ -176,17 +176,6 @@ library(lubridate)
 ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
 ticks$collectDate <- as.Date(ticks$collectDate)
 
-lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
-lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
-
-ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
-ndvi$date <- as.Date(ndvi$date, format = "%m/%d/%Y")
-
-evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
-evi$date <- as.Date(evi$date, format = "%m/%d/%Y")
-
-
-
 ixodes <- ticks |>
   mutate(week = floor_date(collectDate, "week")) |>
   filter(scientificName %in% c("Ixodes scapularis"))
@@ -194,40 +183,6 @@ ixodes <- ticks |>
 amblyomma <- ticks |>
   mutate(week = floor_date(collectDate, "week")) |>
   filter(scientificName %in% c("Amblyomma americanum"))
-
-
-lai <- lai |>
-  mutate(week = floor_date(date,  "week"))
-
-ndvi <- ndvi |>
-  mutate(week = floor_date(date,  "week"))
-
-evi <- evi |>
-  mutate(week = floor_date(date,  "week"))
-
-life_stage_groups <- list(
-  "all life stages" = c("Larva", "Nymph", "Adult"),
-  "nymph" = c("Nymph"),
-  "adult" = c("Adult")
-)
-
-
-
-
-lai <- lai |>
-  group_by(siteID) |>
-  summarise(lai = mean(lai_median, na.rm = TRUE))
-
-ndvi <- ndvi |>
-  group_by(siteID) |>
-  summarise(ndvi = mean(ndvi_median, na.rm = TRUE))
-
-evi <- evi |>
-  group_by(siteID) |>
-  summarise(evi = mean(evi_median, na.rm = TRUE))
-
-
-
 
 r <- 10
 
