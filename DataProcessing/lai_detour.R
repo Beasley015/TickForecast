@@ -44,7 +44,7 @@ ixodes <- ixodes |>
   group_by(siteID, collectDate) |>
   summarise(total_count = sum(processedCount, na.rm = TRUE), .groups = "drop") |>
   group_by(siteID) |>
-  summarise(mean_count = mean(total_count, na.rm = TRUE), .groups = "drop")
+  summarise(adult_count = mean(total_count, na.rm = TRUE), .groups = "drop")
 
 amblyomma <- amblyomma |>
   filter(!is.na(collectDate)) |>
@@ -143,3 +143,51 @@ lag_results
 
 
 nlcd <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_NLCD.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+library(dplyr)
+library(lubridate)
+library(broom)
+
+#obtain parameter .csv's
+files <- list.files("/usr4/ugrad/neochatt/TickForecast/Data", pattern = "Ixodes", full.names = TRUE)
+
+#parameter names
+pars <- c("phi.n.mu")
+
+for(par in pars){
+  
+  deer_files <- list()
+  
+  for (f in files) {
+    dat <- read.csv(f)
+    dat <- dat |> filter(node == par)
+    dat$start.date <- as.Date(dat$start.date)
+    deer_files[[length(deer_files) + 1]] <- dat
+  }
+  
+  deer_files <- bind_rows(deer_files)
+  
+  deer_files <- deer_files |>
+    mutate(week = floor_date(start.date, "week")) |>
+    group_by(week, siteID) |>
+    mutate(par = mean(mean, na.rm = TRUE))
+  
+  params <- deer_files |>
+    group_by(siteID) |>
+    summarize(par = mean[which.max(as.Date(start.date))])
+  
+}
+

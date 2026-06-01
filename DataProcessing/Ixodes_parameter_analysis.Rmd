@@ -56,9 +56,9 @@ for(par in pars){
   deer_files <- list()
   
   #load vegetation data
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
-  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
-  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv")
+  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
+  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
 
   #render it plottable
   lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
@@ -73,11 +73,6 @@ for(par in pars){
   }
 
   deer_files <- bind_rows(deer_files)
-
-  deer_files <- deer_files |>
-    mutate(week = floor_date(start.date, "week")) |>
-    group_by(week, siteID) |>
-    mutate(par = mean(mean, na.rm = TRUE))
   
   params <- deer_files |>
     group_by(siteID) |>
@@ -201,9 +196,9 @@ for(par in pars){
   deer_files <- list()
   
   #load vegetation data
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
-  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
-  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv")
+  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
+  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
 
   #render it plottable
   lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
