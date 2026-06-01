@@ -2,8 +2,8 @@
 # (1): Create a dataframe that decomposes all Cary and 18 NEON sites (including the main 10) 
         # by land cover and use
 # (2): Create another dataframe that contains fragstats (patch area, perimeter, edge, 
-        # %-dominant land cover) and relevant tick data (time-averaged nymph, adult counts) 
-        # for all Cary sites and 18 NEON sites, including the main 10
+        # %-dominant land cover) for all Cary sites and 18 NEON sites, including 
+        # main 10
 
 library(terra)
 library(sf)
@@ -213,63 +213,6 @@ frag$edge_m_per_ha <- frag$perimeter_m/frag$area_ha
 
 
 
-
-
-
-#=========Add mean Ixodes nymph counts
-stages <- c("Nymph")
-
-tick <- read.csv("tickLong.csv")
-ixodes <- tick |>
-  filter(scientificName %in% c("Ixodes scapularis"))
-
-ixodes_nymph <- ixodes |>
-  filter(lifeStage %in% stages) |>
-  group_by(siteID) |>
-  summarise(mean_ixodes_nymphs = mean(processedCount, na.rm = TRUE), .groups = "drop")
-
-
-frag <- left_join(frag, ixodes_nymph, by = c("siteID"))
-
-#=============Add mean Ixodes adult counts
-stages <- c("Adult")
-
-ixodes_adult <- ixodes |>
-  filter(lifeStage %in% stages) |>
-  group_by(siteID) |>
-  summarise(mean_ixodes_adults = mean(processedCount, na.rm = TRUE), .groups = "drop")
-
-
-frag <- left_join(frag, ixodes_adult, by = c("siteID"))
-
-
-
-
-#==============Add mean Amblyomma nymph counts
-amblyomma <- tick |>
-  filter(scientificName %in% c("Amblyomma americanum"))
-
-stages = c("Nymph")
-
-amblyomma_nymph <- amblyomma |>
-  filter(lifeStage %in% stages) |>
-  group_by(siteID) |>
-  summarise(mean_amblyomma_nymphs = mean(processedCount, na.rm = TRUE), .groups = "drop")
-
-
-frag <- left_join(frag, amblyomma_nymph, by = c("siteID"))
-
-
-#================Add mean Amblyomma adult counts
-stages = c("Adult")
-
-amblyomma_adult <- amblyomma |>
-  filter(lifeStage %in% stages) |>
-  group_by(siteID) |>
-  summarise(mean_amblyomma_adults = mean(processedCount, na.rm = TRUE), .groups = "drop")
-
-
-frag <- left_join(frag, amblyomma_adult, by = c("siteID"))
 
 
 

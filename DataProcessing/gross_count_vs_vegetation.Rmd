@@ -36,13 +36,13 @@ stat <- data.frame(
 ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
 ticks$collectDate <- as.Date(ticks$collectDate)
 
-lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv")
 lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
 
-ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
 ndvi$date <- as.Date(ndvi$date, format = "%m/%d/%Y")
 
-evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_VIs.csv")
+evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
 evi$date <- as.Date(evi$date, format = "%m/%d/%Y")
 
 

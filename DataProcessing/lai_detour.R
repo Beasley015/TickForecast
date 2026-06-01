@@ -2,7 +2,7 @@ library(dplyr)
 library(lubridate)
 
 #===================LAI======================
-lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv")
 lai <- lai |>
   mutate(date = as.Date(date),
          week = floor_date(date,  "week"))
@@ -71,13 +71,13 @@ kat <- inner_join(amp, amblyomma)
 
 
 
-#====================CCF + lagged regression======================
+#====================lagged regression======================
 library(dplyr)
 library(lubridate)
 library(tidyr)
 
 # LAI amplitude
-lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv") |>
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv") |>
   mutate(date = as.Date(date),
          year = year(date))
 
@@ -95,7 +95,7 @@ ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
     collectDate = as.Date(collectDate),
     year = year(collectDate)
   ) |>
-  filter(scientificName == "Amblyomma americanum")
+  filter(scientificName == "Ixodes scapularis")
 
 ticks_annual <- ticks |>
   group_by(siteID, year, lifeStage) |>
@@ -109,14 +109,14 @@ ticks_annual <- ticks |>
 # test lags
 lag_results <- data.frame()
 
-for(L in 0:3){
+for(L in c(0)){
   
   dat_lag <- amp |>
     mutate(tick_year = year + L) |>
     inner_join(ticks_annual, by = c("siteID", "tick_year" = "year"))
   
-  fit_nymph <- lm(Nymph ~ delta_LAI + siteID, data = dat_lag)
-  fit_adult <- lm(Adult ~ delta_LAI + siteID, data = dat_lag)
+  fit_nymph <- lm(Nymph ~ delta_LAI, data = dat_lag)
+  fit_adult <- lm(Adult ~ delta_LAI, data = dat_lag)
   
   lag_results <- rbind(
     lag_results,
@@ -140,3 +140,6 @@ for(L in 0:3){
 lag_results
 
 
+
+
+nlcd <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_NLCD.csv")
