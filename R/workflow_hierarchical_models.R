@@ -26,7 +26,7 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- F
+update <- T
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
@@ -72,7 +72,7 @@ ua.cal <-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 # n.slots <- 2
 production <- TRUE
-n.iter <- 15000
+n.iter <- 20000
 # n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
@@ -396,7 +396,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:5){ #start.drags) { 
+for (t in t:start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
