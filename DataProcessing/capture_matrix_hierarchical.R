@@ -41,7 +41,7 @@ capture_matrix <- function(neon.smam, sites){
     fill.days <- neon.smam %>% 
       filter(collectDate %in% missing.days) %>% 
       distinct(collectDate, .keep_all = TRUE) %>% 
-      select(collectDate, tagID) %>% 
+      dplyr::select(collectDate, tagID) %>% 
       mutate(tagID = "noCapture",
              state = unobserved)
   }

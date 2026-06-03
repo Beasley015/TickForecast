@@ -55,7 +55,7 @@ model.code <- nimbleCode({
 		theta.na.obs[site,1] ~ dnorm(theta.na[site], tau=theta.na.obs[site,2])
 		
 		for (j in 1:n.beta) {
-		  beta.obs[j, site] ~ dnorm(beta[j,site], beta.tau[j,site])
+		  beta.obs[j, site] ~ dnorm(beta[j,site], sd=1)
 		}
 
 	  ### first latent process
@@ -99,7 +99,7 @@ model.code <- nimbleCode({
 			  0
 		  )
 		  
-		  # lambda is part of transition matrix... I think reproduction?
+		  # lambda is reproduction in transition matrix
 		  lambda[t, site] <- if_else_nimble(
 			  (cgdd[t, site] >= 1400) & (cgdd[t, site] <= 2500),
 			  repro.mu,

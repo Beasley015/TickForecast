@@ -83,7 +83,7 @@ neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
   filter(siteID %in% sites) %>%
-	filter(time >= "2016-01-01" & time < "2022-01-01") %>%
+	filter(time >= "2016-01-01" & time < "2026-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -142,7 +142,7 @@ source("./DataProcessing/capture_matrix_hierarchical.R")
 smam_cary <- read_csv("./Data/cary_mouse_formatted.csv",
                    show_col_types=F)
 smam_neon <- read_csv("./Data/allSmallMammals.csv",
-                   show_col_types=F)
+                   show_col_types=F) 
                
 ch.ls <- capture_matrix(smam_neon, sites=sites)
 
@@ -164,6 +164,7 @@ mna <- ks %>%
 
 # Add Cary mna
 mna.full <- smam_cary %>%
+  rename("MNA" = "n_trapped") %>%
   dplyr::select(-plotID) %>%
   filter(collectDate >= ymd("2013-01-01")) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
