@@ -174,6 +174,7 @@ mna <- ks %>%
 
 # Add Cary mna
 mna.full <- smam_cary %>%
+  rename("MNA" = "n_trapped") %>%
   dplyr::select(-plotID) %>%
   filter(collectDate >= ymd("2013-01-01")) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%

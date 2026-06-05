@@ -569,6 +569,39 @@ ix.score.ts <-ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
 # save_gg("aa_score_ts.jpeg", aa.score.ts, dir.plot)
 # save_gg("ix_score_ts.jpeg", ix.score.ts, dir.plot)
 
+# Model intercepts: single-site -----------------
+# Get files
+out.files <- list.files("./outUpdate/", recursive = T)
+out.files <- out.files[str_detect(out.files, "parameterSummary.csv")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
+ints <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path("./outUpdate/", out.files[i])) %>%
+    filter(str_detect(node, "phi")) %>%
+    suppressMessages()
+  
+  ints <- bind_rows(ints, wee.tab)
+}
+
+ints <- ints %>%
+  select(-(`start.date == start.date`)) %>%
+  filter(str_detect(model, "WithWeatherAndMiceGlobal") == T,
+         species == "Amblyomma americanum") %>%
+  group_by(siteID, species, node, model) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages()
+
+ggplot(data=ints, aes(x=mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin=lower95, xmax=upper95))+
+  facet_wrap(~node)
+
 # Model coefficients: single-site ----------------
 # Get files
 out.files <- list.files("./outUpdate/", recursive = T)
@@ -712,6 +745,37 @@ aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))
 
 # save_gg("ix_map_singlesite.jpeg", ix.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_map_singlesite.jpeg", aa.map, dir.plot, width = 10, height = 8)
+
+# Model intercepts: hierarchical ------------------
+# Get files
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "parameterSummary")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
+ints <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    suppressMessages()
+  
+  ints <- bind_rows(ints, wee.tab)
+}
+
+ints <- ints %>%
+  select(-start.date) %>%
+  filter(str_detect(model, "WeatherMice") == T) %>%
+  group_by(siteID, species, node, model) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages()
+
+ggplot(data = ints, aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  facet_wrap(~node)
 
 # Model coefficients: hierarchical ---------------------
 # Get files

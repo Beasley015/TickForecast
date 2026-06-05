@@ -42,11 +42,11 @@ model.code <- nimbleCode({
 		### treat previous estimate as "data" drawn from prior
 		# Goal is to reduce shrinkage for sampling periods where
 		# a particular site was not sampled
-		phi.l.obs[site,1] ~ dnorm(phi.l.mu[site], tau=phi.l.obs[site,2])
-		phi.n.obs[site,1] ~ dnorm(phi.n.mu[site], tau=phi.n.obs[site,2])
-		phi.a.obs[site,1] ~ dnorm(phi.a.mu[site], tau=phi.a.obs[site,2])
-		theta.ln.obs[site,1] ~ dnorm(theta.ln[site], tau=theta.ln.obs[site,2])
-		theta.na.obs[site,1] ~ dnorm(theta.na[site], tau=theta.na.obs[site,2])
+		phi.l.obs[site,1] ~ dnorm(phi.l.mu[site], sd=1)
+		phi.n.obs[site,1] ~ dnorm(phi.n.mu[site], sd=1)
+		phi.a.obs[site,1] ~ dnorm(phi.a.mu[site], sd=1)
+		theta.ln.obs[site,1] ~ dnorm(theta.ln[site], sd=1)
+		theta.na.obs[site,1] ~ dnorm(theta.na[site], sd=1)
 
 	  ### first latent process
 		for (i in 1:4) {

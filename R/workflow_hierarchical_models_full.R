@@ -26,7 +26,7 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- F
+update <- T
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
@@ -174,6 +174,7 @@ mna <- ks %>%
 
 # Add Cary mna
 mna.full <- smam_cary %>%
+  rename("MNA" = "n_trapped") %>%
   dplyr::select(-plotID) %>%
   filter(collectDate >= ymd("2013-01-01")) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
@@ -393,7 +394,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:5){#start.drags) { 
+for (t in t:start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
