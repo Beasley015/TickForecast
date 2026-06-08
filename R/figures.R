@@ -382,6 +382,8 @@ for(i in 1:length(score.files)){
   score <- read_csv(file=file.path(dir.analysis, score.files[i])) %>%
     suppressMessages()
   
+  if(nrow(score)==0){next}
+  
   score <- score %>%
     filter(year(time) >= 2018) %>%
     select(lifeStage, time, siteID, species, model, crps) %>%
@@ -391,6 +393,8 @@ for(i in 1:length(score.files)){
   
   df.mutate <- bind_rows(df.mutate, score)
   rm(score)
+  
+  print(i/length(score.files))
 }
 
 df.mutate <- df.mutate %>%
@@ -455,7 +459,10 @@ aa.df <- scores.all %>%
                            model=="NullWeatherIntercept"~"WeatherIntercept",
                            model=="NullWeatherFull"~"WeatherFull",
                            model=="NullWeatherMiceIntercept"~"WeatherMiceIntercept",
-                           model=="NullWeatherMiceFull"~"WeatherMiceFull"))
+                           model=="NullWeatherMiceFull"~"WeatherMiceFull")) %>%
+  # Will get rid of this line later:
+  filter(model %in% c("Weather", "Weather&Mice", "WeatherIntercept",
+                      "WeatherMiceIntercept"))
 
 aa.fig <- ggplot(data=aa.df, aes(x = model, y = crps.diff))+
   geom_boxplot(aes(fill=model))+
@@ -470,7 +477,7 @@ aa.fig <- ggplot(data=aa.df, aes(x = model, y = crps.diff))+
 
 aa.tab <- aa.df %>%
   group_by(siteID, model) %>%
-  summarise(mean.diff = mean(crps.diff)) %>%
+  summarise(mean.diff = mean(crps.diff, na.rm=T)) %>%
   pivot_wider(names_from = siteID, values_from = mean.diff)
 
 ix.df <- scores.all %>%
@@ -591,16 +598,33 @@ for(i in seq_along(out.files)){
 
 ints <- ints %>%
   select(-(`start.date == start.date`)) %>%
-  filter(str_detect(model, "WithWeatherAndMiceGlobal") == T,
-         species == "Amblyomma americanum") %>%
+  filter(str_detect(model, "WithWeatherAndMiceGlobal") == T) %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages()
 
-ggplot(data=ints, aes(x=mean, y = siteID))+
+aa.ints <- ints %>%
+  filter(species == "Amblyomma americanum")
+
+aa.int.plot <- ggplot(data=aa.ints, aes(x=mean, y = siteID))+
   geom_point()+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
-  facet_wrap(~node)
+  facet_wrap(~node)+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+ix.ints <- ints %>%
+  filter(species == "Ixodes scapularis")
+
+ix.int.plot <- ggplot(data=ix.ints, aes(x=mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin=lower95, xmax=upper95))+
+  facet_wrap(~node)+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+save_gg("aa_intercept_single.jpeg", aa.int.plot, dir.plot)
+save_gg("ix_intercept_single.jpeg", ix.int.plot, dir.plot)
 
 # Model coefficients: single-site ----------------
 # Get files
@@ -799,7 +823,7 @@ for(i in seq_along(out.files)){
 betas <- betas %>%
   select(-start.date) %>%
   filter(str_detect(model, "WeatherMice") == T) %>%
-  rename(siteID = site) %>%
+  # rename(siteID = site) %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages() %>%

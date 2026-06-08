@@ -44,6 +44,7 @@ for(j in 1:length(species)){
   
   # extract files for a particular species
   quantScore <- grep(species[j], process.samples, value = T)
+  quantScore <- quantScore[!str_detect(quantScore, "Main")]
   
   for(i in seq_along(quantScore)){
     # Extract constants
