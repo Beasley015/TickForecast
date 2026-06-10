@@ -3,36 +3,38 @@ source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
   # Hyperpriors for intercepts 
-  phi.l.mean ~ dnorm(pr.phi.l[1],sd=1)
-  phi.l.prec ~ dgamma(prec.l[1],prec.l[2]) # calculate from posterior
+  phi.l.mean ~ dnorm(pr.phi.l[1], tau=pr.phi.l[2])
+  phi.n.mean ~ dnorm(pr.phi.n[1], tau=pr.phi.n[2])
+  phi.a.mean ~ dnorm(pr.phi.a[1], tau=pr.phi.a[2])
   
-  phi.n.mean ~ dnorm(pr.phi.n[1],sd=1)
-  phi.n.prec ~ dgamma(prec.n[1],prec.n[2])
+  theta.l2n.mean ~ dnorm(pr.theta.l2n[1], tau=pr.theta.l2n[2])
+  theta.n2a.mean ~ dnorm(pr.theta.n2a[1], tau=pr.theta.n2a[2])
   
-  phi.a.mean ~ dnorm(pr.phi.a[1],sd=1)
-  phi.a.prec ~ dgamma(prec.a[1],prec.a[2])
-  
-  theta.ln.mean ~ dnorm(pr.theta.l2n[1],sd=1)
-  theta.ln.prec ~ dgamma(prec.ln[1],prec.ln[2])
-  
-  theta.na.mean ~ dnorm(pr.theta.n2a[1],sd=1)
-  theta.na.prec ~ dgamma(prec.na[1],prec.na[2])
-  # Means are informative based on previous iterations
-  
-  # priors for beta - eventually moves to main loop
-  for (j in 1:n.beta) {
-    # Betas are the linear covariates for mice/weather linear models
-    # This will be hierarchical after hierarchical intercepts work
-    beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
+  # Hyperpriors for betas
+  for(j in 1:n.beta){
+    beta.mean[j] ~ dnorm(pr.beta[j,1], tau=pr.beta[j,2])
   }
-  
+
   for(site in 1:nsite){
 	  ### priors
-	  phi.l.mu[site] ~ dnorm(phi.l.mean, tau = phi.l.prec)
-	  phi.n.mu[site] ~ dnorm(phi.n.mean, tau = phi.n.prec)
-	  phi.a.mu[site] ~ dnorm(phi.a.mean, tau = phi.a.prec)
-	  theta.ln[site] ~ dnorm(theta.ln.mean, tau = theta.ln.prec)
-	  theta.na[site] ~ dnorm(theta.na.mean, tau = theta.na.prec)
+    dev.phi.l[site] ~ dnorm(0, tau=tau.dev.l)
+    dev.phi.a[site] ~ dnorm(0, tau=tau.dev.a)
+    dev.phi.n[site] ~ dnorm(0, tau=tau.dev.n)
+    
+    phi.l.mu[site] <- phi.l.mean + dev.phi.l[site]
+    phi.n.mu[site] <- phi.n.mean + dev.phi.n[site]
+    phi.a.mu[site] <- phi.a.mean + dev.phi.a[site]
+    
+    dev.ln[site] ~ dnorm(0, tau=tau.dev.ln)
+    dev.na[site] ~ dnorm(0, tau=tau.dev.na)
+    
+    theta.ln[site] <- theta.l2n.mean + dev.ln[site]
+	  theta.na[site] <- theta.n2a.mean + dev.na[site]
+	  
+	  for(j in 1:n.beta){
+	    dev.beta[j,site] ~ dnorm(0, tau=tau.dev.beta[j])
+	    beta[j,site] <- beta.mean[j] + dev.beta[j,site]
+	  }
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
@@ -42,11 +44,16 @@ model.code <- nimbleCode({
 		### treat previous estimate as "data" drawn from prior
 		# Goal is to reduce shrinkage for sampling periods where
 		# a particular site was not sampled
-		phi.l.obs[site,1] ~ dnorm(phi.l.mu[site], sd=1)
-		phi.n.obs[site,1] ~ dnorm(phi.n.mu[site], sd=1)
-		phi.a.obs[site,1] ~ dnorm(phi.a.mu[site], sd=1)
-		theta.ln.obs[site,1] ~ dnorm(theta.ln[site], sd=1)
-		theta.na.obs[site,1] ~ dnorm(theta.na[site], sd=1)
+		phi.l.obs[site,1] ~ dnorm(phi.l.mu[site], tau=phi.l.obs[site,2])
+		phi.n.obs[site,1] ~ dnorm(phi.n.mu[site], tau=phi.n.obs[site,2])
+		phi.a.obs[site,1] ~ dnorm(phi.a.mu[site], tau=phi.a.obs[site,2])
+		
+		theta.ln.obs[site,1] ~ dnorm(theta.ln[site], tau=theta.ln.obs[site,2])
+		theta.na.obs[site,1] ~ dnorm(theta.na[site], tau=theta.ln.obs[site,2])
+		
+		for(j in 1:n.beta){
+		  beta.obs[j,site] ~ dnorm(beta[j,site], tau=beta.tau[j,site])
+		}
 
 	  ### first latent process
 		for (i in 1:4) {
@@ -76,8 +83,8 @@ model.code <- nimbleCode({
 	    
 	    # Mice inputs for life stage transitions
       if (miceAndWeather) {
-			  logit(l2n[t, site]) <- theta.ln[site] + beta[13] * mice[t, site]
-			  logit(n2a[t, site]) <- theta.na[site] + beta[14] * mice[t, site]
+			  logit(l2n[t, site]) <- theta.ln[site] + beta[13, site] * mice[t, site]
+			  logit(n2a[t, site]) <- theta.na[site] + beta[14, site] * mice[t, site]
 		  } else {
 			  logit(l2n[t, site]) <- theta.ln[site]
 			  logit(n2a[t, site]) <- theta.na[site]
@@ -111,22 +118,22 @@ model.code <- nimbleCode({
 				x4[t, site] ~ dnorm(0, 1)
 
 			  logit(phi.l[t, site]) <- phi.l.mu[site] +
-				  beta[1] * x1[t, site] +
-				  beta[2] * x2[t, site] +
-				  beta[3] * x3[t, site] +
-				  beta[4] * x4[t, site]
+				  beta[1, site] * x1[t, site] +
+				  beta[2, site] * x2[t, site] +
+				  beta[3, site] * x3[t, site] +
+				  beta[4, site] * x4[t, site]
 
 			  logit(phi.n[t, site]) <- phi.n.mu[site] +
-				  beta[5] * x1[t, site] +
-				  beta[6] * x2[t, site] +
-				  beta[7] * x3[t, site] +
-			  	beta[8] * x4[t, site]
+				  beta[5, site] * x1[t, site] +
+				  beta[6, site] * x2[t, site] +
+				  beta[7, site] * x3[t, site] +
+			  	beta[8, site] * x4[t, site]
 
 			  logit(phi.a[t, site]) <- phi.a.mu[site] +
-				  beta[9] * x1[t, site] +
-				  beta[10] * x2[t, site] +
-				  beta[11] * x3[t, site] +
-				  beta[12] * x4[t, site]
+				  beta[9, site] * x1[t, site] +
+				  beta[10, site] * x2[t, site] +
+				  beta[11, site] * x3[t, site] +
+				  beta[12, site] * x4[t, site]
 		  } else {
 			  logit(phi.l[t, site]) <- phi.l.mu[site]
 			  logit(phi.n[t, site]) <- phi.n.mu[site]
@@ -160,6 +167,8 @@ model.code <- nimbleCode({
 	  }
 
 	  for (t in 2:horizon) {
+	    # Figure out how to do this as a wishart with moment-matching
+	    # from a multivariate normal -------------------
 		  # expected number questing
 		  Ex[1:4, t, site] <- A[1:4, 1:4, t-1, site] %*% x[1:4, t-1, site]
 

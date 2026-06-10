@@ -26,13 +26,13 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- T
+update <- F
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
 
 # Define models to run
-models <- c("Weather_hierarchicalIntercept", "WeatherMice_hierarchicalIntercept")
+models <- c("Weather_hierarchicalFull", "WeatherMice_hierarchicalFull")
 species <- c("Ixodes scapularis", "Amblyomma americanum") 
 
 # Create all possible combos
@@ -48,7 +48,7 @@ ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 2
+	job.num <- 1
 }
 
 species.job <- jobs$species[job.num] %>%
@@ -106,9 +106,9 @@ df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"),
 month.get <- if_else(month(start.date) < 5, 4, month(start.date))
 data.latent <- df.latent %>%
 	mutate(model = gsub("DormantNymph", "", model)) %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalIntercept",
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
                            model == "WithWeatherAndMiceGlobal" ~ 
-                             "WeatherMice_hierarchicalIntercept",
+                             "WeatherMice_hierarchicalFull",
                            TRUE ~ model)) %>%
 	filter(
 		model == model.job,
@@ -218,7 +218,6 @@ source("./DataProcessing/daymet_downscale_hierarchical.R")
 
 cgdd <- daymet_cumGDD(sites=sites) %>%
   ungroup() %>%
-  filter(year(Date) < 2022) %>%
   dplyr::select(-year) %>%
   suppressMessages()
 
@@ -226,17 +225,14 @@ maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
   ungroup() %>%
   dplyr::select(Date, siteID, maxTempCorrect) %>%
   mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
-  filter(year(Date) < 2022) %>%
   suppressMessages()
 
 rh <- daymet_rh(sites) %>%
     dplyr::select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
-  filter(year(Date) < 2022) %>%
     suppressMessages()
 
 precip <- daymet_precip(sites) %>%
     dplyr::select(Date, precipitation, siteID) %>%
-  filter(year(Date) < 2022) %>%
     suppressMessages()
  
 # Combine all met variables
@@ -268,15 +264,14 @@ df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
                       show_col_types = F)
 
 params.stats <- df.params %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalIntercept",
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
                            model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchicalIntercept",
+                             "WeatherMice_hierarchicalFull",
                            TRUE ~ model)) %>%
 	filter(model == model.job) %>%
 	dplyr::select(parameter, value) %>%
 	group_by(parameter) %>%
-	summarise(mu = mean(value), 
-	          tau = 1 / var(value))
+	summarise(mu = mean(value), tau = 1 / var(value))
 
 get_prior <- function(name) {
 	pr <- numeric(2)
@@ -293,21 +288,14 @@ get_prior <- function(name) {
 	}
 }
 
-# Get informative priors for mean model parameters
-# and start with uninformative priors for precision
+# Get informative priors for model parameters
+# All site priors drawn from dist with the below parameters
 phi.l <- get_prior("phi.l.mu")
 phi.n <- get_prior("phi.n.mu")
 phi.a <- get_prior("phi.a.mu")
 
-prec.l <- c(1,1)
-prec.n <- c(1,1)
-prec.a <- c(1,1)
-
 theta.l2n <- get_prior("theta.ln")
 theta.n2a <- get_prior("theta.na")
-
-prec.l2n <- c(1,1)
-prec.n2a <- c(1,1)
 
 repro <- get_prior("repro.mu")
 repro.mu <- repro[1] # goes to reproduction portion of transition matrix
@@ -319,25 +307,21 @@ n.beta <- params.stats %>%
 	nrow()
 
 get_beta <- function(model.job) {
-	if (model.job == "Static") {
-		return(NA)
-	} else {
-		pr.beta <- matrix(NA, n.beta, 2)
-		n.beta <- params.stats %>%
-			filter(grepl("beta", parameter)) %>%
-			nrow()
+	pr.beta <- matrix(NA, n.beta, 2)
+	n.beta <- params.stats %>%
+		filter(grepl("beta", parameter)) %>%
+		nrow()
 
-		pr.beta <- matrix(NA, n.beta, 2)
-		for (i in seq_len(n.beta)) {
-			if (model.job == "WithMNAMice") {
-				node <- paste0("beta.m[", i, "]")
-			} else {
-				node <- paste0("beta[", i, "]")
-			}
-			pr.beta[i, ] <- get_prior(node)
+	pr.beta <- matrix(NA, n.beta, 2)
+	for (i in seq_len(n.beta)) {
+		if (model.job == "WithMNAMice") {
+			node <- paste0("beta.m[", i, "]")
+		} else {
+			node <- paste0("beta[", i, "]")
 		}
-		return(pr.beta)
+		pr.beta[i, ] <- get_prior(node)
 	}
+	return(pr.beta)
 }
 
 pr.beta <- get_beta(model.job)
@@ -353,9 +337,9 @@ inv_gamma_mm <- function(x) {
 
 # get invgamma parameters
 pr.sig <- df.params %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalIntercept",
+  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
                            model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchicalIntercept",
+                             "WeatherMice_hierarchicalFull",
                            TRUE ~ model)) %>%
 	filter(model == model.job, grepl("sig", parameter)) %>%
 	dplyr::select(parameter, value) %>%
@@ -363,7 +347,7 @@ pr.sig <- df.params %>%
 	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
 
 
-# iterate ===============================================================
+# iterate ====================================================================
 
 # Make sure start is on the first time step
 t = 1
@@ -404,7 +388,7 @@ for (t in t:start.drags) {
 	message(mm)
 
   # flags for if statements
-	miceAndWeather <- model.job == "WeatherMice_hierarchicalIntercept"
+	miceAndWeather <- model.job == "WeatherMice_hierarchicalFull"
 	use.daymet <- grepl("Weather", model.job)
 
 	# initialize nimble lists
@@ -413,11 +397,25 @@ for (t in t:start.drags) {
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 		
+		# Uninformative priors for deviance precision
+		tau.dev.l <- 1
+		tau.dev.n <- 1
+		tau.dev.a <- 1
+		
+		tau.dev.ln <- 1
+		tau.dev.na <- 1
+		
+		tau.dev.beta <- rep(1, length = n.beta)
+		
+		# NA values for "observed" parameters
 		phi.l.obs <- matrix(nrow=length(sites), ncol = 2)
 		phi.n.obs <- matrix(nrow=length(sites), ncol = 2)
 		phi.a.obs <- matrix(nrow=length(sites), ncol = 2)
 		theta.ln.obs <- matrix(nrow=length(sites), ncol = 2)
 		theta.na.obs <- matrix(nrow=length(sites), ncol = 2)
+		
+		beta.obs <- matrix(nrow = n.beta, ncol = length(sites))
+		beta.tau <- matrix(nrow = n.beta, ncol = length(sites))
 		
 		} else {
 		  horizon <- ifelse(as.numeric(last(drag.dates) - fx.start.date) >= 365,
@@ -464,38 +462,36 @@ for (t in t:start.drags) {
 			  ungroup() %>%
 			  select(mu, tau) %>%
 			  as.matrix()
-
+			
 			# get parameter posterior summary
 			params.stats <- last.params %>%
 			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
 			  rename("parameter" = "node") %>%
 				group_by(parameter) %>%
-				summarise(mu = mean(value), tau = 1 / var(value))
+				summarise(mu = mean(value,na.rm=T), tau = 1 / var(value,na.rm = ))
 
-			# Priors for interepts (priors are constant across sites)
-			phi.l <- get_prior("phi.l.mu")
+			# Priors for transitions (priors are constant across sites)
+		  phi.l <- get_prior("phi.l.mu")
 			phi.n <- get_prior("phi.n.mu")
 			phi.a <- get_prior("phi.a.mu")
 			
 			theta.l2n <- get_prior("theta.ln")
 			theta.n2a <- get_prior("theta.na")
 			
-			# Precision priors
-			prec.params <- read_csv(file.path(readDest, "precSamples.csv")) %>%
+			# Deviance priors
+			dev.params <- read_csv(file.path(readDest, "devSamples.csv")) %>%
 			  group_by(node) %>%
-			  summarise(mu = mean(value), v = var(value)) %>%
-			  mutate(alpha = (mu^2 / v) + 2,
-			         beta = mu * ((mu^2 / v) + 1)) %>%
+			  summarise(tau = 1/var(value)) %>%
 			  suppressMessages() 
 			
-			prec.l <- c(prec.params$alpha[2], prec.params$beta[2])
-			prec.n <- c(prec.params$alpha[3], prec.params$beta[3])
-			prec.a <- c(prec.params$alpha[1], prec.params$beta[1])
+			tau.dev.l <- dev.params$tau[4]
+			tau.dev.n <- dev.params$tau[5]
+			tau.dev.a <- dev.params$tau[3]
 			
-			prec.l2n <- c(prec.params$alpha[4], prec.params$beta[4])
-			prec.n2a <- c(prec.params$alpha[5], prec.params$beta[5])
+			tau.dev.ln <- dev.params$tau[1]
+			tau.dev.na <- dev.params$tau[2]
 
-			# Priors for betas
+			# Priors for betas (betas will vary across sites)
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
 				rename("parameter" = "node") %>%
 				group_by(parameter) %>%
@@ -503,18 +499,57 @@ for (t in t:start.drags) {
 				suppressMessages()
 
 			pr.beta <- matrix(NA, n.beta, 2)
-			for (i in seq_len(n.beta)) {
+			for (i in 1:n.beta) {
     		pr <- numeric(2)
 				xx <- betas %>% filter(parameter == paste("beta", i, sep = ""))
 				pr[1] <- xx %>% pull(mu)
 				pr[2] <- xx %>% pull(tau)
-				pr.beta[i, ] <- pr
+				pr.beta[i,] <- pr
 			}
+			
+			# Beta precisions
+			dev.b <- read_csv(file.path(readDest, "devBeta.csv")) %>%
+			  group_by(node) %>%
+			  summarise(tau = 1/var(value)) %>%
+			  suppressMessages() 
+			
+			b.names <- logical()
+			for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
+			
+			tau.dev.beta <- arrange(dev.b, factor(node, levels = b.names)) %>%
+			  pull(tau)
+			
+			# "Observed" betas from previous time step
+			site.betas <- read_csv(file.path(readDest, "beta.csv")) %>%
+			  rename("parameter" = "node") %>%
+			  group_by(parameter, siteID) %>%
+			  summarise(mu = mean(value), tau = 1/var(value)) %>%
+			  suppressMessages()
+			
+			beta.obs <- site.betas %>%
+			  select(-tau) %>%
+			  pivot_wider(names_from = siteID, values_from = mu) %>%
+			  mutate(parameter = as.numeric(str_extract(parameter, 
+			                                            pattern = "[0-9]+"))) %>%
+			  arrange(parameter) %>%
+			  ungroup() %>%
+			  dplyr::select(-parameter) %>%
+			  as.matrix()
+			
+			beta.tau <- site.betas %>%
+			  select(-mu) %>%
+			  pivot_wider(names_from = siteID, values_from = tau) %>%
+			  mutate(parameter = as.numeric(str_extract(parameter, 
+			                                            pattern = "[0-9]+"))) %>%
+			  arrange(parameter) %>%
+			  ungroup() %>%
+			  dplyr::select(-parameter) %>%
+			  as.matrix()
 
 			# get invgamma parameters
 			sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
-			  suppressMessages()
-			
+				suppressMessages()
+				
 			pr.sig <- sig.last %>%
 				group_by(parameter) %>%
 				summarise(
@@ -673,21 +708,29 @@ for (t in t:start.drags) {
 	data$pr.phi.l <- phi.l
 	data$pr.phi.n <- phi.n
 	data$pr.phi.a <- phi.a
-	data$prec.l <- prec.l
-	data$prec.n <- prec.n
-	data$prec.a <- prec.a
 	
 	data$theta.ln.obs <- theta.ln.obs
 	data$theta.na.obs <- theta.na.obs
 	
 	data$pr.theta.l2n <- theta.l2n
 	data$pr.theta.n2a <- theta.n2a
-	data$prec.ln <- prec.l2n
-	data$prec.na <- prec.n2a
 	
 	data$repro.mu <- repro.mu
 	
 	data$pr.beta <- pr.beta
+	
+	data$beta.obs <- beta.obs
+	data$beta.tau <- beta.tau
+	
+	data$tau.dev.l <- tau.dev.l
+	data$tau.dev.n <- tau.dev.n
+	data$tau.dev.a <- tau.dev.a
+	
+	data$tau.dev.ln <- tau.dev.ln
+	data$tau.dev.na <- tau.dev.na
+	
+	data$tau.dev.beta <- tau.dev.beta
+	
 	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
 	
 	# Cumulative degree days
@@ -710,12 +753,11 @@ for (t in t:start.drags) {
 	  if (nrow(data$mice) < length(fx.sequence)) {
 	    horizon <- min(length(data$cgdd), hrow(data$mice))
 	    data$y <- y[, 1:horizon, ,]
-	    fx.sequence <- fx.sequence[1:nrow(data$mice)]
 	  }
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))) {
-	  if (model.job == "Weather_hierarchicalIntercept") {
+	  if (model.job == "Weather_hierarchicalFull") {
 	    # Make sure horizon does not go past empirical data
 	    horizon <- nrow(data$cgdd)
 	    data$y <- as.array(y[, 1:horizon, ,])
@@ -758,21 +800,27 @@ for (t in t:start.drags) {
 	    phi.l.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
 	    phi.n.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
 	    phi.a.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
-			phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
-			phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
-			phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
-			phi.l.prec = rgamma(1,1,1),
-			phi.n.prec = rgamma(1,1,1),
-			phi.a.prec = rgamma(1,1,1),
-			theta.ln.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
-			theta.na.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
-			theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
-			               length(sites)),
-			theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
-			               length(sites)),
-			theta.ln.prec = rgamma(1,1,1),
-			theta.na.prec = rgamma(1,1,1),
-			beta = rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2]))),
+	    phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
+	    phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
+	    phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
+	    dev.phi.l = rnorm(length(sites)),
+	    dev.phi.n = rnorm(length(sites)),
+	    dev.phi.a = rnorm(length(sites)),
+	    theta.ln.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
+	    theta.na.obs = matrix(c(rnorm(length(sites)), rgamma(n=length(sites),1)), ncol = 2),
+	    theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
+	                   length(sites)),
+	    theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
+	                   length(sites)),
+	    dev.ln = rnorm(length(sites)),
+	    dev.na = rnorm(length(sites)),
+			beta = matrix(rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),length(sites)),
+			              ncol = length(sites)),
+			beta.obs = matrix(rnorm(n.beta*length(sites)), nrow=n.beta, 
+			                   ncol = length(sites)),
+			beta.tau = matrix(rgamma(n.beta*length(sites),1,1), nrow=n.beta, 
+			                  ncol = length(sites)),
+			dev.beta = matrix(rnorm(n.beta*length(sites)), nrow=n.beta),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
 			x = array(abs(rnorm(n=4*horizon*length(sites), mean=2)) / 160 * 450, 
@@ -794,14 +842,13 @@ for (t in t:start.drags) {
 		)
 	}
 	
-	params.to.save <-  c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "phi.l.prec",
-	                     "phi.n.prec", "phi.a.prec", "sig",
+	params.to.save <-  c("beta", "dev.beta", "phi.a.mu", "phi.l.mu", "phi.n.mu",  
+	                     "dev.phi.l", "dev.phi.n", "dev.phi.a", "sig",
 	                     # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
-	                     "theta.ln", "theta.na", "theta.ln.prec", "theta.na.prec",
+	                     "theta.ln", "theta.na", "dev.ln", "dev.na",
 	                     "x" #, "x1", "x2", "x3", "x4"
-	                     )     
+	                     )       
 
-	# start <- Sys.time()
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
 	cl <- makeCluster(n.slots) 
@@ -820,10 +867,6 @@ for (t in t:start.drags) {
 		) 
 	
 	stopCluster(cl)
-	
-	# end <- Sys.time()
-	
-	# end-start
   
 	# Merge outputs of chains
 	dat.hindcast <- list()
@@ -907,8 +950,8 @@ for (t in t:start.drags) {
 		observations = neon.job,
 		fx.dates = fx.sequence,
 		model = model.job,
-		spp = species.job,
 		horizon = horizon,
+		spp = species.job,
 		weather = use.daymet,
 		out.dir = fileDest)
 	
