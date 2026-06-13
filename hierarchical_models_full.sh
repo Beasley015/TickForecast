@@ -25,4 +25,4 @@ cd /projectnb/dietzelab/ebeasley/TickForecast
 
 module load R/4.5.2
 
-Rscript /projectnb/dietzelab/ebeasley/TickForecast/R/workflow_hierarchical_models_full.R $SGE_TASK_ID
+Rscript /projectnb/dietzelab/ebeasley/TickForecast/R/workflow_hierarchical_models.R $SGE_TASK_ID
