@@ -590,7 +590,7 @@ out.files <- out.files[which(years >= 2018)]
 ints <- tibble()
 for(i in seq_along(out.files)){
   wee.tab <- read_csv(file.path("./outUpdate/", out.files[i])) %>%
-    filter(str_detect(node, "phi")) %>%
+    filter(str_detect(node, "phi|theta")) %>%
     suppressMessages()
   
   ints <- bind_rows(ints, wee.tab)
@@ -610,6 +610,7 @@ aa.int.plot <- ggplot(data=aa.ints, aes(x=mean, y = siteID))+
   geom_point()+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
   facet_wrap(~node)+
+  labs(x = "Estimate", y = "Site")+
   theme_bw()+
   theme(panel.grid = element_blank())
 
@@ -620,6 +621,7 @@ ix.int.plot <- ggplot(data=ix.ints, aes(x=mean, y = siteID))+
   geom_point()+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
   facet_wrap(~node)+
+  labs(x = "Estimate", y = "Site")+
   theme_bw()+
   theme(panel.grid = element_blank())
 
@@ -703,7 +705,7 @@ aa.sub <- betas %>%
                          TRUE ~ NA),
          node = factor(node))
 
-# Fix these sigs too
+
 aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
   geom_point(aes(x = 4, shape = sig))+
@@ -726,10 +728,16 @@ aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
+both.transition <- (ix.transition | aa.transition)+
+  plot_annotation(tag_levels = "a")
+
 # save_gg("aa_survival_singlesite.jpeg", aa.survival, dir.plot, height = 8)
 # save_gg("aa_transition_singlesite.jpeg", aa.transition, dir.plot, height = 8)
 # save_gg("ix_survival_singlesite.jpeg", ix.survival, dir.plot, height = 8)
 # save_gg("ix_transition_singlesite.jpeg", ix.transition, dir.plot, height = 8)
+
+# save_gg("both_transition_singlesite.jpeg", both.transition, dir.plot, 
+#         height = 8, width = 8)
 
 # Maps?
 site.coords <- read_csv("./Data/siteLatLon.csv") %>%
@@ -737,8 +745,8 @@ site.coords <- read_csv("./Data/siteLatLon.csv") %>%
 
 betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
   filter(str_detect(node, 'Survival')) %>%
-  filter(is.na(decimalLongitude)==F) %>%
-  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+  filter(is.na(lon)==F) %>%
+  st_as_sf(coords = c("lon", "lat"), crs = 4326)
 
 state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
 state_map <- st_make_valid(st_transform(state_map, crs = 5070))
