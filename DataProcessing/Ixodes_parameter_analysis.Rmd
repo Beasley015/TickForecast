@@ -56,9 +56,9 @@ for(par in pars){
   deer_files <- list()
   
   #load vegetation data
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv")
-  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
-  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
+  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_LAIs.csv")
+  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv")
+  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv")
 
   #render it plottable
   lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
@@ -196,9 +196,9 @@ for(par in pars){
   deer_files <- list()
   
   #load vegetation data
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_LAIs.csv")
-  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
-  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/site_VIs.csv")
+  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_LAIs.csv")
+  ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv")
+  evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv")
 
   #render it plottable
   lai$date <- as.Date(lai$date, format = "%m/%d/%Y")
@@ -282,7 +282,7 @@ for(c in 1:ncol(dat)){
   hist(dat[, c],
       breaks = 30,
       main = paste0("Distribution of R² (", colnames(dat)[c], " ~ NDVI)"),
-      xlab = "R²")
+      xlab = "R²", col = "red")
 }
 
 dat <- LAI_R_sq
@@ -291,7 +291,7 @@ for(c in 1:ncol(dat)){
   hist(dat[, c],
       breaks = 30,
       main = paste0("Distribution of R² (", colnames(dat)[c], " ~ LAI)"),
-      xlab = "R²")
+      xlab = "R²", col = "blue")
 }
 
 dat <- EVI_R_sq
@@ -300,7 +300,8 @@ for(c in 1:ncol(dat)){
   hist(dat[, c],
       breaks = 30,
       main = paste0("Distribution of R² (", colnames(dat)[c], " ~ EVI)"),
-      xlab = "R²")
+      xlab = "R²",
+      col = "forestgreen")
 }
 
 

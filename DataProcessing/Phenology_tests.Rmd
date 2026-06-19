@@ -1,0 +1,63 @@
+---
+title: "phenology_tests"
+author: "Neo Chatterjee"
+date: "2026-06-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r, echo = FALSE}
+library(dplyr)
+library(lubridate)
+
+sites <- c("BLAN", "GREN", "HARV", "HNRY", "MLBS", "ORNL", "SCBI", "SERC","STEI", "TEA", "TREE")
+
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
+ticks$collectDate <- as.Date(ticks$collectDate)
+pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/pheno.csv")
+
+years <- 2016:2025
+
+for(site in sites){
+  d2 <- ticks |>
+  filter(scientificName == "Ixodes scapularis") |>
+  filter(lifeStage == "Nymph") |>
+  filter(siteID == site) |>
+  group_by(collectDate) |>
+  summarise(count = sum(processedCount)) |>
+  mutate(DOY = yday(collectDate))
+  
+  d2$year <- year(d2$collectDate)
+
+  d2 <- d2 |>
+    filter(year >= 2016)
+  
+  plot(d2$collectDate, (d2$count), type = "l", xlab = "Date", ylab = "Ixodes nymph count", main = site)
+
+  
+  for(y in years){
+  
+  p <- pheno |>
+    filter(siteID == site) |>
+    filter(year == y)
+  
+  g <- as.Date(p$greenup - 1, origin = paste0(y, "-01-01"))
+  
+  abline(v = g, col = "forestgreen", lty = 2)
+  
+  }
+  
+  
+  legend("topright", 
+       legend = c("Ixodes nymph count", "Greenup"), 
+       col = c("black", "forestgreen"), 
+       lty = c(1, 2),
+       cex = 0.7)
+}
+
+```

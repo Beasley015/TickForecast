@@ -8,11 +8,11 @@ library(dplyr)
 library(lubridate)
 library(tidyr)
 
-site <- "HARV"
+site <- "KONZ"
 
 ticks <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/tickLong.csv", stringsAsFactors = FALSE)
 ticks$collectDate <- as.Date(ticks$collectDate)
-ticks <- ticks[ticks$scientificName %in% c("Ixodes scapularis", "Amblyomma americanum"), ]
+ticks <- ticks[ticks$scientificName %in% c("Amblyomma americanum"), ]
 
 
 ticks_wide <- ticks |> 
@@ -24,7 +24,7 @@ site_ticks <- ticks_wide |> filter(siteID == site)
 d <- 1
 
 #===============================LAI================================
-lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_LAIs.csv")
+lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_LAIs.csv")
 lai <- lai |> filter(siteID == site)
 lai$date <- as.Date(lai$date)
 lai <- lai |>
@@ -145,7 +145,7 @@ ccf(
 title(
   xlab = "Lag (weeks)",
   ylab = "Cross-correlation",
-  main = paste(site, "LAI vs Nymph Count (CCF) (differenced)")
+  main = paste("a.")
 )
 
 
@@ -189,16 +189,14 @@ ccf(
 title(
   xlab = "Lag (weeks)",
   ylab = "Cross-correlation",
-  main = paste(site, "LAI vs Adult Count (CCF) (differenced)")
+  main = paste("b.")
 )
 
 
 
 
 #===============================NDVI================================
-site_ticks <- ticks_wide |> filter(siteID == site)
-
-ndvi <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/full_VIs.csv", stringsAsFactors = FALSE)
+ndvi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv")
 
 ndvi$date_raw <- ndvi$date
 
@@ -209,28 +207,11 @@ ndvi$date <- parse_date_time(
 
 ndvi <- ndvi |> filter(siteID == site)
 ndvi <- ndvi |> arrange(date)
-
-floor <- "2015-12-27" 
-
-site_ticks <- site_ticks |> 
-  filter(collectDate >= as.Date("2015-12-27")) |>
-  arrange(collectDate) |>
-  mutate(week = floor_date(collectDate, "week"))
+ndvi$date <- as.Date(ndvi$date)
 
 ndvi <- ndvi |> 
   mutate(week = floor_date(date, "week"))
 
-larvae <- site_ticks |> 
-  group_by(week) |>
-  summarise(weekly_mean = mean(Larva, na.rm = TRUE))
-
-nymphs <- site_ticks |>
-  group_by(week) |>
-  summarise(weekly_mean = mean(Nymph, na.rm = TRUE))
-
-adults <- site_ticks |>
-  group_by(week) |>
-  summarise(weekly_mean = mean(Adult, na.rm = TRUE))
 
 ndvis <- ndvi |>
   group_by(week) |>
@@ -360,15 +341,14 @@ ccf(
 title(
   xlab = "Lag (weeks)",
   ylab = "Cross-correlation",
-  main = paste(site, "NDVI vs Adult Count (CCF) (differenced)")
+  main = paste("b.")
 )
 
 
 
 #===============================EVI================================
-site_ticks <- ticks_wide |> filter(siteID == site)
 
-evi <- read.csv("full_VIs.csv", stringsAsFactors = FALSE)
+evi <- read.csv("MODIS_site_VIs.csv", stringsAsFactors = FALSE)
 
 evi$date_raw <- evi$date
 
@@ -380,27 +360,10 @@ evi$date <- parse_date_time(
 evi <- evi |> filter(siteID == site)
 evi <- evi |> arrange(date)
 
-floor <- "2015-12-27" 
-
-site_ticks <- site_ticks |> 
-  filter(collectDate >= as.Date("2015-12-27")) |>
-  arrange(collectDate) |>
-  mutate(week = floor_date(collectDate, "week"))
 
 evi <- evi |> 
   mutate(week = floor_date(date, "week"))
 
-larvae <- site_ticks |> 
-  group_by(week) |>
-  summarise(weekly_mean = mean(Larva, na.rm = TRUE))
-
-nymphs <- site_ticks |>
-  group_by(week) |>
-  summarise(weekly_mean = mean(Nymph, na.rm = TRUE))
-
-adults <- site_ticks |>
-  group_by(week) |>
-  summarise(weekly_mean = mean(Adult, na.rm = TRUE))
 
 evis <- evi |>
   group_by(week) |>
