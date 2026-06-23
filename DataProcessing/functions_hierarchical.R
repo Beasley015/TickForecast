@@ -522,7 +522,7 @@ transfer_analysis <- function(
 	out.dir
 ) {
   # Total number of mcmc iterations
-	nmcmc <- nrow(fx.df[[1]])
+	nmcmc <- nrow(fx.df$beta)
 	
 	# Create life stage table
 	ls.tb <- tibble(
@@ -542,6 +542,10 @@ transfer_analysis <- function(
 	# Deviance nodes
 	dev.nodes <- which(str_detect(names(fx.df),"dev") & 
 	                      str_detect(names(fx.df),"beta")==F)
+	
+	# Shrinkage nodes
+	shrink.nodes <- which(str_detect(names(fx.df), "shrink") &
+	                        str_detect(names(fx.df),"beta")==F)
 	
 	# Pull and process states
 	states <- fx.df$x
@@ -620,9 +624,9 @@ transfer_analysis <- function(
 	                             "model", "siteID"))
 	}
 
-	param.list <- fx.df[-c(weather.nodes, dev.nodes,
+	param.list <- fx.df[-c(weather.nodes, dev.nodes, shrink.nodes,
 	                       which(names(fx.df) %in% c("x", "beta","gdd","sig",
-	                       "dev.beta")))]
+	                       "dev.beta","beta.shrink")))]
 	
 	for(i in 1:length(param.list)){
 	  param.list[[i]] <- as.data.frame(param.list[[i]])
@@ -660,6 +664,16 @@ transfer_analysis <- function(
 	
 	dev.df <- pivot_longer(dev.df, cols = -node, names_to = "siteID",
 	                       values_to = "value")
+	
+	# Shrinkage parameters
+	shrinkage <- fx.df[shrink.nodes]
+	
+	for(i in 1:length(shrinkage)){
+	  shrinkage[[i]] <- as.data.frame(shrinkage[[i]])
+	  shrinkage[[i]]$node <- names(shrinkage)[i]
+	}
+	
+	shrinkage.df <- do.call(rbind, shrinkage)
 	
 	# Betas
 	if(length(dim(fx.df$beta)) == 2){
@@ -741,6 +755,19 @@ transfer_analysis <- function(
 	                            values_to = "value")
 	}
 	
+	# Shrinkage for betas
+	if("beta.shrink" %in% names(fx.df)){
+	  shrink.b <- as.data.frame(fx.df$beta.shrink)
+	  
+	  for(i in 1:ncol(shrink.b)){
+	    colnames(shrink.b)[i] <- paste("beta", i, sep = "")
+	  }
+	  
+	  beta.shrink <- pivot_longer(shrink.b, cols = everything(),
+	                              names_to = "node", values_to = "value")
+	  
+	}
+	
 	# Sigma
 	sigma <- fx.df[['sig']]
 	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
@@ -764,7 +791,9 @@ transfer_analysis <- function(
 	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
 	write_csv(sig, file.path(out.dir, "sigma.csv"))
 	write_csv(dev.df, file.path(out.dir, "devSamples.csv"))
+	write_csv(shrinkage.df, file.path(out.dir, "shrinkSamples.csv"))
 	write_csv(beta.dev, file.path(out.dir, "devBeta.csv"))
+	write_csv(beta.shrink, file.path(out.dir, "shrinkBeta.csv"))
 	
 	if(min(year(fx.dates))>=2018){
 	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))

@@ -14,46 +14,62 @@ model.code <- nimbleCode({
   for(j in 1:n.beta){
     beta.mean[j] ~ dnorm(pr.beta[j,1], tau=pr.beta[j,2])
   }
+  
+  # Shrinkage parameters
+  l.shrink ~ dgamma(phil.shrink[1], phil.shrink[2])
+  n.shrink ~ dgamma(phin.shrink[1], phin.shrink[2])
+  a.shrink ~ dgamma(phia.shrink[1], phia.shrink[2])
+  
+  ln.shrink ~ dgamma(l2n.shrink[1], l2n.shrink[2])
+  na.shrink ~ dgamma(n2a.shrink[1], n2a.shrink[2])
+  
+  for(j in 1:n.beta){
+    beta.shrink[j] ~ dgamma(pr.beta.shrink[j,1], pr.beta.shrink[j,2])
+  }
+  
+  # Taus for site-level parameters
+  phi.l.tau ~ dgamma(1,1)
+  phi.n.tau ~ dgamma(1,1)
+  phi.a.tau ~ dgamma(1,1)
+  
+  ln.tau ~ dgamma(1,1)
+  na.tau ~ dgamma(1,1)
+  
+  for(j in 1:n.beta){
+    beta.tau[j] ~ dgamma(1,1)
+  }
 
   for(site in 1:nsite){
 	  ### priors
-    dev.phi.l[site] ~ dnorm(0, tau=tau.dev.l)
-    dev.phi.a[site] ~ dnorm(0, tau=tau.dev.a)
-    dev.phi.n[site] ~ dnorm(0, tau=tau.dev.n)
+    dev.phi.l[site] ~ dnorm(dev.l.pr[site,1], tau=dev.l.pr[site,2])
+    dev.phi.a[site] ~ dnorm(dev.a.pr[site,1], tau=dev.a.pr[site,2])
+    dev.phi.n[site] ~ dnorm(dev.n.pr[site,1], tau=dev.n.pr[site,2])
     
-    phi.l.mu[site] <- phi.l.mean + dev.phi.l[site]
-    phi.n.mu[site] <- phi.n.mean + dev.phi.n[site]
-    phi.a.mu[site] <- phi.a.mean + dev.phi.a[site]
+    phi.l.mu[site] ~ dnorm(phi.l.mean + (l.shrink*dev.phi.l[site]), 
+                           tau=phi.l.tau)
+    phi.n.mu[site] ~ dnorm(phi.n.mean + (n.shrink*dev.phi.n[site]), 
+                           tau=phi.n.tau)
+    phi.a.mu[site] ~ dnorm(phi.a.mean + (a.shrink*dev.phi.a[site]), 
+                           tau=phi.a.tau)
     
-    dev.ln[site] ~ dnorm(0, tau=tau.dev.ln)
-    dev.na[site] ~ dnorm(0, tau=tau.dev.na)
+    dev.ln[site] ~ dnorm(dev.ln.pr[site,1], tau=dev.ln.pr[site,2])
+    dev.na[site] ~ dnorm(dev.na.pr[site,1], tau=dev.na.pr[site,2])
     
-    theta.ln[site] <- theta.l2n.mean + dev.ln[site]
-	  theta.na[site] <- theta.n2a.mean + dev.na[site]
+    theta.ln[site] ~ dnorm(theta.l2n.mean + (ln.shrink*dev.ln[site]),
+                           tau=ln.tau)
+	  theta.na[site] ~ dnorm(theta.n2a.mean + (na.shrink*dev.na[site]),
+	                          tau=na.tau)
 	  
 	  for(j in 1:n.beta){
-	    dev.beta[j,site] ~ dnorm(0, tau=tau.dev.beta[j])
-	    beta[j,site] <- beta.mean[j] + dev.beta[j,site]
+	    dev.beta[j,site] ~ dnorm(dev.beta.mu[j,site], tau=dev.beta.tau[j,site])
+	    beta[j,site] ~ dnorm(beta.mean[j] + (beta.shrink[j]*dev.beta[j,site]),
+	                         tau=beta.tau[j])
 	  }
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
 		tau.minrh[site] ~ dexp(1)
 		tau.precip[site] ~ dexp(1)
-		
-		### treat previous estimate as "data" drawn from prior
-		# Goal is to reduce shrinkage for sampling periods where
-		# a particular site was not sampled
-		phi.l.obs[site,1] ~ dnorm(phi.l.mu[site], tau=phi.l.obs[site,2])
-		phi.n.obs[site,1] ~ dnorm(phi.n.mu[site], tau=phi.n.obs[site,2])
-		phi.a.obs[site,1] ~ dnorm(phi.a.mu[site], tau=phi.a.obs[site,2])
-		
-		theta.ln.obs[site,1] ~ dnorm(theta.ln[site], tau=theta.ln.obs[site,2])
-		theta.na.obs[site,1] ~ dnorm(theta.na[site], tau=theta.ln.obs[site,2])
-		
-		for(j in 1:n.beta){
-		  beta.obs[j,site] ~ dnorm(beta[j,site], tau=beta.tau[j,site])
-		}
 
 	  ### first latent process
 		for (i in 1:4) {
