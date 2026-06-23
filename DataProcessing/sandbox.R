@@ -29,7 +29,7 @@ veg <- vi |>
             evi = mean(evi_median))
 
 deer <- ticks |>
-  filter(scientificName == "Ixodes scapularis") |>
+  filter(scientificName == "Amblyomma americanum") |>
   filter(lifeStage == "Nymph") |>
   group_by(siteID, collectDate) |>
   summarise(total_count = mean(processedCount)) |>
@@ -37,7 +37,7 @@ deer <- ticks |>
   summarise(count = mean(total_count))
 
 adult <- ticks |>
-  filter(scientificName == "Ixodes scapularis") |>
+  filter(scientificName == "Amblyomma americanum") |>
   filter(lifeStage == "Adult") |>
   group_by(siteID, collectDate) |>
   summarise(total_count = mean(processedCount)) |>
@@ -71,7 +71,10 @@ kat <- inner_join(kat, amp_veg)
 kat <- inner_join(kat, adult)
 
 
-
+nlcd <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/full_NLCD.csv")
+frag <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/fragstats.csv")
+kat <- inner_join(kat, nlcd)
+kat <- inner_join(kat, frag)
 
 #=============TEMPORAL==============
 library(lubridate)
@@ -185,8 +188,9 @@ lines(d3$date, norm(d3$avgTemp), col = "red")
 
 
 
+
 years <- 2016:2025
-pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/pheno.csv")
+pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
 
 for(y in years){
   t3 <- d3 |>

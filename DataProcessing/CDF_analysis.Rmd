@@ -28,7 +28,7 @@ for(site in sites){
   ) |>
   filter(scientificName == "Ixodes scapularis")
 
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/harmonized_LAIs.csv") |>
+  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_LAIs.csv") |>
   mutate(date = as.Date(date),
          year = year(date))
 
@@ -69,7 +69,7 @@ lai$DOY <- as.numeric(format(lai$date, "%j"))
   i <- 1
   
   
-  pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/LAI_phenology.csv")
+  pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
   pheno <- pheno |>
     filter(siteID == site)
   

@@ -10,16 +10,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
+## IXODES
 ```{r, echo = FALSE}
 library(dplyr)
 library(lubridate)
+library(zoo)
 
 sites <- c("BLAN", "GREN", "HARV", "HNRY", "MLBS", "ORNL", "SCBI", "SERC","STEI", "TEA", "TREE")
 
+norm <- function(c){
+  return((c - min(c)) / (max(c) - min(c)))
+}
+
+
+#============ticks
 ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
 ticks$collectDate <- as.Date(ticks$collectDate)
-pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/pheno.csv")
+
+#=============DOYs
+pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
+
+
+
 
 years <- 2016:2025
 
@@ -36,6 +48,7 @@ for(site in sites){
 
   d2 <- d2 |>
     filter(year >= 2016)
+
   
   plot(d2$collectDate, (d2$count), type = "l", xlab = "Date", ylab = "Ixodes nymph count", main = site)
 
@@ -47,17 +60,91 @@ for(site in sites){
     filter(year == y)
   
   g <- as.Date(p$greenup - 1, origin = paste0(y, "-01-01"))
+  a <- as.Date(p$midgreenup - 1, origin = paste0(y, "-01-01"))
+  b <- as.Date(p$maturity - 1, origin = paste0(y, "-01-01"))
   
-  abline(v = g, col = "forestgreen", lty = 2)
+  abline(v = g, col = "red", lty = 2)
+  abline(v = a, col = "forestgreen", lty = 2)
+  abline(v = b, col = "blue", lty = 2)
   
   }
   
   
   legend("topright", 
-       legend = c("Ixodes nymph count", "Greenup"), 
-       col = c("black", "forestgreen"), 
-       lty = c(1, 2),
+       legend = c("Ixodes nymph count", "Greenup", "Mid-greenup", "Maturity"), 
+       col = c("black", "red", "forestgreen", "blue"), 
+       lty = c(1, 2, 2, 2),
        cex = 0.7)
+}
+
+```
+
+
+
+
+
+
+## AMBLYOMMA
+```{r, echo = FALSE}
+library(dplyr)
+library(lubridate)
+library(zoo)
+
+sites <- c("BLAN", "DELA", "KONA", "KONZ", "LENO", "ORNL", "OSBS", "SCBI", "SERC", "TALL", "UKFS")
+
+
+#============ticks
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv")
+ticks$collectDate <- as.Date(ticks$collectDate)
+
+#=============DOYs
+pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
+
+
+
+
+years <- 2016:2025
+
+for(site in sites){
+  d2 <- ticks |>
+  filter(scientificName == "Amblyomma americanum") |>
+  filter(lifeStage == "Nymph") |>
+  filter(siteID == site) |>
+  group_by(collectDate) |>
+  summarise(count = sum(processedCount)) |>
+  mutate(DOY = yday(collectDate))
+  
+  d2$year <- year(d2$collectDate)
+
+  d2 <- d2 |>
+    filter(year >= 2016)
+
+  
+  plot(d2$collectDate, (d2$count), type = "l", xlab = "Date", ylab = "Amblyomma nymph count", main = site)
+
+  
+  for(y in years){
+  
+  p <- pheno |>
+    filter(siteID == site) |>
+    filter(year == y)
+  
+  g <- as.Date(p$greenup - 1, origin = paste0(y, "-01-01"))
+  a <- as.Date(p$midgreenup - 1, origin = paste0(y, "-01-01"))
+  b <- as.Date(p$maturity - 1, origin = paste0(y, "-01-01"))
+  
+  abline(v = g, col = "red", lty = 2)
+  abline(v = a, col = "forestgreen", lty = 2)
+  abline(v = b, col = "blue", lty = 2)
+  
+  }
+  
+  
+  legend("topright", 
+       legend = c("Amblyomma nymph count", "Greenup", "Mid-greenup", "Maturity"), 
+       col = c("black", "red", "forestgreen", "blue"), 
+       lty = c(1, 2, 2, 2),
+       cex = 0.5)
 }
 
 ```

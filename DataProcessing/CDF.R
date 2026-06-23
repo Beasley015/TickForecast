@@ -1,7 +1,7 @@
 library(dplyr)
 library(lubridate)
 
-site = "HARV"
+site = "SERC"
 
 ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
   mutate(
@@ -9,16 +9,6 @@ ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
     year = year(collectDate)
   ) |>
   filter(scientificName == "Ixodes scapularis")
-
-lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/harmonized_LAIs.csv") |>
-  mutate(date = as.Date(date),
-         year = year(date))
-
-lai <- lai |>
-  filter(siteID == site)
-
-lai <- lai[lai$year != 2015, ]
-lai$DOY <- as.numeric(format(lai$date, "%j"))
 
 
 deer <- ticks |>
@@ -31,91 +21,75 @@ deer <- ticks |>
 deer$year <- year(deer$collectDate)
 deer$DOY <- as.numeric(format(deer$collectDate, "%j"))
 
-
-lai <- lai[lai$year != 2015, ]
 deer <- deer[deer$year > 2015, ]
 deer <- na.omit(deer)
 
 
-years <- min(deer$year):2023
+years <- min(deer$year):2024
 
-par(mfrow = c(2, 4))
 
 lags <- data.frame(
   year = years,
-  lag = vector(mode = "numeric", length = length(years))
+  greenup = vector(mode = "numeric", length = length(years)),
+  mid_greenup = vector(mode = "numeric", length = length(years)),
+  maturity = vector(mode = "numeric", length = length(years)),
+  tick_15 = vector(mode = "numeric", length = length(years))
 )
 
 i <- 1
 
 
-pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/LAI_phenology.csv")
+pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
 pheno <- pheno |>
   filter(siteID == site)
 
 
+par(mfrow = c(2, 5))
+
 for(y in years){
-  
-  leaf <- lai |>
-    filter(year == y)
-  
+
   tick <- deer |>
     filter(year == y)
   
+  if(nrow(tick) < 3){
+    next
+  }
+  
   temp <- pheno |>
     filter(year == y)
-  
-  leaf <- leaf[1:(nrow(leaf) / 2), ]
-  
-  leaf <- leaf |> 
-    arrange(date) |>
-    mutate(lai_increase = pmax(lai_median - lag(lai_median), 0))
-  
-  leaf$lai_increase[1] <- 0
-  
-  
-  deer <- deer |>
-    filter(month(collectDate) <= 7)
+
   
   
   library(MASS)
   
   
-  # LAI: generate DOY observations weighted by LAI increase
-  lai_doy <- rep(leaf$DOY, times = round(leaf$lai_increase * 100))
-  lai_fit <- fitdistr(lai_doy, "normal")
-  # lai_fit$estimate gives you mean and sd
-  
-  # Ticks: generate DOY observations weighted by count
+  # weigh tick DOYs by count
   tick_doy <- rep(tick$DOY, times = tick$count)
   tick_fit <- fitdistr(tick_doy, "normal")
   
-  # The lag
+  # locate percentile
+  c1 <- qnorm(0.15, mean = tick_fit$estimate["mean"], sd = tick_fit$estimate["sd"]) 
   
-  c1 <- qnorm(0.35, mean = tick_fit$estimate["mean"], sd = tick_fit$estimate["sd"]) 
-  c2 <- qnorm(0.50, mean = lai_fit$estimate["mean"], sd = lai_fit$estimate["sd"])
+  #lags <- c1 - c2
+  d1 <- temp$greenup
+  d2 <- temp$midgreenup
+  d3 <- temp$maturity
   
-  
-  #lag <- c1 - c2
-  lag <- c1 - temp$greenup_doy
-  
-  
-  curve(pnorm(x, mean = lai_fit$estimate["mean"], sd = lai_fit$estimate["sd"]), 
-        from = 1, to = 250, col = "green", xlab = "DOY", ylab = "CDF", main = y)
-  curve(pnorm(x, mean = tick_fit$estimate["mean"], sd = tick_fit$estimate["sd"]), 
-        add = TRUE, col = "black")
-  abline(v = temp$greenup_doy, col = "red", lty = 2)
-  
-
+  curve(pnorm(x, mean = tick_fit$estimate["mean"], sd = tick_fit$estimate["sd"]), col = "black", 
+        from = 1, to = 250, xlab = "DOY", ylab = "CDF", main = y)
+  abline(v = temp$greenup, col = "forestgreen", lty = 2)
   
   
-  lags$lag[i] <- lag
+  lags$greenup[i] <- d1
+  lags$mid_greenup[i] <- d2
+  lags$maturity[i] <- d3
+  lags$tick_15[i] <- c1
+    
   i <- i + 1
   
 }
 
-lags$lag_week <- lags$lag/7
-lags$lag_month <- lags$lag/30
+
 
 
 
