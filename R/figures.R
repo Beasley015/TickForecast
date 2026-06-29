@@ -1041,3 +1041,138 @@ for(i in 1:nrow(combos.site)){
           dest = paste(unique(smol$node), unique(str_replace(smol$species, ". ", "_")),
                        sep = "_"))
 }
+
+# Look at deviance params -----------------
+# Get files
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "dev")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018 & years < 2020)]
+out.files <- out.files[which(str_detect(out.files, "Amblyomma"))]
+out.files <- out.files[which(str_detect(out.files, "Mice"))]
+
+dev.parms <- tibble()
+
+for(i in 1:length(out.files)){
+  start.date <- as.Date(str_extract(out.files[i], pattern = "\\d+-\\d+-\\d+"),
+                        format = "%Y-%m-%d")
+  
+  test <- read_csv(file.path(dir.out, out.files[i])) %>%
+    group_by(siteID, node) %>%
+    summarise(mean = mean(value), sd = sd(value), 
+              min95 = quantile(value,0.025), max95 = quantile(value,0.975)) %>%
+    mutate(start.date=start.date) %>%
+    suppressMessages()
+  
+  dev.parms <- bind_rows(dev.parms, test)
+}
+
+# summary of deviance
+dev.summary <- dev.parms %>%
+  group_by(siteID, node) %>%
+  summarise(mean = mean(mean), sd = mean(sd), 
+            min95 = mean(min95), max95 = mean(max95)) %>%
+  suppressMessages()
+
+dev.inters <- dev.summary %>%
+  filter(str_detect(node, "beta", negate = T))
+
+dev.betas <- dev.summary %>%
+  filter(str_detect(node, "beta"))
+
+ggplot(data = dev.inters, aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin = min95, xmax = max95))+
+  facet_wrap(~node)
+
+ggplot(data = dev.betas, aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin = min95, xmax = max95))+
+  facet_wrap(~node)
+
+# changes over time
+devlist <- list()
+for(i in 1:length(unique(dev.parms$node))){
+  one.node <- filter(dev.parms, node == unique(dev.parms$node)[i])
+  
+  devlist[[i]] <- ggplot(data = one.node, aes(x = start.date, y = mean, 
+                                              color = siteID))+
+    geom_point()+
+    geom_line()+
+    # geom_errorbar(aes(ymin = min95, ymax = max95))+
+    labs(title = unique(one.node$node))+
+    scale_fill_viridis_d()+
+    theme_bw()
+}
+
+devlist <- list()
+for(i in 1:length(unique(dev.parms$node))){
+  one.node <- filter(dev.parms, node == unique(dev.parms$node)[i])
+  
+  devlist[[i]] <- ggplot(data = one.node, aes(x = start.date, y = sd, 
+                                              color = siteID))+
+    geom_point()+
+    geom_line()+
+    # geom_errorbar(aes(ymin = min95, ymax = max95))+
+    labs(title = unique(one.node$node))+
+    scale_fill_viridis_d()+
+    theme_bw()
+}
+
+# Look at shrinkage ------------
+# Get files
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "shrink")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018 & years < 2020)]
+out.files <- out.files[which(str_detect(out.files, "Amblyomma"))]
+out.files <- out.files[which(str_detect(out.files, "Mice"))]
+
+shrink.parms <- tibble()
+for(i in 1:length(out.files)){
+  start.date <- as.Date(str_extract(out.files[i], pattern = "\\d+-\\d+-\\d+"),
+                        format = "%Y-%m-%d")
+  
+  test <- read_csv(file.path(dir.out, out.files[i])) %>%
+    suppressMessages()
+  
+  if(colnames(test)[1] != "node"){
+    colnames(test) <- c("value", "node")
+  }
+  
+  test <- test %>%
+    group_by(node) %>%
+    mutate(case_when(value < 1e-5 & value > -1e-5 ~ 0,
+                     TRUE ~ value)) %>% 
+    summarise(mean = mean(value), sd = sd(value), 
+              min95 = quantile(value,0.025), max95 = quantile(value,0.975)) %>%
+    mutate(start.date=start.date) %>%
+    suppressMessages()
+  
+  shrink.parms <- bind_rows(shrink.parms, test)
+}
+
+ggplot(data = shrink.parms, aes(x = start.date, y = mean,
+                                color = node))+
+  geom_point()+
+  geom_line()
+
+ggplot(data = shrink.parms, aes(x = start.date, y = sd,
+                                color = node))+
+  geom_point()+
+  geom_line()
+       
+shrink.summary <- shrink.parms %>%
+  group_by(node) %>%
+  mutate(mean = mean(mean), sd = mean(sd), max95=mean(max95),
+         min95=mean(min95))
+
+ggplot(data = shrink.summary, aes(x = mean, y = node)) +
+  geom_point()+
+  geom_errorbar(aes(xmin = min95, xmax = max95))

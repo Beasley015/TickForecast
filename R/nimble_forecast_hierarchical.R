@@ -16,27 +16,27 @@ model.code <- nimbleCode({
   }
   
   # Shrinkage parameters
-  l.shrink ~ dgamma(phil.shrink[1], phil.shrink[2])
-  n.shrink ~ dgamma(phin.shrink[1], phin.shrink[2])
-  a.shrink ~ dgamma(phia.shrink[1], phia.shrink[2])
+  l.shrink ~ dgamma(phil.shrink[1], rate=phil.shrink[2])
+  n.shrink ~ dgamma(phin.shrink[1], rate=phin.shrink[2])
+  a.shrink ~ dgamma(phia.shrink[1], rate=phia.shrink[2])
   
-  ln.shrink ~ dgamma(l2n.shrink[1], l2n.shrink[2])
-  na.shrink ~ dgamma(n2a.shrink[1], n2a.shrink[2])
+  ln.shrink ~ dgamma(l2n.shrink[1], rate=l2n.shrink[2])
+  na.shrink ~ dgamma(n2a.shrink[1], rate=n2a.shrink[2])
   
   for(j in 1:n.beta){
-    beta.shrink[j] ~ dgamma(pr.beta.shrink[j,1], pr.beta.shrink[j,2])
+    beta.shrink[j] ~ dgamma(pr.beta.shrink[j,1], rate=pr.beta.shrink[j,2])
   }
   
   # Taus for site-level parameters
-  phi.l.tau ~ dgamma(1,1)
-  phi.n.tau ~ dgamma(1,1)
-  phi.a.tau ~ dgamma(1,1)
+  phi.l.tau ~ dgamma(0.1,0.1)
+  phi.n.tau ~ dgamma(0.1,0.1)
+  phi.a.tau ~ dgamma(0.1,0.1)
   
-  ln.tau ~ dgamma(1,1)
-  na.tau ~ dgamma(1,1)
+  ln.tau ~ dgamma(0.1,0.1)
+  na.tau ~ dgamma(0.1,0.1)
   
   for(j in 1:n.beta){
-    beta.tau[j] ~ dgamma(1,1)
+    beta.tau[j] ~ dgamma(0.1,0.1)
   }
 
   for(site in 1:nsite){
