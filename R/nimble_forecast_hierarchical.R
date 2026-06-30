@@ -183,8 +183,7 @@ model.code <- nimbleCode({
 	  }
 
 	  for (t in 2:horizon) {
-	    # Figure out how to do this as a wishart with moment-matching
-	    # from a multivariate normal -------------------
+	    # Figure out alternative distribution here
 		  # expected number questing
 		  Ex[1:4, t, site] <- A[1:4, 1:4, t-1, site] %*% x[1:4, t-1, site]
 
