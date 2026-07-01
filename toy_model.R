@@ -77,8 +77,8 @@ toy.model <- function(){
   mu.b1 ~ dnorm(b1.mu.pr[1], b1.mu.pr[2])
   tau.b1 ~ dgamma(b1.tau.pr[1], b1.tau.pr[2])
   
-  mu.b2 ~ dnorm(b2.mu.pr[1], b2.mu.pr.[2])
-  tau.b2 ~ dgamma(b1.tau.pr[1], b1.tau.pr[2])
+  mu.b2 ~ dnorm(b2.mu.pr[1], b2.mu.pr[2])
+  tau.b2 ~ dgamma(b2.tau.pr[1], b2.tau.pr[2])
   
   for(site in sampled.sites){
     # site-level priors
@@ -88,16 +88,16 @@ toy.model <- function(){
     
     for(t in 1:steps){
       # Latent state
-      log(lambda[site,t]) <- int[site] + beta1[site]*coef1[site,t] + 
-        beta2[site]*coef2[site,t]
+      log(lambda[t,site]) <- int[site] + beta1[site]*coef1[t] + 
+        beta2[site]*coef2[t]
       
       # Sampling error
-      y[site,t] ~ dpois(lambda[site,t])
+      y[t,site] ~ dpois(lambda[t,site])
     }
     
     for(t in 2:(steps+1)){
       # Forecast
-      lambda[site,t] ~ dpois(lambda[site, t-1])
+      ex.lambda[t,site] ~ dpois(lambda[t-1, site])
     }
   }
 }
@@ -117,21 +117,92 @@ for(i in 1:time.steps){
     
     site <- which(is.na(samples[i,])==F)
     
+    steps <- 5
+    
     data <- list(int.mu.pr=int.mu.pr, int.tau.pr=int.tau.pr, b1.mu.pr=b1.mu.pr,
-                 b1.tau.pr=b1.tau.pr, b2.mu.pr=b2.mu.pr, coef1=var1, coef2=var2,
-                 steps=5, y=samples[i,], sampled.sites=site)
-    params <- c("int.mu.pr", "int.tau.pr", "b1.mu.pr", "b1.tau.pr", "b2.mu.pr",
-                "b2.tau.pr", "int", "beta1", "beta2", "lambda")
-    # inits <- function(){
-    #   list(
-    #     
-    #   )
-    # }
+                 b1.tau.pr=b1.tau.pr, b2.mu.pr=b2.mu.pr, b2.tau.pr=b2.tau.pr,
+                 coef1=var1, coef2=var2, steps=steps, y=samples[i:(i+5),], 
+                 sampled.sites=site)
+    params <- c("int", "beta1", "beta2", "lambda", "mu.int", "tau.int",
+                "mu.b1", "tau.b1", "mu.b2", "tau.b2")
+    inits <- function(){
+      list(
+        int = rep(0,3),
+        beta1 = rep(0,3),
+        beta2 = rep(0,3),
+        lambda = matrix(1, nrow = steps, ncol = 3)
+      )
+    }
     
     mod <- jags(data=data, parameters.to.save = params, model.file = toy.model,
                 n.chains = 3, n.iter=2000)
     
-  } else{
+    outs <- mod$BUGSoutput$sims.list
+    colnames(outs$beta1) <- paste("site",site, sep = "")
+    colnames(outs$beta2) <- paste("site",site, sep = "")
+    colnames(outs$int) <- paste("site",site, sep = "")
+    dimnames(outs$lambda)[[3]] <- paste("site",site, sep = "")
+    model.outs[[i]] <- outs 
     
+    priors <- list(int.mu.pr = c(mean(outs$mu.int), 1/var(outs$mu.int)),
+                   int.tau.pr = c(mean(outs$tau.int), 1/var(outs$tau.int)),
+                   b1.mu.pr = c(mean(outs$mu.b1), 1/var(outs$mu.b1)),
+                   b1.tau.pr = c(mean(outs$tau.b1), 1/var(outs$tau.b1)),
+                   b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
+                   b2.tau.pr = c(mean(outs$tau.b2), 1/var(outs$tau.b2)))
+    
+  } else{
+    int.mu.pr <- priors$int.mu.pr
+    int.tau.pr <- priors$int.tau.pr
+    
+    b1.mu.pr <- priors$b1.mu.pr
+    b1.tau.pr <- priors$b1.tau.pr
+    
+    b2.mu.pr <- priors$b2.mu.pr
+    b2.tau.pr <- priors$b2.tau.pr
+    
+    site <- which(is.na(samples[i,])==F)
+    if(length(site) == 0){next}
+    
+    steps <- ifelse(time.steps+1- i < 5, time.steps+1 - i, 5)
+    
+    if(steps == 5){
+      subs <- samples[i:(i+5),]
+    } else{
+      subs <- samples[i:(i+steps),]
+    }
+    
+    data <- list(int.mu.pr=int.mu.pr, int.tau.pr=int.tau.pr, b1.mu.pr=b1.mu.pr,
+                 b1.tau.pr=b1.tau.pr, b2.mu.pr=b2.mu.pr, b2.tau.pr=b2.tau.pr,
+                 coef1=var1, coef2=var2, steps=steps, y=subs, 
+                 sampled.sites=site)
+    params <- c("int", "beta1", "beta2", "lambda", "mu.int", "tau.int",
+                "mu.b1", "tau.b1", "mu.b2", "tau.b2")
+    inits <- function(){
+      list(
+        int = rep(0,3),
+        beta1 = rep(0,3),
+        beta2 = rep(0,3),
+        lambda = matrix(1, nrow = steps, ncol = 3)
+      )
+    }
+    
+    mod <- jags(data=data, parameters.to.save = params, model.file = toy.model,
+                n.chains = 3, n.iter=2000)
+    
+    outs <- mod$BUGSoutput$sims.list
+    colnames(outs$beta1) <- paste("site",site, sep = "")
+    colnames(outs$beta2) <- paste("site",site, sep = "")
+    colnames(outs$int) <- paste("site",site, sep = "")
+    dimnames(outs$lambda)[[3]] <- paste("site",site, sep = "")
+    model.outs[[i]] <- outs 
+    
+    # Getting infinite values here; need to automate a check and fix
+    priors <- list(int.mu.pr = c(mean(outs$mu.int), 1/var(outs$mu.int)),
+                   int.tau.pr = c(mean(outs$tau.int), 1/var(outs$tau.int)),
+                   b1.mu.pr = c(mean(outs$mu.b1), 1/var(outs$mu.b1)),
+                   b1.tau.pr = c(mean(outs$tau.b1), 1/var(outs$tau.b1)),
+                   b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
+                   b2.tau.pr = c(mean(outs$tau.b2), 1/var(outs$tau.b2)))
   }
 }
