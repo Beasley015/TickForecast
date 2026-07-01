@@ -547,6 +547,10 @@ transfer_analysis <- function(
 	shrink.nodes <- which(str_detect(names(fx.df), "shrink") &
 	                        str_detect(names(fx.df),"beta")==F)
 	
+	# Tau nodes
+	tau.nodes <- which(str_detect(names(fx.df), "tau") &
+	                     str_detect(names(fx.df), "beta")==F)
+	
 	# Pull and process states
 	states <- fx.df$x
 	colnames(states) <- ls.tb$lifeStage
@@ -624,9 +628,9 @@ transfer_analysis <- function(
 	                             "model", "siteID"))
 	}
 
-	param.list <- fx.df[-c(weather.nodes, dev.nodes, shrink.nodes,
+	param.list <- fx.df[-c(weather.nodes, dev.nodes, shrink.nodes, tau.nodes,
 	                       which(names(fx.df) %in% c("x", "beta","gdd","sig",
-	                       "dev.beta","beta.shrink")))]
+	                       "dev.beta","beta.shrink", "beta.tau")))]
 	
 	for(i in 1:length(param.list)){
 	  param.list[[i]] <- as.data.frame(param.list[[i]])
@@ -674,6 +678,18 @@ transfer_analysis <- function(
 	}
 	
 	shrinkage.df <- do.call(rbind, shrinkage)
+	names(shrinkage.df) <- c("value", "node")
+	
+	# Precision parameters
+	tau <- fx.df[tau.nodes]
+	
+	for(i in 1:length(tau)){
+	  tau[[i]] <- as.data.frame(tau[[i]])
+	  tau[[i]]$node <- names(tau)[i]
+	}
+	
+	tau.df <- do.call(rbind, tau) 
+	colnames(tau.df) <- c("value", "node")
 	
 	# Betas
 	if(length(dim(fx.df$beta)) == 2){
@@ -768,6 +784,18 @@ transfer_analysis <- function(
 	  
 	}
 	
+	# Precision for betas
+	if("beta.tau" %in% names(fx.df)){
+	  tau.b <- as.data.frame(fx.df$beta.tau)
+	  
+	  for(i in 1:ncol(tau.b)){
+	    colnames(tau.b)[i] <- paste("beta", i, sep = "")
+	  }
+	  
+	  beta.tau <- pivot_longer(tau.b, cols = everything(), 
+	                           names_to = "node", values_to = "value")
+	}
+	
 	# Sigma
 	sigma <- fx.df[['sig']]
 	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
@@ -792,8 +820,10 @@ transfer_analysis <- function(
 	write_csv(sig, file.path(out.dir, "sigma.csv"))
 	write_csv(dev.df, file.path(out.dir, "devSamples.csv"))
 	write_csv(shrinkage.df, file.path(out.dir, "shrinkSamples.csv"))
+	write_csv(tau.df, file.path(out.dir, "tauSamples.csv"))
 	write_csv(beta.dev, file.path(out.dir, "devBeta.csv"))
 	write_csv(beta.shrink, file.path(out.dir, "shrinkBeta.csv"))
+	write_csv(beta.tau, file.path(out.dir, "tauBeta.csv"))
 	
 	if(min(year(fx.dates))>=2018){
 	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
