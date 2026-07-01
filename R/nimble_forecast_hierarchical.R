@@ -28,15 +28,15 @@ model.code <- nimbleCode({
   }
   
   # Taus for site-level parameters
-  phi.l.tau ~ dgamma(0.1,0.1)
-  phi.n.tau ~ dgamma(0.1,0.1)
-  phi.a.tau ~ dgamma(0.1,0.1)
+  phi.l.tau ~ dgamma(pr.phil.tau[1],pr.phil.tau[2])
+  phi.n.tau ~ dgamma(pr.phin.tau[1],pr.phin.tau[2])
+  phi.a.tau ~ dgamma(pr.phia.tau[1],pr.phia.tau[2])
   
-  ln.tau ~ dgamma(0.1,0.1)
-  na.tau ~ dgamma(0.1,0.1)
+  ln.tau ~ dgamma(pr.ln.tau[1],pr.ln.tau[2])
+  na.tau ~ dgamma(pr.na.tau[1],pr.na.tau[2])
   
   for(j in 1:n.beta){
-    beta.tau[j] ~ dgamma(0.1,0.1)
+    beta.tau[j] ~ dgamma(pr.beta.tau[j,1],pr.beta.tau[j,2])
   }
 
   for(site in 1:nsite){

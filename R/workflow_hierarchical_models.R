@@ -422,6 +422,15 @@ for (t in t:start.drags) {
 		
 		pr.beta.shrink <- matrix(1, nrow = n.beta, ncol = 2)
 		
+		pr.phil.tau <- c(1,2)
+		pr.phin.tau <- c(1,2)
+		pr.phia.tau <- c(1,2)
+		
+		pr.ln.tau <- c(1,2)
+		pr.na.tau <- c(1,2)
+		
+		pr.beta.tau <- matrix(c(rep(1, n.beta), rep(2, n.beta)), ncol = 2)
+		
 		} else {
 		  horizon <- ifelse(as.numeric(last(drag.dates) - fx.start.date) >= 365,
 		                    365,
@@ -475,7 +484,6 @@ for (t in t:start.drags) {
       
       # Shrinkage priors
       shrink.params <- read_csv(file.path(readDest, "shrinkSamples.csv")) %>%
-        rename(value = `shrinkage[[i]]`) %>%
         filter(is.na(value)==F) %>%
         group_by(node) %>%
         summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
@@ -490,6 +498,23 @@ for (t in t:start.drags) {
       phia.shrink <- pull(shrink.params, a.shrink)
       l2n.shrink <- pull(shrink.params, ln.shrink)
       n2a.shrink <- pull(shrink.params, na.shrink)
+      
+      # Tau's
+      prec.params <- read_csv(file.path(readDest, "tauSamples.csv")) %>%
+        group_by(node) %>%
+        summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+                  beta = fitdist(value, distr='gamma')$estimate[2]) %>%
+        pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
+                     values_to = 'value') %>%
+        pivot_wider(names_from = node, values_from=value) %>%
+        suppressMessages()
+      
+      pr.phil.tau <- pull(prec.params, phi.l.tau)
+      pr.phin.tau <- pull(prec.params, phi.n.tau)
+      pr.phia.tau <- pull(prec.params, phi.a.tau)
+      
+      pr.ln.tau <- pull(prec.params, ln.tau)
+      pr.na.tau <- pull(prec.params, na.tau)
 
 			# Priors for betas (betas will vary across sites)
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
@@ -533,6 +558,15 @@ for (t in t:start.drags) {
 			
 			# Beta shrinkage
 			pr.beta.shrink <- read_csv(file.path(readDest, "shrinkBeta.csv")) %>%
+			  group_by(node) %>%
+			  summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+			            beta = fitdist(value, distr='gamma')$estimate[2]) %>%
+			  arrange(factor(node, levels = b.names)) %>%
+			  select(-node) %>%
+			  suppressMessages()
+			
+			# beta precision
+			pr.beta.tau <- read_csv(file.path(readDest, "tauBeta.csv")) %>%
 			  group_by(node) %>%
 			  summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
 			            beta = fitdist(value, distr='gamma')$estimate[2]) %>%
@@ -718,10 +752,18 @@ for (t in t:start.drags) {
 	data$l2n.shrink <- l2n.shrink
 	data$n2a.shrink <- n2a.shrink
 	
+	data$pr.phil.tau <- pr.phil.tau
+	data$pr.phin.tau <- pr.phin.tau
+	data$pr.phia.tau <- pr.phia.tau
+	
+	data$pr.ln.tau <- pr.ln.tau
+	data$pr.na.tau <- pr.na.tau
+	
 	data$dev.beta.mu <- dev.beta.mu
 	data$dev.beta.tau <- dev.beta.tau
 	
 	data$pr.beta.shrink <- pr.beta.shrink
+	data$pr.beta.tau <- pr.beta.tau
 	
 	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
 	
@@ -823,8 +865,9 @@ for (t in t:start.drags) {
 	                     "sig", "theta.ln", "theta.na","x",
 	                     "dev.phi.l", "dev.phi.n", "dev.phi.a", "dev.ln", "dev.na",
 	                     "l.shrink", "n.shrink", "a.shrink", "ln.shrink", "na.shrink",
-	                     "dev.beta", "beta.shrink"
-	                     )       
+	                     "dev.beta", "beta.shrink",
+	                     "phi.l.tau", "phi.n.tau", "phi.a.tau", "ln.tau",
+	                     "na.tau", "beta.tau")       
 
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
