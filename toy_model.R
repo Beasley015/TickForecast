@@ -144,7 +144,7 @@ for(i in 1:time.steps){
     dimnames(outs$lambda)[[3]] <- paste("site",site, sep = "")
     model.outs[[i]] <- outs 
     
-    priors <- list(int.mu.pr = c(mean(outs$mu.int), 1/var(outs$mu.int)),
+    priors <- data.frame(int.mu.pr = c(mean(outs$mu.int), 1/var(outs$mu.int)),
                    int.tau.pr = c(mean(outs$tau.int), 1/var(outs$tau.int)),
                    b1.mu.pr = c(mean(outs$mu.b1), 1/var(outs$mu.b1)),
                    b1.tau.pr = c(mean(outs$tau.b1), 1/var(outs$tau.b1)),
@@ -198,11 +198,14 @@ for(i in 1:time.steps){
     model.outs[[i]] <- outs 
     
     # Getting infinite values here; need to automate a check and fix
-    priors <- list(int.mu.pr = c(mean(outs$mu.int), 1/var(outs$mu.int)),
+    priors <- data.frame(int.mu.pr = c(mean(outs$mu.int), 1/var(outs$mu.int)),
                    int.tau.pr = c(mean(outs$tau.int), 1/var(outs$tau.int)),
                    b1.mu.pr = c(mean(outs$mu.b1), 1/var(outs$mu.b1)),
                    b1.tau.pr = c(mean(outs$tau.b1), 1/var(outs$tau.b1)),
                    b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
                    b2.tau.pr = c(mean(outs$tau.b2), 1/var(outs$tau.b2)))
+    priors[sapply(priors, is.infinite)] <- 1e10
+    priors[priors > 1e10] <- 1e10
+    priors[abs(priors) < 1e-10] <- 1e-10
   }
 }
