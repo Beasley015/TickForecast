@@ -7,6 +7,7 @@
 
 # Packages and global variables ------------
 library(R2jags)
+library(abind)
 
 set.seed(15)
 time.steps <- 20
@@ -37,15 +38,19 @@ for(i in 2:time.steps){
 }
 
 # Time series
-ts1 <- logical()
-ts2 <- logical()
-ts3 <- logical()
+ts1 <- matrix(0, nrow = time.steps, ncol = 3)
+ts2 <- matrix(0, nrow = time.steps, ncol = 3)
+ts3 <- matrix(0, nrow = time.steps, ncol = 3)
 
 for(i in 1:time.steps){
-  ts1[i] <- rpois(1, lambda1[i])
-  ts2[i] <- rpois(1, lambda2[i])
-  ts3[i] <- rpois(1, lambda3[i])
+  for(j in 1:3){
+    ts1[i,] <- rpois(3, lambda1[i])
+    ts2[i,] <- rpois(3, lambda2[i])
+    ts3[i,] <- rpois(3, lambda3[i])
+  }
 }
+
+ts <- abind(ts1, ts2, ts3, along = 3)
 
 # Create sampling history ---------------------
 # Sampling dates
@@ -56,16 +61,14 @@ site3.days <- sort(sample(1:time.steps, 10, replace = F))
 sampling.history <- cbind(site1.days, site2.days, site3.days)
 
 # Samples
-samples <- data.frame(site1=rep(NA, time.steps),
-                      site2=rep(NA, time.steps),
-                      site3=rep(NA, time.steps))
+samples <- array(NA, dim = dim(ts))
 
 for(i in 1:nrow(sampling.history)){
   row = as.matrix(sampling.history[i,])
   
-  samples$site1[row[1]] <- rbinom(n = 1, size = ts1[row[1]], prob = 0.8)
-  samples$site2[row[2]] <- rbinom(n = 1, size = ts2[row[2]], prob = 0.8)
-  samples$site3[row[3]] <- rbinom(n = 1, size = ts3[row[3]], prob = 0.8)
+  samples[row[1],,1] <- rbinom(n = 3, size = ts[row[1],,1], prob = 0.6)
+  samples[row[2],,2] <- rbinom(n = 3, size = ts[row[2],,2], prob = 0.6)
+  samples[row[3],,3] <- rbinom(n = 3, size = ts[row[3],,3], prob = 0.6)
 }
 
 # Model script --------------------
@@ -92,12 +95,16 @@ toy.model <- function(){
         beta2[site]*coef2[t]
       
       # Sampling error
-      y[t,site] ~ dpois(lambda[t,site])
+      x[t,site] ~ dpois(lambda[t,site])
+      
+      for(sample in 1:3){
+        y[t,sample,site] ~ dpois(x[t,site])
+      }
     }
     
     for(t in 2:(steps+1)){
       # Forecast
-      ex.lambda[t,site] ~ dpois(lambda[t-1, site])
+      ex[t,site] ~ dpois(x[t-1, site])
     }
   }
 }
@@ -115,22 +122,29 @@ for(i in 1:time.steps){
     b2.mu.pr <- c(0,1)
     b2.tau.pr <- c(1,1)
     
-    site <- which(is.na(samples[i,])==F)
+    site <- which(colSums(is.na(samples[i,,]))==0)
     
-    steps <- 5
+    steps <- 3
+    
+    obs <- array(NA, dim = c(steps, 3, length(site)))
+    for(j in 1:length(site)){
+      obs[1,,j] <- samples[i,,site[j]]
+    }
     
     data <- list(int.mu.pr=int.mu.pr, int.tau.pr=int.tau.pr, b1.mu.pr=b1.mu.pr,
                  b1.tau.pr=b1.tau.pr, b2.mu.pr=b2.mu.pr, b2.tau.pr=b2.tau.pr,
-                 coef1=var1, coef2=var2, steps=steps, y=samples[i:(i+5),], 
+                 coef1=var1, coef2=var2, steps=steps, y=obs, 
                  sampled.sites=site)
     params <- c("int", "beta1", "beta2", "lambda", "mu.int", "tau.int",
-                "mu.b1", "tau.b1", "mu.b2", "tau.b2")
+                "mu.b1", "tau.b1", "mu.b2", "tau.b2", "x", "ex")
     inits <- function(){
       list(
         int = rep(0,3),
         beta1 = rep(0,3),
         beta2 = rep(0,3),
-        lambda = matrix(1, nrow = steps, ncol = 3)
+        lambda = matrix(1, nrow = steps, ncol = 3),
+        x = matrix(1, nrow = steps, ncol = 3),
+        
       )
     }
     
@@ -161,15 +175,15 @@ for(i in 1:time.steps){
     b2.mu.pr <- priors$b2.mu.pr
     b2.tau.pr <- priors$b2.tau.pr
     
-    site <- which(is.na(samples[i,])==F)
+    site <- which(colSums(is.na(samples[i,,]))==0)
     if(length(site) == 0){next}
     
-    steps <- ifelse(time.steps+1- i < 5, time.steps+1 - i, 5)
+    steps <- ifelse(time.steps+1- i < 3, time.steps+1 - i, 3)
     
-    if(steps == 5){
-      subs <- samples[i:(i+5),]
+    if(steps == 3){
+      subs <- samples[i,,]
     } else{
-      subs <- samples[i:(i+steps),]
+      subs <- samples[i,,]
     }
     
     data <- list(int.mu.pr=int.mu.pr, int.tau.pr=int.tau.pr, b1.mu.pr=b1.mu.pr,
@@ -177,13 +191,14 @@ for(i in 1:time.steps){
                  coef1=var1, coef2=var2, steps=steps, y=subs, 
                  sampled.sites=site)
     params <- c("int", "beta1", "beta2", "lambda", "mu.int", "tau.int",
-                "mu.b1", "tau.b1", "mu.b2", "tau.b2")
+                "mu.b1", "tau.b1", "mu.b2", "tau.b2", "x", "ex")
     inits <- function(){
       list(
         int = rep(0,3),
         beta1 = rep(0,3),
         beta2 = rep(0,3),
-        lambda = matrix(1, nrow = steps, ncol = 3)
+        lambda = matrix(1, nrow = steps, ncol = length(site)),
+        x = round(apply(subs, c(1,3), mean))
       )
     }
     
