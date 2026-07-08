@@ -975,7 +975,7 @@ for(i in seq_along(out.files)){
   if(ncol(wee.tab) != 3){next}
   
   wee.tab <- wee.tab %>%
-    group_by(site, node) %>%
+    group_by(siteID, node) %>%
     mutate(model = case_when(str_detect(out.files[i], "Mice")==T ~ "WeatherMice",
                              TRUE ~ "Weather",),
            iter = i,
@@ -1050,7 +1050,7 @@ out.files <- out.files[str_detect(out.files, "dev")]
 # Omit pre-2018 results
 years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
                       format = "%Y-%m-%d"))
-out.files <- out.files[which(years >= 2018 & years < 2020)]
+out.files <- out.files[which(years < 2020)]
 out.files <- out.files[which(str_detect(out.files, "Amblyomma"))]
 out.files <- out.files[which(str_detect(out.files, "Mice"))]
 
@@ -1130,7 +1130,7 @@ out.files <- out.files[str_detect(out.files, "shrink")]
 # Omit pre-2018 results
 years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
                       format = "%Y-%m-%d"))
-out.files <- out.files[which(years >= 2018 & years < 2020)]
+out.files <- out.files[which( years < 2020)]
 out.files <- out.files[which(str_detect(out.files, "Amblyomma"))]
 out.files <- out.files[which(str_detect(out.files, "Mice"))]
 
@@ -1176,3 +1176,58 @@ shrink.summary <- shrink.parms %>%
 ggplot(data = shrink.summary, aes(x = mean, y = node)) +
   geom_point()+
   geom_errorbar(aes(xmin = min95, xmax = max95))
+
+# Precisions for model coefficients/intercepts ---------
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "tau")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years < 2020)]
+out.files <- out.files[which(str_detect(out.files, "Amblyomma"))]
+out.files <- out.files[which(str_detect(out.files, "Mice"))]
+
+tau.parms <- tibble()
+for(i in 1:length(out.files)){
+  start.date <- as.Date(str_extract(out.files[i], pattern = "\\d+-\\d+-\\d+"),
+                        format = "%Y-%m-%d")
+  
+  test <- read_csv(file.path(dir.out, out.files[i])) %>%
+    suppressMessages()
+  
+  if(colnames(test)[1] != "node"){
+    colnames(test) <- c("value", "node")
+  }
+  
+  test <- test %>%
+    group_by(node) %>%
+    mutate(case_when(value < 1e-5 & value > -1e-5 ~ 0,
+                     TRUE ~ value)) %>% 
+    summarise(mean = mean(value), sd = sd(value), 
+              min95 = quantile(value,0.025), max95 = quantile(value,0.975)) %>%
+    mutate(start.date=start.date) %>%
+    suppressMessages()
+  
+  tau.parms <- bind_rows(tau.parms, test)
+}
+
+ggplot(data = tau.parms, aes(x = start.date, y = mean,
+                                color = node))+
+  geom_point()+
+  geom_line()
+
+ggplot(data = tau.parms, aes(x = start.date, y = sd,
+                                color = node))+
+  geom_point()+
+  geom_line()
+
+tau.summary <- tau.parms %>%
+  group_by(node) %>%
+  mutate(mean = mean(mean), sd = mean(sd), max95=mean(max95),
+         min95=mean(min95))
+
+ggplot(data = tau.summary, aes(x = mean, y = node)) +
+  geom_point()+
+  geom_errorbar(aes(xmin = min95, xmax = max95))
+
