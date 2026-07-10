@@ -381,7 +381,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:start.drags) { 
+for (t in t:5){#start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -397,39 +397,49 @@ for (t in t:start.drags) {
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 		
-		# Uninformative priors for params not in single-site models
-		dev.l.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                     ncol= 2)
-		dev.n.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-		dev.a.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
+		# # Uninformative priors for params not in single-site models
+		# dev.l.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		#                      ncol= 2)
+		# dev.n.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		#                     ncol= 2)
+		# dev.a.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		#                     ncol= 2)
+		# 
+		# dev.ln.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		#                     ncol= 2)
+		# dev.na.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		#                     ncol= 2)
+		# 
+		# phil.shrink <- c(1,1)
+		# phin.shrink <- c(1,1)
+		# phia.shrink <- c(1,1)
+		# 
+		# l2n.shrink <- c(1,1)
+		# n2a.shrink <- c(1,1)
+		# 
+		# dev.beta.mu <- matrix(0, nrow = n.beta, ncol = length(sites))
+		# dev.beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
+		# 
+		# pr.beta.shrink <- matrix(1, nrow = n.beta, ncol = 2)
+		# 
+		# pr.phil.tau <- c(1,2)
+		# pr.phin.tau <- c(1,2)
+		# pr.phia.tau <- c(1,2)
+		# 
+		# pr.ln.tau <- c(1,2)
+		# pr.na.tau <- c(1,2)
+		# 
+		# pr.beta.tau <- matrix(c(rep(1, n.beta), rep(2, n.beta)), ncol = 2)
 		
-		dev.ln.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-		dev.na.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-
-		phil.shrink <- c(1,1)
-		phin.shrink <- c(1,1)
-		phia.shrink <- c(1,1)
+		pr.phi.l <- matrix(rep(phi.l, length(sites)), ncol = 2, byrow = T)
+		pr.phi.n <- matrix(rep(phi.n, length(sites)), ncol = 2, byrow = T)
+		pr.phi.a <- matrix(rep(phi.a, length(sites)), ncol = 2, byrow = T)
 		
-		l2n.shrink <- c(1,1)
-		n2a.shrink <- c(1,1)
+		pr.ln <- matrix(rep(theta.l2n, length(sites)), ncol = 2, byrow = T)
+		pr.na <- matrix(rep(theta.n2a, length(sites)), ncol = 2, byrow = T)
 		
-		dev.beta.mu <- matrix(0, nrow = n.beta, ncol = length(sites))
-		dev.beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
-		
-		pr.beta.shrink <- matrix(1, nrow = n.beta, ncol = 2)
-		
-		pr.phil.tau <- c(1,2)
-		pr.phin.tau <- c(1,2)
-		pr.phia.tau <- c(1,2)
-		
-		pr.ln.tau <- c(1,2)
-		pr.na.tau <- c(1,2)
-		
-		pr.beta.tau <- matrix(c(rep(1, n.beta), rep(2, n.beta)), ncol = 2)
+		pr.beta.mu <- matrix(rep(pr.beta[,1],length(sites)), ncol=length(sites))
+		pr.beta.tau <- matrix(rep(pr.beta[,2],length(sites)), ncol=length(sites))
 		
 		} else {
 		  horizon <- ifelse(as.numeric(last(drag.dates) - fx.start.date) >= 365,
@@ -449,130 +459,155 @@ for (t in t:start.drags) {
 			params.stats <- last.params %>%
 			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
 			  rename("parameter" = "node") %>%
-				group_by(parameter) %>%
+				group_by(parameter, site) %>%
 				summarise(mu = mean(value,na.rm=T), tau = 1 / var(value,na.rm = ))
 
 			# Priors for transitions (priors are constant across sites)
-		  phi.l <- get_prior("phi.l.mu")
-			phi.n <- get_prior("phi.n.mu")
-			phi.a <- get_prior("phi.a.mu")
+		  pr.phi.l <- filter(params.stats, parameter == "phi.l.mu") %>%
+		    ungroup() %>%
+		    select(mu, tau)
+			pr.phi.n <- filter(params.stats, parameter == "phi.n.mu") %>%
+			  ungroup() %>%
+			  select(mu, tau)
+			pr.phi.a <- filter(params.stats, parameter == "phi.a.mu") %>%
+			  ungroup() %>%
+			  select(mu, tau)
 			
-			theta.l2n <- get_prior("theta.ln")
-			theta.n2a <- get_prior("theta.na")
+			pr.ln <- filter(params.stats, parameter == "theta.ln") %>%
+			  ungroup() %>%
+			  select(mu, tau)
+			theta.n2a <- filter(params.stats, parameter == "theta.na") %>%
+			  ungroup() %>%
+			  select(mu, tau)
 			
 			# Deviance priors
-			dev.params <- read_csv(file.path(readDest, "devSamples.csv")) %>%
-			  group_by(node, siteID) %>%
-			  summarise(mu=mean(value), tau = 1/var(value)) %>%
-			  ungroup() %>%
-			  suppressMessages() 
-			
-      dev.l.pr <- filter(dev.params, node == "dev.phi.l") %>%
-        select(-c(node, siteID))
-      
-      dev.n.pr <- filter(dev.params, node == "dev.phi.n") %>%
-        select(-c(node, siteID))
-      
-      dev.a.pr <- filter(dev.params, node == "dev.phi.a") %>%
-        select(-c(node, siteID))
-      
-      dev.ln.pr <- filter(dev.params, node == "dev.ln") %>%
-        select(-c(node, siteID))
-      
-      dev.na.pr <- filter(dev.params, node == "dev.na") %>%
-        select(-c(node, siteID))
+# 			dev.params <- read_csv(file.path(readDest, "devSamples.csv")) %>%
+# 			  group_by(node, siteID) %>%
+# 			  summarise(mu=mean(value), tau = 1/var(value)) %>%
+# 			  ungroup() %>%
+# 			  suppressMessages() 
+# 			
+#       dev.l.pr <- filter(dev.params, node == "dev.phi.l") %>%
+#         select(-c(node, siteID))
+#       
+#       dev.n.pr <- filter(dev.params, node == "dev.phi.n") %>%
+#         select(-c(node, siteID))
+#       
+#       dev.a.pr <- filter(dev.params, node == "dev.phi.a") %>%
+#         select(-c(node, siteID))
+#       
+#       dev.ln.pr <- filter(dev.params, node == "dev.ln") %>%
+#         select(-c(node, siteID))
+#       
+#       dev.na.pr <- filter(dev.params, node == "dev.na") %>%
+#         select(-c(node, siteID))
       
       # Shrinkage priors
-      shrink.params <- read_csv(file.path(readDest, "shrinkSamples.csv")) %>%
-        filter(is.na(value)==F) %>%
-        group_by(node) %>%
-        summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-                  beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-        pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
-                     values_to = 'value') %>%
-        pivot_wider(names_from = node, values_from=value) %>%
-        suppressMessages()
-      
-      phil.shrink <- pull(shrink.params, l.shrink)
-      phin.shrink <- pull(shrink.params, n.shrink)
-      phia.shrink <- pull(shrink.params, a.shrink)
-      l2n.shrink <- pull(shrink.params, ln.shrink)
-      n2a.shrink <- pull(shrink.params, na.shrink)
+      # shrink.params <- read_csv(file.path(readDest, "shrinkSamples.csv")) %>%
+      #   filter(is.na(value)==F) %>%
+      #   group_by(node) %>%
+      #   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+      #             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
+      #   pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
+      #                values_to = 'value') %>%
+      #   pivot_wider(names_from = node, values_from=value) %>%
+      #   suppressMessages()
+      # 
+      # phil.shrink <- pull(shrink.params, l.shrink)
+      # phin.shrink <- pull(shrink.params, n.shrink)
+      # phia.shrink <- pull(shrink.params, a.shrink)
+      # l2n.shrink <- pull(shrink.params, ln.shrink)
+      # n2a.shrink <- pull(shrink.params, na.shrink)
       
       # Tau's
-      prec.params <- read_csv(file.path(readDest, "tauSamples.csv")) %>%
-        group_by(node) %>%
-        summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-                  beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-        pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
-                     values_to = 'value') %>%
-        pivot_wider(names_from = node, values_from=value) %>%
-        suppressMessages()
-      
-      pr.phil.tau <- pull(prec.params, phi.l.tau)
-      pr.phin.tau <- pull(prec.params, phi.n.tau)
-      pr.phia.tau <- pull(prec.params, phi.a.tau)
-      
-      pr.ln.tau <- pull(prec.params, ln.tau)
-      pr.na.tau <- pull(prec.params, na.tau)
+      # prec.params <- read_csv(file.path(readDest, "tauSamples.csv")) %>%
+      #   group_by(node) %>%
+      #   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+      #             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
+      #   pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
+      #                values_to = 'value') %>%
+      #   pivot_wider(names_from = node, values_from=value) %>%
+      #   suppressMessages()
+      # 
+      # pr.phil.tau <- pull(prec.params, phi.l.tau)
+      # pr.phin.tau <- pull(prec.params, phi.n.tau)
+      # pr.phia.tau <- pull(prec.params, phi.a.tau)
+      # 
+      # pr.ln.tau <- pull(prec.params, ln.tau)
+      # pr.na.tau <- pull(prec.params, na.tau)
 
 			# Priors for betas (betas will vary across sites)
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
 				rename("parameter" = "node") %>%
-				group_by(parameter) %>%
+				group_by(parameter,siteID) %>%
 				summarise(mu = mean(value), tau = 1/var(value)) %>%
 				suppressMessages()
-
-			pr.beta <- matrix(NA, n.beta, 2)
-			for (i in 1:n.beta) {
-    		pr <- numeric(2)
-				xx <- betas %>% filter(parameter == paste("beta", i, sep = ""))
-				pr[1] <- xx %>% pull(mu)
-				pr[2] <- xx %>% pull(tau)
-				pr.beta[i,] <- pr
-			}
-			
-			# Beta 
-			dev.beta.tau <- read_csv(file.path(readDest, "devBeta.csv")) %>%
-			  group_by(node, siteID) %>%
-			  summarise(tau = 1/var(value)) %>%
-			  ungroup() %>%
-			  suppressMessages() 
-			
-			dev.beta.mu <- read_csv(file.path(readDest, "devBeta.csv")) %>%
-			  group_by(node, siteID) %>%
-			  summarise(mu = mean(value)) %>%
-			  ungroup() %>%
-			  suppressMessages()
 			
 			b.names <- logical()
 			for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
 			
-			dev.beta.tau <- arrange(dev.beta.tau, factor(node, levels = b.names)) %>%
-			  pivot_wider(names_from = siteID, values_from = tau) %>%
-			  select(-node)
-			
-			dev.beta.mu <- arrange(dev.beta.mu, factor(node, levels = b.names)) %>%
+			pr.beta.mu <- select(betas, -tau) %>%
+			  ungroup () %>%
 			  pivot_wider(names_from = siteID, values_from = mu) %>%
-			  select(-node)
+			  arrange(factor(parameter, levels = b.names)) %>%
+			  select(-parameter)
 			
-			# Beta shrinkage
-			pr.beta.shrink <- read_csv(file.path(readDest, "shrinkBeta.csv")) %>%
-			  group_by(node) %>%
-			  summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-			            beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-			  arrange(factor(node, levels = b.names)) %>%
-			  select(-node) %>%
-			  suppressMessages()
+			pr.beta.tau <- select(betas, -mu) %>%
+			  ungroup() %>%
+			  pivot_wider(names_from = siteID, values_from = tau) %>%
+			  arrange(factor(parameter, levels = b.names)) %>%
+			  select(-parameter)
+
+# 			pr.beta <- matrix(NA, n.beta, 2)
+# 			for (i in 1:n.beta) {
+#     		pr <- numeric(2)
+# 				xx <- betas %>% filter(parameter == paste("beta", i, sep = ""))
+# 				pr[1] <- xx %>% pull(mu)
+# 				pr[2] <- xx %>% pull(tau)
+# 				pr.beta[i,] <- pr
+# 			}
 			
-			# beta precision
-			pr.beta.tau <- read_csv(file.path(readDest, "tauBeta.csv")) %>%
-			  group_by(node) %>%
-			  summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-			            beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-			  arrange(factor(node, levels = b.names)) %>%
-			  select(-node) %>%
-			  suppressMessages()
+			# # Beta 
+			# dev.beta.tau <- read_csv(file.path(readDest, "devBeta.csv")) %>%
+			#   group_by(node, siteID) %>%
+			#   summarise(tau = 1/var(value)) %>%
+			#   ungroup() %>%
+			#   suppressMessages() 
+			# 
+			# dev.beta.mu <- read_csv(file.path(readDest, "devBeta.csv")) %>%
+			#   group_by(node, siteID) %>%
+			#   summarise(mu = mean(value)) %>%
+			#   ungroup() %>%
+			#   suppressMessages()
+			# 
+			# b.names <- logical()
+			# for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
+			# 
+			# dev.beta.tau <- arrange(dev.beta.tau, factor(node, levels = b.names)) %>%
+			#   pivot_wider(names_from = siteID, values_from = tau) %>%
+			#   select(-node)
+			# 
+			# dev.beta.mu <- arrange(dev.beta.mu, factor(node, levels = b.names)) %>%
+			#   pivot_wider(names_from = siteID, values_from = mu) %>%
+			#   select(-node)
+			# 
+			# # Beta shrinkage
+			# pr.beta.shrink <- read_csv(file.path(readDest, "shrinkBeta.csv")) %>%
+			#   group_by(node) %>%
+			#   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+			#             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
+			#   arrange(factor(node, levels = b.names)) %>%
+			#   select(-node) %>%
+			#   suppressMessages()
+			# 
+			# # beta precision
+			# pr.beta.tau <- read_csv(file.path(readDest, "tauBeta.csv")) %>%
+			#   group_by(node) %>%
+			#   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+			#             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
+			#   arrange(factor(node, levels = b.names)) %>%
+			#   select(-node) %>%
+			#   suppressMessages()
 			  
 			# get invgamma parameters
 			sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
@@ -729,41 +764,42 @@ for (t in t:start.drags) {
 	data$area <- area
 	data$IC <- IC
 	
-	data$pr.phi.l <- phi.l
-	data$pr.phi.n <- phi.n
-	data$pr.phi.a <- phi.a
+	data$pr.phi.l <- pr.phi.l
+	data$pr.phi.n <- pr.phi.n
+	data$pr.phi.a <- pr.phi.a
 	
-	data$pr.theta.l2n <- theta.l2n
-	data$pr.theta.n2a <- theta.n2a
+	data$pr.ln <- pr.ln
+	data$pr.na <- pr.na
 	
 	data$repro.mu <- repro.mu
 	
-	data$pr.beta <- pr.beta
-	
-	data$dev.l.pr <- dev.l.pr
-	data$dev.n.pr <- dev.n.pr
-	data$dev.a.pr <- dev.a.pr
-	data$dev.ln.pr <- dev.ln.pr
-	data$dev.na.pr <- dev.na.pr
-	
-	data$phil.shrink <- phil.shrink
-	data$phin.shrink <- phin.shrink
-	data$phia.shrink <- phia.shrink
-	data$l2n.shrink <- l2n.shrink
-	data$n2a.shrink <- n2a.shrink
-	
-	data$pr.phil.tau <- pr.phil.tau
-	data$pr.phin.tau <- pr.phin.tau
-	data$pr.phia.tau <- pr.phia.tau
-	
-	data$pr.ln.tau <- pr.ln.tau
-	data$pr.na.tau <- pr.na.tau
-	
-	data$dev.beta.mu <- dev.beta.mu
-	data$dev.beta.tau <- dev.beta.tau
-	
-	data$pr.beta.shrink <- pr.beta.shrink
+	data$pr.beta.mu <- pr.beta.mu
 	data$pr.beta.tau <- pr.beta.tau
+	
+	# data$dev.l.pr <- dev.l.pr
+	# data$dev.n.pr <- dev.n.pr
+	# data$dev.a.pr <- dev.a.pr
+	# data$dev.ln.pr <- dev.ln.pr
+	# data$dev.na.pr <- dev.na.pr
+	# 
+	# data$phil.shrink <- phil.shrink
+	# data$phin.shrink <- phin.shrink
+	# data$phia.shrink <- phia.shrink
+	# data$l2n.shrink <- l2n.shrink
+	# data$n2a.shrink <- n2a.shrink
+	# 
+	# data$pr.phil.tau <- pr.phil.tau
+	# data$pr.phin.tau <- pr.phin.tau
+	# data$pr.phia.tau <- pr.phia.tau
+	# 
+	# data$pr.ln.tau <- pr.ln.tau
+	# data$pr.na.tau <- pr.na.tau
+	# 
+	# data$dev.beta.mu <- dev.beta.mu
+	# data$dev.beta.tau <- dev.beta.tau
+	# 
+	# data$pr.beta.shrink <- pr.beta.shrink
+	# data$pr.beta.tau <- pr.beta.tau
 	
 	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
 	
@@ -834,10 +870,10 @@ for (t in t:start.drags) {
 	    phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
 	    phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
 	    phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
-	    theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])), 
-	                   length(sites)),
-	    theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])), 
-	                   length(sites)),
+	    # theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
+	    #                length(sites)),
+	    # theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+	    #                length(sites)),
 			beta = matrix(rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),length(sites)),
 			              ncol = length(sites)),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
@@ -861,13 +897,16 @@ for (t in t:start.drags) {
 		)
 	}
 	
-	params.to.save <-  c("beta", "dev.beta", "phi.a.mu", "phi.l.mu", "phi.n.mu",  
-	                     "sig", "theta.ln", "theta.na","x",
-	                     "dev.phi.l", "dev.phi.n", "dev.phi.a", "dev.ln", "dev.na",
-	                     "l.shrink", "n.shrink", "a.shrink", "ln.shrink", "na.shrink",
-	                     "dev.beta", "beta.shrink",
-	                     "phi.l.tau", "phi.n.tau", "phi.a.tau", "ln.tau",
-	                     "na.tau", "beta.tau")       
+	# params.to.save <-  c("beta", "dev.beta", "phi.a.mu", "phi.l.mu", "phi.n.mu",  
+	#                      "sig", "theta.ln", "theta.na","x",
+	#                      "dev.phi.l", "dev.phi.n", "dev.phi.a", "dev.ln", "dev.na",
+	#                      "l.shrink", "n.shrink", "a.shrink", "ln.shrink", "na.shrink",
+	#                      "dev.beta", "beta.shrink",
+	#                      "phi.l.tau", "phi.n.tau", "phi.a.tau", "ln.tau",
+	#                      "na.tau", "beta.tau")       
+	
+	params.to.save <-  c("beta","phi.a.mu", "phi.l.mu", "phi.n.mu",  
+	                     "sig", "theta.ln", "theta.na","x")  
 
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")

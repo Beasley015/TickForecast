@@ -17,7 +17,6 @@ run_transfer_nimble <- function(
 
 	n.cores <- length(cl) # number of cores used
 
-	# Need to add nimble function here?
 	export.vec <- c(
 		"model",
 		"constants",
