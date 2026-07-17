@@ -8,7 +8,7 @@ library(MetBrewer)
 
 # Forecasts for all days -------------
 dir.top <- getwd()
-dir.out <- file.path(dir.top, "outUpdate")
+dir.out <- file.path(dir.top, "out")
 dir.analysis <-  file.path(dir.top, "analysis")
 if(!dir.exists(dir.analysis)) dir.create(dir.analysis, recursive = TRUE, showWarnings = FALSE)
 

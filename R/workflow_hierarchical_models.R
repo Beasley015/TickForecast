@@ -26,7 +26,7 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- F
+update <- T
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
@@ -381,7 +381,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:5){#start.drags) { 
+for (t in t:start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -476,7 +476,7 @@ for (t in t:5){#start.drags) {
 			pr.ln <- filter(params.stats, parameter == "theta.ln") %>%
 			  ungroup() %>%
 			  select(mu, tau)
-			theta.n2a <- filter(params.stats, parameter == "theta.na") %>%
+			pr.na <- filter(params.stats, parameter == "theta.na") %>%
 			  ungroup() %>%
 			  select(mu, tau)
 			

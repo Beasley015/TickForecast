@@ -786,25 +786,27 @@ out.files <- out.files[str_detect(out.files, "parameterSummary")]
 # Omit pre-2018 results
 years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
                       format = "%Y-%m-%d"))
-out.files <- out.files[which(years >= 2018)]
+# out.files <- out.files[which(years >= 2018)]
 
 # Get coefficients
 ints <- tibble()
 for(i in seq_along(out.files)){
+  start.date <- str_extract(out.files[i], pattern = "\\d+-\\d+-\\d+")
   wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    mutate(start.date = start.date) %>%
     suppressMessages()
   
   ints <- bind_rows(ints, wee.tab)
 }
 
 ints <- ints %>%
-  select(-start.date) %>%
+  # select(-start.date) %>%
   filter(str_detect(model, "WeatherMice") == T) %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages()
 
-ggplot(data = ints, aes(x = mean, y = siteID))+
+ggplot(data = ints[ints$species == "Amblyomma_americanum",], aes(x = mean, y = siteID))+
   geom_point()+
   geom_errorbar(aes(xmin = lower95, xmax = upper95))+
   facet_wrap(~node)
@@ -817,19 +819,22 @@ out.files <- out.files[str_detect(out.files, "betaQuant")]
 # Omit pre-2018 results
 years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
                  format = "%Y-%m-%d"))
-out.files <- out.files[which(years >= 2018)]
+# out.files <- out.files[which(years >= 2018)]
+out.files <- out.files[which(years >= 2017)]
 
 # Get coefficients
 betas <- tibble()
 for(i in seq_along(out.files)){
+  start.date <- str_extract(out.files, pattern = "\\d+-\\d+-\\d+")
   wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    mutate(start.date = start.date) %>%
     suppressMessages()
   
   betas <- bind_rows(betas, wee.tab)
 }
 
 betas <- betas %>%
-  select(-start.date) %>%
+  # select(-start.date) %>%
   filter(str_detect(model, "WeatherMice") == T) %>%
   # rename(siteID = site) %>%
   group_by(siteID, species, node, model) %>%
@@ -917,14 +922,14 @@ aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x 
 # save_gg("ix_survival.jpeg", ix.survival, dir.plot, height = 8)
 # save_gg("ix_transition.jpeg", ix.transition, dir.plot, height = 8)
 
-# Maps?
+# Maps
 site.coords <- read_csv("./Data/siteLatLon.csv") %>%
   suppressMessages()
 
 betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
   filter(str_detect(node, 'Survival')) %>%
-  filter(is.na(decimalLongitude)==F) %>%
-  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
+  filter(is.na(lon)==F) %>%
+  st_as_sf(coords = c("lon", "lat"), crs = 4326)
 
 state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
 state_map <- st_make_valid(st_transform(state_map, crs = 5070))
@@ -950,11 +955,51 @@ aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma_americanum"))
   # scale_shape_manual(values = c(21,24))+
   labs(title = "Amblyomma americanum")+
   scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
-  facet_wrap(~node)+
+  facet_wrap(~node, dir = "v")+
   theme_bw()
 
 # save_gg("ix_map.jpeg", ix.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_map.jpeg", aa.map, dir.plot, width = 10, height = 8)
+
+# Betas over time ----------------
+# Get files
+out.files <- list.files(dir.out, recursive = T)
+out.files <- out.files[str_detect(out.files, "betaQuant")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+# out.files <- out.files[which(years >= 2018)]
+out.files <- out.files[which(years >= 2017)]
+
+# Get coefficients
+betas <- tibble()
+for(i in 1:length(out.files)){
+  start <- str_extract(out.files[i], pattern = "\\d+-\\d+-\\d+")
+  wee.tab <- read_csv(file.path(dir.out, out.files[i])) %>%
+    mutate(start.date = as.Date(start, format = "%Y-%m-%d")) %>%
+    suppressMessages()
+  
+  betas <- bind_rows(betas, wee.tab)
+}
+
+aa.time <- betas %>%
+  filter(species == "Amblyomma_americanum") %>%
+  group_by(node, siteID, start.date) %>%
+  summarise(mean = mean(mean), variance = mean(variance))
+
+ix.time <- betas %>%
+  filter(species == "Ixodes_scapularis") %>%
+  group_by(node, siteID, start.date) %>%
+  summarise(mean = mean(mean), variance = mean(variance))
+
+ggplot(data = aa.time, aes(x = start.date, y = mean, color = siteID))+
+  geom_line()+
+  facet_wrap(~node)
+
+ggplot(data = ix.time, aes(x = start.date, y = mean, color = siteID))+
+  geom_line()+
+  facet_wrap(~node)
 
 # Beta posteriors ----------------
 # Get files
