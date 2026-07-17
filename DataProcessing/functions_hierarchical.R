@@ -539,17 +539,17 @@ transfer_analysis <- function(
 	# Pull weather-related nodes
 	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
 	
-	# Deviance nodes
-	dev.nodes <- which(str_detect(names(fx.df),"dev") & 
-	                      str_detect(names(fx.df),"beta")==F)
-	
-	# Shrinkage nodes
-	shrink.nodes <- which(str_detect(names(fx.df), "shrink") &
-	                        str_detect(names(fx.df),"beta")==F)
-	
-	# Tau nodes
-	tau.nodes <- which(str_detect(names(fx.df), "tau") &
-	                     str_detect(names(fx.df), "beta")==F)
+	# # Deviance nodes
+	# dev.nodes <- which(str_detect(names(fx.df),"dev") & 
+	#                       str_detect(names(fx.df),"beta")==F)
+	# 
+	# # Shrinkage nodes
+	# shrink.nodes <- which(str_detect(names(fx.df), "shrink") &
+	#                         str_detect(names(fx.df),"beta")==F)
+	# 
+	# # Tau nodes
+	# tau.nodes <- which(str_detect(names(fx.df), "tau") &
+	#                      str_detect(names(fx.df), "beta")==F)
 	
 	# Pull and process states
 	states <- fx.df$x
@@ -628,7 +628,7 @@ transfer_analysis <- function(
 	                             "model", "siteID"))
 	}
 
-	param.list <- fx.df[-c(weather.nodes, dev.nodes, shrink.nodes, tau.nodes,
+	param.list <- fx.df[-c(weather.nodes, #dev.nodes, shrink.nodes, tau.nodes,
 	                       which(names(fx.df) %in% c("x", "beta","gdd","sig",
 	                       "dev.beta","beta.shrink", "beta.tau")))]
 	
@@ -656,40 +656,40 @@ transfer_analysis <- function(
 	  mutate(species = spp, start.date = start.date, model = model)
 	
 	# Deviance parameters 
-	deviance <- fx.df[dev.nodes]
-	
-	for(i in 1:length(deviance)){
-	  deviance[[i]] <- as.data.frame(deviance[[i]])
-	  deviance[[i]]$node <- names(deviance)[i]
-	}
-	
-	dev.df <- do.call(rbind, deviance)
-	names(dev.df)[1:length(sites)] <- sites
-	
-	dev.df <- pivot_longer(dev.df, cols = -node, names_to = "siteID",
-	                       values_to = "value")
+	# deviance <- fx.df[dev.nodes]
+	# 
+	# for(i in 1:length(deviance)){
+	#   deviance[[i]] <- as.data.frame(deviance[[i]])
+	#   deviance[[i]]$node <- names(deviance)[i]
+	# }
+	# 
+	# dev.df <- do.call(rbind, deviance)
+	# names(dev.df)[1:length(sites)] <- sites
+	# 
+	# dev.df <- pivot_longer(dev.df, cols = -node, names_to = "siteID",
+	#                        values_to = "value")
 	
 	# Shrinkage parameters
-	shrinkage <- fx.df[shrink.nodes]
-	
-	for(i in 1:length(shrinkage)){
-	  shrinkage[[i]] <- as.data.frame(shrinkage[[i]])
-	  shrinkage[[i]]$node <- names(shrinkage)[i]
-	}
-	
-	shrinkage.df <- do.call(rbind, shrinkage)
-	names(shrinkage.df) <- c("value", "node")
+	# shrinkage <- fx.df[shrink.nodes]
+	# 
+	# for(i in 1:length(shrinkage)){
+	#   shrinkage[[i]] <- as.data.frame(shrinkage[[i]])
+	#   shrinkage[[i]]$node <- names(shrinkage)[i]
+	# }
+	# 
+	# shrinkage.df <- do.call(rbind, shrinkage)
+	# names(shrinkage.df) <- c("value", "node")
 	
 	# Precision parameters
-	tau <- fx.df[tau.nodes]
-	
-	for(i in 1:length(tau)){
-	  tau[[i]] <- as.data.frame(tau[[i]])
-	  tau[[i]]$node <- names(tau)[i]
-	}
-	
-	tau.df <- do.call(rbind, tau) 
-	colnames(tau.df) <- c("value", "node")
+	# tau <- fx.df[tau.nodes]
+	# 
+	# for(i in 1:length(tau)){
+	#   tau[[i]] <- as.data.frame(tau[[i]])
+	#   tau[[i]]$node <- names(tau)[i]
+	# }
+	# 
+	# tau.df <- do.call(rbind, tau) 
+	# colnames(tau.df) <- c("value", "node")
 	
 	# Betas
 	if(length(dim(fx.df$beta)) == 2){
@@ -756,45 +756,45 @@ transfer_analysis <- function(
 	}
 	
 	# Deviance for betas
-	if("dev.beta" %in% names(fx.df)){
-	  dev.b <- fx.df$dev.beta
-	  
-	  dev.b <- as.data.frame(apply(dev.b, 2, rbind))
-	  
-	  for(i in 1:ncol(dev.b)){
-	    colnames(dev.b)[i] <- paste("beta", i, sep = "")
-	  }
-	  
-	  dev.b$siteID <- rep(sites, each = nmcmc)
-	  
-	  beta.dev <- pivot_longer(dev.b, -siteID, names_to = "node",
-	                            values_to = "value")
-	}
+	# if("dev.beta" %in% names(fx.df)){
+	#   dev.b <- fx.df$dev.beta
+	#   
+	#   dev.b <- as.data.frame(apply(dev.b, 2, rbind))
+	#   
+	#   for(i in 1:ncol(dev.b)){
+	#     colnames(dev.b)[i] <- paste("beta", i, sep = "")
+	#   }
+	#   
+	#   dev.b$siteID <- rep(sites, each = nmcmc)
+	#   
+	#   beta.dev <- pivot_longer(dev.b, -siteID, names_to = "node",
+	#                             values_to = "value")
+	# }
 	
 	# Shrinkage for betas
-	if("beta.shrink" %in% names(fx.df)){
-	  shrink.b <- as.data.frame(fx.df$beta.shrink)
-	  
-	  for(i in 1:ncol(shrink.b)){
-	    colnames(shrink.b)[i] <- paste("beta", i, sep = "")
-	  }
-	  
-	  beta.shrink <- pivot_longer(shrink.b, cols = everything(),
-	                              names_to = "node", values_to = "value")
-	  
-	}
+	# if("beta.shrink" %in% names(fx.df)){
+	#   shrink.b <- as.data.frame(fx.df$beta.shrink)
+	#   
+	#   for(i in 1:ncol(shrink.b)){
+	#     colnames(shrink.b)[i] <- paste("beta", i, sep = "")
+	#   }
+	#   
+	#   beta.shrink <- pivot_longer(shrink.b, cols = everything(),
+	#                               names_to = "node", values_to = "value")
+	#   
+	# }
 	
 	# Precision for betas
-	if("beta.tau" %in% names(fx.df)){
-	  tau.b <- as.data.frame(fx.df$beta.tau)
-	  
-	  for(i in 1:ncol(tau.b)){
-	    colnames(tau.b)[i] <- paste("beta", i, sep = "")
-	  }
-	  
-	  beta.tau <- pivot_longer(tau.b, cols = everything(), 
-	                           names_to = "node", values_to = "value")
-	}
+	# if("beta.tau" %in% names(fx.df)){
+	#   tau.b <- as.data.frame(fx.df$beta.tau)
+	#   
+	#   for(i in 1:ncol(tau.b)){
+	#     colnames(tau.b)[i] <- paste("beta", i, sep = "")
+	#   }
+	#   
+	#   beta.tau <- pivot_longer(tau.b, cols = everything(), 
+	#                            names_to = "node", values_to = "value")
+	# }
 	
 	# Sigma
 	sigma <- fx.df[['sig']]
@@ -818,12 +818,12 @@ transfer_analysis <- function(
 	write_csv(ungroup(betas.quant), file.path(out.dir, "betaQuant.csv"))
 	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
 	write_csv(sig, file.path(out.dir, "sigma.csv"))
-	write_csv(dev.df, file.path(out.dir, "devSamples.csv"))
-	write_csv(shrinkage.df, file.path(out.dir, "shrinkSamples.csv"))
-	write_csv(tau.df, file.path(out.dir, "tauSamples.csv"))
-	write_csv(beta.dev, file.path(out.dir, "devBeta.csv"))
-	write_csv(beta.shrink, file.path(out.dir, "shrinkBeta.csv"))
-	write_csv(beta.tau, file.path(out.dir, "tauBeta.csv"))
+	# write_csv(dev.df, file.path(out.dir, "devSamples.csv"))
+	# write_csv(shrinkage.df, file.path(out.dir, "shrinkSamples.csv"))
+	# write_csv(tau.df, file.path(out.dir, "tauSamples.csv"))
+	# write_csv(beta.dev, file.path(out.dir, "devBeta.csv"))
+	# write_csv(beta.shrink, file.path(out.dir, "shrinkBeta.csv"))
+	# write_csv(beta.tau, file.path(out.dir, "tauBeta.csv"))
 	
 	if(min(year(fx.dates))>=2018){
 	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
