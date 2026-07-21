@@ -509,6 +509,7 @@ score <- function(df.pred.obs, nmcmc) {
 #' @param model the model used for the forecast
 #' @param horizon temporal extent of the forecast
 #' @param spp the species being forecasted
+#' @param sub.sites subset of sites analyzed at time t
 #' @param out.dir the output directory to save results
 
 transfer_analysis <- function(
@@ -539,6 +540,13 @@ transfer_analysis <- function(
 	
 	# Pull weather-related nodes
 	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
+	
+	# Pull nodes for hyperpriors
+	prior.nodes <- which(names(fx.df) %in% c("phi.a.mean", "phi.a.tau", "phi.l.mean",
+	                                         "phi.l.tau", "phi.n.mean", "phi.n.tau",
+	                                         "theta.l2n.mean", "theta.l2n.tau",
+	                                         "theta.n2a.mean", "theta.n2a.tau"))
+	beta.priors <- which(names(fx.df) %in% c("beta.mean", "beta.tau"))
 	
 	# Pull and process states
 	states <- fx.df$x
@@ -626,7 +634,7 @@ transfer_analysis <- function(
 	                             "model", "siteID"))
 	}
 
-	param.list <- fx.df[-c(weather.nodes, 
+	param.list <- fx.df[-c(weather.nodes, prior.nodes, beta.priors,
 	                       which(names(fx.df) %in% c("x", "beta","gdd","sig")))]
 	
 	for(i in 1:length(param.list)){
@@ -730,6 +738,21 @@ transfer_analysis <- function(
 	if (!dir.exists(out.dir)) {
 		dir.create(out.dir, recursive = TRUE, showWarnings = FALSE)
 	}
+	
+	# priors
+	priors <- fx.df[prior.nodes]
+	for(i in 1:length(priors)){
+	  priors[[i]] <- data.frame(value=priors[[i]],node=names(priors)[i])
+	}
+	priors <- do.call(rbind, priors)
+	
+	beta.pr <- fx.df[beta.priors]
+	for(i in 1:length(beta.pr)){
+	  beta.pr[[i]] <- cbind(beta.pr[[i]], names(beta.pr[i]))
+	}
+	
+	beta.pr <- as.data.frame(do.call(rbind, beta.pr))
+	colnames(beta.pr) <- c(paste("beta", 1:n.beta, sep = ""), "node")
 
 	# save
 	message("  Writing files to ", out.dir)
@@ -738,6 +761,8 @@ transfer_analysis <- function(
 	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
 	write_csv(ungroup(betas.quant), file.path(out.dir, "betaQuant.csv"))
 	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
+	write_csv(priors, file.path(out.dir, "priorSamples.csv"))
+	write_csv(beta.pr, file.path(out.dir, "priorBeta.csv"))
 	write_csv(sig, file.path(out.dir, "sigma.csv"))
 	
 	if(min(year(fx.dates))>=2018){
