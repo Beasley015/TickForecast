@@ -1,0 +1,824 @@
+#' get the neon tick data for a given species
+#'
+#' @param species the species to extract; "Ixodes scapularis" or "Amblyomma americanum"
+#' @export
+
+# Extract and process neon tick data
+neon_tick_data <- function(species) {
+	get_data <- function(i) {
+		sub.df <- data |>
+			filter(plotID == plots[i]) |>
+			arrange(time) |>
+			ungroup()
+
+		if (all(sub.df$processedCount == 0)) {
+			return(NULL)
+		}
+
+		drags <- unique(sub.df$time) |> sort()
+		n.drags <- length(drags)
+		days.sequence <- seq.Date(from=as.Date(drags[1], format="%Y-%m-%d"), 
+		                          to=as.Date(drags[n.drags], format="%Y-%m-%d"),
+		                          by = 1)
+		n.days <- length(days.sequence)
+
+		df.l <- sub.df |>
+			filter(lifeStage == "Larva") |>
+			group_by(time, totalSampledArea) |>
+			summarise(processedCount = sum(processedCount)) |>
+			mutate(lifeStage = "Larva")
+
+		df.na <- sub.df |>
+			filter(lifeStage %in% c("Nymph", "Adult")) |>
+			dplyr::select(time, processedCount, totalSampledArea, lifeStage) |>
+			distinct()
+
+		counts <- bind_rows(df.l, df.na) |>
+			pivot_wider(names_from = lifeStage, values_from = processedCount) |>
+			mutate(
+				plotID = plots[i],
+				siteID = sub.df$siteID[1],
+				species = species,
+				nlcd = sub.df$nlcdClass[1],
+				n.drags = n.drags,
+				n.days = n.days,
+				count.flag = nrow(df.l) * 2 == nrow(df.na)
+			)
+	}
+	species <- str_replace(species, "_", " ")
+
+	df <- read.csv(
+		"./Data/tickTargets.csv"
+	) |>
+		suppressMessages()
+	data <- df |>
+		filter(scientificName %in% c(species, "AAorIX"))
+	# time >= "2018-01-01")
+
+	plots <- unique(data$plotID)
+	n.plots <- length(plots)
+
+	plot.info <- tibble()
+	for (i in 1:n.plots) {
+		plot.info <- bind_rows(plot.info, get_data(i))
+	}
+
+	return(plot.info)
+}
+
+
+#' this function reads the small mammal csv and creates a
+#' capture history matrix for given scale for the NEON small mammal data
+#' 1 = alive - ticks present
+#' 2 = alive - ticks absent
+#' 3 = alive - ticks unknown
+#' 4 = dead - ticks present
+#' 5 = dead - ticks absent
+#' 6 = dead - ticks unknown
+#' 7 = not seen
+#'
+#' @param site the unit to extract; "HARV"
+#' @param neon.smam the small mammal neon.smam frame from the csv in /Data
+
+capture_matrix <- function(site, neon.smam) {
+	neon.df <- neon.smam %>%
+		filter(siteID == site)
+
+	all.days <- neon.df %>% pull(collectDate) %>% unique()
+
+	df <- neon.df %>%
+		filter(genusName == "Peromyscus")
+
+	mice.days <- df %>% pull(collectDate) %>% unique()
+
+	# the states that we need are:
+	alive.p <- 1 # observed mouse with tick attached
+	alive.a <- 2 # observed mouse without tick attached
+	alive.u <- 3 # observed mouse with unknown tick status
+	dead.p <- 4 # observed mouse with tick attached
+	dead.u <- 5 # observed mouse with unknown tick status
+	dead.a <- 6 # observed mouse without tick attached
+	unobserved <- 7 # unobserved
+
+	# if Peromyscus was not seen on all days, need to fill days back in
+	fill.days <- tibble()
+	if (length(mice.days) < length(all.days)) {
+		missing.days <- all.days[which(!(all.days %in% mice.days))]
+		fill.days <- neon.smam %>%
+			filter(collectDate %in% missing.days) %>%
+			distinct(collectDate, .keep_all = TRUE) %>%
+			dplyr::select(collectDate, tagID) %>%
+			mutate(tagID = "noCapture", state = unobserved)
+	}
+
+	# the total number of unique tags
+	total.ind <- df %>%
+		filter(!is.na(tagID)) %>%
+		pull(tagID) %>%
+		unique() %>%
+		length()
+
+	# get the state of each mouse at each trap night
+	df.state <- df %>%
+		mutate(
+			tickOn = if_else(
+				adultTicksAttached == "U" | # any life stage unknown
+					nymphalTicksAttached == "U" |
+					larvalTicksAttached == "U",
+				3,
+				0
+			),
+			tickOn = if_else(
+				adultTicksAttached == "Y" | # any life stage observed
+					nymphalTicksAttached == "Y" |
+					larvalTicksAttached == "Y",
+				1,
+				tickOn
+			),
+			tickOn = if_else(
+				adultTicksAttached == "N" & # all life stages not observed
+					nymphalTicksAttached == "N" &
+					larvalTicksAttached == "N",
+				2,
+				tickOn
+			),
+			tickOn = if_else(
+				adultTicksAttached == "U" & # all life stages unknown
+					nymphalTicksAttached == "U" &
+					larvalTicksAttached == "U",
+				3,
+				tickOn
+			),
+			tickOn = if_else(is.na(tickOn), 3, tickOn), # NAs get unknown status
+			state = if_else(animalInTrap == 1 & tickOn == 3, alive.u, 0), # observed animal with unknown tick status
+			state = if_else(animalInTrap == 1 & tickOn == 2, alive.a, state), # observed animal without tick attached
+			state = if_else(animalInTrap == 1 & tickOn == 1, alive.p, state), # observed animal with tick attached
+			state = if_else(animalInTrap == 2 & tickOn == 3, dead.u, state), # dead animal with unknown tick status
+			state = if_else(animalInTrap == 2 & tickOn == 2, dead.a, state), # dead animal without tick attached
+			state = if_else(animalInTrap == 2 & tickOn == 1, dead.p, state), # dead animal with tick attached
+			state = if_else(animalInTrap == 0, unobserved, state), # unobserved
+			tagID = if_else(is.na(tagID) & animalInTrap == 0, "noCapture", tagID)
+		) %>% # placeholder for trap nights without any captures
+		select(tagID, collectDate, state) %>%
+		filter(!is.na(tagID))
+
+	# states should all have >0 designation
+	if (any(df.state$state == 0)) {
+		stop("All possible states unaccounted for")
+	}
+
+	# add missing days
+	df.all.days <- bind_rows(df.state, fill.days)
+
+	ch <- df.all.days %>%
+		group_by(collectDate, tagID) %>%
+		distinct() %>%
+		summarise(state = min(state)) %>% # conflicting states get unknown designation
+		ungroup() %>%
+		arrange(collectDate) %>%
+		pivot_wider(
+			names_from = collectDate,
+			values_from = state,
+			values_fill = unobserved
+		) %>%
+		filter(tagID != "noCapture") %>%
+		select(-tagID)
+
+	# check dimensions are what they should be
+	if (ncol(ch) != length(all.days)) {
+		stop("Conflicting days in data vs capture matrix")
+	}
+	if (nrow(ch) != total.ind) {
+		stop("Conflicting individuals in data vs capture matrix")
+	}
+
+	# make sure mice that are recorded dead stay dead!
+	# all days after found dead should be unobserved
+	# assume that if there is a case of a zombie mouse,
+	# the dead recording is true and the following capture
+	# is an error in reading the tag number
+	for (z in 1:nrow(ch)) {
+		if (any(ch[z, ] %in% c(dead.u, dead.a, dead.p))) {
+			# print(z)
+			day.dead <- which(ch[z, ] %in% c(dead.u, dead.a, dead.p))
+			if (day.dead < ncol(ch)) {
+				if (!all(ch[z, (day.dead + 1):ncol(ch)] == unobserved)) {
+					ch[z, (day.dead + 1):ncol(ch)] <- unobserved
+				}
+			}
+		}
+	}
+
+	# dates and deltas
+	# all days trapped
+	capture.dates <- df.all.days %>%
+		pull(collectDate) %>%
+		unique() %>%
+		sort()
+
+	# every day in time series
+	every.day <- seq.Date(first(capture.dates), last(capture.dates), by = 1)
+
+	# the index where each capture occasion happens in time series
+	capture.index <- which(every.day %in% capture.dates)
+
+	# the number of days between capture occasions
+	delta.days <- diff.Date(capture.dates) %>% as.numeric()
+
+	return(list(
+		ch = as.matrix(ch),
+		alive.p = alive.p,
+		alive.a = alive.a,
+		alive.u = alive.u,
+		dead.p = dead.p,
+		dead.u = dead.u,
+		dead.a = dead.a,
+		unobserved = unobserved,
+		capture.dates = capture.dates,
+		every.day = every.day,
+		capture.index = capture.index,
+		delta.days = delta.days
+	))
+}
+
+#' Known states function
+#'
+#' This function fills in the capture history matrix where individuals are known but not observed
+#' @param ch Capture history matrix
+#' @export
+#' @examples known_states(ch)
+
+known_states <- function(ch) {
+	state <- ch[,-1]
+	for (i in 1:dim(ch)[1]) {
+		n1 <- min(which(ch[i, -1] != 0))
+		n2 <- max(which(ch[i, -1] != 0))
+		if (n2 > n1) {
+			state[i, n1:n2] <- 1
+		}
+	}
+	state <- cbind(ch[,1], state)
+	return(state)
+}
+
+#' Capture History Matrix Function for the Cary Mouse Data
+#'
+#' This function reads the raw csv file containing white footef mice capture data
+#' @param path File path to csv, Default = "" and assumes csv is in working directory
+#' @param grid What grid do you want to create matrix for? One of Green Control, Henry Control, Tea Control, Green Experimental, Henry Experimental, Tea Experimental
+#' @examples ch.cary("Green Control")
+#' @export
+
+ch_cary <- function(grid, path = "") {
+	file <- "Data/Cary_mouse.csv"
+
+	dat <- read.csv(
+		paste(path, file, sep = ""),
+		na.strings = c(c("", " ", "      "), "NA")
+	) # read in data
+
+	smam <- dat[, c(
+		"Grid",
+		"Full.Date.1",
+		"Full.Date.2",
+		"Day.1",
+		"Day.2",
+		"Tag..",
+		"Fate"
+	)]
+
+	alive <- c(1, 2) # codes for alive individuals
+	#smam <- smam %>% filter(Fate %in% alive)            # extract only live individuals
+	smam <- subset(smam, Fate == 1 | Fate == 2)
+
+	smam[4:5] <- as.integer(!is.na(smam[4:5])) # converts trap histories to 1 or 0
+
+	smam$Full.Date.1 <- as.Date(smam$Full.Date.1) # convert factors to dates
+	smam$Full.Date.2 <- as.Date(smam$Full.Date.2) # convert factors to dates
+
+	m <- subset(smam, Grid == grid)
+	m <- m[, c("Tag..", "Day.1", "Day.2", "Full.Date.1", "Full.Date.2")]
+	m <- subset(m, !is.na(Tag..))
+
+	m$Tag.. <- as.character(m$Tag..)
+	m.ls <- split(m, m$Full.Date.1) # split on first capture date for sampling occasion
+	for (i in 1:length(m.ls)) {
+		m.ls[[i]] <- m.ls[[i]][c(-4, -5)]
+	}
+
+	day.1 <- as.character(unique(m$Full.Date.1)) # 1st capture date of sampling occasion
+	day.2 <- as.character(unique(m$Full.Date.2)) # 2nd capture date of sampling occasion
+	days <- c(rbind(day.1, day.2)) # vector of unique trapping days (for colnames)
+
+	ch.base <- merge(m.ls[[1]], m.ls[[2]], by = "Tag..", all = TRUE)
+	l.m <- length(m.ls) * 1
+	for (i in 3:l.m) {
+		# loop through the rest
+		g <- as.data.frame(m.ls[[i]])
+		ch.base <- merge(ch.base, g, by = "Tag..", all = TRUE)
+	}
+	ch.base <- as.matrix(ch.base[, -1]) # convert all NAs to 0
+	for (i in 1:nrow(ch.base)) {
+		for (t in 1:ncol(ch.base)) {
+			if (is.na(ch.base[i, t])) {
+				ch.base[i, t] <- 0
+			}
+			as.numeric(ch.base[i, t])
+		}
+	}
+	colnames(ch.base) <- days
+	return(ch.base)
+}
+
+#' get the minimum number alive (mna) for jags input for a specific site
+
+mna_jags <- function(site.run, return.mean = FALSE) {
+	if (!grepl("Control", site.run)) {
+		site.run <- paste(site.run, "Control")
+	}
+	ch <- suppressWarnings(ch_cary(site.run))
+	ks <- known_states(ch)
+	mna <- apply(ks, 2, sum)
+
+	mice.obs <- ymd(colnames(ch)) # unique sampling days: mice
+
+	# every day in mouse sequence
+	mice.seq <- seq.Date(mice.obs[1], mice.obs[length(mice.obs)], by = 1)
+
+	mna.all.days <- rep(NA, length(mice.seq))
+	mna.count <- 1
+	for (i in seq_along(mice.seq)) {
+		if (mice.seq[i] %in% mice.obs) {
+			mna.all.days[i] <- mna[mna.count]
+			mna.count <- mna.count + 1
+		} else {
+			mna.all.days[i] <- mna[mna.count]
+		}
+	}
+
+	# tick data
+	dat <- read.csv(file=paste(getwd(), "/Data/tick_cleaned.csv", sep = "")) # tick data
+	tick <- dat[, c("Grid", "DATE", "n_larvae", "n_nymphs", "n_adults")]
+	tick <- subset(tick, Grid == site.run)
+	tick$DATE <- as.Date(tick$DATE)
+
+	# match tick dates to mice dates
+	start.tick <- which(tick$DATE[1] == mice.seq)
+	end.tick <- which(tick$DATE[length(tick$DATE)] == mice.seq)
+
+	# index mice estimates - convert sd to prec
+	mna.for.jags <- mna.all.days[start.tick:end.tick]
+
+	# center and scale
+	mna.scaled <- scale(mna.for.jags)
+
+	if (return.mean) {
+		return(
+			list(
+				mna = mna.scaled,
+				mean = mean(mna.for.jags),
+				sd = sd(mna.for.jags)
+			)
+		)
+	} else {
+		return(mna.scaled)
+	}
+}
+
+
+scale_met_forecast <- function() {
+	met <- read.csv("./Data/Cary_Met_Data_Daily.csv")
+	met <- met %>%
+		filter(DATE >= "05-02-1995") %>%
+		filter(DATE <= "08-17-2005") %>%
+		select(c("MAX_TEMP", "MAX_RH", "MIN_RH", "TOT_PREC"))
+
+	met.means <- apply(met, 2, mean, na.rm = TRUE)
+	met.sd <- apply(met, 2, sd, na.rm = TRUE)
+
+	met.scale <- apply(met, 2, scale)
+	scale.max <- c(
+		10000,
+		(100 - met.means["MAX_RH"]) / met.sd["MAX_RH"],
+		(100 - met.means["MIN_RH"]) / met.sd["MIN_RH"],
+		10000
+	)
+
+	scale.min <- c(
+		-10000,
+		(0 - met.means["MAX_RH"]) / met.sd["MAX_RH"],
+		(0 - met.means["MIN_RH"]) / met.sd["MIN_RH"],
+		(0 - met.means["TOT_PREC"]) / met.sd["TOT_PREC"]
+	)
+
+	names(scale.max) <- c("MAX_TEMP", "MAX_RH", "MIN_RH", "TOT_PREC")
+	names(scale.min) <- c("MAX_TEMP", "MAX_RH", "MIN_RH", "TOT_PREC")
+
+	return(list(
+		means = met.means,
+		sds = met.sd,
+		scale.max = scale.max,
+		scale.min = scale.min
+	))
+}
+
+#' Score forecasts
+#'
+#' CRPS is used in the main analysis, but other metrics are calculated as well
+#'
+#' @param df.pred.obs dataframe with forecast samples and observations
+#' @param nmcmc number of MCMC samples
+
+score <- function(df.pred.obs, nmcmc) {
+	ls.vec <- unique(df.pred.obs$lifeStage)
+
+	# crps scores and other metrics
+	start.date <- min(df.pred.obs$time)
+	obs.plots <- unique(df.pred.obs$plotID)
+	all.scores <- tibble()
+	
+	for (p in seq_along(obs.plots)) {
+		plot.subset <- df.pred.obs %>% filter(plotID == obs.plots[p])
+		obs.dates <- unique(plot.subset$time)
+		for (i in seq_along(ls.vec)) {
+			ls.subset <- plot.subset %>%
+				arrange(time) %>%
+				filter(lifeStage == ls.vec[i])
+			
+			if(any(is.na(ls.subset$value)==T)){next}
+			
+			ls.observed <- ls.subset %>%
+				select(time, observed) %>%
+				distinct() %>%
+				pull(observed)
+			ls.predicted <- ls.subset %>%
+				select(time, forecast) %>%
+				group_by(time) %>%
+				mutate(iter = 1:nmcmc) %>%
+				pivot_wider(names_from = time, values_from = forecast) %>%
+				select(-iter) %>%
+				as.matrix() %>%
+				t()
+
+			rmse <- function(obs, pred) {
+				if (length(obs) == 1) {
+					n <- length(pred)
+					rmse <- sqrt((1 / n) * sum((pred - obs)^2))
+				} else {
+					n <- ncol(pred)
+					rmse <- obs
+					for (i in 1:length(obs)) {
+						rmse[i] <- sqrt((1 / n) * sum((pred[i, ] - obs[i])^2))
+					}
+				}
+				return(rmse)
+			}
+
+			bayes_p <- function(obs, pred) {
+				bayes.p.val <- rep(NA, nrow(pred))
+				for (gg in 1:nrow(pred)) {
+					cdf <- ecdf(pred[gg, ])
+					bayes.p.val[gg] <- cdf(obs[gg])
+				}
+				return(bayes.p.val)
+			}
+
+			scores <- tibble(
+				lifeStage = ls.vec[i],
+				time = unique(ls.subset$time),
+				plotID = obs.plots[p],
+				horizon = as.numeric(unique(ls.subset$time) - start.date),
+				percentBias = scoringutils::bias_sample(ls.observed, ls.predicted),
+				crps = scoringutils::crps_sample(ls.observed, ls.predicted),
+				rmse = rmse(ls.observed, ls.predicted),
+				bayesP = bayes_p(ls.observed, ls.predicted)
+			)
+
+			all.scores <- bind_rows(all.scores, scores)
+		}
+	}
+	return(all.scores)
+}
+
+
+#' Run the analysis on tick forecasts at NEON
+#'
+#' @param fx.df the forecast dataframe from run_transfer_nimble.R
+#' @param observations dataframe of observations from the NEON site
+#' @param fx.dates vector of dates for the forecast
+#' @param model the model used for the forecast
+#' @param horizon temporal extent of the forecast
+#' @param spp the species being forecasted
+#' @param out.dir the output directory to save results
+
+transfer_analysis <- function(
+	fx.df,
+	observations,
+	fx.dates,
+	horizon,
+	model,
+	weather,
+	spp,
+	sub.sites,
+	out.dir
+) {
+  # Total number of mcmc iterations
+	nmcmc <- nrow(fx.df$beta)
+	
+	# Create life stage table
+	ls.tb <- tibble(
+		lifeStage = c("Larva", "Dormant", "Nymph", "Adult"),
+		ls.index = 1:4
+	)
+
+	# Time steps table
+	time.tb <- tibble(
+		time = fx.dates,
+		time.index = 1:length(fx.dates)
+	)
+	
+	# Pull weather-related nodes
+	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
+	
+	# Pull and process states
+	states <- fx.df$x
+	colnames(states) <- ls.tb$lifeStage
+	
+	# Convert to giant-ass data frame
+	if(length(dim(states))==3){
+	  states <- as.data.frame(apply(states, 2, "c"))
+	  states$siteID <- sites[sub.sites]
+	  states$time <- rep(time.tb$time, each = nmcmc)
+	} else{
+	  states <- apply(states, c(2,4), "c")
+	  
+	  states <- abind(states, 
+	                  array(rep(time.tb$time.index, each = nmcmc),
+	                        replace(dim(states), 2, 1)), 
+	                  along = 2)
+	  states <- as.data.frame(apply(states, 2, "c")) %>%
+	    mutate(siteID = rep(sites[sub.sites], each = nmcmc*horizon)) %>% 
+	    arrange(V5) %>%
+	    mutate(time = rep(time.tb$time, 
+	                      each = nmcmc*length(sub.sites))) %>% 
+	    select(-V5)
+	  # I hate it but it works
+	}
+
+	# Clean up observation data
+	data.site <- observations %>%
+		filter(time %in% fx.sequence) %>%
+	  filter(siteID %in% sites[sub.sites]) %>%
+		select(-n.drags, -n.days, -count.flag) %>%
+		pivot_longer(
+			cols = c("Larva", "Nymph", "Adult"),
+			names_to = "lifeStage",
+			values_to = "observed"
+		)
+
+	# pred.obs will only have forecasts for the dates tick drags occurred
+	plots <- data.site$plotID %>% unique()
+	
+	data.site$time <- as.Date(data.site$time, format = "%Y-%m-%d")
+	
+	fx.sub <- states %>%
+	  filter(time %in% unique(data.site$time), 
+	                          siteID %in% unique(data.site$siteID)) %>%
+	  mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
+	  select(-Dormant) %>%
+	  pivot_longer(cols = Larva:Adult, names_to = 'lifeStage', 
+	               values_to = 'value')
+	
+	pred.obs <- left_join(fx.sub, data.site, 
+	                      by = c("time", "lifeStage", "siteID"),
+	                      relationship = "many-to-many") %>%
+	  filter(is.na(observed) == F)
+	
+	fx.data <- pred.obs %>%
+		mutate(
+			forecast = value / 450 * totalSampledArea,
+			start.date = start.date,
+			model = model
+		)
+
+	fx.quantiles <- fx.data %>%
+	  ungroup() %>%
+		group_by(lifeStage, time, siteID, start.date, model, species,
+		         totalSampledArea, plotID, nlcd, observed) %>%
+		summarise(
+			lower95 = quantile(forecast, 0.025, na.rm=T),
+			lower75 = quantile(forecast, 0.125, na.rm=T),
+			median = median(forecast, na.rm=T),
+			mean = mean(forecast, na.rm=T),
+			upper75 = quantile(forecast, 0.875, na.rm=T),
+			upper95 = quantile(forecast, 0.975, na.rm=T),
+			variance = var(forecast, na.rm=T)
+		)
+
+	if(min(year(fx.dates))>=2018){
+	  scores <- score(fx.data, nmcmc) %>%
+		  mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
+		         species = spp, model = model) %>%
+	    mutate(species = str_replace(species, pattern = "_", replacement = " "))
+
+	  fx.out <- left_join(fx.quantiles, scores,
+	                      by = c("lifeStage", "time", "species", "plotID", 
+	                             "model", "siteID"))
+	}
+
+	param.list <- fx.df[-c(weather.nodes, 
+	                       which(names(fx.df) %in% c("x", "beta","gdd","sig")))]
+	
+	for(i in 1:length(param.list)){
+	  param.list[[i]] <- as.data.frame(param.list[[i]])
+	  param.list[[i]]$node <- names(param.list)[i]
+	}
+	
+	param.df <- do.call(rbind, param.list)
+	colnames(param.df)[1:length(sub.sites)] <- sites[sub.sites]
+	
+	param.quant <- param.df %>%
+	  pivot_longer(cols = -node, names_to='siteID', values_to = 'value') %>%		
+	  group_by(node, siteID) %>%
+	  summarise(
+	    lower95 = quantile(value, 0.025, na.rm=T),
+	    lower75 = quantile(value, 0.125, na.rm=T),
+	    median = median(value, na.rm=T),
+	    mean = mean(value, na.rm=T),
+	    upper75 = quantile(value, 0.875, na.rm=T),
+	    upper95 = quantile(value, 0.975, na.rm=T),
+	    variance = var(value, na.rm=T)
+	  ) %>%
+	  ungroup() %>%
+	  mutate(species = spp, start.date = start.date, model = model)
+	
+	# Betas
+	if(length(dim(fx.df$beta)) == 2){
+	  # extract and rename columns
+	  betas <- as.data.frame(fx.df$beta)
+	  colnames(betas) <- str_replace(colnames(betas), "V", "beta")
+	
+	  # Long format
+	  betas <- betas %>%
+	    pivot_longer(cols = everything(), names_to="node", values_to="value")
+	  
+	  # quants
+	  betas.quant <- betas %>%
+	    group_by(node) %>%
+	    summarise(
+	      lower95 = quantile(value, 0.025, na.rm=T),
+	      lower75 = quantile(value, 0.125, na.rm=T),
+	      median = median(value, na.rm=T),
+	      mean = mean(value, na.rm=T),
+	      upper75 = quantile(value, 0.875, na.rm=T),
+	      upper95 = quantile(value, 0.975, na.rm=T),
+	      variance = var(value, na.rm=T)
+	    ) %>%
+	    ungroup() %>%
+	    mutate(species = spp, start.date = start.date, model = model,
+	           siteID = sites[sub.sites])
+	  
+	} else{
+	  # extract
+	  betas <-fx.df$beta 
+	  
+	  # Create column names
+	  beta.names <- logical()
+	  for(i in 1:dim(betas)[2]){beta.names[i] <- paste("beta", i, sep = "")}
+	  
+	  # Add col for site
+	  betas <- abind(betas, array(NA, replace(dim(betas), 2, 1)), along = 2)
+	  
+	  for(i in 1:length(sites)){
+	    betas[,ncol(betas),i] <- sites[i]
+	  }
+	  
+	  betas <- as.data.frame(apply(betas, 2, rbind))
+	  colnames(betas) <- c(beta.names, "siteID")
+	  
+	  # Long format
+	  betas <- betas %>%
+	    pivot_longer(cols = -siteID, names_to="node", values_to="value") %>%
+	    mutate(value = as.numeric(value))
+	  
+	  # quants
+	  betas.quant <- betas %>%
+	    group_by(node, siteID) %>%
+	    summarise(
+	      lower95 = quantile(value, 0.025, na.rm=T),
+	      lower75 = quantile(value, 0.125, na.rm=T),
+	      median = median(value, na.rm=T),
+	      mean = mean(value, na.rm=T),
+	      upper75 = quantile(value, 0.875, na.rm=T),
+	      upper95 = quantile(value, 0.975, na.rm=T),
+	      variance = var(value, na.rm=T)
+	    ) %>%
+	    ungroup() %>%
+	    mutate(species = spp, start.date = start.date, model = model)
+	}
+	
+	# Sigma
+	sigma <- fx.df[['sig']]
+	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
+
+	sigma <- as.data.frame(apply(sigma, 2, "c"))
+	sigma$siteID <- rep(sites[sub.sites], each = nmcmc)
+	
+	sig <- sigma %>%
+	  pivot_longer(cols=sig1:sig4, names_to = 'parameter', values_to='value')
+
+	if (!dir.exists(out.dir)) {
+		dir.create(out.dir, recursive = TRUE, showWarnings = FALSE)
+	}
+
+	# save
+	message("  Writing files to ", out.dir)
+	write_csv(ungroup(states), file.path(out.dir, "stateSamples.csv"))
+	write_csv(ungroup(param.quant), file.path(out.dir, "parameterSummary.csv"))
+	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
+	write_csv(ungroup(betas.quant), file.path(out.dir, "betaQuant.csv"))
+	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
+	write_csv(sig, file.path(out.dir, "sigma.csv"))
+	
+	if(min(year(fx.dates))>=2018){
+	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
+	}
+
+	# weather - if used
+	if (weather && length(weather.nodes > 0)) {
+	  weather.list <- fx.df[weather.nodes]
+	  
+	  weather.list <- lapply(weather.list, function(x) apply(x, 3, "c"))
+	  
+	  weather.list <- lapply(weather.list, 
+	                 function(x) cbind(rep(time.tb$time.index, each = nmcmc),x))
+	  
+	  for(i in 1:length(weather.list)){
+	    weather.list[[i]] <- cbind(names(weather.list)[i], weather.list[[i]])
+	  }
+	  
+	  weather.df <- as.data.frame(do.call(rbind, weather.list))
+	  colnames(weather.df) <- c("node", "time", sites)
+	  
+		daymet <- weather.df %>%
+		  pivot_longer(cols = -c(node, time), names_to = "site", 
+		               values_to = "value") %>%
+		  mutate(value= as.numeric(value)) %>%
+		  group_by(node, time, site) %>%
+			summarise(
+				lower95 = quantile(value, 0.025, na.rm=T),
+				lower75 = quantile(value, 0.125, na.rm=T),
+				median = median(value, na.rm=T),
+				mean = mean(value, na.rm=T),
+				upper75 = quantile(value, 0.875, na.rm=T),
+				upper95 = quantile(value, 0.975, na.rm=T),
+				variance = var(value, na.rm=T)
+			) %>%
+			ungroup() %>%
+			mutate(
+				species = spp,
+				start.date = start.date,
+				model = model
+			)
+
+		write_csv(daymet, file.path(out.dir, "weatherSummary.csv"))
+	}
+}
+
+dZIP <- nimbleFunction(
+  run = function(x = integer(), lambda = double(), 
+                 zeroProb = double(), log = logical(0, default = 0)) {
+    returnType(double())
+    ## First handle non-zero data
+    if (x != 0) {
+      ## return the log probability if log = TRUE
+      if (log) return(dpois(x, lambda, log = TRUE) + log(1 - zeroProb))
+      ## or the probability if log = FALSE
+      else return((1 - zeroProb) * dpois(x, lambda, log = FALSE))
+    }
+    ## From here down we know x is 0
+    totalProbZero <- zeroProb + (1 - zeroProb) * dpois(0, lambda, log = FALSE)
+    if (log) return(log(totalProbZero))
+    return(totalProbZero)
+  })
+
+# zero-inflated poisson distribution random number generator 
+rZIP <- nimbleFunction(
+  run = function(n = integer(), lambda = double(), zeroProb = double()) {
+    returnType(integer())
+    isStructuralZero <- rbinom(1, prob = zeroProb, size = 1)
+    if (isStructuralZero) return(0)
+    return(rpois(1, lambda))
+  })
+
+
+if_else_nimble <- nimbleFunction(
+  run = function(condition = integer(0), valueIf=double(0), valueElse=double(0)) {
+    returnType(double(0))
+    if (condition==TRUE) {
+      return(valueIf)
+    } else {
+      return(valueElse)
+    }
+  }
+)

@@ -89,7 +89,8 @@ neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
   filter(siteID %in% sites) %>%
-	filter(time >= "2016-01-01" & time < "2022-01-01") %>%
+	filter(time >= "2016-01-01" & time < "2022-01-01",
+	       grepl("Forest", nlcd)) %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -176,8 +177,9 @@ mna <- ks %>%
 mna.full <- smam_cary %>%
   rename("MNA" = "n_trapped") %>%
   dplyr::select(-plotID) %>%
-  filter(collectDate >= ymd("2013-01-01")) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
+  filter(collectDate >= ymd("2016-01-01")) %>%
+  arrange(collectDate) %>%
   pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
               values_fn = sum) %>%
   mutate(pmap_df(., ~ na.locf(c(...)[-1]))) %>%
@@ -442,9 +444,9 @@ for (t in t:start.drags) {
 		pr.beta.tau <- matrix(rep(pr.beta[,2],length(sites)), ncol=length(sites))
 		
 		} else {
-		  horizon <- ifelse(as.numeric(last(drag.dates) - fx.start.date) >= 365,
+		  horizon <- ifelse(as.numeric(last(start.dates) - fx.start.date) >= 365,
 		                    365,
-		                    as.numeric(last(drag.dates) - fx.start.date))
+		                    as.numeric(last(start.dates) - fx.start.date))
 
 			# read last forecast parameters and state
 			readDest <- file.path(

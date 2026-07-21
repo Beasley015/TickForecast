@@ -819,8 +819,7 @@ out.files <- out.files[str_detect(out.files, "betaQuant")]
 # Omit pre-2018 results
 years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
                  format = "%Y-%m-%d"))
-# out.files <- out.files[which(years >= 2018)]
-out.files <- out.files[which(years >= 2017)]
+out.files <- out.files[which(years >= 2018)]
 
 # Get coefficients
 betas <- tibble()
