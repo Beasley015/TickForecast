@@ -26,7 +26,7 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- T
+update <- F
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
