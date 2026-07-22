@@ -649,7 +649,7 @@ for (t in t:start.drags) {
 	    suppressMessages()
 
 	  if (nrow(data$mice) < length(fx.sequence)) {
-	    horizon <- min(length(data$cgdd), hrow(data$mice))
+	    horizon <- min(length(data$cgdd), nrow(data$mice))
 	    data$y <- y[, 1:horizon, ,]
 	  }
 	}

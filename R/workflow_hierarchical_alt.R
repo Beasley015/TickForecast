@@ -48,7 +48,7 @@ ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 1
+	job.num <- 4
 }
 
 species.job <- jobs$species[job.num] %>%
@@ -178,7 +178,7 @@ mna.full <- smam_cary %>%
   rename("MNA" = "n_trapped") %>%
   dplyr::select(-plotID) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
-  filter(collectDate >= ymd("2016-01-01")) %>%
+  filter(collectDate >= ymd("2015-01-01")) %>%
   arrange(collectDate) %>%
   pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
               values_fn = sum) %>%
@@ -702,7 +702,7 @@ for (t in t:n.drags) {
 	    suppressMessages()
 
 	  if (nrow(data$mice) < length(fx.sequence)) {
-	    horizon <- min(length(data$cgdd), hrow(data$mice))
+	    horizon <- min(length(data$cgdd), nrow(data$mice))
 	    data$y <- y[, 1:horizon, ,]
 	  }
 	}

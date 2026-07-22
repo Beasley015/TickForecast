@@ -561,9 +561,9 @@ transfer_analysis <- function(
 	                array(rep(time.tb$time.index, each = nmcmc),
 	                      replace(dim(states), 2, 1)), 
 	                along = 2)
-	states <- as.data.frame(apply(states, 2, "c")) %>%
+	test <- as.data.frame(apply(states, 2, "c")) %>%
 	  mutate(siteID = rep(sites, each = nmcmc*horizon)) %>% 
-	  arrange(V5) %>%
+	  arrange(V5) #%>%
 	  mutate(time = rep(time.tb$time, each = nmcmc*length(sites))) %>% 
 	  select(-V5)
 	# I hate it but it works
