@@ -250,6 +250,28 @@ df.daymet <- join2 %>%
   filter(Date >= "2016-01-01" & Date < "2022-01-01")
 
 # =========================================== #
+#       remotely sensed covs (site) ----------
+# =========================================== #
+
+# Edge
+edge <- read_csv("./Data/fragstats.csv") %>%
+  filter(siteID %in% sites) %>%
+  arrange(siteID) %>%
+  pull(edge_m_per_ha) %>%
+  suppressMessages()
+
+# Dominant land cover
+land.cover <- read_csv("./Data/full_NLCD.csv") %>%
+  filter(siteID %in% sites) %>%
+  select(siteID, lc_dominant) %>%
+  arrange(siteID) %>%
+  mutate(lc_dominant = str_remove(lc_dominant, "_pct")) %>%
+  pull(lc_dominant) %>%
+  suppressMessages()
+
+# EVI
+
+# =========================================== #
 #       get informative priors -------------------
 # =========================================== #
 df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
