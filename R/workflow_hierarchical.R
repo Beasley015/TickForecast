@@ -270,6 +270,19 @@ land.cover <- read_csv("./Data/full_NLCD.csv") %>%
   suppressMessages()
 
 # EVI
+evi <- read_csv("./Data/MODIS_site_VIs.csv") %>%
+  select(siteID, date, evi_median)
+
+time.seq <- data.frame(date=seq(min(evi$date), max(evi$date))) %>%
+  expand_grid(sites) %>%
+  rename(siteID = sites) %>%
+  filter(siteID %in% unique(evi$siteID))
+
+evi <- evi %>%
+  right_join(time.seq, by = c("date", "siteID")) %>%
+  arrange(siteID, date) %>%
+  group_by(siteID) %>%
+  fill(evi_median, .direction = 'down')
 
 # =========================================== #
 #       get informative priors -------------------
