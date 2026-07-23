@@ -697,8 +697,8 @@ transfer_analysis <- function(
 	  # Add col for site
 	  betas <- abind(betas, array(NA, replace(dim(betas), 2, 1)), along = 2)
 	  
-	  for(i in 1:length(sites)){
-	    betas[,ncol(betas),i] <- sites[i]
+	  for(i in 1:length(sub.sites)){
+	    betas[,ncol(betas),i] <- sites[sub.sites[i]]
 	  }
 	  
 	  betas <- as.data.frame(apply(betas, 2, rbind))

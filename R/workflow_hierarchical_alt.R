@@ -26,7 +26,7 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- F
+update <- T
 
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out", "alt")
@@ -721,7 +721,7 @@ for (t in t:n.drags) {
 
 	# finalize constants
 	constants$n.beta <- n.beta
-	constants$sub.sites <- which(unique(obs$siteID) %in% sites)
+	constants$sub.sites <- which(sites %in% unique(obs$siteID))
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
@@ -792,7 +792,7 @@ for (t in t:n.drags) {
 	                     "theta.l2n.tau", "theta.n2a.tau", "x")  
 
 	source("./R/nimble_forecast_alt.R")
-	source("./R/run_transfer_nimble_hierarchical.R")
+	source("./R/run_transfer_nimble_alt.R")
 	cl <- makeCluster(n.slots) 
 	
 	# Run the model	
