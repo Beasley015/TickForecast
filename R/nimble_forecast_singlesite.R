@@ -2,15 +2,23 @@ library(nimble)
 source("./DataProcessing/functions.R")
 
 model.code <- nimbleCode({
-	### priors
+	### priors (intercepts)
 	phi.l.mu ~ dnorm(pr.phi.l[1], tau = pr.phi.l[2])
 	phi.n.mu ~ dnorm(pr.phi.n[1], tau = pr.phi.n[2])
 	phi.a.mu ~ dnorm(pr.phi.a[1], tau = pr.phi.a[2])
 	theta.ln ~ dnorm(pr.theta.l2n[1], tau = pr.theta.l2n[2])
 	theta.na ~ dnorm(pr.theta.n2a[1], tau = pr.theta.n2a[2])
 
+	# priors for model coefficients
 	for (j in 1:n.beta) {
 		beta[j] ~ dnorm(pr.beta[j, 1], tau = pr.beta[j, 2])
+	}
+	
+	# plot-level priors
+	for(j in 1:3){
+	  gam0[j] ~ dnorm(pr.gam0[j,1], tau=pr.gam0[j,2])
+	  gam1[j] ~ dnorm(pr.gam1[j,1], tau=pr.gam1[j,2])
+	  gam2[j] ~ dnorm(pr.gam2[j,1], tau=pr.gam2[j,2])
 	}
 
 	tau.temp ~ dexp(1)
@@ -126,12 +134,12 @@ model.code <- nimbleCode({
 			dx[3, t, p] <- x[4, t] / 450 * area[t, p]
 			
 			# Prob available for sampling (p)
-			logit(pz[1,t,p]) <- gam0[1,t,p] + gam1[1,t,p] * gdd[t,p]^2 + 
+			logit(pz[1,t,p]) <- gam0[1] + gam1[1] * gdd[t,p]^2 + 
 			  gam2[1,t,p] * gdd[t,p]
-			logit(pz[2,t,p]) <- gam0[2,t,p] + gam1[2,t,p] * gdd[t,p]^2 + 
+			logit(pz[2,t,p]) <- gam0[2] + gam1[2] * gdd[t,p]^2 + 
 			  gam2[2,t,p] * gdd[t,p]
-			logit(pz[3,t,p]) <- gam0[3,t,p] + gam1[3,t,p] * gdd[t,p]^2 + 
-			  gam2[3,t,p] * gdd[t,p]
+			logit(pz[3,t,p]) <- gam0[3] + gam1[3] * gdd[t,p]^2 + 
+			  gam2[3] * gdd[t,p]
 			
 			# Tick density given sampling availability (dlamb)
 			log(dlamb[1,t,p]) <- dx[1,t,p] # add habitat covs
