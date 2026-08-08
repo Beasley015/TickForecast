@@ -186,20 +186,24 @@ write_csv(target, "./Data/tickTargets.csv")
 
 # Get vectors of sites w/both species ----------------
 ix <- tick.long %>%
-  filter(scientificName == "Ixodes scapularis") %>%
+  mutate(year = year(collectDate)) %>%
+  filter(scientificName == "Ixodes scapularis",
+         year <= 2022) %>%
   group_by(siteID) %>%
   summarise(total_count = sum(processedCount)) %>%
-  filter(total_count > 10)
+  filter(total_count > 25)
 
 am <- tick.long %>%
-  filter(scientificName == "Amblyomma americanum")%>%
+  mutate(year = year(collectDate)) %>%
+  filter(scientificName == "Amblyomma americanum",
+         year <= 2022)%>%
   group_by(siteID) %>%
   summarise(total_count = sum(processedCount)) %>%
-  filter(total_count > 10)
+  filter(total_count > 25)
 
 ix.sites <- unique(ix$siteID)
 
 am.sites <- unique(am$siteID)
 
-write_lines(ix.sites, file = "./Data/ix_sites.txt")
-write_lines(am.sites, file = "./Data/am_sites.txt")
+write_lines(ix.sites, file = "./Data/ix_sites_single.txt")
+write_lines(am.sites, file = "./Data/am_sites_single.txt")

@@ -29,7 +29,7 @@ neon_tick_data <- function(species) {
 			mutate(lifeStage = "Larva")
 
 		df.na <- sub.df |>
-			filter(lifeStage != "Larva") |>
+			filter(lifeStage %in% c("Nymph", "Adult")) |>
 			select(time, processedCount, totalSampledArea, lifeStage) |>
 			distinct()
 
@@ -49,10 +49,10 @@ neon_tick_data <- function(species) {
 	df <- read.csv(
 		"./Data/tickTargets.csv"
 	) |>
+	  mutate(scientificName = str_replace(scientificName, " ", "_")) %>%
 		suppressMessages()
 	data <- df |>
 		filter(scientificName %in% c(species, "AAorIX"))
-	# time >= "2018-01-01")
 
 	plots <- unique(data$plotID)
 	n.plots <- length(plots)
@@ -737,4 +737,16 @@ if_else_nimble <- nimbleFunction(
       return(valueElse)
     }
   }
+)
+
+dZIP <- nimbleFunction(
+  run = function(x = double(), dlamb = double(),
+                 zeroProb = double(), log = logical(0, default = 0)) {
+    returnType(double())
+    ## For use with AD, we cannot use an `if` statement to handle the mixture.
+    prob <- zeroProb * dbinom(x, size = 1, prob = 0) + (1 - zeroProb) * dpois(x, dlamb)
+    if (log) return(log(prob))
+    return(prob)
+  },
+  buildDerivs = 'run'   # Needed when used with AD-based algorithms.
 )
