@@ -66,19 +66,19 @@ model.code <- nimbleCode({
 
 		if(n.plots == 1){
 		  mean.gdd <- gdd[t,1]
+		  mean.pz3 <- pz[3,t,1]
 		  mean.pz2 <- pz[2,t,1]
 		  mean.pz1 <- pz[1,t,1]
 		} else{
 		  mean.gdd <- mean(gdd[t,1:n.plots])
+		  mean.pz3 <- mean(pz[3,t,1:n.plots])
 		  mean.pz2 <- mean(pz[2,t,1:n.plots])
 		  mean.pz1 <- mean(pz[1,t,1:n.plots])
 		}
 		
-		lambda[t] <- if_else_nimble(
-		  (mean.gdd >= 1400) & (mean.gdd <= 2500),
-		  repro.mu,
-		  0
-		)
+		lambda.bin[t] ~ dbern(mean.pz3)
+		lambda[t] <- if_else_nimble(lambda.bin[t]==0, repro.mu, 0)
+		# look @ repro.mu: put a prior so it can vary?
 		
 		# Relate p's to site-level transition probs:
 		n2a.bin[t] ~ dbern(mean.pz2)

@@ -277,6 +277,8 @@ pr.sig <- df.params %>%
 
 # iterate ==================================================================
 
+t = 1
+
 for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
@@ -514,59 +516,56 @@ for (t in seq_len(n.drags)) {
 		
 	stopCluster(cl)
 
-	# Resume -------------
-		dat.hindcast <- do.call(rbind, out.nchains)
+	dat.hindcast <- do.call(rbind, out.nchains)
 
-		# if (ua.job == "ic_parameter_driver_process") {
-			message("Checking convergence...")
-			nodes <- colnames(out.nchains[[1]])
-			gelman.keep <- numeric(length(nodes))
-			for (ff in seq_along(nodes)) {
-				mcmc.check <- list()
-				col <- nodes[ff]
-				for (c in seq_along(out.nchains)) {
-					mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
-				}
-				gelman.keep[ff] <- try(coda::gelman.diag(
-					mcmc.check,
-					transform = TRUE
-				)$psrf[1])
-			#}
+	message("Checking convergence...")
+	nodes <- colnames(out.nchains[[1]])
+	nodes <- nodes[!str_detect(nodes, c("dlamb|dx|pz|x"))]
+			
+	gelman.keep <- numeric(length(nodes))
+	for (ff in seq_along(nodes)) {
+	  mcmc.check <- list()
+	  col <- nodes[ff]
+	  
+	  for (c in seq_along(out.nchains)) {
+	    mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
+	    }
+	  
+	  gelman.keep[ff] <- try(coda::gelman.diag(
+	    mcmc.check,
+	    transform = TRUE)$psrf[1])
 
-			if (any(gelman.keep > 1.2)) {
-				# message("WARNING: Convergence not reached!")
-				bad.nodes <- which(gelman.keep > 1.2)
-				bad.params <- tibble(
-					node = nodes[bad.nodes],
-					psrf = as.numeric(gelman.keep[bad.nodes])
-				) %>%
+	  if (any(gelman.keep > 1.2)) {
+	    # message("WARNING: Convergence not reached!")
+	    bad.nodes <- which(gelman.keep > 1.2)
+	    bad.params <- tibble(
+				node = nodes[bad.nodes],
+				psrf = as.numeric(gelman.keep[bad.nodes])
+			) %>%
 					arrange(psrf)
-				# print(tail(bad.params))
-			} else {
-				# message("Convergence = TRUE")
-			}
-		}
+	    
+	    print(tail(bad.params))
+	  } 
+	  }
 
-		if (nrow(dat.hindcast) > 5000) {
-			draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))
-		} else {
-			draws <- seq_len(nrow(dat.hindcast))
-		}
+	if (nrow(dat.hindcast) > 5000) {
+	  draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))
+	} else {
+		draws <- seq_len(nrow(dat.hindcast))
+	}
 
-		dat.draws <- dat.hindcast[draws, ]
+	dat.draws <- dat.hindcast[draws, ]
 
-		fileDest <- file.path(dir.save, fx.start.date)
-		message("Running analysis...")
-		transfer_analysis(
-			fx.df = dat.draws,
-			observations = neon.job,
-			fx.dates = fx.sequence,
-			model = model.job,
-			# ua = ua.job,
-			spp = species.job,
-			out.dir = fileDest
-		)
-		# message(ua.job, " complete")
-	#}
+	fileDest <- file.path(dir.save, fx.start.date)
+	message("Running analysis...")
+		
+	# RESUME ---------------------
+	transfer_analysis(
+	  fx.df = dat.draws,
+	  observations = neon.job,
+	  fx.dates = fx.sequence,
+	  model = model.job,
+		spp = species.job,
+		out.dir = fileDest
+	)
 }
-
