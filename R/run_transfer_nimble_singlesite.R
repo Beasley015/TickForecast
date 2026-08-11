@@ -4,7 +4,8 @@ run_transfer_nimble <- function(
 	data,
 	constants,
 	inits,
-	n.iter
+	n.iter,
+	parms
 ) {
 	library(parallel)
 	library(nimble)
@@ -19,7 +20,10 @@ run_transfer_nimble <- function(
 		"constants",
 		"data",
 		"n.iter",
-		"if_else_nimble"
+		"parms",
+		"if_else_nimble",
+		"dZIP",
+		"rZIP"
 	)
 
 	clusterExport(cl, export.vec, envir = environment())
@@ -46,7 +50,7 @@ run_transfer_nimble <- function(
 			inits = init
 		)
 		cModel <- compileNimble(model)
-		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE)
+		mcmcConf <- configureMCMC(cModel, onlyRW = TRUE, monitors = parms)
 		Rmcmc <- buildMCMC(mcmcConf)
 		Cmcmc <- compileNimble(Rmcmc)
 		Cmcmc$run(niter = n.iter, nburnin = n.iter / 2)

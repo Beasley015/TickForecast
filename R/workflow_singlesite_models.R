@@ -49,7 +49,7 @@ model.job <- jobs$model[job.num]
 
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 if(is.na(n.slots)){
-  n.slots <- 1
+  n.slots <- 2
 }
 
 n.iter <- 50000
@@ -168,7 +168,7 @@ mna.scaled <- tibble(
 # =========================================== #
 #       daymet intake and correction -------------
 # =========================================== #
-source("./DataProcessing/daymet_downscale.R")
+source("./DataProcessing/daymet_downscale_singlesite.R")
 
 cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
 maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
@@ -270,7 +270,7 @@ inv_gamma_mm <- function(x) {
 
 # get invgamma parameters
 pr.sig <- df.params %>%
-	filter(model == model.job, grepl("sig", parameter)) %>%
+	filter(model == "WithWeatherAndMiceGlobal", grepl("sig", parameter)) %>%
 	select(parameter, value) %>%
 	group_by(parameter) %>%
 	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
@@ -409,10 +409,16 @@ for (t in seq_len(n.drags)) {
 	data$pr.gam1 <- pr.gam1
 	data$pr.gam2 <- pr.gam2
 	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
-	data$cgdd <- cgdd %>%
-		filter(Date %in% ymd(fx.sequence)) %>%
-		pull(cumGDD)
-	data$max.cgdd <- max(data$cgdd) * 1.2
+	
+	data$gdd <- cgdd %>%
+	  ungroup() %>%
+		filter(Date %in% ymd(fx.sequence),
+		       plotID %in% plots) %>%
+	  select(-year) %>%
+	  pivot_wider(names_from = plotID, values_from = cumGDD) %>%
+	  select(-Date)
+	
+	data$max.cgdd <- max(data$gdd) * 1.2
 	data$xind <- matrix(1, 4, horizon)
 
 	data$mice <- mna.scaled %>%
@@ -429,7 +435,7 @@ for (t in seq_len(n.drags)) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))){
-		horizon <- length(data$cgdd)
+		horizon <- nrow(data$cgdd)
 		data$y <- as.array(y[, 1:horizon, ])
 				
 		if(is.na(dim(data$y)[3]==T)){
@@ -437,7 +443,7 @@ for (t in seq_len(n.drags)) {
 		  }
     
 		} else {
-		  horizon <- min(length(data$cgdd), length(data$mice))
+		  horizon <- min(nrow(data$cgdd), length(data$mice))
 			data$y <- y[, 1:horizon, ]
 				
 			if(is.na(dim(data$y)[3]==T)){
@@ -478,30 +484,37 @@ for (t in seq_len(n.drags)) {
 			tau.maxrh = rexp(1),
 			tau.minrh = rexp(1),
 			tau.precip = rexp(1),
-			tau.cgdd = rexp(1),
 			x1 = jitter(data$maxtemp),
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
-			x4 = jitter(data$precip),
-			gdd = jitter(data$cgdd))
-	  }
+			x4 = jitter(data$precip))
+	}
+	
+	# Parameters to save (uses less memory)
+	params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
+	            # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
+	            "theta.ln", "theta.na", 
+	            "gam0", "gam1", "gam2", "pz", 
+	            "dx", "dlamb",
+	            "x" #, "x1", "x2", "x3", "x4"
+	)  
 
 	source("./R/nimble_forecast_singlesite.R")
 	source("./R/run_transfer_nimble_singlesite.R")
 	cl <- makeCluster(n.slots) 
 		
-	# This makes R crash:
-	# Find error within scripts
 	out.nchains <- run_transfer_nimble(
 		cl = cl,
 		model = model.code,
 		data = data,
 		constants = constants,
 		inits = inits,
-		n.iter = n.iter)
+		n.iter = n.iter,
+		parms = params.to.save)
 		
 	stopCluster(cl)
 
+	# Resume -------------
 		dat.hindcast <- do.call(rbind, out.nchains)
 
 		# if (ua.job == "ic_parameter_driver_process") {

@@ -750,3 +750,12 @@ dZIP <- nimbleFunction(
   },
   buildDerivs = 'run'   # Needed when used with AD-based algorithms.
 )
+
+rZIP <- nimbleFunction(
+  run = function(n = integer(), dlamb = double(), zeroProb = double()) {
+    returnType(double())
+    isStructuralZero <- rbinom(1, prob = zeroProb, size = 1)
+    if (isStructuralZero) return(0)
+    return(rpois(1, dlamb))
+  }
+)

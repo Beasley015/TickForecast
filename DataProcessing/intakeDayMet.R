@@ -8,12 +8,10 @@ library(curl)
 site.coord <- readr::read_csv("./Data/siteLatLon.csv") %>% suppressMessages()
 plot.coord <- read_csv("./Data/plotLatLon.csv") %>% suppressMessages()
 
-# Create site coords if needed TO DO--------------------
-
 # Daymet download
 dm <- download_daymet_batch(
-  file_location = './Data/siteLatLon.csv',
-  # file_location = './Data/plotLatLon.csv', #uncomment for plot level
+  # file_location = './Data/siteLatLon.csv',
+  file_location = './Data/plotLatLon.csv', #uncomment for plot level
   start = 2016,
   end = 2025,
   internal = TRUE
@@ -33,7 +31,7 @@ dm_tst <- lapply(dm, dm_unlist)
 
 dm_df <- do.call(rbind, dm_tst)
 
-write_csv(dm_df, file = "./Data/daymetSite.csv")
+write_csv(dm_df, file = "./Data/daymetPlot.csv")
 
 variables <- c(
   "dayl..s.",      # day length
@@ -116,8 +114,9 @@ make_csvs <- function(size){
     
     if(size == "Plot"){
       df.save <- df.save %>% 
-        separate(site, c("data", "plotID"), sep = 4) %>%
-        filter(plotID != "ORNL_006") %>%
+        # separate(site, c("data", "plotID"), sep = 4) %>%
+        rename(plotID = site) %>%
+        # filter(plotID != "ORNL_006") %>%
         rename_at(variables[s], ~ variable.name[s])  %>% 
         arrange(plotID, Date)
     }

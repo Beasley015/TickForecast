@@ -25,7 +25,6 @@ model.code <- nimbleCode({
 	tau.maxrh ~ dexp(1)
 	tau.minrh ~ dexp(1)
 	tau.precip ~ dexp(1)
-	tau.cgdd ~ dexp(1)
 
 	for (i in 1:ns) {
 		sig[i] ~ dinvgamma(pr.sig[i, 1], pr.sig[i, 2])
@@ -65,21 +64,29 @@ model.code <- nimbleCode({
 		logit(l2n[t]) <- theta.ln + beta[13] * mice[t]
 		logit(n2a[t]) <- theta.na + beta[14] * mice[t]
 
-		gdd[t] <- cgdd[t]
-
+		if(n.plots == 1){
+		  mean.gdd <- gdd[t,1]
+		  mean.pz2 <- pz[2,t,1]
+		  mean.pz1 <- pz[1,t,1]
+		} else{
+		  mean.gdd <- mean(gdd[t,1:n.plots])
+		  mean.pz2 <- mean(pz[2,t,1:n.plots])
+		  mean.pz1 <- mean(pz[1,t,1:n.plots])
+		}
+		
 		lambda[t] <- if_else_nimble(
-		  (gdd[t] >= 1400) & (gdd[t] <= 2500),
+		  (mean.gdd >= 1400) & (mean.gdd <= 2500),
 		  repro.mu,
 		  0
 		)
 		
 		# Relate p's to site-level transition probs:
-		n2a.bin[t] ~ dbern(mean(pz[2,,]))
-		n2a.quest[t] <- if_else_nimble(n2a.bin==0, n2a[t], 0)
+		n2a.bin[t] ~ dbern(mean.pz2)
+		n2a.quest[t] <- if_else_nimble(n2a.bin[t]==0, n2a[t], 0)
 		
 		# Turn prob of zero from phenology into binary site-level yes/no
-		l2n.bin[t] ~ dbern(mean(pz[1,,]))
-		l2n.quest[t] <- if_else_nimble(l2n.bin==0, 1, 0)
+		l2n.bin[t] ~ dbern(mean.pz1)
+		l2n.quest[t] <- if_else_nimble(l2n.bin[t]==0, 1, 0)
 
 		maxtemp[t] ~ dnorm(x1[t], tau = tau.temp)
 		maxrh[t] ~ dnorm(x2[t], tau = tau.maxrh)
@@ -135,9 +142,9 @@ model.code <- nimbleCode({
 			
 			# Prob available for sampling (p)
 			logit(pz[1,t,p]) <- gam0[1] + gam1[1] * gdd[t,p]^2 + 
-			  gam2[1,t,p] * gdd[t,p]
+			  gam2[1] * gdd[t,p]
 			logit(pz[2,t,p]) <- gam0[2] + gam1[2] * gdd[t,p]^2 + 
-			  gam2[2,t,p] * gdd[t,p]
+			  gam2[2] * gdd[t,p]
 			logit(pz[3,t,p]) <- gam0[3] + gam1[3] * gdd[t,p]^2 + 
 			  gam2[3] * gdd[t,p]
 			
@@ -147,9 +154,9 @@ model.code <- nimbleCode({
 			log(dlamb[3,t,p]) <- dx[3,t,p]
 			
 			# Observed ticks follow zero-inflated Poisson
-			y[1,t,p] ~ dZIP(dlamb[1,t,p], zeroProb = 1-pz[1,t,p])
-			y[3,t,p] ~ dZIP(dlamb[2,t,p], zeroProb = 1-pz[2,t,p])
-			y[4,t,p] ~ dZIP(dlamb[3,t,p], zeroProb = 1-pz[3,t,p])
+			y[1,t,p] ~ dZIP(dlamb=dlamb[1,t,p], zeroProb = 1-pz[1,t,p])
+			y[3,t,p] ~ dZIP(dlamb=dlamb[2,t,p], zeroProb = 1-pz[2,t,p])
+			y[4,t,p] ~ dZIP(dlamb=dlamb[3,t,p], zeroProb = 1-pz[3,t,p])
 		}
 	}
 
