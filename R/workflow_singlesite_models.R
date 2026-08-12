@@ -332,7 +332,23 @@ for (t in seq_len(n.drags)) {
 		pr.beta <- matrix(NA, n.beta, 2)
 		for (i in seq_len(n.beta)) {
 				pr.beta[i, ] <- get_prior(paste0("beta[", i, "]"))
-			}
+		}
+		
+		# plot-level priors
+		pr.gam0 <- matrix(NA, 3, 2)
+		for(i in 1:3){
+		  pr.gam0[i,] <- get_prior(paste0("gam0[", i, "]"))
+		}
+		
+		pr.gam1 <- matrix(NA, 3, 2)
+		for(i in 1:3){
+		  pr.gam1[i,] <- get_prior(paste0("gam1[", i, "]"))
+		}
+		
+		pr.gam2 <- matrix(NA, 3, 2)
+		for(i in 1:3){
+		  pr.gam2[i,] <- get_prior(paste0("gam2[", i, "]"))
+		}
 
 		# get invgamma parameters
 		pr.sig <- last.params %>%
@@ -351,9 +367,9 @@ for (t in seq_len(n.drags)) {
 				group_by(lifeStage, time) %>%
 			  summarise(mu = mean(value), tau = 1 / var(value))
 
-			IC <- matrix(NA, 4, 2)
+		IC <- matrix(NA, 4, 2)
 			
-			if(nrow(tick.stats)!=0){
+		if(nrow(tick.stats)!=0){
 			  IC[1, 1] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(mu)
 			  IC[1, 2] <- tick.stats %>% filter(lifeStage == "Larva") %>% pull(tau)
 			  IC[2, 1] <- tick.stats %>% filter(lifeStage == "Dormant") %>% pull(mu)
@@ -364,9 +380,9 @@ for (t in seq_len(n.drags)) {
 			  IC[4, 2] <- tick.stats %>% filter(lifeStage == "Adult") %>% pull(tau)
 			}
 
-			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
-			n.days <- length(fx.sequence)
-		}
+		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
+    n.days <- length(fx.sequence)
+	}
 		
 	if(horizon == 0){
 		break
@@ -559,13 +575,17 @@ for (t in seq_len(n.drags)) {
 	fileDest <- file.path(dir.save, fx.start.date)
 	message("Running analysis...")
 		
-	# RESUME ---------------------
 	transfer_analysis(
 	  fx.df = dat.draws,
 	  observations = neon.job,
 	  fx.dates = fx.sequence,
 	  model = model.job,
 		spp = species.job,
+		plots = plots, 
 		out.dir = fileDest
 	)
+	
+	rm(dat.draws)
+	rm(dat.hindcast)
+	rm(out.nchains)
 }

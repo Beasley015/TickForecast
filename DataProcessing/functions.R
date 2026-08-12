@@ -450,8 +450,9 @@ score <- function(df.pred.obs, nmcmc) {
 			ls.predicted <- ls.subset %>%
 				select(time, forecast) %>%
 				group_by(time) %>%
-				mutate(iter = 1:nmcmc) %>%
-				pivot_wider(names_from = time, values_from = forecast) %>%
+				mutate(iter = rep(1:nmcmc, length.out = n())) %>%
+				pivot_wider(names_from = time, values_from = forecast,
+				            values_fn = mean) %>%
 				select(-iter) %>%
 				as.matrix() %>%
 				t()
@@ -503,7 +504,7 @@ score <- function(df.pred.obs, nmcmc) {
 #' @param observations dataframe of observations from the NEON site
 #' @param fx.dates vector of dates for the forecast
 #' @param model the model used for the forecast
-#' @param ua the uncertainty type(s) used in the forecast
+#' @param plots plots used in the analysis
 #' @param spp the species being forecasted
 #' @param out.dir the output directory to save results
 
@@ -512,7 +513,7 @@ transfer_analysis <- function(
 	observations,
 	fx.dates,
 	model,
-	# ua,
+	plots,
 	spp,
 	out.dir
 ) {
@@ -565,7 +566,8 @@ transfer_analysis <- function(
 		mutate(siteID = site)
 
 	data.site <- observations %>%
-		filter(time %in% fx.sequence) %>%
+		filter(time %in% fx.sequence,
+		       plotID %in% plots) %>%
 		select(-n.drags, -n.days, -count.flag) %>%
 		pivot_longer(
 			cols = c("Larva", "Nymph", "Adult"),
@@ -573,7 +575,7 @@ transfer_analysis <- function(
 			values_to = "observed"
 		)
 
-	pred.obs <- tibble() # pred.obs will only have forecasts for the dates tick drags occured
+	pred.obs <- tibble() 
 	plots <- data.site$plotID %>% unique()
 	for (p in seq_along(plots)) {
 		data.sub <- data.site %>%
@@ -594,7 +596,6 @@ transfer_analysis <- function(
 		mutate(
 			forecast = value / 450 * totalSampledArea,
 			start.date = start.date,
-			# ua = ua,
 			model = model
 		)
 
@@ -624,13 +625,12 @@ transfer_analysis <- function(
 
 	# get scores
 	scores <- score(fx.data, nmcmc) %>%
-		mutate(siteID = site, #ua = ua, 
-		       species = spp, model = model)
+		mutate(siteID = site, species = spp, model = model)
 
 	fx.out <- left_join(
 		fx.quantiles,
 		scores,
-		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")#, "ua")
+		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")
 	)
 
 	# parameters
@@ -691,7 +691,6 @@ transfer_analysis <- function(
 			select(-time.index) %>%
 			mutate(
 				siteID = site,
-				#ua = ua,
 				species = spp,
 				start.date == start.date,
 				model = model
