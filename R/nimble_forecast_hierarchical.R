@@ -2,19 +2,19 @@ library(nimble)
 source("./DataProcessing/functions_hierarchical.R")
 
 model.code <- nimbleCode({
-  # # Hyperpriors for intercepts 
-  # phi.l.mean ~ dnorm(pr.phi.l[1], tau=pr.phi.l[2])
-  # phi.n.mean ~ dnorm(pr.phi.n[1], tau=pr.phi.n[2])
-  # phi.a.mean ~ dnorm(pr.phi.a[1], tau=pr.phi.a[2])
-  # 
-  # theta.l2n.mean ~ dnorm(pr.theta.l2n[1], tau=pr.theta.l2n[2])
-  # theta.n2a.mean ~ dnorm(pr.theta.n2a[1], tau=pr.theta.n2a[2])
-  # 
-  # # Hyperpriors for betas
-  # for(j in 1:n.beta){
-  #   beta.mean[j] ~ dnorm(pr.beta[j,1], tau=pr.beta[j,2])
-  # }
-  # 
+  # Hyperpriors for intercepts
+  phi.l.mean ~ dnorm(pr.phi.l[1], tau=pr.phi.l[2])
+  phi.n.mean ~ dnorm(pr.phi.n[1], tau=pr.phi.n[2])
+  phi.a.mean ~ dnorm(pr.phi.a[1], tau=pr.phi.a[2])
+
+  theta.l2n.mean ~ dnorm(pr.theta.l2n[1], tau=pr.theta.l2n[2])
+  theta.n2a.mean ~ dnorm(pr.theta.n2a[1], tau=pr.theta.n2a[2])
+
+  # Hyperpriors for betas
+  for(j in 1:n.beta){
+    beta.mean[j] ~ dnorm(pr.beta[j,1], tau=pr.beta[j,2])
+  }
+
   # # Shrinkage parameters
   # l.shrink ~ dgamma(phil.shrink[1], rate=phil.shrink[2])
   # n.shrink ~ dgamma(phin.shrink[1], rate=phin.shrink[2])
@@ -41,41 +41,41 @@ model.code <- nimbleCode({
 
   for(site in 1:nsite){
 	  ### priors
-#     dev.phi.l[site] ~ dnorm(dev.l.pr[site,1], tau=dev.l.pr[site,2])
-#     dev.phi.a[site] ~ dnorm(dev.a.pr[site,1], tau=dev.a.pr[site,2])
-#     dev.phi.n[site] ~ dnorm(dev.n.pr[site,1], tau=dev.n.pr[site,2])
-#     
-#     phi.l.mu[site] ~ dnorm(phi.l.mean + (l.shrink*dev.phi.l[site]), 
-#                            tau=phi.l.tau)
-#     phi.n.mu[site] ~ dnorm(phi.n.mean + (n.shrink*dev.phi.n[site]), 
-#                            tau=phi.n.tau)
-#     phi.a.mu[site] ~ dnorm(phi.a.mean + (a.shrink*dev.phi.a[site]), 
-#                            tau=phi.a.tau)
-#     
-#     dev.ln[site] ~ dnorm(dev.ln.pr[site,1], tau=dev.ln.pr[site,2])
-#     dev.na[site] ~ dnorm(dev.na.pr[site,1], tau=dev.na.pr[site,2])
-#     
-#     theta.ln[site] ~ dnorm(theta.l2n.mean + (ln.shrink*dev.ln[site]),
-#                            tau=ln.tau)
-# 	  theta.na[site] ~ dnorm(theta.n2a.mean + (na.shrink*dev.na[site]),
-# 	                          tau=na.tau)
-# 	  
-# 	  for(j in 1:n.beta){
-# 	    dev.beta[j,site] ~ dnorm(dev.beta.mu[j,site], tau=dev.beta.tau[j,site])
-# 	    beta[j,site] ~ dnorm(beta.mean[j] + (beta.shrink[j]*dev.beta[j,site]),
-# 	                         tau=beta.tau[j])
-	  # }
+    dev.phi.l[site] ~ dnorm(dev.l.pr[site,1], tau=dev.l.pr[site,2])
+    dev.phi.a[site] ~ dnorm(dev.a.pr[site,1], tau=dev.a.pr[site,2])
+    dev.phi.n[site] ~ dnorm(dev.n.pr[site,1], tau=dev.n.pr[site,2])
+
+    phi.l.mu[site] ~ dnorm((phi.l.mean + dev.phi.l[site]),
+                           tau=phi.l.tau[site])
+    phi.n.mu[site] ~ dnorm((phi.n.mean + dev.phi.n[site]),
+                           tau=phi.n.tau[site])
+    phi.a.mu[site] ~ dnorm((phi.a.mean + dev.phi.a[site]),
+                           tau=phi.a.tau[site])
+
+    dev.ln[site] ~ dnorm(dev.ln.pr[site,1], tau=dev.ln.pr[site,2])
+    dev.na[site] ~ dnorm(dev.na.pr[site,1], tau=dev.na.pr[site,2])
+
+    theta.ln[site] ~ dnorm((theta.l2n.mean + dev.ln[site]),
+                           tau=ln.tau[site])
+	  theta.na[site] ~ dnorm((theta.n2a.mean + dev.na[site]),
+	                          tau=na.tau[site])
+
+	  for(j in 1:n.beta){
+	    dev.beta[j,site] ~ dnorm(dev.beta.mu[j,site], tau=dev.beta.tau[j,site])
+	    beta[j,site] ~ dnorm((beta.mean[j] + dev.beta[j,site]),
+	                         tau=beta.tau[j,site])
+}
     
-    phi.l.mu[site] ~ dnorm(pr.phi.l[site,1], tau = pr.phi.l[site,2])
-    phi.n.mu[site] ~ dnorm(pr.phi.n[site,1], tau = pr.phi.n[site,2])
-    phi.a.mu[site] ~ dnorm(pr.phi.a[site,1], tau = pr.phi.a[site,2])
-    
-    theta.ln[site] ~ dnorm(pr.ln[site,1], tau = pr.ln[site,2])
-    theta.na[site] ~ dnorm(pr.na[site,1], tau = pr.na[site,2])
-    
-    for(j in 1:n.beta){
-      beta[j,site] ~ dnorm(pr.beta.mu[j,site], tau = pr.beta.tau[j,site])
-    }
+    # phi.l.mu[site] ~ dnorm(pr.phi.l[site,1], tau = pr.phi.l[site,2])
+    # phi.n.mu[site] ~ dnorm(pr.phi.n[site,1], tau = pr.phi.n[site,2])
+    # phi.a.mu[site] ~ dnorm(pr.phi.a[site,1], tau = pr.phi.a[site,2])
+    # 
+    # theta.ln[site] ~ dnorm(pr.ln[site,1], tau = pr.ln[site,2])
+    # theta.na[site] ~ dnorm(pr.na[site,1], tau = pr.na[site,2])
+    # 
+    # for(j in 1:n.beta){
+    #   beta[j,site] ~ dnorm(pr.beta.mu[j,site], tau = pr.beta.tau[j,site])
+    # }
 
 		tau.temp[site] ~ dexp(1)
 		tau.maxrh[site] ~ dexp(1)
@@ -169,11 +169,19 @@ model.code <- nimbleCode({
 
 		  # Transition matrix
 		  A[1, 1, t, site] <- phi.l[t, site] * (1 - l2n[t, site])
+		  A[1, 2, t, site] <- 0
+		  A[1, 3, t, site] <- 0
 		  A[1, 4, t, site] <- lambda[t, site]
 		  A[2, 1, t, site] <- phi.l[t, site] * l2n[t, site]
 		  A[2, 2, t, site] <- 1 - l2n.quest[t, site]
+		  A[2, 3, t, site] <- 0
+		  A[2, 4, t, site] <- 0
+		  A[3, 1, t, site] <- 0
 		  A[3, 2, t, site] <- l2n.quest[t, site]
 		  A[3, 3, t, site] <- phi.n[t, site] * (1 - theta.n2a[t, site])
+		  A[3, 4, t, site] <- 0
+		  A[4, 1, t, site] <- 0
+		  A[4, 2, t, site] <- 0
 		  A[4, 3, t, site] <- phi.n[t, site] * theta.n2a[t, site]
 		  A[4, 4, t, site] <- phi.a[t, site]
 

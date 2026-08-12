@@ -70,10 +70,8 @@ ua.cal <-
 	)
 
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
-# n.slots <- 2
 production <- TRUE
 n.iter <- 20000
-# n.iter <- 100
 # Nmc <- 2000
 horizon <- 365
 
@@ -400,19 +398,19 @@ for (t in t:start.drags) {
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 		
-		# # Uninformative priors for params not in single-site models
-		# dev.l.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		#                      ncol= 2)
-		# dev.n.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		#                     ncol= 2)
-		# dev.a.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		#                     ncol= 2)
-		# 
-		# dev.ln.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		#                     ncol= 2)
-		# dev.na.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		#                     ncol= 2)
-		# 
+		# Uninformative priors for params not in single-site models
+		dev.l.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		                     ncol= 2)
+		dev.n.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		                    ncol= 2)
+		dev.a.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		                    ncol= 2)
+
+		dev.ln.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		                    ncol= 2)
+		dev.na.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
+		                    ncol= 2)
+
 		# phil.shrink <- c(1,1)
 		# phin.shrink <- c(1,1)
 		# phia.shrink <- c(1,1)
@@ -420,29 +418,37 @@ for (t in t:start.drags) {
 		# l2n.shrink <- c(1,1)
 		# n2a.shrink <- c(1,1)
 		# 
-		# dev.beta.mu <- matrix(0, nrow = n.beta, ncol = length(sites))
-		# dev.beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
+		dev.beta.mu <- matrix(0, nrow = n.beta, ncol = length(sites))
+		dev.beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
 		# 
 		# pr.beta.shrink <- matrix(1, nrow = n.beta, ncol = 2)
+		
+		phi.l.tau <- rep(1,length(sites))
+		phi.n.tau <- rep(1,length(sites))
+		phi.a.tau <- rep(1, length(sites))
+		
+		ln.tau <- rep(1, length(sites))
+		na.tau <- rep(1, length(sites))
+		
+		beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
+
+		# pr.phil.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
+		# pr.phin.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
+		# pr.phia.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
 		# 
-		# pr.phil.tau <- c(1,2)
-		# pr.phin.tau <- c(1,2)
-		# pr.phia.tau <- c(1,2)
-		# 
-		# pr.ln.tau <- c(1,2)
-		# pr.na.tau <- c(1,2)
+		# pr.ln.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
+		# pr.na.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
 		# 
 		# pr.beta.tau <- matrix(c(rep(1, n.beta), rep(2, n.beta)), ncol = 2)
 		
-		pr.phi.l <- matrix(rep(phi.l, length(sites)), ncol = 2, byrow = T)
-		pr.phi.n <- matrix(rep(phi.n, length(sites)), ncol = 2, byrow = T)
-		pr.phi.a <- matrix(rep(phi.a, length(sites)), ncol = 2, byrow = T)
-		
-		pr.ln <- matrix(rep(theta.l2n, length(sites)), ncol = 2, byrow = T)
-		pr.na <- matrix(rep(theta.n2a, length(sites)), ncol = 2, byrow = T)
-		
-		pr.beta.mu <- matrix(rep(pr.beta[,1],length(sites)), ncol=length(sites))
-		pr.beta.tau <- matrix(rep(pr.beta[,2],length(sites)), ncol=length(sites))
+		# pr.phi.l <- matrix(rep(phi.l, length(sites)), ncol = 2, byrow = T)
+		# pr.phi.n <- matrix(rep(phi.n, length(sites)), ncol = 2, byrow = T)
+		# pr.phi.a <- matrix(rep(phi.a, length(sites)), ncol = 2, byrow = T)
+		# 
+		# pr.ln <- matrix(rep(theta.l2n, length(sites)), ncol = 2, byrow = T)
+		# pr.na <- matrix(rep(theta.n2a, length(sites)), ncol = 2, byrow = T)
+		# 
+		# pr.beta.mu <- matrix(rep(pr.beta[,1],length(sites)), ncol=length(sites))
 		
 		} else {
 		  horizon <- ifelse(as.numeric(last(start.dates) - fx.start.date) >= 365,
@@ -462,49 +468,93 @@ for (t in t:start.drags) {
 			params.stats <- last.params %>%
 			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
 			  rename("parameter" = "node") %>%
-				group_by(parameter, site) %>%
+				group_by(parameter) %>%
 				summarise(mu = mean(value,na.rm=T), tau = 1 / var(value,na.rm = ))
 
 			# Priors for transitions (priors are constant across sites)
-		  pr.phi.l <- filter(params.stats, parameter == "phi.l.mu") %>%
+		  phi.l <- filter(params.stats, parameter == "phi.l.mu") %>%
 		    ungroup() %>%
-		    select(mu, tau)
-			pr.phi.n <- filter(params.stats, parameter == "phi.n.mu") %>%
+		    select(mu, tau) %>%
+		    as.numeric()
+			phi.n <- filter(params.stats, parameter == "phi.n.mu") %>%
 			  ungroup() %>%
-			  select(mu, tau)
-			pr.phi.a <- filter(params.stats, parameter == "phi.a.mu") %>%
+			  select(mu, tau) %>%
+			  as.numeric()
+			phi.a <- filter(params.stats, parameter == "phi.a.mu") %>%
 			  ungroup() %>%
-			  select(mu, tau)
+			  select(mu, tau) %>%
+			  as.numeric()
 			
-			pr.ln <- filter(params.stats, parameter == "theta.ln") %>%
+			theta.l2n <- filter(params.stats, parameter == "theta.ln") %>%
 			  ungroup() %>%
-			  select(mu, tau)
-			pr.na <- filter(params.stats, parameter == "theta.na") %>%
+			  select(mu, tau) %>%
+			  as.numeric()
+			theta.n2a <- filter(params.stats, parameter == "theta.na") %>%
 			  ungroup() %>%
-			  select(mu, tau)
+			  select(mu, tau) %>%
+			  as.numeric()
 			
 			# Deviance priors
-# 			dev.params <- read_csv(file.path(readDest, "devSamples.csv")) %>%
-# 			  group_by(node, siteID) %>%
-# 			  summarise(mu=mean(value), tau = 1/var(value)) %>%
-# 			  ungroup() %>%
-# 			  suppressMessages() 
-# 			
-#       dev.l.pr <- filter(dev.params, node == "dev.phi.l") %>%
-#         select(-c(node, siteID))
-#       
-#       dev.n.pr <- filter(dev.params, node == "dev.phi.n") %>%
-#         select(-c(node, siteID))
-#       
-#       dev.a.pr <- filter(dev.params, node == "dev.phi.a") %>%
-#         select(-c(node, siteID))
-#       
-#       dev.ln.pr <- filter(dev.params, node == "dev.ln") %>%
-#         select(-c(node, siteID))
-#       
-#       dev.na.pr <- filter(dev.params, node == "dev.na") %>%
-#         select(-c(node, siteID))
+			dev.params <- read_csv(file.path(readDest, "devSamples.csv")) %>%
+			  group_by(node, siteID) %>%
+			  summarise(mu=mean(value), tau = 1/var(value)) %>%
+			  ungroup() %>%
+			  suppressMessages()
+
+      dev.l.pr <- filter(dev.params, node == "dev.phi.l") %>%
+        select(-c(node, siteID)) %>%
+        as.matrix()
+
+      dev.n.pr <- filter(dev.params, node == "dev.phi.n") %>%
+        select(-c(node, siteID)) %>%
+        as.matrix()
+
+      dev.a.pr <- filter(dev.params, node == "dev.phi.a") %>%
+        select(-c(node, siteID)) %>%
+        as.matrix()
+
+      dev.ln.pr <- filter(dev.params, node == "dev.ln") %>%
+        select(-c(node, siteID)) %>%
+        as.matrix()
+
+      dev.na.pr <- filter(dev.params, node == "dev.na") %>%
+        select(-c(node, siteID)) %>%
+        as.matrix()
+       
+      # Temporary priors: site-level precision
+      site.tau <- last.params %>%
+        pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
+        rename("parameter" = "node") %>%
+        group_by(parameter,site) %>%
+        summarise(tau = 1 / var(value,na.rm = T))
       
+      phi.l.tau <- filter(site.tau, parameter == "phi.l.mu") %>%
+        ungroup() %>%
+        select(tau) %>%
+        as.matrix() %>%
+        as.numeric()
+      phi.n.tau <- filter(site.tau, parameter == "phi.n.mu")%>%
+        ungroup() %>%
+        select(tau) %>%
+        as.matrix() %>%
+        as.numeric()
+      phi.a.tau <- filter(site.tau, parameter == "phi.a.mu")%>%
+        ungroup() %>%
+        select(tau) %>%
+        as.matrix() %>%
+        as.numeric()
+      
+      ln.tau <- filter(site.tau, parameter == "theta.ln")%>%
+        ungroup() %>%
+        select(tau) %>%
+        as.matrix() %>%
+        as.numeric()
+      na.tau <- filter(site.tau, parameter == "theta.na")%>%
+        ungroup() %>%
+        select(tau) %>%
+        as.matrix() %>%
+        as.numeric()
+
       # Shrinkage priors
       # shrink.params <- read_csv(file.path(readDest, "shrinkSamples.csv")) %>%
       #   filter(is.na(value)==F) %>%
@@ -542,58 +592,52 @@ for (t in t:start.drags) {
 			# Priors for betas (betas will vary across sites)
 			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
 				rename("parameter" = "node") %>%
-				group_by(parameter,siteID) %>%
+				group_by(parameter) %>%
 				summarise(mu = mean(value), tau = 1/var(value)) %>%
 				suppressMessages()
 			
 			b.names <- logical()
 			for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
 			
-			pr.beta.mu <- select(betas, -tau) %>%
-			  ungroup () %>%
-			  pivot_wider(names_from = siteID, values_from = mu) %>%
+			pr.beta <- ungroup (betas) %>%
 			  arrange(factor(parameter, levels = b.names)) %>%
-			  select(-parameter)
-			
-			pr.beta.tau <- select(betas, -mu) %>%
-			  ungroup() %>%
+			  select(-parameter) %>%
+			  as.matrix()
+
+			beta.tau <- read_csv(file.path(readDest, "beta.csv")) %>%
+			  rename("parameter" = "node") %>%
+			  group_by(parameter, siteID) %>%
+			  summarise(tau = 1/var(value)) %>%
 			  pivot_wider(names_from = siteID, values_from = tau) %>%
 			  arrange(factor(parameter, levels = b.names)) %>%
-			  select(-parameter)
-
-# 			pr.beta <- matrix(NA, n.beta, 2)
-# 			for (i in 1:n.beta) {
-#     		pr <- numeric(2)
-# 				xx <- betas %>% filter(parameter == paste("beta", i, sep = ""))
-# 				pr[1] <- xx %>% pull(mu)
-# 				pr[2] <- xx %>% pull(tau)
-# 				pr.beta[i,] <- pr
-# 			}
+			  ungroup() %>%
+			  select(-parameter) %>%
+			  suppressMessages()
 			
-			# # Beta 
-			# dev.beta.tau <- read_csv(file.path(readDest, "devBeta.csv")) %>%
-			#   group_by(node, siteID) %>%
-			#   summarise(tau = 1/var(value)) %>%
-			#   ungroup() %>%
-			#   suppressMessages() 
-			# 
-			# dev.beta.mu <- read_csv(file.path(readDest, "devBeta.csv")) %>%
-			#   group_by(node, siteID) %>%
-			#   summarise(mu = mean(value)) %>%
-			#   ungroup() %>%
-			#   suppressMessages()
-			# 
-			# b.names <- logical()
-			# for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
-			# 
-			# dev.beta.tau <- arrange(dev.beta.tau, factor(node, levels = b.names)) %>%
-			#   pivot_wider(names_from = siteID, values_from = tau) %>%
-			#   select(-node)
-			# 
-			# dev.beta.mu <- arrange(dev.beta.mu, factor(node, levels = b.names)) %>%
-			#   pivot_wider(names_from = siteID, values_from = mu) %>%
-			#   select(-node)
-			# 
+			# Beta
+			dev.beta.tau <- read_csv(file.path(readDest, "devBeta.csv")) %>%
+			  group_by(node, siteID) %>%
+			  summarise(tau = 1/var(value)) %>%
+			  ungroup() %>%
+			  suppressMessages()
+
+			dev.beta.mu <- read_csv(file.path(readDest, "devBeta.csv")) %>%
+			  group_by(node, siteID) %>%
+			  summarise(mu = mean(value)) %>%
+			  ungroup() %>%
+			  suppressMessages()
+
+			b.names <- logical()
+			for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
+
+			dev.beta.tau <- arrange(dev.beta.tau, factor(node, levels = b.names)) %>%
+			  pivot_wider(names_from = siteID, values_from = tau) %>%
+			  select(-node)
+
+			dev.beta.mu <- arrange(dev.beta.mu, factor(node, levels = b.names)) %>%
+			  pivot_wider(names_from = siteID, values_from = mu) %>%
+			  select(-node)
+
 			# # Beta shrinkage
 			# pr.beta.shrink <- read_csv(file.path(readDest, "shrinkBeta.csv")) %>%
 			#   group_by(node) %>%
@@ -767,24 +811,32 @@ for (t in t:start.drags) {
 	data$area <- area
 	data$IC <- IC
 	
-	data$pr.phi.l <- pr.phi.l
-	data$pr.phi.n <- pr.phi.n
-	data$pr.phi.a <- pr.phi.a
+	data$pr.phi.l <- phi.l
+	data$pr.phi.n <- phi.n
+	data$pr.phi.a <- phi.a
 	
-	data$pr.ln <- pr.ln
-	data$pr.na <- pr.na
+	data$pr.theta.l2n <- theta.l2n
+	data$pr.theta.n2a <- theta.n2a
 	
 	data$repro.mu <- repro.mu
 	
-	data$pr.beta.mu <- pr.beta.mu
-	data$pr.beta.tau <- pr.beta.tau
+	data$pr.beta <- pr.beta
 	
-	# data$dev.l.pr <- dev.l.pr
-	# data$dev.n.pr <- dev.n.pr
-	# data$dev.a.pr <- dev.a.pr
-	# data$dev.ln.pr <- dev.ln.pr
-	# data$dev.na.pr <- dev.na.pr
-	# 
+	data$dev.l.pr <- dev.l.pr
+	data$dev.n.pr <- dev.n.pr
+	data$dev.a.pr <- dev.a.pr
+	data$dev.ln.pr <- dev.ln.pr
+	data$dev.na.pr <- dev.na.pr
+	
+	data$phi.l.tau <- phi.l.tau
+	data$phi.a.tau <- phi.a.tau
+	data$phi.n.tau <- phi.n.tau
+	
+	data$ln.tau <- ln.tau
+	data$na.tau <- na.tau
+	
+	data$beta.tau <- beta.tau
+
 	# data$phil.shrink <- phil.shrink
 	# data$phin.shrink <- phin.shrink
 	# data$phia.shrink <- phia.shrink
@@ -798,8 +850,8 @@ for (t in t:start.drags) {
 	# data$pr.ln.tau <- pr.ln.tau
 	# data$pr.na.tau <- pr.na.tau
 	# 
-	# data$dev.beta.mu <- dev.beta.mu
-	# data$dev.beta.tau <- dev.beta.tau
+	data$dev.beta.mu <- dev.beta.mu
+	data$dev.beta.tau <- dev.beta.tau
 	# 
 	# data$pr.beta.shrink <- pr.beta.shrink
 	# data$pr.beta.tau <- pr.beta.tau
@@ -877,7 +929,7 @@ for (t in t:start.drags) {
 	    #                length(sites)),
 	    # theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
 	    #                length(sites)),
-			beta = matrix(rep(rnorm(n.beta, pr.beta[, 1], 1 / sqrt(pr.beta[, 2])),length(sites)),
+			beta = matrix(rep(rnorm(n=n.beta, mean=pr.beta[, 1], sd= 1/sqrt(pr.beta[, 2])),length(sites)),
 			              ncol = length(sites)),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
 			             nrow=4, ncol=length(sites)),
@@ -895,8 +947,7 @@ for (t in t:start.drags) {
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
 			x4 = jitter(data$precip),
-			OMEGA = array(0, dim=c(4,4,length(sites))),
-			A = array(0, dim=c(4, 4, horizon, length(sites)))
+			OMEGA = array(0, dim=c(4,4,length(sites)))
 		)
 	}
 	
@@ -909,7 +960,9 @@ for (t in t:start.drags) {
 	#                      "na.tau", "beta.tau")       
 	
 	params.to.save <-  c("beta","phi.a.mu", "phi.l.mu", "phi.n.mu",  
-	                     "sig", "theta.ln", "theta.na","x")  
+	                     "sig", "theta.ln", "theta.na","x",
+	                     "dev.beta", "dev.phi.n", "dev.phi.a", "dev.phi.l",
+	                     "dev.ln", "dev.na")  
 
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
@@ -1020,4 +1073,3 @@ for (t in t:start.drags) {
 	# Clear environment
 	rm(out.nchains, dat.hindcast, dat.draws)
 }
-
