@@ -14,164 +14,196 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo = FALSE}
 library(dplyr)
 library(lubridate)
+library(MASS)
+
 
 LAG <- data.frame()
 
+#------------likelihood functions
+
+#---typical:
+estim <- function(theta, data){
+  mu <- theta[1]
+  sigma <- theta[2]
+  
+  p <- pnorm(data$DOY, mu, sigma)
+  
+  fitted <- p * max(data$count)
+  
+  return(-sum(dpois(data$count, fitted, log = TRUE)))
+}
+
+#---anomalous:
+kiyoung <- function(theta, data){
+  sigma <- theta[1]
+  
+  p <- pnorm(data$DOY, mu, sigma)
+  
+  fitted <- p * max(data$count)
+  
+  return(-sum(dpois(data$count, fitted, log = TRUE)))
+}
+
+
+#initial guess
+start <- c(120, 10)
+
 sites <- c("GREN", "HNRY", "TEA", "BLAN", "SCBI", "SERC", "ORNL", "MLBS", "TREE", "HARV")
 
-for(site in sites){
-  
-  ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
+
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
   mutate(
     collectDate = as.Date(collectDate),
     year = year(collectDate)
   ) |>
-  filter(scientificName == "Ixodes scapularis")
+  filter(scientificName == "Ixodes scapularis") |>
+  filter(lifeStage == "Nymph") 
 
-  lai <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_LAIs.csv") |>
-  mutate(date = as.Date(date),
-         year = year(date))
-
-  lai <- lai |>
-    filter(siteID == site)
-
-    lai <- lai[lai$year != 2015, ]
-lai$DOY <- as.numeric(format(lai$date, "%j"))
+phenology <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
 
 
+for(site in sites){
+  
   deer <- ticks |>
-    filter(siteID == site) |>
-    filter(scientificName == "Ixodes scapularis") |>
-    filter(lifeStage == "Nymph") |>
-    arrange(collectDate) |>
-    group_by(collectDate) |>
-    summarise(count = sum(processedCount)) 
+  filter(siteID == site) |>
+  arrange(collectDate) |>
+  group_by(collectDate) |>
+  summarise(count = sum(processedCount)) 
   deer$year <- year(deer$collectDate)
   deer$DOY <- as.numeric(format(deer$collectDate, "%j"))
-
-
-  lai <- lai[lai$year != 2015, ]
+  
   deer <- deer[deer$year > 2015, ]
   deer <- na.omit(deer)
-  
-  
-  years <- min(deer$year):2023
-  
-  par(mfrow = c(2, 4))
+
+  pheno <- phenology |>
+  filter(siteID == site)
+
+
+  years <- min(deer$year):2024
   
   lags <- data.frame(
-    siteID = vector(mode = "character", length = length(years)),
+    siteID = site,
     year = years,
-    lag = vector(mode = "numeric", length = length(years))
+    greenup = vector(mode = "numeric", length = length(years)),
+    mid_greenup = vector(mode = "numeric", length = length(years)),
+    maturity = vector(mode = "numeric", length = length(years)),
+    tick_15 = vector(mode = "numeric", length = length(years)),
+    anomalous = vector(mode = "logical", length = length(years))
   )
-  lags$siteID <- site
   
   i <- 1
   
-  
-  pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
-  pheno <- pheno |>
-    filter(siteID == site)
-  
-  
   for(y in years){
-    
-    leaf <- lai |>
-      filter(year == y)
-    
-    tick <- deer |>
-      filter(year == y)
-    
-    temp <- pheno |>
-      filter(year == y)
-    
-    leaf <- leaf[1:(nrow(leaf) / 2), ]
-    
-    leaf <- leaf |> 
-      arrange(date) |>
-      mutate(lai_increase = pmax(lai_median - lag(lai_median), 0))
-    
-    leaf$lai_increase[1] <- 0
-    
-    
-    deer <- deer |>
-      filter(month(collectDate) <= 7)
-    
-    
-    library(MASS)
-    
-    
-    # LAI: generate DOY observations weighted by LAI increase
-    lai_doy <- rep(leaf$DOY, times = round(leaf$lai_increase * 100))
-    lai_fit <- fitdistr(lai_doy, "normal")
-    # lai_fit$estimate gives you mean and sd
-    
-    # Ticks: generate DOY observations weighted by count
-    tick_doy <- rep(tick$DOY, times = tick$count)
-    tick_fit <- fitdistr(tick_doy, "normal")
-    
-    # The lag
-    
-    c1 <- qnorm(0.50, mean = tick_fit$estimate["mean"], sd = tick_fit$estimate["sd"]) 
-    
-    c2 <- qnorm(0.50, mean = lai_fit$estimate["mean"], sd = lai_fit$estimate["sd"])
+
+  #=============filter to year y
+  temp <- deer |>
+    filter(year == y)
   
-    #lag <- c1 - temp$greenup_doy
-    lag <- c1 - c2
-    
-    
-    curve(pnorm(x, mean = lai_fit$estimate["mean"], sd = lai_fit$estimate["sd"]), 
-          from = 1, to = 250, col = "green", xlab = "DOY", ylab = "CDF")
-    curve(pnorm(x, mean = tick_fit$estimate["mean"], sd = tick_fit$estimate["sd"]), 
-          add = TRUE, col = "black")
-    abline(v = temp$greenup_doy, col = "red", lty = 2)
-    
+  if(!any(temp$count >= 5)){
+      lags$greenup[i] <- NA
+      lags$mid_greenup[i] <- NA
+      lags$maturity[i] <- NA
+      lags$tick_15[i] <- NA
+      i <- i+1
+      next
+    }
   
-    
-    
-    lags$lag[i] <- lag
-    i <- i + 1
-    
+  if(y == 2020){
+    lags$greenup[i] <- NA
+    lags$mid_greenup[i] <- NA
+    lags$maturity[i] <- NA
+    lags$tick_15[i] <- NA
+    i <- i+1
+    next
   }
   
-  lags$lag_week <- lags$lag/7
-  lags$lag_month <- lags$lag/30
+  
+  #=============Locate first peak 
+  local_max <- which(
+    temp$count > c(-Inf, head(temp$count, -1)) &
+      temp$count >= c(tail(temp$count, -1), -Inf)
+  )
+  first_peak <- local_max[which(temp$count[local_max] >= 5)[1]]
+  peak_DOY <- temp$DOY[first_peak]
+  
+  #=============Find ramp + locate 15th percentile
+  ramp <- temp |>
+    filter(DOY <= peak_DOY)
+  
+  if(nrow(ramp) == 1){
+    lags$greenup[i] <- NA
+    lags$mid_greenup[i] <- NA
+    lags$maturity[i] <- NA
+    lags$tick_15[i] <- NA
+    i <- i+1
+    next
+  }
+  
+  if(sum(ramp$count != 0) == 1){
+      
+      mu <- (ramp$DOY[first_peak-1] + ramp$DOY[first_peak])/2
+      
+      fit <- optim(par = 2, 
+             fn = kiyoung, 
+             data = ramp, 
+             method = "Brent",
+             lower = 0.1,
+             upper = 5)
+      
+      sigma <- fit$par[1]
+      print(paste0(site, y, " ", sigma))
+      
+      c1 <- qnorm(0.15, mean = mu, sd = sigma)
+      d1 <- pheno$greenup[pheno$year == y]
+      d2 <- pheno$midgreenup[pheno$year == y]
+      d3 <- pheno$maturity[pheno$year == y]
+      
+      lags$greenup[i] <- d1
+      lags$mid_greenup[i] <- d2
+      lags$maturity[i] <- d3
+      lags$tick_15[i] <- c1
+      lags$anomalous[i] <- TRUE
+      
+      i <- i+1
+      
+      next
+    }
+
+  
+  fit <- optim(start, fn = estim, data = ramp)
+
+  mu <- fit$par[1]
+  sigma <- fit$par[2]
+  
+  #locate percentile 
+  c1 <- qnorm(0.15, mean = mu, sd = sigma)
+
+  
+  #===========leaf phenology
+  d1 <- pheno$greenup[pheno$year == y]
+  d2 <- pheno$midgreenup[pheno$year == y]
+  d3 <- pheno$maturity[pheno$year == y]
+  
+  #==========load into dataframe
+  lags$greenup[i] <- d1
+  lags$mid_greenup[i] <- d2
+  lags$maturity[i] <- d3
+  lags$tick_15[i] <- c1
+  lags$anomalous[i] <- FALSE
     
-   
+  i <- i + 1
+  
+  }
+
   LAG <- rbind(LAG, lags)
+  
 }
+  
+
+
 
 
 LAG <- na.omit(LAG)
-
-
-
-
-
-i <- 1
-
-for(s in sites){
-  temp <- LAG |>
-    filter(siteID == s)
-  
-  if(i == 1){
-    plot(temp$year, temp$lag, pch = 16, cex = 0.7, col = cols[i], ylim = c(min(LAG$lag), max(LAG$lag)), xlab = "Year", ylab = "Lag (days)")
-    lines(temp$year, temp$lag, col = cols[i])
-  } else {
-    points(temp$year, temp$lag, pch = 16, cex = 0.7, col = cols[i])
-    lines(temp$year, temp$lag, col = cols[i])
-  }
-  
-  i <- i +1
-  
-}
-
-
-legend("topright", 
-       legend = sites, 
-       col    = cols, 
-       lty    = 1, 
-       lwd    = 2)
 
 
 
@@ -180,8 +212,169 @@ legend("topright",
 
 
 
+#=========Diagnostic plot (can be used for either species
+# or life stage assuming LAG has been generated)
+
+species <- "Ixodes"
+lifeStage <- "nymph"
+
+plot(LAG$maturity, LAG$tick_15, pch = 16, cex = 0.7, col = "blue", xlim = c(min(LAG$greenup), max(LAG$maturity)), xlab = "Phenology DOY", ylab = paste0(species, " ", lifeStage, " ", "emergence DOY"))
+abline(a =0, b = 1, col = "black", lty = 2)
+points(LAG$mid_greenup, LAG$tick_15, pch = 16, cex = 0.7, col = "forestgreen")
+points(LAG$greenup, LAG$tick_15, pch = 16, cex = 0.7, col = "red")
+
+legend(
+  "topleft",
+  legend = c("Greenup", "Mid-greenup", "Maturity"),
+  col = c("red", "forestgreen", "blue"),
+  pch = c(NA, NA, NA),
+  lty = c(1, 1, 1),
+  cex = 0.7
+)
+
+
+
+#============MODEL STATISTICS
+summary(lm(LAG$tick_15 ~ LAG$greenup))
+summary(lm(LAG$tick_15 ~ LAG$mid_greenup))
+summary(lm(LAG$tick_15 ~ LAG$maturity))
 
 
 
 
+#==============cumulative mean DOYs
+DOY <- LAG |>
+  arrange(siteID, year) |>
+  group_by(siteID) |>
+  mutate(mean_greenup = cummean(greenup),
+         mean_mid = cummean(mid_greenup)) |>
+  ungroup()
 
+DOY <- DOY |>
+  filter(year > 2016)
+  
+
+
+
+## AMBLYOMMA
+```{r, echo = FALSE}
+
+LAG <- data.frame()
+
+sites <- c("BLAN", "DELA", "KONA", "KONZ", "LENO", "ORNL", "OSBS", "SCBI", "SERC", "TALL", "UKFS")
+
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
+  mutate(
+    collectDate = as.Date(collectDate),
+    year = year(collectDate)
+  ) |>
+  filter(scientificName == "Amblyomma americanum") |>
+  filter(lifeStage == "Nymph")
+
+phenology <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
+
+
+for(site in sites){
+  
+  star <- ticks |>
+    filter(siteID == site) |>
+    arrange(collectDate) |>
+    group_by(collectDate) |>
+    summarise(count = sum(processedCount)) 
+    star$year <- year(star$collectDate)
+    star$DOY <- as.numeric(format(star$collectDate, "%j"))
+  
+  star <- star[star$year > 2015, ]
+  star <- na.omit(star)
+
+  pheno <- phenology |>
+  filter(siteID == site)
+
+
+  years <- min(star$year):2024
+  
+  lags <- data.frame(
+    siteID = site,
+    year = years,
+    greenup = vector(mode = "numeric", length = length(years)),
+    mid_greenup = vector(mode = "numeric", length = length(years)),
+    maturity = vector(mode = "numeric", length = length(years)),
+    tick_15 = vector(mode = "numeric", length = length(years))
+  )
+  
+  i <- 1
+  
+  for(y in years){
+
+    #=============filter to year y
+    temp <- star |>
+      filter(year == y)
+    
+    if(!any(temp$count >= 5)){
+      lags$greenup[i] <- NA
+      lags$mid_greenup[i] <- NA
+      lags$maturity[i] <- NA
+      lags$tick_15[i] <- NA
+      i <- i+1
+      next
+    }
+    
+    #=============Locate first peak 
+    local_max <- which(
+      temp$count > c(-Inf, head(temp$count, -1)) &
+        temp$count >= c(tail(temp$count, -1), -Inf)
+    )
+    first_peak <- local_max[which(temp$count[local_max] >= 5)[1]]
+    peak_DOY <- temp$DOY[first_peak]
+    
+    #=============Find ramp + locate 15th percentile
+    ramp <- temp |>
+      filter(DOY <= peak_DOY) |>
+      mutate(
+        cum_count = cumsum(count),
+        total = sum(count),
+        prop = cum_count/total
+      )
+    
+    if(sum(ramp$count != 0) == 1){
+      lags$greenup[i] <- NA
+      lags$mid_greenup[i] <- NA
+      lags$maturity[i] <- NA
+      lags$tick_15[i] <- NA
+      i <- i+1
+      next
+    }
+    
+    fit <- optim(start, fn = estim, data = ramp)
+
+    mu <- fit$par[1]
+    sigma <- fit$par[2]
+    
+    #locate percentile 
+    c1 <- qnorm(0.15, mean = mu, sd = sigma)
+    
+    
+    #===========leaf phenology
+    d1 <- pheno$greenup[pheno$year == y]
+    d2 <- pheno$midgreenup[pheno$year == y]
+    d3 <- pheno$maturity[pheno$year == y]
+    
+    #==========load into dataframe
+    lags$greenup[i] <- d1
+    lags$mid_greenup[i] <- d2
+    lags$maturity[i] <- d3
+    lags$tick_15[i] <- c1
+      
+    i <- i + 1
+  
+  }
+
+  LAG <- rbind(LAG, lags)
+  
+}
+  
+
+
+LAG <- na.omit(LAG)
+
+```

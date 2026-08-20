@@ -29,15 +29,15 @@ veg <- vi |>
             evi = mean(evi_median))
 
 deer <- ticks |>
-  filter(scientificName == "Amblyomma americanum") |>
-  filter(lifeStage == "Nymph") |>
+  filter(scientificName == "Ixodes scapularis") |>
+  filter(lifeStage == "Larva") |>
   group_by(siteID, collectDate) |>
   summarise(total_count = mean(processedCount)) |>
   group_by(siteID) |>
   summarise(count = mean(total_count))
 
 adult <- ticks |>
-  filter(scientificName == "Amblyomma americanum") |>
+  filter(scientificName == "Ixodes scapularis") |>
   filter(lifeStage == "Adult") |>
   group_by(siteID, collectDate) |>
   summarise(total_count = mean(processedCount)) |>
@@ -77,178 +77,81 @@ kat <- inner_join(kat, nlcd)
 kat <- inner_join(kat, frag)
 
 #=============TEMPORAL==============
-library(lubridate)
-lai$date <- as.Date(lai$date)
-ticks$collectDate <- as.Date(ticks$collectDate)
-
-site <- "SERC"
+library(terra)
+library(sf)
 
 
-c1 <- lai |>
-  filter(siteID == site) |>
-  mutate(week = floor_date(date, "week")) |>
-  group_by(week) |>
-  summarise(lai = mean(lai_median))
+files <- list.files("/projectnb/dietzelab/skanee/MSLP/ancillary/aspect",
+                    full.names = TRUE)
+path <- files[1350]
+path <- "	/projectnb/dietzelab/skanee/MSLP/ancillary/aspect/aspect_17VNR.tif"
 
-c2 <- ticks |>
-  filter(scientificName == "Ixodes scapularis") |>
-  filter(lifeStage == "Nymph") |>
-  filter(siteID == site) |>
-  mutate(week = floor_date(collectDate, "week")) |>
-  group_by(week) |>
-  summarise(tick = mean(processedCount))
+r <- terra::rast(path)
 
+plot(r)
 
-norm <- function(c){
-  return((c - min(c)) / (max(c) - min(c)))
-}
+# center in raster CRS
+x <- mean(c(xmin(r), xmax(r)))
+y <- mean(c(ymin(r), ymax(r)))
+
+# convert to lon/lat
+pt <- vect(matrix(c(x, y), ncol = 2),
+           type = "points",
+           crs = crs(r))
+
+crds(project(pt, "EPSG:4326"))
 
 
 
 
-met <- read.csv("/projectnb/dietzelab/ebeasley/TickForecast/Data/daymetSite.csv")
-
-met <- met |>
-  select(year = X2016, DOY = X1, maxTemp = X6.45, minTemp = X1.24, siteID = BLAN)
-
-met$maxTemp <- as.numeric(met$maxTemp)
-met$minTemp <- as.numeric(met$minTemp)
-
-met <- met |> 
-  mutate(date = as.Date(as.numeric(DOY) - 1, origin = paste0(year, "-01-01"))) |>
-  mutate(avgTemp = (maxTemp + minTemp)/2) |>
-  arrange(by = date)
 
 
-c3 <- met |>
-  filter(siteID == site) |>
-  mutate(week = floor_date(date, "week")) |>
-  group_by(week) |>
-  summarise(temp = mean(avgTemp))
 
 
-c2 <- c2 |>
-  filter(year(week) >= 2016)
-
-c4 <- inner_join(c1, c2, by = "week")
-c4 <- inner_join(c4, c3, by = "week")
 
 
-c4$lai_bucket <- cut(
-  c4$lai,
-  breaks = seq(min(c4$lai, na.rm = TRUE),
-               max(c4$lai, na.rm = TRUE),
-               length.out = 5),   # 4 buckets
-  include.lowest = TRUE
+
+files <- list.files(
+  "/projectnb/dietzelab/skanee/MSLP/ancillary/aspect",
+  full.names = TRUE
 )
 
-boxplot(
-  tick ~ lai_bucket,
-  data = c4,
-  xlab = "LAI",
-  ylab = "Mean tick count",
-  main = "",
-  col = c("white", "white", "limegreen", "tomato")
+results <- data.frame(
+  file = character(),
+  lon_min = numeric(),
+  lon_max = numeric(),
+  lat_min = numeric(),
+  lat_max = numeric()
 )
 
-
-
-
-
-plot(c2$week, norm(c2$tick), type = "l")
-lines(c1$week, norm(c1$lai), col = "green")
-lines(c3$week, norm(c3$temp), col = "red")
-
-
-d1 <- lai |>
-  filter(siteID == site) |>
-  mutate(DOY = yday(date))
-
-d2 <- ticks |>
-  filter(scientificName == "Ixodes scapularis") |>
-  filter(lifeStage == "Nymph") |>
-  filter(siteID == site) |>
-  group_by(collectDate) |>
-  summarise(count = sum(processedCount)) |>
-  mutate(DOY = yday(collectDate))
-
-d3 <- met |>
-  filter(siteID == site)
-
-d2$year <- year(d2$collectDate)
-
-d2 <- d2 |>
-  filter(year >= 2016)
-
-
-
-plot(d2$collectDate, norm(d2$count), type = "l")
-lines(d1$date, norm(d1$lai_median), col = "green")
-lines(d3$date, norm(d3$avgTemp), col = "red")
-
-
-
-
-years <- 2016:2025
-pheno <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/phenology_DOYs.csv")
-
-for(y in years){
-  t3 <- d3 |>
-    filter(year == y)
-  t1 <- d1 |>
-    filter(year == y)
-  t2 <- d2 |>
-    filter(year == y)
+for (f in files) {
+  r <- rast(f)
   
-  p <- pheno |>
-    filter(siteID == site) |>
-    filter(year == y)
+  # four corners in native CRS
+  corners <- rbind(
+    c(xmin(r), ymin(r)),
+    c(xmin(r), ymax(r)),
+    c(xmax(r), ymin(r)),
+    c(xmax(r), ymax(r))
+  )
   
-  g <- as.Date(p$greenup - 1, origin = paste0(y, "-01-01"))
+  pts <- vect(corners,
+              type = "points",
+              crs = crs(r))
   
+  coords <- crds(project(pts, "EPSG:4326"))
   
-  plot(t3$date, norm(t3$avgTemp), col = "red", type = "l", main = paste0(site, " ", y), xlab = "Date", ylab = "Normalized temperature, LAI, or ticks")
-  lines(t1$date, norm(t1$lai_median), col = "green")
-  lines(t2$collectDate, norm(t2$count), type = "l")
-  abline(v = g, col = "forestgreen", lty = 2)
-  
-  legend("topright", 
-         legend = c("Avg. temperature", "LAI", paste0("Greenup DOY = ", p$greenup),"Ixodes nymph count"), 
-         col = c("red", "green", "forestgreen", "black"), 
-         lty = c(1, 1, 2, 1),
-         cex = 0.6)
+  results <- rbind(results, data.frame(
+    file = basename(f),
+    lon_min = min(coords[,1]),
+    lon_max = max(coords[,1]),
+    lat_min = min(coords[,2]),
+    lat_max = max(coords[,2])
+  ))
 }
 
+results
 
 
 
 
-
-
-
-
-d5 <- inner_join(d1, d3, by = "date")
-
-
-
-plot(d2$collectDate, (d2$count), type = "l", xlab = "Date", ylab = "Ixodes nymph count")
-
-for(y in years){
-  
-  p <- pheno |>
-    filter(siteID == site) |>
-    filter(year == y)
-  
-  g <- as.Date(p$greenup - 1, origin = paste0(y, "-01-01"))
-  
-  abline(v = g, col = "forestgreen", lty = 2)
-  
-}
-
-
-
-legend("topright", 
-       legend = c("Ixodes nymph count", "Greenup"), 
-       col = c("black", "forestgreen"), 
-       lty = c(1, 2),
-       cex = 0.7)
