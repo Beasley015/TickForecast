@@ -13,7 +13,7 @@
 #$ -l h_rt=48:00:00
 
 # Assign cores and cores per node
-#$ -pe omp 3 -l mem_per_core=16G # This assigns 3 cores per task; 1 core per markov chain
+#$ -pe omp 3 -l mem_per_core=18G # This assigns 3 cores per task; 1 core per markov chain
 
 # Send an email when the job finishes or if it is aborted 
 #$ -m ea
