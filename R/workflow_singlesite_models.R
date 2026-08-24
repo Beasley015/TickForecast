@@ -119,7 +119,8 @@ source("./DataProcessing/capture_matrix.R")
 if(site.job %in% c("HNRY", "TEA", "GREN")){
   smam <- read_csv("./Data/cary_mouse_formatted.csv",
                    show_col_types=F) %>%
-    filter(siteID == site.job)
+    filter(siteID == site.job) %>%
+    rename(MNA = n_trapped)
   
   mice.obs <- ymd(smam$collectDate)
   mna <- smam$MNA
@@ -406,6 +407,9 @@ for (t in seq_len(n.drags)) {
 	area <- matrix(NA, horizon, n.plots)
 	for (p in 1:n.plots) {
 	  obs.plot <- obs %>% filter(plotID == plots[p])
+	  if(nrow(obs.plot) > 1){
+	    obs.plot <- obs.plot[1,]
+	  }
 		y[1, 1, p] <- obs.plot %>% pull(Larva)
 		y[3, 1, p] <- obs.plot %>% pull(Nymph)
 		y[4, 1, p] <- obs.plot %>% pull(Adult)
@@ -433,7 +437,8 @@ for (t in seq_len(n.drags)) {
 		filter(Date %in% ymd(fx.sequence),
 		       plotID %in% plots) %>%
 	  select(-year) %>%
-	  pivot_wider(names_from = plotID, values_from = cumGDD) %>%
+	  pivot_wider(names_from = plotID, values_from = cumGDD,
+	              values_fn = mean) %>%
 	  select(-Date)
 	
 	data$max.cgdd <- max(data$gdd) * 1.2
@@ -444,7 +449,7 @@ for (t in seq_len(n.drags)) {
 		pull(mna.scaled)
 
 	if (length(data$mice) < length(fx.sequence)) {
-	  horizon <- min(length(data$cgdd), length(data$mice))
+	  horizon <- min(nrow(data$gdd), length(data$mice))
 	  data$y <- y[, 1:horizon, ]
 		
 	  if(is.na(dim(data$y)[3]==T)){
@@ -453,7 +458,7 @@ for (t in seq_len(n.drags)) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))){
-		horizon <- nrow(data$cgdd)
+		horizon <- nrow(data$gdd)
 		data$y <- as.array(y[, 1:horizon, ])
 				
 		if(is.na(dim(data$y)[3]==T)){

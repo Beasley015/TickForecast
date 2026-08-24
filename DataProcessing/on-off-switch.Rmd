@@ -1,0 +1,143 @@
+---
+title: "on-off-switch.Rmd"
+author: "Neo Chatterjee"
+date: "2026-08-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r pressure, echo=FALSE}
+
+library(dplyr)
+library(lubridate)
+library(tidyverse)
+
+
+#----------------tick SETUP----------------
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
+  mutate(
+    collectDate = as.Date(collectDate),
+    year = year(collectDate)
+  ) |>
+  filter(scientificName == "Ixodes scapularis") |>
+  filter(lifeStage == "Nymph")
+
+deer <- ticks |>
+  arrange(collectDate) |>
+  group_by(siteID, collectDate) |>
+  summarise(count = sum(processedCount)) 
+deer$year <- year(deer$collectDate)
+deer$DOY <- as.numeric(format(deer$collectDate, "%j"))
+
+deer <- deer[deer$year > 2015, ]
+deer <- na.omit(deer)
+
+doy <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/DOYs.csv")
+
+retreat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/RETREAT.csv")
+
+lat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/UPDATED_FINAL_bounders.csv")
+
+lat <- lat |>
+  group_by(siteID) |>
+  summarise(latitude = mean(c(latitude_top_left, latitude_bottom_right)))
+
+
+
+#------------DAT setup-----------------
+dat <- left_join(doy, retreat)
+
+dat <- inner_join(dat, lat)
+
+deer <- deer |> filter(siteID %in% unique(dat$siteID))
+
+
+dat$mu_15 <- NA_real_
+
+
+for(s in unique(dat$siteID)){
+  
+  mod <- lm(tick_15 ~ latitude,
+            data = dat |> filter(siteID != s))
+  
+  dat$mu_15[dat$siteID == s] <- predict(
+    mod,
+    newdata = dat |> filter(siteID == s)
+  )
+}
+
+#---------------------------------------------------
+
+estim <- function(theta, data, shift){
+
+  scale <- theta[1]
+  
+  x <- data$DOY - shift
+  
+  fitted <- ifelse(
+    x > 0,
+    dgamma(x, shape = 5, scale = scale),
+    0
+  )
+  
+  fitted <- fitted / max(fitted)
+  
+  sum((norm(data$count) - fitted)^2)
+}
+
+norm <- function(x) {
+  return ((x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)))
+}
+
+
+for(s in unique(dat$siteID)){
+  for(y in unique(dat$year)){
+    
+    temp <- deer |> filter(siteID == s, year == y)
+    
+    if(nrow(temp) == 0) next
+    
+    temp <- temp |>
+      ungroup() |>
+      add_row(DOY = 15, count = 0,
+              .before = 1)
+    
+    
+    shift <- mean(dat$mu_15[dat$siteID == s])
+    
+    fit <- optim(
+      par = c(2, 15),
+      fn = estim,
+      data = temp,
+      shift = shift,
+      method = "L-BFGS-B",
+      lower = 7.5,
+      upper = 100
+    )
+    
+    scale <- fit$par[1]
+    
+    DOY <- 1:365
+    
+    curve <- dgamma(DOY - shift,
+                shape = 5,
+                scale = scale)
+
+    curve <- curve / max(curve)
+    
+    plot(temp$DOY, norm(temp$count), type = "l", main = paste0(s, y))
+    lines(DOY, curve, col = "blue")
+    
+  }
+}
+
+
+
+
+
+```
+

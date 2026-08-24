@@ -1,0 +1,99 @@
+---
+title: "off-switch"
+author: "Neo Chatterjee"
+date: "2026-08-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE}
+library(dplyr)
+library(lubridate)
+library(MASS)
+
+
+LAG <- data.frame()
+
+
+
+sites <- c("GREN", "HNRY", "TEA", "BLAN", "SCBI", "SERC", "ORNL", "MLBS", "TREE", "HARV")
+
+
+years <- 2016:2024
+
+
+ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
+  mutate(
+    collectDate = as.Date(collectDate),
+    year = year(collectDate)
+  ) |>
+  filter(scientificName == "Ixodes scapularis") |>
+  filter(lifeStage == "Nymph") 
+
+
+
+
+for(site in sites){
+  for(y in years){
+    
+    deer <- ticks |> filter(siteID == site, year == y) |> 
+                     arrange(collectDate) |> 
+                     group_by(collectDate)|> 
+                     summarise(count = sum(processedCount)) 
+    
+    deer$year <- year(deer$collectDate) 
+    deer$DOY <- as.numeric(format(deer$collectDate, "%j")) 
+    
+    deer <- deer |> arrange(DOY) |> 
+                    mutate(cum_prop = cumsum(count) / sum(count, na.rm = TRUE)) 
+    
+    tick_85 <- deer$DOY[which(deer$cum_prop >= 0.85)[1]]
+  
+    lag <- data.frame(siteID = site,
+                      year = y,
+                      tick_85 = tick_85)
+    
+    LAG <- rbind(LAG, lag)
+    
+  }
+}
+
+
+LAG <- na.omit(LAG)
+
+
+```
+
+
+#=========Diagnostic plot (can be used for either species
+# or life stage assuming LAG has been generated)
+
+species <- "Ixodes"
+lifeStage <- "nymph"
+
+plot(LAG$maturity, LAG$tick_85, pch = 16, cex = 0.7, col = "blue", xlim = c(min(LAG$greenup), max(LAG$maturity)), xlab = "Phenology DOY", ylab = paste0(species, " ", lifeStage, " ", "emergence DOY"))
+abline(a =0, b = 1, col = "black", lty = 2)
+points(LAG$mid_greenup, LAG$tick_85, pch = 16, cex = 0.7, col = "forestgreen")
+points(LAG$greenup, LAG$tick_85, pch = 16, cex = 0.7, col = "red")
+
+legend(
+  "topleft",
+  legend = c("Greenup", "Mid-greenup", "Maturity"),
+  col = c("red", "forestgreen", "blue"),
+  pch = c(NA, NA, NA),
+  lty = c(1, 1, 1),
+  cex = 0.7
+)
+
+
+
+#============MODEL STATISTICS
+summary(lm(LAG$tick_15 ~ LAG$greenup))
+summary(lm(LAG$tick_15 ~ LAG$mid_greenup))
+summary(lm(LAG$tick_15 ~ LAG$maturity))
+
+
+
