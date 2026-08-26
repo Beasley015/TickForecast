@@ -9,12 +9,7 @@ library(tidyverse)
 #' @param site the site being modeled
 #' @param org either "tick" or "smam"
 daymet_cumGDD <- function(site) {
-  if(site %in% c("TEA", "HNRY", "GREN")){
-    df.all <- read_csv("./Data/Cary_maxTemperature.csv")
-    df.all$siteID <- site
-  } else{
-    df.all <- read.csv("./Data/daymetPlot_maxTemperature.csv") 
-  }
+  df.all <- read.csv("./Data/daymetPlot_maxTemperature.csv") 
 	
 	df <- df.all %>%
 		filter(str_detect(plotID, site)) %>%

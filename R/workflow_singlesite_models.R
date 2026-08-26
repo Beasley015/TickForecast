@@ -458,7 +458,7 @@ for (t in seq_len(n.drags)) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))){
-		horizon <- nrow(data$gdd)
+		horizon <- nrow(daymet.sub)
 		data$y <- as.array(y[, 1:horizon, ])
 				
 		if(is.na(dim(data$y)[3]==T)){
