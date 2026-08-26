@@ -19,6 +19,7 @@ library(tidyverse)
 library(lubridate)
 library(nimble)
 library(parallel)
+library(fitdistrplus)
 
 options(dplyr.summarise.inform = FALSE)
 
@@ -278,7 +279,7 @@ pr.sig <- df.params %>%
 
 # iterate ==================================================================
 
-t = 1
+t = 2
 
 for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
@@ -304,7 +305,7 @@ for (t in seq_len(n.drags)) {
 		
 		# uninformative plot-level priors (zero inflation/phenology)
 		pr.gam0 <- cbind(rep(0,3), rep(1,3))
-		pr.gam1 <- cbind(rep(0,3), rep(1,3))
+		pr.gam1 <- cbind(rep(1,3), rep(1,3))
 		pr.gam2 <- cbind(rep(0,3), rep(1,3))
 		
 	} else {
@@ -341,9 +342,18 @@ for (t in seq_len(n.drags)) {
 		  pr.gam0[i,] <- get_prior(paste0("gam0[", i, "]"))
 		}
 		
+		# gam1 is weird because it must be negative
+		gam1.vals <- last.params %>%
+		  filter(str_detect(node, "gam1"))
+		
 		pr.gam1 <- matrix(NA, 3, 2)
 		for(i in 1:3){
-		  pr.gam1[i,] <- get_prior(paste0("gam1[", i, "]"))
+		  pr.gam1[i,] <- filter(gam1.vals, node == paste0("gam1[", i, "]")) %>%
+		    mutate(value = ifelse(value > 0, value, -value)) %>%
+		    summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
+		              beta = fitdist(value, distr = 'gamma')$estimate[2]) %>%
+		    as.numeric() %>%
+		    suppressMessages()
 		}
 		
 		pr.gam2 <- matrix(NA, 3, 2)
