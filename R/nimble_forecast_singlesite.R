@@ -17,9 +17,10 @@ model.code <- nimbleCode({
 	# plot-level priors
 	for(j in 1:3){
 	  gam0[j] ~ dnorm(pr.gam0[j,1], tau=pr.gam0[j,2])
-	  -gam1[j] ~ dgamma(pr.gam1[j,1], pr.gam1[j,2])
+	  neg.gam1[j] ~ dgamma(pr.gam1[j,1], pr.gam1[j,2])
 	  gam2[j] ~ dnorm(pr.gam2[j,1], tau=pr.gam2[j,2])
 	}
+	gam1 <- -neg.gam1
 
 	tau.temp ~ dexp(1)
 	tau.maxrh ~ dexp(1)
