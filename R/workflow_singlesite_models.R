@@ -15,11 +15,11 @@
 # =========================================== #
 
 library(mclm)
+library(fitdistrplus)
 library(tidyverse)
 library(lubridate)
 library(nimble)
 library(parallel)
-library(fitdistrplus)
 
 options(dplyr.summarise.inform = FALSE)
 
