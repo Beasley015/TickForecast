@@ -778,6 +778,236 @@ aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))
 # save_gg("ix_map_singlesite.jpeg", ix.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_map_singlesite.jpeg", aa.map, dir.plot, width = 10, height = 8)
 
+# Model intercepts: plot-level -----------------------
+# Get files
+out.files <- list.files("./out/", recursive = T)
+out.files <- out.files[str_detect(out.files, "parameterSummary.csv")]
+out.files <- out.files[str_detect(out.files, "PlotLevel")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
+ints <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path("./out/", out.files[i])) %>%
+    filter(str_detect(node, "phi|theta|gam0")) %>%
+    suppressMessages()
+  
+  ints <- bind_rows(ints, wee.tab)
+}
+
+ints <- ints %>%
+  select(-(`start.date == start.date`)) %>%
+  filter(str_detect(model, "PlotLevel") == T) %>%
+  group_by(siteID, species, node, model) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages()
+
+aa.ints <- ints %>%
+  filter(species == "Amblyomma_americanum")
+
+aa.int.plot <- ggplot(data=aa.ints, aes(x=mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin=lower95, xmax=upper95))+
+  facet_wrap(~node)+
+  labs(x = "Estimate", y = "Site")+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+ix.ints <- ints %>%
+  filter(species == "Ixodes_scapularis")
+
+ix.int.plot <- ggplot(data=ix.ints, aes(x=mean, y = siteID))+
+  geom_point()+
+  geom_errorbar(aes(xmin=lower95, xmax=upper95))+
+  facet_wrap(~node)+
+  labs(x = "Estimate", y = "Site")+
+  theme_bw()+
+  theme(panel.grid = element_blank())
+
+save_gg("aa_intercept_pl.jpeg", aa.int.plot, dir.plot)
+save_gg("ix_intercept_pl.jpeg", ix.int.plot, dir.plot)
+
+# Model coefficients: plot-level --------------------
+# Get files
+out.files <- list.files("./out/", recursive = T)
+out.files <- out.files[str_detect(out.files, "parameterSummary.csv")]
+out.files <- out.files[str_detect(out.files, "PlotLevel")]
+
+# Omit pre-2018 results
+years <- year(as.Date(str_extract(out.files, pattern = "\\d+-\\d+-\\d+"),
+                      format = "%Y-%m-%d"))
+out.files <- out.files[which(years >= 2018)]
+
+# Get coefficients
+betas <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path("./out/", out.files[i])) %>%
+    filter(str_detect(node, "beta")) %>%
+    suppressMessages()
+  
+  betas <- bind_rows(betas, wee.tab)
+}
+
+gammas <- tibble()
+for(i in seq_along(out.files)){
+  wee.tab <- read_csv(file.path("./out/", out.files[i])) %>%
+    filter(str_detect(node, "gam")) %>%
+    suppressMessages()
+  
+  gammas <- bind_rows(gammas, wee.tab)
+}
+
+# Site-level coefficients
+betas <- betas %>%
+  select(-(`start.date == start.date`)) %>%
+  filter(str_detect(model, "PlotLevel") == T) %>%
+  group_by(siteID, species, node, model) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages() %>%
+  mutate(node = case_when(node == 'beta[1]' ~ 'MaxTempLarvalSurvival',
+                          node == 'beta[2]' ~ 'MaxRHLarvalSurvival',
+                          node == 'beta[3]' ~ 'MinRHLarvalSurvival',
+                          node == 'beta[4]' ~ 'PrecipLarvalSurvival',
+                          node == 'beta[5]' ~ 'MaxTempNymphSurvival',
+                          node == 'beta[6]' ~ 'MaxRHNymphSurvival',
+                          node == 'beta[7]' ~ 'MinRHNymphSurvival',
+                          node == 'beta[8]' ~ 'PrecipNymphSurvival',
+                          node == 'beta[9]' ~ 'MaxTempAdultSurvival',
+                          node == 'beta[10]' ~ 'MaxRHAdultSurvival',
+                          node == 'beta[11]' ~ 'MinRHAdultSurvival',
+                          node == 'beta[12]' ~ 'PrecipAdultSurvival',
+                          node == 'beta[13]' ~ 'MiceLarvaToNymph',
+                          node == 'beta[14]' ~ 'MiceNymphToAdult'))
+
+ix.sub <- betas %>%
+  filter(species == "Ixodes_scapularis") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 4.2, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 3, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.sub <- betas %>%
+  filter(species == "Amblyomma_americanum") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node)) %>%
+  filter(node != "MaxRHNymphSurvival")
+
+aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 4, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 3.5, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+both.transition <- (ix.transition | aa.transition)+
+  plot_annotation(tag_levels = "a")
+
+# save_gg("aa_survival_pl.jpeg", aa.survival, dir.plot, height = 8)
+# save_gg("aa_transition_pl.jpeg", aa.transition, dir.plot, height = 8)
+# save_gg("ix_survival_pl.jpeg", ix.survival, dir.plot, height = 8)
+# save_gg("ix_transition_pl.jpeg", ix.transition, dir.plot, height = 8)
+
+# gammas
+gammas <- gammas %>%
+  filter(!str_detect(node, "gam0")) %>%
+  mutate(node = case_when(node == "gam1[1]" ~ "X2_Larvae",
+                          node == "gam1[2]" ~ "X2_Nymphs", 
+                          node == "gam1[3]" ~ "X2_Adults",
+                          node == "gam2[1]" ~ "X_Larvae",
+                          node == "gam2[2]" ~ "X_Nymphs",
+                          node == "gam2[3]" ~ "X_Adults",
+                          TRUE ~ NA))
+
+ix.gamma <- gammas %>%
+  filter(species == "Ixodes_scapularis") %>%
+  group_by(siteID, node) %>%
+  summarise(mean = mean(mean), lower95 = mean(lower95),
+            upper95 = mean(upper95)) %>%
+  # mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+  #                        lower95>0 & upper95>0 ~ 'sig',
+  #                        TRUE ~ NA),
+         # node = factor(node)) %>%
+  arrange(node)
+
+ix.gam.plt <- ggplot(data = ix.gamma, aes(x = mean, y = siteID))+
+  geom_point()+
+  # geom_point(aes(x = 3, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "h") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.gamma <- gammas %>%
+  filter(species == "Amblyomma_americanum") %>%
+  group_by(siteID, node) %>%
+  summarise(mean = mean(mean), lower95 = mean(lower95),
+            upper95 = mean(upper95)) %>%
+  # mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+  #                        lower95>0 & upper95>0 ~ 'sig',
+  #                        TRUE ~ NA),
+         # node = factor(node)) %>%
+  arrange(node)
+
+aa.gam.plt <- ggplot(data = aa.gamma, aes(x = mean, y = siteID))+
+  geom_point()+
+  # geom_point(aes(x = 3.25, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "h") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+# save_gg("aa_gamma_pl.jpeg", aa.gam.plt, dir.plot, height = 8)
+# save_gg("ix_gamma_pl.jpeg", ix.gam.plt, dir.plot, height = 8)
+
 # Model intercepts: hierarchical ------------------
 # Get files
 out.files <- list.files(dir.out, recursive = T)

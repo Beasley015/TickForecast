@@ -90,7 +90,8 @@ for(j in 1:length(sites)){
 out.files <- list.files(dir.out, recursive = TRUE)
 quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
 
-models <- c("Weather", "WithWeatherAndMiceGlobal")
+# models <- c("Weather", "WithWeatherAndMiceGlobal", "PlotLevel")
+models <- "PlotLevel"
 species <- c("Ixodesscapularis", "Amblyommaamericanum")
 neon.sites <- c(
   "BLAN",

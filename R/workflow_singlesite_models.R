@@ -306,7 +306,7 @@ for (t in seq_len(n.drags)) {
 		# uninformative plot-level priors (zero inflation/phenology)
 		pr.gam0 <- cbind(rep(0,3), rep(1,3))
 		pr.gam1 <- cbind(rep(1,3), rep(1,3))
-		pr.gam2 <- cbind(rep(0,3), rep(1,3))
+		pr.gam2 <- cbind(rep(1,3), rep(1,3))
 		
 	} else {
 		# read last forecast parameters and state
@@ -342,7 +342,7 @@ for (t in seq_len(n.drags)) {
 		  pr.gam0[i,] <- get_prior(paste0("gam0[", i, "]"))
 		}
 		
-		# gam1 is weird because it must be negative
+		# gam1 must be negative
 		gam1.vals <- last.params %>%
 		  filter(str_detect(node, "gam1"))
 		
@@ -451,7 +451,9 @@ for (t in seq_len(n.drags)) {
 	              values_fn = mean) %>%
 	  select(-Date)
 	
-	data$max.cgdd <- max(data$gdd) * 1.2
+	data$gdd <- scale(data$gdd)
+	
+	# data$max.cgdd <- max(data$gdd) * 1.2
 	data$xind <- matrix(1, 4, horizon)
 
 	data$mice <- mna.scaled %>%
@@ -520,7 +522,8 @@ for (t in seq_len(n.drags)) {
 			x1 = jitter(data$maxtemp),
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
-			x4 = jitter(data$precip))
+			x4 = jitter(data$precip),
+			neg.gam1 = rgamma(3,1,1))
 	}
 	
 	# Parameters to save (uses less memory)
