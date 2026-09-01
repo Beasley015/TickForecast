@@ -205,6 +205,18 @@ df.daymet <- join2 %>%
   filter(Date >= "2016-01-01" & Date < "2022-01-01")
 
 # =========================================== #
+#   Remotely-sensed data intake -------------------
+# =========================================== #
+
+# Site-level cov: edge effects
+edge <- read_csv("./Data/fragstats.csv") %>%
+  filter(siteID == site.job) %>%
+  pull(edge_m_per_ha) %>%
+  suppressMessages()
+
+# Plot-level cov: land cover
+
+# =========================================== #
 #       get informative priors -------------------
 # =========================================== #
 df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
@@ -261,6 +273,11 @@ get_beta <- function(model.job) {
 
 pr.beta <- get_beta(model.job)
 
+# edge.beta <- matrix(c(0,0,1,1), nrow = 2, ncol = 2)
+# 
+# pr.beta <- rbind(pr.beta, edge.beta)
+# n.beta <- n.beta + nrow(edge.beta)
+
 # function to approximate moment the inverse gamma
 inv_gamma_mm <- function(x) {
 	mu <- mean(x)
@@ -279,7 +296,7 @@ pr.sig <- df.params %>%
 
 # iterate ==================================================================
 
-t = 2
+t = 1
 
 for (t in seq_len(n.drags)) {
 	fx.start.date <- drag.dates[t]
@@ -306,7 +323,7 @@ for (t in seq_len(n.drags)) {
 		# uninformative plot-level priors (zero inflation/phenology)
 		pr.gam0 <- cbind(rep(0,3), rep(1,3))
 		pr.gam1 <- cbind(rep(1,3), rep(1,3))
-		pr.gam2 <- cbind(rep(1,3), rep(1,3))
+		pr.gam2 <- cbind(rep(0,3), rep(1,3))
 		
 	} else {
 		# read last forecast parameters and state
@@ -456,6 +473,7 @@ for (t in seq_len(n.drags)) {
 	# data$max.cgdd <- max(data$gdd) * 1.2
 	data$xind <- matrix(1, 4, horizon)
 
+	# data$edge <- edge
 	data$mice <- mna.scaled %>%
 	  filter(Date %in% fx.sequence) %>%
 		pull(mna.scaled)

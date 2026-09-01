@@ -62,8 +62,8 @@ model.code <- nimbleCode({
 	for (t in 1:horizon) {
 		# loop over every day in time series
 
-		logit(l2n[t]) <- theta.ln + beta[13] * mice[t]
-		logit(n2a[t]) <- theta.na + beta[14] * mice[t]
+		logit(l2n[t]) <- theta.ln + beta[13] * mice[t] #+ beta[15] * edge
+		logit(n2a[t]) <- theta.na + beta[14] * mice[t] #+ beta[16] * edge
 
 		if(n.plots == 1){
 		  mean.gdd[t] <- gdd[t,1]
