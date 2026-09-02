@@ -8,6 +8,8 @@ model.code <- nimbleCode({
 	phi.a.mu ~ dnorm(pr.phi.a[1], tau = pr.phi.a[2])
 	theta.ln ~ dnorm(pr.theta.l2n[1], tau = pr.theta.l2n[2])
 	theta.na ~ dnorm(pr.theta.n2a[1], tau = pr.theta.n2a[2])
+	
+	repro ~ dpois(repro.mu)
 
 	# priors for model coefficients
 	for (j in 1:n.beta) {
@@ -60,8 +62,7 @@ model.code <- nimbleCode({
 
   ### define parameters
 	for (t in 1:horizon) {
-		# loop over every day in time series
-
+	  # loop over every day in time series
 		logit(l2n[t]) <- theta.ln + beta[13] * mice[t] #+ beta[15] * edge
 		logit(n2a[t]) <- theta.na + beta[14] * mice[t] #+ beta[16] * edge
 
@@ -78,7 +79,7 @@ model.code <- nimbleCode({
 		}
 		
 		lambda.bin[t] ~ dbern(mean.pz3[t])
-		lambda[t] <- if_else_nimble(lambda.bin[t]==0, repro.mu, 0)
+		lambda[t] <- if_else_nimble(lambda.bin[t]==0, repro, 0)
 		# look @ repro.mu: put a prior so it can vary?
 		
 		# Relate p's to site-level transition probs:

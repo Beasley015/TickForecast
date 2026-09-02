@@ -378,6 +378,8 @@ for (t in seq_len(n.drags)) {
 		  pr.gam2[i,] <- get_prior(paste0("gam2[", i, "]"))
 		}
 
+		# expected reproduction
+		
 		# get invgamma parameters
 		pr.sig <- last.params %>%
 				rename(parameter = node) %>%
@@ -549,7 +551,7 @@ for (t in seq_len(n.drags)) {
 	            # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
 	            "theta.ln", "theta.na", 
 	            "gam0", "gam1", "gam2", "pz", 
-	            "dx", "dlamb",
+	            "dx", "dlamb", "repro",
 	            "x" #, "x1", "x2", "x3", "x4"
 	)  
 
@@ -611,6 +613,7 @@ for (t in seq_len(n.drags)) {
 	fileDest <- file.path(dir.save, fx.start.date)
 	message("Running analysis...")
 		
+	# Update to record reproduction node -------------
 	transfer_analysis(
 	  fx.df = dat.draws,
 	  observations = neon.job,
