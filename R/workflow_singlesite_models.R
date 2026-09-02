@@ -215,6 +215,13 @@ edge <- read_csv("./Data/fragstats.csv") %>%
   suppressMessages()
 
 # Plot-level cov: land cover
+plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
+  filter(siteID == site.job) %>%
+  select(plotID, lc_dominant) %>%
+  mutate(lc_dominant = str_remove(lc_dominant, pattern = "_pct")) %>%
+  suppressMessages()
+
+# Plot-level cov: EVI
 
 # =========================================== #
 #       get informative priors -------------------
@@ -379,6 +386,9 @@ for (t in seq_len(n.drags)) {
 		}
 
 		# expected reproduction
+		repro.mu <- params.stats %>%
+		  filter(parameter=='repro') %>%
+		  pull(mu)
 		
 		# get invgamma parameters
 		pr.sig <- last.params %>%
@@ -613,7 +623,6 @@ for (t in seq_len(n.drags)) {
 	fileDest <- file.path(dir.save, fx.start.date)
 	message("Running analysis...")
 		
-	# Update to record reproduction node -------------
 	transfer_analysis(
 	  fx.df = dat.draws,
 	  observations = neon.job,
