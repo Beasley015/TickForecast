@@ -24,6 +24,16 @@ model.code <- nimbleCode({
 	}
 	gam1[1:3] <- neg.gam1[1:3] * -1
 
+	# land cover is categorical and therefore a pain in the ass
+	if(n.lc > 1){
+	  gam3[1:3, 1] <- 0
+	  for(j in 2:n.lc){ # j = land cover class
+	    for(k in 1:3){ # k = observed tick life stage
+	      gam3[k,j] ~ dnorm(gam3.mu[k,j], tau=gam3.tau[k,j])
+	    }
+	  }
+	}
+	
 	tau.temp ~ dexp(1)
 	tau.maxrh ~ dexp(1)
 	tau.minrh ~ dexp(1)
@@ -151,9 +161,9 @@ model.code <- nimbleCode({
 			  gam2[3] * gdd[t,p]
 			
 			# Tick density given sampling availability (dlamb)
-			log(dlamb[1,t,p]) <- dx[1,t,p] # add habitat covs
-			log(dlamb[2,t,p]) <- dx[2,t,p]
-			log(dlamb[3,t,p]) <- dx[3,t,p]
+			log(dlamb[1,t,p]) <- dx[1,t,p] + gam3[1,lc.class[p]]
+			log(dlamb[2,t,p]) <- dx[2,t,p] + gam3[2,lc.class[p]]
+			log(dlamb[3,t,p]) <- dx[3,t,p] + gam3[3,lc.class[p]]
 			
 			# Observed ticks follow zero-inflated Poisson
 			y[1,t,p] ~ dZIP(dlamb=dlamb[1,t,p], zeroProb = 1-pz[1,t,p])

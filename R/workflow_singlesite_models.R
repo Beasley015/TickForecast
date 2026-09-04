@@ -41,7 +41,7 @@ jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 1
+	job.num <- 2
 }
 
 site.job <- jobs$site[job.num]
@@ -69,7 +69,7 @@ neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
 	filter(siteID == site.job, #grepl("Forest", nlcd), 
-	       time >= "2016-01-01" & time < "2022-01-01") %>%
+	       time >= "2016-01-01" & time < "2025-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -173,13 +173,17 @@ mna.scaled <- tibble(
 source("./DataProcessing/daymet_downscale_singlesite.R")
 
 cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
+
 maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
-    select(Date, maxTempCorrect) %>%
-    mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
-    suppressMessages()
+  select(Date, maxTemperature) %>%
+  mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
+  distinct() %>%
+  suppressMessages()
+
 rh <- daymet_rh(site.job) %>%
-    select(Date, maxRHCorrect, minRHCorrect) %>%
+    select(Date, maxRH, minRH) %>%
     suppressMessages()
+
 precip <- daymet_precip(site.job) %>%
     select(Date, precipitation) %>%
     suppressMessages()
@@ -202,7 +206,7 @@ df.daymet <- join2 %>%
   ) %>%
   ungroup() %>%
   select(Date, contains("Scale")) %>%
-  filter(Date >= "2016-01-01" & Date < "2022-01-01")
+  filter(Date >= "2016-01-01" & Date < "2025-01-01")
 
 # =========================================== #
 #   Remotely-sensed data intake -------------------
@@ -219,6 +223,7 @@ plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
   filter(siteID == site.job) %>%
   select(plotID, lc_dominant) %>%
   mutate(lc_dominant = str_remove(lc_dominant, pattern = "_pct")) %>%
+  arrange(lc_dominant) %>%
   suppressMessages()
 
 # Plot-level cov: EVI
@@ -332,6 +337,9 @@ for (t in seq_len(n.drags)) {
 		pr.gam1 <- cbind(rep(1,3), rep(1,3))
 		pr.gam2 <- cbind(rep(0,3), rep(1,3))
 		
+		gam3.mu <- matrix(0, nrow = 3, ncol = length(unique(plt_cover$lc_dominant)))
+		gam3.tau <- matrix(1, nrow = 3, ncol = length(unique(plt_cover$lc_dominant))) 
+		
 	} else {
 		# read last forecast parameters and state
 		readDest <- file.path(
@@ -384,6 +392,33 @@ for (t in seq_len(n.drags)) {
 		for(i in 1:3){
 		  pr.gam2[i,] <- get_prior(paste0("gam2[", i, "]"))
 		}
+		
+		# gam3 here
+		gam3.vals <- last.params %>%
+		  filter(str_detect(node, "gam3"))
+		
+		gam3.mean <- matrix(NA, 3, length(unique(plt_cover$lc_dominant)))
+		for(i in 1:3){
+		  for(j in 1:length(unique(plt_cover$lc_dominant))){
+		    gam3.mean[i,j] <- filter(gam3.vals, 
+		                           node == paste0("gam3[", i, ", ", j, "]")) %>%
+		      summarise(mean = mean(value)) %>%
+		      pull(mean) %>%
+		      suppressMessages()
+		  }
+		}
+		
+		gam3.tau <- matrix(NA, 3, length(unique(plt_cover$lc_dominant)))
+		for(i in 1:3){
+		  for(j in 1:length(unique(plt_cover$lc_dominant))){
+		    gam3.tau[i,j] <- filter(gam3.vals, 
+		                             node == paste0("gam3[", i, ", ", j, "]")) %>%
+		      summarise(prec = 1/var(value)) %>%
+		      pull(prec) %>%
+		      suppressMessages()
+		  }
+		}
+		gam3.tau[is.infinite(gam3.tau)] <- 1
 
 		# expected reproduction
 		repro.mu <- params.stats %>%
@@ -469,6 +504,8 @@ for (t in seq_len(n.drags)) {
 	data$pr.gam0 <- pr.gam0
 	data$pr.gam1 <- pr.gam1
 	data$pr.gam2 <- pr.gam2
+	data$gam3.mu <- gam3.mu
+	data$gam3.tau <- gam3.tau
 	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
 	
 	data$gdd <- cgdd %>%
@@ -489,6 +526,14 @@ for (t in seq_len(n.drags)) {
 	data$mice <- mna.scaled %>%
 	  filter(Date %in% fx.sequence) %>%
 		pull(mna.scaled)
+	
+	# land cover
+	land.classes <- unique(plt_cover$lc_dominant)
+  current.classes <- plt_cover %>%
+	  filter(plotID %in% unique(obs$plotID)) %>%
+	  pull(lc_dominant)
+  
+  data$lc.class <- which(current.classes == land.classes)
 
 	if (length(data$mice) < length(fx.sequence)) {
 	  horizon <- min(nrow(data$gdd), length(data$mice))
@@ -525,6 +570,7 @@ for (t in seq_len(n.drags)) {
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
+	constants$n.lc <- length(land.classes)
 
 	area.init <- area
 	nai <- which(is.na(area))
@@ -560,7 +606,7 @@ for (t in seq_len(n.drags)) {
 	params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
 	            # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
 	            "theta.ln", "theta.na", 
-	            "gam0", "gam1", "gam2", "pz", 
+	            "gam0", "gam1", "gam2", "gam3", "pz", 
 	            "dx", "dlamb", "repro",
 	            "x" #, "x1", "x2", "x3", "x4"
 	)  
