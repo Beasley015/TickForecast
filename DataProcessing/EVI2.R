@@ -1,13 +1,14 @@
 library(terra)
 library(dplyr)
+library(terra)
 
 dat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/UPDATED_FINAL_bounders.csv")
-r <- 15
+r <- 1
 
 # Use any original 18TXM raster as the spatial template.
 # Fmask is convenient because it has the same grid as the processed bands.
 template_file <- list.files(
-  "/projectnb/dietzelab/neochatt/MSLP/input/HLS30/15TYL/images/HLS.L30.T15TYL.2016023T164010.v2.0",
+  "/projectnb/dietzelab/neochatt/MSLP/input/HLS30/18TXM/images/HLS.L30.T18TXM.2016026T153258.v2.0",
   pattern = "Fmask\\.tif$",
   recursive = TRUE,
   full.names = TRUE
@@ -319,27 +320,100 @@ evi2$evi2 <- 2.5 * (evi2$nir - evi2$red) / (evi2$nir + 2.4 * evi2$red + 1)
 #-------------------COMPARE---------------
 
 evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv") |>
-  filter(siteID == "TREE")
+  filter(siteID == "GREN")
 
 evi$date <- as.Date(evi$date)
 
 
 
+#------------------ASSEMBLE TIME SERIES--------------------------
 
 
+files <- list.files(path = "/projectnb/dietzelab/neochatt/MSLP/EVI2/GREN", pattern = "\\.csv$", full.names = TRUE)
 
-
-#------------------DESPIKE--------------------------
-
-
-
-
-
-fit <- readRDS("CHECK_THIS_FIT.rds")
-
+cells <- unique(sub(
+  ".*\\/(cell_[0-9]+)_year_.*",
+  "\\1",
+  files
+))
 
 
 
 
 
+cell_dfs <- setNames(vector("list", length(cells)), cells)
 
+for (c in cells) {
+  
+  cell_files <- files[
+    grepl(
+      paste0(c, "_year_"),
+      basename(files),
+      fixed = TRUE
+    )
+  ]
+  
+  dat <- bind_rows(lapply(cell_files, read.csv))
+  
+  dat <- unique(dat)
+  dat$date <- as.Date(dat$date)
+  dat <- dat[order(dat$date), ]
+  dat$cell <- c
+  
+  cell_dfs[[c]] <- dat
+}
+
+
+
+
+all_cells <- bind_rows(cell_dfs)
+
+evi2 <- all_cells |>
+  group_by(date) |>
+  summarise(
+    evi2_mean   = mean(evi2, na.rm = TRUE),
+    evi2_median = median(evi2, na.rm = TRUE),
+    evi2_sd           = sd(evi2, na.rm = TRUE),
+    n_pixels     = n_distinct(cell[!is.na(evi2)]),
+    .groups = "drop"
+  ) |>
+  arrange(date)
+
+
+
+
+evi2 <- evi2 |> filter(year(date) >= 2016) |>
+  filter(year(date) <= 2025)
+
+
+evi2$siteID <- "GREN"
+
+evi2 <- evi2 |> relocate(siteID)
+
+plot(
+  evi2$date,
+  evi2$evi2_median,
+  type = "l",
+  col = "black",
+  xlab = "Date",
+  ylab = "EVI2"
+)
+
+points(evi2$date, evi2$evi2_median, pch = 15, cex = 0.5)
+
+points(evi$date, evi$evi_median, col = "green")
+
+lines(
+  evi$date,
+  evi$evi_median,
+  col = "green"
+)
+
+legend(
+  "topright",
+  legend = c("Median HLS EVI2", "Median MODIS EVI"),
+  col = c("black", "green"),
+  pch = c(15, 16),
+  lty = 1,
+  cex = 0.8
+)
