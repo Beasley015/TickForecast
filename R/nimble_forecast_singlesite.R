@@ -21,6 +21,7 @@ model.code <- nimbleCode({
 	  gam0[j] ~ dnorm(pr.gam0[j,1], tau=pr.gam0[j,2])
 	  neg.gam1[j] ~ dgamma(pr.gam1[j,1], pr.gam1[j,2])
 	  gam2[j] ~ dnorm(pr.gam2[j,1], tau=pr.gam2[j,2])
+	  gam4[j] ~ dnorm(pr.gam4[j,1], tau=pr.gam4[j,2])
 	}
 	gam1[1:3] <- neg.gam1[1:3] * -1
 
@@ -161,9 +162,15 @@ model.code <- nimbleCode({
 			  gam2[3] * gdd[t,p]
 			
 			# Tick density given sampling availability (dlamb)
-			log(dlamb[1,t,p]) <- dx[1,t,p] + gam3[1,lc.class[p]]
-			log(dlamb[2,t,p]) <- dx[2,t,p] + gam3[2,lc.class[p]]
-			log(dlamb[3,t,p]) <- dx[3,t,p] + gam3[3,lc.class[p]]
+			if(n.lc > 1){
+			  log(dlamb[1,t,p]) <- dx[1,t,p] + gam3[1,lc.class[p]] + gam4[1]*evi2[t,p]
+			  log(dlamb[2,t,p]) <- dx[2,t,p] + gam3[2,lc.class[p]] + gam4[2]*evi2[t,p]
+			  log(dlamb[3,t,p]) <- dx[3,t,p] + gam3[3,lc.class[p]] + gam4[3]*evi2[t,p]
+			} else {
+			  log(dlamb[1,t,p]) <- dx[1,t,p] + gam4[1]*evi2[t,p]
+			  log(dlamb[2,t,p]) <- dx[2,t,p] + gam4[2]*evi2[t,p]
+			  log(dlamb[3,t,p]) <- dx[3,t,p] + gam4[3]*evi2[t,p]
+			}
 			
 			# Observed ticks follow zero-inflated Poisson
 			y[1,t,p] ~ dZIP(dlamb=dlamb[1,t,p], zeroProb = 1-pz[1,t,p])

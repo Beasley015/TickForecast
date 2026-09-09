@@ -69,7 +69,7 @@ neon.data <- neon_tick_data(species.job) %>% suppressMessages()
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
 	filter(siteID == site.job, #grepl("Forest", nlcd), 
-	       time >= "2016-01-01" & time < "2025-01-01") %>%
+	       time >= "2016-01-01" & time < "2026-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -175,14 +175,14 @@ source("./DataProcessing/daymet_downscale_singlesite.R")
 cgdd <- daymet_cumGDD(site.job) %>% suppressMessages()
 
 maxTemp <- daymet_temp(site.job, minimum = FALSE) %>%
-  select(Date, maxTemperature) %>%
+  select(Date, maxTempCorrect) %>%
   mutate(Date = as.Date(Date, format = "%Y-%m-%d")) %>%
   distinct() %>%
   suppressMessages()
 
 rh <- daymet_rh(site.job) %>%
-    select(Date, maxRH, minRH) %>%
-    suppressMessages()
+  select(Date, maxRHCorrect, minRHCorrect) %>%
+  suppressMessages()
 
 precip <- daymet_precip(site.job) %>%
     select(Date, precipitation) %>%
@@ -206,7 +206,7 @@ df.daymet <- join2 %>%
   ) %>%
   ungroup() %>%
   select(Date, contains("Scale")) %>%
-  filter(Date >= "2016-01-01" & Date < "2025-01-01")
+  filter(Date >= "2016-01-01" & Date < "2026-01-01")
 
 # =========================================== #
 #   Remotely-sensed data intake -------------------
@@ -227,6 +227,9 @@ plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
   suppressMessages()
 
 # Plot-level cov: EVI
+evi2 <- read_csv("./Data/Cary_EVI2.csv") %>%
+  filter(siteID == site.job) %>%
+  select(plotID, date, evi2_mean)
 
 # =========================================== #
 #       get informative priors -------------------
@@ -336,6 +339,7 @@ for (t in seq_len(n.drags)) {
 		pr.gam0 <- cbind(rep(0,3), rep(1,3))
 		pr.gam1 <- cbind(rep(1,3), rep(1,3))
 		pr.gam2 <- cbind(rep(0,3), rep(1,3))
+		pr.gam4 <- cbind(rep(0,3), rep(1,3))
 		
 		gam3.mu <- matrix(0, nrow = 3, ncol = length(unique(plt_cover$lc_dominant)))
 		gam3.tau <- matrix(1, nrow = 3, ncol = length(unique(plt_cover$lc_dominant))) 
@@ -393,7 +397,6 @@ for (t in seq_len(n.drags)) {
 		  pr.gam2[i,] <- get_prior(paste0("gam2[", i, "]"))
 		}
 		
-		# gam3 here
 		gam3.vals <- last.params %>%
 		  filter(str_detect(node, "gam3"))
 		
@@ -419,6 +422,11 @@ for (t in seq_len(n.drags)) {
 		  }
 		}
 		gam3.tau[is.infinite(gam3.tau)] <- 1
+		
+		pr.gam4 <- matrix(NA, 3, 2)
+		for(i in 1:3){
+		  pr.gam4[i,] <- get_prior(paste0("gam4[", i, "]"))
+		}
 
 		# expected reproduction
 		repro.mu <- params.stats %>%
@@ -506,6 +514,7 @@ for (t in seq_len(n.drags)) {
 	data$pr.gam2 <- pr.gam2
 	data$gam3.mu <- gam3.mu
 	data$gam3.tau <- gam3.tau
+	data$pr.gam4 <- pr.gam4
 	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
 	
 	data$gdd <- cgdd %>%
@@ -534,6 +543,12 @@ for (t in seq_len(n.drags)) {
 	  pull(lc_dominant)
   
   data$lc.class <- which(current.classes == land.classes)
+  
+  # evi
+  data$evi2 <- evi2 %>%
+    filter(date %in% fx.sequence) %>%
+    pivot_wider(names_from = plotID, values_from = evi2_mean) %>%
+    select(-date)
 
 	if (length(data$mice) < length(fx.sequence)) {
 	  horizon <- min(nrow(data$gdd), length(data$mice))
@@ -606,10 +621,14 @@ for (t in seq_len(n.drags)) {
 	params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
 	            # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
 	            "theta.ln", "theta.na", 
-	            "gam0", "gam1", "gam2", "gam3", "pz", 
+	            "gam0", "gam1", "gam2", "pz", 
 	            "dx", "dlamb", "repro",
 	            "x" #, "x1", "x2", "x3", "x4"
 	)  
+	
+	if(length(land.classes) > 1){
+	  params.to.save <- c(params.to.save, "gam3")
+	}
 
 	source("./R/nimble_forecast_singlesite.R")
 	source("./R/run_transfer_nimble_singlesite.R")
@@ -628,35 +647,37 @@ for (t in seq_len(n.drags)) {
 
 	dat.hindcast <- do.call(rbind, out.nchains)
 
-	message("Checking convergence...")
-	nodes <- colnames(out.nchains[[1]])
-	nodes <- nodes[!str_detect(nodes, c("dlamb|dx|pz|x"))]
+	if(year(fx.start.date) >= 2018){
+	  message("Checking convergence...")
+	  nodes <- colnames(out.nchains[[1]])
+	  nodes <- nodes[!str_detect(nodes, c("dlamb|dx|pz|x"))]
 			
-	gelman.keep <- numeric(length(nodes))
-	for (ff in seq_along(nodes)) {
-	  mcmc.check <- list()
-	  col <- nodes[ff]
+	  gelman.keep <- numeric(length(nodes))
+	  for (ff in seq_along(nodes)) {
+	    mcmc.check <- list()
+	    col <- nodes[ff]
 	  
-	  for (c in seq_along(out.nchains)) {
-	    mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
-	    }
+	    for (c in seq_along(out.nchains)) {
+	      mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][, col])
+	      }
 	  
-	  gelman.keep[ff] <- try(coda::gelman.diag(
-	    mcmc.check,
-	    transform = TRUE)$psrf[1])
+	    gelman.keep[ff] <- try(coda::gelman.diag(
+	      mcmc.check,
+	      transform = TRUE)$psrf[1])
 
-	  if (any(gelman.keep > 1.2)) {
-	    # message("WARNING: Convergence not reached!")
-	    bad.nodes <- which(gelman.keep > 1.2)
-	    bad.params <- tibble(
-				node = nodes[bad.nodes],
-				psrf = as.numeric(gelman.keep[bad.nodes])
-			) %>%
-					arrange(psrf)
+	    if (any(gelman.keep > 1.2)) {
+	      # message("WARNING: Convergence not reached!")
+	      bad.nodes <- which(gelman.keep > 1.2)
+	      bad.params <- tibble(
+				  node = nodes[bad.nodes],
+				  psrf = as.numeric(gelman.keep[bad.nodes])
+			  ) %>%
+				  	arrange(psrf)
 	    
-	    print(tail(bad.params))
-	  } 
+	      print(tail(bad.params))
+	    } 
 	  }
+	}
 
 	if (nrow(dat.hindcast) > 5000) {
 	  draws <- round(seq.int(1, nrow(dat.hindcast), length.out = 5000))

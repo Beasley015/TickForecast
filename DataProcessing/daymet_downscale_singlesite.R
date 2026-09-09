@@ -26,36 +26,28 @@ daymet_cumGDD <- function(site) {
 ## max temperature ==================================================================
 daymet_temp <- function(site, minimum) {
 	if (minimum) {
-	  if(site %in% c("TEA", "HNRY", "GREN")){
-	    df.all <- read_csv("./Data/Cary_minTemperature.csv") 
-	    df.all$siteID <- site
-	  } else{
-	    df.all <- read.csv("./Data/daymetSite_minTemperature.csv") 
-	  }
+	  df.all <- read.csv("./Data/daymetSite_minTemperature.csv") 
 		
 		neon.col <- "tempTripleMinimum"
 		daymet.col <- "minTemperature"
+		
 	} else {
-	  if(site %in% c("TEA", "HNRY", "GREN")){
-	    df.all <- read_csv("./Data/Cary_maxTemperature.csv")
-	    df.all$siteID <- site
-	  } else{
-	    df.all <- read.csv("./Data/daymetSite_maxTemperature.csv") 
-	  }
+	  df.all <- read.csv("./Data/daymetSite_maxTemperature.csv") 
 		
 		neon.col <- "tempTripleMaximum"
 		daymet.col <- "maxTemperature"
 	}
 
-  if(!(site %in% c("TEA", "HNRY", "GREN"))){
-	  df.temp <- df.all %>%
-		  filter(siteID == site) %>%
-		  group_by(yday) #%>%
-		  # select(-tile)
 
-	  neon.temp <- read_csv("./Data/airTempDaily.csv")
+  df.temp <- df.all %>%
+		  filter(siteID == site) %>%
+		  group_by(yday)
+  
+  if(!(site %in% c("GREN", "HNRY", "TEA"))){
+
+    neon.temp <- read_csv("./Data/airTempDaily.csv")
 	
-	  neon.sub <- neon.temp %>%
+    neon.sub <- neon.temp %>%
 		  filter(siteID == site) %>%
 		  mutate(yday = yday(Date))
 
@@ -83,78 +75,34 @@ daymet_temp <- function(site, minimum) {
 		  daymet.temp.bias <- daymet.temp.bias %>%
 			  rename(maxTempCorrect = TempCorrect)
 	  }
+	  
 	return(daymet.temp.bias)
+	  
   } else{
-    df.all <- df.all %>%
+    df.temp <- df.temp %>%
       rename(maxTempCorrect=maxTemperature)
     
-    return(df.all)
+    return(df.temp)
   }
 }
-
-# ndf <- neon.sub %>%
-#   filter(Date >= "2018-01-01",
-#          Date < "2021-01-01") %>%
-#   select(Date, siteID, tempTripleMaximum)
-# ddf <- daymet.temp.bias %>%
-#   ungroup() %>%
-#   filter(Date >= "2018-01-01",
-#          Date < "2021-01-01") %>%
-#   select(Date, siteID, maxTempCorrect)
-#
-# gg.max.temp <- left_join(ndf, ddf, by = c("siteID", "Date")) %>%
-#   ggplot()+
-#   aes(x = tempTripleMaximum, y = maxTempCorrect) +
-#   geom_point() +
-#   geom_abline() +
-#   labs(title = "Daily Minimum Temperature (Deg. C)",
-#        x = "NEON",
-#        y = "Daymet Corrected") +
-#   theme_pubr()
 
 ## relative humidity ==========================================================================
 
 daymet_rh <- function(site) {
-  if(site %in% c("HNRY", "GREN", "TEA")){
-    df.rh <- read_csv("./Data/Cary_vaporPressure.csv") %>%
-      mutate(siteID = site)
-  } else{
-	  df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv") %>%
-	    filter(siteID == site) #%>%
-	    # select(-tile)
-  }
-	
-  if(!(site %in% c("HNRY", "GREN", "TEA"))){
-    df.temp <- read_csv("./Data/daymetSite_maxTemperature.csv") %>%
-      filter(siteID == site) #%>%
-      # select(-tile)
-  }
-  
-  if(site %in% c("HNRY", "GREN", "TEA")){
-    df.rh <- df.rh %>%
-      rename(maxRHCorrect=maxRH, minRHCorrect=minRH)
-    
-    return(df.rh)
-    
-  } else{
-    df.join <- left_join(
-		  df.vpd,
-		  df.temp,
-		  by = c(
-			  "siteID",
-			  # "latitude",
-			  # "longitude",
-			  # "altitude",
-			  "year",
-			  "yday",
-			  "Date"
-		  )
-	  )
-	
-    df.dew <- df.join %>%
-		  ungroup() %>%
-		  mutate(rh = plantecophys::VPDtoRH(vaporPressure / 1000, maxTemperature))
+  df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv") %>%
+    filter(siteID == site)
 
+  df.temp <- read_csv("./Data/daymetSite_maxTemperature.csv") %>%
+    filter(siteID == site)
+
+  df.join <- left_join(df.vpd, df.temp,
+                       by = c("siteID","year","yday","Date"))
+	
+  df.dew <- df.join %>%
+		ungroup() %>%
+		mutate(rh = plantecophys::VPDtoRH(vaporPressure / 1000, maxTemperature))
+
+  if(!(site %in% c("GREN", "HNRY", "TEA"))){
 	  neon.temp <- read_csv("./Data/RelativeHumidityDaily.csv")
 	
 	  neon.sub <- neon.temp %>%
@@ -181,6 +129,14 @@ daymet_rh <- function(site) {
 		  select(-maxTemperature, -vaporPressure)
 	  
 	  return(daymet.temp.bias)
+  } else {
+    df.rh.tru <- df.dew %>%
+      group_by(yday) %>%
+      mutate(maxRHCorrect = quantile(rh, 0.975),
+             minRHCorrect = quantile(rh, 0.025)) %>%
+    select(-maxTemperature, -vaporPressure)
+    
+    return(df.rh.tru)
   }
 }
 
@@ -228,28 +184,22 @@ daymet_rh <- function(site) {
 ## Precipitation ==========================================================================
 
 daymet_precip <- function(site) {
-  if(site %in% c("HNRY", "GREN", "TEA")){
-    cary.precip <- read_csv("./Data/Cary_precipitation.csv") %>%
-      mutate(siteID = site)
-    
-    return(cary.precip)
-  } else{
-	  neon.precip <- read_csv("./Data/precipDaily.csv")
+  neon.precip <- read_csv("./Data/precipDaily.csv")
 	
-	  neon.sub <- neon.precip %>%
-		  filter(siteID == site) %>%
-		  mutate(year = year(Date)) %>%
-		  group_by(year) %>%
-		  summarise(sum.precip = sum(priPrecipTotal)) %>%
-		  pull(sum.precip) %>%
-		  mean()
+	neon.sub <- neon.precip %>%
+		filter(siteID == site) %>%
+		mutate(year = year(Date)) %>%
+		group_by(year) %>%
+		summarise(sum.precip = sum(priPrecipTotal)) %>%
+		pull(sum.precip) %>%
+		mean()
 
-	  df <- read_csv("./Data/daymetSite_precipitation.csv")
+	df <- read_csv("./Data/daymetSite_precipitation.csv")
 
-	  df.p <- df %>%
-		  filter(siteID == site)
-	  return(df.p)
-  }
+	df.p <- df %>%
+		filter(siteID == site)
+	  
+	return(df.p)
 }
 
 # df %>%
