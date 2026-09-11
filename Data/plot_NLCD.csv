@@ -3,6 +3,8 @@
 "GREN","GREN_002",0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,"deciduous_forest_pct"
 "HNRY","HNRY_001",0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,"deciduous_forest_pct"
 "HNRY","HNRY_002",0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,"deciduous_forest_pct"
+"TEA","TEA_001",0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,"deciduous_forest_pct"
+"TEA","TEA_002",0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,"deciduous_forest_pct"
 "OSBS","OSBS_077",0,0,0,0,0,0,0.777777777777778,0,0,0,0,0,0.222222222222222,0,0.777777777777778,"evergreen_forest_pct"
 "OSBS","OSBS_001",0,0,0,0,0,0,0.666666666666667,0,0,0,0,0,0.333333333333333,0,0.666666666666667,"evergreen_forest_pct"
 "OSBS","OSBS_048",0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,"evergreen_forest_pct"

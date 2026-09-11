@@ -14,130 +14,700 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(dplyr)
 library(lubridate)
-library(tidyverse)
+library(tidyr)
+library(ggplot2)
 
 
-#----------------tick SETUP----------------
-ticks <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv") |>
+#---------------- TICK SETUP ----------------
+
+ticks <- read.csv(
+  "/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv"
+) |>
   mutate(
     collectDate = as.Date(collectDate),
     year = year(collectDate)
   ) |>
-  filter(scientificName == "Ixodes scapularis") |>
-  filter(lifeStage == "Nymph")
+  filter(
+    scientificName == "Ixodes scapularis",
+    lifeStage == "Nymph"
+  )
+
 
 deer <- ticks |>
-  arrange(collectDate) |>
+  arrange(siteID, collectDate) |>
   group_by(siteID, collectDate) |>
-  summarise(count = sum(processedCount)) 
-deer$year <- year(deer$collectDate)
-deer$DOY <- as.numeric(format(deer$collectDate, "%j"))
+  summarise(
+    count = sum(processedCount, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    year = year(collectDate),
+    DOY = yday(collectDate)
+  ) |>
+  filter(
+    year >= 2016,
+    year <= 2025
+  ) |>
+  drop_na(
+    siteID,
+    collectDate,
+    year,
+    DOY,
+    count
+  )
 
-deer <- deer[deer$year > 2015, ]
-deer <- na.omit(deer)
 
-doy <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/DOYs.csv")
+#---------------- OTHER DATA ----------------
 
-retreat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/RETREAT.csv")
+doy <- read.csv(
+  "/usr4/ugrad/neochatt/TickForecast/Data/DOYs.csv"
+)
 
-lat <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/UPDATED_FINAL_bounders.csv")
 
-lat <- lat |>
+retreat <- read.csv(
+  "/usr4/ugrad/neochatt/TickForecast/Data/RETREAT.csv"
+)
+
+
+lat <- read.csv(
+  "/usr4/ugrad/neochatt/TickForecast/Data/UPDATED_FINAL_bounders.csv"
+) |>
   group_by(siteID) |>
-  summarise(latitude = mean(c(latitude_top_left, latitude_bottom_right)))
-
-
-
-#------------DAT setup-----------------
-dat <- left_join(doy, retreat)
-
-dat <- inner_join(dat, lat)
-
-deer <- deer |> filter(siteID %in% unique(dat$siteID))
-
-
-dat$mu_15 <- NA_real_
-
-
-for(s in unique(dat$siteID)){
-  
-  mod <- lm(tick_15 ~ latitude,
-            data = dat |> filter(siteID != s))
-  
-  dat$mu_15[dat$siteID == s] <- predict(
-    mod,
-    newdata = dat |> filter(siteID == s)
+  summarise(
+    latitude = mean(
+      c(
+        latitude_top_left,
+        latitude_bottom_right
+      ),
+      na.rm = TRUE
+    ),
+    .groups = "drop"
   )
-}
 
-#---------------------------------------------------
 
-estim <- function(theta, data, shift){
+#---------------- DATA SETUP ----------------
 
-  scale <- theta[1]
-  
-  x <- data$DOY - shift
-  
-  fitted <- ifelse(
-    x > 0,
-    dgamma(x, shape = 5, scale = scale),
-    0
+dat <- doy |>
+  left_join(retreat) |>
+  inner_join(
+    lat,
+    by = "siteID"
   )
-  
-  fitted <- fitted / max(fitted)
-  
-  sum((norm(data$count) - fitted)^2)
-}
-
-norm <- function(x) {
-  return ((x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE)))
-}
 
 
-for(s in unique(dat$siteID)){
-  for(y in unique(dat$year)){
-    
-    temp <- deer |> filter(siteID == s, year == y)
-    
-    if(nrow(temp) == 0) next
-    
-    temp <- temp |>
-      ungroup() |>
-      add_row(DOY = 15, count = 0,
-              .before = 1)
-    
-    
-    shift <- mean(dat$mu_15[dat$siteID == s])
-    
-    fit <- optim(
-      par = c(2, 15),
-      fn = estim,
-      data = temp,
-      shift = shift,
-      method = "L-BFGS-B",
-      lower = 7.5,
-      upper = 100
+deer <- deer |>
+  filter(siteID %in% dat$siteID)
+
+
+#---------------- LIKELIHOOD ----------------
+
+estim <- function(theta, data) {
+
+  beta0 <- theta[1]
+  beta1 <- theta[2]
+
+  # Forces the quadratic DOY effect to curve downward
+  beta2 <- -exp(theta[3])
+
+  # Center and scale DOY
+  x <- (data$DOY - 180) / 100
+
+  psi <- plogis(
+    beta0 +
+      beta1 * x +
+      beta2 * x^2
+  )
+
+  detected <- as.integer(data$count > 0)
+
+  nll <- -sum(
+    dbinom(
+      detected,
+      size = 1,
+      prob = psi,
+      log = TRUE
     )
-    
-    scale <- fit$par[1]
-    
-    DOY <- 1:365
-    
-    curve <- dgamma(DOY - shift,
-                shape = 5,
-                scale = scale)
+  )
 
-    curve <- curve / max(curve)
-    
-    plot(temp$DOY, norm(temp$count), type = "l", main = paste0(s, y))
-    lines(DOY, curve, col = "blue")
-    
-  }
+  return(nll)
 }
 
 
+#---------------- MODEL SETTINGS ----------------
+
+years <- 2016:2025
+
+start_date <- as.Date("2016-01-01")
+end_date <- as.Date("2025-12-31")
+
+sites <- intersect(
+  unique(dat$siteID),
+  unique(deer$siteID)
+)
 
 
+#---------------- OUTPUT OBJECTS ----------------
+
+rmse_doy <- data.frame()
+fit_summary <- data.frame()
+
+
+#---------------- FIT EACH SITE ----------------
+
+for (s in sites) {
+
+  # All real observations from 2016–2025 at this site
+  if(s != "TREE"){
+    site_dat <- deer |>
+      filter(
+        siteID == s,
+        year %in% years
+      ) |>
+      arrange(collectDate)
+  } else {
+    site_dat <- dree |>
+      filter(
+        year %in% years
+      ) |>
+      arrange(collectDate)
+  }
+  
+
+  if (nrow(site_dat) == 0) {
+    message(
+      "Skipping ",
+      s,
+      ": no observations"
+    )
+
+    next
+  }
+
+
+  #---------------- SYNTHETIC ENDPOINTS ----------------
+
+  # Add an explicit zero at the beginning and end of
+  # every year used for fitting.
+  start_anchors <- tibble(
+    siteID = s,
+    collectDate = as.Date(
+      paste0(years, "-01-01")
+    ),
+    year = years,
+    DOY = 1,
+    count = 0
+  )
+
+
+  end_dates <- as.Date(
+    paste0(years, "-12-31")
+  )
+
+
+  end_anchors <- tibble(
+    siteID = s,
+    collectDate = end_dates,
+    year = years,
+    DOY = yday(end_dates),
+    count = 0
+  )
+
+
+  anchors <- bind_rows(
+    start_anchors,
+    end_anchors
+  )
+
+
+  fit_dat <- bind_rows(
+    site_dat |>
+      select(
+        siteID,
+        collectDate,
+        year,
+        DOY,
+        count
+      ),
+    anchors
+  ) |>
+    arrange(collectDate)
+
+  fit_dat <- site_dat
+
+  #---------------- OPTIMIZATION ----------------
+
+  fit <- optim(
+    par = c(
+      beta0 = 2,
+      beta1 = 0,
+      log_curvature = 0
+    ),
+    fn = estim,
+    data = fit_dat,
+    method = "BFGS",
+    hessian = TRUE
+  )
+
+
+  beta0 <- fit$par[1]
+  beta1 <- fit$par[2]
+  beta2 <- -exp(fit$par[3])
+
+  
+  fit_summary <- bind_rows(
+    fit_summary,
+    tibble(
+      siteID = s,
+  
+      beta0 = beta0,
+      beta1 = beta1,
+      beta2 = beta2,
+  
+      log_curvature = fit$par[3],
+  
+      convergence = fit$convergence,
+      nll = fit$value,
+  
+      AIC = 2 * fit$value +
+        2 * length(fit$par),
+  
+      n_real_observations = nrow(site_dat),
+      n_synthetic_anchors = nrow(anchors),
+      n_fitting_observations = nrow(fit_dat),
+  
+      n_detections = sum(
+        site_dat$count > 0,
+        na.rm = TRUE
+      ),
+  
+      detection_rate = mean(
+        site_dat$count > 0,
+        na.rm = TRUE
+      ),
+  
+      first_observation = min(
+        site_dat$collectDate,
+        na.rm = TRUE
+      ),
+  
+      last_observation = max(
+        site_dat$collectDate,
+        na.rm = TRUE
+      )
+    )
+  )
+
+  #---------------- OBSERVED-DATE PREDICTIONS ----------------
+
+  # Predictions at actual sampling dates only.
+  # Synthetic anchors are excluded from evaluation.
+  site_dat <- site_dat |>
+    mutate(
+      x = (DOY - 180) / 100,
+
+      psi_hat = plogis(
+        beta0 +
+          beta1 * x +
+          beta2 * x^2
+      ),
+
+      detected = as.integer(count > 0)
+    )
+
+
+  # This is detection RMSE, not count RMSE.
+  site_rmse <- sqrt(
+    mean(
+      (site_dat$detected - site_dat$psi_hat)^2,
+      na.rm = TRUE
+    )
+  )
+
+
+  rmse_doy <- bind_rows(
+    rmse_doy,
+    tibble(
+      siteID = s,
+
+      RMSE = site_rmse,
+
+      n_observations = nrow(site_dat),
+
+      n_detections = sum(
+        site_dat$detected,
+        na.rm = TRUE
+      ),
+
+      detection_rate = mean(
+        site_dat$detected,
+        na.rm = TRUE
+      )
+    )
+  )
+
+
+  #---------------- DAILY PREDICTION GRID ----------------
+
+  # Generate a complete daily series from 2016–2025.
+  prediction_grid <- tibble(
+    date = seq(
+      start_date,
+      end_date,
+      by = "day"
+    )
+  ) |>
+    mutate(
+      siteID = s,
+      year = year(date),
+      DOY = yday(date),
+
+      x = (DOY - 180) / 100,
+
+      psi = plogis(
+        beta0 +
+          beta1 * x +
+          beta2 * x^2
+      )
+    )
+
+
+  #----------------PLOT----------------
+
+  # Increase right margin to accommodate count axis.
+  par(
+    mar = c(5, 4, 4, 5) + 0.1
+  )
+
+
+  # Left axis: fitted probability of detection.
+  plot(
+    prediction_grid$date,
+    prediction_grid$psi,
+    type = "l",
+    col = "red",
+    lwd = 2,
+    ylim = c(0, 1),
+    xlim = c(start_date, end_date),
+    xlab = "Date",
+    ylab = "ψ",
+    main = paste0(
+      s,
+      ": DOY"
+    )
+  )
+
+
+  # Add a new plotting layer for observed counts.
+  par(new = TRUE)
+
+
+  # Right axis: actual observed counts.
+  plot(
+    site_dat$collectDate,
+    site_dat$count,
+    type = "l",
+    col = "black",
+    lwd = 1,
+    axes = FALSE,
+    xlab = "",
+    ylab = "",
+    xlim = c(start_date, end_date),
+    ylim = c(
+      0,
+      max(
+        1,
+        site_dat$count,
+        na.rm = TRUE
+      )
+    )
+  )
+
+
+  points(
+    site_dat$collectDate,
+    site_dat$count,
+    pch = 16,
+    cex = 0.55,
+    col = "black"
+  )
+
+
+  axis(
+    side = 4,
+    las = 1
+  )
+
+
+  mtext(
+    "Observed count",
+    side = 4,
+    line = 3
+  )
+
+
+  legend(
+    "topright",
+    legend = c(
+      "ψ",
+      "Observed count"
+    ),
+    col = c(
+      "red",
+      "black"
+    ),
+    lty = c(1, 1),
+    lwd = c(2, 1),
+    pch = c(NA, 16),
+    cex = 0.7
+  )
+}
+
+
+#---------------- COMBINE OUTPUTS ----------------
+
+rmse_doy <- rmse_doy |>
+  arrange(RMSE)
+
+
+fit_summary <- fit_summary |>
+  arrange(siteID)
+
+
+#---------------- CHECK RESULTS ----------------
+
+print(rmse_doy)
+
+print(fit_summary)
+
+# A value of 0 means nominal convergence
+print(
+  table(
+    fit_summary$convergence
+  )
+)
 
 ```
+
+
+```{r, echo = FALSE}
+
+library(dplyr)
+library(lubridate)
+library(tidyr)
+library(ggplot2)
+library(performance)
+library(broom)
+
+#---------DATA SETUP-----------------
+
+ticks <- read.csv(
+  "/usr4/ugrad/neochatt/TickForecast/Data/tickLong.csv"
+) |>
+  mutate(
+    collectDate = as.Date(collectDate),
+    year = year(collectDate)
+  ) |>
+  filter(
+    scientificName == "Ixodes scapularis",
+    lifeStage == "Nymph"
+  )
+
+
+deer <- ticks |>
+  arrange(siteID, collectDate) |>
+  group_by(siteID, collectDate) |>
+  summarise(
+    count = sum(processedCount, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    year = year(collectDate),
+    DOY = yday(collectDate)
+  ) |>
+  filter(year > 2015) |> 
+  filter(year <= 2025) |>
+  drop_na(siteID, year, DOY, count)
+
+
+met <- read.csv(
+  "/usr4/ugrad/neochatt/TickForecast/Data/daymetSite.csv"
+)
+
+met <- met |>
+  select(
+    year = X2016,
+    DOY = X1,
+    maxTemp = X6.45,
+    minTemp = X1.24,
+    siteID = BLAN
+  ) |>
+  mutate(
+    year = as.numeric(year),
+    DOY = as.numeric(DOY),
+    maxTemp = as.numeric(maxTemp),
+    minTemp = as.numeric(minTemp),
+    
+    date = as.Date(
+      paste(
+        year,
+        DOY,
+        sep = "-"
+      ),
+      format = "%Y-%j"
+    ),
+    
+    avgTemp = (
+      maxTemp +
+        minTemp
+    ) / 2
+  ) |>
+  filter(
+    year >= 2016,
+    year <= 2025
+  ) |>
+  drop_na(
+    siteID,
+    year,
+    DOY,
+    date,
+    avgTemp
+  ) |>
+  arrange(
+    siteID,
+    year,
+    DOY
+  ) |>
+  group_by(
+    siteID,
+    year
+  ) |>
+  mutate(
+    GDD = pmax(
+      0,
+      avgTemp - 4
+    ),
+    
+    CGDD = cumsum(GDD)
+  ) |>
+  ungroup()
+
+
+vpd <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/daymetSite_vaporPressure.csv")
+vpd$date <- as.Date(vpd$Date)
+vpd$VPD <- pmax(
+  0,
+  (
+    0.6108 * exp(17.27 * vpd$tmax..deg.c. / (vpd$tmax..deg.c. + 237.3)) +
+      0.6108 * exp(17.27 * vpd$tmin..deg.c. / (vpd$tmin..deg.c. + 237.3))
+  ) / 2 -
+    vpd$vaporPressure / 1000
+)
+vpd <- na.omit(vpd)
+
+
+
+
+
+sites <- c("GREN", "HNRY", "TEA", "BLAN", "HARV", "SCBI", "SERC", "MLBS", "ORNL", "TREE")
+
+
+#---------------- EXPLORE EACH SITE ----------------
+
+rmse <- data.frame()
+
+for (s in sites) {
+
+  blan <- deer |> filter(siteID == s)
+  temp <- vpd |> filter(siteID == s)
+  
+  blan <- blan |>
+    group_by(year) |>
+    mutate(peak_date = collectDate[which.max(count)])
+  
+  temp <- left_join(temp, blan, by = c("siteID", "date" = "collectDate", "year"))
+  
+  if(s == "MLBS"){
+    temp <- temp |> filter(year >= 2018)
+  }
+
+  temp <- temp |>
+    group_by(year) |>
+    mutate(
+      CVPD = cumsum(VPD),
+      peak_date = as.Date(
+        round(
+          mean(
+            as.numeric(peak_date),
+            na.rm = TRUE
+          )
+        ),
+        origin = "1970-01-01"
+      ),
+      peak_CVPD = CVPD[
+        which.min(
+          abs(
+            as.numeric(date - first(peak_date))
+          )
+        )
+      ]
+    ) |>
+    ungroup()
+  
+  z <- 80
+
+  threshold_dates <- temp |>
+    group_by(year) |>
+    arrange(date) |>
+    filter(
+      CVPD >= z,
+      is.na(lag(CVPD)) | lag(CVPD) < z
+    ) |>
+    pull(date)
+  
+  plot(blan$collectDate, (blan$count), type = "l", main = s)
+  abline(
+    v = as.numeric(threshold_dates),
+    col = "blue",
+    lty = 2
+  )
+  
+  a <- yday(threshold_dates)
+  b <- yday(unique(temp$peak_date))
+  c <- rep(median(b), times = length(unique(temp$year)))
+  d <- rep(155, times = length(unique(temp$year)))
+  
+  mod <- lm(b ~ a)
+  
+  sub = data.frame(
+    siteID = s,
+    rmse = Metrics::rmse(a, b),
+    rmse_null = Metrics::rmse(b, c),
+    rmse_doy = Metrics::rmse(b, d),
+    median_peak = median(b),
+    R = cor(a, b)
+  )
+  
+  rmse <- rbind(rmse, sub)
+  
+}
+
+
+print(rmse)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
