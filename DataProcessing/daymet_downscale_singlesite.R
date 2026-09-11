@@ -30,12 +30,14 @@ daymet_temp <- function(site, minimum) {
 		
 		neon.col <- "tempTripleMinimum"
 		daymet.col <- "minTemperature"
+		cary.col <- "MIN_TEMP"
 		
 	} else {
 	  df.all <- read.csv("./Data/daymetSite_maxTemperature.csv") 
 		
 		neon.col <- "tempTripleMaximum"
 		daymet.col <- "maxTemperature"
+		cary.col <- "MAX_TEMP"
 	}
 
 
@@ -79,10 +81,35 @@ daymet_temp <- function(site, minimum) {
 	return(daymet.temp.bias)
 	  
   } else{
-    df.temp <- df.temp %>%
-      rename(maxTempCorrect=maxTemperature)
+    cary.doy <- read_csv("./Data/cary_met_data_daily.csv") %>%
+      filter(DATE > 2015) %>%
+      mutate(yday = yday(DATE)) %>%
+      group_by(yday) %>%
+      summarise(muCary = mean(.data[[cary.col]], na.rm = T)) %>%
+      ungroup() %>%
+      suppressMessages()
     
-    return(df.temp)
+    daymet.doy <- df.temp %>%
+      group_by(yday) %>%
+      summarise(muDaymet = mean(.data[[daymet.col]])) %>%
+      ungroup()
+    
+    tempbias <- left_join(cary.doy, daymet.doy, by = "yday") %>%
+      mutate(tempBias = muCary - muDaymet) %>%
+      select(yday, tempBias)
+    
+    daymet.temp.bias <- left_join(df.temp, tempbias, by = "yday") %>%
+      mutate(TempCorrect = .data[[daymet.col]] + tempBias)
+    
+    if (minimum) {
+      daymet.temp.bias <- daymet.temp.bias %>%
+        rename(minTempCorrect = TempCorrect)
+    } else {
+      daymet.temp.bias <- daymet.temp.bias %>%
+        rename(maxTempCorrect = TempCorrect)
+    }
+    
+    return(daymet.temp.bias)
   }
 }
 
@@ -129,14 +156,33 @@ daymet_rh <- function(site) {
 		  select(-maxTemperature, -vaporPressure)
 	  
 	  return(daymet.temp.bias)
+	  
   } else {
-    df.rh.tru <- df.dew %>%
-      group_by(yday) %>%
-      mutate(maxRHCorrect = quantile(rh, 0.975),
-             minRHCorrect = quantile(rh, 0.025)) %>%
-    select(-maxTemperature, -vaporPressure)
+    cary.sub <- read_csv("./Data/cary_met_data_daily.csv") %>%
+      mutate(yday = yday(DATE)) %>%
+      select(DATE, yday, MAX_RH, MIN_RH) %>%
+      suppressMessages()
     
-    return(df.rh.tru)
+    cary.doy <- cary.sub %>%
+      group_by(yday) %>%
+      summarise(muRHmax = mean(MAX_RH, na.rm=T), 
+                muRHmin = mean(MIN_RH, na.rm=T))
+    
+    daymet.doy <- df.dew %>%
+      group_by(yday) %>%
+      summarise(muDaymet = mean(rh))
+    
+    df.join <- left_join(cary.doy, daymet.doy, by = "yday") %>%
+      mutate(biasMax = muRHmax - muDaymet, biasMin = muRHmin - muDaymet)
+    
+    daymet.temp.bias <- left_join(df.dew, df.join, by = "yday") %>%
+      mutate(
+        maxRHCorrect = pmin(rh + biasMax, 100),
+        minRHCorrect = pmin(rh + biasMin, 100)
+      ) %>%
+      select(-maxTemperature, -vaporPressure)
+    
+    return(daymet.temp.bias)
   }
 }
 
