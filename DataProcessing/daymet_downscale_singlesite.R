@@ -10,9 +10,16 @@ library(tidyverse)
 #' @param org either "tick" or "smam"
 daymet_cumGDD <- function(site) {
   df.all <- read.csv("./Data/daymetPlot_maxTemperature.csv") 
+  
+  if(site == "CARY"){
+    df.all <- df.all %>%
+      filter(str_detect(plotID, "GREN|HNRY|TEA"))
+  } else{
+    df.all <- df.all %>%
+      filter(str_detect(plotID, site))
+  }
 	
 	df <- df.all %>%
-		filter(str_detect(plotID, site)) %>%
 		group_by(year, plotID) %>%
 		mutate(
 			growingDegree = if_else(maxTemperature > 10, maxTemperature - 10, 0),
@@ -42,10 +49,12 @@ daymet_temp <- function(site, minimum) {
 
 
   df.temp <- df.all %>%
+    mutate(siteID = case_when(siteID %in% c("GREN", "HNRY", "TEA") ~ "CARY",
+                              TRUE ~ siteID)) %>%
 		  filter(siteID == site) %>%
 		  group_by(yday)
   
-  if(!(site %in% c("GREN", "HNRY", "TEA"))){
+  if(site != "CARY"){
 
     neon.temp <- read_csv("./Data/airTempDaily.csv")
 	
@@ -117,10 +126,29 @@ daymet_temp <- function(site, minimum) {
 
 daymet_rh <- function(site) {
   df.vpd <- read_csv("./Data/daymetSite_vaporPressure.csv") %>%
-    filter(siteID == site)
+    mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                              TRUE ~ siteID)) %>%
+    filter(siteID == site) %>%
+    suppressMessages()
+  
+  if(site == "CARY"){
+    df.vpd <- df.vpd %>%
+      group_by(siteID, year, yday, Date) %>%
+      summarise_all(.funs = mean)
+  }
 
   df.temp <- read_csv("./Data/daymetSite_maxTemperature.csv") %>%
-    filter(siteID == site)
+    mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                              TRUE ~ siteID)) %>%
+    filter(siteID == site) %>%
+    distinct() %>%
+    suppressMessages()
+  
+  if(site == "CARY"){
+    df.temp <- df.temp %>%
+      group_by(siteID, year, yday, Date) %>%
+      summarise_all(.funs = mean)
+  }
 
   df.join <- left_join(df.vpd, df.temp,
                        by = c("siteID","year","yday","Date"))
@@ -129,7 +157,7 @@ daymet_rh <- function(site) {
 		ungroup() %>%
 		mutate(rh = plantecophys::VPDtoRH(vaporPressure / 1000, maxTemperature))
 
-  if(!(site %in% c("GREN", "HNRY", "TEA"))){
+  if(site != "CARY"){
 	  neon.temp <- read_csv("./Data/RelativeHumidityDaily.csv")
 	
 	  neon.sub <- neon.temp %>%
@@ -243,7 +271,15 @@ daymet_precip <- function(site) {
 	df <- read_csv("./Data/daymetSite_precipitation.csv")
 
 	df.p <- df %>%
+	  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+	                            TRUE ~ siteID)) %>%
 		filter(siteID == site)
+	
+	if(site == "CARY"){
+	  df.p <- df.p %>%
+	    group_by(year, yday, Date, siteID) %>%
+	    summarise_all(.funs = mean)
+	}
 	  
 	return(df.p)
 }

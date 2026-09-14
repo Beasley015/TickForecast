@@ -63,7 +63,9 @@ horizon <- 365
 source("./DataProcessing/functions.R")
 
 # Get tick data based on site
-neon.data <- neon_tick_data(species.job) %>% suppressMessages()
+neon.data <- neon_tick_data(species.job) %>% suppressMessages() %>%
+  mutate(siteID = case_when(siteID %in% c("GREN", "HNRY", "TEA") ~ "CARY",
+                            TRUE ~ siteID))
 # function now retrieves cary sites as well as NEON
 
 # Filter tick data based on job requirements
@@ -117,10 +119,9 @@ IC <- tibble(
 
 source("./DataProcessing/capture_matrix.R")
 
-if(site.job %in% c("HNRY", "TEA", "GREN")){
+if(site.job == "CARY"){
   smam <- read_csv("./Data/cary_mouse_formatted.csv",
                    show_col_types=F) %>%
-    filter(siteID == site.job) %>%
     rename(MNA = n_trapped)
   
   mice.obs <- ymd(smam$collectDate)
@@ -214,12 +215,20 @@ df.daymet <- join2 %>%
 
 # Site-level cov: edge effects
 edge <- read_csv("./Data/fragstats.csv") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
   filter(siteID == site.job) %>%
   pull(edge_m_per_ha) %>%
   suppressMessages()
 
+if(site.job == "CARY"){
+  edge <- mean(edge)
+}
+
 # Plot-level cov: land cover
 plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
   filter(siteID == site.job) %>%
   select(plotID, lc_dominant) %>%
   mutate(lc_dominant = str_remove(lc_dominant, pattern = "_pct")) %>%
@@ -228,6 +237,8 @@ plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
 
 # Plot-level cov: EVI
 evi2 <- read_csv("./Data/Cary_EVI2.csv") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
   filter(siteID == site.job) %>%
   select(plotID, date, evi2_mean)
 
