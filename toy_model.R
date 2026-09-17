@@ -11,6 +11,8 @@ library(R2jags)
 library(abind)
 library(tidyverse)
 library(patchwork)
+library(fitdistrplus)
+library(viridis)
 
 set.seed(10)
 time.steps <- 20
@@ -215,7 +217,7 @@ inits <- function(){
 }
 
 mod <- jags(data=data, parameters.to.save = params, model.file = model.base,
-            inits = inits, n.chains = 3, n.iter=7500)
+            inits = inits, n.chains = 3, n.iter=10000)
 
 # Base model: figures ------------------
 # Time series
@@ -304,7 +306,7 @@ tru.betas <- as.data.frame(rbind(stage1.beta, stage2.beta, transition.beta)) %>%
 
 ggplot(betas, aes(x = mean, y = site))+
   geom_point(size = 1.5)+
-  geom_errorbar(aes(xmin = lower95, xmax=upper95), size = 1)+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95), linewidth = 1)+
   geom_point(data=tru.betas, aes(x = val, y = site), color = 'firebrick',
              size = 1.5)+
   geom_vline(xintercept = 0, linetype = 'dashed')+
@@ -368,7 +370,7 @@ for(i in 1:time.steps){
     }
     
     mod <- jags(data=data, parameters.to.save = params, model.file = model.base,
-                inits = inits, n.chains = 3, n.iter=7500)
+                inits = inits, n.chains = 3, n.iter=10000)
     
     outs <- mod$BUGSoutput$sims.list
     colnames(outs$beta1) <- paste("site",1:3, sep = "")
@@ -381,17 +383,17 @@ for(i in 1:time.steps){
     iter.outs[[i]] <- outs
     
     priors <- data.frame(int.mu1 = c(mean(outs$mu.int1), 1/var(outs$mu.int1)),
-                   int.tau1 = c(mean(outs$tau.int1), 1/var(outs$tau.int1)),
+                   int.tau1 = fitdist(outs$tau.int1, 'gamma')$estimate,
                    int.mu2 = c(mean(outs$mu.int2), 1/var(outs$mu.int2)),
-                   int.tau2 = c(mean(outs$tau.int2), 1/var(outs$tau.int2)),
+                   int.tau2 = fitdist(outs$tau.int2, 'gamma')$estimate,
                    int.mu3 = c(mean(outs$mu.int3), 1/var(outs$mu.int3)),
-                   int.tau3 = c(mean(outs$tau.int3), 1/var(outs$tau.int3)),
+                   int.tau3 = fitdist(outs$tau.int3, 'gamma')$estimate,
                    b1.mu.pr = c(mean(outs$mu.b1), 1/var(outs$mu.b1)),
-                   b1.tau.pr = c(mean(outs$tau.b1), 1/var(outs$tau.b1)),
+                   b1.tau.pr = fitdist(outs$tau.b1, 'gamma')$estimate,
                    b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
-                   b2.tau.pr = c(mean(outs$tau.b2), 1/var(outs$tau.b2)),
+                   b2.tau.pr = fitdist(outs$tau.b2, 'gamma')$estimate,
                    b3.mu.pr = c(mean(outs$mu.b3), 1/var(outs$mu.b3)),
-                   b3.tau.pr = c(mean(outs$tau.b3), 1/var(outs$tau.b3)))
+                   b3.tau.pr = fitdist(outs$tau.b3, 'gamma')$estimate)
     
     pr.x <- apply(outs$x, c(2,4), median)
     
@@ -447,7 +449,7 @@ for(i in 1:time.steps){
     }
     
     mod <- jags(data=data, parameters.to.save = params, model.file = model.base,
-                inits=inits, n.chains = 3, n.iter=7500)
+                inits=inits, n.chains = 3, n.iter=10000)
     
     outs <- mod$BUGSoutput$sims.list
     colnames(outs$beta1) <- paste("site",1:3, sep = "")
@@ -460,23 +462,38 @@ for(i in 1:time.steps){
     iter.outs[[i]] <- outs
     
     priors <- data.frame(int.mu1 = c(mean(outs$mu.int1), 1/var(outs$mu.int1)),
-                         int.tau1 = c(mean(outs$tau.int1), 1/var(outs$tau.int1)),
+                         int.tau1 = fitdist(outs$tau.int1, 'gamma')$estimate,
                          int.mu2 = c(mean(outs$mu.int2), 1/var(outs$mu.int2)),
-                         int.tau2 = c(mean(outs$tau.int2), 1/var(outs$tau.int2)),
+                         int.tau2 = fitdist(outs$tau.int2, 'gamma')$estimate,
                          int.mu3 = c(mean(outs$mu.int3), 1/var(outs$mu.int3)),
-                         int.tau3 = c(mean(outs$tau.int3), 1/var(outs$tau.int3)),
+                         int.tau3 = fitdist(outs$tau.int3, 'gamma')$estimate,
                          b1.mu.pr = c(mean(outs$mu.b1), 1/var(outs$mu.b1)),
-                         b1.tau.pr = c(mean(outs$tau.b1), 1/var(outs$tau.b1)),
+                         b1.tau.pr = fitdist(outs$tau.b1, 'gamma')$estimate,
                          b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
-                         b2.tau.pr = c(mean(outs$tau.b2), 1/var(outs$tau.b2)),
+                         b2.tau.pr = fitdist(outs$tau.b2, 'gamma')$estimate,
                          b3.mu.pr = c(mean(outs$mu.b3), 1/var(outs$mu.b3)),
-                         b3.tau.pr = c(mean(outs$tau.b3), 1/var(outs$tau.b3)))
+                         b3.tau.pr = fitdist(outs$tau.b3, 'gamma')$estimate)
     
     pr.x <- apply(outs$x, c(2,4), median)
   }
 }
 
 # Iterative figures -----------------------
+# Tau over time
+b2.tau <- list()
+for(i in 1:length(iter.outs)){
+  b2.tau[[i]] <- as.data.frame(iter.outs[[i]]$tau.b2) %>%
+    mutate(time = i, param = 'tau.b2')
+}
+
+b2tau.df <- do.call(bind_rows, b2.tau)
+
+ggplot(data = b2tau.df, aes(x = factor(time), y = V1))+
+  geom_boxplot(fill = 'lightgray')+
+  labs(x = "Iter", y = "B2 tau")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank())
+
 # Time series
 
 # Params
@@ -519,8 +536,34 @@ ggplot(data = all.betas, aes(x = mean, y = site))+
   geom_errorbar(aes(xmin = lower95, xmax = upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
   geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
-  facet_wrap(~param)
-  
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
 ggplot(data = iter.betas, aes(x = time, y = mean, color = site))+
   geom_line()+
-  facet_wrap(~param)
+  geom_hline(data = tru.betas, aes(yintercept = val, color = site))+
+  facet_wrap(~param)+
+  scale_color_viridis_d(end = 0.8)+
+  labs(x = "Iter", y = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank())
+
+last.betas <- iter.betas %>%
+  filter(time > 5) %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+ggplot(data = last.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())

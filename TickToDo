@@ -1,8 +1,13 @@
-Immediate to do's:
-- Plot-level intercept model
+Done:
+X Plot-level intercept model
+X Figure out where in model remotely sensed covariates should go
+X Add remotely sensed covs to plot-level model
+
+To do:
+- Run full plot-level model
+- Create figures comparing outputs to John's model
 
 In the distance:
-- Figure out where in model remotely sensed covariates should go
-- Add remotely sensed covs to plot-level model
-- Create multi-site toy model
+- Create multi-site toy model (DA, no missing data)
+- Multi-site toy model(Cauchy priors, no missing data)
 
