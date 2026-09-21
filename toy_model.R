@@ -818,7 +818,7 @@ for(i in 1:time.steps){
     
     b3.mu.pr <- c(0,1)
     b3.tau.pr <- c(1,1)
-    b2.dev.pr <- matrix(c(rep(0,site),rep(1,site)), nrow = site)
+    b3.dev.pr <- matrix(c(rep(0,site),rep(1,site)), nrow = site)
     
     pr.x <- matrix(apply(ts, c(1,3), max), nrow = 2, ncol = 3)
     
@@ -931,7 +931,7 @@ for(i in 1:time.steps){
                  coef1=var1, coef2=var2, steps=steps, y=obs, pr.x = pr.x)
     params <- c("int1", "int2", "int3", "beta1", "beta2", "beta3", "lambda", 
                 "mu.int1", "tau.int1", "mu.int2", "tau.int2", "mu.int3",
-                "tau.int3", "mu.b1", "tau.b1", "dev.1", "mu.b2", "tau.b2", 
+                "tau.int3", "mu.b1", "tau.b1", "dev.b1", "mu.b2", "tau.b2", 
                 "dev.b2", "mu.b3", "tau.b3", "dev.b3", "x", "ex", "sample.prob")
     
     inits <- function(){
@@ -953,7 +953,7 @@ for(i in 1:time.steps){
     mod.cauchy <- jags(data=data, parameters.to.save = params, model.file = model.cauchy,
                 inits=inits, n.chains = 3, n.iter=10000)
     
-    outs <- mod$BUGSoutput$sims.list
+    outs <- mod.cauchy$BUGSoutput$sims.list
     colnames(outs$beta1) <- paste("site",1:3, sep = "")
     colnames(outs$beta2) <- paste("site",1:3, sep = "")
     colnames(outs$beta3) <- paste("site", 1:3, sep = "")
@@ -991,3 +991,191 @@ for(i in 1:time.steps){
                         nrow = site, ncol = 2)
   }
 }
+
+# Iterative Cauchy figures --------------------
+# Betas
+tru.betas <- as.data.frame(rbind(stage1.beta, stage2.beta, transition.beta)) %>%
+  rename('site1'='V1', 'site2'='V2', 'site3'='V3') %>%
+  mutate(param = c('beta1', 'beta2', 'beta3')) %>%
+  pivot_longer(-param, names_to = 'site', values_to = 'val')
+
+iter.cauchy.betas <- tibble()
+for(i in 1:length(iter.cauchy)){
+  b1.raw <- as.data.frame(iter.cauchy[[i]]$beta1) %>%
+    mutate(time = i, param = 'beta1') %>%
+    pivot_longer(cols = site1:site3, names_to = 'site', values_to = 'estimate')
+  
+  b2.raw <- as.data.frame(iter.cauchy[[i]]$beta2) %>%
+    mutate(time = i, param = 'beta2') %>%
+    pivot_longer(cols = site1:site3, names_to = 'site', values_to = 'estimate')
+  
+  b3.raw <- as.data.frame(iter.cauchy[[i]]$beta3) %>%
+    mutate(time = i, param = 'beta3') %>%
+    pivot_longer(cols = site1:site3, names_to = 'site', values_to = 'estimate')
+  
+  betas <- bind_rows(b1.raw, b2.raw, b3.raw) %>%
+    group_by(time, site, param) %>%
+    summarise(mean = mean(estimate), median=median(estimate), 
+              lower95 = quantile(estimate, 0.025),
+              upper95 = quantile(estimate, 0.975),
+              var=var(estimate,na.rm = T)) %>%
+    suppressMessages()
+  
+  iter.cauchy.betas <- bind_rows(iter.cauchy.betas, betas)
+}
+
+all.betas <- iter.cauchy.betas %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+ggplot(data = all.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
+ggplot(data = iter.cauchy.betas, aes(x = time, y = mean, color = site))+
+  geom_line()+
+  geom_hline(data = tru.betas, aes(yintercept = val, color = site))+
+  facet_wrap(~param)+
+  scale_color_viridis_d(end = 0.8)+
+  labs(x = "Iter", y = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank())
+
+last.betas <- iter.cauchy.betas %>%
+  filter(time > 10) %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+ggplot(data = last.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
+# Community params
+iter.cauchy.comm <- tibble()
+for(i in 1:length(iter.cauchy)){
+  b1.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b1, 
+                        tau = iter.cauchy[[i]]$tau.b1) %>%
+    mutate(iter = i, param = 'b1')
+
+  b2.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b2, 
+                        tau = iter.cauchy[[i]]$tau.b2) %>%
+    mutate(iter = i, param = 'b2')
+
+  b3.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b3, 
+                        tau = iter.cauchy[[i]]$tau.b3) %>%
+    mutate(iter = i, param = 'b3')
+  
+  comm.parms <- bind_rows(b1.comm, b2.comm, b3.comm)
+  
+  iter.cauchy.comm <- bind_rows(iter.cauchy.comm, comm.parms)
+}
+
+parm.summ <- iter.cauchy.comm %>%
+  group_by(iter, param) %>%
+  summarise(mu = mean(mu), tau = mean(tau))
+
+ggplot(data = parm.summ, aes(x = iter, y = mu, color = param))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Param")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+ggplot(data = parm.summ, aes(x = iter, y = tau, color = param))+
+  geom_line(linewidth = 1)+
+  scale_color_viridis_d(end = 0.8, name = "Param")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+# Deviance params
+iter.cauchy.dev <- tibble()
+for(i in 1:length(iter.cauchy)){
+  b1.dev <- as.data.frame(iter.cauchy[[i]]$dev.b1) %>%
+    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
+    mutate(site = str_replace(site, "V", "site")) %>%
+    mutate(iter = i, param = 'b1')
+  
+  b2.dev <- as.data.frame(iter.cauchy[[i]]$dev.b2) %>%
+    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
+    mutate(site = str_replace(site, "V", "site")) %>%
+    mutate(iter = i, param = 'b2')
+  
+  b3.dev <- as.data.frame(iter.cauchy[[i]]$dev.b3) %>%
+    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
+    mutate(site = str_replace(site, "V", "site")) %>%
+    mutate(iter = i, param = 'b3')
+  
+  dev.parms <- bind_rows(b1.dev, b2.dev, b3.dev)
+  
+  iter.cauchy.dev <- bind_rows(iter.cauchy.dev, dev.parms)
+}
+
+dev.summ <- iter.cauchy.dev %>%
+  group_by(iter, param, site) %>%
+  summarise(mean = mean(dev), sd = sd(dev))
+
+b1.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b1',], aes(x = iter, y = mean, 
+                                                             color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b2.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b2',], aes(x = iter, y = mean, 
+                                                             color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b3.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b3',], aes(x = iter, y = mean, 
+                                                             color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+(b1.mean.dev | b2.mean.dev | b3.mean.dev)+
+  plot_layout(guides = 'collect')
+
+b1.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b1',], aes(x = iter, y = sd, 
+                                                             color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b2.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b2',], aes(x = iter, y = sd, 
+                                                             color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b3.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b3',], aes(x = iter, y = sd, 
+                                                             color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+(b1.tau.dev | b2.tau.dev | b3.tau.dev)+
+  plot_layout(guides = 'collect')
+

@@ -37,7 +37,8 @@ iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
 ambly.jobs <- data.frame(site = ambly.sites, species = "Amblyomma_americanum")
 
 jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
-  mutate(model = models)
+  mutate(model = models) %>%
+  filter(site != "DELA")
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
@@ -236,7 +237,7 @@ plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
   suppressMessages()
 
 # Plot-level cov: EVI
-evi2 <- read_csv("./Data/Cary_EVI2.csv") %>%
+evi2 <- read_csv("./Data/full_EVI2.csv") %>%
   mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                             TRUE ~ siteID)) %>%
   filter(siteID == site.job) %>%
@@ -411,10 +412,10 @@ for (t in seq_len(n.drags)) {
 		gam3.vals <- last.params %>%
 		  filter(str_detect(node, "gam3"))
 		
-		gam3.mean <- matrix(NA, 3, length(unique(plt_cover$lc_dominant)))
+		gam3.mu<- matrix(NA, 3, length(unique(plt_cover$lc_dominant)))
 		for(i in 1:3){
 		  for(j in 1:length(unique(plt_cover$lc_dominant))){
-		    gam3.mean[i,j] <- filter(gam3.vals, 
+		    gam3.mu[i,j] <- filter(gam3.vals, 
 		                           node == paste0("gam3[", i, ", ", j, "]")) %>%
 		      summarise(mean = mean(value)) %>%
 		      pull(mean) %>%
@@ -433,6 +434,7 @@ for (t in seq_len(n.drags)) {
 		  }
 		}
 		gam3.tau[is.infinite(gam3.tau)] <- 1
+		gam3.tau[is.na(gam3.tau)] <- 1
 		
 		pr.gam4 <- matrix(NA, 3, 2)
 		for(i in 1:3){
@@ -553,11 +555,12 @@ for (t in seq_len(n.drags)) {
 	  filter(plotID %in% unique(obs$plotID)) %>%
 	  pull(lc_dominant)
   
-  data$lc.class <- which(current.classes == land.classes)
+  data$lc.class <- match(current.classes, land.classes)
   
   # evi
   data$evi2 <- evi2 %>%
-    filter(date %in% fx.sequence) %>%
+    filter(date %in% fx.sequence, plotID %in% plots) %>%
+    arrange(plotID) %>%
     pivot_wider(names_from = plotID, values_from = evi2_mean) %>%
     select(-date)
 
@@ -632,7 +635,7 @@ for (t in seq_len(n.drags)) {
 	params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
 	            # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
 	            "theta.ln", "theta.na", 
-	            "gam0", "gam1", "gam2", "pz", 
+	            "gam0", "gam1", "gam2", "gam4", "pz", 
 	            "dx", "dlamb", "repro",
 	            "x" #, "x1", "x2", "x3", "x4"
 	)  
