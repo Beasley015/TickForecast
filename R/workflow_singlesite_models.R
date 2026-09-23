@@ -491,6 +491,12 @@ for (t in seq_len(n.drags)) {
 	data$maxrh <- daymet.sub %>% pull(maxRHScale) %>% as.vector()
 	data$minrh <- daymet.sub %>% pull(minRHScale) %>% as.vector()
 	data$precip <- daymet.sub %>% pull(precipScale) %>% as.vector()
+	
+	if(any(length(data$maxtemp < horizon), length(data$maxrh < horizon),
+	       length(data$minrh < horizon), length(data$precip < horizon))){
+	  horizon <- min(length(data$maxtemp < horizon), length(data$maxrh < horizon),
+	                 length(data$minrh < horizon), length(data$precip < horizon))
+	}
 
 	obs <- neon.job %>%
 		filter(time == fx.start.date)
@@ -582,7 +588,9 @@ for (t in seq_len(n.drags)) {
 		  }
     
 		} else {
-		  horizon <- min(nrow(data$cgdd), length(data$mice))
+		  horizon <- min(nrow(data$cgdd), length(data$mice), 
+		                 length(data$maxtemp < horizon), length(data$maxrh < horizon),
+		                 length(data$minrh < horizon), length(data$precip < horizon))
 			data$y <- y[, 1:horizon, ]
 				
 			if(is.na(dim(data$y)[3]==T)){
@@ -664,7 +672,7 @@ for (t in seq_len(n.drags)) {
 	if(year(fx.start.date) >= 2018){
 	  message("Checking convergence...")
 	  nodes <- colnames(out.nchains[[1]])
-	  nodes <- nodes[!str_detect(nodes, c("dlamb|dx|pz|x"))]
+	  nodes <- nodes[!str_detect(nodes, c("dlamb|dx|pz|x|gam3"))]
 			
 	  gelman.keep <- numeric(length(nodes))
 	  for (ff in seq_along(nodes)) {
@@ -679,7 +687,7 @@ for (t in seq_len(n.drags)) {
 	      mcmc.check,
 	      transform = TRUE)$psrf[1])
 
-	    if (any(gelman.keep > 1.2)) {
+	    if (any(gelman.keep[!is.na(gelman.keep)] > 1.2)) {
 	      # message("WARNING: Convergence not reached!")
 	      bad.nodes <- which(gelman.keep > 1.2)
 	      bad.params <- tibble(
