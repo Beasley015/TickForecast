@@ -10,10 +10,10 @@
 #$ -t 1-20
 
 # Specify hard time limit of hours for the job (if you have a short runtime the SCC gives you priority)
-#$ -l h_rt=48:00:00
+#$ -l h_rt=72:00:00
 
 # Assign cores and cores per node
-#$ -pe omp 3 -l mem_per_core=18G # This assigns 3 cores per task; 1 core per markov chain
+#$ -pe omp 16 # This assigns a full node (16 cores) for a total of 128G of RAM
 
 # Send an email when the job finishes or if it is aborted 
 #$ -m ea

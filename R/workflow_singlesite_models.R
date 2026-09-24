@@ -50,6 +50,7 @@ species.job <- jobs$species[job.num]
 model.job <- jobs$model[job.num]
 
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+n.slots <- ifelse(n.slots > 3, 3, n.slots)
 if(is.na(n.slots)){
   n.slots <- 2
 }

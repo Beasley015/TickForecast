@@ -245,6 +245,85 @@ model.cauchy <- function(){
   }
 }
 
+model.test <- function(){
+  # Global priors
+  mu.int1 ~ dnorm(int.mu1[1], int.mu1[2])
+  tau.int1 ~ dgamma(int.tau1[1], int.tau1[2])
+  
+  mu.int2 ~ dnorm(int.mu2[1], int.mu2[2])
+  tau.int2 ~ dgamma(int.tau2[1], int.tau2[2])
+  
+  mu.int3 ~ dnorm(int.mu3[1], int.mu3[2])
+  tau.int3 ~ dgamma(int.tau3[1], int.tau3[2])
+  
+  for(i in 1:sites){
+    mu.b1[i] ~ dnorm(b1.mu.pr[i,1], b1.mu.pr[i,2])
+  }
+  k ~ dpois(klamb)
+  o.b1 ~ dwish(R.b1, sites + k)
+  beta1 ~ dmnorm(mu.b1, o.b1)
+  
+  mu.b2 ~ dnorm(b2.mu.pr[1], b2.mu.pr[2])
+  tau.b2 ~ dgamma(b2.tau.pr[1], b2.tau.pr[2])
+  
+  mu.b3 ~ dnorm(b3.mu.pr[1], b3.mu.pr[2])
+  tau.b3 ~ dgamma(b3.tau.pr[1], b3.tau.pr[2])
+  
+  sample.prob ~ dbeta(5,5)
+  lambda ~ dgamma(1,1)
+  
+  # Starting value for x
+  for(stage in 1:2){
+    for(site in 1:sites){
+      x[stage,1,site] ~ dpois(pr.x[stage,site])
+    }
+  }
+  
+  for(site in 1:sites){
+    # site-level priors
+    int1[site] ~ dnorm(mu.int1, tau.int1)
+    int2[site] ~ dnorm(mu.int2, tau.int2)
+    int3[site] ~ dnorm(mu.int3, tau.int3)
+    
+    dev.b2[site] ~ dnorm(b2.dev.pr[site,1], b2.dev.pr[site,2])
+    dev.b3[site] ~ dnorm(b3.dev.pr[site,1], b3.dev.pr[site,2])
+    
+    beta2[site] ~ dnorm(mu.b2 + dev.b2[site], tau.b2)
+    beta3[site] ~ dnorm(mu.b3 + dev.b3[site], tau.b3)
+    
+    for(t in 1:steps){
+      # Components of transition matrix
+      logit(survival1[t,site]) <- int1[site] + beta1[site]*coef2[t]
+      logit(survival2[t,site]) <- int2[site] + beta2[site]*coef2[t]
+      logit(transition[t,site]) <- int3[site] + beta3[site]*coef1[t]
+      
+      repro[t,site] ~ dpois(lambda)
+      
+      # Transition matrix
+      A[1,1,t,site] <- survival1[t,site]*(1-transition[t,site])
+      A[1,2,t,site] <- repro[t,site]
+      A[2,1,t,site] <- survival1[t,site]*transition[t,site]
+      A[2,2,t,site] <- survival2[t,site]
+      
+      # Sampling error
+      for(stage in 1:2){
+        for(sample in 1:4){
+          y[stage,t,site,sample] ~ dbin(sample.prob, x[stage,t,site])
+        }
+      }
+    }
+    
+    for(t in 2:(steps+1)){
+      # Forecast
+      ex[1:2,t,site] <- A[1:2,1:2,t-1,site] %*% x[1:2,t-1,site]
+      
+      for(stage in 1:2){
+        x[stage,t,site] ~ dpois(ex[stage,t,site])
+      }
+    }
+  }
+}
+
 # Base model workflow ------------------
 int.mu1 <- c(0,1)
 int.tau1 <- c(1,1)
@@ -1222,3 +1301,421 @@ dev.summ %>%
   plot_annotation(tag_levels = "a")
 
 # Test model workflow ---------------------------------
+iter.test <- list()
+for(i in 1:time.steps){
+  if(i == 1){
+    int.mu1 <- c(0,1)
+    int.tau1 <- c(1,1)
+    
+    int.mu2 <- c(0,1)
+    int.tau2 <- c(1,1)
+    
+    int.mu3 <- c(0,1)
+    int.tau3 <- c(1,1)
+    
+    klamb <- 1
+    
+    b1.mu.pr <- matrix(c(rep(0,site), rep(1,site)), nrow = site)
+    R.b1 <- diag(sites)
+    
+    b2.mu.pr <- c(0,1)
+    b2.tau.pr <- c(1,1)
+    b2.dev.pr <- matrix(c(rep(0,site),rep(1,site)), nrow = site)
+    
+    b3.mu.pr <- c(0,1)
+    b3.tau.pr <- c(1,1)
+    b3.dev.pr <- matrix(c(rep(0,site),rep(1,site)), nrow = site)
+    
+    pr.x <- matrix(apply(ts, c(1,3), max), nrow = 2, ncol = site)
+    
+    steps <- 2
+    
+    obs <- samples[,1:steps,,]
+    
+    data <- list(int.mu1=int.mu1, int.tau1=int.tau1, int.mu2=int.mu2, 
+                 int.tau2=int.tau2, int.mu3=int.mu3, int.tau3=int.tau3,
+                 b1.mu.pr=b1.mu.pr, R.b1 = R.b1, b2.mu.pr=b2.mu.pr, 
+                 b2.tau.pr=b2.tau.pr, b2.dev.pr=b2.dev.pr,
+                 b3.mu.pr=b3.mu.pr, b3.tau.pr=b3.tau.pr, b3.dev.pr=b3.dev.pr,
+                 coef1=var1, coef2=var2, steps=steps, y=obs, pr.x = pr.x,
+                 sites=site, klamb = klamb)
+    
+    params <- c("int1", "int2", "int3", "beta1", "beta2", "beta3", "lambda", 
+                "mu.int1", "tau.int1", "mu.int2", "tau.int2", "mu.int3",
+                "tau.int3", "mu.b1", "o.b1", "mu.b2", "tau.b2", 
+                "dev.b2", "mu.b3", "tau.b3", "dev.b3", "x", "ex", "sample.prob", 
+                "pr.x", "k")
+    
+    inits <- function(){
+      list(
+        int1 = rep(0,site),
+        int2 = rep(0,site),
+        int3 = rep(0,site),
+        beta1 = rep(0,site),
+        beta2 = rep(0,site),
+        beta3 = rep(0,site),
+        lambda = rgamma(1,5,0.5),
+        sample.prob = runif(1,0.5,1),
+        x = abind(ceiling(apply(samples[,1:steps,,], c(1:3), max)*1.2),
+                  matrix(0, nrow = dim(samples)[1], ncol = site),
+                  along = 2)
+      )
+    }
+    
+    mod.test <- jags(data=data, parameters.to.save = params, 
+                       model.file = model.test, inits = inits, n.chains = 3,
+                       n.iter=10000)
+    
+    outs <- mod.test$BUGSoutput$sims.list
+    colnames(outs$beta1) <- paste("site",1:site, sep = "")
+    colnames(outs$beta2) <- paste("site",1:site, sep = "")
+    colnames(outs$beta3) <- paste("site", 1:site, sep = "")
+    colnames(outs$int1) <- paste("site",1:site, sep = "")
+    colnames(outs$int2) <- paste("site",1:site, sep = "")
+    colnames(outs$int3) <- paste("site",1:site, sep = "")
+    dimnames(outs$x)[[4]] <- paste("site",1:site, sep = "")
+    iter.test[[i]] <- outs
+    
+    priors <- data.frame(int.mu1 = c(mean(outs$mu.int1), 1/var(outs$mu.int1)),
+                         int.tau1 = fitdist(outs$tau.int1, 'gamma')$estimate,
+                         int.mu2 = c(mean(outs$mu.int2), 1/var(outs$mu.int2)),
+                         int.tau2 = fitdist(outs$tau.int2, 'gamma')$estimate,
+                         int.mu3 = c(mean(outs$mu.int3), 1/var(outs$mu.int3)),
+                         int.tau3 = fitdist(outs$tau.int3, 'gamma')$estimate,
+                         b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
+                         b2.tau.pr = fitdist(as.numeric(outs$tau.b2), 
+                                             'gamma')$estimate,
+                         b3.mu.pr = c(mean(outs$mu.b3), 1/var(outs$mu.b3)),
+                         b3.tau.pr = fitdist(as.numeric(outs$tau.b3), 
+                                             'gamma')$estimate)
+    
+    pr.x <- apply(outs$x, c(2,4), median)
+    
+    b1.mu.pr <- matrix(c(colMeans(outs$mu.b1), 
+                         apply(outs$mu.b1, 2, function(x) 1/var(x))),
+                       nrow = sites)
+    R.b1 <- apply(outs$o.b1, c(2,3), mean)
+    klamb <- mean(outs$k)
+    
+    b2.dev.pr <- matrix(c(colMeans(outs$dev.b2), 
+                          apply(outs$dev.b2, 2, function(x) 1/var(x))),
+                        nrow = site, ncol = 2)
+    
+    b3.dev.pr <- matrix(c(colMeans(outs$dev.b3), 
+                          apply(outs$dev.b3, 2, function(x) 1/var(x))),
+                        nrow = site, ncol = 2)
+    
+  } else{
+    int.mu1 <- priors$int.mu1
+    int.tau1 <- priors$int.tau1
+    
+    int.mu2 <- priors$int.mu2
+    int.tau2 <- priors$int.tau2
+    
+    int.mu3 <- priors$int.mu3
+    int.tau3 <- priors$int.tau3
+    
+    b1.mu.pr <- b1.mu.pr
+    R.b1 <- R.b1
+    klamb <- klamb
+    
+    b2.mu.pr <- priors$b2.mu.pr
+    b2.tau.pr <- priors$b2.tau.pr
+    b2.dev.pr <- b2.dev.pr
+    
+    b3.mu.pr <- priors$b3.mu.pr
+    b3.tau.pr <- priors$b3.tau.pr
+    b3.dev.pr <- b3.dev.pr
+    
+    pr.x <- pr.x
+    
+    steps <- ifelse(time.steps+1- i < 2, time.steps+1 - i, 2)
+    
+    obs <- samples[,i:(i+1),,]
+    
+    data <- list(int.mu1=int.mu1, int.tau1=int.tau1, int.mu2=int.mu2, 
+                 int.tau2=int.tau2, int.mu3=int.mu3, int.tau3=int.tau3,
+                 b1.mu.pr=b1.mu.pr, R.b1 = R.b1, b2.mu.pr=b2.mu.pr, 
+                 b2.tau.pr=b2.tau.pr, b2.dev.pr=b2.dev.pr,
+                 b3.mu.pr=b3.mu.pr, b3.tau.pr=b3.tau.pr, b3.dev.pr=b3.dev.pr,
+                 coef1=var1, coef2=var2, steps=steps, y=obs, pr.x = pr.x,
+                 sites = site, klamb = klamb)
+    
+    params <- c("int1", "int2", "int3", "beta1", "beta2", "beta3", "lambda", 
+                "mu.int1", "tau.int1", "mu.int2", "tau.int2", "mu.int3",
+                "tau.int3", "mu.b1", "o.b1", "mu.b2", "tau.b2", "k",
+                "dev.b2", "mu.b3", "tau.b3", "dev.b3", "x", "ex", "sample.prob")
+    
+    inits <- function(){
+      list(
+        int1 = rep(0,site),
+        int2 = rep(0,site),
+        int3 = rep(0,site),
+        beta1 = rep(0,site),
+        beta2 = rep(0,site),
+        beta3 = rep(0,site),
+        lambda = rgamma(1,5,0.5),
+        sample.prob = runif(1,0.5,1),
+        x = abind(ceiling(apply(samples[,i:(i+1),,], c(1:3), max)*1.2),
+                  matrix(0, nrow = dim(samples)[1], ncol = site),
+                  along = 2)
+      )
+    }
+    
+    mod.test <- jags(data=data, parameters.to.save = params, 
+                       model.file = model.test, inits=inits, 
+                       n.chains = 3, n.iter=10000)
+    
+    outs <- mod.test$BUGSoutput$sims.list
+    colnames(outs$beta1) <- paste("site",1:site, sep = "")
+    colnames(outs$beta2) <- paste("site",1:site, sep = "")
+    colnames(outs$beta3) <- paste("site", 1:site, sep = "")
+    colnames(outs$int1) <- paste("site",1:site, sep = "")
+    colnames(outs$int2) <- paste("site",1:site, sep = "")
+    colnames(outs$int3) <- paste("site",1:site, sep = "")
+    dimnames(outs$x)[[4]] <- paste("site",1:site, sep = "")
+    iter.test[[i]] <- outs
+    
+    priors <- data.frame(int.mu1 = c(mean(outs$mu.int1), 1/var(outs$mu.int1)),
+                         int.tau1 = fitdist(outs$tau.int1, 'gamma')$estimate,
+                         int.mu2 = c(mean(outs$mu.int2), 1/var(outs$mu.int2)),
+                         int.tau2 = fitdist(outs$tau.int2, 'gamma')$estimate,
+                         int.mu3 = c(mean(outs$mu.int3), 1/var(outs$mu.int3)),
+                         int.tau3 = fitdist(outs$tau.int3, 'gamma')$estimate,
+                         b2.mu.pr = c(mean(outs$mu.b2), 1/var(outs$mu.b2)),
+                         b2.tau.pr = fitdist(as.numeric(outs$tau.b2), 
+                                             'gamma')$estimate,
+                         b3.mu.pr = c(mean(outs$mu.b3), 1/var(outs$mu.b3)),
+                         b3.tau.pr = fitdist(as.numeric(outs$tau.b3), 
+                                             'gamma')$estimate)
+    
+    pr.x <- apply(outs$x, c(2,4), median)
+    
+    b1.mu.pr <- matrix(c(colMeans(outs$mu.b1), 
+                         apply(outs$mu.b1, 2, function(x) 1/var(x))),
+                       nrow = sites)
+    R.b1 <- apply(outs$o.b1, c(2,3), mean)
+    klamb <- mean(outs$k)
+    
+    b2.dev.pr <- matrix(c(colMeans(outs$dev.b2), 
+                          apply(outs$dev.b2, 2, function(x) 1/var(x))),
+                        nrow = site, ncol = 2)
+    
+    b3.dev.pr <- matrix(c(colMeans(outs$dev.b3), 
+                          apply(outs$dev.b3, 2, function(x) 1/var(x))),
+                        nrow = site, ncol = 2)
+  }
+}
+
+# Test model figures ---------------------
+# Betas
+tru.betas <- as.data.frame(rbind(stage1.beta, stage2.beta, transition.beta)) %>%
+  rename_with(~paste0("site", 1:sites)) %>%
+  mutate(param = c('beta1', 'beta2', 'beta3')) %>%
+  pivot_longer(-param, names_to = 'site', values_to = 'val')
+
+iter.test.betas <- tibble()
+for(i in 1:length(iter.test)){
+  b1.raw <- as.data.frame(iter.test[[i]]$beta1) %>%
+    mutate(time = i, param = 'beta1') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  b2.raw <- as.data.frame(iter.test[[i]]$beta2) %>%
+    mutate(time = i, param = 'beta2') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  b3.raw <- as.data.frame(iter.test[[i]]$beta3) %>%
+    mutate(time = i, param = 'beta3') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  betas <- bind_rows(b1.raw, b2.raw, b3.raw) %>%
+    group_by(time, site, param) %>%
+    summarise(mean = mean(estimate), median=median(estimate), 
+              lower95 = quantile(estimate, 0.025),
+              upper95 = quantile(estimate, 0.975),
+              var=var(estimate,na.rm = T)) %>%
+    suppressMessages()
+  
+  iter.test.betas <- bind_rows(iter.test.betas, betas)
+}
+
+all.betas <- iter.test.betas %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+ggplot(data = all.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
+ggplot(data = iter.test.betas, aes(x = time, y = mean, color = site))+
+  geom_line()+
+  # geom_hline(data = tru.betas, aes(yintercept = val, color = site))+
+  facet_wrap(~param)+
+  scale_color_viridis_d(end = 0.8)+
+  labs(x = "Iter", y = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank())
+
+last.betas <- iter.test.betas %>%
+  filter(time > 10) %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+ggplot(data = last.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
+# Community params
+iter.cauchy.comm <- tibble()
+for(i in 1:length(iter.cauchy)){
+  b1.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b1, 
+                        tau = iter.cauchy[[i]]$tau.b1) %>%
+    mutate(iter = i, param = 'b1')
+  
+  b2.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b2, 
+                        tau = iter.cauchy[[i]]$tau.b2) %>%
+    mutate(iter = i, param = 'b2')
+  
+  b3.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b3, 
+                        tau = iter.cauchy[[i]]$tau.b3) %>%
+    mutate(iter = i, param = 'b3')
+  
+  comm.parms <- bind_rows(b1.comm, b2.comm, b3.comm)
+  
+  iter.cauchy.comm <- bind_rows(iter.cauchy.comm, comm.parms)
+}
+
+parm.summ <- iter.cauchy.comm %>%
+  group_by(iter, param) %>%
+  summarise(mu = mean(mu), tau = mean(tau))
+
+tru.comm.betas <- tru.betas %>%
+  mutate(param = str_remove(param, "eta")) %>%
+  group_by(param) %>%
+  summarise(mean = mean(val))
+
+ggplot(data = parm.summ, aes(x = iter, y = mu, color = param))+
+  geom_line(linewidth = 1)+
+  geom_hline(data=tru.comm.betas, aes(yintercept = mean, color = param),
+             linetype = 'dashed')+
+  scale_color_viridis_d(end = 0.8, name = "Param")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+ggplot(data = parm.summ, aes(x = iter, y = tau, color = param))+
+  geom_line(linewidth = 1)+
+  scale_color_viridis_d(end = 0.8, name = "Param")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+# Deviance params
+iter.cauchy.dev <- tibble()
+for(i in 1:length(iter.cauchy)){
+  b1.dev <- as.data.frame(iter.cauchy[[i]]$dev.b1) %>%
+    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
+    mutate(site = str_replace(site, "V", "site")) %>%
+    mutate(iter = i, param = 'b1')
+  
+  b2.dev <- as.data.frame(iter.cauchy[[i]]$dev.b2) %>%
+    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
+    mutate(site = str_replace(site, "V", "site")) %>%
+    mutate(iter = i, param = 'b2')
+  
+  b3.dev <- as.data.frame(iter.cauchy[[i]]$dev.b3) %>%
+    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
+    mutate(site = str_replace(site, "V", "site")) %>%
+    mutate(iter = i, param = 'b3')
+  
+  dev.parms <- bind_rows(b1.dev, b2.dev, b3.dev)
+  
+  iter.cauchy.dev <- bind_rows(iter.cauchy.dev, dev.parms)
+}
+
+dev.summ <- iter.cauchy.dev %>%
+  group_by(iter, param, site) %>%
+  summarise(mean = mean(dev), sd = sd(dev))
+
+b1.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b1',], 
+                      aes(x = iter, y = mean, ymin=mean-2*sd, ymax = mean+2*sd,
+                          color = site))+
+  geom_line()+
+  geom_pointrange()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b2.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b2',], 
+                      aes(x = iter, y = mean, ymin=mean-2*sd, ymax = mean+2*sd,
+                          color = site))+
+  geom_line()+
+  geom_pointrange()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b3.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b3',], 
+                      aes(x = iter, y = mean, ymin=mean-2*sd, ymax = mean+2*sd,
+                          color = site))+
+  geom_line()+
+  geom_pointrange()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+(b1.mean.dev | b2.mean.dev | b3.mean.dev)+
+  plot_layout(guides = 'collect')
+
+b1.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b1',], aes(x = iter, y = sd, 
+                                                            color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b2.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b2',], aes(x = iter, y = sd, 
+                                                            color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+b3.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b3',], aes(x = iter, y = sd, 
+                                                            color = site))+
+  geom_line()+
+  scale_color_viridis_d(end = 0.8, name = "Site")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid = element_blank())
+
+(b1.tau.dev | b2.tau.dev | b3.tau.dev)+
+  plot_layout(guides = 'collect')
+
+colnames(dev.summ)
+colnames(parm.summ)
+
+dev.summ %>%
+  mutate(tau.dev = 1/(sd^2)) %>%
+  left_join(parm.summ, c("iter", "param")) %>%
+  mutate(est.param = mean + mu) %>%
+  group_by(param) 
+
+# Fig comparing base and cauchy betas
+(base.cauchy.betas/iter.cauchy.betas)+
+  plot_annotation(tag_levels = "a")
