@@ -257,7 +257,9 @@ model.test <- function(){
   tau.int3 ~ dgamma(int.tau3[1], int.tau3[2])
   
   for(i in 1:sites){
-    mu.b1[i] ~ dnorm(b1.mu.pr[i,1], b1.mu.pr[i,2])
+    mu.b1[site] ~ dnorm(b1.mu.pr[1], shrink[site]*gshrink)
+    #shrinkage params are mixing densities: look into horseshoe prior &
+    # bayesian lasso
   }
   k ~ dpois(klamb)
   o.b1 ~ dwish(R.b1, sites + k)
@@ -1313,9 +1315,9 @@ for(i in 1:time.steps){
     int.mu3 <- c(0,1)
     int.tau3 <- c(1,1)
     
+    b1.mu.pr <- rep(0,sites)
+    b1.cov.pr <- diag(sites)
     klamb <- 1
-    
-    b1.mu.pr <- matrix(c(rep(0,site), rep(1,site)), nrow = site)
     R.b1 <- diag(sites)
     
     b2.mu.pr <- c(0,1)
@@ -1334,8 +1336,8 @@ for(i in 1:time.steps){
     
     data <- list(int.mu1=int.mu1, int.tau1=int.tau1, int.mu2=int.mu2, 
                  int.tau2=int.tau2, int.mu3=int.mu3, int.tau3=int.tau3,
-                 b1.mu.pr=b1.mu.pr, R.b1 = R.b1, b2.mu.pr=b2.mu.pr, 
-                 b2.tau.pr=b2.tau.pr, b2.dev.pr=b2.dev.pr,
+                 b1.mu.pr=b1.mu.pr, b1.cov.pr=b1.cov.pr, R.b1 = R.b1, 
+                 b2.mu.pr=b2.mu.pr, b2.tau.pr=b2.tau.pr, b2.dev.pr=b2.dev.pr,
                  b3.mu.pr=b3.mu.pr, b3.tau.pr=b3.tau.pr, b3.dev.pr=b3.dev.pr,
                  coef1=var1, coef2=var2, steps=steps, y=obs, pr.x = pr.x,
                  sites=site, klamb = klamb)
@@ -1391,9 +1393,8 @@ for(i in 1:time.steps){
     
     pr.x <- apply(outs$x, c(2,4), median)
     
-    b1.mu.pr <- matrix(c(colMeans(outs$mu.b1), 
-                         apply(outs$mu.b1, 2, function(x) 1/var(x))),
-                       nrow = sites)
+    b1.mu.pr <- colMeans(outs$mu.b1)
+    b1.cov.pr <- solve(cov(outs$mu.b1))
     R.b1 <- apply(outs$o.b1, c(2,3), mean)
     klamb <- mean(outs$k)
     
@@ -1416,6 +1417,7 @@ for(i in 1:time.steps){
     int.tau3 <- priors$int.tau3
     
     b1.mu.pr <- b1.mu.pr
+    b1.cov.pr <- b1.cov.pr
     R.b1 <- R.b1
     klamb <- klamb
     
@@ -1431,7 +1433,7 @@ for(i in 1:time.steps){
     
     steps <- ifelse(time.steps+1- i < 2, time.steps+1 - i, 2)
     
-    obs <- samples[,i:(i+1),,]
+    obs <- samples[,i:(i+steps-1),,]
     
     data <- list(int.mu1=int.mu1, int.tau1=int.tau1, int.mu2=int.mu2, 
                  int.tau2=int.tau2, int.mu3=int.mu3, int.tau3=int.tau3,
@@ -1439,7 +1441,7 @@ for(i in 1:time.steps){
                  b2.tau.pr=b2.tau.pr, b2.dev.pr=b2.dev.pr,
                  b3.mu.pr=b3.mu.pr, b3.tau.pr=b3.tau.pr, b3.dev.pr=b3.dev.pr,
                  coef1=var1, coef2=var2, steps=steps, y=obs, pr.x = pr.x,
-                 sites = site, klamb = klamb)
+                 sites = site, klamb = klamb, b1.cov.pr = b1.cov.pr)
     
     params <- c("int1", "int2", "int3", "beta1", "beta2", "beta3", "lambda", 
                 "mu.int1", "tau.int1", "mu.int2", "tau.int2", "mu.int3",
@@ -1456,7 +1458,7 @@ for(i in 1:time.steps){
         beta3 = rep(0,site),
         lambda = rgamma(1,5,0.5),
         sample.prob = runif(1,0.5,1),
-        x = abind(ceiling(apply(samples[,i:(i+1),,], c(1:3), max)*1.2),
+        x = abind(ceiling(apply(samples[,i:(i+steps-1),,], c(1:3), max)*1.2),
                   matrix(0, nrow = dim(samples)[1], ncol = site),
                   along = 2)
       )
@@ -1491,9 +1493,8 @@ for(i in 1:time.steps){
     
     pr.x <- apply(outs$x, c(2,4), median)
     
-    b1.mu.pr <- matrix(c(colMeans(outs$mu.b1), 
-                         apply(outs$mu.b1, 2, function(x) 1/var(x))),
-                       nrow = sites)
+    b1.mu.pr <- colMeans(outs$mu.b1)
+    b1.cov.pr <- solve(cov(outs$mu.b1))
     R.b1 <- apply(outs$o.b1, c(2,3), mean)
     klamb <- mean(outs$k)
     
@@ -1566,7 +1567,7 @@ ggplot(data = iter.test.betas, aes(x = time, y = mean, color = site))+
   theme(panel.grid = element_blank())
 
 last.betas <- iter.test.betas %>%
-  filter(time > 10) %>%
+  filter(time > 15) %>%
   ungroup() %>%
   group_by(site, param) %>%
   summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
@@ -1583,139 +1584,9 @@ ggplot(data = last.betas, aes(x = mean, y = site))+
   theme_bw(base_size = 14)+
   theme(panel.grid = element_blank(), axis.title.y = element_blank())
 
-# Community params
-iter.cauchy.comm <- tibble()
-for(i in 1:length(iter.cauchy)){
-  b1.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b1, 
-                        tau = iter.cauchy[[i]]$tau.b1) %>%
-    mutate(iter = i, param = 'b1')
-  
-  b2.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b2, 
-                        tau = iter.cauchy[[i]]$tau.b2) %>%
-    mutate(iter = i, param = 'b2')
-  
-  b3.comm <- data.frame(mu = iter.cauchy[[i]]$mu.b3, 
-                        tau = iter.cauchy[[i]]$tau.b3) %>%
-    mutate(iter = i, param = 'b3')
-  
-  comm.parms <- bind_rows(b1.comm, b2.comm, b3.comm)
-  
-  iter.cauchy.comm <- bind_rows(iter.cauchy.comm, comm.parms)
-}
-
-parm.summ <- iter.cauchy.comm %>%
-  group_by(iter, param) %>%
-  summarise(mu = mean(mu), tau = mean(tau))
-
-tru.comm.betas <- tru.betas %>%
-  mutate(param = str_remove(param, "eta")) %>%
-  group_by(param) %>%
-  summarise(mean = mean(val))
-
-ggplot(data = parm.summ, aes(x = iter, y = mu, color = param))+
-  geom_line(linewidth = 1)+
-  geom_hline(data=tru.comm.betas, aes(yintercept = mean, color = param),
-             linetype = 'dashed')+
-  scale_color_viridis_d(end = 0.8, name = "Param")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-ggplot(data = parm.summ, aes(x = iter, y = tau, color = param))+
-  geom_line(linewidth = 1)+
-  scale_color_viridis_d(end = 0.8, name = "Param")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-# Deviance params
-iter.cauchy.dev <- tibble()
-for(i in 1:length(iter.cauchy)){
-  b1.dev <- as.data.frame(iter.cauchy[[i]]$dev.b1) %>%
-    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
-    mutate(site = str_replace(site, "V", "site")) %>%
-    mutate(iter = i, param = 'b1')
-  
-  b2.dev <- as.data.frame(iter.cauchy[[i]]$dev.b2) %>%
-    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
-    mutate(site = str_replace(site, "V", "site")) %>%
-    mutate(iter = i, param = 'b2')
-  
-  b3.dev <- as.data.frame(iter.cauchy[[i]]$dev.b3) %>%
-    pivot_longer(everything(), names_to = "site", values_to = "dev") %>%
-    mutate(site = str_replace(site, "V", "site")) %>%
-    mutate(iter = i, param = 'b3')
-  
-  dev.parms <- bind_rows(b1.dev, b2.dev, b3.dev)
-  
-  iter.cauchy.dev <- bind_rows(iter.cauchy.dev, dev.parms)
-}
-
-dev.summ <- iter.cauchy.dev %>%
-  group_by(iter, param, site) %>%
-  summarise(mean = mean(dev), sd = sd(dev))
-
-b1.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b1',], 
-                      aes(x = iter, y = mean, ymin=mean-2*sd, ymax = mean+2*sd,
-                          color = site))+
-  geom_line()+
-  geom_pointrange()+
-  scale_color_viridis_d(end = 0.8, name = "Site")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-b2.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b2',], 
-                      aes(x = iter, y = mean, ymin=mean-2*sd, ymax = mean+2*sd,
-                          color = site))+
-  geom_line()+
-  geom_pointrange()+
-  scale_color_viridis_d(end = 0.8, name = "Site")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-b3.mean.dev <- ggplot(dev.summ[dev.summ$param == 'b3',], 
-                      aes(x = iter, y = mean, ymin=mean-2*sd, ymax = mean+2*sd,
-                          color = site))+
-  geom_line()+
-  geom_pointrange()+
-  scale_color_viridis_d(end = 0.8, name = "Site")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-(b1.mean.dev | b2.mean.dev | b3.mean.dev)+
-  plot_layout(guides = 'collect')
-
-b1.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b1',], aes(x = iter, y = sd, 
-                                                            color = site))+
-  geom_line()+
-  scale_color_viridis_d(end = 0.8, name = "Site")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-b2.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b2',], aes(x = iter, y = sd, 
-                                                            color = site))+
-  geom_line()+
-  scale_color_viridis_d(end = 0.8, name = "Site")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-b3.tau.dev <- ggplot(dev.summ[dev.summ$param == 'b3',], aes(x = iter, y = sd, 
-                                                            color = site))+
-  geom_line()+
-  scale_color_viridis_d(end = 0.8, name = "Site")+
-  theme_bw(base_size = 12)+
-  theme(panel.grid = element_blank())
-
-(b1.tau.dev | b2.tau.dev | b3.tau.dev)+
-  plot_layout(guides = 'collect')
-
-colnames(dev.summ)
-colnames(parm.summ)
-
-dev.summ %>%
-  mutate(tau.dev = 1/(sd^2)) %>%
-  left_join(parm.summ, c("iter", "param")) %>%
-  mutate(est.param = mean + mu) %>%
-  group_by(param) 
-
-# Fig comparing base and cauchy betas
-(base.cauchy.betas/iter.cauchy.betas)+
-  plot_annotation(tag_levels = "a")
+apply(iter.test[[10]]$o.b1, c(2,3), mean)
+apply(iter.test[[1]]$o.b1, c(2,3), mean)
+mean(iter.test[[1]]$k)
+mean(iter.test[[10]]$k)
+colMeans(iter.test[[1]]$mu.b1)
+colMeans(iter.test[[10]]$mu.b1)
