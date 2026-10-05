@@ -2,12 +2,14 @@ Done:
 X Plot-level intercept model
 X Figure out where in model remotely sensed covariates should go
 X Add remotely sensed covs to plot-level model
+X Run full plot-level model
 
 To do:
-- Run full plot-level model
 - Create figures comparing outputs to John's model
+- Plot-level time series (& check on OSBS for ixodes)
+- PP-RB toy model
 
 In the distance:
-- Create multi-site toy model (DA, no missing data)
-- Multi-site toy model(Cauchy priors, no missing data)
+- Clean up coefficient figs (change significance symbol)
+- Plot out parabolas/get covariance for GDD parameters
 

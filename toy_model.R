@@ -223,6 +223,26 @@ pprb.phase1 <- function(){
 }
 
 # PP_RB part 2: across-site parameters using recursive Bayes
+pprb.phase2 <- function(){
+  for(site in 1:sites){
+    b1[site] ~ dnorm(mu.b1[site], tau.b1[site])
+  }
+  
+  # proposed sigma
+  q.start ~ dgamma(1,1)
+  r.start ~ dgamma(1,1)
+  
+  q <- sites/(2+q.start)
+  r <- 1/sum((b1-mu.b1)^2 + 1/r.start)
+  
+  s2b1.temp ~ dgamma(q, r)
+  b1.s2 <- 1/stb1.temp
+    
+  # proposed mu
+  tmp.var=1/((sites/b1.s2)+(1/1))
+  tmp.mn=tmp.var*(sum(b1)/b1.s2)
+  b1.mu ~ dnorm(tmp.mn, 1/tmp.var)
+}
 
 # Base model workflow ------------------
 int.mu1 <- c(0,1)
