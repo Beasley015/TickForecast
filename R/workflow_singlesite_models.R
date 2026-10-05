@@ -58,6 +58,7 @@ if(is.na(n.slots)){
 n.iter <- 50000
 Nmc <- 2000
 horizon <- 365
+update <- T
 
 # =========================================== #
 #       tick data intake ----------------
@@ -326,7 +327,18 @@ pr.sig <- df.params %>%
 
 t = 1
 
-for (t in seq_len(n.drags)) {
+if(update){
+  dir.base <- file.path(dir.out,site.job, model.job, 
+                        gsub(" ", "", species.job))
+  
+  complete.dates <- str_extract(list.dirs(dir.base), pattern = "\\d+-\\d+-\\d+")
+  complete.dates <- complete.dates[!(is.na(complete.dates))]
+  
+  t <- which(drag.dates == max(complete.dates))+1
+  
+}
+
+for (t in t:n.drags) {
 	fx.start.date <- drag.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / n.drags * 100, 2), "%)")
@@ -481,7 +493,7 @@ for (t in seq_len(n.drags)) {
     n.days <- length(fx.sequence)
 	}
 		
-	if(horizon == 0){
+	if(horizon < 2){
 		break
 	}
 
@@ -574,6 +586,8 @@ for (t in seq_len(n.drags)) {
 	if (length(data$mice) < length(fx.sequence)) {
 	  horizon <- min(nrow(data$gdd), length(data$mice))
 	  data$y <- y[, 1:horizon, ]
+	  
+	  if(horizon < 2){break}
 		
 	  if(is.na(dim(data$y)[3]==T)){
 			 dim(data$y)[3] <- 1
@@ -581,7 +595,10 @@ for (t in seq_len(n.drags)) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))){
-		horizon <- nrow(daymet.sub)
+		horizon <- min(nrow(data$gdd), length(data$mice), 
+		               length(data$maxtemp), length(data$maxrh),
+		               length(data$minrh), length(data$precip),
+		               nrow(daymet.sub))
 		data$y <- as.array(y[, 1:horizon, ])
 				
 		if(is.na(dim(data$y)[3]==T)){
@@ -589,9 +606,9 @@ for (t in seq_len(n.drags)) {
 		  }
     
 		} else {
-		  horizon <- min(nrow(data$cgdd), length(data$mice), 
-		                 length(data$maxtemp < horizon), length(data$maxrh < horizon),
-		                 length(data$minrh < horizon), length(data$precip < horizon))
+		  horizon <- min(nrow(data$gdd), length(data$mice), 
+		                 length(data$maxtemp), length(data$maxrh),
+		                 length(data$minrh), length(data$precip))
 			data$y <- y[, 1:horizon, ]
 				
 			if(is.na(dim(data$y)[3]==T)){
@@ -599,7 +616,7 @@ for (t in seq_len(n.drags)) {
 			}
 		}
 		
-	if(horizon == 0){
+	if(horizon < 2){
 		break
 	}
 

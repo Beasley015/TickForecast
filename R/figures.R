@@ -79,7 +79,7 @@ site.info <- neonstore::neon_sites()
 # Model output ------------------
 analysis.files <- list.files(dir.analysis, recursive = T)
 
-# time series figures (single site) ----------------------------------------------
+# time series figures (OG) ----------------------------------------------
 series.files <- analysis.files[str_detect(analysis.files, "allDays")]
 
 for(i in 1:length(series.files)){
@@ -205,6 +205,142 @@ for(i in 1:length(series.files)){
 	                  all_combos$ls[j], "_", all_combos$mod[j], ".jpeg"),
 	    gg = gg,
 	    path = dir.plot
+    )
+    
+    print(paste("Site = ", site.vec, ", Species = ", all_combos$sp[j], ", Life Stage = ", all_combos$ls[j], 
+                ", Model = ", all_combos$mod[j], sep = ""))
+  }
+  rm(list = c("scores", 'forecast.density', 'forecast.smol'))
+  gc()
+}
+
+# Time series figures (plot-level) -------------------------
+series.files <- analysis.files[str_detect(analysis.files, "allDays")]
+series.files <- series.files[str_detect(series.files, pattern = "[A-Z]+_")]
+
+for(i in 1:length(series.files)){
+  # Read in time series from forecasting model
+  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = ""))
+  
+  # Get constants for filtering
+  ls <- c("Larva", "Nymph", "Adult")
+  sp <- unique(df.mutate$species)
+  site.vec <- unique(df.mutate$siteID)
+  mod <- unique(df.mutate$model)
+  
+  # Get associated scoring files because they have plot areas
+  score.files <- analysis.files[str_detect(analysis.files, site.vec[i])]
+  score.files <- score.files[-length(score.files)]
+  
+  # Read in score files
+  scores <- tibble()
+  for(j in 1:length(score.files)){
+    file <- read_csv(file=paste(dir.analysis,score.files[j], sep = "")) %>%
+      suppressMessages()
+    scores <- bind_rows(scores, file)
+    rm(file)
+  }
+  
+  scores <- scores %>%
+    select(time, siteID, totalSampledArea, plotID, species, model) %>%
+    filter(time >= as.Date("2018-01-01", format = "%Y-%m-%d"),
+           is.na(plotID) == F) %>%
+    group_by(time, species, model, plotID) %>%
+    distinct() %>%
+    ungroup() %>%
+    group_by(time, species, model) %>%
+    summarise(sampledArea = sum(totalSampledArea, na.rm = T)) %>%
+    suppressMessages()
+  
+  # Condense forecast across plots
+  forecast.density <- df.mutate %>%
+    select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
+    mutate(time=as.Date(time, format = "%Y-%m-%d")) %>%
+    left_join(scores, by = c("time", "species","model")) %>%
+    fill(sampledArea, .direction="down") %>%
+    group_by(time, lifeStage, model, species, sampledArea) %>% 
+    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
+              forecast95=mean(upper95)) %>%
+    suppressMessages()
+  
+  rm(df.mutate)
+  
+  if(site.vec != "CARY"){
+    forecast.density <- forecast.density %>%
+      mutate(mean.forecast = (mean.forecast/sampledArea)*450,
+             forecast05 = (forecast05/sampledArea)*450,
+             forecast95 = (forecast95/sampledArea)*450) %>%
+      suppressMessages()
+  } 
+  
+  all_combos <- expand_grid(ls, sp, mod)
+  
+  fx.issue.date <- neon.data %>%
+    filter(siteID == site.vec) %>%
+    pull(time) %>%
+    unique()
+  fx.issue.date <- as.Date(fx.issue.date, format = "%Y-%m-%d")
+  
+  # Filter null model data
+  df.null.timeseries <- df.null %>%
+    filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date),
+           lifeStage %in% ls, species %in% sp) %>%
+    rename(siteID = site) %>%
+    select(median, lower95, upper95, variance, time, lifeStage, species) %>%
+    group_by(time)
+  
+  # Filter raw data
+  neon.timeseries <- neon.data %>%
+    mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
+    filter(siteID==site.vec, lifeStage %in% ls, species %in% sp, time>=min(fx.issue.date),
+           time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
+    select(time, plotID, density, lifeStage, species) %>%
+    group_by(time, lifeStage, species) %>%
+    summarise(meandensity = mean(density)) %>%
+    suppressMessages()
+  
+  # Filter forecast data
+  forecast.density <- forecast.density %>%
+    filter(time >= min(fx.issue.date),time <= max(fx.issue.date+364))
+  
+  dist.cols <- c(
+    "Data" = "#dd5129",
+    "Forecast" = "#0f7ba2",
+    "Null" = "#43b284"
+  )
+  
+  for(j in 1:nrow(all_combos)){
+    # Further filtering
+    forecast.smol <- forecast.density %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j], model == all_combos$mod[j])
+    
+    neon.smol <- neon.timeseries %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j])
+    
+    null.smol <- df.null.timeseries %>%
+      filter(lifeStage == all_combos$ls[j], species==all_combos$sp[j])
+    
+    gg <- ggplot() +
+      geom_ribbon(data=null.smol, aes(x = time, ymin = lower95, ymax = upper95, fill = "Null")) +
+      geom_point(data = neon.smol, aes(x=time, y = meandensity, fill = "Observed Data"),
+                 color = "#dd5129", size = 3) +
+      geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"),
+                  alpha = 0.3)+
+      geom_line(dat=forecast.smol, aes(x=time, y=mean.forecast), color = "#0f7ba2")+
+      lims(x = c(fx.issue.date[1], as.Date("2022-01-01", format = "%Y-%m-%d"))) +
+      labs(x = "Date", y = "Ticks/450m^2", 
+           title = paste(site.vec, ", ", all_combos$sp[j], ", ", all_combos$ls[j], ", ", 
+                         all_combos$mod[j], sep = "")) +
+      scale_fill_manual(values = c("#0f7ba2", "#43b284", "#dd5129"), name = "")+
+      theme_pubr() +
+      theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5),
+            legend.position = "bottom")
+    gg
+    save_gg(
+      dest = paste0("/timeseries_singlemods/", site.vec, "_", all_combos$sp[j], "_", 
+                    all_combos$ls[j], "_", all_combos$mod[j], ".jpeg"),
+      gg = gg,
+      path = dir.plot
     )
     
     print(paste("Site = ", site.vec, ", Species = ", all_combos$sp[j], ", Life Stage = ", all_combos$ls[j], 
@@ -373,9 +509,13 @@ for(i in 1:length(hierarchical.files)){
 # score figures --------------------------------------------------------------------------
 # Null model
 null.crps <- null.scores %>%
-	mutate(crps = score, doy = yday(time)) 
+	mutate(crps = score, doy = yday(time)) %>%
+  mutate(site = case_when(site %in% c("GREN", "HNRY", "TEA") ~ "CARY",
+                          TRUE ~ site))
+  
 
 score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
+score.files <- score.files[!str_detect(score.files, "Weather.csv")]
 
 df.mutate <- tibble()
 for(i in 1:length(score.files)){
@@ -385,7 +525,7 @@ for(i in 1:length(score.files)){
   if(nrow(score)==0){next}
   
   score <- score %>%
-    filter(year(time) >= 2018) %>%
+    filter(year(time) >= 2018 & time <= 2022) %>%
     select(lifeStage, time, siteID, species, model, crps) %>%
     group_by(lifeStage, time, siteID, species, model) %>%
     summarise(crps = mean(crps)) %>%
@@ -739,7 +879,7 @@ both.transition <- (ix.transition | aa.transition)+
 # save_gg("both_transition_singlesite.jpeg", both.transition, dir.plot, 
 #         height = 8, width = 8)
 
-# Maps?
+# Maps
 site.coords <- read_csv("./Data/siteLatLon.csv") %>%
   suppressMessages()
 
@@ -801,7 +941,8 @@ for(i in seq_along(out.files)){
 
 ints <- ints %>%
   select(-(`start.date == start.date`)) %>%
-  filter(str_detect(model, "PlotLevel") == T) %>%
+  filter(str_detect(model, "PlotLevel") == T,
+         siteID != "DELA") %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages()
@@ -856,6 +997,7 @@ gammas <- tibble()
 for(i in seq_along(out.files)){
   wee.tab <- read_csv(file.path("./out/", out.files[i])) %>%
     filter(str_detect(node, "gam")) %>%
+    filter(!str_detect(node, "gam0")) %>%
     suppressMessages()
   
   gammas <- bind_rows(gammas, wee.tab)
@@ -864,7 +1006,8 @@ for(i in seq_along(out.files)){
 # Site-level coefficients
 betas <- betas %>%
   select(-(`start.date == start.date`)) %>%
-  filter(str_detect(model, "PlotLevel") == T) %>%
+  filter(str_detect(model, "PlotLevel") == T,
+         !(siteID %in% c("DELA", "GREN", "HNRY", "TEA"))) %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages() %>%
@@ -883,6 +1026,52 @@ betas <- betas %>%
                           node == 'beta[13]' ~ 'MiceLarvaToNymph',
                           node == 'beta[14]' ~ 'MiceNymphToAdult'))
 
+gammas <- gammas %>%
+  select(-(`start.date == start.date`)) %>%
+  filter(str_detect(model, "PlotLevel") == T,
+         !(siteID %in% c("DELA", "GREN", "HNRY", "TEA"))) %>%
+  group_by(siteID, species, node, model) %>%
+  summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
+  suppressMessages() 
+
+gammas.noland <- gammas %>%
+  filter(!str_detect(node, "gam3")) %>%
+  mutate(node = case_when(node == "gam1[1]" ~ "GDDsqLarva",
+                          node == "gam1[2]" ~ "GDDsqNymph",
+                          node == "gam1[3]" ~ "GDDsqAdult",
+                          node == "gam2[1]" ~ "GDDLarva",
+                          node == "gam2[2]" ~ "GDDNymph",
+                          node == "gam2[3]" ~ "GDDAdult",
+                          node == "gam4[1]" ~ "EVILarva",
+                          node == "gam4[2]" ~ "EVINymph",
+                          node == "gam4[3]" ~ "EVIAdult"))
+
+plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
+  filter(siteID != "DELA") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  select(siteID, lc_dominant) %>%
+  mutate(lc_dominant = str_remove(lc_dominant, pattern = "_pct")) %>%
+  distinct() %>%
+  arrange(siteID, lc_dominant) %>%
+  mutate() %>%
+  group_by(siteID) %>% 
+  mutate(index=1:n()) %>%
+  suppressMessages()
+
+gammas.land <- gammas %>%
+  filter(str_detect(node, "gam3")) %>%
+  mutate(index = case_when(str_detect(node, ", 1]") ~ 1,
+                           str_detect(node, ", 2]") ~ 2,
+                           str_detect(node, ", 3]") ~ 3,
+                           str_detect(node, ", 4]") ~ 4,
+                           str_detect(node, ", 5]") ~ 5)) %>%
+  mutate(lifeStage = case_when(str_detect(node, "gam3\\[1") ~ "Larva",
+                               str_detect(node, "gam3\\[2") ~ "Nymph",
+                               str_detect(node, "gam3\\[3") ~ "Adult")) %>%
+  left_join(plt_cover, by = c("siteID", "index"))
+
+# Ixodes plots
 ix.sub <- betas %>%
   filter(species == "Ixodes_scapularis") %>%
   mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
@@ -892,7 +1081,7 @@ ix.sub <- betas %>%
 
 ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
-  geom_point(aes(x = 4.2, shape = sig))+
+  geom_point(aes(x = 3, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
   facet_wrap(~node, dir = "v") +
@@ -912,17 +1101,58 @@ ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
+ix.sub.gamma <- gammas.noland %>%
+  filter(species == "Ixodes_scapularis") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+ix.gamma.noland <- ggplot(data = ix.sub.gamma, aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 2.5, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+ix.sub.land <- gammas.land %>%
+  filter(species == "Ixodes_scapularis") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+ix.gam.land <- ggplot(data = ix.sub.land, aes(x = mean, y = lifeStage, 
+                                              color=lc_dominant))+
+  geom_point(position = position_dodge(width = 1))+
+  geom_point(aes(x = 2.5, shape = sig), position = position_dodge(width=1))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95), 
+                position = position_dodge(width = 1))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_color_viridis_d(end = 0.9, name = "Land Cover Class")+
+  # scale_shape_manual()+
+  facet_wrap(~siteID, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), 
+        axis.title.y = element_blank())
+
+# Amblyomma plots
 aa.sub <- betas %>%
   filter(species == "Amblyomma_americanum") %>%
   mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
                          lower95>0 & upper95>0 ~ 'sig',
                          TRUE ~ NA),
-         node = factor(node)) %>%
-  filter(node != "MaxRHNymphSurvival")
+         node = factor(node)) #%>%
+  # filter(node != "MaxRHNymphSurvival")
 
 aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
-  geom_point(aes(x = 4, shape = sig))+
+  geom_point(aes(x = 3.5, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
   facet_wrap(~node, dir = "v") +
@@ -942,71 +1172,133 @@ aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
-both.transition <- (ix.transition | aa.transition)+
-  plot_annotation(tag_levels = "a")
+aa.sub.gamma <- gammas.noland %>%
+  filter(species == "Amblyomma_americanum") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+aa.gamma.noland <- ggplot(data = aa.sub.gamma, aes(x = mean, y = siteID))+
+  geom_point()+
+  geom_point(aes(x = 3, shape = sig))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  facet_wrap(~node, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), legend.position = 'none', 
+        axis.title.y = element_blank())
+
+aa.sub.land <- gammas.land %>%
+  filter(species == "Amblyomma_americanum") %>%
+  mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
+                         lower95>0 & upper95>0 ~ 'sig',
+                         TRUE ~ NA),
+         node = factor(node))
+
+aa.gam.land <- ggplot(data = aa.sub.land, aes(x = mean, y = lifeStage, 
+                                              color=lc_dominant))+
+  geom_point(position = position_dodge(width = 1))+
+  geom_point(aes(x = 2.5, shape = sig), position = position_dodge(width=1))+
+  geom_errorbar(aes(xmin = lower95, xmax=upper95), 
+                position = position_dodge(width = 1))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_color_viridis_d(end = 0.9, name = "Land Cover Class")+
+  # scale_shape_manual()+
+  facet_wrap(~siteID, dir = "v") +
+  labs(x = "Coefficient Estimate")+
+  theme_bw(base_size = 12) +
+  theme(panel.grid = element_blank(), 
+        axis.title.y = element_blank())
+
 
 # save_gg("aa_survival_pl.jpeg", aa.survival, dir.plot, height = 8)
 # save_gg("aa_transition_pl.jpeg", aa.transition, dir.plot, height = 8)
+# save_gg("aa_gamma_pl.jpeg", aa.gamma.noland, dir.plot, height = 8)
+# save_gg("aa_land_pl.jpeg", aa.gam.land, dir.plot, height = 8)
 # save_gg("ix_survival_pl.jpeg", ix.survival, dir.plot, height = 8)
 # save_gg("ix_transition_pl.jpeg", ix.transition, dir.plot, height = 8)
+# save_gg("ix_gamma_pl.jpeg", ix.gamma.noland, dir.plot, height = 8)
+# save_gg("ix_land_pl.jpeg", ix.gam.land, dir.plot, height = 8)
 
-# gammas
-gammas <- gammas %>%
-  filter(!str_detect(node, "gam0")) %>%
-  mutate(node = case_when(node == "gam1[1]" ~ "X2_Larvae",
-                          node == "gam1[2]" ~ "X2_Nymphs", 
-                          node == "gam1[3]" ~ "X2_Adults",
-                          node == "gam2[1]" ~ "X_Larvae",
-                          node == "gam2[2]" ~ "X_Nymphs",
-                          node == "gam2[3]" ~ "X_Adults",
-                          TRUE ~ NA))
+# Plot model coefficients: maps ------------------
+site.coords <- read_csv("./Data/siteLatLon.csv") %>%
+  filter(is.na(lon)==F) %>%
+  st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+  suppressMessages()
 
-ix.gamma <- gammas %>%
-  filter(species == "Ixodes_scapularis") %>%
-  group_by(siteID, node) %>%
-  summarise(mean = mean(mean), lower95 = mean(lower95),
-            upper95 = mean(upper95)) %>%
-  # mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
-  #                        lower95>0 & upper95>0 ~ 'sig',
-  #                        TRUE ~ NA),
-         # node = factor(node)) %>%
-  arrange(node)
+cary.coord <- data.frame(siteID="CARY", 
+           geometry=st_centroid(st_union(filter(site.coords, 
+                                                siteID %in% c("GREN","HNRY","TEA"))))) %>%
+  st_as_sf(crs = 4326)
 
-ix.gam.plt <- ggplot(data = ix.gamma, aes(x = mean, y = siteID))+
-  geom_point()+
-  # geom_point(aes(x = 3, shape = sig))+
-  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
-  geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_wrap(~node, dir = "h") +
-  labs(x = "Coefficient Estimate")+
-  theme_bw(base_size = 12) +
-  theme(panel.grid = element_blank(), legend.position = 'none', 
-        axis.title.y = element_blank())
+site.coords <- rbind(site.coords, cary.coord) %>%
+  filter(!(siteID %in% c("DELA", "GREN", "HNRY", "TEA")))
 
-aa.gamma <- gammas %>%
-  filter(species == "Amblyomma_americanum") %>%
-  group_by(siteID, node) %>%
-  summarise(mean = mean(mean), lower95 = mean(lower95),
-            upper95 = mean(upper95)) %>%
-  # mutate(sig = case_when(lower95<0 & upper95<0 ~ 'sig',
-  #                        lower95>0 & upper95>0 ~ 'sig',
-  #                        TRUE ~ NA),
-         # node = factor(node)) %>%
-  arrange(node)
+betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
+  filter(str_detect(node, 'Survival')) %>%
+  st_as_sf(crs = 4326)
 
-aa.gam.plt <- ggplot(data = aa.gamma, aes(x = mean, y = siteID))+
-  geom_point()+
-  # geom_point(aes(x = 3.25, shape = sig))+
-  geom_errorbar(aes(xmin = lower95, xmax=upper95))+
-  geom_vline(xintercept = 0, linetype = 'dashed')+
-  facet_wrap(~node, dir = "h") +
-  labs(x = "Coefficient Estimate")+
-  theme_bw(base_size = 12) +
-  theme(panel.grid = element_blank(), legend.position = 'none', 
-        axis.title.y = element_blank())
+state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
+state_map <- st_make_valid(st_transform(state_map, crs = 5070))
 
-# save_gg("aa_gamma_pl.jpeg", aa.gam.plt, dir.plot, height = 8)
-# save_gg("ix_gamma_pl.jpeg", ix.gam.plt, dir.plot, height = 8)
+# Clip map at given latitude
+state_map <- st_transform(state_map, crs = 4326)
+state_map <- st_crop(state_map, st_bbox(betas.loc))
+
+ix.map <- ggplot(data = betas.loc %>% filter(species == "Ixodes_scapularis"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Ixodes scapularis")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate",
+                       limit = max(abs(betas.loc$mean))*c(-1,1))+
+  facet_wrap(~node, dir = "v")+
+  theme_bw()
+
+aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma_americanum"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Amblyomma americanum")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node, dir = "v")+
+  theme_bw()
+
+gammas.loc <- left_join(gammas.noland, site.coords, by = 'siteID') %>%
+  st_as_sf(crs = 4326)
+
+scaled.gams <- gammas.loc %>%
+  group_by(species, node) %>%
+  mutate(mean = scale(mean)) 
+
+ix.gam.plt <- ggplot(data = scaled.gams %>% filter(species == "Ixodes_scapularis"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean[,1]), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Ixodes scapularis")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node, dir = "v")+
+  theme_bw()
+
+aa.gam.plt <- ggplot(data = scaled.gams %>% filter(species == "Amblyomma_americanum"))+
+  geom_sf(data=state_map)+
+  geom_sf(aes(fill = mean), shape = 21, size = 3.5)+
+  # geom_sf_text(aes(label = siteID))+
+  # scale_shape_manual(values = c(21,24))+
+  labs(title = "Amblyomma americanum")+
+  scale_fill_distiller(palette="RdBu", direction=1, name = "Mean Estimate")+
+  facet_wrap(~node, dir = "v")+
+  theme_bw()
+
+# save_gg("ix_mapBeta_plotmodel.jpeg", ix.map, dir.plot, width = 10, height = 8)
+# save_gg("ix_mapGamma_plotmodel.jpeg", ix.gam.plt, dir.plot, width = 10, height = 8)
+# save_gg("aa_mapBeta_plotmodel.jpeg", aa.map, dir.plot, width = 10, height = 8)
+# save_gg("aa_mapGamma_plotmodel.jpeg", aa.gam.plt, dir.plot, width = 10, height = 8)
 
 # Model intercepts: hierarchical ------------------
 # Get files

@@ -1,3 +1,4 @@
+library(mclm)
 library(tidyverse)
 library(lubridate)
 library(nimble)
@@ -6,12 +7,12 @@ library(utils)
 library(ggpubr)
 library(MetBrewer)
 
-# Forecasts for all days -------------
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
 dir.analysis <-  file.path(dir.top, "analysis")
 if(!dir.exists(dir.analysis)) dir.create(dir.analysis, recursive = TRUE, showWarnings = FALSE)
 
+# Forecasts for all days -------------
 out.files <- list.files(dir.out, recursive = TRUE)
 process.samples <- grep("stateSamples.csv", out.files, value = TRUE)
 rm(out.files)
@@ -23,6 +24,9 @@ find_model <- function(x){
   if(grepl("WithWeatherAndMiceGlobal", x)){
     m <- "Mice & Weather"
   } 
+  if(str_detect(x, "PlotLevel")){
+    m <- "PlotLevel"
+  }
   m
 }
 
@@ -33,10 +37,12 @@ find_species <- function(x){
   species
 }
 
-sites <- c("BLAN","HARV","KONZ","LENO","OSBS","SCBI","SERC","TALL","TREE","UKFS",
-           "GREN","HNRY","TEA")
+iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
+ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
+sites <- unique(c(iscap.sites, ambly.sites))
+sites <- sites[sites != "DELA"]
 
-for(j in 1:length(sites)){
+for(j in 1:length(sites)){ 
   # Blank df for each site
   df.process <- tibble()
   
@@ -92,46 +98,23 @@ quantScore <- grep("fxQuantScore.csv", out.files, value = TRUE)
 
 # models <- c("Weather", "WithWeatherAndMiceGlobal", "PlotLevel")
 models <- "PlotLevel"
-species <- c("Ixodesscapularis", "Amblyommaamericanum")
-neon.sites <- c(
-  "BLAN",
-  "HARV",
-  "KONZ",
-  "LENO",
-  "OSBS",
-  "SCBI",
-  "SERC",
-  "TALL",
-  "TREE",
-  "UKFS"
-)
+species <- c("Ixodes_scapularis", "Amblyomma_americanum")
 
-cary.sites <- c(
-  "GREN",
-  "HNRY",
-  "TEA"
-)
+iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
+ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
+sites <- unique(c(iscap.sites, ambly.sites))
+sites <- sites[sites != "DELA"]
+
+iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
+ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
 
 # Create all possible combos
-jobs <- expand_grid(
-  model = models,
-  species = species,
-  site = c(neon.sites, cary.sites)
-)
+iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
+ambly.jobs <- data.frame(site = ambly.sites, species = "Amblyomma_americanum")
 
-# Not all sites have both tick species
-jobs <- jobs %>%
-  filter(
-    !(site == "HARV" & species == "Amblyommaamericanum"),
-    !(site == "TREE" & species == "Amblyommaamericanum"),
-    !(site == "KONZ" & species == "Ixodesscapularis"),
-    !(site == "OSBS" & species == "Ixodesscapularis"),
-    !(site == "TALL" & species == "Ixodesscapularis"),
-    !(site == "UKFS" & species == "Ixodesscapularis"),
-    !(site == "GREN" & species == "Amblyommaamericanum"),,
-    !(site == "HNRY" & species == "Amblyommaamericanum"),,
-    !(site == "TEA" & species == "Amblyommaamericanum"),
-  )
+jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
+  mutate(model = models) %>%
+  filter(site != "DELA")
 
 # Process outputs
 for(j in 1:nrow(jobs)){

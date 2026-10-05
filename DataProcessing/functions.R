@@ -444,10 +444,12 @@ score <- function(df.pred.obs, nmcmc) {
 			ls.subset <- plot.subset %>%
 				arrange(time) %>%
 				filter(lifeStage == ls.vec[i])
+			
 			ls.observed <- ls.subset %>%
 				select(time, observed) %>%
 				distinct() %>%
 				pull(observed)
+			
 			ls.predicted <- ls.subset %>%
 				select(time, forecast) %>%
 				group_by(time) %>%
@@ -457,6 +459,13 @@ score <- function(df.pred.obs, nmcmc) {
 				select(-iter) %>%
 				as.matrix() %>%
 				t()
+			
+			if(any(is.na(rowSums(ls.predicted)))){
+			  bad.rows <- which(is.na(rowSums(ls.predicted)))
+			  
+			  ls.predicted <- ls.predicted[-bad.rows,]
+			  ls.observed <- ls.observed[-bad.rows]
+			}
 
 			rmse <- function(obs, pred) {
 				if (length(obs) == 1) {
@@ -483,7 +492,7 @@ score <- function(df.pred.obs, nmcmc) {
 
 			scores <- tibble(
 				lifeStage = ls.vec[i],
-				time = unique(ls.subset$time),
+				time = unique(ls.subset$time)[-bad.rows],
 				plotID = obs.plots[p],
 				horizon = as.numeric(time - start.date),
 				percentBias = scoringutils::bias_sample(ls.observed, ls.predicted),
