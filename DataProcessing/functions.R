@@ -490,11 +490,17 @@ score <- function(df.pred.obs, nmcmc) {
 				return(bayes.p.val)
 			}
 
+			if(exists("bad.rows")){
+			  dates.vec <- unique(ls.subset$time)[-bad.rows]
+			} else{
+			  dates.vec <- unique(ls.subset$time)
+			}
+			
 			scores <- tibble(
 				lifeStage = ls.vec[i],
-				time = unique(ls.subset$time)[-bad.rows],
+				time = dates.vec,
 				plotID = obs.plots[p],
-				horizon = as.numeric(time - start.date),
+				horizon = as.numeric(dates.vec - start.date),
 				percentBias = scoringutils::bias_sample(ls.observed, ls.predicted),
 				crps = scoringutils::crps_sample(ls.observed, ls.predicted),
 				rmse = rmse(ls.observed, ls.predicted),
@@ -502,6 +508,8 @@ score <- function(df.pred.obs, nmcmc) {
 			)
 
 			all.scores <- bind_rows(all.scores, scores)
+			
+			if(exists("bad.rows")){rm("bad.rows")}
 		}
 	}
 	return(all.scores)
@@ -635,13 +643,14 @@ transfer_analysis <- function(
 
 	# get scores
 	scores <- score(fx.data, nmcmc) %>%
-		mutate(siteID = site, species = spp, model = model)
+		mutate(siteID = site, species = spp, model = model) %>%
+	  mutate(time = as.Date(time, format = "%Y-%m-%d"))
 
 	fx.out <- left_join(
 		fx.quantiles,
 		scores,
 		by = c("lifeStage", "time", "species", "plotID", "model", "siteID")
-	)
+	) 
 
 	# parameters
 	param.samples <- fx.tb %>%

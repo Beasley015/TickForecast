@@ -42,7 +42,7 @@ jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 2
+	job.num <- 8
 }
 
 site.job <- jobs$site[job.num]

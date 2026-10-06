@@ -512,7 +512,6 @@ null.crps <- null.scores %>%
 	mutate(crps = score, doy = yday(time)) %>%
   mutate(site = case_when(site %in% c("GREN", "HNRY", "TEA") ~ "CARY",
                           TRUE ~ site))
-  
 
 score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
 score.files <- score.files[!str_detect(score.files, "Weather.csv")]
