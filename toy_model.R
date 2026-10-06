@@ -224,24 +224,24 @@ pprb.phase1 <- function(){
 
 # PP_RB part 2: across-site parameters using recursive Bayes
 pprb.phase2 <- function(){
-  for(site in 1:sites){
-    b1[site] ~ dnorm(mu.b1[site], tau.b1[site])
-  }
-  
-  # proposed sigma
-  q.start ~ dgamma(1,1)
-  r.start ~ dgamma(1,1)
+  # proposed variance
+  q.start ~ dgamma(q.pr[1], q.pr[2])
+  r.start ~ dgamma(r.pr[1], r.pr[2])
   
   q <- sites/(2+q.start)
   r <- 1/sum((b1-mu.b1)^2 + 1/r.start)
   
   s2b1.temp ~ dgamma(q, r)
-  b1.s2 <- 1/stb1.temp
+  b1.tau <- 1/s2b1.temp
     
   # proposed mu
-  tmp.var=1/((sites/b1.s2)+(1/1))
-  tmp.mn=tmp.var*(sum(b1)/b1.s2)
-  b1.mu ~ dnorm(tmp.mn, 1/tmp.var)
+  tmp.sd <- 1/((sites/s2b1.temp)+(1/b1.var.pr))
+  tmp.mn <- tmp.sd*((sum(b1)/s2b1.temp) + (b1.mu.pr/b1.var.pr))
+  b1.mu ~ dnorm(tmp.mn, 1/(tmp.sd^2))
+  
+  for(site in 1:sites){
+    b1[site] ~ dnorm(mu.b1[site], tau.b1[site])
+  }
 }
 
 # Base model workflow ------------------
@@ -645,8 +645,10 @@ ggplot(data = last.betas, aes(x = mean, y = site))+
 
 # Iterative model workflow: recursive Bayes -------------
 rb.outs <- list()
+rb.outs.comm <- list()
 for(i in 1:time.steps){
   if(i == 1){
+    # Part I: Site-level models
     mu.int1 <- rep(0,sites)
     tau.int1 <- rep(1, sites)
     
@@ -723,7 +725,35 @@ for(i in 1:time.steps){
     
     pr.x <- apply(outs$x, c(2,4), median)
     
+    # Part II: Recursive Bayesian updating of site-level coefs
+    q.pr <- c(1,1)
+    r.pr <- c(1,1)
+    
+    b1.mu.pr <- 0
+    b1.var.pr <- 1
+    
+    data.rb <- list(q.pr=q.pr, r.pr=r.pr, b1.mu.pr=b1.mu.pr, b1.var.pr=b1.var.pr,
+                    mu.b1 = priors$mu.b1, tau.b1 = priors$tau.b1, sites=sites)
+    params.rb <- c("q", "r", "b1.mu", "b1.tau", "b1")
+    
+    mod.rb <- jags(data=data.rb, parameters.to.save = params.rb, 
+                   model.file = pprb.phase2, n.chains = 3, n.iter=5000,
+                   DIC = F)
+    
+    outs.update <- mod.rb$BUGSoutput$sims.list
+    rb.outs.comm[[i]] <- outs.update
+    
+    priors$mu.b1 <- colMeans(outs.update$b1)
+    priors$tau.b1 <- apply(outs.update$b1, 2, function(x) 1/var(x))
+    
+    q.pr <- fitdist(outs.update$q, distr = 'gamma')$estimate
+    r.pr <- fitdist(outs.update$r, distr = 'gamma')$estimate
+    
+    b1.mu.pr <- mean(outs.update$b1.mu)
+    b1.var.pr <- 1/(mean(outs.update$b1.tau))
+    
   } else{
+    # Part I: Site-level models
     mu.int1 <- priors$mu.int1
     tau.int1 <- priors$tau.int1
     
@@ -799,5 +829,34 @@ for(i in 1:time.steps){
                          tau.b3 = apply(outs$beta3, 2, function(x) 1/var(x)))
     
     pr.x <- apply(outs$x, c(2,4), median)
+    
+    # Part II: Recursive Bayesian updating of site-level coefs
+    q.pr <- q.pr
+    r.pr <- r.pr
+    
+    b1.mu.pr <- b1.mu.pr
+    b1.var.pr <- b1.var.pr
+    
+    data.rb <- list(q.pr=q.pr, r.pr=r.pr, b1.mu.pr=b1.mu.pr, b1.var.pr=b1.var.pr,
+                    mu.b1 = priors$mu.b1, tau.b1 = priors$tau.b1, sites=sites)
+    params.rb <- c("q", "r", "b1.mu", "b1.tau", "b1")
+    
+    mod.rb <- jags(data=data.rb, parameters.to.save = params.rb, 
+                   model.file = pprb.phase2, n.chains = 3, n.iter=5000,
+                   DIC = F)
+    
+    outs.update <- mod.rb$BUGSoutput$sims.list
+    rb.outs.comm[[i]] <- outs.update
+    
+    priors$mu.b1 <- colMeans(outs.update$b1)
+    priors$tau.b1 <- apply(outs.update$b1, 2, function(x) 1/var(x))
+    
+    q.pr <- fitdist(outs.update$q, distr = 'gamma')$estimate
+    r.pr <- fitdist(outs.update$r, distr = 'gamma')$estimate
+    
+    b1.mu.pr <- mean(outs.update$b1.mu)
+    b1.tau.pr <- mean(outs.update$b1.tau)
   }
 }
+
+# Recursive Bayes: Figures -------------------------
