@@ -225,22 +225,40 @@ pprb.phase1 <- function(){
 # PP_RB part 2: across-site parameters using recursive Bayes
 pprb.phase2 <- function(){
   # proposed variance
-  q.start ~ dgamma(q.pr[1], q.pr[2])
-  r.start ~ dgamma(r.pr[1], r.pr[2])
+  for(b in 1:n.beta){
+    q.start[b] ~ dgamma(q.pr[1,b], q.pr[2,b])
+    r.start[b] ~ dgamma(r.pr[1,b], r.pr[2,b])
   
-  q <- sites/(2+q.start)
-  r <- 1/sum((b1-mu.b1)^2 + 1/r.start)
+    q[b] <- sites/(2+q.start[b])
+    r[b] <- 1/sum((b1-mu.b1)^2 + 1/r.start[b])
+  }
   
-  s2b1.temp ~ dgamma(q, r)
+  s2b1.temp ~ dgamma(q[1], r[1])
   b1.tau <- 1/s2b1.temp
+  
+  s2b2.temp ~ dgamma(q[2], r[2])
+  b2.tau <- 1/s2b2.temp
+  
+  s2b3.temp ~ dgamma(q[3], r[3])
+  b3.tau <- 1/s2b3.temp
     
   # proposed mu
-  tmp.sd <- 1/((sites/s2b1.temp)+(1/b1.var.pr))
-  tmp.mn <- tmp.sd*((sum(b1)/s2b1.temp) + (b1.mu.pr/b1.var.pr))
-  b1.mu ~ dnorm(tmp.mn, 1/(tmp.sd^2))
+  tmp.sd.b1 <- 1/((sites/s2b1.temp)+(1/b1.var.pr))
+  tmp.mn.b1 <- tmp.sd.b1*((sum(b1)/s2b1.temp) + (b1.mu.pr/b1.var.pr))
+  b1.mu ~ dnorm(tmp.mn.b1, 1/(tmp.sd.b1^2))
+  
+  tmp.sd.b2 <- 1/((sites/s2b2.temp)+(1/b2.var.pr))
+  tmp.mn.b2 <- tmp.sd.b2*((sum(b2)/s2b2.temp) + (b2.mu.pr/b2.var.pr))
+  b2.mu ~ dnorm(tmp.mn.b2, 1/(tmp.sd.b2^2))
+  
+  tmp.sd.b3 <- 1/((sites/s2b3.temp)+(1/b3.var.pr))
+  tmp.mn.b3 <- tmp.sd.b3*((sum(b3)/s2b3.temp) + (b3.mu.pr/b3.var.pr))
+  b3.mu ~ dnorm(tmp.mn.b3, 1/(tmp.sd.b3^2))
   
   for(site in 1:sites){
     b1[site] ~ dnorm(mu.b1[site], tau.b1[site])
+    b2[site] ~ dnorm(mu.b2[site], tau.b2[site])
+    b3[site] ~ dnorm(mu.b3[site], tau.b3[site])
   }
 }
 
@@ -504,7 +522,7 @@ for(i in 1:time.steps){
                  int.tau2=int.tau2, int.mu3=int.mu3, int.tau3=int.tau3,
                  b1.mu.pr=b1.mu.pr,b1.tau.pr=b1.tau.pr, b2.mu.pr=b2.mu.pr, 
                  b2.tau.pr=b2.tau.pr, b3.mu.pr=b3.mu.pr, b3.tau.pr=b3.tau.pr,
-                 coef1=var1, coef2=var2, steps=steps, y=obs, pr.x = pr.x,
+                 coef1=var1[i:(i+1)], coef2=var2[i:(i+1)], steps=steps, y=obs, pr.x = pr.x,
                  sites=sites)
     params <- c("int1", "int2", "int3", "beta1", "beta2", "beta3", "lambda", 
                 "mu.int1", "tau.int1", "mu.int2", "tau.int2", "mu.int3",
@@ -726,32 +744,57 @@ for(i in 1:time.steps){
     pr.x <- apply(outs$x, c(2,4), median)
     
     # Part II: Recursive Bayesian updating of site-level coefs
-    q.pr <- c(1,1)
-    r.pr <- c(1,1)
-    
+    q.pr <- matrix(1, nrow=2, ncol=3)
+    r.pr <- matrix(1, nrow=2, ncol=3)
+
     b1.mu.pr <- 0
     b1.var.pr <- 1
     
-    data.rb <- list(q.pr=q.pr, r.pr=r.pr, b1.mu.pr=b1.mu.pr, b1.var.pr=b1.var.pr,
-                    mu.b1 = priors$mu.b1, tau.b1 = priors$tau.b1, sites=sites)
-    params.rb <- c("q", "r", "b1.mu", "b1.tau", "b1")
+    b2.mu.pr <- 0
+    b2.var.pr <- 1
     
-    mod.rb <- jags(data=data.rb, parameters.to.save = params.rb, 
+    b3.mu.pr <- 0
+    b3.var.pr <- 1
+
+    data.rb <- list(q.pr=q.pr, r.pr=r.pr, b1.mu.pr=b1.mu.pr, b1.var.pr=b1.var.pr,
+                    mu.b1 = priors$mu.b1, tau.b1 = priors$tau.b1, 
+                    b2.mu.pr=b2.mu.pr, b2.var.pr=b2.var.pr, mu.b2=priors$mu.b2,
+                    tau.b2=priors$tau.b2, b3.mu.pr=b3.mu.pr, b3.var.pr=b3.var.pr,
+                    mu.b3=priors$mu.b3, tau.b3=priors$tau.b3, sites=sites,
+                    n.beta = 3)
+    params.rb <- c("q", "r", "b1.mu", "b1.tau", "b1", "b2.mu", "b2.tau", "b2",
+                   "b3.mu", "b3.tau", "b3")
+
+    mod.rb <- jags(data=data.rb, parameters.to.save = params.rb,
                    model.file = pprb.phase2, n.chains = 3, n.iter=5000,
                    DIC = F)
-    
+
     outs.update <- mod.rb$BUGSoutput$sims.list
     rb.outs.comm[[i]] <- outs.update
-    
+
     priors$mu.b1 <- colMeans(outs.update$b1)
     priors$tau.b1 <- apply(outs.update$b1, 2, function(x) 1/var(x))
     
-    q.pr <- fitdist(outs.update$q, distr = 'gamma')$estimate
-    r.pr <- fitdist(outs.update$r, distr = 'gamma')$estimate
+    priors$mu.b2 <- colMeans(outs.update$b2)
+    priors$tau.b2 <- apply(outs.update$b2, 2, function(x) 1/var(x))
     
+    priors$mu.b3 <- colMeans(outs.update$b3)
+    priors$tau.b3 <- apply(outs.update$b3, 2, function(x) 1/var(x))
+
+    q.pr <- apply(outs.update$q, 2, 
+                  function(x) fitdist(x, distr='gamma')$estimate)
+    r.pr <- apply(outs.update$r, 2, 
+                  function(x) fitdist(x, distr='gamma')$estimate)
+
     b1.mu.pr <- mean(outs.update$b1.mu)
     b1.var.pr <- 1/(mean(outs.update$b1.tau))
     
+    b2.mu.pr <- mean(outs.update$b2.mu)
+    b2.var.pr <- 1/(mean(outs.update$b2.tau))
+    
+    b3.mu.pr <- mean(outs.update$b3.mu)
+    b3.var.pr <- 1/(mean(outs.update$b3.tau))
+
   } else{
     # Part I: Site-level models
     mu.int1 <- priors$mu.int1
@@ -781,7 +824,7 @@ for(i in 1:time.steps){
     data <- list(mu.int1=mu.int1, tau.int1=tau.int1, mu.int2=mu.int2, 
                  tau.int2=tau.int2, mu.int3=mu.int3, tau.int3=tau.int3,
                  mu.b1=mu.b1, tau.b1=tau.b1, mu.b2=mu.b2, tau.b2=tau.b2, 
-                 mu.b3=mu.b3, tau.b3=tau.b3, coef1=var1, coef2=var2, 
+                 mu.b3=mu.b3, tau.b3=tau.b3, coef1=var1[i:(i+1)], coef2=var2[i:(i+1)], 
                  steps=steps, y=obs, pr.x = pr.x, sites=sites)
     params <- c("int1", "int2", "int3", "beta1", "beta2", "beta3", "lambda",
                 "x", "ex", "sample.prob", "pr.x")
@@ -837,11 +880,22 @@ for(i in 1:time.steps){
     b1.mu.pr <- b1.mu.pr
     b1.var.pr <- b1.var.pr
     
-    data.rb <- list(q.pr=q.pr, r.pr=r.pr, b1.mu.pr=b1.mu.pr, b1.var.pr=b1.var.pr,
-                    mu.b1 = priors$mu.b1, tau.b1 = priors$tau.b1, sites=sites)
-    params.rb <- c("q", "r", "b1.mu", "b1.tau", "b1")
+    b2.mu.pr <- b2.mu.pr
+    b2.var.pr <- b2.var.pr
     
-    mod.rb <- jags(data=data.rb, parameters.to.save = params.rb, 
+    b3.mu.pr <- b3.mu.pr
+    b3.var.pr <- b3.var.pr
+    
+    data.rb <- list(q.pr=q.pr, r.pr=r.pr, b1.mu.pr=b1.mu.pr, b1.var.pr=b1.var.pr,
+                    mu.b1 = priors$mu.b1, tau.b1 = priors$tau.b1, 
+                    b2.mu.pr=b2.mu.pr, b2.var.pr=b2.var.pr, mu.b2=priors$mu.b2,
+                    tau.b2=priors$tau.b2, b3.mu.pr=b3.mu.pr, b3.var.pr=b3.var.pr,
+                    mu.b3=priors$mu.b3, tau.b3=priors$tau.b3, sites=sites,
+                    n.beta = 3)
+    params.rb <- c("q", "r", "b1.mu", "b1.tau", "b1", "b2.mu", "b2.tau", "b2",
+                   "b3.mu", "b3.tau", "b3")
+    
+    mod.rb <- jags(data=data.rb, parameters.to.save = params.rb,
                    model.file = pprb.phase2, n.chains = 3, n.iter=5000,
                    DIC = F)
     
@@ -851,12 +905,142 @@ for(i in 1:time.steps){
     priors$mu.b1 <- colMeans(outs.update$b1)
     priors$tau.b1 <- apply(outs.update$b1, 2, function(x) 1/var(x))
     
-    q.pr <- fitdist(outs.update$q, distr = 'gamma')$estimate
-    r.pr <- fitdist(outs.update$r, distr = 'gamma')$estimate
+    priors$mu.b2 <- colMeans(outs.update$b2)
+    priors$tau.b2 <- apply(outs.update$b2, 2, function(x) 1/var(x))
+    
+    priors$mu.b3 <- colMeans(outs.update$b3)
+    priors$tau.b3 <- apply(outs.update$b3, 2, function(x) 1/var(x))
+    
+    q.pr <- apply(outs.update$q, 2, 
+                  function(x) fitdist(x, distr='gamma')$estimate)
+    r.pr <- apply(outs.update$r, 2, 
+                  function(x) fitdist(x, distr='gamma')$estimate)
     
     b1.mu.pr <- mean(outs.update$b1.mu)
-    b1.tau.pr <- mean(outs.update$b1.tau)
+    b1.var.pr <- 1/(mean(outs.update$b1.tau))
+    
+    b2.mu.pr <- mean(outs.update$b2.mu)
+    b2.var.pr <- 1/(mean(outs.update$b2.tau))
+    
+    b3.mu.pr <- mean(outs.update$b3.mu)
+    b3.var.pr <- 1/(mean(outs.update$b3.tau))
   }
 }
 
 # Recursive Bayes: Figures -------------------------
+# Betas after phase 2
+rb.betas <- tibble()
+for(i in 1:length(rb.outs.comm)){
+  b1.raw <- as.data.frame(rb.outs.comm[[i]]$b1) %>%
+    mutate(time = i, param = 'beta1') %>%
+    rename_with(~paste0('site', 1:sites), V1:V10) %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  b2.raw <- as.data.frame(rb.outs[[i]]$beta2) %>%
+    mutate(time = i, param = 'beta2') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  b3.raw <- as.data.frame(rb.outs[[i]]$beta3) %>%
+    mutate(time = i, param = 'beta3') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  betas <- bind_rows(b1.raw, b2.raw, b3.raw) %>%
+    group_by(time, site, param) %>%
+    summarise(mean = mean(estimate), median=median(estimate), 
+              lower95 = quantile(estimate, 0.025),
+              upper95 = quantile(estimate, 0.975),
+              var=var(estimate,na.rm = T)) %>%
+    suppressMessages()
+  
+  rb.betas <- bind_rows(rb.betas, betas)
+}
+
+all.betas <- rb.betas %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+tru.betas <- as.data.frame(rbind(stage1.beta, stage2.beta, transition.beta)) %>%
+  rename_with(~paste0("site", 1:sites)) %>%
+  mutate(param = c('beta1', 'beta2', 'beta3')) %>%
+  pivot_longer(-param, names_to = 'site', values_to = 'val')
+
+ggplot(data = all.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
+last.betas <- rb.betas %>%
+  filter(time > 10) %>%
+  ungroup() %>%
+  group_by(site, param) %>%
+  summarise(mean = median(mean), lower95=median(lower95), upper95=median(upper95),
+            var = median(var)) %>%
+  suppressMessages()
+
+ggplot(data = last.betas, aes(x = mean, y = site))+
+  geom_point()+
+  geom_errorbar(aes(xmin = lower95, xmax = upper95))+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
+  geom_point(data = tru.betas, aes(x = val, y = site), color = 'firebrick')+
+  facet_wrap(~param)+
+  labs(x = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank(), axis.title.y = element_blank())
+
+ggplot(data = rb.betas, aes(x = time, y = mean, color = site))+
+  geom_line()+
+  # geom_hline(data = tru.betas, aes(yintercept = val, color = site))+
+  facet_wrap(~param)+
+  scale_color_viridis_d(end = 0.8)+
+  labs(x = "Iter", y = "Estimate")+
+  theme_bw(base_size = 14)+
+  theme(panel.grid = element_blank())
+
+# Compare to phase 1 betas
+rb.og <- tibble()
+for(i in 1:length(rb.outs)){
+  b1.raw <- as.data.frame(rb.outs[[i]]$beta1) %>%
+    mutate(time = i, param = 'beta1') %>%
+    # rename_with(~paste0('site', 1:sites), V1:V10) %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  b2.raw <- as.data.frame(rb.outs[[i]]$beta2) %>%
+    mutate(time = i, param = 'beta2') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  b3.raw <- as.data.frame(rb.outs[[i]]$beta3) %>%
+    mutate(time = i, param = 'beta3') %>%
+    pivot_longer(cols = site1:site10, names_to = 'site', values_to = 'estimate')
+  
+  betas <- bind_rows(b1.raw, b2.raw, b3.raw) %>%
+    group_by(time, site, param) %>%
+    summarise(mean = mean(estimate), median=median(estimate), 
+              lower95 = quantile(estimate, 0.025),
+              upper95 = quantile(estimate, 0.975),
+              var=var(estimate,na.rm = T)) %>%
+    suppressMessages()
+  
+  rb.og <- bind_rows(rb.og, betas)
+}
+
+rb.betas$phase <- 2
+rb.og$phase <- 1
+
+all.rb <- bind_rows(rb.betas, rb.og) %>%
+  filter(param == "beta1") %>%
+  group_by(time, site, phase) %>%
+  summarise(mean = mean(mean), lower95=mean(lower95), upper95=mean(upper95))
+
+ggplot(data = all.rb, aes(x = time, y = mean))+
+  geom_point(aes(color = factor(phase)))+
+  geom_errorbar(aes(ymin = lower95, ymax = upper95, color = factor(phase)))+
+  facet_wrap(~site)
+a
