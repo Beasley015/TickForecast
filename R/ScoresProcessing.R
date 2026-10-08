@@ -23,15 +23,17 @@ score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
 score.files <- score.files[!str_detect(score.files, "Weather.csv")]
 score.files <- score.files[!str_detect(score.files, "Score")]
 
-for(i in 14:length(score.files)){
+for(i in 25:length(score.files)){
   score <- read_csv(file=file.path(dir.analysis, score.files[i])) %>%
+    select(lifeStage, time, siteID, species, model, crps) %>%
     suppressMessages()
+  
+  gc()
   
   if(nrow(score)==0){next}
   
   score <- score %>%
     filter(year(time) >= 2018 & year(time) <= 2022) %>%
-    select(lifeStage, time, siteID, species, model, crps) %>%
     mutate(species = str_replace(species, " ", "_")) %>%
     group_by(lifeStage, time, siteID, species, model) %>%
     summarise(crps = mean(crps)) %>%
@@ -41,6 +43,7 @@ for(i in 14:length(score.files)){
                                                      unique(score$species), 
                                     unique(score$model), sep = "_"), ".csv"))
   rm(score)
+  gc()
   
   print(i/length(score.files))
 }
