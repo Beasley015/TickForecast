@@ -68,28 +68,19 @@ for(t in 2:(time.steps)){
 }
 
 # Create sampling history ---------------------
-# Sampling dates
-# site1.days <- sort(sample(1:time.steps, 14, replace = F))
-# site2.days <- sort(sample(1:time.steps, 14, replace = F))
-# site3.days <- sort(sample(1:time.steps, 14, replace = F))
-# 
-# sampling.history <- cbind(site1.days, site2.days, site3.days)
-# 
-# # Samples
-# samples <- array(NA, dim = dim(ts))
-# 
-# for(i in 1:nrow(sampling.history)){
-#   row = as.matrix(sampling.history[i,])
-#   
-#   samples[,row[1],1] <- rbinom(n = 2, size = ts[,row[1],1], prob = 0.7)
-#   samples[,row[2],2] <- rbinom(n = 2, size = ts[,row[2],2], prob = 0.7)
-#   samples[,row[3],3] <- rbinom(n = 2, size = ts[,row[3],3], prob = 0.7)
-# }
-
+# Sample from latent state
 samples <- array(NA, dim = c(dim(ts),4))
 
 for(i in 1:4){
   samples[,,,i] <- array(rbinom(n = ts, size = ts, prob = 0.7), dim = dim(ts))
+}
+
+# Incorporate missing data
+missing.days <- cbind(sample(1:sites, 10, replace = T), 
+                  sample(1:time.steps, 10, replace = T))
+
+for(i in 1:nrow(missing.days)){
+  samples[,missing.days[i,2], missing.days[i,1],] <- NA
 }
 
 # Model script --------------------
