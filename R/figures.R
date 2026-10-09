@@ -515,6 +515,7 @@ null.crps <- null.scores %>%
 
 score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
 score.files <- score.files[!str_detect(score.files, "Weather.csv")]
+score.files <- score.files[str_detect(score.files, "Score")]
 
 df.mutate <- tibble()
 for(i in 1:length(score.files)){
@@ -522,13 +523,6 @@ for(i in 1:length(score.files)){
     suppressMessages()
   
   if(nrow(score)==0){next}
-  
-  score <- score %>%
-    filter(year(time) >= 2018 & time <= 2022) %>%
-    select(lifeStage, time, siteID, species, model, crps) %>%
-    group_by(lifeStage, time, siteID, species, model) %>%
-    summarise(crps = mean(crps)) %>%
-    suppressMessages()
   
   df.mutate <- bind_rows(df.mutate, score)
   rm(score)
@@ -551,7 +545,9 @@ for(i in 1:nrow(all.combos)){
 
   null.smol <- null.crps %>%
     filter(lifeStage==all.combos$lifeStage[i], siteID==all.combos$siteID[i],
-           species==all.combos$species[i])
+           species==str_replace(all.combos$species[i], "_", " "))
+  
+  if(nrow(null.smol) == 0){next}
 
   gg <- ggplot() +
     aes(x = doy, y = crps)+
@@ -576,32 +572,23 @@ for(i in 1:nrow(all.combos)){
 scores.all <- bind_rows(df.mutate, null.crps)
 
 aa.df <- scores.all %>%
-  filter(species == "Amblyomma americanum", lifeStage=="Nymph") %>%
+  mutate(species = case_when(species == "Amblyomma americanum" ~
+                               "Amblyomma_americanum",
+                             TRUE ~ species)) %>%
+  filter(species == "Amblyomma_americanum", lifeStage=="Nymph") %>%
   select(siteID, time, model, crps) %>%
   group_by(siteID, time, model) %>%
   summarise(crps = mean(crps, na.rm=T)) %>%
   pivot_wider(names_from = model, values_from = crps) %>%
-  filter(is.na(Weather) == F) %>%
   rename("WeatherMice" = "WithWeatherAndMiceGlobal") %>%
-  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice,
-         NullWeatherIntercept = Null-Weather_hierarchicalIntercept,
-         NullWeatherFull = Null-Weather_hierarchicalFull,
-         NullWeatherMiceIntercept = Null-WeatherMice_hierarchicalIntercept,
-         NullWeatherMiceFull = Null-WeatherMice_hierarchicalFull) %>%
-  select(-c(Null, Weather, WeatherMice, Weather_hierarchicalIntercept,
-            WeatherMice_hierarchicalIntercept, Weather_hierarchicalFull,
-            WeatherMice_hierarchicalFull)) %>%
-  pivot_longer(NullWeather:NullWeatherMiceFull, names_to = 'model', 
+  mutate(NullWeatherMice = Null-WeatherMice,
+         NullPlot = Null-PlotLevel) %>%
+  select(-c(Null, WeatherMice, PlotLevel)) %>%
+  pivot_longer(NullWeatherMice:NullPlot, names_to = 'model', 
                values_to = 'crps.diff') %>%
-  mutate(model = case_when(model=="NullWeather" ~ "Weather",
-                           model=="NullWeatherMice" ~ "Weather&Mice",
-                           model=="NullWeatherIntercept"~"WeatherIntercept",
-                           model=="NullWeatherFull"~"WeatherFull",
-                           model=="NullWeatherMiceIntercept"~"WeatherMiceIntercept",
-                           model=="NullWeatherMiceFull"~"WeatherMiceFull")) %>%
-  # Will get rid of this line later:
-  filter(model %in% c("Weather", "Weather&Mice", "WeatherIntercept",
-                      "WeatherMiceIntercept"))
+  mutate(model = case_when(model=="NullWeatherMice" ~ "Weather&Mice",
+                           model=="NullPlot" ~ "PlotLevel")) %>%
+  filter(!is.na(crps.diff))
 
 aa.fig <- ggplot(data=aa.df, aes(x = model, y = crps.diff))+
   geom_boxplot(aes(fill=model))+
@@ -620,29 +607,25 @@ aa.tab <- aa.df %>%
   pivot_wider(names_from = siteID, values_from = mean.diff)
 
 ix.df <- scores.all %>%
-  filter(species == "Ixodes scapularis", lifeStage=="Nymph") %>%
+  mutate(species = case_when(species == "Ixodes scapularis" ~
+                               "Ixodes_scapularis",
+                             TRUE ~ species)) %>%
+  mutate(siteID = case_when(siteID %in% c("GREN", "HNRY", "TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  filter(species == "Ixodes_scapularis", lifeStage=="Nymph") %>%
   select(siteID, time, model, crps) %>%
   group_by(siteID, time, model) %>%
   summarise(crps = mean(crps, na.rm=T)) %>%
   pivot_wider(names_from = model, values_from = crps) %>%
-  filter(is.na(Weather) == F) %>%
   rename("WeatherMice" = "WithWeatherAndMiceGlobal") %>%
-  mutate(NullWeather = Null-Weather, NullWeatherMice = Null-WeatherMice,
-         NullWeatherIntercept = Null-Weather_hierarchicalIntercept,
-         NullWeatherFull = Null-Weather_hierarchicalFull,
-         NullWeatherMiceIntercept = Null-WeatherMice_hierarchicalIntercept,
-         NullWeatherMiceFull = Null-WeatherMice_hierarchicalFull) %>%
-  select(-c(Null, Weather, WeatherMice, Weather_hierarchicalIntercept,
-            WeatherMice_hierarchicalIntercept, Weather_hierarchicalFull,
-            WeatherMice_hierarchicalFull)) %>%
-  pivot_longer(NullWeather:NullWeatherMiceFull, names_to = 'model', 
+  mutate(NullWeatherMice = Null-WeatherMice,
+         NullPlot = Null-PlotLevel) %>%
+  select(-c(Null, WeatherMice, PlotLevel)) %>%
+  pivot_longer(NullWeatherMice:NullPlot, names_to = 'model', 
                values_to = 'crps.diff') %>%
-  mutate(model = case_when(model=="NullWeather" ~ "Weather",
-                           model=="NullWeatherMice" ~ "Weather&Mice",
-                           model=="NullWeatherIntercept"~"WeatherIntercept",
-                           model=="NullWeatherFull"~"WeatherFull",
-                           model=="NullWeatherMiceIntercept"~"WeatherMiceIntercept",
-                           model=="NullWeatherMiceFull"~"WeatherMiceFull"))
+  mutate(model = case_when(model=="NullWeatherMice" ~ "Weather&Mice",
+                           model=="NullPlot" ~ "PlotLevel")) %>%
+  filter(!is.na(crps.diff))
 
 ix.fig <- ggplot(data=ix.df, aes(x = model, y = crps.diff))+
   geom_boxplot(aes(fill=model))+
