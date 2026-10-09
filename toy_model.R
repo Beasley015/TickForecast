@@ -76,8 +76,8 @@ for(i in 1:4){
 }
 
 # Incorporate missing data
-missing.days <- cbind(sample(1:sites, 10, replace = T), 
-                  sample(1:time.steps, 10, replace = T))
+missing.days <- cbind(sample(1:sites, 20, replace = T), 
+                  sample(1:time.steps, 20, replace = T))
 
 for(i in 1:nrow(missing.days)){
   samples[,missing.days[i,2], missing.days[i,1],] <- NA
@@ -1033,5 +1033,6 @@ all.rb <- bind_rows(rb.betas, rb.og) %>%
 ggplot(data = all.rb, aes(x = time, y = mean))+
   geom_point(aes(color = factor(phase)))+
   geom_errorbar(aes(ymin = lower95, ymax = upper95, color = factor(phase)))+
+  geom_hline(yintercept = 0, linetype = 'dashed')+
+  scale_color_viridis_d(end = 0.7, name = "RB Phase")+
   facet_wrap(~site)
-a
