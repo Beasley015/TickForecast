@@ -63,8 +63,8 @@ df.null <- null.quants %>%
 
 # Raw NEON data ----------------
 source("./DataProcessing/functions.R")
-neon.ix <- neon_tick_data("Ixodes scapularis") %>% suppressMessages()
-neon.aa <- neon_tick_data("Amblyomma americanum") %>% suppressMessages()
+neon.ix <- neon_tick_data("Ixodes_scapularis") %>% suppressMessages()
+neon.aa <- neon_tick_data("Amblyomma_americanum") %>% suppressMessages()
 
 neon.data <- bind_rows(neon.ix, neon.aa) %>%
   filter(time >= "2018-01-01" & time <= "2022-01-01") %>%
@@ -220,7 +220,8 @@ series.files <- series.files[str_detect(series.files, pattern = "[A-Z]+_")]
 
 for(i in 1:length(series.files)){
   # Read in time series from forecasting model
-  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = ""))
+  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = "")) %>%
+    select(-c(mice, weather))
   
   # Get constants for filtering
   ls <- c("Larva", "Nymph", "Adult")
@@ -228,35 +229,23 @@ for(i in 1:length(series.files)){
   site.vec <- unique(df.mutate$siteID)
   mod <- unique(df.mutate$model)
   
-  # Get associated scoring files because they have plot areas
-  score.files <- analysis.files[str_detect(analysis.files, site.vec[i])]
-  score.files <- score.files[-length(score.files)]
-  
-  # Read in score files
-  scores <- tibble()
-  for(j in 1:length(score.files)){
-    file <- read_csv(file=paste(dir.analysis,score.files[j], sep = "")) %>%
-      suppressMessages()
-    scores <- bind_rows(scores, file)
-    rm(file)
-  }
-  
-  scores <- scores %>%
-    select(time, siteID, totalSampledArea, plotID, species, model) %>%
-    filter(time >= as.Date("2018-01-01", format = "%Y-%m-%d"),
-           is.na(plotID) == F) %>%
-    group_by(time, species, model, plotID) %>%
+  # Get plot areas from neon data
+  df.mutate <- neon.data %>%
+    filter(siteID == site.vec) %>%
+    select(time, totalSampledArea, plotID, siteID) %>%
     distinct() %>%
-    ungroup() %>%
-    group_by(time, species, model) %>%
-    summarise(sampledArea = sum(totalSampledArea, na.rm = T)) %>%
-    suppressMessages()
+    group_by(time, siteID) %>%
+    summarise(sampledArea=sum(totalSampledArea)) %>%
+    right_join(df.mutate, by = c("time", "siteID")) %>%
+    suppressMessages
   
   # Condense forecast across plots
   forecast.density <- df.mutate %>%
-    select(time, lifeStage, siteID, species, model, mean, lower95, upper95) %>%
+    ungroup() %>%
+    select(time, lifeStage, siteID, species, model, mean, lower95, upper95,
+           sampledArea) %>%
     mutate(time=as.Date(time, format = "%Y-%m-%d")) %>%
-    left_join(scores, by = c("time", "species","model")) %>%
+    arrange(time) %>%
     fill(sampledArea, .direction="down") %>%
     group_by(time, lifeStage, model, species, sampledArea) %>% 
     summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
@@ -291,7 +280,8 @@ for(i in 1:length(series.files)){
   
   # Filter raw data
   neon.timeseries <- neon.data %>%
-    mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
+    mutate(time = as.Date(time, format ="%Y-%m-%d"),
+           species = str_replace(species, "_", " ")) %>%
     filter(siteID==site.vec, lifeStage %in% ls, species %in% sp, time>=min(fx.issue.date),
            time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
     select(time, plotID, density, lifeStage, species) %>%
@@ -650,27 +640,25 @@ ix.tab <- ix.df %>%
 
 # Scores across model iterations --------------------------
 score.files <- analysis.files[!str_detect(analysis.files, "allDays")]
+score.files <- score.files[str_detect(score.files, "Score")]
 
 df.mutate <- tibble()
 for(i in 1:length(score.files)){
   score <- read_csv(file=file.path(dir.analysis, score.files[i])) %>%
     suppressMessages()
   
-  score <- score %>%
-    filter(year(time) >= 2018) %>%
-    select(lifeStage, siteID, species, model, start.date, crps) %>%
-    group_by(lifeStage, siteID, species, model, start.date) %>%
-    summarise(crps = mean(crps)) %>%
-    suppressMessages()
+  if(nrow(score)==0){next}
   
   df.mutate <- bind_rows(df.mutate, score)
   rm(score)
+  
+  print(i/length(score.files))
 }
 
 aa.sites <- df.mutate %>%
-  filter(species == "Amblyomma americanum")
+  filter(species == "Amblyomma_americanum")
 
-aa.score.ts <-ggplot(data=aa.sites, aes(x = start.date, y = crps, color = model,
+aa.score.ts <-ggplot(data=aa.sites, aes(x = time, y = crps, color = model,
                           fill=model))+
   geom_smooth(method='gam', linewidth = 1.5)+
   facet_wrap(~siteID)+
@@ -682,9 +670,11 @@ aa.score.ts <-ggplot(data=aa.sites, aes(x = start.date, y = crps, color = model,
   theme(panel.grid = element_blank())
 
 ix.sites <- df.mutate %>%
-  filter(species == "Ixodes scapularis")
+  filter(species == "Ixodes_scapularis") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                                          TRUE ~ siteID))
 
-ix.score.ts <-ggplot(data=ix.sites, aes(x = start.date, y = crps, color = model,
+ix.score.ts <-ggplot(data=ix.sites, aes(x = time, y = crps, color = model,
                           fill=model))+
   geom_smooth(method='gam', linewidth = 1.5)+
   facet_wrap(~siteID)+

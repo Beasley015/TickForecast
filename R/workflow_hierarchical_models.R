@@ -16,6 +16,7 @@
 #       1 - setup ------------
 # =========================================== #
 
+library(mclm)
 library(fitdistrplus)
 library(tidyverse)
 library(lubridate)
@@ -26,29 +27,26 @@ library(abind)
 
 options(dplyr.summarise.inform = FALSE)
 
-update <- F
-
 dir.top <- getwd()
 dir.out <- file.path(dir.top, "out")
 
 # Define models to run
-models <- c("Weather_hierarchicalFull", "WeatherMice_hierarchicalFull")
-species <- c("Ixodes scapularis", "Amblyomma americanum") 
+models <- c("MultiSite")
+
+iscap.sites <- str_remove(read_txt("./Data/ix_sites.txt"), "\\*")
+ambly.sites <- str_remove(read_txt("./Data/am_sites.txt"), "\\*")
 
 # Create all possible combos
-jobs <- expand_grid(
-	model = models,
-	species = species)
+iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
+ambly.jobs <- data.frame(site = ambly.sites, species = "Amblyomma_americanum")
 
-# Vectors of site names
-iscap.sites <- c("BLAN","GREN","HARV","HNRY","LENO","SCBI",
-                  "SERC","TEA","TREE")
-ambly.sites <- c("BLAN","KONZ","LENO","OSBS","SCBI",
-                 "SERC","TALL","UKFS")
+jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
+  mutate(model = models) %>%
+  filter(site != "DELA")
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 4
+  job.num <- 2
 }
 
 species.job <- jobs$species[job.num] %>%
@@ -61,19 +59,12 @@ if(species.job=="Ixodes_scapularis"){
     sites <- ambly.sites
 }
 
-# Assign variable that will later control whether mice submodel is run (?)
-ua.cal <-
-	if_else(
-		model.job == "WeatherMice_hierarchical",
-		"mice_ic_parameter_process",
-		"ic_parameter_process"
-	)
-
 n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 production <- TRUE
 n.iter <- 20000
 # Nmc <- 2000
 horizon <- 365
+update <- F
 
 # =========================================== #
 #       tick data intake ----------------
@@ -81,14 +72,16 @@ horizon <- 365
 source("./DataProcessing/functions_hierarchical.R")
 
 # Get tick data based on site
-neon.data <- neon_tick_data(species.job) %>% suppressMessages()
+neon.data <- neon_tick_data(species.job) %>% 
+  mutate(siteID = case_when(siteID %in% c("GREN", "HNRY", "TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  suppressMessages()
 # function now retrieves cary sites as well as NEON
 
 # Filter tick data based on job requirements
 neon.job <- neon.data %>%
   filter(siteID %in% sites) %>%
-	filter(time >= "2016-01-01" & time < "2022-01-01",
-	       grepl("Forest", nlcd)) %>%
+	filter(time >= "2016-01-01" & time < "2026-01-01") %>%
 	arrange(time)
 
 # Extract sampling dates and number of samples
@@ -105,15 +98,13 @@ df.latent <- read_csv(file.path("./Data", "dormantNymphTimeSeries.csv"),
 month.get <- if_else(month(start.date) < 5, 4, month(start.date))
 data.latent <- df.latent %>%
 	mutate(model = gsub("DormantNymph", "", model)) %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
-                           model == "WithWeatherAndMiceGlobal" ~ 
-                             "WeatherMice_hierarchicalFull",
+  mutate(model = case_when(model == "WithWeatherAndMiceGlobal" ~ 
+                             "MultiSite",
                            TRUE ~ model)) %>%
 	filter(
 		model == model.job,
 		type == "latent",
 		statistic == "conf_50",
-		ua == ua.cal,
 		month(DATE) == month.get
 	) %>%
   mutate(value = case_when(value == 0 ~ 1e-10,
@@ -148,12 +139,20 @@ IC <- array(IC, dim = c(nrow(IC), ncol(IC), length(sites)))
 
 source("./DataProcessing/capture_matrix_hierarchical.R")
 
-smam_cary <- read_csv("./Data/cary_mouse_formatted.csv",
-                   show_col_types=F)
-smam_neon <- read_csv("./Data/allSmallMammals.csv",
-                   show_col_types=F)
-               
-ch.ls <- capture_matrix(smam_neon, sites=sites)
+if("CARY" %in% sites){
+  smam.cary <- read_csv("./Data/cary_mouse_formatted.csv",
+                   show_col_types=F) %>%
+    rename(MNA = n_trapped)
+  
+  mice.obs <- ymd(smam.cary$collectDate)
+  cary.mna <- smam.cary$MNA
+  names(cary.mna) <- smam.cary$collectDate
+}
+
+# Read in NEON smam data
+smam <- read_csv("./Data/allSmallMammals.csv", show_col_types=F)
+  
+ch.ls <- capture_matrix(smam, sites=sites)
 
 ch <- ch.ls$ch %>%
   mutate_at(.vars = vars(-siteID), ~case_when(. %in% 1:3 ~ 1,
@@ -169,12 +168,15 @@ mna <- ks %>%
   group_by(siteID) %>%
   summarise(across(.cols = everything(), sum)) %>%
   pivot_longer(cols = -siteID, names_to = "collectDate", values_to = "MNA") %>%
-  mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d"))
+  mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d")) %>%
+  filter(year(collectDate) >= 2015)
 
 # Add Cary mna
+smam_cary <- data.frame(siteID = "CARY", collectDate=names(cary.mna),
+                        MNA = cary.mna) 
+
 mna.full <- smam_cary %>%
-  rename("MNA" = "n_trapped") %>%
-  dplyr::select(-plotID) %>%
+  mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d")) %>%
   full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
   filter(collectDate >= ymd("2015-01-01")) %>%
   arrange(collectDate) %>%
@@ -265,9 +267,8 @@ df.params <- read_csv(file.path("./Data/dormantNymphParams.csv"),
                       show_col_types = F)
 
 params.stats <- df.params %>%
-  mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
-                           model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchicalFull",
+  mutate(model = case_when(model == "WithWeatherAndMiceGlobal" ~
+                             "MultiSite",
                            TRUE ~ model)) %>%
 	filter(model == model.job) %>%
 	dplyr::select(parameter, value) %>%
@@ -362,7 +363,7 @@ dir.base <- file.path(
 
 dir.save <- file.path(dir.base)
 
-# Filter drag dates and # drags so 1 week is analyzed at a time
+# Model assimilates 1 month of data at a time RESUME ----------
 weekly <- logical(length = length(drag.dates))
 weekly[1] <- T
 for(n in 2:n.drags){

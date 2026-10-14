@@ -387,10 +387,11 @@ mna_jags <- function(site.run, return.mean = FALSE) {
 
 
 scale_met_forecast <- function() {
-	met <- read.csv("./Data/Cary_Met_Data_Daily.csv")
+	met <- read.csv("./Data/cary_met_data_daily.csv")
 	met <- met %>%
-		filter(DATE >= "05-02-1995") %>%
-		filter(DATE <= "08-17-2005") %>%
+	  mutate(DATE = as.Date(DATE, format = "%Y-%m-%d")) %>%
+		filter(DATE >= "1995-05-02") %>%
+		filter(DATE <= "2005-08-17") %>%
 		select(c("MAX_TEMP", "MAX_RH", "MIN_RH", "TOT_PREC"))
 
 	met.means <- apply(met, 2, mean, na.rm = TRUE)
