@@ -3,13 +3,15 @@ X Plot-level intercept model
 X Figure out where in model remotely sensed covariates should go
 X Add remotely sensed covs to plot-level model
 X Run full plot-level model
+X Create figures comparing outputs to John's model
+X Plot-level time series (& check on OSBS for ixodes)
+X PP-RB toy model
 
 To do:
-- Create figures comparing outputs to John's model
-- Plot-level time series (& check on OSBS for ixodes)
-- PP-RB toy model
+- Plot out parabolas/get covariance for GDD parameters
+- Probably change ZIP portion of plot-level model; replace gdd
+- PP-RB multi-site model
 
 In the distance:
 - Clean up coefficient figs (change significance symbol)
-- Plot out parabolas/get covariance for GDD parameters
 
