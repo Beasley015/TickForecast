@@ -258,7 +258,37 @@ df.daymet <- join2 %>%
   ) %>%
   ungroup() %>%
   dplyr::select(Date, siteID, contains("Scale")) %>%
-  filter(Date >= "2016-01-01" & Date < "2022-01-01")
+  filter(Date >= "2016-01-01" & Date < "2026-01-01")
+
+# =========================================== #
+#   Remotely-sensed data intake -------------------
+# =========================================== #
+
+# Site-level cov: edge effects
+edge <- read_csv("./Data/fragstats.csv") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  filter(siteID == site.job) %>%
+  pull(edge_m_per_ha) %>%
+  suppressMessages()
+
+# Plot-level cov: land cover
+plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  filter(siteID %in% sites) %>%
+  select(plotID, lc_dominant) %>%
+  mutate(lc_dominant = str_remove(lc_dominant, pattern = "_pct")) %>%
+  arrange(lc_dominant) %>%
+  suppressMessages()
+
+# Plot-level cov: EVI
+evi2 <- read_csv("./Data/full_EVI2.csv") %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  filter(siteID %in% sites) %>%
+  select(plotID, date, evi2_mean) %>%
+  suppressMessages()
 
 # =========================================== #
 #       get informative priors -------------------
@@ -363,11 +393,12 @@ dir.base <- file.path(
 
 dir.save <- file.path(dir.base)
 
-# Model assimilates 1 month of data at a time RESUME ----------
+# Model assimilates 1 month of data at a time 
 weekly <- logical(length = length(drag.dates))
 weekly[1] <- T
+
 for(n in 2:n.drags){
-  weekly[n] <- ifelse(drag.dates[n]-drag.dates[n-1] < 7, F, T)
+  weekly[n] <- ifelse(month(drag.dates[n])==month(drag.dates[n-1]), F, T)
 }
 
 start.dates <- drag.dates[weekly]
@@ -388,10 +419,13 @@ for (t in t:start.drags) {
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
 	message(mm)
-
-  # flags for if statements
-	miceAndWeather <- model.job == "WeatherMice_hierarchicalFull"
-	use.daymet <- grepl("Weather", model.job)
+	
+	dir.base <- file.path(
+	  dir.out,
+	  model.job,
+	  gsub(" ", "", species.job)
+	)
+	dir.save <- file.path(dir.base)
 
 	# initialize nimble lists
 	constants <- data <- list()
@@ -399,58 +433,20 @@ for (t in t:start.drags) {
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 		
-		# Uninformative priors for params not in single-site models
-		dev.l.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                     ncol= 2)
-		dev.n.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-		dev.a.pr <-  matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-
-		dev.ln.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-		dev.na.pr <- matrix(c(rep(0,length(sites)), rep(1,length(sites))),
-		                    ncol= 2)
-
-		# phil.shrink <- c(1,1)
-		# phin.shrink <- c(1,1)
-		# phia.shrink <- c(1,1)
-		# 
-		# l2n.shrink <- c(1,1)
-		# n2a.shrink <- c(1,1)
-		# 
-		dev.beta.mu <- matrix(0, nrow = n.beta, ncol = length(sites))
-		dev.beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
-		# 
-		# pr.beta.shrink <- matrix(1, nrow = n.beta, ncol = 2)
+		n.days <- horizon
+		y <- array(NA, dim = c(4, horizon, length(sites)))
 		
-		phi.l.tau <- rep(1,length(sites))
-		phi.n.tau <- rep(1,length(sites))
-		phi.a.tau <- rep(1, length(sites))
-		
-		ln.tau <- rep(1, length(sites))
-		na.tau <- rep(1, length(sites))
-		
-		beta.tau <- matrix(1, nrow = n.beta, ncol = length(sites))
-
-		# pr.phil.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
-		# pr.phin.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
-		# pr.phia.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
-		# 
-		# pr.ln.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
-		# pr.na.tau <- matrix(c(1,2), nrow = length(sites), ncol = 2, byrow = T)
-		# 
-		# pr.beta.tau <- matrix(c(rep(1, n.beta), rep(2, n.beta)), ncol = 2)
-		
-		# pr.phi.l <- matrix(rep(phi.l, length(sites)), ncol = 2, byrow = T)
-		# pr.phi.n <- matrix(rep(phi.n, length(sites)), ncol = 2, byrow = T)
-		# pr.phi.a <- matrix(rep(phi.a, length(sites)), ncol = 2, byrow = T)
-		# 
-		# pr.ln <- matrix(rep(theta.l2n, length(sites)), ncol = 2, byrow = T)
-		# pr.na <- matrix(rep(theta.n2a, length(sites)), ncol = 2, byrow = T)
-		# 
-		# pr.beta.mu <- matrix(rep(pr.beta[,1],length(sites)), ncol=length(sites))
-		
+		# uninformative plot-level priors (zero inflation/phenology)
+		pr.gam0 <- array(cbind(rep(0,3), rep(1,3)), dim = c(3,2,length(sites)))
+		pr.gam1 <- array(cbind(rep(1,3), rep(1,3)), dim = c(3,2,length(sites)))
+		pr.gam2 <- array(cbind(rep(0,3), rep(1,3)), dim = c(3,2,length(sites)))
+		pr.gam4 <- array(cbind(rep(0,3), rep(1,3)), dim = c(3,2,length(sites)))
+	
+		gam3.mu <- array(0, dim = c(3, length(unique(plt_cover$lc_dominant)), 
+		                            length(sites)))
+		gam3.tau <- array(1, dim = c(3, length(unique(plt_cover$lc_dominant)), 
+		                             length(sites)))
+	
 		} else {
 		  horizon <- ifelse(as.numeric(last(start.dates) - fx.start.date) >= 365,
 		                    365,
@@ -722,44 +718,43 @@ for (t in t:start.drags) {
 			n.days <- length(fx.sequence)
 		}
 
-	if (use.daymet) {
-		# Filter dates that don't have corresponding drags
-		daymet.sub <- df.daymet %>%
-			filter(Date %in% fx.sequence)
+	# Filter dates that don't have corresponding drags
+	daymet.sub <- df.daymet %>%
+		filter(Date %in% fx.sequence)
 			
-		# Create day x site matrices for each variable
-		data$maxtemp <- daymet.sub %>% 
-			dplyr::select(Date, siteID, maxTempScale) %>%
-			pivot_wider(names_from= siteID, values_from = maxTempScale,
-		              values_fill=NA) %>%
-			dplyr::select(-Date) %>%
-			as.matrix()
+	# Create day x site matrices for each variable
+	data$maxtemp <- daymet.sub %>% 
+		dplyr::select(Date, siteID, maxTempScale) %>%
+		pivot_wider(names_from= siteID, values_from = maxTempScale,
+		              values_fill=NA, values_fn = mean) %>%
+		dplyr::select(-Date) %>%
+		as.matrix()
 			
-		data$maxrh <- daymet.sub %>%
-		  dplyr::select(Date, siteID, maxRHScale) %>%
-			pivot_wider(names_from=siteID, values_from=maxRHScale,
-			           values_fill=NA) %>%
-			dplyr::select(-Date) %>%
-			as.matrix()
+	data$maxrh <- daymet.sub %>%
+		dplyr::select(Date, siteID, maxRHScale) %>%
+		pivot_wider(names_from=siteID, values_from=maxRHScale,
+			           values_fill=NA, values_fn = mean) %>%
+		dplyr::select(-Date) %>%
+		as.matrix()
 			
-		data$minrh <- daymet.sub %>% 
-      dplyr::select(Date, siteID, minRHScale) %>%
-	    pivot_wider(names_from=siteID, values_from=minRHScale,
-	                values_fill=NA) %>%
-		  dplyr::select(-Date) %>%
-		  as.matrix()
+	data$minrh <- daymet.sub %>% 
+    dplyr::select(Date, siteID, minRHScale) %>%
+	  pivot_wider(names_from=siteID, values_from=minRHScale,
+	               values_fill=NA, values_fn = mean) %>%
+		dplyr::select(-Date) %>%
+		as.matrix()
 			
-		data$precip <- daymet.sub %>% 
-		  dplyr::select(Date, siteID, precipScale) %>%
-			pivot_wider(names_from=siteID, values_from=precipScale,
-			            values_fill=NA) %>%
-			dplyr::select(-Date) %>%
-			as.matrix()
-	}
+	data$precip <- daymet.sub %>% 
+		dplyr::select(Date, siteID, precipScale) %>%
+		pivot_wider(names_from=siteID, values_from=precipScale,
+			            values_fill=NA, values_fn = mean) %>%
+		dplyr::select(-Date) %>%
+		as.matrix()
     
 	# Get observational data
-	obs.dates <- as.Date(fx.start.date:(fx.start.date+6),
-	                     format = "%Y-%m-%d")
+	obs.dates <- fx.sequence[month(fx.sequence)==month(fx.start.date) &
+	                           year(fx.sequence)==year(fx.start.date)]
+
 	obs <- neon.job %>%
 	  filter(time %in% obs.dates) %>%
 	  mutate(index = match(time, obs.dates))
@@ -767,6 +762,7 @@ for (t in t:start.drags) {
 	# Get number of plots per site
 	plots <- neon.job %>%
 	  dplyr::select(siteID, plotID) %>%
+	  arrange(siteID, plotID) %>%
 	  filter(siteID %in% sites) %>%
 	  distinct() 
 	
@@ -811,59 +807,31 @@ for (t in t:start.drags) {
 	data$y <- y
 	data$area <- area
 	data$IC <- IC
-	
 	data$pr.phi.l <- phi.l
 	data$pr.phi.n <- phi.n
 	data$pr.phi.a <- phi.a
-	
 	data$pr.theta.l2n <- theta.l2n
 	data$pr.theta.n2a <- theta.n2a
-	
 	data$repro.mu <- repro.mu
-	
 	data$pr.beta <- pr.beta
+	data$pr.gam0 <- pr.gam0
+	data$pr.gam1 <- pr.gam1
+	data$pr.gam2 <- pr.gam2
+	data$gam3.mu <- gam3.mu
+	data$gam3.tau <- gam3.tau
+	data$pr.gam4 <- pr.gam4
+	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
 	
-	data$dev.l.pr <- dev.l.pr
-	data$dev.n.pr <- dev.n.pr
-	data$dev.a.pr <- dev.a.pr
-	data$dev.ln.pr <- dev.ln.pr
-	data$dev.na.pr <- dev.na.pr
-	
-	data$phi.l.tau <- phi.l.tau
-	data$phi.a.tau <- phi.a.tau
-	data$phi.n.tau <- phi.n.tau
-	
-	data$ln.tau <- ln.tau
-	data$na.tau <- na.tau
-	
-	data$beta.tau <- beta.tau
-
-	# data$phil.shrink <- phil.shrink
-	# data$phin.shrink <- phin.shrink
-	# data$phia.shrink <- phia.shrink
-	# data$l2n.shrink <- l2n.shrink
-	# data$n2a.shrink <- n2a.shrink
-	# 
-	# data$pr.phil.tau <- pr.phil.tau
-	# data$pr.phin.tau <- pr.phin.tau
-	# data$pr.phia.tau <- pr.phia.tau
-	# 
-	# data$pr.ln.tau <- pr.ln.tau
-	# data$pr.na.tau <- pr.na.tau
-	# 
-	data$dev.beta.mu <- dev.beta.mu
-	data$dev.beta.tau <- dev.beta.tau
-	# 
-	# data$pr.beta.shrink <- pr.beta.shrink
-	# data$pr.beta.tau <- pr.beta.tau
-	
-	data$pr.sig <- pr.sig %>% dplyr::select(-parameter) %>% as.matrix()
-	
+	# RESUME: -----------------------
 	# Cumulative degree days
-	data$cgdd <- cgdd %>%
-	  filter(Date %in% ymd(fx.sequence)) %>%
-	  pivot_wider(names_from=siteID, values_from=cumGDD) %>%
-	  dplyr::select(-Date)
+	gdd <- cgdd %>%
+	  ungroup() %>%
+	  filter(Date %in% ymd(fx.sequence),
+	         plotID %in% plots$plotID) %>%
+	  mutate(siteID = str_extract(plotID, "[A-Z]+"))
+	
+	data$gdd
+	data$gdd <- scale(data$gdd)
 	
 	# data$xind <- array(1, dim=c(4, horizon, length(sites)))
 
