@@ -9,7 +9,7 @@ X PP-RB toy model
 
 To do:
 - Plot out parabolas/get covariance for GDD parameters
-- Probably change ZIP portion of plot-level model; replace gdd
+- Check: 1) cgdd in 2021 (weirdly warm?), CARY post-processing
 - PP-RB multi-site model
 
 In the distance:
