@@ -31,9 +31,9 @@ find_model <- function(x){
 }
 
 find_species <- function(x){
-  species <- if_else(grepl("Amblyommaamericanum", x),
-                     "Amblyomma americanum",
-                     "Ixodes scapularis")
+  species <- if_else(grepl("Amblyomma_americanum", x),
+                     "Amblyomma_americanum",
+                     "Ixodes_scapularis")
   species
 }
 
@@ -42,7 +42,7 @@ ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
 sites <- unique(c(iscap.sites, ambly.sites))
 sites <- sites[sites != "DELA"]
 
-for(j in 1:length(sites)){ 
+for(j in 9:length(sites)){ 
   # Blank df for each site
   df.process <- tibble()
   

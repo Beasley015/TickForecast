@@ -67,7 +67,7 @@ neon.ix <- neon_tick_data("Ixodes_scapularis") %>% suppressMessages()
 neon.aa <- neon_tick_data("Amblyomma_americanum") %>% suppressMessages()
 
 neon.data <- bind_rows(neon.ix, neon.aa) %>%
-  filter(time >= "2018-01-01" & time <= "2022-01-01") %>%
+  filter(time >= "2018-01-01") %>%
   select(-n.drags, -n.days, -count.flag) %>%
   pivot_longer(cols = c(Larva, Nymph, Adult),
                names_to = "lifeStage",
@@ -231,6 +231,8 @@ for(i in 1:length(series.files)){
   
   # Get plot areas from neon data
   df.mutate <- neon.data %>%
+    mutate(siteID = case_when(siteID %in% c("GREN",'HNRY','TEA')~'CARY',
+                              TRUE ~ siteID)) %>%
     filter(siteID == site.vec) %>%
     select(time, totalSampledArea, plotID, siteID) %>%
     distinct() %>%
@@ -265,6 +267,8 @@ for(i in 1:length(series.files)){
   all_combos <- expand_grid(ls, sp, mod)
   
   fx.issue.date <- neon.data %>%
+    mutate(siteID = case_when(siteID %in% c("GREN",'HNRY','TEA')~'CARY',
+                              TRUE ~ siteID)) %>%
     filter(siteID == site.vec) %>%
     pull(time) %>%
     unique()
@@ -272,6 +276,9 @@ for(i in 1:length(series.files)){
   
   # Filter null model data
   df.null.timeseries <- df.null %>%
+    mutate(site = case_when(site %in% c("GREN",'HNRY','TEA')~'CARY',
+                              TRUE ~ site),
+           species = str_replace(species, " ", "_")) %>%
     filter(site == site.vec, time >= min(fx.issue.date), time <= max(fx.issue.date),
            lifeStage %in% ls, species %in% sp) %>%
     rename(siteID = site) %>%
@@ -280,10 +287,10 @@ for(i in 1:length(series.files)){
   
   # Filter raw data
   neon.timeseries <- neon.data %>%
-    mutate(time = as.Date(time, format ="%Y-%m-%d"),
-           species = str_replace(species, "_", " ")) %>%
-    filter(siteID==site.vec, lifeStage %in% ls, species %in% sp, time>=min(fx.issue.date),
-           time<=as.Date("2022-01-01", format="%Y-%m-%d")) %>%
+    mutate(siteID = case_when(siteID %in% c("GREN",'HNRY','TEA')~'CARY',
+                              TRUE ~ siteID)) %>%
+    mutate(time = as.Date(time, format ="%Y-%m-%d")) %>%
+    filter(siteID==site.vec, lifeStage %in% ls, species %in% sp, time>=min(fx.issue.date)) %>%
     select(time, plotID, density, lifeStage, species) %>%
     group_by(time, lifeStage, species) %>%
     summarise(meandensity = mean(density)) %>%
@@ -317,7 +324,7 @@ for(i in 1:length(series.files)){
       geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, fill = "Forecast"),
                   alpha = 0.3)+
       geom_line(dat=forecast.smol, aes(x=time, y=mean.forecast), color = "#0f7ba2")+
-      lims(x = c(fx.issue.date[1], as.Date("2022-01-01", format = "%Y-%m-%d"))) +
+      lims(x = c(fx.issue.date[1], as.Date("2025-01-01", format = "%Y-%m-%d"))) +
       labs(x = "Date", y = "Ticks/450m^2", 
            title = paste(site.vec, ", ", all_combos$sp[j], ", ", all_combos$ls[j], ", ", 
                          all_combos$mod[j], sep = "")) +

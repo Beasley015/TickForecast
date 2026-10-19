@@ -115,8 +115,7 @@ daymet_rh <- function(sites) {
     filter(siteID %in% sites) 
   
   df.join <- left_join(df.vpd, df.temp, by = c("siteID","year",
-                                               "yday","Date"),
-                       relationship= 'many-to-many')
+                                               "yday","Date","plotID"))
 	
   df.dew <- df.join %>%
 		  ungroup() %>%
