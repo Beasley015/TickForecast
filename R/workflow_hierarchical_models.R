@@ -217,6 +217,7 @@ mna.scaled <- mna.scaled %>%
 # =========================================== #
 #       daymet intake and correction -------------
 # =========================================== #
+# CHECK SITES IN DAYMET FILES -------------------
 source("./DataProcessing/daymet_downscale_hierarchical.R")
 
 cgdd <- daymet_cumGDD(sites=sites) %>%
@@ -265,12 +266,12 @@ df.daymet <- join2 %>%
 # =========================================== #
 
 # Site-level cov: edge effects
-edge <- read_csv("./Data/fragstats.csv") %>%
-  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
-                            TRUE ~ siteID)) %>%
-  filter(siteID == site.job) %>%
-  pull(edge_m_per_ha) %>%
-  suppressMessages()
+# edge <- read_csv("./Data/fragstats.csv") %>%
+#   mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+#                             TRUE ~ siteID)) %>%
+#   filter(siteID == site.job) %>%
+#   pull(edge_m_per_ha) %>%
+#   suppressMessages()
 
 # Plot-level cov: land cover
 plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
@@ -332,8 +333,6 @@ theta.n2a <- get_prior("theta.na")
 repro <- get_prior("repro.mu")
 repro.mu <- repro[1] # goes to reproduction portion of transition matrix
 
-# I don't like how covariates are annotated: all are just "beta"
-# Will fix once model comparisons are complete
 n.beta <- params.stats %>%
 	filter(grepl("beta", parameter)) %>%
 	nrow()
@@ -357,6 +356,18 @@ get_beta <- function(model.job) {
 }
 
 pr.beta <- get_beta(model.job)
+
+# Convert to correct dimensions
+phi.l <- matrix(rep(phi.l, length(sites)), ncol = 2, byrow = T)
+phi.n <- matrix(rep(phi.n, length(sites)), ncol = 2, byrow = T)
+phi.a <- matrix(rep(phi.a, length(sites)), ncol = 2, byrow = T)
+
+theta.l2n <- matrix(rep(theta.l2n, length(sites)), ncol = 2, byrow = T)
+theta.n2a <- matrix(rep(theta.n2a, length(sites)), ncol = 2, byrow = T)
+
+repro.mu <- rep(repro[1], length(sites))
+
+pr.beta <- array(rep(pr.beta, length(sites)), dim = c(n.beta, 2, length(sites)))
 
 # function to approximate moment the inverse gamma
 inv_gamma_mm <- function(x) {
@@ -430,6 +441,7 @@ for (t in t:start.drags) {
 	# initialize nimble lists
 	constants <- data <- list()
 
+	# Setup ---------------
 	if (t == 1) {
 		fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 		
@@ -822,49 +834,50 @@ for (t in t:start.drags) {
 	data$pr.gam4 <- pr.gam4
 	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
 	
-	# RESUME: -----------------------
 	# Cumulative degree days
 	gdd <- cgdd %>%
 	  ungroup() %>%
 	  filter(Date %in% ymd(fx.sequence),
 	         plotID %in% plots$plotID) %>%
-	  mutate(siteID = str_extract(plotID, "[A-Z]+"))
+	  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
+	  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
+	                            TRUE ~ siteID)) %>%
+	  pivot_wider(names_from = plotID, values_from = cumGDD,
+	              values_fill = NA)
 	
-	data$gdd
-	data$gdd <- scale(data$gdd)
-	
-	# data$xind <- array(1, dim=c(4, horizon, length(sites)))
-
-	if (miceAndWeather){
-	  data$mice <- mna.scaled %>%
-	    filter(Date %in% fx.sequence) %>%
-	    pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
-	    dplyr::select(-Date) %>%
-	    relocate(all_of(sites)) %>%
-	    as.matrix() %>%
-	    suppressMessages()
-
-	  if (nrow(data$mice) < length(fx.sequence)) {
-	    horizon <- min(nrow(data$cgdd), nrow(data$mice))
-	    data$y <- y[, 1:horizon, ,]
+	gdd.list <- split(gdd, ~siteID)
+	gdd.list <- lapply(gdd.list, 
+	       function(x) x <- x[,-which(unname(colSums(is.na(x))==nrow(x)))])
+	gdd.list <- lapply(gdd.list, 
+	                   function(x) x <- as.matrix(select(x, -c(Date, siteID))))
+	for(i in 1:length(gdd.list)){
+	  if(ncol(gdd.list[[i]])<max(n.plots)){
+	    new.cols <- matrix(NA, nrow = nrow(gdd.list[[i]]), 
+	                       ncol=max(n.plots-ncol(gdd.list[[i]])))
+	    gdd.list[[i]] <- cbind(gdd.list[[i]], new.cols)
 	  }
+	}
+	
+	gdd.ar <- do.call(abind, c(gdd.list, along = 3))
+	data$gdd <- gdd.ar
+
+	data$mice <- mna.scaled %>%
+	  filter(Date %in% fx.sequence) %>%
+	  pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
+	  dplyr::select(-Date) %>%
+	  relocate(all_of(sites)) %>%
+	  as.matrix() %>%
+	  suppressMessages()
+
+	if (nrow(data$mice) < length(fx.sequence)) {
+	  horizon <- min(nrow(data$gdd), nrow(data$mice))
+	  data$y <- y[, 1:horizon, ,]
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))) {
-	  if (model.job == "Weather_hierarchicalFull") {
-	    # Make sure horizon does not go past empirical data
-	    horizon <- nrow(data$cgdd)
-	    data$y <- as.array(y[, 1:horizon, ,])
-	    
-	    # Fix error arising from single-site models, may remove
-	    # if(is.na(dim(data$y)[3]==T)){
-	    #   dim(data$y)[3] <- 1
-	    # }
-	    
-	    } else {
-	      horizon <- min(nrow(data$cgdd), nrow(data$mice))
-				data$y <- y[, 1:horizon, ,]
-	    }
+	  # Make sure horizon does not go past empirical data
+	  horizon <- nrow(data$cgdd)
+	  data$y <- as.array(y[, 1:horizon, ,])
 	}
 
 	# finalize constants
@@ -873,13 +886,6 @@ for (t in t:start.drags) {
 	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
-	# constants$max.cgdd <- cgdd %>%
-	#   group_by(siteID) %>%
-	#   filter(Date >= min(fx.sequence)) %>%
-	#   mutate(max.cgdd = cumGDD*1.2) %>%
-	#   summarise(min = min(max.cgdd), max = max(max.cgdd)) %>%
-	#   select(-siteID) %>%
-	#   t()
 	
 	# Initialize area
 	area.init <- area
@@ -887,6 +893,8 @@ for (t in t:start.drags) {
 	area.init[nai] <- 160
 	area.init[-nai] <- NA
 		
+	# PP-RB Phase I --------------------------------
+	# CHECK AFTER REVISING NIMBLE SCRIPT ---------------
 	# Initial values to send to nimble
 	inits <- function() {
 	  list(
@@ -894,10 +902,10 @@ for (t in t:start.drags) {
 	    phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
 	    phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
 	    phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
-	    # theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-	    #                length(sites)),
-	    # theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-	    #                length(sites)),
+	    theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
+	                   length(sites)),
+	    theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
+	                   length(sites)),
 			beta = matrix(rep(rnorm(n=n.beta, mean=pr.beta[, 1], sd= 1/sqrt(pr.beta[, 2])),length(sites)),
 			              ncol = length(sites)),
 			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
@@ -919,20 +927,11 @@ for (t in t:start.drags) {
 			OMEGA = array(0, dim=c(4,4,length(sites)))
 		)
 	}
-	
-	# params.to.save <-  c("beta", "dev.beta", "phi.a.mu", "phi.l.mu", "phi.n.mu",  
-	#                      "sig", "theta.ln", "theta.na","x",
-	#                      "dev.phi.l", "dev.phi.n", "dev.phi.a", "dev.ln", "dev.na",
-	#                      "l.shrink", "n.shrink", "a.shrink", "ln.shrink", "na.shrink",
-	#                      "dev.beta", "beta.shrink",
-	#                      "phi.l.tau", "phi.n.tau", "phi.a.tau", "ln.tau",
-	#                      "na.tau", "beta.tau")       
-	
-	params.to.save <-  c("beta","phi.a.mu", "phi.l.mu", "phi.n.mu",  
-	                     "sig", "theta.ln", "theta.na","x",
-	                     "dev.beta", "dev.phi.n", "dev.phi.a", "dev.phi.l",
-	                     "dev.ln", "dev.na")  
 
+	params.to.save <-  c("beta","phi.a.mu", "phi.l.mu", "phi.n.mu",  
+	                     "sig", "theta.ln", "theta.na","x")  
+
+	# RESUME ------------------------
 	source("./R/nimble_forecast_hierarchical.R")
 	source("./R/run_transfer_nimble_hierarchical.R")
 	cl <- makeCluster(n.slots) 
@@ -1023,8 +1022,10 @@ for (t in t:start.drags) {
 	}
 	
 	names(dat.draws) <- names(dat.hindcast)
+	
+	# PP-RB Phase II ----------------------
 
-	# Output processing and save
+	# Output processing and save ----------------------
 	fileDest <- file.path(dir.save, fx.start.date)
 	
 	message("Running analysis...")

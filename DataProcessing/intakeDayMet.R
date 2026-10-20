@@ -10,8 +10,8 @@ plot.coord <- read_csv("./Data/plotLatLon.csv") %>% suppressMessages()
 
 # Daymet download
 dm <- download_daymet_batch(
-  file_location = './Data/siteLatLon.csv',
-  # file_location = './Data/plotLatLon.csv', #uncomment for plot level
+  # file_location = './Data/siteLatLon.csv',
+  file_location = './Data/plotLatLon.csv', #uncomment for plot level
   start = 2016,
   end = 2025,
   internal = TRUE
