@@ -261,6 +261,15 @@ df.daymet <- join2 %>%
   dplyr::select(Date, siteID, contains("Scale")) %>%
   filter(Date >= "2016-01-01" & Date < "2026-01-01")
 
+cgdd.test <- cgdd %>%
+  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+                            TRUE ~ siteID)) %>%
+  group_by(siteID, Date) %>%
+  summarise(cumGDD=mean(cumGDD))
+ggplot(data=cgdd.test, aes(x = Date, y = cumGDD, color = siteID))+
+  geom_line()
+
 # =========================================== #
 #   Remotely-sensed data intake -------------------
 # =========================================== #

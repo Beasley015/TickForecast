@@ -221,7 +221,7 @@ pprb.phase2 <- function(){
     r.start[b] ~ dgamma(r.pr[1,b], r.pr[2,b])
   
     q[b] <- sites/(2+q.start[b])
-    r[b] <- 1/sum((b1-mu.b1)^2 + 1/r.start[b])
+    r[b] <- 1/sum((b1-mu.b1)^2 + 1/r.start[b]) #fix this in real model
   }
   
   s2b1.temp ~ dgamma(q[1], r[1])
