@@ -45,10 +45,15 @@ all.coords <- bind_rows(cary.coords, tick.plots)
 
 # Final plot locations -----------------
 coords.filtered <- all.coords %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
+                            TRUE ~ siteID)) %>%
   filter(siteID %in% c(aa.sites, ix.sites)) %>%
-  filter(is.na(decimalLatitude)==F, is.na(decimalLongitude)==F)
-
-# write.csv(coords.filtered, "./Data/plotLatLon.csv")
+  filter(is.na(decimalLatitude)==F, is.na(decimalLongitude)==F) %>%
+  select(-siteID) %>%
+  rename(lat = decimalLatitude, lon = decimalLongitude) %>%
+  relocate(plotID, lat, lon)
+  
+# write_csv(coords.filtered, "./Data/plotLatLon.csv")
 
 # Get site midpoints --------------------
 site.coords <- coords.filtered %>%

@@ -42,7 +42,7 @@ jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-	job.num <- 8
+	job.num <- 2
 }
 
 site.job <- jobs$site[job.num]
@@ -58,7 +58,7 @@ if(is.na(n.slots)){
 n.iter <- 50000
 Nmc <- 2000
 horizon <- 365
-update <- T
+update <- F
 
 # =========================================== #
 #       tick data intake ----------------
@@ -243,7 +243,8 @@ evi2 <- read_csv("./Data/full_EVI2.csv") %>%
   mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                             TRUE ~ siteID)) %>%
   filter(siteID == site.job) %>%
-  select(plotID, date, evi2_mean)
+  select(plotID, date, evi2_mean) %>%
+  suppressMessages()
 
 # =========================================== #
 #       get informative priors -------------------
@@ -498,7 +499,10 @@ for (t in t:n.drags) {
 	}
 
 	daymet.sub <- df.daymet %>%
-			filter(Date %in% fx.sequence)
+			filter(Date %in% fx.sequence) %>%
+	  group_by(Date) %>%
+	  summarise(maxTempScale=mean(maxTempScale), maxRHScale=mean(maxRHScale),
+	            minRHScale=mean(minRHScale), precipScale=mean(precipScale))
 			
 	data$maxtemp <- daymet.sub %>% pull(maxTempScale) %>% as.vector()
 	data$maxrh <- daymet.sub %>% pull(maxRHScale) %>% as.vector()
@@ -563,7 +567,6 @@ for (t in t:n.drags) {
 	# data$max.cgdd <- max(data$gdd) * 1.2
 	data$xind <- matrix(1, 4, horizon)
 
-	# data$edge <- edge
 	data$mice <- mna.scaled %>%
 	  filter(Date %in% fx.sequence) %>%
 		pull(mna.scaled)
@@ -629,7 +632,11 @@ for (t in t:n.drags) {
 
 	area.init <- area
 	nai <- which(is.na(area))
-	area.init[nai] <- 160
+	if(site.job=="CARY"){
+	  area.init[nai] <- 450
+	} else{
+	  area.init[nai] <- 160
+	}
 	area.init[-nai] <- NA
 
 	# Define inits

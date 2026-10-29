@@ -908,3 +908,24 @@ if_else_nimble <- nimbleFunction(
     }
   }
 )
+
+dZIP <- nimbleFunction(
+  run = function(x = double(), dlamb = double(),
+                 zeroProb = double(), log = logical(0, default = 0)) {
+    returnType(double())
+    ## For use with AD, we cannot use an `if` statement to handle the mixture.
+    prob <- zeroProb * dbinom(x, size = 1, prob = 0) + (1 - zeroProb) * dpois(x, dlamb)
+    if (log) return(log(prob))
+    return(prob)
+  },
+  buildDerivs = 'run'   # Needed when used with AD-based algorithms.
+)
+
+rZIP <- nimbleFunction(
+  run = function(n = integer(), dlamb = double(), zeroProb = double()) {
+    returnType(double())
+    isStructuralZero <- rbinom(1, prob = zeroProb, size = 1)
+    if (isStructuralZero) return(0)
+    return(rpois(1, dlamb))
+  }
+)

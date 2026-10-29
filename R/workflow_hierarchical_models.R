@@ -24,6 +24,8 @@ library(zoo)
 library(nimble)
 library(parallel)
 library(abind)
+library(doParallel)
+library(foreach)
 
 options(dplyr.summarise.inform = FALSE)
 
@@ -33,8 +35,13 @@ dir.out <- file.path(dir.top, "out")
 # Define models to run
 models <- c("MultiSite")
 
-iscap.sites <- str_remove(read_txt("./Data/ix_sites.txt"), "\\*")
-ambly.sites <- str_remove(read_txt("./Data/am_sites.txt"), "\\*")
+iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
+ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
+
+# These are the real files, use them once Neo is done
+# getting plot-level vars
+# iscap.sites <- str_remove(read_txt("./Data/ix_sites.txt"), "\\*")
+# ambly.sites <- str_remove(read_txt("./Data/am_sites.txt"), "\\*")
 
 # Create all possible combos
 iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
@@ -59,7 +66,7 @@ if(species.job=="Ixodes_scapularis"){
     sites <- ambly.sites
 }
 
-n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
+# n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 production <- TRUE
 n.iter <- 20000
 # Nmc <- 2000
@@ -217,12 +224,14 @@ mna.scaled <- mna.scaled %>%
 # =========================================== #
 #       daymet intake and correction -------------
 # =========================================== #
-# CHECK SITES IN DAYMET FILES -------------------
 source("./DataProcessing/daymet_downscale_hierarchical.R")
 
 cgdd <- daymet_cumGDD(sites=sites) %>%
   ungroup() %>%
   dplyr::select(-year) %>%
+  group_by(Date, plotID) %>%
+  summarise(cumGDD = mean(cumGDD)) %>%
+  mutate(cumGDD = scale(cumGDD)[,1]) %>%
   suppressMessages()
 
 maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
@@ -232,12 +241,16 @@ maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
   suppressMessages()
 
 rh <- daymet_rh(sites) %>%
-    dplyr::select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
-    suppressMessages()
+  dplyr::select(Date, maxRHCorrect, minRHCorrect, siteID) %>%
+  group_by(Date, siteID) %>%
+  summarise(maxRHCorrect=mean(maxRHCorrect), minRHCorrect=mean(minRHCorrect)) %>%
+  suppressMessages()
 
 precip <- daymet_precip(sites) %>%
-    dplyr::select(Date, precipitation, siteID) %>%
-    suppressMessages()
+  dplyr::select(Date, precipitation, siteID) %>%
+  group_by(Date, siteID) %>%
+  summarise(precipitation=mean(precipitation)) %>%
+  suppressMessages()
  
 # Combine all met variables
 join1 <- left_join(maxTemp, rh, by = c("Date", "siteID"))
@@ -261,15 +274,6 @@ df.daymet <- join2 %>%
   dplyr::select(Date, siteID, contains("Scale")) %>%
   filter(Date >= "2016-01-01" & Date < "2026-01-01")
 
-cgdd.test <- cgdd %>%
-  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
-  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
-                            TRUE ~ siteID)) %>%
-  group_by(siteID, Date) %>%
-  summarise(cumGDD=mean(cumGDD))
-ggplot(data=cgdd.test, aes(x = Date, y = cumGDD, color = siteID))+
-  geom_line()
-
 # =========================================== #
 #   Remotely-sensed data intake -------------------
 # =========================================== #
@@ -282,7 +286,7 @@ ggplot(data=cgdd.test, aes(x = Date, y = cumGDD, color = siteID))+
 #   pull(edge_m_per_ha) %>%
 #   suppressMessages()
 
-# Plot-level cov: land cover
+# Plot-level cov: land cover ---------------
 plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
   mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                             TRUE ~ siteID)) %>%
@@ -391,13 +395,15 @@ inv_gamma_mm <- function(x) {
 pr.sig <- df.params %>%
   mutate(model = case_when(model == "Weather" ~ "Weather_hierarchicalFull",
                            model == "WithWeatherAndMiceGlobal" ~
-                             "WeatherMice_hierarchicalFull",
+                             "MultiSite",
                            TRUE ~ model)) %>%
 	filter(model == model.job, grepl("sig", parameter)) %>%
 	dplyr::select(parameter, value) %>%
 	group_by(parameter) %>%
-	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2])
+	summarise(alpha = inv_gamma_mm(value)[1], beta = inv_gamma_mm(value)[2]) %>%
+  select(-parameter)
 
+pr.sig <- replicate(length(sites), as.matrix(pr.sig))
 
 # iterate ====================================================================
 
@@ -841,9 +847,9 @@ for (t in t:start.drags) {
 	data$gam3.mu <- gam3.mu
 	data$gam3.tau <- gam3.tau
 	data$pr.gam4 <- pr.gam4
-	data$pr.sig <- pr.sig %>% select(-parameter) %>% as.matrix()
+	data$pr.sig <- pr.sig 
 	
-	# Cumulative degree days
+	# Cumulative degree days 
 	gdd <- cgdd %>%
 	  ungroup() %>%
 	  filter(Date %in% ymd(fx.sequence),
@@ -870,6 +876,7 @@ for (t in t:start.drags) {
 	gdd.ar <- do.call(abind, c(gdd.list, along = 3))
 	data$gdd <- gdd.ar
 
+	# Mice
 	data$mice <- mna.scaled %>%
 	  filter(Date %in% fx.sequence) %>%
 	  pivot_wider(names_from=siteID, values_from=mna_scaled) %>%
@@ -877,13 +884,61 @@ for (t in t:start.drags) {
 	  relocate(all_of(sites)) %>%
 	  as.matrix() %>%
 	  suppressMessages()
+	
+	# land cover 
+	land.classes <- unique(plt_cover$lc_dominant)
+	current.classes <- plt_cover %>%
+	  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
+	  mutate(siteID = case_when(siteID %in% c("GREN", "HNRY", "TEA")~"CARY",
+	                            TRUE~siteID)) %>%
+	  arrange(siteID,plotID) %>%
+	  pivot_wider(names_from=siteID, values_from = lc_dominant,
+	              values_fill=NA) %>%
+	  select(-plotID) 
+	
+	current.classes <- apply(current.classes, 2, 
+	                         function(x) x <- c(x[!is.na(x)], x[is.na(x)]))
+	rowna <- apply(current.classes, 1, function(x) sum(is.na(x)))
+	rowna <- which(rowna == ncol(current.classes))
+	current.classes <- current.classes[-rowna,]
+	
+	current.classes <- apply(current.classes, 2, match, land.classes)
+	current.classes <- apply(current.classes, 2, 
+	      function(x) as.numeric(factor(x, exclude = NA, levels=unique(x))))
+	
+	data$lc.class <- current.classes
+	
+	# evi 
+	evi <- evi2 %>%
+	  filter(date %in% fx.sequence, plotID %in% plots$plotID) %>%
+	  arrange(plotID) %>%
+	  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
+	  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
+	                            TRUE ~ siteID)) %>%
+	  pivot_wider(names_from = plotID, values_from = evi2_mean) 
+	  
+	evi.list <- split(evi, ~siteID)
+	evi.list <- lapply(evi.list, 
+	                     function(x) x <- x[,-which(unname(colSums(is.na(x))==nrow(x)))])
+	evi.list <- lapply(evi.list, 
+	                     function(x) x <- as.matrix(select(x, -c(date, siteID))))
+	for(i in 1:length(evi.list)){
+	  if(ncol(evi.list[[i]])<max(n.plots)){
+	    new.cols <- matrix(NA, nrow = nrow(evi.list[[i]]), 
+	                       ncol=max(n.plots-ncol(evi.list[[i]])))
+	    evi.list[[i]] <- cbind(evi.list[[i]], new.cols)
+	  }
+	}
+	  
+	evi.ar <- do.call(abind, c(evi.list, along = 3))
+	data$evi2 <- evi.ar
 
 	if (nrow(data$mice) < length(fx.sequence)) {
 	  horizon <- min(nrow(data$gdd), nrow(data$mice))
 	  data$y <- y[, 1:horizon, ,]
 	}
 
-	if (year(fx.start.date) == max(year(neon.job$time))) {
+	if(year(fx.start.date) == max(year(neon.job$time))) {
 	  # Make sure horizon does not go past empirical data
 	  horizon <- nrow(data$cgdd)
 	  data$y <- as.array(y[, 1:horizon, ,])
@@ -891,8 +946,6 @@ for (t in t:start.drags) {
 
 	# finalize constants
 	constants$n.beta <- n.beta
-	constants$nsite <- length(sites)
-	constants$n.plots <- n.plots
 	constants$horizon <- horizon
 	constants$ns <- 4
 	
@@ -901,64 +954,122 @@ for (t in t:start.drags) {
 	nai <- which(is.na(area))	
 	area.init[nai] <- 160
 	area.init[-nai] <- NA
+	area.init[,,2] <- 450
 		
 	# PP-RB Phase I --------------------------------
-	# CHECK AFTER REVISING NIMBLE SCRIPT ---------------
-	# Initial values to send to nimble
-	inits <- function() {
-	  list(
-	    area = area.init,
-	    phi.l.mu = rep(rnorm(1, phi.l[1], 1 / sqrt(phi.l[2])), length(sites)),
-	    phi.n.mu = rep(rnorm(1, phi.n[1], 1 / sqrt(phi.n[2])), length(sites)),
-	    phi.a.mu = rep(rnorm(1, phi.a[1], 1 / sqrt(phi.a[2])), length(sites)),
-	    theta.ln = rep(rnorm(1, theta.l2n[1], 1 / sqrt(theta.l2n[2])),
-	                   length(sites)),
-	    theta.na = rep(rnorm(1, theta.n2a[1], 1 / sqrt(theta.n2a[2])),
-	                   length(sites)),
-			beta = matrix(rep(rnorm(n=n.beta, mean=pr.beta[, 1], sd= 1/sqrt(pr.beta[, 2])),length(sites)),
-			              ncol = length(sites)),
-			sig = matrix(rinvgamma(4*length(sites), pr.sig$alpha, pr.sig$beta),
-			             nrow=4, ncol=length(sites)),
-			x = array(abs(rnorm(n=4*horizon*length(sites), mean=2)) / 160 * 450, 
-			          dim=c(4, horizon, length(sites))),
-			Ex = array(rpois(4 * horizon * length(sites), 2) / 160 * 450,
-			           dim=c(4, horizon, length(sites))),
-			y = array(rep(0, 4*horizon*max(n.plots)*length(sites)),
-			          dim = dim(data$y)),
-			tau.temp = rexp(length(sites)),
-			tau.maxrh = rexp(length(sites)),
-			tau.minrh = rexp(length(sites)),
-			tau.precip = rexp(length(sites)),
-			x1 = jitter(data$maxtemp),
-			x2 = jitter(data$maxrh),
-			x3 = jitter(data$minrh),
-			x4 = jitter(data$precip),
-			OMEGA = array(0, dim=c(4,4,length(sites)))
-		)
-	}
-
-	params.to.save <-  c("beta","phi.a.mu", "phi.l.mu", "phi.n.mu",  
-	                     "sig", "theta.ln", "theta.na","x")  
-
-	# RESUME ------------------------
-	source("./R/nimble_forecast_hierarchical.R")
-	source("./R/run_transfer_nimble_hierarchical.R")
-	cl <- makeCluster(n.slots) 
+	source("./R/nimble_forecast_multisite.R")
+	source("./R/run_transfer_nimble_multisite.R")
 	
-	# Run the model	
-	out.nchains <- run_transfer_nimble(
-		cl = cl,
-		model = model.code,
-		data = data,
-		constants = constants,
-		inits = inits,
-		n.iter = n.iter,
-		parms = params.to.save,
-		miceAndWeather = miceAndWeather,
-		use.daymet = use.daymet
+	# Create matrix with all chains to run
+	iter.mat <- expand.grid(sites, 1:3) %>%
+	  rename(site = Var1, chain = Var2)
+	
+	# Set up parallel processing
+	cores <- parallel::detectCores()
+	
+	cluster <- parallel::makeCluster(cores, type = "PSOCK")
+	
+	doParallel::registerDoParallel(cl = cluster)
+	
+	# Export packages and data
+	export.vec <- c(
+	  "constants",
+	  "data",
+	  "n.iter",
+	  "if_else_nimble",
+	  "dZIP",
+	  "rZIP"
+	)
+	
+	clusterExport(cl=cluster, export.vec, envir = environment())
+	
+	all.chains <- foreach(i = 1:nrow(iter.mat), .combine='c') %dopar% {
+	  # sample on each cluster
+	  library(nimble)
+	  library(coda)
+	  
+	  # Extract constants per site
+	  site <- which(iter.mat$site[i] == sites)
+	  
+	  constant <- constants
+	  constant$n.plots <- n.plots[site]
+	  constant$n.lc <- length(unique(data$lc.class[,site]))-1
+	  
+	  dat <- list()
+	  # Extract data per site
+	  for(d in 1:length(data)){
+	    if(is.null(dim(data[[d]]))){
+	      if(length(data[[d]])==length(sites)){
+	        dat[[d]] <- data[[d]][site]
+	      } else {
+	        dat[[d]] <- data[[d]]
+	      }
+	    } else if(length(dim(data[[d]]))==2){
+	      if(nrow(data[[d]]) == length(sites)){
+	        dat[[d]] <- data[[d]][site,]
+	      } else{
+	        dat[[d]] <- data[[d]][,site]
+	      }
+	    } else if(length(dim(data[[d]]))==3){
+	      dat[[d]] <- data[[d]][,,site]
+	    } else if(length(dim(data[[d]]))==4){
+	      dat[[d]] <- data[[d]][,,,site]
+	    } 
+	  }
+	  names(dat) <- names(data)
+	  dat$lc.class <- dat$lc.class[!is.na(dat$lc.class)]
+	  
+	  # Initial values to send to nimble
+	  inits <- function() {
+	    list(
+	     area = area.init[,,site],
+       phi.l.mu = rnorm(1, phi.l[site,1], 1 / sqrt(phi.l[site,2])),
+       phi.n.mu = rnorm(1, phi.n[site,1], 1 / sqrt(phi.n[site,2])),
+       phi.a.mu = rnorm(1, phi.a[site,1], 1 / sqrt(phi.a[site,2])),
+       theta.ln = rnorm(1, theta.l2n[site,1], 1 / sqrt(theta.l2n[site,2])),
+       theta.na = rnorm(1, theta.n2a[site,1], 1 / sqrt(theta.n2a[site,2])),
+       beta = rnorm(n.beta, pr.beta[, 1,site], 1 / sqrt(pr.beta[, 2,site])),
+       sig = rinvgamma(4, pr.sig[,1,site], pr.sig[,2,site]),
+       x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+       Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
+       y = array(rpois(4 * horizon * constant$n.plots, 5), dim = dim(dat$y)),
+       tau.temp = rexp(1),
+       tau.maxrh = rexp(1),
+       tau.minrh = rexp(1),
+       tau.precip = rexp(1),
+       x1 = jitter(dat$maxtemp),
+       x2 = jitter(dat$maxrh),
+       x3 = jitter(dat$minrh),
+       x4 = jitter(dat$precip),
+       neg.gam1 = rgamma(3,1,1)
+	     )
+   }
+	
+	  # Parameters to save (uses less memory)
+	  params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
+	                      # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
+	                      "theta.ln", "theta.na", 
+	                      "gam0", "gam1", "gam2", "gam4", "pz", 
+	                      "repro","x" #, "x1", "x2", "x3", "x4"
+	                      )  
+	  
+	  if(constant$n.lc > 1){
+	    params.to.save <- c(params.to.save, "gam3")
+	  }
+
+	  # Run the model	
+	  out.nchains <- run_transfer_nimble(,
+		  model = model.code,
+		  data = dat,
+		  constants = constant,
+		  inits = inits,
+		  n.iter = n.iter,
+		  parms = params.to.save
 		) 
 	
-	stopCluster(cl)
+	}
+	
+	parallel::stopCluster(cl = cluster)
   
 	# Merge outputs of chains
 	dat.hindcast <- list()

@@ -78,28 +78,25 @@ model.code <- nimbleCode({
 		logit(n2a[t]) <- theta.na + beta[14] * mice[t] #+ beta[16] * edge
 
 		if(n.plots == 1){
-		  mean.gdd[t] <- gdd[t,1]
 		  mean.pz3[t] <- pz[3,t,1]
 		  mean.pz2[t] <- pz[2,t,1]
 		  mean.pz1[t] <- pz[1,t,1]
 		} else{
-		  mean.gdd[t] <- mean(gdd[t,1:n.plots])
 		  mean.pz3[t] <- mean(pz[3,t,1:n.plots])
 		  mean.pz2[t] <- mean(pz[2,t,1:n.plots])
 		  mean.pz1[t] <- mean(pz[1,t,1:n.plots])
 		}
 		
 		lambda.bin[t] ~ dbern(mean.pz3[t])
-		lambda[t] <- if_else_nimble(lambda.bin[t]==0, repro, 0)
-		# look @ repro.mu: put a prior so it can vary?
+		lambda[t] <- if_else_nimble(lambda.bin[t]==0, 0, repro)
 		
 		# Relate p's to site-level transition probs:
 		n2a.bin[t] ~ dbern(mean.pz2[t])
-		n2a.quest[t] <- if_else_nimble(n2a.bin[t]==0, n2a[t], 0)
+		n2a.quest[t] <- if_else_nimble(n2a.bin[t]==0, 0, n2a[t])
 		
 		# Turn prob of zero from phenology into binary site-level yes/no
 		l2n.bin[t] ~ dbern(mean.pz1[t])
-		l2n.quest[t] <- if_else_nimble(l2n.bin[t]==0, 1, 0)
+		l2n.quest[t] <- if_else_nimble(l2n.bin[t]==0, 0, 1)
 
 		maxtemp[t] ~ dnorm(x1[t], tau = tau.temp)
 		maxrh[t] ~ dnorm(x2[t], tau = tau.maxrh)

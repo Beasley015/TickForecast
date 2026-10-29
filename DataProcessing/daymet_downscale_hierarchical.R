@@ -143,8 +143,10 @@ daymet_rh <- function(sites) {
 
   daymet.temp.bias <- left_join(df.dew, df.join, by = c("yday", "siteID")) %>%
     mutate(
-			  maxRHCorrect = pmin(rh + biasMax, 100),
-			  minRHCorrect = pmin(rh + biasMin, 100)
+			  maxRHCorrect = case_when(siteID != "CARY" ~ pmin(rh + biasMax, 100),
+			                           TRUE ~ rh),
+			  minRHCorrect = case_when(siteID != "CARY" ~ pmin(rh + biasMin, 100),
+			                           TRUE ~ rh)
 		  ) %>%
     select(Date, maxRHCorrect, minRHCorrect, siteID)
   

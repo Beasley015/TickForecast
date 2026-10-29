@@ -6,7 +6,8 @@ library(curl)
 
 # Read in site and plot coords 
 site.coord <- readr::read_csv("./Data/siteLatLon.csv") %>% suppressMessages()
-plot.coord <- read_csv("./Data/plotLatLon.csv") %>% suppressMessages()
+plot.coord <- read_csv("./Data/plotLatLon.csv") %>% 
+  suppressMessages()
 
 # Daymet download
 dm <- download_daymet_batch(
@@ -31,7 +32,7 @@ dm_tst <- lapply(dm, dm_unlist)
 
 dm_df <- do.call(rbind, dm_tst)
 
-write_csv(dm_df, file = "./Data/daymetSite.csv")
+# write_csv(dm_df, file = "./Data/daymetPlot.csv")
 
 variables <- c(
   "dayl..s.",      # day length
@@ -78,21 +79,25 @@ make_csvs <- function(size){
       leap.df <- df.save %>%
         filter(site == unique(df.save$site)[i],
                Date %in% c("2016-12-30", "2017-01-01",
-                           "2020-12-30", "2021-01-01")) # leap years?
+                           "2020-12-30", "2021-01-01",
+                           "2024-12-30", "2025-01-01")) # leap years?
     
       leap.value <- leap.df %>%
-        mutate(group = case_when(year %in% c(2016, 2017) ~ 1,
+        mutate(group = case_when(year %in% c(2016, 2017,
+                                             2020, 2021,
+                                             2024, 2025) ~ 1,
                                  TRUE ~ 2)) %>%
         group_by(group) %>%
         summarise_at(vars(variables[s]), mean) %>%
         select(-group)
         
       leap.row <- data.frame(as.vector(leap.value[,1]), 
-                             c(ymd("2016-12-31"),ymd("2020-12-31")),
+                             c(ymd("2016-12-31"),ymd("2020-12-31"),
+                               ymd("2024-12-31")),
                              leap.df$site[1],
                     # leap.df$latitude[1], leap.df$longitude[1],
                     # leap.df$altitude[1],
-                    c(2016,2020), 366)
+                    c(2016,2020,2024), 366)
       
       colnames(leap.row) <- c(variables[s], 'Date', 'site',
                            # 'latitude', 'longitude', 'altitude',

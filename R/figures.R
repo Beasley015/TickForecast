@@ -74,7 +74,7 @@ neon.data <- bind_rows(neon.ix, neon.aa) %>%
                values_to = "observed") %>%
   mutate(density = observed / totalSampledArea * 450)
 
-site.info <- neonstore::neon_sites()
+# site.info <- neonstore::neon_sites()
 
 # Model output ------------------
 analysis.files <- list.files(dir.analysis, recursive = T)
@@ -256,13 +256,11 @@ for(i in 1:length(series.files)){
   
   rm(df.mutate)
   
-  if(site.vec != "CARY"){
-    forecast.density <- forecast.density %>%
-      mutate(mean.forecast = (mean.forecast/sampledArea)*450,
-             forecast05 = (forecast05/sampledArea)*450,
-             forecast95 = (forecast95/sampledArea)*450) %>%
-      suppressMessages()
-  } 
+  forecast.density <- forecast.density %>%
+    mutate(mean.forecast = (mean.forecast/sampledArea)*450,
+            forecast05 = (forecast05/sampledArea)*450,
+            forecast95 = (forecast95/sampledArea)*450) %>%
+    suppressMessages()
   
   all_combos <- expand_grid(ls, sp, mod)
   
@@ -502,8 +500,95 @@ for(i in 1:length(hierarchical.files)){
   gc()
 }
 
+# Time series figures: all life stages (plot) ---------------------
+series.files <- analysis.files[str_detect(analysis.files, "allDays")]
+series.files <- series.files[str_detect(series.files, pattern = "[A-Z]+_")]
 
-# score figures --------------------------------------------------------------------------
+for(i in 1:length(series.files)){
+  # Read in time series from forecasting model
+  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = "")) %>%
+    select(-c(mice, weather))
+  
+  # Get constants for filtering
+  sp <- unique(df.mutate$species)
+  site.vec <- unique(df.mutate$siteID)
+  mod <- unique(df.mutate$model)
+  
+  # Get plot areas from neon data
+  df.mutate <- neon.data %>%
+    mutate(siteID = case_when(siteID %in% c("GREN",'HNRY','TEA')~'CARY',
+                              TRUE ~ siteID)) %>%
+    filter(siteID == site.vec) %>%
+    select(time, totalSampledArea, plotID, siteID) %>%
+    distinct() %>%
+    group_by(time, siteID) %>%
+    summarise(sampledArea=sum(totalSampledArea)) %>%
+    right_join(df.mutate, by = c("time", "siteID")) %>%
+    suppressMessages
+  
+  # Condense forecast across plots
+  forecast.density <- df.mutate %>%
+    ungroup() %>%
+    select(time, lifeStage, siteID, species, model, mean, lower95, upper95,
+           sampledArea) %>%
+    mutate(time=as.Date(time, format = "%Y-%m-%d")) %>%
+    arrange(time) %>%
+    fill(sampledArea, .direction="down") %>%
+    group_by(time, lifeStage, model, species, sampledArea) %>% 
+    summarise(mean.forecast = mean(mean), forecast05 = mean(lower95),
+              forecast95=mean(upper95)) %>%
+    suppressMessages()
+  
+  rm(df.mutate)
+  
+  forecast.density <- forecast.density %>%
+    mutate(mean.forecast = (mean.forecast/sampledArea)*450,
+           forecast05 = (forecast05/sampledArea)*450,
+           forecast95 = (forecast95/sampledArea)*450) %>%
+    suppressMessages()
+  
+  all_combos <- expand_grid(sp, mod)
+  
+  # Filter forecast data
+  forecast.density <- forecast.density %>%
+    filter(year(time) >= 2018)
+  
+  for(j in 1:nrow(all_combos)){
+    # Further filtering
+    forecast.smol <- forecast.density %>%
+      filter(species==all_combos$sp[j], model == all_combos$mod[j])
+    
+    gg <- ggplot() +
+      geom_ribbon(data=forecast.smol, aes(x = time, ymin=forecast05, ymax=forecast95, 
+                                          fill = lifeStage), alpha = 0.3)+
+      geom_line(dat=forecast.smol, aes(x=time, y=mean.forecast, color=lifeStage),
+                linewidth=1)+
+      labs(x = "Date", y = "Ticks/450m^2", 
+           title = paste(site.vec, ", ", all_combos$sp[j], ", ", all_combos$mod[j], 
+                         sep = "")) +
+      scale_fill_manual(values = natparks.pals("DeathValley"), 
+                        guide="none")+
+      scale_color_manual(values = natparks.pals("DeathValley"), name="Life Stage")+
+      theme_pubr() +
+      theme(axis.text.x = element_text(size = 10, angle = 45, vjust = 0.5),
+            legend.position = "bottom")
+    gg
+    save_gg(
+      dest = paste0("/timeseries_ls_singlemods/", site.vec, "_", all_combos$sp[j], "_", 
+                   all_combos$mod[j], ".jpeg"),
+      gg = gg,
+      path = dir.plot
+    )
+    
+    print(paste("Site = ", site.vec, ", Species = ", all_combos$sp[j], 
+                ", Model = ", all_combos$mod[j], sep = ""))
+  }
+  
+  rm(list = c('forecast.density', 'forecast.smol'))
+  gc()
+}
+
+# score figures -------------------------------------------------------------
 # Null model
 null.crps <- null.scores %>%
 	mutate(crps = score, doy = yday(time)) %>%
@@ -1191,7 +1276,6 @@ aa.gam.land <- ggplot(data = aa.sub.land, aes(x = mean, y = lifeStage,
   theme(panel.grid = element_blank(), 
         axis.title.y = element_blank())
 
-
 # save_gg("aa_survival_pl.jpeg", aa.survival, dir.plot, height = 8)
 # save_gg("aa_transition_pl.jpeg", aa.transition, dir.plot, height = 8)
 # save_gg("aa_gamma_pl.jpeg", aa.gamma.noland, dir.plot, height = 8)
@@ -1201,6 +1285,81 @@ aa.gam.land <- ggplot(data = aa.sub.land, aes(x = mean, y = lifeStage,
 # save_gg("ix_gamma_pl.jpeg", ix.gamma.noland, dir.plot, height = 8)
 # save_gg("ix_land_pl.jpeg", ix.gam.land, dir.plot, height = 8)
 
+# Parabolas
+gdd.coefs <- gammas.noland %>%
+  filter(str_detect(node, "GDD")) %>%
+  mutate(lifeStage = str_extract(node, "Larva|Nymph|Adult")) %>%
+  mutate(node = str_remove(node, "Larva|Nymph|Adult"))
+
+gdd.ints <- ints %>%
+  filter(str_detect(node, "gam0")) %>%
+  mutate(lifeStage = case_when(str_detect(node, "1")~"Larva",
+                               str_detect(node, "2")~"Nymph",
+                               str_detect(node, "3")~"Adult")) %>%
+  mutate(node = str_remove(node, "\\[\\d\\]"))
+
+gdd.vals <- bind_rows(gdd.coefs, gdd.ints) %>%
+  select(-c(upper95, lower95)) %>%
+  pivot_wider(names_from=node, values_from=mean) %>%
+  group_by(siteID, lifeStage) %>%
+  filter(!(siteID %in% c("GREN", "HNRY", "TEA")))
+
+gdd.ix <- filter(gdd.vals, species == "Ixodes_scapularis")
+
+quad <- function(a,b,c,x){
+  y = a*x^2 + b*x + c
+  
+  return(y)
+}
+
+gdd.plt <- ggplot(gdd.ix, aes(color = siteID, linetype=lifeStage))+
+  scale_x_continuous(limits=c(-5,5))
+for(i in 1:length(unique(gdd.ix$siteID))){
+  for(j in 1:3){
+    site <- unique(gdd.ix$siteID)[i]
+    ls <- unique(gdd.ix$lifeStage)[j]
+  
+    df.tmp <- filter(gdd.ix, siteID==site, lifeStage==ls)
+  
+    gdd.plt <- gdd.plt +
+      stat_function(data = df.tmp,
+                    fun = quad,
+                    args = list(a = df.tmp$GDDsq, b = df.tmp$GDD,
+                                c = df.tmp$gam0))
+
+    gdd.plt
+  }
+}
+
+gdd.plt +
+  theme_bw()+
+  theme(panel.grid.minor = element_blank())
+
+gdd.aa <- filter(gdd.vals, species == "Amblyomma_americanum")
+
+gdd.plt <- ggplot(gdd.aa, aes(color = siteID, linetype=lifeStage))+
+  scale_x_continuous(limits=c(-5,5))
+for(i in 1:length(unique(gdd.aa$siteID))){
+  for(j in 1:3){
+    site <- unique(gdd.aa$siteID)[i]
+    ls <- unique(gdd.aa$lifeStage)[j]
+    
+    df.tmp <- filter(gdd.aa, siteID==site, lifeStage==ls)
+    
+    gdd.plt <- gdd.plt +
+      stat_function(data = df.tmp,
+                    fun = quad,
+                    args = list(a = df.tmp$GDDsq, b = df.tmp$GDD,
+                                c = df.tmp$gam0))
+    
+    gdd.plt
+  }
+}
+
+gdd.plt +
+  theme_bw()+
+  theme(panel.grid.minor = element_blank())
+  
 # Plot model coefficients: maps ------------------
 site.coords <- read_csv("./Data/siteLatLon.csv") %>%
   filter(is.na(lon)==F) %>%
