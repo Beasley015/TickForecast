@@ -133,6 +133,19 @@ daymet_rh <- function(sites) {
   neon.doy <- neon.sub %>%
     group_by(yday, siteID) %>%
     summarise(muRHmax = mean(RHMaximum), muRHmin = mean(RHMinimum))
+  
+  cary.sub <- read_csv("./Data/cary_met_data_daily.csv") %>%
+    mutate(yday = yday(DATE)) %>%
+    select(DATE, yday, MAX_RH, MIN_RH) %>%
+    suppressMessages()
+  
+  cary.doy <- cary.sub %>%
+    group_by(yday) %>%
+    summarise(muRHmax = mean(MAX_RH, na.rm=T), 
+              muRHmin = mean(MIN_RH, na.rm=T))
+  
+  neon.doy <- left_join(neon.doy, cary.doy, by = c("yday", "siteID",
+                                                    "muRHmax", "muRHmin"))
 	  
   daymet.doy <- df.dew %>%
     group_by(yday, siteID) %>%
