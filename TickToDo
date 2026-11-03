@@ -6,12 +6,17 @@ X Run full plot-level model
 X Create figures comparing outputs to John's model
 X Plot-level time series (& check on OSBS for ixodes)
 X PP-RB toy model
+X Plot out parabolas/get covariance for GDD parameters
+X Check Cary post-processing and data intake
 
 To do:
-- Plot out parabolas/get covariance for GDD parameters
-- Check Cary post-processing and data intake
 - PP-RB multi-site model
+- Clean up coefficient figs (change significance symbol, do scatterplots by lat/long instead of map)
+- Merge Cary plots on OG figs
+- Re-do plot-level model post-processing and figs
 
 In the distance:
-- Clean up coefficient figs (change significance symbol)
+- Run multi-site model
+- Create a site map as Figure 1
+
 
