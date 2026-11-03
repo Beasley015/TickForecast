@@ -965,7 +965,7 @@ for (t in t:start.drags) {
 	  rename(site = Var1, chain = Var2)
 	
 	# Set up parallel processing
-	cores <- parallel::detectCores()
+	cores <- parallel::detectCores()/2
 	
 	cluster <- parallel::makeCluster(cores, type = "PSOCK")
 	
@@ -983,13 +983,14 @@ for (t in t:start.drags) {
 	
 	clusterExport(cl=cluster, export.vec, envir = environment())
 	
-	all.chains <- foreach(i = 1:nrow(iter.mat), .combine='c') %dopar% {
+	all.chains <- foreach(rep = 1:5, .combine='c') %dopar% {
+	  # foreach(i = 1:nrow(iter.mat), .combine='c') %dopar% {
 	  # sample on each cluster
 	  library(nimble)
 	  library(coda)
 	  
 	  # Extract constants per site
-	  site <- which(iter.mat$site[i] == sites)
+	  site <- which(iter.mat$site[rep] == sites)
 	  
 	  constant <- constants
 	  constant$n.plots <- n.plots[site]
@@ -1049,7 +1050,7 @@ for (t in t:start.drags) {
 	  params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
 	                      # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
 	                      "theta.ln", "theta.na", 
-	                      "gam0", "gam1", "gam2", "gam4", "pz", 
+	                      "gam0", "gam1", "gam2", "gam4", #"pz", 
 	                      "repro","x" #, "x1", "x2", "x3", "x4"
 	                      )  
 	  
@@ -1066,100 +1067,129 @@ for (t in t:start.drags) {
 		  n.iter = n.iter,
 		  parms = params.to.save
 		) 
+	  
+	  out.nchains <- cbind(out.chains, iter.mat$site[rep])
+	  
+	  out.nchains <- list(out.nchains)
 	
 	}
 	
 	parallel::stopCluster(cl = cluster)
+	
+	# REMOVE intermediate output before running ----------
+	# saveRDS(all.chains, "test_out.rds")
+	all.chains <- readRDS("test_out.rds")
   
 	# Merge outputs of chains
-	dat.hindcast <- list()
-	for(i in seq_along(names(out.nchains[[1]]))){
-	  if(length(dim(out.nchains[[1]][[i]]))==2){
-	    dat.hindcast[[i]] <- do.call(rbind, lapply(out.nchains, `[[`, i))
-	  } else{
-	    dat.hindcast[[i]] <- do.call(abind, list(lapply(out.nchains, `[[`, i),
-	                                 along = 1))
+	site.parms <- function(dat, latent=F){
+	  if(latent == F){
+	    param.names <- colnames(dat)[-which(str_detect(colnames(dat), "pz|x"))]
+	    param.names <- unique(str_remove(param.names, pattern = "\\[.*\\]"))
+	  
+	    parm.string <- paste(param.names, collapse = "|")
+	  
+	    cols <- which(str_detect(colnames(dat), parm.string))
+	  
+	    out <- as.data.frame(dat[,cols])
+	    out$site <- dat[,ncol(dat)]
+	  } else {
+	    cols <- which(str_detect(colnames(dat), "x"))
+	    
+	    out <- as.data.frame(dat[,cols])
+	    out$site <- dat[,ncol(dat)]
 	  }
+	  
+	  return(out)
 	}
 	
-	names(dat.hindcast) <- names(out.nchains[[1]])
-
-	# Test MCMC convergence with Gelman-Rubin statistic
-	if(year(fx.start.date)>=2018){
-	  message("Checking convergence...")
-	  nodes <- names(dat.hindcast)
-	  nodes <- nodes[nodes %in% c("beta", "x", "x1", "x2", "x3", "x4", 
-	                              nodes[str_detect(nodes, "phi")], 
-	                              nodes[str_detect(nodes, "theta")])]
-	  gelman.keep <-list()
+	# data frame with saved params
+	saved.params <- lapply(all.chains, site.parms, latent = F)
+	saved.params <- do.call(bind_rows, saved.params) %>%
+	  select(-.y) %>%
+	  group_by(site) %>%
+	  mutate(niter = n())
 	
-	  for (ff in seq_along(nodes)) {
-	    mcmc.check <- list()
-		  col <- nodes[ff]
-		
-		  if(length(dim(out.nchains[[1]][[nodes[ff]]]))!=2){next}
-				
-		  for (c in seq_along(out.nchains)) {
-		      mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
-		  }
-		
-		  gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
-		                                           transform = TRUE)$psrf[,1])
-		
-		  if(all(is.na(gelman.keep[[ff]]=='character'))){next}
-		  if(typeof(gelman.keep[[ff]])=='character'){next}
+	# Frame with est. latent states
+	latent.states <- lapply(all.chains, site.parms, latent = T)
+	latent.states <- do.call(bind_rows, latent.states) %>%
+	  group_by(site) %>%
+	  mutate(niter = n())
 
-		  if (any(gelman.keep[[ff]] > 1.2)) {
-		    message("WARNING: Convergence not reached!")
-		    bad.nodes <- which(gelman.keep[[ff]] > 1.2)
-		    bad.params <- tibble(node = nodes[[ff]],
-		      psrf = as.numeric(gelman.keep[[ff]][bad.nodes])) %>%
-		      arrange(psrf)
-				  print(tail(bad.params))
-		  
-		    } else {
-		      # message("Convergence = TRUE")
-		    }
-	  }
-	}
+	rm(all.chains)
+
+	# Test MCMC convergence with Gelman-Rubin statistic FIX ------------
+	# if(year(fx.start.date)>=2018){
+	#   message("Checking convergence...")
+	#   nodes <- names(saved.params)
+	#   nodes <- nodes[!str_detect(nodes, "gam3")]
+	#   gelman.keep <-list()
+	# 
+	#   for (ff in seq_along(nodes)) {
+	#     mcmc.check <- list()
+	# 	  col <- nodes[ff]
+	# 	
+	# 	  if(length(dim(out.nchains[[1]][[nodes[ff]]]))!=2){next}
+	# 			
+	# 	  for (c in seq_along(out.nchains)) {
+	# 	      mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
+	# 	  }
+	# 	
+	# 	  gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
+	# 	                                           transform = TRUE)$psrf[,1])
+	# 	
+	# 	  if(all(is.na(gelman.keep[[ff]]=='character'))){next}
+	# 	  if(typeof(gelman.keep[[ff]])=='character'){next}
+	# 
+	# 	  if (any(gelman.keep[[ff]] > 1.2)) {
+	# 	    message("WARNING: Convergence not reached!")
+	# 	    bad.nodes <- which(gelman.keep[[ff]] > 1.2)
+	# 	    bad.params <- tibble(node = nodes[[ff]],
+	# 	      psrf = as.numeric(gelman.keep[[ff]][bad.nodes])) %>%
+	# 	      arrange(psrf)
+	# 			  print(tail(bad.params))
+	# 	  
+	# 	    } else {
+	# 	      # message("Convergence = TRUE")
+	# 	    }
+	#   }
+	# }
   
-	# Thin the chains
-	dat.draws <- list()
-	for(i in 1:length(dat.hindcast)){
-	  if (nrow(dat.hindcast[[i]]) > 5000) {
-	    draws <- round(seq.int(1, nrow(dat.hindcast[[i]]), length.out = 5000))
-    } else {
-		  draws <- seq_len(nrow(dat.hindcast[[i]]))
-    }
-
-	  if(length(dim(dat.hindcast[[i]]))==2){
-	    dat.draws[[i]] <- dat.hindcast[[i]][draws, ]
-	  } else if(length(dim(dat.hindcast[[i]]))==3){
-	    dat.draws[[i]] <- dat.hindcast[[i]][draws,,]
-	  } else{
-	    dat.draws[[i]] <- dat.hindcast[[i]][draws,,,]
-	  }
+	# Thin the chains ---------------
+	if(max(latent.states$niter) > 5000){
+	  draws <- round(seq.int(1, max(latent.states$niter), length.out = 5000))
+	} else {
+	  draws <- seq_len(max(latent.states$niter))
 	}
 	
-	names(dat.draws) <- names(dat.hindcast)
+	lantent.states <- latent.states[draws,]
+	saved.params <- saved.params[draws,]
 	
-	# PP-RB Phase II ----------------------
-
 	# Output processing and save ----------------------
 	fileDest <- file.path(dir.save, fx.start.date)
 	
 	message("Running analysis...")
 	
 	transfer_analysis(
-	  fx.df = dat.draws,
+	  fx.df = list(latent.states=latent.states, saved.params=saved.params),
 		observations = neon.job,
+		site.df = data.frame(siteID=sites, siteno = 1:length(sites)),
 		fx.dates = fx.sequence,
 		model = model.job,
 		horizon = horizon,
 		spp = species.job,
-		weather = use.daymet,
 		out.dir = fileDest)
 	
+	# Extract betas
+	beta.cols <- which(str_detect(colnames(saved.params), "beta|gam"))
+	g.cols <- which(str_detect(colnames(saved.params), "gam3|gam0"))
+	
+	beta.cols <- setdiff(beta.cols, g.cols) 
+	
+	betas <- saved.params[,beta.cols]
+	
 	# Clear environment
-	rm(out.nchains, dat.hindcast, dat.draws)
+	rm(latent.states, saved.params)
+	
+	# PP-RB Phase II ----------------------
+	
 }

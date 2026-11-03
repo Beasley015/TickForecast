@@ -506,6 +506,7 @@ score <- function(df.pred.obs, nmcmc) {
 #'
 #' @param fx.df the forecast dataframe from run_transfer_nimble.R
 #' @param observations dataframe of observations from the NEON site
+#' @param site.df names and ID numbers for each site
 #' @param fx.dates vector of dates for the forecast
 #' @param model the model used for the forecast
 #' @param horizon temporal extent of the forecast
@@ -518,12 +519,11 @@ transfer_analysis <- function(
 	fx.dates,
 	horizon,
 	model,
-	weather,
 	spp,
 	out.dir
 ) {
   # Total number of mcmc iterations
-	nmcmc <- nrow(fx.df$beta)
+	nmcmc <- nrow(fx.df$saved.params)
 	
 	# Create life stage table
 	ls.tb <- tibble(
@@ -538,36 +538,23 @@ transfer_analysis <- function(
 	)
 	
 	# Pull weather-related nodes
-	weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
-	
-	# Deviance nodes
-	dev.nodes <- which(str_detect(names(fx.df),"dev") &
-	                      str_detect(names(fx.df),"beta")==F)
-
-	# # Shrinkage nodes
-	# shrink.nodes <- which(str_detect(names(fx.df), "shrink") &
-	#                         str_detect(names(fx.df),"beta")==F)
-	# 
-	# # Tau nodes
-	# tau.nodes <- which(str_detect(names(fx.df), "tau") &
-	#                      str_detect(names(fx.df), "beta")==F)
+	# weather.nodes <- which(names(fx.df) %in% c("x1", "x2", "x3", "x4"))
 	
 	# Pull and process states
-	states <- fx.df$x
-	colnames(states) <- ls.tb$lifeStage
+	states <- fx.df$latent.states
 	
-	# Convert to giant-ass data frame
-	states <- apply(states, c(2,4), "c")
-	states <- abind(states, 
-	                array(rep(time.tb$time.index, each = nmcmc),
-	                      replace(dim(states), 2, 1)), 
-	                along = 2)
-	states <- as.data.frame(apply(states, 2, "c")) %>%
-	  mutate(siteID = rep(sites, each = nmcmc*horizon)) %>% 
-	  arrange(V5) %>%
-	  mutate(time = rep(time.tb$time, each = nmcmc*length(sites))) %>% 
-	  select(-V5)
-	# I hate it but it works
+	states <- states %>%
+	  ungroup() %>%
+	  pivot_longer(cols = -c(site, niter), names_to = "node", 
+	               values_to = "value") %>%
+	  mutate(stage=as.numeric(str_extract(node, pattern="(\\[)(\\d{1})", group=2)),
+	         day = as.numeric(str_extract(node, pattern="(\\d+)(\\])", group=1))) %>%
+	  select(-c(niter, node)) %>%
+	  left_join(ls.tb, by = c("stage"="ls.index")) %>%
+	  left_join(time.tb, by = c("day"="time.index")) %>%
+	  select(-c(stage, day)) %>%
+	  left_join(site.df, by=c("site"="siteno")) %>%
+	  select(-site)
 
 	# Clean up observation data
 	data.site <- observations %>%
@@ -588,9 +575,7 @@ transfer_analysis <- function(
 	  filter(time %in% unique(data.site$time), 
 	                          siteID %in% unique(data.site$siteID)) %>%
 	  mutate(time = as.Date(time, format = "%Y-%m-%d")) %>%
-	  select(-Dormant) %>%
-	  pivot_longer(cols = Larva:Adult, names_to = 'lifeStage', 
-	               values_to = 'value')
+	  filter(lifeStage != "Dormant")
 	
 	pred.obs <- left_join(fx.sub, data.site, 
 	                      by = c("time", "lifeStage", "siteID"),
@@ -622,6 +607,8 @@ transfer_analysis <- function(
 	  scores <- score(fx.data, nmcmc) %>%
 		  mutate(siteID = str_extract(.$plotID, "[A-Z]+"), 
 		         species = spp, model = model) %>%
+	    mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
+	                              TRUE ~ siteID)) %>%
 	    mutate(species = str_replace(species, pattern = "_", replacement = " "))
 
 	  fx.out <- left_join(fx.quantiles, scores,
@@ -629,20 +616,14 @@ transfer_analysis <- function(
 	                             "model", "siteID"))
 	}
 
-	param.list <- fx.df[-c(weather.nodes, dev.nodes, #shrink.nodes, tau.nodes,
-	                       which(names(fx.df) %in% c("x", "beta","gdd","sig",
-	                       "dev.beta","beta.shrink", "beta.tau")))]
+	param.list <- fx.df$saved.params %>%
+	  ungroup() %>%
+	  pivot_longer(cols = -c(site, niter), names_to = "node",
+	               values_to = "value") %>%
+	  left_join(site.df, by=c("site"="siteno")) %>%
+	  select(-c(site,niter))
 	
-	for(i in 1:length(param.list)){
-	  param.list[[i]] <- as.data.frame(param.list[[i]])
-	  param.list[[i]]$node <- names(param.list)[i]
-	}
-	
-	param.df <- do.call(rbind, param.list)
-	colnames(param.df)[1:length(sites)] <- sites
-	
-	param.quant <- param.df %>%
-	  pivot_longer(cols = -node, names_to='siteID', values_to = 'value') %>%		
+	param.quant <- param.list %>%
 	  group_by(node, siteID) %>%
 	  summarise(
 	    lower95 = quantile(value, 0.025, na.rm=T),
@@ -655,219 +636,19 @@ transfer_analysis <- function(
 	  ) %>%
 	  ungroup() %>%
 	  mutate(species = spp, start.date = start.date, model = model)
-	
-	# Deviance parameters 
-	deviance <- fx.df[dev.nodes]
-
-	for(i in 1:length(deviance)){
-	  deviance[[i]] <- as.data.frame(deviance[[i]])
-	  deviance[[i]]$node <- names(deviance)[i]
-	}
-
-	dev.df <- do.call(rbind, deviance)
-	names(dev.df)[1:length(sites)] <- sites
-
-	dev.df <- pivot_longer(dev.df, cols = -node, names_to = "siteID",
-	                       values_to = "value")
-	
-	# Shrinkage parameters
-	# shrinkage <- fx.df[shrink.nodes]
-	# 
-	# for(i in 1:length(shrinkage)){
-	#   shrinkage[[i]] <- as.data.frame(shrinkage[[i]])
-	#   shrinkage[[i]]$node <- names(shrinkage)[i]
-	# }
-	# 
-	# shrinkage.df <- do.call(rbind, shrinkage)
-	# names(shrinkage.df) <- c("value", "node")
-	
-	# Precision parameters
-	# tau <- fx.df[tau.nodes]
-	# 
-	# for(i in 1:length(tau)){
-	#   tau[[i]] <- as.data.frame(tau[[i]])
-	#   tau[[i]]$node <- names(tau)[i]
-	# }
-	# 
-	# tau.df <- do.call(rbind, tau) 
-	# colnames(tau.df) <- c("value", "node")
-	
-	# Betas
-	if(length(dim(fx.df$beta)) == 2){
-	  # extract and rename columns
-	  betas <- as.data.frame(fx.df$beta)
-	  colnames(betas) <- str_replace(colnames(betas), "V", "beta")
-	
-	  # Long format
-	  betas <- betas %>%
-	    pivot_longer(cols = everything(), names_to="node", values_to="value")
-	  
-	  # quants
-	  betas.quant <- betas %>%
-	    group_by(node) %>%
-	    summarise(
-	      lower95 = quantile(value, 0.025, na.rm=T),
-	      lower75 = quantile(value, 0.125, na.rm=T),
-	      median = median(value, na.rm=T),
-	      mean = mean(value, na.rm=T),
-	      upper75 = quantile(value, 0.875, na.rm=T),
-	      upper95 = quantile(value, 0.975, na.rm=T),
-	      variance = var(value, na.rm=T)
-	    ) %>%
-	    ungroup() %>%
-	    mutate(species = spp, start.date = start.date, model = model)
-	  
-	} else{
-	  # extract
-	  betas <-fx.df$beta 
-	  
-	  # Create column names
-	  beta.names <- logical()
-	  for(i in 1:dim(betas)[2]){beta.names[i] <- paste("beta", i, sep = "")}
-	  
-	  # Add col for site
-	  betas <- abind(betas, array(NA, replace(dim(betas), 2, 1)), along = 2)
-	  
-	  for(i in 1:length(sites)){
-	    betas[,ncol(betas),i] <- sites[i]
-	  }
-	  
-	  betas <- as.data.frame(apply(betas, 2, rbind))
-	  colnames(betas) <- c(beta.names, "siteID")
-	  
-	  # Long format
-	  betas <- betas %>%
-	    pivot_longer(cols = -siteID, names_to="node", values_to="value") %>%
-	    mutate(value = as.numeric(value))
-	  
-	  # quants
-	  betas.quant <- betas %>%
-	    group_by(node, siteID) %>%
-	    summarise(
-	      lower95 = quantile(value, 0.025, na.rm=T),
-	      lower75 = quantile(value, 0.125, na.rm=T),
-	      median = median(value, na.rm=T),
-	      mean = mean(value, na.rm=T),
-	      upper75 = quantile(value, 0.875, na.rm=T),
-	      upper95 = quantile(value, 0.975, na.rm=T),
-	      variance = var(value, na.rm=T)
-	    ) %>%
-	    ungroup() %>%
-	    mutate(species = spp, start.date = start.date, model = model)
-	}
-	
-	# Deviance for betas
-	if("dev.beta" %in% names(fx.df)){
-	  dev.b <- fx.df$dev.beta
-
-	  dev.b <- as.data.frame(apply(dev.b, 2, rbind))
-
-	  for(i in 1:ncol(dev.b)){
-	    colnames(dev.b)[i] <- paste("beta", i, sep = "")
-	  }
-
-	  dev.b$siteID <- rep(sites, each = nmcmc)
-
-	  beta.dev <- pivot_longer(dev.b, -siteID, names_to = "node",
-	                            values_to = "value")
-	}
-	
-	# Shrinkage for betas
-	# if("beta.shrink" %in% names(fx.df)){
-	#   shrink.b <- as.data.frame(fx.df$beta.shrink)
-	#   
-	#   for(i in 1:ncol(shrink.b)){
-	#     colnames(shrink.b)[i] <- paste("beta", i, sep = "")
-	#   }
-	#   
-	#   beta.shrink <- pivot_longer(shrink.b, cols = everything(),
-	#                               names_to = "node", values_to = "value")
-	#   
-	# }
-	
-	# Precision for betas
-	# if("beta.tau" %in% names(fx.df)){
-	#   tau.b <- as.data.frame(fx.df$beta.tau)
-	#   
-	#   for(i in 1:ncol(tau.b)){
-	#     colnames(tau.b)[i] <- paste("beta", i, sep = "")
-	#   }
-	#   
-	#   beta.tau <- pivot_longer(tau.b, cols = everything(), 
-	#                            names_to = "node", values_to = "value")
-	# }
-	
-	# Sigma
-	sigma <- fx.df[['sig']]
-	colnames(sigma) <- c('sig1', 'sig2', 'sig3', 'sig4')
-
-	sigma <- as.data.frame(apply(sigma, 2, "c"))
-	sigma$siteID <- rep(sites, each = nmcmc)
-	
-	sig <- sigma %>%
-	  pivot_longer(cols=sig1:sig4, names_to = 'parameter', values_to='value')
 
 	if (!dir.exists(out.dir)) {
 		dir.create(out.dir, recursive = TRUE, showWarnings = FALSE)
 	}
-
+ 
 	# save
 	message("  Writing files to ", out.dir)
 	write_csv(ungroup(states), file.path(out.dir, "stateSamples.csv"))
 	write_csv(ungroup(param.quant), file.path(out.dir, "parameterSummary.csv"))
-	write_csv(ungroup(betas), file.path(out.dir, "beta.csv"))
-	write_csv(ungroup(betas.quant), file.path(out.dir, "betaQuant.csv"))
-	write_csv(ungroup(param.df), file.path(out.dir, "parameterSamples.csv"))
-	write_csv(sig, file.path(out.dir, "sigma.csv"))
-	write_csv(dev.df, file.path(out.dir, "devSamples.csv"))
-	# write_csv(shrinkage.df, file.path(out.dir, "shrinkSamples.csv"))
-	# write_csv(tau.df, file.path(out.dir, "tauSamples.csv"))
-	write_csv(beta.dev, file.path(out.dir, "devBeta.csv"))
-	# write_csv(beta.shrink, file.path(out.dir, "shrinkBeta.csv"))
-	# write_csv(beta.tau, file.path(out.dir, "tauBeta.csv"))
+	write_csv(ungroup(param.list), file.path(out.dir, "parameterSamples.csv"))
 	
 	if(min(year(fx.dates))>=2018){
 	  write_csv(ungroup(fx.out), file.path(out.dir, "fxQuantScore.csv"))
-	}
-
-	# weather - if used
-	if (weather && length(weather.nodes > 0)) {
-	  weather.list <- fx.df[weather.nodes]
-	  
-	  weather.list <- lapply(weather.list, function(x) apply(x, 3, "c"))
-	  
-	  weather.list <- lapply(weather.list, 
-	                 function(x) cbind(rep(time.tb$time.index, each = nmcmc),x))
-	  
-	  for(i in 1:length(weather.list)){
-	    weather.list[[i]] <- cbind(names(weather.list)[i], weather.list[[i]])
-	  }
-	  
-	  weather.df <- as.data.frame(do.call(rbind, weather.list))
-	  colnames(weather.df) <- c("node", "time", sites)
-	  
-		daymet <- weather.df %>%
-		  pivot_longer(cols = -c(node, time), names_to = "site", 
-		               values_to = "value") %>%
-		  mutate(value= as.numeric(value)) %>%
-		  group_by(node, time, site) %>%
-			summarise(
-				lower95 = quantile(value, 0.025, na.rm=T),
-				lower75 = quantile(value, 0.125, na.rm=T),
-				median = median(value, na.rm=T),
-				mean = mean(value, na.rm=T),
-				upper75 = quantile(value, 0.875, na.rm=T),
-				upper95 = quantile(value, 0.975, na.rm=T),
-				variance = var(value, na.rm=T)
-			) %>%
-			ungroup() %>%
-			mutate(
-				species = spp,
-				start.date = start.date,
-				model = model
-			)
-
-		write_csv(daymet, file.path(out.dir, "weatherSummary.csv"))
 	}
 }
 

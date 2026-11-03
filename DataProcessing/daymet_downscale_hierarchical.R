@@ -105,6 +105,9 @@ daymet_rh <- function(sites) {
     mutate(siteID = str_extract(plotID, pattern = "[A-Z]+")) %>%
     mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                               TRUE ~ siteID)) %>%
+    select(year, yday, plotID, vaporPressure, siteID, Date) %>%
+    group_by(year,yday,plotID,siteID,Date) %>%
+    summarise(vaporPressure=mean(vaporPressure)) %>%
     filter(siteID %in% sites)
 	
   df.temp <- read_csv("./Data/daymetPlot_maxTemperature.csv",
@@ -112,6 +115,9 @@ daymet_rh <- function(sites) {
     mutate(siteID = str_extract(plotID, pattern = "[A-Z]+")) %>%
     mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                               TRUE ~ siteID)) %>%
+    select(year, yday, plotID, maxTemperature, siteID, Date) %>%
+    group_by(year,yday,plotID,siteID,Date) %>%
+    summarise(maxTemperature=mean(maxTemperature)) %>%
     filter(siteID %in% sites) 
   
   df.join <- left_join(df.vpd, df.temp, by = c("siteID","year",
@@ -142,10 +148,10 @@ daymet_rh <- function(sites) {
   cary.doy <- cary.sub %>%
     group_by(yday) %>%
     summarise(muRHmax = mean(MAX_RH, na.rm=T), 
-              muRHmin = mean(MIN_RH, na.rm=T))
+              muRHmin = mean(MIN_RH, na.rm=T)) %>%
+    mutate(siteID = "CARY")
   
-  neon.doy <- left_join(neon.doy, cary.doy, by = c("yday", "siteID",
-                                                    "muRHmax", "muRHmin"))
+  neon.doy <- bind_rows(neon.doy, cary.doy)
 	  
   daymet.doy <- df.dew %>%
     group_by(yday, siteID) %>%
@@ -156,11 +162,8 @@ daymet_rh <- function(sites) {
 
   daymet.temp.bias <- left_join(df.dew, df.join, by = c("yday", "siteID")) %>%
     mutate(
-			  maxRHCorrect = case_when(siteID != "CARY" ~ pmin(rh + biasMax, 100),
-			                           TRUE ~ rh),
-			  minRHCorrect = case_when(siteID != "CARY" ~ pmin(rh + biasMin, 100),
-			                           TRUE ~ rh)
-		  ) %>%
+			  maxRHCorrect = pmin(rh + biasMax, 100),
+			  minRHCorrect = pmin(rh + biasMin, 100)) %>%
     select(Date, maxRHCorrect, minRHCorrect, siteID)
   
   return(daymet.temp.bias)
