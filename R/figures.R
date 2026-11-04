@@ -803,6 +803,8 @@ for(i in seq_along(out.files)){
 ints <- ints %>%
   select(-(`start.date == start.date`)) %>%
   filter(str_detect(model, "WithWeatherAndMiceGlobal") == T) %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
+                            TRUE ~ siteID)) %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages()
@@ -812,6 +814,7 @@ aa.ints <- ints %>%
 
 aa.int.plot <- ggplot(data=aa.ints, aes(x=mean, y = siteID))+
   geom_point()+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
   facet_wrap(~node)+
   labs(x = "Estimate", y = "Site")+
@@ -823,6 +826,7 @@ ix.ints <- ints %>%
 
 ix.int.plot <- ggplot(data=ix.ints, aes(x=mean, y = siteID))+
   geom_point()+
+  geom_vline(xintercept = 0, linetype = 'dashed')+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
   facet_wrap(~node)+
   labs(x = "Estimate", y = "Site")+
@@ -855,6 +859,8 @@ for(i in seq_along(out.files)){
 betas <- betas %>%
   select(-(`start.date == start.date`)) %>%
   filter(str_detect(model, "WithWeatherAndMiceGlobal") == T) %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
+                            TRUE ~ siteID)) %>%
   group_by(siteID, species, node, model) %>%
   summarise(mean = mean(mean), upper95 = mean(upper95), lower95=mean(lower95)) %>%
   suppressMessages() %>%
