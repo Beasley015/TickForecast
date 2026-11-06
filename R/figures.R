@@ -891,6 +891,7 @@ ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(
   geom_point(aes(x = 4.2, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -902,6 +903,7 @@ ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   geom_point(aes(x = 3, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -921,6 +923,7 @@ aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(
   geom_point(aes(x = 4, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -932,6 +935,7 @@ aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   geom_point(aes(x = 3.5, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -942,16 +946,19 @@ both.transition <- (ix.transition | aa.transition)+
   plot_annotation(tag_levels = "a")
 
 # save_gg("aa_survival_singlesite.jpeg", aa.survival, dir.plot, height = 8)
-# save_gg("aa_transition_singlesite.jpeg", aa.transition, dir.plot, height = 8)
+# save_gg("aa_transition_singlesite.jpeg", aa.transition, dir.plot, height = 4,
+#         width=8)
 # save_gg("ix_survival_singlesite.jpeg", ix.survival, dir.plot, height = 8)
-# save_gg("ix_transition_singlesite.jpeg", ix.transition, dir.plot, height = 8)
+# save_gg("ix_transition_singlesite.jpeg", ix.transition, dir.plot, height = 4,
+#         width=8)
 
 # save_gg("both_transition_singlesite.jpeg", both.transition, dir.plot, 
 #         height = 8, width = 8)
 
 # Maps
 site.coords <- read_csv("./Data/siteLatLon.csv") %>%
-  suppressMessages()
+  rename("lon"="decimalLongitude", "lat"="decimalLatitude") %>%
+  suppressMessages() 
 
 betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
   filter(str_detect(node, 'Survival')) %>%
@@ -987,6 +994,87 @@ aa.map <- ggplot(data = betas.loc %>% filter(species == "Amblyomma americanum"))
 
 # save_gg("ix_map_singlesite.jpeg", ix.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_map_singlesite.jpeg", aa.map, dir.plot, width = 10, height = 8)
+
+# Scatterplots by lat/lon
+
+betas.loc <- betas.loc %>%
+  mutate(lon = st_coordinates(geometry)[,1],
+         lat = st_coordinates(geometry)[,2])
+
+betas.nodes <- unique(betas.loc$node)
+betas.species <- c("Ixodes scapularis", "Amblyomma americanum")
+
+lm.results <- tibble()
+for(i in 1:length(betas.nodes)){
+  for(s in 1:length(betas.species)){
+    betas.sub <- filter(betas.loc, node == betas.nodes[i], 
+                        species == betas.species[s]) %>%
+      mutate(lat2 = lat^2,
+             lon2 = lon^2)
+    
+    lm <- summary(lm(data=betas.sub, mean~lat+lon))
+    
+    quadratic.lat <- glance(lm(data=betas.sub, mean~lat+lat2))
+    quadratic.lon <- glance(lm(data=betas.sub, mean~lon+lon2))
+    
+    df.tmp <- data.frame(species = unique(betas.sub$species), 
+                         node=unique(betas.sub$node),
+                         lat.p = lm$coefficients[2,4],
+                         lon.p = lm$coefficients[3,4],
+                         quad.lat = quadratic.lat$p.value,
+                         quad.lon = quadratic.lon$p.value)
+    
+    lm.results <- bind_rows(lm.results, df.tmp)
+    
+  }
+}
+
+lm.results <- lm.results %>%
+  pivot_longer(cols = c(lat.p, lon.p, quad.lat, quad.lon), names_to = "spatial", 
+               values_to = "pval") %>%
+  mutate(sig = case_when(pval < 0.05 ~ "sig",
+                         TRUE ~ NA)) %>%
+  select(-pval)
+
+betas.loc <- betas.loc %>%
+  left_join(lm.results, by=c("node", "species"), relationship="many-to-many")
+
+betas.lat.fig <- ggplot(data=betas.loc %>% filter(spatial == "lat.p"), 
+       aes(x = lat, y = mean, color = species,
+           linetype = sig))+
+  geom_point()+
+  geom_smooth(data=betas.loc %>% filter(spatial == "lat.p"),
+              method = 'lm', se = F)+
+  # stat_smooth(data=betas.loc %>% filter(spatial == "quad.lat"),
+  #             method = "lm", formula = y ~ x + I(x^2), se = F)+
+  geom_hline(yintercept = 0, linetype = "dashed")+
+  scale_color_manual(values = natparks.pals("DeathValley"),
+                     name = "Species")+
+  scale_linetype_manual(values = c(1,0), guide = "none")+
+  facet_wrap(~node, dir = "v")+
+  labs(x = "Latitude", y = "Parameter Mean")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid=element_blank())
+
+lon.betas.singlesite <- ggplot(data=betas.loc %>% filter(spatial == "lon.p" |spatial=="quad.lon"), 
+       aes(x = lon, y = mean, color = species,
+           linetype = sig))+
+  geom_point()+
+  geom_smooth(data=betas.loc %>% filter(spatial == "lon.p"), method = 'lm', 
+              se = F)+
+  stat_smooth(data=betas.loc %>% filter(spatial == "quad.lon"),
+              method = "lm", formula = y ~ x + I(x^2), se = F)+
+  geom_hline(yintercept = 0, linetype = "dashed")+
+  scale_color_manual(values = natparks.pals("DeathValley"),
+                     name = "Species")+
+  scale_linetype_manual(values = c(1,0), guide = "none")+
+  facet_wrap(~node, dir = "v")+
+  labs(x = "Latitude", y = "Parameter Mean")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid=element_blank())
+
+save_gg("lat_betas_singlesite.jpeg", betas.lat.fig, dir.plot, width = 10, height = 8)
+save_gg("lon_betas_singlesite.jpeg", betas.lon.fig, dir.plot, width = 10, height = 8)
 
 # Model intercepts: plot-level -----------------------
 # Get files

@@ -516,6 +516,7 @@ score <- function(df.pred.obs, nmcmc) {
 transfer_analysis <- function(
 	fx.df,
 	observations,
+	site.df,
 	fx.dates,
 	horizon,
 	model,

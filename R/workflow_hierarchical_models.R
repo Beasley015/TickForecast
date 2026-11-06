@@ -68,10 +68,11 @@ if(species.job=="Ixodes_scapularis"){
 
 # n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 production <- TRUE
-n.iter <- 20000
+n.iter <- 50000
 # Nmc <- 2000
 horizon <- 365
 update <- F
+phase2.iter <- 10000
 
 # =========================================== #
 #       tick data intake ----------------
@@ -1155,10 +1156,10 @@ for (t in t:start.drags) {
 	# }
   
 	# Thin the chains ---------------
-	if(max(latent.states$niter) > 5000){
-	  draws <- round(seq.int(1, max(latent.states$niter), length.out = 5000))
+	if(nrow(latent.states) > 5000){
+	  draws <- round(seq.int(1, nrow(latent.states), length.out = 5000))
 	} else {
-	  draws <- seq_len(max(latent.states$niter))
+	  draws <- seq_len(nrow(latent.states))
 	}
 	
 	lantent.states <- latent.states[draws,]
@@ -1180,16 +1181,150 @@ for (t in t:start.drags) {
 		out.dir = fileDest)
 	
 	# Extract betas
-	beta.cols <- which(str_detect(colnames(saved.params), "beta|gam"))
-	g.cols <- which(str_detect(colnames(saved.params), "gam3|gam0"))
+	sitevec <- saved.params$site
+
+	g.cols <- which(str_detect(colnames(saved.params), 
+	                           "gam3|gam1|repro|sig"))
 	
-	beta.cols <- setdiff(beta.cols, g.cols) 
-	
-	betas <- saved.params[,beta.cols]
+	betas <- saved.params[,-g.cols] %>%
+	  ungroup() %>%
+	  select(-c(site,niter))
 	
 	# Clear environment
 	rm(latent.states, saved.params)
 	
 	# PP-RB Phase II ----------------------
+	# Create output list
+	data2 <- constants2 <- list()
 	
+	# Priors for comm. distributions
+	if(t == 1){
+	  mu.pr <- rep(0, ncol(betas))
+	  var.pr <- rep(1, ncol(betas))
+	  
+	  q.pr <- matrix(1, nrow=2, ncol=ncol(betas))
+	  r.pr <- matrix(1, nrow=2, ncol=ncol(betas))
+	} else{
+	  print("You should not see this yet")
+	}
+	
+	data2$mu.pr <- mu.pr
+	data2$var.pr <- var.pr
+	data2$q.pr <- q.pr
+	data2$r.pr <- r.pr
+	
+	nodestats <- cbind(betas, sitevec) %>%
+	  pivot_longer(cols=-sitevec, names_to = "node", values_to = "value") %>%
+	  group_by(sitevec,node) %>%
+	  summarise(mean = mean(value), tau = 1/var(value)) %>%
+	  suppressMessages()
+	
+	data2$mu.coef <- nodestats %>%
+	  select(sitevec, node, mean) %>%
+	  pivot_wider(names_from = node, values_from = mean) %>%
+	  ungroup() %>%
+	  select(-sitevec)
+	
+	data2$tau.coef <- nodestats %>%
+	  select(sitevec, node, tau) %>%
+	  pivot_wider(names_from = node, values_from = tau) %>%
+	  ungroup() %>%
+	  select(-sitevec)
+	
+	constants2$n.coef <- ncol(betas)
+	constants2$sites <- length(unique(sitevec))
+	
+	parms2 <- c("coef", "coef.tau", "coef.mu")
+	
+	inits2 <- function(){
+	  list(
+	    q.start = rgamma(ncol(betas),1,1),
+	    r.start = rgamma(ncol(betas),1,1),
+	    s2.temp = rgamma(ncol(betas),1,1),
+	    coef = matrix(rnorm(ncol(betas)*length(unique(sitevec))),ncol=ncol(betas),
+	                  nrow = length(unique(sitevec)))
+	  )
+	}
+
+	source("./R/nimble_pprb2.R")
+	
+	# Set up parallel processing
+	cluster <- parallel::makeCluster(3, type = "PSOCK")
+	
+	doParallel::registerDoParallel(cl = cluster)
+	
+	# Export packages and data
+	export.vec <- c(
+	  "constants2",
+	  "data2",
+	  "inits2",
+	  "parms2",
+	  "phase2.iter"
+	)
+	
+	clusterExport(cl=cluster, export.vec, envir = environment())
+	
+	comm.chains <- foreach(rep = 1:3, .combine='c') %dopar% {
+	  # sample on each cluster
+	  library(nimble)
+	  library(coda)
+	  
+	  # Run the model	
+	  out.pprb <- run_transfer_nimble(,
+	                                  model = model.code,
+	                                  data = data2,
+	                                  constants = constants2,
+	                                  inits = inits2,
+	                                  n.iter = phase2.iter,
+	                                  parms = parms2) 
+	  
+	  out.pprb <- list(out.pprb)
+	  
+	}
+	
+	parallel::stopCluster(cl = cluster)
+	
+	# Check convergence TO DO ---------------
+	
+	# Save outputs
+	# REMOVE TEMP OUTPUTS --------------
+	# saveRDS(comm.chains, "pprb2temp.rds")
+	comm.chains <- readRDS("pprb2temp.rds")
+	
+	# bind lists
+	comm.df <- do.call(rbind, comm.chains)
+	
+	# Create separate data frames for coefficients & hyperparameters
+	comm.params <- as.data.frame(comm.df[,which(str_detect(colnames(comm.df),
+	                                                       "coef.mu|coef.tau"))])
+	
+	param.names <- data.frame(name = colnames(betas), 
+	                          coef = as.character(1:ncol(betas))) 
+	
+	comm.params <- comm.params %>%
+	  pivot_longer(cols = everything(), names_to = "node", values_to = "value") %>%
+	  mutate(coef = str_extract(node, "[0-9]+"),
+	         param = str_extract(node, ".([a-z]+)\\[", group = 1)) %>%
+	  left_join(param.names, by = c("coef")) %>%
+	  select(-c(node, coef)) %>%
+	  rename("coef" = "name")
+	
+	upd.coefs <- as.data.frame(comm.df[,-which(str_detect(colnames(comm.df),
+	                                                     "coef.mu|coef.tau"))])
+	
+	upd.coefs <- as.data.frame(upd.coefs) %>%
+	  pivot_longer(cols = everything(), names_to = "node", values_to = "value") %>%
+	  mutate(site = str_extract(node, "\\[([0-9]+),", group = 1),
+	         coef = str_extract(node, ", ([0-9]+)]", group = 1)) %>%
+	  left_join(param.names, by = c("coef")) %>%
+	  select(-c(node, coef)) %>%
+	  rename("coef" = "name")
+	  
+	
+	# Save
+	write_csv(comm.params, "comm_params.csv")
+	write_csv(upd.coefs, "coefs_updated.csv")
+	
+	# Remove unnecessary objects
+	rm(comm.chains, comm.df)
 }

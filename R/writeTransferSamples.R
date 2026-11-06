@@ -42,7 +42,7 @@ ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
 sites <- unique(c(iscap.sites, ambly.sites))
 sites <- sites[sites != "DELA"]
 
-for(j in 9:length(sites)){ 
+for(j in 1:length(sites)){ 
   # Blank df for each site
   df.process <- tibble()
   
@@ -66,10 +66,8 @@ for(j in 9:length(sites)){
     df.summary <- dfi %>% 
       group_by(time, lifeStage, siteID) %>%
       summarise(lower95 = quantile(value, 0.025),
-                lower75 = quantile(value, 0.125),
                 median = median(value),
                 mean = mean(value),
-                upper75 = quantile(value, 0.875),
                 upper95 = quantile(value, 0.975), 
                 variance = var(value)) %>% 
       mutate(model = m,species = spp, start.date = st) %>% 
@@ -78,14 +76,12 @@ for(j in 9:length(sites)){
   
    df.process <- bind_rows(df.process, df.summary)
   
-    if(i %% 10 == 0) message(i, " of ", length(quantScore), " complete ", round(i/length(quantScore)*100), "%")
+   if(i %% 10 == 0) message(i, " of ", length(quantScore), " complete ", 
+                            round(i/length(quantScore)*100), "%")
   }
   
-  df.process <- df.process %>% 
-    mutate(mice = if_else(grepl("Mice", model), "Mice", "No mice"),
-           weather = if_else(grepl("Weather", model), "Weather", "No weather"))
-  
-  write_csv(df.process, file = file.path(dir.analysis, paste(site, "allDays.csv", sep = "_")))
+  write_csv(df.process, file = file.path(dir.analysis, paste(site, "allDays.csv", 
+                                                             sep = "_")))
   
   print(paste(sites[j], "Complete", sep = " "))
 }
@@ -105,8 +101,8 @@ ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
 sites <- unique(c(iscap.sites, ambly.sites))
 sites <- sites[sites != "DELA"]
 
-iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
-ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
+# iscap.sites <- str_remove(read_txt("./Data/ix_sites.txt"), "\\*")
+# ambly.sites <- str_remove(read_txt("./Data/am_sites.txt"), "\\*")
 
 # Create all possible combos
 iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
@@ -130,18 +126,20 @@ for(j in 1:nrow(jobs)){
       dfi <- read_csv(file.path(dir.out, quant.files[i])) %>%
         mutate(start.date = str_extract(quant.files[i], "\\d{4}-\\d{2}-\\d{2}")) %>%
         filter(lifeStage=="Nymph") %>%
-        dplyr::select(-c(nlcd, percentBias, rmse, bayesP)) %>%
+        dplyr::select(-c(nlcd, percentBias, rmse, bayesP, totalSampledArea,
+                         horizon)) %>%
         suppressMessages()
-
+      
+      if(year(unique(dfi$start.date)) < 2018){next}
+      
       df.process <- bind_rows(df.process, dfi)
-      if(i %% 10 == 0) message(i, " of ", length(quant.files), " complete ", round(i/length(quant.files)*100), "%")
+      if(i %% 10 == 0) message(i, " of ", length(quant.files), " complete ", 
+                               round(i/length(quant.files)*100), "%")
+      
   }
 
-  df.process <- df.process %>%
-    mutate(mice = if_else(grepl("Mice", jobs$model[j]), "Mice", "No mice"),
-           weather = if_else(grepl("Weather", jobs$model[j]), "Weather", "No weather"))
-
-  write_csv(df.process, file=paste(dir.analysis, "/", as.character(jobs[j,3]), as.character(jobs[j,2]),
+  write_csv(df.process, file=paste(dir.analysis, "/", as.character(jobs[j,3]), 
+                                   as.character(jobs[j,2]),
                                    as.character(jobs[j,1]), ".csv", sep = ""))
 
   print(paste("Job = ", j))

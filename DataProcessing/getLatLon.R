@@ -57,8 +57,11 @@ coords.filtered <- all.coords %>%
 
 # Get site midpoints --------------------
 site.coords <- coords.filtered %>%
-  st_as_sf(coords=c('decimalLongitude', 'decimalLatitude')) %>%
+  st_as_sf(coords=c('lon', 'lat')) %>%
   st_set_crs(value = 4326) %>%
+  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
+  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
+                            TRUE ~ siteID)) %>%
   group_by(siteID) %>%
   summarise(geometry = st_union(geometry)) %>%
   st_centroid() %>%
