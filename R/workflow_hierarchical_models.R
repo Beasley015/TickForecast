@@ -1322,8 +1322,8 @@ for (t in t:start.drags) {
 	  
 	
 	# Save
-	write_csv(comm.params, "comm_params.csv")
-	write_csv(upd.coefs, "coefs_updated.csv")
+	write_csv(comm.params, file.path(out.dir,"comm_params.csv"))
+	write_csv(upd.coefs, file.path(out.dir,"coefs_updated.csv"))
 	
 	# Remove unnecessary objects
 	rm(comm.chains, comm.df)
