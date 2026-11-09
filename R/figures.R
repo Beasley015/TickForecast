@@ -15,6 +15,7 @@ library(ggpubr)
 library(MetBrewer)
 library(NatParksPalettes)
 library(sf)
+library(broom)
 
 dir.out <- "./out/"
 dir.analysis <- "./analysis/"
@@ -942,8 +943,8 @@ aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   theme(panel.grid = element_blank(), legend.position = 'none', 
         axis.title.y = element_blank())
 
-both.transition <- (ix.transition | aa.transition)+
-  plot_annotation(tag_levels = "a")
+# both.transition <- (ix.transition | aa.transition)+
+#   plot_annotation(tag_levels = "a")
 
 # save_gg("aa_survival_singlesite.jpeg", aa.survival, dir.plot, height = 8)
 # save_gg("aa_transition_singlesite.jpeg", aa.transition, dir.plot, height = 4,
@@ -1073,8 +1074,9 @@ lon.betas.singlesite <- ggplot(data=betas.loc %>% filter(spatial == "lon.p" |spa
   theme_bw(base_size = 12)+
   theme(panel.grid=element_blank())
 
-save_gg("lat_betas_singlesite.jpeg", betas.lat.fig, dir.plot, width = 10, height = 8)
-save_gg("lon_betas_singlesite.jpeg", betas.lon.fig, dir.plot, width = 10, height = 8)
+# save_gg("lat_betas_singlesite.jpeg", betas.lat.fig, dir.plot, width = 10, height = 8)
+# save_gg("lon_betas_singlesite.jpeg", lon.betas.singlesite, dir.plot, 
+#         width = 10, height = 8)
 
 # Model intercepts: plot-level -----------------------
 # Get files
