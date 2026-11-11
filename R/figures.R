@@ -221,8 +221,7 @@ series.files <- series.files[str_detect(series.files, pattern = "[A-Z]+_")]
 
 for(i in 1:length(series.files)){
   # Read in time series from forecasting model
-  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = "")) %>%
-    select(-c(mice, weather))
+  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = "")) 
   
   # Get constants for filtering
   ls <- c("Larva", "Nymph", "Adult")
@@ -507,8 +506,7 @@ series.files <- series.files[str_detect(series.files, pattern = "[A-Z]+_")]
 
 for(i in 1:length(series.files)){
   # Read in time series from forecasting model
-  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = "")) %>%
-    select(-c(mice, weather))
+  df.mutate <- read.csv(paste(dir.analysis, series.files[i], sep = "")) 
   
   # Get constants for filtering
   sp <- unique(df.mutate$species)
@@ -695,6 +693,7 @@ ix.df <- scores.all %>%
                              TRUE ~ species)) %>%
   mutate(siteID = case_when(siteID %in% c("GREN", "HNRY", "TEA") ~ "CARY",
                             TRUE ~ siteID)) %>%
+  filter(siteID != "LENO") %>%
   filter(species == "Ixodes_scapularis", lifeStage=="Nymph") %>%
   select(siteID, time, model, crps) %>%
   group_by(siteID, time, model) %>%
@@ -1113,6 +1112,7 @@ aa.ints <- ints %>%
 aa.int.plot <- ggplot(data=aa.ints, aes(x=mean, y = siteID))+
   geom_point()+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = "dashed")+
   facet_wrap(~node)+
   labs(x = "Estimate", y = "Site")+
   theme_bw()+
@@ -1124,13 +1124,14 @@ ix.ints <- ints %>%
 ix.int.plot <- ggplot(data=ix.ints, aes(x=mean, y = siteID))+
   geom_point()+
   geom_errorbar(aes(xmin=lower95, xmax=upper95))+
+  geom_vline(xintercept = 0, linetype = "dashed")+
   facet_wrap(~node)+
   labs(x = "Estimate", y = "Site")+
   theme_bw()+
   theme(panel.grid = element_blank())
 
-save_gg("aa_intercept_pl.jpeg", aa.int.plot, dir.plot)
-save_gg("ix_intercept_pl.jpeg", ix.int.plot, dir.plot)
+# save_gg("aa_intercept_pl.jpeg", aa.int.plot, dir.plot)
+# save_gg("ix_intercept_pl.jpeg", ix.int.plot, dir.plot)
 
 # Model coefficients: plot-level --------------------
 # Get files

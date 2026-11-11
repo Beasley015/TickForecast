@@ -18,12 +18,8 @@ model.code <- nimbleCode({
 	
 	# plot-level priors
 	for(j in 1:3){
-	  gam0[j] ~ dnorm(pr.gam0[j,1], tau=pr.gam0[j,2])
-	  neg.gam1[j] ~ dgamma(pr.gam1[j,1], pr.gam1[j,2])
-	  gam2[j] ~ dnorm(pr.gam2[j,1], tau=pr.gam2[j,2])
 	  gam4[j] ~ dnorm(pr.gam4[j,1], tau=pr.gam4[j,2])
 	}
-	gam1[1:3] <- neg.gam1[1:3] * -1
 
 	# land cover is categorical and therefore a pain in the ass
 	if(n.lc > 1){
@@ -76,27 +72,18 @@ model.code <- nimbleCode({
 	  # loop over every day in time series
 		logit(l2n[t]) <- theta.ln + beta[13] * mice[t] #+ beta[15] * edge
 		logit(n2a[t]) <- theta.na + beta[14] * mice[t] #+ beta[16] * edge
-
-		if(n.plots == 1){
-		  mean.pz3[t] <- pz[3,t,1]
-		  mean.pz2[t] <- pz[2,t,1]
-		  mean.pz1[t] <- pz[1,t,1]
-		} else{
-		  mean.pz3[t] <- mean(pz[3,t,1:n.plots])
-		  mean.pz2[t] <- mean(pz[2,t,1:n.plots])
-		  mean.pz1[t] <- mean(pz[1,t,1:n.plots])
-		}
 		
-		lambda.bin[t] ~ dbern(mean.pz3[t])
-		lambda[t] <- if_else_nimble(lambda.bin[t]==0, 0, repro)
-		
-		# Relate p's to site-level transition probs:
-		n2a.bin[t] ~ dbern(mean.pz2[t])
-		n2a.quest[t] <- if_else_nimble(n2a.bin[t]==0, 0, n2a[t])
-		
-		# Turn prob of zero from phenology into binary site-level yes/no
-		l2n.bin[t] ~ dbern(mean.pz1[t])
-		l2n.quest[t] <- if_else_nimble(l2n.bin[t]==0, 0, 1)
+		theta.n2a[t] <- if_else_nimble(
+		  (gdd[t] <= 1000) | (gdd[t] >= 2500),
+		  n2a[t],
+		  0
+		)
+		lambda[t] <- if_else_nimble(
+		  (gdd[t] >= 1400) & (gdd[t] <= 2500),
+		  repro.mu,
+		  0
+		)
+		l2n.quest[t] <- if_else_nimble((gdd[t] >= 400) & (gdd[t] <= 2500), 1, 0)
 
 		maxtemp[t] ~ dnorm(x1[t], tau = tau.temp)
 		maxrh[t] ~ dnorm(x2[t], tau = tau.maxrh)
@@ -136,11 +123,11 @@ model.code <- nimbleCode({
 		A[2, 4, t] <- 0
 		A[3, 1, t] <- 0
 		A[3, 2, t] <- l2n.quest[t]
-		A[3, 3, t] <- phi.n[t] * (1 - n2a.quest[t])
+		A[3, 3, t] <- phi.n[t] * (1 - theta.n2a[t])
 		A[3, 4, t] <- 0
 		A[4, 1, t] <- 0
 		A[4, 2, t] <- 0
-		A[4, 3, t] <- phi.n[t] * n2a.quest[t]
+		A[4, 3, t] <- phi.n[t] * theta.n2a[t]
 		A[4, 4, t] <- phi.a[t]
 
 		### Data Model ###
@@ -149,14 +136,6 @@ model.code <- nimbleCode({
 			dx[1, t, p] <- x[1, t] / 450 * area[t, p]
 			dx[2, t, p] <- x[3, t] / 450 * area[t, p]
 			dx[3, t, p] <- x[4, t] / 450 * area[t, p]
-			
-			# Prob available for sampling (p)
-			logit(pz[1,t,p]) <- gam0[1] + gam1[1] * gdd[t,p]^2 + 
-			  gam2[1] * gdd[t,p]
-			logit(pz[2,t,p]) <- gam0[2] + gam1[2] * gdd[t,p]^2 + 
-			  gam2[2] * gdd[t,p]
-			logit(pz[3,t,p]) <- gam0[3] + gam1[3] * gdd[t,p]^2 + 
-			  gam2[3] * gdd[t,p]
 			
 			# Tick density given sampling availability (dlamb)
 			if(n.lc > 1){
@@ -170,9 +149,9 @@ model.code <- nimbleCode({
 			}
 			
 			# Observed ticks follow zero-inflated Poisson
-			y[1,t,p] ~ dZIP(dlamb=dlamb[1,t,p], zeroProb = 1-pz[1,t,p])
-			y[3,t,p] ~ dZIP(dlamb=dlamb[2,t,p], zeroProb = 1-pz[2,t,p])
-			y[4,t,p] ~ dZIP(dlamb=dlamb[3,t,p], zeroProb = 1-pz[3,t,p])
+			y[1,t,p] ~ dpois(dlamb[1,t,p])
+			y[3,t,p] ~ dpois(dlamb[2,t,p])
+			y[4,t,p] ~ dpois(dlamb[3,t,p])
 		}
 	}
 

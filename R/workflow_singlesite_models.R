@@ -362,9 +362,6 @@ for (t in t:n.drags) {
 		y <- matrix(NA, 4, horizon)
 		
 		# uninformative plot-level priors (zero inflation/phenology)
-		pr.gam0 <- cbind(rep(0,3), rep(1,3))
-		pr.gam1 <- cbind(rep(1,3), rep(1,3))
-		pr.gam2 <- cbind(rep(0,3), rep(1,3))
 		pr.gam4 <- cbind(rep(0,3), rep(1,3))
 		
 		gam3.mu <- matrix(0, nrow = 3, ncol = length(unique(plt_cover$lc_dominant)))
@@ -399,30 +396,6 @@ for (t in t:n.drags) {
 		}
 		
 		# plot-level priors
-		pr.gam0 <- matrix(NA, 3, 2)
-		for(i in 1:3){
-		  pr.gam0[i,] <- get_prior(paste0("gam0[", i, "]"))
-		}
-		
-		# gam1 must be negative
-		gam1.vals <- last.params %>%
-		  filter(str_detect(node, "gam1"))
-		
-		pr.gam1 <- matrix(NA, 3, 2)
-		for(i in 1:3){
-		  pr.gam1[i,] <- filter(gam1.vals, node == paste0("gam1[", i, "]")) %>%
-		    mutate(value = ifelse(value > 0, value, -value)) %>%
-		    summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-		              beta = fitdist(value, distr = 'gamma')$estimate[2]) %>%
-		    as.numeric() %>%
-		    suppressMessages()
-		}
-		
-		pr.gam2 <- matrix(NA, 3, 2)
-		for(i in 1:3){
-		  pr.gam2[i,] <- get_prior(paste0("gam2[", i, "]"))
-		}
-		
 		gam3.vals <- last.params %>%
 		  filter(str_detect(node, "gam3"))
 		
@@ -545,9 +518,6 @@ for (t in t:n.drags) {
 	data$pr.theta.n2a <- theta.n2a
 	data$repro.mu <- repro.mu
 	data$pr.beta <- pr.beta
-	data$pr.gam0 <- pr.gam0
-	data$pr.gam1 <- pr.gam1
-	data$pr.gam2 <- pr.gam2
 	data$gam3.mu <- gam3.mu
 	data$gam3.tau <- gam3.tau
 	data$pr.gam4 <- pr.gam4
@@ -558,11 +528,10 @@ for (t in t:n.drags) {
 		filter(Date %in% ymd(fx.sequence),
 		       plotID %in% plots) %>%
 	  select(-year) %>%
-	  pivot_wider(names_from = plotID, values_from = cumGDD,
-	              values_fn = mean) %>%
-	  select(-Date)
-	
-	data$gdd <- scale(data$gdd)
+	  group_by(Date) %>%
+	  summarise(cumGDD = mean(cumGDD)) %>%
+	  select(-Date) %>%
+	  pull(cumGDD)
 	
 	# data$max.cgdd <- max(data$gdd) * 1.2
 	data$xind <- matrix(1, 4, horizon)
@@ -660,16 +629,14 @@ for (t in t:n.drags) {
 			x1 = jitter(data$maxtemp),
 			x2 = jitter(data$maxrh),
 			x3 = jitter(data$minrh),
-			x4 = jitter(data$precip),
-			neg.gam1 = rgamma(3,1,1))
+			x4 = jitter(data$precip)
+	  )
 	}
 	
 	# Parameters to save (uses less memory)
 	params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
 	            # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
-	            "theta.ln", "theta.na", 
-	            "gam0", "gam1", "gam2", "gam4", "pz", 
-	            "dx", "dlamb", "repro",
+	            "theta.ln", "theta.na",  "gam4", "dlamb", "repro",
 	            "x" #, "x1", "x2", "x3", "x4"
 	)  
 	
