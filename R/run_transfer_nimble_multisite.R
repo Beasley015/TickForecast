@@ -26,12 +26,12 @@ run_transfer_nimble <- function(
 	cModel <- compileNimble(model)
 	
 	# Test for infinite values
-	test <- names(cModel)[str_detect(names(cModel), "logProb")]
-	test <- test[str_detect(test, "\\.")==F]
-	for(i in 1:length(test)){
-	  prb <- any(is.infinite(cModel[[test[i]]]))
-	  if(prb==T){print(paste(test[i], "is infinite", sep = " "))}
-	}
+	# test <- names(cModel)[str_detect(names(cModel), "logProb")]
+	# test <- test[str_detect(test, "\\.")==F]
+	# for(i in 1:length(test)){
+	#   prb <- any(is.infinite(cModel[[test[i]]]))
+	#   if(prb==T){print(paste(test[i], "is infinite", sep = " "))}
+	# }
 
 	mcmcConf <- configureMCMC(cModel, onlyRW = TRUE, monitors = parms)
 	Rmcmc <- buildMCMC(mcmcConf)

@@ -232,7 +232,6 @@ cgdd <- daymet_cumGDD(sites=sites) %>%
   dplyr::select(-year) %>%
   group_by(Date, plotID) %>%
   summarise(cumGDD = mean(cumGDD)) %>%
-  mutate(cumGDD = scale(cumGDD)[,1]) %>%
   suppressMessages()
 
 maxTemp <- daymet_temp(sites=sites, minimum = FALSE) %>%
@@ -441,7 +440,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:start.drags) { 
+for (t in t:5){ #start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -465,9 +464,6 @@ for (t in t:start.drags) {
 		y <- array(NA, dim = c(4, horizon, length(sites)))
 		
 		# uninformative plot-level priors (zero inflation/phenology)
-		pr.gam0 <- array(cbind(rep(0,3), rep(1,3)), dim = c(3,2,length(sites)))
-		pr.gam1 <- array(cbind(rep(1,3), rep(1,3)), dim = c(3,2,length(sites)))
-		pr.gam2 <- array(cbind(rep(0,3), rep(1,3)), dim = c(3,2,length(sites)))
 		pr.gam4 <- array(cbind(rep(0,3), rep(1,3)), dim = c(3,2,length(sites)))
 	
 		gam3.mu <- array(0, dim = c(3, length(unique(plt_cover$lc_dominant)), 
@@ -486,215 +482,113 @@ for (t in t:start.drags) {
 				start.dates[t - 1]
 			)
 
-			last.params <- read_csv(file.path(readDest, "parameterSamples.csv")) %>%
+			last.params <- read_csv(file.path(readDest, "coefs_updated.csv")) %>%
 				suppressMessages()
 			
 			# get parameter posterior summary
 			params.stats <- last.params %>%
-			  pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
-			  rename("parameter" = "node") %>%
-				group_by(parameter) %>%
+			  rename("parameter" = "coef") %>%
+				group_by(parameter, site) %>%
 				summarise(mu = mean(value,na.rm=T), tau = 1 / var(value,na.rm = ))
 
 			# Priors for transitions (priors are constant across sites)
 		  phi.l <- filter(params.stats, parameter == "phi.l.mu") %>%
 		    ungroup() %>%
 		    select(mu, tau) %>%
-		    as.numeric()
-			phi.n <- filter(params.stats, parameter == "phi.n.mu") %>%
+		    as.matrix()
+			
+		  phi.n <- filter(params.stats, parameter == "phi.n.mu") %>%
 			  ungroup() %>%
 			  select(mu, tau) %>%
-			  as.numeric()
-			phi.a <- filter(params.stats, parameter == "phi.a.mu") %>%
+			  as.matrix()
+			
+		  phi.a <- filter(params.stats, parameter == "phi.a.mu") %>%
 			  ungroup() %>%
 			  select(mu, tau) %>%
-			  as.numeric()
+			  as.matrix()
 			
 			theta.l2n <- filter(params.stats, parameter == "theta.ln") %>%
 			  ungroup() %>%
 			  select(mu, tau) %>%
-			  as.numeric()
+			  as.matrix()
+			
 			theta.n2a <- filter(params.stats, parameter == "theta.na") %>%
 			  ungroup() %>%
 			  select(mu, tau) %>%
-			  as.numeric()
-			
-			# Deviance priors
-			dev.params <- read_csv(file.path(readDest, "devSamples.csv")) %>%
-			  group_by(node, siteID) %>%
-			  summarise(mu=mean(value), tau = 1/var(value)) %>%
+			  as.matrix()
+
+			# Priors for betas 
+			betas <- params.stats %>%
+			  filter(str_detect(parameter, "beta")) %>%
 			  ungroup() %>%
-			  suppressMessages()
-
-      dev.l.pr <- filter(dev.params, node == "dev.phi.l") %>%
-        select(-c(node, siteID)) %>%
-        as.matrix()
-
-      dev.n.pr <- filter(dev.params, node == "dev.phi.n") %>%
-        select(-c(node, siteID)) %>%
-        as.matrix()
-
-      dev.a.pr <- filter(dev.params, node == "dev.phi.a") %>%
-        select(-c(node, siteID)) %>%
-        as.matrix()
-
-      dev.ln.pr <- filter(dev.params, node == "dev.ln") %>%
-        select(-c(node, siteID)) %>%
-        as.matrix()
-
-      dev.na.pr <- filter(dev.params, node == "dev.na") %>%
-        select(-c(node, siteID)) %>%
-        as.matrix()
-       
-      # Temporary priors: site-level precision
-      site.tau <- last.params %>%
-        pivot_longer(cols=!(node), names_to="site", values_to="value") %>%
-        rename("parameter" = "node") %>%
-        group_by(parameter,site) %>%
-        summarise(tau = 1 / var(value,na.rm = T))
-      
-      phi.l.tau <- filter(site.tau, parameter == "phi.l.mu") %>%
-        ungroup() %>%
-        select(tau) %>%
-        as.matrix() %>%
-        as.numeric()
-      phi.n.tau <- filter(site.tau, parameter == "phi.n.mu")%>%
-        ungroup() %>%
-        select(tau) %>%
-        as.matrix() %>%
-        as.numeric()
-      phi.a.tau <- filter(site.tau, parameter == "phi.a.mu")%>%
-        ungroup() %>%
-        select(tau) %>%
-        as.matrix() %>%
-        as.numeric()
-      
-      ln.tau <- filter(site.tau, parameter == "theta.ln")%>%
-        ungroup() %>%
-        select(tau) %>%
-        as.matrix() %>%
-        as.numeric()
-      na.tau <- filter(site.tau, parameter == "theta.na")%>%
-        ungroup() %>%
-        select(tau) %>%
-        as.matrix() %>%
-        as.numeric()
-
-      # Shrinkage priors
-      # shrink.params <- read_csv(file.path(readDest, "shrinkSamples.csv")) %>%
-      #   filter(is.na(value)==F) %>%
-      #   group_by(node) %>%
-      #   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-      #             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-      #   pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
-      #                values_to = 'value') %>%
-      #   pivot_wider(names_from = node, values_from=value) %>%
-      #   suppressMessages()
-      # 
-      # phil.shrink <- pull(shrink.params, l.shrink)
-      # phin.shrink <- pull(shrink.params, n.shrink)
-      # phia.shrink <- pull(shrink.params, a.shrink)
-      # l2n.shrink <- pull(shrink.params, ln.shrink)
-      # n2a.shrink <- pull(shrink.params, na.shrink)
-      
-      # Tau's
-      # prec.params <- read_csv(file.path(readDest, "tauSamples.csv")) %>%
-      #   group_by(node) %>%
-      #   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-      #             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-      #   pivot_longer(cols = c(alpha, beta), names_to = 'parm', 
-      #                values_to = 'value') %>%
-      #   pivot_wider(names_from = node, values_from=value) %>%
-      #   suppressMessages()
-      # 
-      # pr.phil.tau <- pull(prec.params, phi.l.tau)
-      # pr.phin.tau <- pull(prec.params, phi.n.tau)
-      # pr.phia.tau <- pull(prec.params, phi.a.tau)
-      # 
-      # pr.ln.tau <- pull(prec.params, ln.tau)
-      # pr.na.tau <- pull(prec.params, na.tau)
-
-			# Priors for betas (betas will vary across sites)
-			betas <- read_csv(file.path(readDest, "beta.csv")) %>%
-				rename("parameter" = "node") %>%
-				group_by(parameter) %>%
-				summarise(mu = mean(value), tau = 1/var(value)) %>%
 				suppressMessages()
 			
 			b.names <- logical()
 			for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
 			
-			pr.beta <- ungroup (betas) %>%
+			betas <- ungroup (betas) %>%
 			  arrange(factor(parameter, levels = b.names)) %>%
-			  select(-parameter) %>%
-			  as.matrix()
-
-			beta.tau <- read_csv(file.path(readDest, "beta.csv")) %>%
-			  rename("parameter" = "node") %>%
-			  group_by(parameter, siteID) %>%
-			  summarise(tau = 1/var(value)) %>%
-			  pivot_wider(names_from = siteID, values_from = tau) %>%
-			  arrange(factor(parameter, levels = b.names)) %>%
-			  ungroup() %>%
-			  select(-parameter) %>%
+			  select(-parameter)
+			
+			pr.beta <- abind(split(betas, ~site), along = 3)[,-1,]
+		
+			# Gammas	
+			gam3.vals <- read_csv(file=file.path(readDest, "parameterSamples.csv")) %>%
+			  filter(str_detect(node, "gam3")) %>%
+			  mutate(lifeStage = str_extract(node, "\\[([1-9])", group = 1),
+			         cover.class = str_extract(node, ", ([1-9])]", group = 1),
+			         node = str_extract(node, "gam3")) %>%
+			  select(-node) %>%
+			  group_by(siteID, lifeStage, cover.class) %>%
 			  suppressMessages()
 			
-			# Beta
-			dev.beta.tau <- read_csv(file.path(readDest, "devBeta.csv")) %>%
-			  group_by(node, siteID) %>%
-			  summarise(tau = 1/var(value)) %>%
-			  ungroup() %>%
-			  suppressMessages()
-
-			dev.beta.mu <- read_csv(file.path(readDest, "devBeta.csv")) %>%
-			  group_by(node, siteID) %>%
+			gam3.mu <- gam3.vals %>%
 			  summarise(mu = mean(value)) %>%
-			  ungroup() %>%
+			  pivot_wider(names_from = cover.class, values_from = mu)
+			gam3.mu <- abind(split(gam3.mu, ~siteID), along = 3)[,-c(1:2),]
+			class(gam3.mu) <- "numeric"
+			
+			gam3.tau <- gam3.vals %>%
+			  summarise(tau = 1/var(value)) %>%
+			  pivot_wider(names_from = cover.class, values_from = tau)
+			gam3.tau <- abind(split(gam3.tau, ~siteID), along = 3)[,-c(1:2),]
+			class(gam3.tau) <- "numeric"
+			gam3.tau[is.infinite(gam3.tau)] <- 0
+			
+			gam4.vals <- last.params %>%
+			  filter(str_detect(coef, "gam4")) %>%
+			  group_by(coef, site) %>%
+			  summarise(mu = mean(value), tau = 1/var(value))
+			
+			pr.gam4 <- abind(split(gam4.vals, ~site), along=3)[,-c(1:2),]
+			class(pr.gam4) <- "numeric"
+			
+			# expected reproduction
+			repro.mu <-read_csv(file.path(readDest, "parameterSamples.csv")) %>%
+			  filter(str_detect(node, "repro")) %>%
+			  group_by(siteID) %>%
+			  summarise(repro = mean(value)) %>%
+			  pull(repro) %>%
 			  suppressMessages()
-
-			b.names <- logical()
-			for(i in 1:n.beta){b.names[i] <- paste("beta", i, sep = "")}
-
-			dev.beta.tau <- arrange(dev.beta.tau, factor(node, levels = b.names)) %>%
-			  pivot_wider(names_from = siteID, values_from = tau) %>%
-			  select(-node)
-
-			dev.beta.mu <- arrange(dev.beta.mu, factor(node, levels = b.names)) %>%
-			  pivot_wider(names_from = siteID, values_from = mu) %>%
-			  select(-node)
-
-			# # Beta shrinkage
-			# pr.beta.shrink <- read_csv(file.path(readDest, "shrinkBeta.csv")) %>%
-			#   group_by(node) %>%
-			#   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-			#             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-			#   arrange(factor(node, levels = b.names)) %>%
-			#   select(-node) %>%
-			#   suppressMessages()
-			# 
-			# # beta precision
-			# pr.beta.tau <- read_csv(file.path(readDest, "tauBeta.csv")) %>%
-			#   group_by(node) %>%
-			#   summarise(alpha = fitdist(value, distr = 'gamma')$estimate[1],
-			#             beta = fitdist(value, distr='gamma')$estimate[2]) %>%
-			#   arrange(factor(node, levels = b.names)) %>%
-			#   select(-node) %>%
-			#   suppressMessages()
 			  
 			# get invgamma parameters
-			sig.last <- read_csv(file.path(readDest, "sigma.csv")) %>%
+			sig.last <- read_csv(file.path(readDest, "parameterSamples.csv")) %>%
+			  filter(str_detect(node, "sig")) %>%
+			  rename("parameter"="node") %>%
 				suppressMessages()
 				
 			pr.sig <- sig.last %>%
-				group_by(parameter) %>%
+				group_by(parameter, siteID) %>%
 				summarise(
 					alpha = inv_gamma_mm(value)[1],
 					beta = inv_gamma_mm(value)[2]
 				)
+			
+			pr.sig <- abind(split(pr.sig, ~siteID),along=3)[,-c(1:2),]
+			class(pr.sig) <- "numeric"
 
+			# Initial conditions
 			last.fx <- read_csv(file.path(readDest, "stateSamples.csv")) %>%
-			  pivot_longer(cols=Larva:Adult, names_to = 'lifeStage', 
-			               values_to='value') %>%
 				suppressMessages()
 
 			tick.stats <- last.fx %>%
@@ -826,6 +720,10 @@ for (t in t:start.drags) {
 			    y[3, obs.plot$index, p, site] <- obs.plot %>% pull(Nymph)
 			    y[4, obs.plot$index, p, site] <- obs.plot %>% pull(Adult)
 			    area[obs.plot$index, p, site] <- obs.plot %>% pull(totalSampledArea)
+			    
+			    if(sites[site]=="CARY"){
+			      area[obs.plot$index,p,site] <- 450
+			    }
 			  }
 		  }
 	  }
@@ -842,41 +740,25 @@ for (t in t:start.drags) {
 	data$pr.theta.n2a <- theta.n2a
 	data$repro.mu <- repro.mu
 	data$pr.beta <- pr.beta
-	data$pr.gam0 <- pr.gam0
-	data$pr.gam1 <- pr.gam1
-	data$pr.gam2 <- pr.gam2
 	data$gam3.mu <- gam3.mu
 	data$gam3.tau <- gam3.tau
 	data$pr.gam4 <- pr.gam4
 	data$pr.sig <- pr.sig 
 	
 	# Cumulative degree days 
-	gdd <- cgdd %>%
+	data$gdd <- cgdd %>%
 	  ungroup() %>%
 	  filter(Date %in% ymd(fx.sequence),
-	         plotID %in% plots$plotID) %>%
+	         plotID %in% unique(plots$plotID)) %>%
 	  mutate(siteID = str_extract(plotID, "[A-Z]+")) %>%
 	  mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA")~"CARY",
-	                            TRUE ~ siteID)) %>%
-	  pivot_wider(names_from = plotID, values_from = cumGDD,
-	              values_fill = NA)
+	                            TRUE~siteID)) %>%
+	  group_by(Date, siteID) %>%
+	  summarise(cumGDD = mean(cumGDD)) %>%
+	  pivot_wider(names_from=siteID, values_from=cumGDD, values_fn=mean) %>%
+	  ungroup() %>%
+	  select(-Date)
 	
-	gdd.list <- split(gdd, ~siteID)
-	gdd.list <- lapply(gdd.list, 
-	       function(x) x <- x[,-which(unname(colSums(is.na(x))==nrow(x)))])
-	gdd.list <- lapply(gdd.list, 
-	                   function(x) x <- as.matrix(select(x, -c(Date, siteID))))
-	for(i in 1:length(gdd.list)){
-	  if(ncol(gdd.list[[i]])<max(n.plots)){
-	    new.cols <- matrix(NA, nrow = nrow(gdd.list[[i]]), 
-	                       ncol=max(n.plots-ncol(gdd.list[[i]])))
-	    gdd.list[[i]] <- cbind(gdd.list[[i]], new.cols)
-	  }
-	}
-	
-	gdd.ar <- do.call(abind, c(gdd.list, along = 3))
-	data$gdd <- gdd.ar
-
 	# Mice
 	data$mice <- mna.scaled %>%
 	  filter(Date %in% fx.sequence) %>%
@@ -984,8 +866,7 @@ for (t in t:start.drags) {
 	
 	clusterExport(cl=cluster, export.vec, envir = environment())
 	
-	all.chains <- foreach(rep = 1:5, .combine='c') %dopar% {
-	  # foreach(i = 1:nrow(iter.mat), .combine='c') %dopar% {
+	all.chains <- foreach(rep = 1:nrow(iter.mat), .combine='c') %dopar% {
 	  # sample on each cluster
 	  library(nimble)
 	  library(coda)
@@ -1050,9 +931,8 @@ for (t in t:start.drags) {
 	  # Parameters to save (uses less memory)
 	  params.to.save <- c("beta", "phi.a.mu", "phi.l.mu", "phi.n.mu", "sig",
 	                      # "tau.maxrh", "tau.minrh", "tau.precip", "tau.temp", 
-	                      "theta.ln", "theta.na", 
-	                      "gam0", "gam1", "gam2", "gam4", #"pz", 
-	                      "repro","x" #, "x1", "x2", "x3", "x4"
+	                      "theta.ln", "theta.na", "gam4", "repro",
+	                      "x" #, "x1", "x2", "x3", "x4"
 	                      )  
 	  
 	  if(constant$n.lc > 1){
@@ -1076,10 +956,6 @@ for (t in t:start.drags) {
 	}
 	
 	parallel::stopCluster(cl = cluster)
-	
-	# REMOVE intermediate output before running ----------
-	# saveRDS(all.chains, "test_out.rds")
-	all.chains <- readRDS("test_out.rds")
   
 	# Merge outputs of chains
 	site.parms <- function(dat, latent=F){
@@ -1205,7 +1081,37 @@ for (t in t:start.drags) {
 	  q.pr <- matrix(1, nrow=2, ncol=ncol(betas))
 	  r.pr <- matrix(1, nrow=2, ncol=ncol(betas))
 	} else{
-	  print("You should not see this yet")
+	  last.dist <- read_csv(file.path(readDest, "comm_params.csv")) %>%
+	    filter(param %in% c("mu", "tau", "q", "r")) %>%
+	    suppressMessages
+	  
+	  mu.pr <- last.dist %>%
+	    filter(param == "mu") %>%
+	    group_by(coef) %>%
+	    summarise(mean = median(value)) %>%
+	    pull(mean)
+	  
+	  var.pr <- last.dist %>%
+	    filter(param == "tau") %>%
+	    group_by(coef) %>%
+	    summarise(var = 1/median(value)) %>%
+	    pull(var)
+	  
+	  q.pr <- last.dist %>%
+	    filter(param == "q") %>%
+	    group_by(coef) %>%
+	    summarise(alpha = fitdist(value, 'gamma')$estimate[1],
+	              beta = fitdist(value, 'gamma')$estimate[2]) %>%
+	    select(-coef) %>%
+	    as.matrix()
+	  
+	  r.pr <- last.dist %>%
+	    filter(param == "r") %>%
+	    group_by(coef) %>%
+	    summarise(alpha = fitdist(value, 'gamma')$estimate[1],
+	              beta = fitdist(value, 'gamma')$estimate[2]) %>%
+	    select(-coef) %>%
+	    as.matrix()
 	}
 	
 	data2$mu.pr <- mu.pr
@@ -1234,7 +1140,7 @@ for (t in t:start.drags) {
 	constants2$n.coef <- ncol(betas)
 	constants2$sites <- length(unique(sitevec))
 	
-	parms2 <- c("coef", "coef.tau", "coef.mu")
+	parms2 <- c("coef", "coef.tau", "coef.mu", "q", "r")
 	
 	inits2 <- function(){
 	  list(
@@ -1287,16 +1193,12 @@ for (t in t:start.drags) {
 	# Check convergence TO DO ---------------
 	
 	# Save outputs
-	# REMOVE TEMP OUTPUTS --------------
-	# saveRDS(comm.chains, "pprb2temp.rds")
-	comm.chains <- readRDS("pprb2temp.rds")
-	
 	# bind lists
 	comm.df <- do.call(rbind, comm.chains)
 	
 	# Create separate data frames for coefficients & hyperparameters
 	comm.params <- as.data.frame(comm.df[,which(str_detect(colnames(comm.df),
-	                                                       "coef.mu|coef.tau"))])
+	                                                       "coef.mu|coef.tau|q|r"))])
 	
 	param.names <- data.frame(name = colnames(betas), 
 	                          coef = as.character(1:ncol(betas))) 
