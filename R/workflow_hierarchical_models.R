@@ -949,7 +949,7 @@ for (t in t:5){ #start.drags) {
 		  parms = params.to.save
 		) 
 	  
-	  out.nchains <- cbind(out.chains, iter.mat$site[rep])
+	  out.nchains <- cbind(out.nchains, iter.mat$site[rep])
 	  
 	  out.nchains <- list(out.nchains)
 	

@@ -556,7 +556,7 @@ for (t in t:n.drags) {
     select(-date)
 
 	if (length(data$mice) < length(fx.sequence)) {
-	  horizon <- min(nrow(data$gdd), length(data$mice))
+	  horizon <- min(length(data$gdd), length(data$mice))
 	  data$y <- y[, 1:horizon, ]
 	  
 	  if(horizon < 2){break}
@@ -567,7 +567,7 @@ for (t in t:n.drags) {
 	}
 
 	if (year(fx.start.date) == max(year(neon.job$time))){
-		horizon <- min(nrow(data$gdd), length(data$mice), 
+		horizon <- min(length(data$gdd), length(data$mice), 
 		               length(data$maxtemp), length(data$maxrh),
 		               length(data$minrh), length(data$precip),
 		               nrow(daymet.sub))
@@ -578,7 +578,7 @@ for (t in t:n.drags) {
 		  }
     
 		} else {
-		  horizon <- min(nrow(data$gdd), length(data$mice), 
+		  horizon <- min(length(data$gdd), length(data$mice), 
 		                 length(data$maxtemp), length(data$maxrh),
 		                 length(data$minrh), length(data$precip))
 			data$y <- y[, 1:horizon, ]
