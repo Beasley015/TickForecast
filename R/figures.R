@@ -16,6 +16,7 @@ library(MetBrewer)
 library(NatParksPalettes)
 library(sf)
 library(broom)
+library(ggsflabel)
 
 dir.out <- "./out/"
 dir.analysis <- "./analysis/"
@@ -39,6 +40,30 @@ save_gg <- function(dest, gg, path, width=7, height=5) {
 	)
 	# dev.off()
 }
+
+# Map of study sites ----------------------
+site.coords <- read_csv("./Data/siteLatLon.csv") %>%
+  filter(is.na(decimalLongitude)==F) %>%
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326) %>%
+  suppressMessages()
+
+site.coords <- rbind(site.coords, cary.coord) %>%
+  filter(!(siteID %in% c("DELA")))
+
+state_map <- st_as_sf(maps::map("state", plot = FALSE, fill = TRUE))
+state_map <- st_make_valid(st_transform(state_map, crs = 5070))
+
+# Clip map at coord extent
+state_map <- st_transform(state_map, crs = 4326)
+state_map <- st_crop(state_map, st_bbox(st_buffer(st_union(site.coords),dist=1.5e5)))
+
+map.plt <- ggplot()+
+  geom_sf(data=state_map, fill = 'lightgray')+
+  geom_sf(data = site.coords, size = 1.5) +
+  geom_sf_text_repel(data = site.coords, aes(label=siteID))+
+  theme_bw()
+
+# save_gg(gg=map.plt, dest = "site_map.jpeg", path=dir.plot)
 
 # Retrieve null model outputs-----------------
 dir.out.null <- "./out/Null"
