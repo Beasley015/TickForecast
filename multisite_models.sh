@@ -7,13 +7,13 @@
 #$ -l buyin
 
 # Specify array job with tasks
-#$ -t 1
+#$ -t 1-2
 
 # Specify hard time limit of hours for the job (if you have a short runtime the SCC gives you priority)
 #$ -l h_rt=24:00:00
 
 # Assign cores and cores per node
-#$ -pe omp 16 # This assigns a full node (16 cores) for a total of 128G of RAM
+#$ -pe omp 28 # This assigns a full node (28 cores) for a total of 192G of RAM
 
 # Send an email when the job finishes or if it is aborted 
 #$ -m ea
