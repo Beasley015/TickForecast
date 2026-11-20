@@ -107,7 +107,7 @@ plots <- plots[!plots %in% c("GREN_001", "GREN_002", "HNRY_001", "HNRY_002", "TE
                              "OSBS_077")]
 
 
-beta <- mega$plotID[mega$siteID == "TALL"]
+beta <- mega$plotID[mega$siteID == "LENO"]
 
 sites <- unique(mega$siteID)
 
@@ -123,135 +123,20 @@ for (plotID in beta) {
 
 
 
-#-------------------COMPARE---------------
-
-evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv") |>
-  filter(siteID == "TEA")
-
-evi$date <- as.Date(evi$date)
-
-
-
 #------------------ASSEMBLE TIME SERIES--------------------------
 
-
-files <- list.files(path = "/projectnb/dietzelab/neochatt/MSLP/EVI2/GREN_001", pattern = "\\.csv$", full.names = TRUE)
-
-cells <- unique(sub(
-  ".*\\/(cell_[0-9]+)_year_.*",
-  "\\1",
-  files
-))
+plots <- mega$plotID
+plots <- plots[!plots %in% c("GREN_001", "GREN_002", "HNRY_001", "HNRY_002", "TEA_001", "TEA_002")]
+plot <- c("OSBS_077")
 
 
-
-
-
-cell_dfs <- setNames(vector("list", length(cells)), cells)
-
-for (c in cells) {
-  
-  cell_files <- files[
-    grepl(
-      paste0(c, "_year_"),
-      basename(files),
-      fixed = TRUE
-    )
-  ]
-  
-  dat <- bind_rows(lapply(cell_files, read.csv))
-  
-  dat <- unique(dat)
-  dat$date <- as.Date(dat$date)
-  dat <- dat[order(dat$date), ]
-  dat$cell <- c
-  
-  cell_dfs[[c]] <- dat
-}
-
-
-
-
-all_cells <- bind_rows(cell_dfs)
-
-evi2 <- all_cells |>
-  group_by(date) |>
-  summarise(
-    evi2_mean   = mean(evi2, na.rm = TRUE),
-    evi2_median = median(evi2, na.rm = TRUE),
-    evi2_sd           = sd(evi2, na.rm = TRUE),
-    n_pixels     = n_distinct(cell[!is.na(evi2)]),
-    .groups = "drop"
-  ) |>
-  arrange(date)
-
-
-
-
-evi2 <- evi2 |> filter(year(date) >= 2016) |>
-  filter(year(date) <= 2025)
-
-
-evi2$siteID <- "HNRY"
-
-evi2 <- evi2 |> relocate(siteID)
-
-plot(
-  evi2$date,
-  evi2$evi2_median,
-  type = "l",
-  col = "black",
-  xlab = "Date",
-  ylab = "EVI2"
-)
-
-points(evi2$date, evi2$evi2_median, pch = 15, cex = 0.5)
-
-points(evi$date, evi$evi_median, col = "green")
-
-lines(
-  evi$date,
-  evi$evi_median,
-  col = "green"
-)
-
-legend(
-  "topright",
-  legend = c("Median HLS EVI2", "Median MODIS EVI"),
-  col = c("black", "green"),
-  pch = c(15, 16),
-  lty = 1,
-  cex = 0.8
-)
-
-
-
-both <- left_join(evi, evi2, by = "date", "siteID")
-
-both <- na.omit(both)
-
-
-
-
-
-gren_001 <- evi2
-hnry_001 <- evi2
-
-
-
-plots <- c("GREN_001", "GREN_002", "HNRY_001", "HNRY_002", "TEA_001", "TEA_002")
-
-
-
-
-
-
-
-cary <- data.frame()
+NEON_EVI2 <- data.frame()
 
 for(p in plots){
   
-  files <- list.files(path = paste0("/projectnb/dietzelab/neochatt/MSLP/EVI2/", p), pattern = "\\.csv$", full.names = TRUE)
+  
+  path <- paste0("/projectnb/dietzelab/neochatt/MSLP/EVI2/", p)
+  files <- list.files(path = path, pattern = "\\.csv$", full.names = TRUE)
   
   cells <- unique(sub(
     ".*\\/(cell_[0-9]+)_year_.*",
@@ -305,119 +190,137 @@ for(p in plots){
     filter(year(date) <= 2025)
   
   
-  evi2$plotID <- p
-  evi2 <- evi2 |> relocate(plotID)
-  
-  evi2$siteID <- sub("_.*$", "", evi2$plotID)
-  
+  evi2$siteID <- mega$siteID[mega$plotID == p]
   evi2 <- evi2 |> relocate(siteID)
   
+  evi2$plotID <- p
+  evi2 <- evi2 |> relocate(plotID)
+
+  NEON_EVI2 <- rbind(NEON_EVI2, evi2)
   
-  cary <- rbind(cary, evi2)
 }
 
 
-plots <- unique(cary$plotID)
 
 
-cols <- setNames(rainbow(length(plots)), plots)
 
-for (i in seq_along(plots)) {
-  p <- plots[i]
-  sub <- cary |> filter(plotID == p)
-  
-  if (i == 1) {
-    plot(
-      sub$date,
-      sub$evi2_median,
-      type = "l",
-      col = cols[p],
-      ylim = c(0, 1),
-      xlab = "Date",
-      ylab = "Median EVI2"
-    )
-  } else {
-    lines(sub$date, sub$evi2_median, col = cols[p])
-  }
-}
+evi2 <- NEON_EVI2
+
+evi2 <- evi2 |>
+  arrange(siteID)
+
+
+
+
+sub <- evi2 |> filter(plotID == "SERC_012")
+
+
+evi <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/MODIS_site_VIs.csv") |>
+  filter(siteID == "SERC")
+
+evi$date <- as.Date(evi$date)
+
+
+
+
+
+
+plot(
+  sub$date,
+  sub$evi2_median,
+  type = "l",
+  col = "black",
+  xlab = "Date",
+  ylab = "EVI2",
+  ylim = c(0,1)
+)
+
+lines(
+  evi$date,
+  evi$evi_median,
+  col = "green"
+)
+
+
+
 
 legend(
   "topright",
-  legend = plots,
-  col = cols[plots],
+  legend = c("Median HLS EVI2", "Median MODIS EVI"),
+  col = c("black", "green"),
+  pch = c(15, 16),
   lty = 1,
-  bty = "n"
+  cex = 0.8
 )
 
 
 
+both <- left_join(evi, evi2, by = "date", "siteID")
 
-#----------------FIX--------------------------
-
-library(sf)
-
-grid_url <- paste0(
-  "https://raw.githubusercontent.com/",
-  "NASA-IMPACT/hls-land_tiles/master/s2_grid.json"
-)
-
-grid_file <- "/usr4/ugrad/neochatt/TickForecast/MSLSP/s2_grid.json"
-
-download.file(
-  grid_url,
-  destfile = grid_file,
-  mode = "wb"
-)
-
-hls_tiles <- st_read(grid_file, quiet = TRUE)
+both <- na.omit(both)
 
 
 
 
-bad_plots <- c(
-  "HARV_001", "HARV_002", "HARV_004", "HARV_020", "HARV_022",
-  "KONZ_001", "KONZ_002", "KONZ_004", "KONZ_007",
-  "UKFS_003", "UKFS_018"
-)
 
-# Replace tickLong and coordinate names if yours differ
-bad_coords <- dat |>
-  filter(plotID %in% bad_plots) |>
-  select(plotID, longitude_top_left, latitude_top_left) |>
-  filter(!is.na(latitude_top_left), !is.na(latitude_top_left)) |>
-  distinct(plotID, .keep_all = TRUE)
+gren_001 <- evi2
+hnry_001 <- evi2
 
-bad_sf <- st_as_sf(
-  bad_coords,
-  coords = c("longitude_top_left", "latitude_top_left"),
-  crs = 4326,
-  remove = FALSE
-)
 
-plot_tiles <- st_join(
-  st_transform(bad_sf, st_crs(hls_tiles)),
-  hls_tiles["identifier"],
-  join = st_intersects
-) |>
-  st_drop_geometry() |>
-  transmute(
-    plotID,
-    tile = paste0("T", sub("^T", "", identifier))
+
+plots <- c("GREN_001", "GREN_002", "HNRY_001", "HNRY_002", "TEA_001", "TEA_002")
+
+
+
+
+
+cary <- read.csv("/usr4/ugrad/neochatt/TickForecast/Data/Cary_EVI2.csv")
+cary$date <- as.Date(cary$date)
+
+
+
+full_evi2 <- rbind(cary, evi2)
+
+
+
+
+
+
+library(dplyr)
+
+# Standardize dates before joining
+evi$date <- as.Date(as.character(evi$date))
+full_evi2$date <- as.Date(as.character(full_evi2$date))
+
+# Match MODIS site-level EVI with each HLS plot on exact shared dates
+matched_evi <- full_evi2 |>
+  dplyr::select(siteID, plotID, date, evi2_mean) |>
+  dplyr::inner_join(
+    evi |>
+      dplyr::select(siteID, date, evi_mean),
+    by = c("siteID", "date")
+  ) |>
+  dplyr::filter(
+    complete.cases(evi_mean, evi2_mean)
   )
 
-plot_tiles
+# Compute Pearson's R for each HLS plot
+plot_correlations <- matched_evi |>
+  dplyr::group_by(siteID, plotID) |>
+  dplyr::summarise(
+    n_shared_dates = dplyr::n(),
+    R = cor(evi_mean, evi2_mean),
+    .groups = "drop"
+  ) |>
+  dplyr::arrange(siteID, plotID)
+
+View(plot_correlations)
 
 
 
 
+prop <- mean(plot_correlations$R > 0.80, na.rm = TRUE)
 
 
-
-
-
-
-
-
-
-
+prop
 

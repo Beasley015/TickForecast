@@ -1,13 +1,12 @@
 run_transfer_nimble <- function(
 	cl,
 	model,
-	data,
-	constants,
+	dat,
+	constant,
 	inits,
 	n.iter,
 	parms
 ) {
-	library(parallel)
 	library(nimble)
 	library(coda)
 
@@ -19,8 +18,8 @@ run_transfer_nimble <- function(
 
 	model <- nimbleModel(
 	  model,
-		constants = constants,
-		data = data,
+		constants = constant,
+		data = dat,
 		inits = init)
 		
 	cModel <- compileNimble(model)

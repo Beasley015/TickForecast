@@ -47,9 +47,8 @@ ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
 iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
 ambly.jobs <- data.frame(site = ambly.sites, species = "Amblyomma_americanum")
 
-jobs <- bind_rows(iscap.jobs, ambly.jobs) %>%
-  mutate(model = models) %>%
-  filter(site != "DELA")
+jobs <- data.frame(species = c("Ixodes_scapularis", "Amblyomma_americanum"),
+                   model = models)
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
@@ -64,7 +63,8 @@ if(species.job=="Ixodes_scapularis"){
   sites <- iscap.sites
   } else{
     sites <- ambly.sites
-}
+  }
+sites <- sites[sites != "DELA"]
 
 # n.slots <- Sys.getenv("NSLOTS") %>% as.numeric() #Cluster var # of cores
 production <- TRUE
@@ -179,21 +179,34 @@ mna <- ks %>%
   mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d")) %>%
   filter(year(collectDate) >= 2015)
 
-# Add Cary mna
-smam_cary <- data.frame(siteID = "CARY", collectDate=names(cary.mna),
-                        MNA = cary.mna) 
+if("CARY" %in% sites){
+  # Add Cary mna
+  smam_cary <- data.frame(siteID = "CARY", collectDate=names(cary.mna),
+                          MNA = cary.mna) 
 
-mna.full <- smam_cary %>%
-  mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d")) %>%
-  full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
-  filter(collectDate >= ymd("2015-01-01")) %>%
-  arrange(collectDate) %>%
-  pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
-              values_fn = sum) %>%
-  filter(siteID %in% sites) %>%
-  mutate(pmap_df(., ~ na.locf(c(...)[-1]))) %>%
-  mutate(across(-siteID, .fns = as.numeric)) %>%
-  arrange(siteID)
+  mna.full <- smam_cary %>%
+    mutate(collectDate = as.Date(collectDate, format = "%Y-%m-%d")) %>%
+    full_join(mna, by = c("siteID", "collectDate", "MNA")) %>%
+    filter(collectDate >= ymd("2015-01-01")) %>%
+    arrange(collectDate) %>%
+    pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
+                values_fn = sum) %>%
+    filter(siteID %in% sites) %>%
+    mutate(pmap_df(., ~ na.locf(c(...)[-1]))) %>%
+    mutate(across(-siteID, .fns = as.numeric)) %>%
+    arrange(siteID)
+  
+} else {
+  mna.full <- mna %>%
+    filter(collectDate >= ymd("2015-01-01")) %>%
+    arrange(collectDate) %>%
+    pivot_wider(id_cols = siteID, names_from = collectDate, values_from = MNA,
+                values_fn = sum) %>%
+    filter(siteID %in% sites) %>%
+    mutate(pmap_df(., ~ na.locf(c(...)[-1]))) %>%
+    mutate(across(-siteID, .fns = as.numeric)) %>%
+    arrange(siteID)
+}
 
 mice.obs <- ymd(colnames(mna.full)[-1]) # unique sampling days: mice
 
@@ -757,7 +770,8 @@ for (t in t:5){ #start.drags) {
 	  summarise(cumGDD = mean(cumGDD)) %>%
 	  pivot_wider(names_from=siteID, values_from=cumGDD, values_fn=mean) %>%
 	  ungroup() %>%
-	  select(-Date)
+	  select(-Date) %>%
+	  as.matrix()
 	
 	# Mice
 	data$mice <- mna.scaled %>%
@@ -837,7 +851,9 @@ for (t in t:5){ #start.drags) {
 	nai <- which(is.na(area))	
 	area.init[nai] <- 160
 	area.init[-nai] <- NA
-	area.init[,,2] <- 450
+	if("CARY" %in% sites){
+	  area.init[,,2] <- 450
+	}
 		
 	# PP-RB Phase I --------------------------------
 	source("./R/nimble_forecast_multisite.R")
@@ -876,9 +892,10 @@ for (t in t:5){ #start.drags) {
 	  
 	  constant <- constants
 	  constant$n.plots <- n.plots[site]
-	  constant$n.lc <- length(unique(data$lc.class[,site]))-1
+	  constant$n.lc <- sum(!is.na(unique(data$lc.class[,site])))
 	  
 	  dat <- list()
+	  
 	  # Extract data per site
 	  for(d in 1:length(data)){
 	    if(is.null(dim(data[[d]]))){
@@ -901,21 +918,25 @@ for (t in t:5){ #start.drags) {
 	  }
 	  names(dat) <- names(data)
 	  dat$lc.class <- dat$lc.class[!is.na(dat$lc.class)]
+	  dat$area <- dat$area[,1:constant$n.plots]
+	  dat$y <- dat$y[,,1:constant$n.plots]
 	  
 	  # Initial values to send to nimble
 	  inits <- function() {
 	    list(
-	     area = area.init[,,site],
-       phi.l.mu = rnorm(1, phi.l[site,1], 1 / sqrt(phi.l[site,2])),
-       phi.n.mu = rnorm(1, phi.n[site,1], 1 / sqrt(phi.n[site,2])),
-       phi.a.mu = rnorm(1, phi.a[site,1], 1 / sqrt(phi.a[site,2])),
-       theta.ln = rnorm(1, theta.l2n[site,1], 1 / sqrt(theta.l2n[site,2])),
-       theta.na = rnorm(1, theta.n2a[site,1], 1 / sqrt(theta.n2a[site,2])),
-       beta = rnorm(n.beta, pr.beta[, 1,site], 1 / sqrt(pr.beta[, 2,site])),
-       sig = rinvgamma(4, pr.sig[,1,site], pr.sig[,2,site]),
-       x = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-       Ex = matrix(rpois(4 * horizon, 2) / 160 * 450, 4, horizon),
-       y = array(rpois(4 * horizon * constant$n.plots, 5), dim = dim(dat$y)),
+	     area = matrix(ifelse(iter.mat$site[rep]=="CARY",450,160),nrow=constant$horizon,
+	                   ncol=constant$n.plots),
+       phi.l.mu = rnorm(1, dat$pr.phi.l[1], 1 / sqrt(dat$pr.phi.l[2])),
+       phi.n.mu = rnorm(1, dat$pr.phi.n[1], 1 / sqrt(dat$pr.phi.n[2])),
+       phi.a.mu = rnorm(1, dat$pr.phi.a[1], 1 / sqrt(dat$pr.phi.a[2])),
+       theta.ln = rnorm(1, dat$pr.theta.l2n[1], 1 / sqrt(dat$pr.theta.l2n[2])),
+       theta.na = rnorm(1, dat$pr.theta.n2a[1], 1 / sqrt(dat$pr.theta.n2a[2])),
+       beta = rnorm(constant$n.beta, dat$pr.beta[,1], 1 / sqrt(dat$pr.beta[,2])),
+       sig = rinvgamma(4, dat$pr.sig[,1], dat$pr.sig[,2]),
+       x = matrix(rpois(4 * constant$horizon, 2) / 160 * 450, 4, constant$horizon),
+       Ex = matrix(rpois(4 * constant$horizon, 2) / 160 * 450, 4, constant$horizon),
+       y = array(rpois(4 * constant$horizon * constant$n.plots, mean(dat$y,na.rm=T)+1), 
+                 dim = dim(dat$y)),
        tau.temp = rexp(1),
        tau.maxrh = rexp(1),
        tau.minrh = rexp(1),
@@ -923,8 +944,7 @@ for (t in t:5){ #start.drags) {
        x1 = jitter(dat$maxtemp),
        x2 = jitter(dat$maxrh),
        x3 = jitter(dat$minrh),
-       x4 = jitter(dat$precip),
-       neg.gam1 = rgamma(3,1,1)
+       x4 = jitter(dat$precip)
 	     )
    }
 	
@@ -942,17 +962,17 @@ for (t in t:5){ #start.drags) {
 	  # Run the model	
 	  out.nchains <- run_transfer_nimble(,
 		  model = model.code,
-		  data = dat,
-		  constants = constant,
+		  dat = dat,
+		  constant = constant,
 		  inits = inits,
 		  n.iter = n.iter,
 		  parms = params.to.save
 		) 
 	  
 	  out.nchains <- cbind(out.nchains, iter.mat$site[rep])
+	  colnames(out.nchains)[ncol(out.nchains)] <- "site"
 	  
 	  out.nchains <- list(out.nchains)
-	
 	}
 	
 	parallel::stopCluster(cl = cluster)
@@ -981,20 +1001,25 @@ for (t in t:5){ #start.drags) {
 	
 	# data frame with saved params
 	saved.params <- lapply(all.chains, site.parms, latent = F)
-	saved.params <- do.call(bind_rows, saved.params) %>%
-	  select(-.y) %>%
-	  group_by(site) %>%
-	  mutate(niter = n())
+	saved.params <- do.call(bind_rows, saved.params) #%>%
+	  # group_by(site) %>%
+	  # mutate(niter = n())
 	
 	# Frame with est. latent states
 	latent.states <- lapply(all.chains, site.parms, latent = T)
-	latent.states <- do.call(bind_rows, latent.states) %>%
-	  group_by(site) %>%
-	  mutate(niter = n())
+	latent.states <- do.call(bind_rows, latent.states) #%>%
+	  # group_by(site) %>%
+	  # mutate(niter = n())
 
 	rm(all.chains)
 
 	# Test MCMC convergence with Gelman-Rubin statistic FIX ------------
+	# Convert to array
+	# conv.test <- saved.params[,-which(str_detect(colnames(saved.params), 
+	#                               "gam3|repro|sig"))] %>%
+	#   mutate(chain = rep(1:3, each = n.iter/2)) %>%
+	#   pivot_longer(cols = -c(site, chain), names_to = "node", values_to = "value")
+	# 
 	# if(year(fx.start.date)>=2018){
 	#   message("Checking convergence...")
 	#   nodes <- names(saved.params)
@@ -1060,7 +1085,7 @@ for (t in t:5){ #start.drags) {
 	sitevec <- saved.params$site
 
 	g.cols <- which(str_detect(colnames(saved.params), 
-	                           "gam3|gam1|repro|sig"))
+	                           "gam3|repro|sig"))
 	
 	betas <- saved.params[,-g.cols] %>%
 	  ungroup() %>%
@@ -1070,6 +1095,8 @@ for (t in t:5){ #start.drags) {
 	rm(latent.states, saved.params)
 	
 	# PP-RB Phase II ----------------------
+	message("Starting Phase II...")
+	
 	# Create output list
 	data2 <- constants2 <- list()
 	
@@ -1193,6 +1220,8 @@ for (t in t:5){ #start.drags) {
 	# Check convergence TO DO ---------------
 	
 	# Save outputs
+	message("Saving updated coefficients...")
+	
 	# bind lists
 	comm.df <- do.call(rbind, comm.chains)
 	
@@ -1224,8 +1253,8 @@ for (t in t:5){ #start.drags) {
 	  
 	
 	# Save
-	write_csv(comm.params, file.path(out.dir,"comm_params.csv"))
-	write_csv(upd.coefs, file.path(out.dir,"coefs_updated.csv"))
+	write_csv(comm.params, file.path(fileDest,"comm_params.csv"))
+	write_csv(upd.coefs, file.path(fileDest,"coefs_updated.csv"))
 	
 	# Remove unnecessary objects
 	rm(comm.chains, comm.df)
