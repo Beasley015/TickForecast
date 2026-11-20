@@ -500,7 +500,7 @@ for(i in 1:length(hierarchical.files)){
   gc()
 }
 
-# Time series figures: all life stages (plot) ---------------------
+# Time series figures: all life stages (plot-level) ---------------------
 series.files <- analysis.files[str_detect(analysis.files, "allDays")]
 series.files <- series.files[str_detect(series.files, pattern = "[A-Z]+_")]
 
@@ -748,7 +748,8 @@ for(i in 1:length(score.files)){
 }
 
 aa.sites <- df.mutate %>%
-  filter(species == "Amblyomma_americanum")
+  filter(species == "Amblyomma_americanum") %>%
+  filter(siteID != "KONA") # Not enough time steps to do a GAM at this site
 
 aa.score.ts <-ggplot(data=aa.sites, aes(x = time, y = crps, color = model,
                           fill=model))+
@@ -1242,9 +1243,10 @@ ix.sub <- betas %>%
 
 ix.survival <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Survival')), aes(x = mean, y = siteID))+
   geom_point()+
-  geom_point(aes(x = 3, shape = sig))+
+  geom_point(aes(x = 5.5, shape = sig), )+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -1256,6 +1258,7 @@ ix.transition <- ggplot(data = ix.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   geom_point(aes(x = 3, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -1271,9 +1274,10 @@ ix.sub.gamma <- gammas.noland %>%
 
 ix.gamma.noland <- ggplot(data = ix.sub.gamma, aes(x = mean, y = siteID))+
   geom_point()+
-  geom_point(aes(x = 2.5, shape = sig))+
+  geom_point(aes(x = -9, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -1294,6 +1298,7 @@ ix.gam.land <- ggplot(data = ix.sub.land, aes(x = mean, y = lifeStage,
   geom_errorbar(aes(xmin = lower95, xmax=upper95), 
                 position = position_dodge(width = 1))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   scale_color_viridis_d(end = 0.9, name = "Land Cover Class")+
   # scale_shape_manual()+
   facet_wrap(~siteID, dir = "v") +
@@ -1316,6 +1321,7 @@ aa.survival <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Survival')), aes(
   geom_point(aes(x = 3.5, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -1327,6 +1333,7 @@ aa.transition <- ggplot(data = aa.sub%>%filter(str_detect(node, 'Mice')), aes(x 
   geom_point(aes(x = 3.5, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -1342,9 +1349,10 @@ aa.sub.gamma <- gammas.noland %>%
 
 aa.gamma.noland <- ggplot(data = aa.sub.gamma, aes(x = mean, y = siteID))+
   geom_point()+
-  geom_point(aes(x = 3, shape = sig))+
+  geom_point(aes(x = -10, shape = sig))+
   geom_errorbar(aes(xmin = lower95, xmax=upper95))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   facet_wrap(~node, dir = "v") +
   labs(x = "Coefficient Estimate")+
   theme_bw(base_size = 12) +
@@ -1365,6 +1373,7 @@ aa.gam.land <- ggplot(data = aa.sub.land, aes(x = mean, y = lifeStage,
   geom_errorbar(aes(xmin = lower95, xmax=upper95), 
                 position = position_dodge(width = 1))+
   geom_vline(xintercept = 0, linetype = 'dashed')+
+  scale_shape_manual(values = c(8, NA))+
   scale_color_viridis_d(end = 0.9, name = "Land Cover Class")+
   # scale_shape_manual()+
   facet_wrap(~siteID, dir = "v") +
@@ -1381,95 +1390,12 @@ aa.gam.land <- ggplot(data = aa.sub.land, aes(x = mean, y = lifeStage,
 # save_gg("ix_transition_pl.jpeg", ix.transition, dir.plot, height = 8)
 # save_gg("ix_gamma_pl.jpeg", ix.gamma.noland, dir.plot, height = 8)
 # save_gg("ix_land_pl.jpeg", ix.gam.land, dir.plot, height = 8)
-
-# Parabolas
-gdd.coefs <- gammas.noland %>%
-  filter(str_detect(node, "GDD")) %>%
-  mutate(lifeStage = str_extract(node, "Larva|Nymph|Adult")) %>%
-  mutate(node = str_remove(node, "Larva|Nymph|Adult"))
-
-gdd.ints <- ints %>%
-  filter(str_detect(node, "gam0")) %>%
-  mutate(lifeStage = case_when(str_detect(node, "1")~"Larva",
-                               str_detect(node, "2")~"Nymph",
-                               str_detect(node, "3")~"Adult")) %>%
-  mutate(node = str_remove(node, "\\[\\d\\]"))
-
-gdd.vals <- bind_rows(gdd.coefs, gdd.ints) %>%
-  select(-c(upper95, lower95)) %>%
-  pivot_wider(names_from=node, values_from=mean) %>%
-  group_by(siteID, lifeStage) %>%
-  filter(!(siteID %in% c("GREN", "HNRY", "TEA")))
-
-gdd.ix <- filter(gdd.vals, species == "Ixodes_scapularis")
-
-quad <- function(a,b,c,x){
-  y = a*x^2 + b*x + c
   
-  return(y)
-}
-
-gdd.plt <- ggplot(gdd.ix, aes(color = siteID, linetype=lifeStage))+
-  scale_x_continuous(limits=c(-5,5))
-for(i in 1:length(unique(gdd.ix$siteID))){
-  for(j in 1:3){
-    site <- unique(gdd.ix$siteID)[i]
-    ls <- unique(gdd.ix$lifeStage)[j]
-  
-    df.tmp <- filter(gdd.ix, siteID==site, lifeStage==ls)
-  
-    gdd.plt <- gdd.plt +
-      stat_function(data = df.tmp,
-                    fun = quad,
-                    args = list(a = df.tmp$GDDsq, b = df.tmp$GDD,
-                                c = df.tmp$gam0))
-
-    gdd.plt
-  }
-}
-
-gdd.plt +
-  theme_bw()+
-  theme(panel.grid.minor = element_blank())
-
-gdd.aa <- filter(gdd.vals, species == "Amblyomma_americanum")
-
-gdd.plt <- ggplot(gdd.aa, aes(color = siteID, linetype=lifeStage))+
-  scale_x_continuous(limits=c(-5,5))
-for(i in 1:length(unique(gdd.aa$siteID))){
-  for(j in 1:3){
-    site <- unique(gdd.aa$siteID)[i]
-    ls <- unique(gdd.aa$lifeStage)[j]
-    
-    df.tmp <- filter(gdd.aa, siteID==site, lifeStage==ls)
-    
-    gdd.plt <- gdd.plt +
-      stat_function(data = df.tmp,
-                    fun = quad,
-                    args = list(a = df.tmp$GDDsq, b = df.tmp$GDD,
-                                c = df.tmp$gam0))
-    
-    gdd.plt
-  }
-}
-
-gdd.plt +
-  theme_bw()+
-  theme(panel.grid.minor = element_blank())
-  
-# Plot model coefficients: maps ------------------
+# Plot model coefficients: maps/scatterplots ------------------
 site.coords <- read_csv("./Data/siteLatLon.csv") %>%
-  filter(is.na(lon)==F) %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+  filter(is.na(decimalLongitude)==F) %>%
+  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326) %>%
   suppressMessages()
-
-cary.coord <- data.frame(siteID="CARY", 
-           geometry=st_centroid(st_union(filter(site.coords, 
-                                                siteID %in% c("GREN","HNRY","TEA"))))) %>%
-  st_as_sf(crs = 4326)
-
-site.coords <- rbind(site.coords, cary.coord) %>%
-  filter(!(siteID %in% c("DELA", "GREN", "HNRY", "TEA")))
 
 betas.loc <- left_join(betas, site.coords, by = 'siteID') %>%
   filter(str_detect(node, 'Survival')) %>%
@@ -1534,6 +1460,90 @@ aa.gam.plt <- ggplot(data = scaled.gams %>% filter(species == "Amblyomma_america
 # save_gg("ix_mapGamma_plotmodel.jpeg", ix.gam.plt, dir.plot, width = 10, height = 8)
 # save_gg("aa_mapBeta_plotmodel.jpeg", aa.map, dir.plot, width = 10, height = 8)
 # save_gg("aa_mapGamma_plotmodel.jpeg", aa.gam.plt, dir.plot, width = 10, height = 8)
+
+# Scatterplots by lat/lon
+
+coefs.loc <- bind_rows(betas.loc, scaled.gams)
+
+coefs.loc <- coefs.loc %>%
+  mutate(lon = st_coordinates(geometry)[,1],
+         lat = st_coordinates(geometry)[,2])
+
+coef.nodes <- unique(coefs.loc$node)
+coef.species <- c("Ixodes_scapularis", "Amblyomma_americanum")
+
+lm.results <- tibble()
+for(i in 1:length(coef.nodes)){
+  for(s in 1:length(coef.species)){
+    betas.sub <- filter(coefs.loc, node == coef.nodes[i], 
+                        species == coef.species[s]) %>%
+      mutate(lat2 = lat^2,
+             lon2 = lon^2)
+    
+    lm <- summary(lm(data=betas.sub, mean~lat+lon))
+    
+    quadratic.lat <- glance(lm(data=betas.sub, mean~lat+lat2))
+    quadratic.lon <- glance(lm(data=betas.sub, mean~lon+lon2))
+    
+    df.tmp <- data.frame(species = unique(betas.sub$species), 
+                         node=unique(betas.sub$node),
+                         lat.p = lm$coefficients[2,4],
+                         lon.p = lm$coefficients[3,4],
+                         quad.lat = quadratic.lat$p.value,
+                         quad.lon = quadratic.lon$p.value)
+    
+    lm.results <- bind_rows(lm.results, df.tmp)
+    
+  }
+}
+
+lm.results <- lm.results %>%
+  pivot_longer(cols = c(lat.p, lon.p, quad.lat, quad.lon), names_to = "spatial", 
+               values_to = "pval") %>%
+  mutate(sig = case_when(pval < 0.05 ~ "sig",
+                         TRUE ~ NA)) %>%
+  select(-pval)
+
+coefs.loc <- coefs.loc %>%
+  left_join(lm.results, by=c("node", "species"), relationship="many-to-many")
+
+coefs.lat.fig <- ggplot(data=coefs.loc %>% filter(spatial == "lat.p"), 
+                        aes(x = lat, y = mean, color = species,
+                            linetype = sig))+
+  geom_point()+
+  geom_smooth(data=coefs.loc %>% filter(spatial == "lat.p"),
+              method = 'lm', se = F)+
+  # stat_smooth(data=betas.loc %>% filter(spatial == "quad.lat"),
+  #             method = "lm", formula = y ~ x + I(x^2), se = F)+
+  geom_hline(yintercept = 0, linetype = "dashed")+
+  scale_color_manual(values = natparks.pals("DeathValley"),
+                     name = "Species")+
+  scale_linetype_manual(values = c(1,0), guide = "none")+
+  facet_wrap(~node, dir = "v", nrow = 3)+
+  labs(x = "Latitude", y = "Parameter Mean")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid=element_blank())
+
+lon.betas.singlesite <- ggplot(data=coefs.loc %>% filter(spatial == "lon.p" |spatial=="quad.lon"), 
+                               aes(x = lon, y = mean, color = species,
+                                   linetype = sig))+
+  geom_point()+
+  geom_smooth(data=coefs.loc %>% filter(spatial == "lon.p"), method = 'lm', 
+              se = F)+
+  stat_smooth(data=coefs.loc %>% filter(spatial == "quad.lon"),
+              method = "lm", formula = y ~ x + I(x^2), se = F)+
+  geom_hline(yintercept = 0, linetype = "dashed")+
+  scale_color_manual(values = natparks.pals("DeathValley"),
+                     name = "Species")+
+  scale_linetype_manual(values = c(1,0), guide = "none")+
+  facet_wrap(~node, dir = "v", nrow = 3)+
+  labs(x = "Latitude", y = "Parameter Mean")+
+  theme_bw(base_size = 12)+
+  theme(panel.grid=element_blank())
+
+# save_gg("lat_betas_singlesite.jpeg", betas.lat.fig, dir.plot, width = 10, height = 8)
+# save_gg("lon_betas_singlesite.jpeg", lon.betas.singlesite, dir.plot,
+#         width = 10, height = 8)
 
 # Model intercepts: hierarchical ------------------
 # Get files

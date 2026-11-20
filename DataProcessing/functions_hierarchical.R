@@ -524,18 +524,20 @@ transfer_analysis <- function(
 	out.dir
 ) {
   # Total number of mcmc iterations
-	nmcmc <- nrow(fx.df$saved.params)
+	nmcmc <- nrow(fx.df$saved.params)/(nrow(site.df))
 	
 	# Create life stage table
 	ls.tb <- tibble(
 		lifeStage = c("Larva", "Dormant", "Nymph", "Adult"),
-		ls.index = 1:4
+		ls.index = 1:4,
+		ls.chr = as.character(1:4)
 	)
 
 	# Time steps table
 	time.tb <- tibble(
 		time = fx.dates,
-		time.index = 1:length(fx.dates)
+		time.index = 1:length(fx.dates),
+		time.chr = as.character(1:length(fx.dates))
 	)
 	
 	# Pull weather-related nodes
@@ -548,11 +550,11 @@ transfer_analysis <- function(
 	  ungroup() %>%
 	  pivot_longer(cols = -c(site, niter), names_to = "node", 
 	               values_to = "value") %>%
-	  mutate(stage=as.numeric(str_extract(node, pattern="(\\[)(\\d{1})", group=2)),
-	         day = as.numeric(str_extract(node, pattern="(\\d+)(\\])", group=1))) %>%
+	  mutate(stage=str_extract(node, pattern="\\[([0-9]),", group=1),
+	         day = str_extract(node, pattern=", ([0-9]+)\\]", group=1)) %>%
 	  select(-c(niter, node)) %>%
-	  left_join(ls.tb, by = c("stage"="ls.index")) %>%
-	  left_join(time.tb, by = c("day"="time.index")) %>%
+	  left_join(ls.tb, by = c("stage"="ls.chr")) %>%
+	  left_join(time.tb, by = c("day"="time.chr")) %>%
 	  select(-c(stage, day)) %>%
 	  left_join(site.df, by=c("site"="siteno")) %>%
 	  select(-site)
