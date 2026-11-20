@@ -1,0 +1,6 @@
+"siteID","open_water_pct","developed_open_pct","developed_low_pct","developed_medium_pct","developed_high_pct","deciduous_forest_pct","evergreen_forest_pct","mixed_forest_pct","shrub_pct","grassland_pct","pasture_pct","cultivated_crops_pct","woody_wetland_pct","emergent_wetland_pct","pct_dominant","lc_dominant"
+"BART_029",0,0,0,0,0,0,0.666666666666667,0.333333333333333,0,0,0,0,0,0,0.666666666666667,"evergreen_forest_pct"
+"BART_011",0,0,0,0,0,0,0.166666666666667,0.833333333333333,0,0,0,0,0,0,0.833333333333333,"mixed_forest_pct"
+"BART_019",0,0,0,0,0,0,0.5,0.5,0,0,0,0,0,0,0.5,"evergreen_forest_pct"
+"BART_002",0,0,0,0,0,0.666666666666667,0,0.333333333333333,0,0,0,0,0,0,0.666666666666667,"deciduous_forest_pct"
+"BART_010",0,0,0,0,0,0.888888888888889,0,0.111111111111111,0,0,0,0,0,0,0.888888888888889,"deciduous_forest_pct"
