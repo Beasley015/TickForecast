@@ -10,8 +10,8 @@ model.code <- nimbleCode({
   
   for(b in 1:n.coef){
     # proposed variance
-    q.start[b] ~ dgamma(q.pr[1,b], q.pr[2,b])
-    r.start[b] ~ dgamma(r.pr[1,b], r.pr[2,b])
+    q.start[b] ~ dgamma(q.pr[b,1], q.pr[b,2])
+    r.start[b] ~ dgamma(r.pr[b,1], r.pr[b,2])
     
     q[b] <- sites/(2+q.start[b])
     r[b] <- 1/sum((coef[1:sites,b]-mu.coef[1:sites,b])^2 + 1/r.start[b])

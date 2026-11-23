@@ -1107,8 +1107,8 @@ for (t in t:5){ #start.drags) {
 	  mu.pr <- rep(0, ncol(betas))
 	  var.pr <- rep(1, ncol(betas))
 	  
-	  q.pr <- matrix(1, nrow=2, ncol=ncol(betas))
-	  r.pr <- matrix(1, nrow=2, ncol=ncol(betas))
+	  q.pr <- matrix(1, ncol=2, nrow=ncol(betas))
+	  r.pr <- matrix(1, ncol=2, nrow=ncol(betas))
 	} else{
 	  last.dist <- read_csv(file.path(readDest, "comm_params.csv")) %>%
 	    filter(param %in% c("mu", "tau", "q", "r")) %>%
