@@ -73,7 +73,7 @@ model.code <- nimbleCode({
 		logit(l2n[t]) <- theta.ln + beta[13] * mice[t]
 		logit(n2a[t]) <- theta.na + beta[14] * mice[t]
 
-		theta.n2a[t] <- if_else_nimble(
+		n2a.quest[t] <- if_else_nimble(
 		  (gdd[t] <= 1000) | (gdd[t] >= 2500),
 		  n2a[t],
 		  0
@@ -158,17 +158,17 @@ model.code <- nimbleCode({
 		}
 	}
 
-	for (t in 2:horizon) {
-		# process error
-		# expected number questing
-		Ex[1:ns, t] <- A[1:ns, 1:ns, t - 1] %*% x[1:ns, t - 1]
-
-		x[1:ns, t] ~
-			dmnorm(mean = Ex[1:ns, t], cholesky = Ochol[1:ns, 1:ns], prec_param = 0)
-
-		for (c in 1:ns) {
-			xind[c, t] ~ dconstraint(x[c, t] >= 0)
-		}
-
-	}
+	# for (t in 2:horizon) {
+	# 	# process error
+	# 	# expected number questing
+	# 	Ex[1:ns, t] <- A[1:ns, 1:ns, t - 1] %*% x[1:ns, t - 1]
+	# 
+	# 	x[1:ns, t] ~
+	# 		dmnorm(mean = Ex[1:ns, t], cholesky = Ochol[1:ns, 1:ns], prec_param = 0)
+	# 
+	# 	for (c in 1:ns) {
+	# 		xind[c, t] ~ dconstraint(x[c, t] >= 0)
+	# 	}
+	# 
+	# }
 })
