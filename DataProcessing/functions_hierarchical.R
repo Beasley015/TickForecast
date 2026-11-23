@@ -548,11 +548,11 @@ transfer_analysis <- function(
 	
 	states <- states %>%
 	  ungroup() %>%
-	  pivot_longer(cols = -c(site, niter), names_to = "node", 
+	  pivot_longer(cols = -site, names_to = "node", 
 	               values_to = "value") %>%
 	  mutate(stage=str_extract(node, pattern="\\[([0-9]),", group=1),
 	         day = str_extract(node, pattern=", ([0-9]+)\\]", group=1)) %>%
-	  select(-c(niter, node)) %>%
+	  select(-node) %>%
 	  left_join(ls.tb, by = c("stage"="ls.chr")) %>%
 	  left_join(time.tb, by = c("day"="time.chr")) %>%
 	  select(-c(stage, day)) %>%
@@ -621,10 +621,10 @@ transfer_analysis <- function(
 
 	param.list <- fx.df$saved.params %>%
 	  ungroup() %>%
-	  pivot_longer(cols = -c(site, niter), names_to = "node",
+	  pivot_longer(cols = -site, names_to = "node",
 	               values_to = "value") %>%
 	  left_join(site.df, by=c("site"="siteno")) %>%
-	  select(-c(site,niter))
+	  select(-site)
 	
 	param.quant <- param.list %>%
 	  group_by(node, siteID) %>%

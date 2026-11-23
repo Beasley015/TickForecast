@@ -606,7 +606,8 @@ for (t in t:5){ #start.drags) {
 
 			tick.stats <- last.fx %>%
 				filter(time == fx.start.date) %>%
-			  mutate(value = case_when(value < 0 ~ 0,
+			  mutate(value = case_when(value <= 0 ~ 1e-10,
+			                           is.na(value) ~ 1e-10,
 			                   TRUE ~ value)) %>%
 				group_by(lifeStage, time, siteID) %>%
 			  summarise(shape=fitdist(value, distr='gamma', lower = c(0,0))[[1]][1], 
@@ -933,7 +934,8 @@ for (t in t:5){ #start.drags) {
        theta.na = rnorm(1, dat$pr.theta.n2a[1], 1 / sqrt(dat$pr.theta.n2a[2])),
        beta = rnorm(constant$n.beta, dat$pr.beta[,1], 1 / sqrt(dat$pr.beta[,2])),
        sig = rinvgamma(4, dat$pr.sig[,1], dat$pr.sig[,2]),
-       x = matrix(rpois(4 * constant$horizon, 2) / 160 * 450, 4, constant$horizon),
+       x = matrix(rpois(4 * constant$horizon, mean(dat$y,na.rm=T)+5) / 160 * 450, 
+                  4, constant$horizon),
        Ex = matrix(rpois(4 * constant$horizon, 2) / 160 * 450, 4, constant$horizon),
        y = array(rpois(4 * constant$horizon * constant$n.plots, mean(dat$y,na.rm=T)+1), 
                  dim = dim(dat$y)),
@@ -1063,7 +1065,7 @@ for (t in t:5){ #start.drags) {
 	  draws <- seq_len(nrow(latent.states))
 	}
 	
-	lantent.states <- latent.states[draws,]
+	latent.states <- latent.states[draws,]
 	saved.params <- saved.params[draws,]
 	
 	# Output processing and save ----------------------
@@ -1089,7 +1091,7 @@ for (t in t:5){ #start.drags) {
 	
 	betas <- saved.params[,-g.cols] %>%
 	  ungroup() %>%
-	  select(-c(site,niter))
+	  select(-site)
 	
 	# Clear environment
 	rm(latent.states, saved.params)
@@ -1205,8 +1207,8 @@ for (t in t:5){ #start.drags) {
 	  # Run the model	
 	  out.pprb <- run_transfer_nimble(,
 	                                  model = model.code,
-	                                  data = data2,
-	                                  constants = constants2,
+	                                  dat = data2,
+	                                  constant = constants2,
 	                                  inits = inits2,
 	                                  n.iter = phase2.iter,
 	                                  parms = parms2) 
@@ -1235,23 +1237,22 @@ for (t in t:5){ #start.drags) {
 	comm.params <- comm.params %>%
 	  pivot_longer(cols = everything(), names_to = "node", values_to = "value") %>%
 	  mutate(coef = str_extract(node, "[0-9]+"),
-	         param = str_extract(node, ".([a-z]+)\\[", group = 1)) %>%
+	         param = str_extract(node, "([a-z]+)\\[", group = 1)) %>%
 	  left_join(param.names, by = c("coef")) %>%
 	  select(-c(node, coef)) %>%
 	  rename("coef" = "name")
 	
 	upd.coefs <- as.data.frame(comm.df[,-which(str_detect(colnames(comm.df),
-	                                                     "coef.mu|coef.tau"))])
+	                                                     "coef.mu|coef.tau|q|r"))])
 	
 	upd.coefs <- as.data.frame(upd.coefs) %>%
 	  pivot_longer(cols = everything(), names_to = "node", values_to = "value") %>%
 	  mutate(site = str_extract(node, "\\[([0-9]+),", group = 1),
-	         coef = str_extract(node, ", ([0-9]+)]", group = 1)) %>%
+	         coef = str_extract(node, "([0-9]+)\\]", group = 1)) %>%
 	  left_join(param.names, by = c("coef")) %>%
 	  select(-c(node, coef)) %>%
 	  rename("coef" = "name")
 	  
-	
 	# Save
 	write_csv(comm.params, file.path(fileDest,"comm_params.csv"))
 	write_csv(upd.coefs, file.path(fileDest,"coefs_updated.csv"))
