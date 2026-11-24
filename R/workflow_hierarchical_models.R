@@ -35,13 +35,13 @@ dir.out <- file.path(dir.top, "out")
 # Define models to run
 models <- c("MultiSite")
 
-iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
-ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
+# iscap.sites <- str_remove(read_txt("./Data/ix_sites_single.txt"), "\\*")
+# ambly.sites <- str_remove(read_txt("./Data/am_sites_single.txt"), "\\*")
 
 # These are the real files, use them once Neo is done
 # getting plot-level vars
-# iscap.sites <- str_remove(read_txt("./Data/ix_sites.txt"), "\\*")
-# ambly.sites <- str_remove(read_txt("./Data/am_sites.txt"), "\\*")
+iscap.sites <- str_remove(read_txt("./Data/ix_sites.txt"), "\\*")
+ambly.sites <- str_remove(read_txt("./Data/am_sites.txt"), "\\*")
 
 # Create all possible combos
 iscap.jobs <- data.frame(site = iscap.sites, species = "Ixodes_scapularis")
@@ -52,7 +52,7 @@ jobs <- data.frame(species = c("Ixodes_scapularis", "Amblyomma_americanum"),
 
 job.num <- as.numeric(Sys.getenv("SGE_TASK_ID"))
 if (is.na(job.num)) {
-  job.num <- 2
+  job.num <- 1
 }
 
 species.job <- jobs$species[job.num] %>%
@@ -300,7 +300,7 @@ df.daymet <- join2 %>%
 #   suppressMessages()
 
 # Plot-level cov: land cover ---------------
-plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
+plt_cover <- read_csv("./Data/final_NLCD.csv") %>%
   mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                             TRUE ~ siteID)) %>%
   filter(siteID %in% sites) %>%
@@ -310,7 +310,7 @@ plt_cover <- read_csv("./Data/plot_NLCD.csv") %>%
   suppressMessages()
 
 # Plot-level cov: EVI
-evi2 <- read_csv("./Data/full_EVI2.csv") %>%
+evi2 <- read_csv("./Data/final_EVI2.csv") %>%
   mutate(siteID = case_when(siteID %in% c("GREN","HNRY","TEA") ~ "CARY",
                             TRUE ~ siteID)) %>%
   filter(siteID %in% sites) %>%
@@ -453,7 +453,7 @@ if(update == T){
   t <- t+length(comp.dates)
 }
 
-for (t in t:5){ #start.drags) { 
+for (t in t:start.drags) { 
 	fx.start.date <- start.dates[t]
 	message("---------------------------------------------------")
 	mm <- paste(fx.start.date, " (", round(t / start.drags * 100, 2), "%)")
@@ -605,50 +605,49 @@ for (t in t:5){ #start.drags) {
 				suppressMessages()
 
 			tick.stats <- last.fx %>%
-				filter(time == fx.start.date) %>%
-			  mutate(value = case_when(value <= 0 ~ 1e-10,
-			                           is.na(value) ~ 1e-10,
-			                   TRUE ~ value)) %>%
-				group_by(lifeStage, time, siteID) %>%
-			  summarise(shape=fitdist(value, distr='gamma', lower = c(0,0))[[1]][1], 
-			            rate=fitdist(value, distr='gamma', lower = c(0,0))[[1]][2]) %>%
-			  suppressWarnings()
+			  filter(time == fx.start.date) %>%
+			  group_by(lifeStage, time, siteID) %>%
+			  summarise(mu = mean(value,na.rm=T), tau = 1 / var(value,na.rm=T))
 
 			IC <- array(NA, dim = c(4, 2, length(sites)))
 			
 			for(i in 1:length(sites)){
 			  IC[1, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Larva" & siteID==sites[i]) %>% 
-			    pull(shape)
+			    pull(mu)
 			  
 			  IC[1, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Larva" & siteID==sites[i]) %>% 
-			    pull(rate)
+			    pull(tau)
 			
 			  IC[2, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Dormant"& siteID==sites[i]) %>% 
-			    pull(shape)
+			    pull(mu)
 			
 			  IC[2, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Dormant" & siteID==sites[i]) %>% 
-			    pull(rate)
+			    pull(tau)
 			
 			  IC[3, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Nymph" & siteID==sites[i]) %>% 
-			    pull(shape)
+			    pull(mu)
 			
 			  IC[3, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Nymph" & siteID==sites[i]) %>% 
-			    pull(rate)
+			    pull(tau)
 			
 			  IC[4, 1, i] <- tick.stats %>% 
 			    filter(lifeStage == "Adult" & siteID==sites[i]) %>% 
-			    pull(shape)
+			    pull(mu)
 			
 			  IC[4, 2, i] <- tick.stats %>% 
 			    filter(lifeStage == "Adult" & siteID==sites[i]) %>% 
-			    pull(rate)
+			    pull(tau)
 			}
+			
+			# Add uninformative ICs if none available
+			IC[is.infinite(IC)] <- 0
+			IC[is.na(IC)] <- 0
 
 			fx.sequence <- seq.Date(fx.start.date, by = 1, length.out = horizon)
 			n.days <- length(fx.sequence)
@@ -1016,47 +1015,32 @@ for (t in t:5){ #start.drags) {
 	rm(all.chains)
 
 	# Test MCMC convergence with Gelman-Rubin statistic FIX ------------
-	# Convert to array
-	# conv.test <- saved.params[,-which(str_detect(colnames(saved.params), 
-	#                               "gam3|repro|sig"))] %>%
-	#   mutate(chain = rep(1:3, each = n.iter/2)) %>%
-	#   pivot_longer(cols = -c(site, chain), names_to = "node", values_to = "value")
-	# 
-	# if(year(fx.start.date)>=2018){
-	#   message("Checking convergence...")
-	#   nodes <- names(saved.params)
-	#   nodes <- nodes[!str_detect(nodes, "gam3")]
-	#   gelman.keep <-list()
-	# 
-	#   for (ff in seq_along(nodes)) {
-	#     mcmc.check <- list()
-	# 	  col <- nodes[ff]
-	# 	
-	# 	  if(length(dim(out.nchains[[1]][[nodes[ff]]]))!=2){next}
-	# 			
-	# 	  for (c in seq_along(out.nchains)) {
-	# 	      mcmc.check[[c]] <- coda::mcmc(out.nchains[[c]][[col]])
-	# 	  }
-	# 	
-	# 	  gelman.keep[[ff]] <- try(coda::gelman.diag(mcmc.check, 
-	# 	                                           transform = TRUE)$psrf[,1])
-	# 	
-	# 	  if(all(is.na(gelman.keep[[ff]]=='character'))){next}
-	# 	  if(typeof(gelman.keep[[ff]])=='character'){next}
-	# 
-	# 	  if (any(gelman.keep[[ff]] > 1.2)) {
-	# 	    message("WARNING: Convergence not reached!")
-	# 	    bad.nodes <- which(gelman.keep[[ff]] > 1.2)
-	# 	    bad.params <- tibble(node = nodes[[ff]],
-	# 	      psrf = as.numeric(gelman.keep[[ff]][bad.nodes])) %>%
-	# 	      arrange(psrf)
-	# 			  print(tail(bad.params))
-	# 	  
-	# 	    } else {
-	# 	      # message("Convergence = TRUE")
-	# 	    }
-	#   }
-	# }
+	if(year(fx.start.date)>=2018){
+	  message("Checking convergence...")
+	  nodes <- names(saved.params)
+	  nodes <- nodes[!str_detect(nodes, "gam3|site")]
+	  gelman.keep <-list()
+
+	  for (ff in seq_along(nodes)) {
+	    mcmc.check <- list()
+		  col <- nodes[ff]
+		  param.mat <- matrix(saved.params[,col], ncol = 3)
+
+		  gelman.keep[[ff]] <- Rhat(param.mat)
+	  }
+	  
+	  if(any(unlist(gelman.keep) > 1.2)){
+	    message("WARNING: Convergence not reached!")
+		  bad.nodes <- which(unlist(gelman.keep) > 1.2)
+		  bad.params <- tibble(node = nodes[bad.nodes],
+		                       Rhat = gelman.keep[[bad.nodes]]) %>%
+		      arrange(Rhat)
+			print(tail(bad.params))
+
+			} else {
+		      message("Convergence = TRUE")
+			}
+	}
   
 	# Thin the chains ---------------
 	if(nrow(latent.states) > 5000){
@@ -1219,13 +1203,38 @@ for (t in t:5){ #start.drags) {
 	
 	parallel::stopCluster(cl = cluster)
 	
+	# bind lists
+	comm.df <- do.call(rbind, comm.chains)
+	
 	# Check convergence TO DO ---------------
+	if(year(fx.start.date)>=2018){
+	  message("Checking convergence...")
+	  nodes <- colnames(comm.df)
+	  gelman.keep <-list()
+	  
+	  for (ff in seq_along(nodes)) {
+	    mcmc.check <- list()
+	    col <- nodes[ff]
+	    param.mat <- matrix(comm.df[,col], ncol = 3)
+	    
+	    gelman.keep[[ff]] <- Rhat(param.mat)
+	  }
+	  
+	  if(any(unlist(gelman.keep) > 1.2)){
+	    message("WARNING: Convergence not reached!")
+	    bad.nodes <- which(unlist(gelman.keep) > 1.2)
+	    bad.params <- tibble(node = nodes[bad.nodes],
+	                         Rhat = gelman.keep[[bad.nodes]]) %>%
+	      arrange(Rhat)
+	    print(tail(bad.params))
+	    
+	  } else {
+	    message("Convergence = TRUE")
+	  }
+	}
 	
 	# Save outputs
 	message("Saving updated coefficients...")
-	
-	# bind lists
-	comm.df <- do.call(rbind, comm.chains)
 	
 	# Create separate data frames for coefficients & hyperparameters
 	comm.params <- as.data.frame(comm.df[,which(str_detect(colnames(comm.df),
