@@ -26,6 +26,7 @@ library(parallel)
 library(abind)
 library(doParallel)
 library(foreach)
+library(rstan)
 
 options(dplyr.summarise.inform = FALSE)
 
